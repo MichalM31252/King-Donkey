@@ -164,6 +164,9 @@ int main(int argc, char** argv) {
 	};
 
 
+
+
+
 	Game game{ 100 };
 	game.takeDamage(50);
 	printf("Monster hp: %d\n", game.getHp());
