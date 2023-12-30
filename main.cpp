@@ -3,12 +3,14 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "./libs/Constants.h"
 #include "./libs/game_gameplay/GameStatus.h"
 
 extern "C" {
 #include "./SDL2-2.0.10/include/SDL.h"
 #include "./SDL2-2.0.10/include/SDL_main.h"
+
+#include "./libs/Constants.h"
+#include "./libs/game_gameplay/GameStatus.h"
 }
 
 
@@ -139,29 +141,6 @@ int main(int argc, char** argv) {
 		return 1;
 	};
 	SDL_SetColorKey(charset, true, 0x000000);
-
-	class Game
-	{
-	public:
-		Game::Game(int hp)
-		{
-			mHp = hp;
-		}
-		int Game::getHp()
-		{
-			return mHp;
-		}
-
-		void Game::takeDamage(int amount)
-		{
-			mHp -= amount;
-
-			if (mHp < 0)
-				mHp = 0;
-		}
-	private:
-		int mHp;
-	};
 
 
 	Game game{ 100 };
