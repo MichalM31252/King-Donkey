@@ -15,9 +15,6 @@ extern "C" {
 
 
 
-#define SCREEN_WIDTH	640
-#define SCREEN_HEIGHT	480
-
 // narysowanie napisu txt na powierzchni screen, zaczynaj¹c od punktu (x, y)
 // charset to bitmapa 128x128 zawieraj¹ca znaki
 // draw a text txt on surface screen, starting from the point (x, y)
@@ -142,30 +139,29 @@ int main(int argc, char** argv) {
 	};
 	SDL_SetColorKey(charset, true, 0x000000);
 
-
-	Game game{ 100 };
-	game.takeDamage(50);
-	printf("Monster hp: %d\n", game.getHp());
-
-
-	/*game.closeGame(charset, screen, scrtex, window, renderer);*/
-
 	eti = SDL_LoadBMP("./eti.bmp");
 	if (eti == NULL) {
 		printf("SDL_LoadBMP(eti.bmp) error: %s\n", SDL_GetError());
-		// closing the program missing
+		
+		SDL_FreeSurface(charset);
+		SDL_FreeSurface(screen);
+		SDL_DestroyTexture(scrtex);
+		SDL_DestroyWindow(window);
+		SDL_DestroyRenderer(renderer);
+		SDL_Quit();
+
 		return 1;
 	};
 
 	char text[128];
-	int black = SDL_MapRGB(screen->format, 0x00, 0x00, 0x00);
-	int green = SDL_MapRGB(screen->format, 0x00, 0xFF, 0x00);
-	int red = SDL_MapRGB(screen->format, 0xFF, 0x00, 0x00);
-	int blue = SDL_MapRGB(screen->format, 0x11, 0x11, 0xCC);
-	int white = SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF);
+	const int black = SDL_MapRGB(screen->format, 0x00, 0x00, 0x00);
+	const int green = SDL_MapRGB(screen->format, 0x00, 0xFF, 0x00);
+	const int red = SDL_MapRGB(screen->format, 0xFF, 0x00, 0x00);
+	const int blue = SDL_MapRGB(screen->format, 0x11, 0x11, 0xCC);
+	const int white = SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF);
 
-	int ladderColor = SDL_MapRGB(screen->format, 0x00, 0xcf, 0xcf);
-	int platformColor = SDL_MapRGB(screen->format, 0xef, 0x1e, 0x4f); // just draw a line instead of a big platform
+	const int ladderColor = SDL_MapRGB(screen->format, 0x00, 0xcf, 0xcf);
+	const int platformColor = SDL_MapRGB(screen->format, 0xef, 0x1e, 0x4f); // just draw a line instead of a big platform
 
 	tick1 = SDL_GetTicks();
 

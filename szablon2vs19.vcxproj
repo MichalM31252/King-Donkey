@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="libs\game_file_interface\FileInterface.cpp" />
     <ClCompile Include="libs\game_gameplay\Barrel.cpp" />
     <ClCompile Include="libs\game_gameplay\Board.cpp" />
     <ClCompile Include="libs\game_gameplay\Floor.cpp" />
@@ -27,6 +28,12 @@
     <ClCompile Include="libs\game_gameplay\Platform.cpp" />
     <ClCompile Include="libs\game_gameplay\Player.cpp" />
     <ClCompile Include="libs\game_gameplay\Stage.cpp" />
+    <ClCompile Include="libs\game_info\AdditionalInfo.cpp" />
+    <ClCompile Include="libs\game_info\HallOfFame.cpp" />
+    <ClCompile Include="libs\game_info\LivesBar.cpp" />
+    <ClCompile Include="libs\game_info\Menu.cpp" />
+    <ClCompile Include="libs\game_info\ScoreBar.cpp" />
+    <ClCompile Include="libs\game_info\TimeBar.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\Constants.h" />
+    <ClInclude Include="libs\game_file_interface\FileInterface.h" />
     <ClInclude Include="libs\game_gameplay\Barrel.h" />
     <ClInclude Include="libs\game_gameplay\Board.h" />
     <ClInclude Include="libs\game_gameplay\Floor.h" />
@@ -43,6 +51,12 @@
     <ClInclude Include="libs\game_gameplay\Platform.h" />
     <ClInclude Include="libs\game_gameplay\Player.h" />
     <ClInclude Include="libs\game_gameplay\Stage.h" />
+    <ClInclude Include="libs\game_info\AdditionalInfo.h" />
+    <ClInclude Include="libs\game_info\HallOfFame.h" />
+    <ClInclude Include="libs\game_info\LivesBar.h" />
+    <ClInclude Include="libs\game_info\Menu.h" />
+    <ClInclude Include="libs\game_info\ScoreBar.h" />
+    <ClInclude Include="libs\game_info\TimeBar.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
