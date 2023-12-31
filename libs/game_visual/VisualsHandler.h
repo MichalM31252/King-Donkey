@@ -5,7 +5,7 @@ extern "C" {
 	#include "../../SDL2-2.0.10/include/SDL_main.h"
 }
 
-class DrawHandler {
+class VisualsHandler {
 	public:
 		void DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset);
 		void DrawSurface(SDL_Surface* screen, SDL_Surface* sprite, int x, int y);

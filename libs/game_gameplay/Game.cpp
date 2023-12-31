@@ -9,66 +9,99 @@ extern "C" {
 
 	#include "Game.h"
 	#include "../Constants.h"
-	#include "../game_visual/DrawHandler.h"
+	#include "../game_visual/VisualsHandler.h"
 }
 
-Game::Game(){
-	quit = 0;
-}
-
-void Game::initEverything() {
-	int tick1, tick2, frames, rc;
-	double deltaTime, worldTime, fpsTimer, fps, distance, etiSpeed;
-	SDL_Event event;
-	SDL_Surface* screen, * charset; // screen on which we will be drawing, charset is the bitmap with characters
-	SDL_Surface* eti; // picture of eti
-	SDL_Texture* scrtex; // ?? probably useless
-	SDL_Window* window; // widnows window
-	SDL_Renderer* renderer; // we send here to render the screen
-
-	DrawHandler drawHandler;
-
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+void Game::SDLCheck() { // checks if SDL was initialized correctly
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) { 
 		printf("SDL_Init error: %s\n", SDL_GetError());
 		this->closeGame();
 	}
+}
 
+void Game::SDLCreateWindowAndRenderer() {
 	rc = SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
 	if (rc != 0) {
 		printf("SDL_CreateWindowAndRenderer error: %s\n", SDL_GetError());
 		this->closeGame();
 	};
+}
 
+void Game::SDLSetHint() {
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+}
+
+void Game::SDLSetRenderLogicalSize() {
 	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+}
+
+void Game::SDLSetDefaultDrawColor() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+}
 
+void Game::SDLSetWindowTitle() {
 	SDL_SetWindowTitle(window, "192928 Michal Malinowski");
+}
 
-	screen = SDL_CreateRGBSurface(0, SCREEN_WIDTH, SCREEN_HEIGHT, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
-
-	scrtex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_WIDTH, SCREEN_HEIGHT);
-
-	SDL_ShowCursor(SDL_DISABLE);
-
-	charset = SDL_LoadBMP("./cs8x8.bmp"); // this function is for reading bmp files
+void Game::SDLSetCharset() {
+	charset = SDL_LoadBMP("./cs8x8.bmp"); 
 	if (charset == NULL) {
 		printf("SDL_LoadBMP(cs8x8.bmp) error: %s\n", SDL_GetError());
 		this->closeGame(charset, screen, scrtex, window, renderer);
 	};
-	SDL_SetColorKey(charset, true, 0x000000);
+}
 
-	eti = SDL_LoadBMP("./eti.bmp");
+void Game::SDLSetScreen() {
+	screen = SDL_CreateRGBSurface(0, SCREEN_WIDTH, SCREEN_HEIGHT, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+}
+
+void Game::SDLSetTexture() {
+	scrtex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_WIDTH, SCREEN_HEIGHT);
+}
+
+void Game::SDLSetEtiLogo() {
+	eti = SDL_LoadBMP("./eti.bmp"); 
 	if (eti == NULL) {
 		printf("SDL_LoadBMP(eti.bmp) error: %s\n", SDL_GetError());
 		this->closeGame(charset, screen, scrtex, window, renderer);
 	};
+}
 
+void Game::SDLHideCursor() {
+	SDL_ShowCursor(SDL_DISABLE); // hides the cursor
+}
+
+void Game::SDLSetColorKey() {
+	SDL_SetColorKey(charset, true, 0x000000); 
+}
+
+
+void Game::initGame() {
+
+	VisualsHandler visualsHandler;
+
+	this->SDLCheck();
+	this->SDLCreateWindowAndRenderer();
+	this->SDLSetHint();
+	this->SDLSetRenderLogicalSize();
+	this->SDLSetDefaultDrawColor();
+	this->SDLSetWindowTitle();
+	this->SDLSetCharset();
+	this->SDLSetScreen();
+	this->SDLSetTexture();
+	this->SDLSetEtiLogo();
+	this->SDLHideCursor();
+	this->SDLSetColorKey();
+
+
+	// this is here to reserve a space for a long text
 	char text[128];
+
+	// colors
 	const int black = SDL_MapRGB(screen->format, 0x00, 0x00, 0x00);
 	const int green = SDL_MapRGB(screen->format, 0x00, 0xFF, 0x00);
 	const int red = SDL_MapRGB(screen->format, 0xFF, 0x00, 0x00);
-	const int blue = SDL_MapRGB(screen->format, 0x11, 0x11, 0xCC);
+	const int blue = SDL_MapRGB(screen->format, 0x00, 0x00, 0xFF);
 	const int white = SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF);
 
 	const int ladderColor = SDL_MapRGB(screen->format, 0x00, 0xcf, 0xcf);
@@ -76,11 +109,13 @@ void Game::initEverything() {
 
 	tick1 = SDL_GetTicks();
 
-	frames = 0; // frames tha happend
+	frames = 0; // frames that happend
 	fpsTimer = 0; // 
 	fps = 0; // frames per second
 
 	worldTime = 0; // how long the game is running
+
+
 	distance = 0; // the distance of the eti sign (this could maybe work for collision detection)
 	etiSpeed = 1; // speed of the eti sign
 
@@ -96,7 +131,7 @@ void Game::initEverything() {
 		SDL_FillRect(screen, NULL, platformColor);
 
 		// draws the eti.bmp image, for drawing 	                        
-		drawHandler.DrawSurface(screen, eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	
+		visualsHandler.DrawSurface(screen, eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	
 
 		fpsTimer += deltaTime;
 		if (fpsTimer > SECONDS_BETWEEN_REFRESH) {
@@ -106,11 +141,11 @@ void Game::initEverything() {
 		};
 
 		// tekst informacyjny / info text
-		drawHandler.DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black); // draws border around the whole screen
-		drawHandler.DrawRectangle(screen, 1, 1, SCREEN_WIDTH - 2, 18, blue, blue);
+		visualsHandler.DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black); // draws border around the whole screen
+		visualsHandler.DrawRectangle(screen, 1, 1, SCREEN_WIDTH - 2, 18, blue, blue);
 
 		sprintf(text, "Time: %.1lf s  Score: 00000  Lives: 3", worldTime); //            "template for the second project, elapsed time = %.1lf s  %.0lf frames / s"
-		drawHandler.DrawString(screen, screen->w / 2 - strlen(text) * 8 / 2, 7, text, charset);
+		visualsHandler.DrawString(screen, screen->w / 2 - strlen(text) * 8 / 2, 7, text, charset);
 
 
 		SDL_UpdateTexture(scrtex, NULL, screen->pixels, screen->pitch);

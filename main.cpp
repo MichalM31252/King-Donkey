@@ -12,21 +12,14 @@ extern "C" {
 	#include "./libs/game_gameplay/Game.h"
 }
 
-
-
-
 // main
 #ifdef __cplusplus
 extern "C"
 #endif
 int main(int argc, char** argv) {
-
-
 	Game game;
 
-	game.initEverything();
-
-
+	game.initGame();
 
 	// zwolnienie powierzchni / freeing all surfaces
 	return 0;
