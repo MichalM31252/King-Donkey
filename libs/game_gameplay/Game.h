@@ -10,7 +10,7 @@ class Game {
 		int quit;
 		Game();
 
-		void initEverything(int *rc, SDL_Window* window, SDL_Renderer* renderer);
+		void initEverything();
 
 		void closeGame();
 		void closeGame(SDL_Surface* charset, SDL_Surface* screen, SDL_Texture* scrtex, SDL_Window* window, SDL_Renderer* renderer);
