@@ -3,14 +3,13 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "./libs/game_gameplay/GameStatus.h"
-
 extern "C" {
-#include "./SDL2-2.0.10/include/SDL.h"
-#include "./SDL2-2.0.10/include/SDL_main.h"
+	
+	#include "./SDL2-2.0.10/include/SDL.h"
+	#include "./SDL2-2.0.10/include/SDL_main.h"
 
-#include "./libs/Constants.h"
-#include "./libs/game_gameplay/GameStatus.h"
+	#include "./libs/Constants.h"
+	#include "./libs/game_gameplay/Game.h"
 }
 
 
@@ -94,7 +93,7 @@ void DrawRectangle(SDL_Surface* screen, int x, int y, int l, int k,Uint32 outlin
 extern "C"
 #endif
 int main(int argc, char** argv) {
-	int tick1, tick2, quit, frames, rc;
+	int tick1, tick2, frames, rc;
 	double deltaTime, worldTime, fpsTimer, fps, distance, etiSpeed;
 	SDL_Event event;
 	SDL_Surface* screen, * charset; // screen on which we will be drawing, charset is the bitmap with characters
@@ -103,16 +102,17 @@ int main(int argc, char** argv) {
 	SDL_Window* window; // widnows window
 	SDL_Renderer* renderer; // we send here to render the screen
 
+	Game game;
+
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		printf("SDL_Init error: %s\n", SDL_GetError());
-		return 1;
+		game.closeGame();
 	}
 
 	rc = SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0,&window, &renderer);
 	if (rc != 0) {
-		SDL_Quit();
 		printf("SDL_CreateWindowAndRenderer error: %s\n", SDL_GetError());
-		return 1;
+		game.closeGame();
 	};
 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
@@ -130,27 +130,14 @@ int main(int argc, char** argv) {
 	charset = SDL_LoadBMP("./cs8x8.bmp"); // this function is for reading bmp files
 	if (charset == NULL) {
 		printf("SDL_LoadBMP(cs8x8.bmp) error: %s\n", SDL_GetError());
-		SDL_FreeSurface(screen);
-		SDL_DestroyTexture(scrtex);
-		SDL_DestroyWindow(window);
-		SDL_DestroyRenderer(renderer);
-		SDL_Quit();
-		return 1;
+		game.closeGame(charset, screen, scrtex, window, renderer);
 	};
 	SDL_SetColorKey(charset, true, 0x000000);
 
 	eti = SDL_LoadBMP("./eti.bmp");
 	if (eti == NULL) {
 		printf("SDL_LoadBMP(eti.bmp) error: %s\n", SDL_GetError());
-		
-		SDL_FreeSurface(charset);
-		SDL_FreeSurface(screen);
-		SDL_DestroyTexture(scrtex);
-		SDL_DestroyWindow(window);
-		SDL_DestroyRenderer(renderer);
-		SDL_Quit();
-
-		return 1;
+		game.closeGame(charset, screen, scrtex, window, renderer);
 	};
 
 	char text[128];
@@ -168,12 +155,12 @@ int main(int argc, char** argv) {
 	frames = 0; // frames tha happend
 	fpsTimer = 0; // 
 	fps = 0; // frames per second
-	quit = 0; // flag for quitting the game
+	
 	worldTime = 0; // how long the game is running
 	distance = 0; // the distance of the eti sign (this could maybe work for collision detection)
 	etiSpeed = 1; // speed of the eti sign
 
-	while (!quit) { // 1 frame of the game
+	while (true) { // 1 frame of the game
 		tick2 = SDL_GetTicks();
 		deltaTime = (tick2 - tick1) * 0.001; // deltaTime is time in miliseconds since the last screen was drawn to make sure that the game runs at the same speed on different computers
 		tick1 = tick2;
@@ -214,7 +201,7 @@ int main(int argc, char** argv) {
 			switch (event.type) {
 			case SDL_KEYDOWN:
 				if (event.key.keysym.sym == SDLK_ESCAPE) 
-					quit = 1;
+					game.closeGame(charset, screen, scrtex, window, renderer);
 				else if (event.key.keysym.sym == SDLK_UP) 
 					etiSpeed = 2.0;
 				else if (event.key.keysym.sym == SDLK_DOWN) 
@@ -224,7 +211,7 @@ int main(int argc, char** argv) {
 				etiSpeed = 1.0;
 				break;
 			case SDL_QUIT:
-				quit = 1;
+				game.closeGame(charset, screen, scrtex, window, renderer);
 				break;
 			};
 		};
@@ -232,12 +219,5 @@ int main(int argc, char** argv) {
 	};
 
 	// zwolnienie powierzchni / freeing all surfaces
-	SDL_FreeSurface(charset);
-	SDL_FreeSurface(screen);
-	SDL_DestroyTexture(scrtex);
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
-
-	SDL_Quit();
-	return 0;
+	game.closeGame(charset, screen, scrtex, window, renderer);
 };

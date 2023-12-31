@@ -23,7 +23,7 @@
     <ClCompile Include="libs\game_gameplay\Barrel.cpp" />
     <ClCompile Include="libs\game_gameplay\Board.cpp" />
     <ClCompile Include="libs\game_gameplay\Floor.cpp" />
-    <ClCompile Include="libs\game_gameplay\GameStatus.cpp" />
+    <ClCompile Include="libs\game_gameplay\Game.cpp" />
     <ClCompile Include="libs\game_gameplay\Ladder.cpp" />
     <ClCompile Include="libs\game_gameplay\Platform.cpp" />
     <ClCompile Include="libs\game_gameplay\Player.cpp" />
@@ -46,7 +46,7 @@
     <ClInclude Include="libs\game_gameplay\Barrel.h" />
     <ClInclude Include="libs\game_gameplay\Board.h" />
     <ClInclude Include="libs\game_gameplay\Floor.h" />
-    <ClInclude Include="libs\game_gameplay\GameStatus.h" />
+    <ClInclude Include="libs\game_gameplay\Game.h" />
     <ClInclude Include="libs\game_gameplay\Ladder.h" />
     <ClInclude Include="libs\game_gameplay\Platform.h" />
     <ClInclude Include="libs\game_gameplay\Player.h" />
