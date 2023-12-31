@@ -9,7 +9,7 @@ extern "C" {
 
 	#include "Game.h"
 	#include "../Constants.h"
-	#include "../game_visual/VisualsHandler.h"
+	#include "../game_visual/VisualHandler.h"
 }
 
 void Game::SDLCheck() { // checks if SDL was initialized correctly
@@ -78,7 +78,7 @@ void Game::SDLSetColorKey() {
 
 void Game::initGame() {
 
-	VisualsHandler visualsHandler;
+	VisualHandler visualHandler;
 
 	this->SDLCheck();
 	this->SDLCreateWindowAndRenderer();
@@ -93,19 +93,8 @@ void Game::initGame() {
 	this->SDLHideCursor();
 	this->SDLSetColorKey();
 
-
-	// this is here to reserve a space for a long text
-	char text[128];
-
-	// colors
-	const int black = SDL_MapRGB(screen->format, 0x00, 0x00, 0x00);
-	const int green = SDL_MapRGB(screen->format, 0x00, 0xFF, 0x00);
-	const int red = SDL_MapRGB(screen->format, 0xFF, 0x00, 0x00);
-	const int blue = SDL_MapRGB(screen->format, 0x00, 0x00, 0xFF);
-	const int white = SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF);
-
-	const int ladderColor = SDL_MapRGB(screen->format, 0x00, 0xcf, 0xcf);
-	const int platformColor = SDL_MapRGB(screen->format, 0xef, 0x1e, 0x4f); // just draw a line instead of a big platform
+	visualHandler.setColors(screen);
+	
 
 	tick1 = SDL_GetTicks();
 
@@ -114,7 +103,6 @@ void Game::initGame() {
 	fps = 0; // frames per second
 
 	worldTime = 0; // how long the game is running
-
 
 	distance = 0; // the distance of the eti sign (this could maybe work for collision detection)
 	etiSpeed = 1; // speed of the eti sign
@@ -128,10 +116,10 @@ void Game::initGame() {
 
 		distance += etiSpeed * deltaTime;
 
-		SDL_FillRect(screen, NULL, platformColor);
+		SDL_FillRect(screen, NULL, visualHandler.platformColor);
 
 		// draws the eti.bmp image, for drawing 	                        
-		visualsHandler.DrawSurface(screen, eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	
+		visualHandler.DrawSurface(screen, eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	
 
 		fpsTimer += deltaTime;
 		if (fpsTimer > SECONDS_BETWEEN_REFRESH) {
@@ -141,39 +129,23 @@ void Game::initGame() {
 		};
 
 		// tekst informacyjny / info text
-		visualsHandler.DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black); // draws border around the whole screen
-		visualsHandler.DrawRectangle(screen, 1, 1, SCREEN_WIDTH - 2, 18, blue, blue);
+		visualHandler.DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, visualHandler.blue, visualHandler.black); // draws border around the whole screen
+		visualHandler.DrawRectangle(screen, 1, 1, SCREEN_WIDTH - 2, 18, visualHandler.blue, visualHandler.blue);
 
+		// this is here to reserve a space for a long text
+		char text[128];
 		sprintf(text, "Time: %.1lf s  Score: 00000  Lives: 3", worldTime); //            "template for the second project, elapsed time = %.1lf s  %.0lf frames / s"
-		visualsHandler.DrawString(screen, screen->w / 2 - strlen(text) * 8 / 2, 7, text, charset);
+		visualHandler.DrawString(screen, screen->w / 2 - strlen(text) * 8 / 2, 7, text, charset);
 
 
 		SDL_UpdateTexture(scrtex, NULL, screen->pixels, screen->pitch);
-		//		SDL_RenderClear(renderer);
 		SDL_RenderCopy(renderer, scrtex, NULL, NULL);
 		SDL_RenderPresent(renderer);
 
 
 
 		// obs³uga zdarzeñ (o ile jakieœ zasz³y) / handling of events (if there were any)
-		while (SDL_PollEvent(&event)) {
-			switch (event.type) {
-			case SDL_KEYDOWN:
-				if (event.key.keysym.sym == SDLK_ESCAPE)
-					this->closeGame(charset, screen, scrtex, window, renderer);
-				else if (event.key.keysym.sym == SDLK_UP)
-					etiSpeed = 2.0;
-				else if (event.key.keysym.sym == SDLK_DOWN)
-					etiSpeed = 0.3;
-				break;
-			case SDL_KEYUP:
-				etiSpeed = 1.0;
-				break;
-			case SDL_QUIT:
-				this->closeGame(charset, screen, scrtex, window, renderer);
-				break;
-			};
-		};
+
 		frames++;
 	};
 	this->closeGame(charset, screen, scrtex, window, renderer);

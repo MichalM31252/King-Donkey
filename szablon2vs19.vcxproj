@@ -22,6 +22,7 @@
     <ClCompile Include="libs\game_file_interface\FileInterface.cpp" />
     <ClCompile Include="libs\game_gameplay\Barrel.cpp" />
     <ClCompile Include="libs\game_gameplay\Board.cpp" />
+    <ClCompile Include="libs\game_gameplay\EventHandler.cpp" />
     <ClCompile Include="libs\game_gameplay\Floor.cpp" />
     <ClCompile Include="libs\game_gameplay\Game.cpp" />
     <ClCompile Include="libs\game_gameplay\Ladder.cpp" />
@@ -34,7 +35,7 @@
     <ClCompile Include="libs\game_info\Menu.cpp" />
     <ClCompile Include="libs\game_info\ScoreBar.cpp" />
     <ClCompile Include="libs\game_info\TimeBar.cpp" />
-    <ClCompile Include="libs\game_visual\VisualsHandler.cpp" />
+    <ClCompile Include="libs\game_visual\VisualHandler.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +47,7 @@
     <ClInclude Include="libs\game_file_interface\FileInterface.h" />
     <ClInclude Include="libs\game_gameplay\Barrel.h" />
     <ClInclude Include="libs\game_gameplay\Board.h" />
+    <ClInclude Include="libs\game_gameplay\EventHandler.h" />
     <ClInclude Include="libs\game_gameplay\Floor.h" />
     <ClInclude Include="libs\game_gameplay\Game.h" />
     <ClInclude Include="libs\game_gameplay\Ladder.h" />
@@ -58,7 +60,7 @@
     <ClInclude Include="libs\game_info\Menu.h" />
     <ClInclude Include="libs\game_info\ScoreBar.h" />
     <ClInclude Include="libs\game_info\TimeBar.h" />
-    <ClInclude Include="libs\game_visual\VisualsHandler.h" />
+    <ClInclude Include="libs\game_visual\VisualHandler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
