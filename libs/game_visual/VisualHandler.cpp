@@ -11,26 +11,110 @@ extern "C" {
 	#include "../Constants.h"
 }
 
-
-void VisualHandler::setColors(SDL_Surface* screen) {
-	black = SDL_MapRGB(screen->format, 0x00, 0x00, 0x00);
-	green = SDL_MapRGB(screen->format, 0x00, 0xFF, 0x00);
-	red = SDL_MapRGB(screen->format, 0xFF, 0x00, 0x00);
-	blue = SDL_MapRGB(screen->format, 0x00, 0x00, 0xFF);
-	white = SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF);
-	ladderColor = SDL_MapRGB(screen->format, 0x00, 0xcf, 0xcf);
-	platformColor = SDL_MapRGB(screen->format, 0xef, 0x1e, 0x4f); // just draw a line instead of a big platform
-};
-
-void VisualHandler::drawOutlineOfTheBoard(SDL_Surface* screen) { // draws the outline of the board
-	this->DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, this->blue, this->black); 
+void VisualHandler::SDLCheck() { // checks if SDL was initialized correctly
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
+		printf("SDL_Init error: %s\n", SDL_GetError());
+		// this->closeGame();
+	}
 }
 
-void VisualHandler::drawAdditionalInfo(SDL_Surface* screen, double worldTime, SDL_Surface* charset) { // draws current time, score and lives on the top of the screen
+void VisualHandler::SDLCreateWindowAndRenderer() { // visual
+	rc = SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
+	if (rc != 0) {
+		printf("SDL_CreateWindowAndRenderer error: %s\n", SDL_GetError());
+		// this->closeGame();
+	};
+}
+
+void VisualHandler::SDLSetHint() { // visual
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+}
+
+void VisualHandler::SDLSetRenderLogicalSize() { // visual
+	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
+}
+
+void VisualHandler::SDLSetDefaultDrawColor() { // visual
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+}
+
+void VisualHandler::SDLSetWindowTitle() { // visual
+	SDL_SetWindowTitle(window, "192928 Michal Malinowski");
+}
+
+void VisualHandler::SDLSetCharset() { // visual
+	charset = SDL_LoadBMP("./cs8x8.bmp");
+	if (charset == NULL) {
+		printf("SDL_LoadBMP(cs8x8.bmp) error: %s\n", SDL_GetError());
+		// this->closeGame(charset, screen, scrtex, window, renderer);
+	};
+}
+
+void VisualHandler::SDLSetScreen() { // visual
+	screen = SDL_CreateRGBSurface(0, SCREEN_WIDTH, SCREEN_HEIGHT, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+}
+
+void VisualHandler::SDLSetTexture() { // visual
+	scrtex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_WIDTH, SCREEN_HEIGHT);
+}
+
+void VisualHandler::SDLSetEtiLogo() { // visual
+	eti = SDL_LoadBMP("./eti.bmp");
+	if (eti == NULL) {
+		printf("SDL_LoadBMP(eti.bmp) error: %s\n", SDL_GetError());
+		// this->closeGame(charset, screen, scrtex, window, renderer);
+	};
+}
+
+void VisualHandler::SDLHideCursor() { // visual
+	SDL_ShowCursor(SDL_DISABLE); // hides the cursor
+}
+
+void VisualHandler::SDLSetColorKey() { // visual
+	SDL_SetColorKey(charset, true, 0x000000);
+}
+
+void VisualHandler::serveNextFrame() { // visual
+	SDL_UpdateTexture(scrtex, NULL, screen->pixels, screen->pitch);
+	SDL_RenderCopy(renderer, scrtex, NULL, NULL);
+	SDL_RenderPresent(renderer);
+}
+
+void VisualHandler::setColors() {
+	black = SDL_MapRGB(this->screen->format, 0x00, 0x00, 0x00);
+	green = SDL_MapRGB(this->screen->format, 0x00, 0xFF, 0x00);
+	red = SDL_MapRGB(this->screen->format, 0xFF, 0x00, 0x00);
+	blue = SDL_MapRGB(this->screen->format, 0x00, 0x00, 0xFF);
+	white = SDL_MapRGB(this->screen->format, 0xFF, 0xFF, 0xFF);
+	ladderColor = SDL_MapRGB(this->screen->format, 0x00, 0xcf, 0xcf);
+	platformColor = SDL_MapRGB(this->screen->format, 0xef, 0x1e, 0x4f); // just draw a line instead of a big platform
+};
+
+void VisualHandler::drawOutlineOfTheBoard() { // draws the outline of the board
+	this->DrawRectangle(this->screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, this->blue, this->black); 
+}
+
+void VisualHandler::drawAdditionalInfo(double worldTime) { // draws current time, score and lives on the top of the screen
 	this->DrawRectangle(screen, 1, 1, SCREEN_WIDTH - 2, 18, this->blue, this->blue);
 	char text[128];
 	sprintf(text, "Time: %.1lf s  Score: 00000  Lives: 3", worldTime);
 	DrawString(screen, screen->w / 2 - strlen(text) * 8 / 2, 7, text, charset);
+}
+
+void VisualHandler::setUpVisuals() {
+	this->SDLCheck();
+	this->SDLCreateWindowAndRenderer();
+	this->SDLSetHint();
+	this->SDLSetRenderLogicalSize();
+	this->SDLSetDefaultDrawColor();
+	this->SDLSetWindowTitle();
+	this->SDLSetCharset();
+	this->SDLSetScreen();
+	this->SDLSetTexture();
+	this->SDLSetEtiLogo();
+	this->SDLHideCursor();
+	this->SDLSetColorKey();
+	this->setColors();
 }
 
 // narysowanie napisu txt na powierzchni screen, zaczynaj¹c od punktu (x, y)

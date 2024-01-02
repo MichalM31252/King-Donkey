@@ -7,18 +7,37 @@ extern "C" {
 
 class VisualHandler {
 	public:
-		Uint32 black;
-		Uint32 green;
-		Uint32 red;
-		Uint32 blue;
-		Uint32 white;
-		Uint32 ladderColor;
-		Uint32 platformColor; // just draw a line instead of a big platform
+		Uint32 black, green, red, blue, white;
+		Uint32 ladderColor, platformColor;
 
-		void setColors(SDL_Surface* screen);
-		void drawOutlineOfTheBoard(SDL_Surface* screen);
-		void drawAdditionalInfo(SDL_Surface* screen, double worldTime, SDL_Surface* charset);
+		int rc;
+		SDL_Surface* screen, * charset; // screen on which we will be drawing, charset is the bitmap with characters
+		SDL_Surface* eti; // picture of eti
+		SDL_Texture* scrtex; // ?? probably useless
+		SDL_Window* window; // widnows window
+		SDL_Renderer* renderer; // we send here to render the screen
 
+		void SDLCheck();
+		void SDLCreateWindowAndRenderer();
+		void SDLSetHint();
+		void SDLSetRenderLogicalSize();
+		void SDLSetDefaultDrawColor();
+		void SDLSetWindowTitle();
+		void SDLSetCharset();
+		void SDLSetScreen();
+		void SDLSetTexture();
+		void SDLSetEtiLogo();
+		void SDLHideCursor();
+		void SDLSetColorKey();
+
+		void setColors();
+		void drawOutlineOfTheBoard();
+		void drawAdditionalInfo(double worldTime);
+		void setUpVisuals();
+
+		void serveNextFrame();
+
+		// don't touch for now you are sleepy
 		void DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset);
 		void DrawSurface(SDL_Surface* screen, SDL_Surface* sprite, int x, int y);
 		void DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color);
