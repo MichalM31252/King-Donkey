@@ -11,6 +11,26 @@ extern "C" {
 	#include "../Constants.h"
 }
 
-void EventHandler::handleEvents() {
-
+void EventHandler::handleEvents(bool *quit) {
+	while (SDL_PollEvent(&event)) {
+		switch (event.type) {
+			case SDL_KEYDOWN: // event of pressing down a key on keyboard
+				if (event.key.keysym.sym == SDLK_ESCAPE) {
+					*quit = true; // Esc = Quit CLOSING THE PROGRAM HERE
+				} 			
+				else if (event.key.keysym.sym == SDLK_UP) {
+					// etiSpeed = 2.0; // Arrow Up Fly faster by changing speed
+				} 
+				else if (event.key.keysym.sym == SDLK_DOWN) {
+					// etiSpeed = 0.3; // Reduce the speed
+				}
+				break;
+			case SDL_KEYUP: // similarly event when you stop pressing
+				// etiSpeed = 1.0; // reset the speed of ETI
+				break;
+			case SDL_QUIT: // This is for closing the window by the regular "X" button
+				*quit = true;
+				break;
+		}
+	}
 }

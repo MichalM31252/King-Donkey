@@ -7,5 +7,7 @@ extern "C" {
 
 class EventHandler {
 public:
-	void handleEvents();
+	void handleEvents(bool* quit);
+private:
+	SDL_Event event; // this can be used here
 };

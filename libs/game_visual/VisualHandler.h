@@ -16,6 +16,8 @@ class VisualHandler {
 		Uint32 platformColor; // just draw a line instead of a big platform
 
 		void setColors(SDL_Surface* screen);
+		void drawOutlineOfTheBoard(SDL_Surface* screen);
+		void drawAdditionalInfo(SDL_Surface* screen, double worldTime, SDL_Surface* charset);
 
 		void DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset);
 		void DrawSurface(SDL_Surface* screen, SDL_Surface* sprite, int x, int y);

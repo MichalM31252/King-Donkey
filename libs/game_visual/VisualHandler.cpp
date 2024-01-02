@@ -18,10 +18,20 @@ void VisualHandler::setColors(SDL_Surface* screen) {
 	red = SDL_MapRGB(screen->format, 0xFF, 0x00, 0x00);
 	blue = SDL_MapRGB(screen->format, 0x00, 0x00, 0xFF);
 	white = SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF);
-
 	ladderColor = SDL_MapRGB(screen->format, 0x00, 0xcf, 0xcf);
 	platformColor = SDL_MapRGB(screen->format, 0xef, 0x1e, 0x4f); // just draw a line instead of a big platform
 };
+
+void VisualHandler::drawOutlineOfTheBoard(SDL_Surface* screen) { // draws the outline of the board
+	this->DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, this->blue, this->black); 
+}
+
+void VisualHandler::drawAdditionalInfo(SDL_Surface* screen, double worldTime, SDL_Surface* charset) { // draws current time, score and lives on the top of the screen
+	this->DrawRectangle(screen, 1, 1, SCREEN_WIDTH - 2, 18, this->blue, this->blue);
+	char text[128];
+	sprintf(text, "Time: %.1lf s  Score: 00000  Lives: 3", worldTime);
+	DrawString(screen, screen->w / 2 - strlen(text) * 8 / 2, 7, text, charset);
+}
 
 // narysowanie napisu txt na powierzchni screen, zaczynaj¹c od punktu (x, y)
 // charset to bitmapa 128x128 zawieraj¹ca znaki

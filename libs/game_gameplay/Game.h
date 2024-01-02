@@ -3,6 +3,8 @@
 extern "C" {
 	#include "../../SDL2-2.0.10/include/SDL.h"
 	#include "../../SDL2-2.0.10/include/SDL_main.h"
+	#include "../game_visual/VisualHandler.h"
+	#include "./EventHandler.h"
 }
 
 class Game {
@@ -11,7 +13,6 @@ class Game {
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
 		double distance, etiSpeed; // this can be used here
-		SDL_Event event; // this can be used here
 
 		// visual
 		int rc;
@@ -21,7 +22,9 @@ class Game {
 		SDL_Window* window; // widnows window
 		SDL_Renderer* renderer; // we send here to render the screen
 
-		// Game(); Constructor
+		// Game(); Constructor NEEDED ADD DEFAULT VALUES
+		void initGame();
+
 		void SDLCheck();
 		void SDLCreateWindowAndRenderer();
 		void SDLSetHint();
@@ -34,8 +37,14 @@ class Game {
 		void SDLSetEtiLogo();
 		void SDLHideCursor();
 		void SDLSetColorKey();
+		void setUpFramerate();
+		void setUpGameObjects();
+		void handleFPSTimer();
+		void handleDifferentComputers();
+		void updateWorldTime();
+		void serveNextFrame();
 
-		void initGame();
+		void handleGame(VisualHandler& visualHandler, EventHandler& eventHandler);
 
 		void closeGame();
 		void closeGame(SDL_Surface* charset, SDL_Surface* screen, SDL_Texture* scrtex, SDL_Window* window, SDL_Renderer* renderer);

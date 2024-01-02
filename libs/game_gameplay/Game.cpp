@@ -10,6 +10,7 @@ extern "C" {
 	#include "Game.h"
 	#include "../Constants.h"
 	#include "../game_visual/VisualHandler.h"
+	#include "./EventHandler.h"
 }
 
 void Game::SDLCheck() { // checks if SDL was initialized correctly
@@ -76,9 +77,72 @@ void Game::SDLSetColorKey() {
 }
 
 
+void Game::setUpFramerate() {
+	tick1 = SDL_GetTicks();
+	frames = 0; // frames that happend
+	fpsTimer = 0; // 
+	fps = 0; // frames per second
+	worldTime = 0; // how long the game is running
+}
+
+void Game::setUpGameObjects() {
+	distance = 0; // the distance of the eti sign (this could maybe work for collision detection)
+	etiSpeed = 1; // speed of the eti sign
+}
+
+void Game::handleDifferentComputers() { // make every object dependent on deltaTime so it works the same on different computers
+	tick2 = SDL_GetTicks();
+	deltaTime = (tick2 - tick1) * 0.001;
+	tick1 = tick2;
+}
+
+void Game::updateWorldTime() {
+	worldTime += deltaTime;
+}
+
+void Game::handleFPSTimer() {
+	fpsTimer += deltaTime;
+	if (fpsTimer > SECONDS_BETWEEN_REFRESH) {
+		fps = frames * REFRESH_RATE;
+		frames = 0;
+		fpsTimer -= SECONDS_BETWEEN_REFRESH;
+	};
+}
+
+void Game::serveNextFrame() {
+	SDL_UpdateTexture(scrtex, NULL, screen->pixels, screen->pitch);
+	SDL_RenderCopy(renderer, scrtex, NULL, NULL);
+	SDL_RenderPresent(renderer);
+}
+
+void Game::handleGame(VisualHandler& visualHandler, EventHandler& eventHandler) { // visualHandler is passed by reference, can't be an const because it's methods change the object
+	visualHandler.setColors(screen);
+	bool quit = false;
+	
+	while (!quit) { // 1 frame of the game
+
+		this->handleDifferentComputers();
+		this->updateWorldTime();
+		this->handleFPSTimer();
+
+		// distance += etiSpeed * deltaTime; // make gameObjects dependent on deltaTime so it works the same on different computers          
+		// visualHandler.DrawSurface(screen, eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	   
+		
+		visualHandler.drawOutlineOfTheBoard(screen);
+		visualHandler.drawAdditionalInfo(screen, worldTime, charset);
+
+		this->serveNextFrame(); // refactor so visualHabndler serves the next frame
+
+		eventHandler.handleEvents(&quit);
+
+		frames++;
+	};
+}
+
 void Game::initGame() {
 
 	VisualHandler visualHandler;
+	EventHandler eventHandler;
 
 	this->SDLCheck();
 	this->SDLCreateWindowAndRenderer();
@@ -93,61 +157,14 @@ void Game::initGame() {
 	this->SDLHideCursor();
 	this->SDLSetColorKey();
 
-	visualHandler.setColors(screen);
 	
+	
+	
+	this->setUpFramerate();
+	this->setUpGameObjects();
 
-	tick1 = SDL_GetTicks();
+	this->handleGame(visualHandler, eventHandler);
 
-	frames = 0; // frames that happend
-	fpsTimer = 0; // 
-	fps = 0; // frames per second
-
-	worldTime = 0; // how long the game is running
-
-	distance = 0; // the distance of the eti sign (this could maybe work for collision detection)
-	etiSpeed = 1; // speed of the eti sign
-
-	while (true) { // 1 frame of the game
-		tick2 = SDL_GetTicks();
-		deltaTime = (tick2 - tick1) * 0.001; // deltaTime is time in miliseconds since the last screen was drawn to make sure that the game runs at the same speed on different computers
-		tick1 = tick2;
-
-		worldTime += deltaTime;
-
-		distance += etiSpeed * deltaTime;
-
-		SDL_FillRect(screen, NULL, visualHandler.platformColor);
-
-		// draws the eti.bmp image, for drawing 	                        
-		visualHandler.DrawSurface(screen, eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	
-
-		fpsTimer += deltaTime;
-		if (fpsTimer > SECONDS_BETWEEN_REFRESH) {
-			fps = frames * REFRESH_RATE;
-			frames = 0;
-			fpsTimer -= SECONDS_BETWEEN_REFRESH;
-		};
-
-		// tekst informacyjny / info text
-		visualHandler.DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, visualHandler.blue, visualHandler.black); // draws border around the whole screen
-		visualHandler.DrawRectangle(screen, 1, 1, SCREEN_WIDTH - 2, 18, visualHandler.blue, visualHandler.blue);
-
-		// this is here to reserve a space for a long text
-		char text[128];
-		sprintf(text, "Time: %.1lf s  Score: 00000  Lives: 3", worldTime); //            "template for the second project, elapsed time = %.1lf s  %.0lf frames / s"
-		visualHandler.DrawString(screen, screen->w / 2 - strlen(text) * 8 / 2, 7, text, charset);
-
-
-		SDL_UpdateTexture(scrtex, NULL, screen->pixels, screen->pitch);
-		SDL_RenderCopy(renderer, scrtex, NULL, NULL);
-		SDL_RenderPresent(renderer);
-
-
-
-		// obs³uga zdarzeñ (o ile jakieœ zasz³y) / handling of events (if there were any)
-
-		frames++;
-	};
 	this->closeGame(charset, screen, scrtex, window, renderer);
 }
 
@@ -156,7 +173,7 @@ void Game::closeGame(){
 	exit(0);
 }
 
-void Game::closeGame(SDL_Surface* charset, SDL_Surface* screen, SDL_Texture* scrtex, SDL_Window* window, SDL_Renderer* renderer) {
+void Game::closeGame(SDL_Surface* charset, SDL_Surface* screen, SDL_Texture* scrtex, SDL_Window* window, SDL_Renderer* renderer) { // change this into a vector to be more efficient (so it can destroy every gameobject)
 	SDL_FreeSurface(charset);
 	SDL_FreeSurface(screen);
 	SDL_DestroyTexture(scrtex);
