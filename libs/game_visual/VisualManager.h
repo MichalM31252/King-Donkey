@@ -5,7 +5,7 @@ extern "C" {
 	#include "../../SDL2-2.0.10/include/SDL_main.h"
 }
 
-class VisualHandler {
+class VisualManager {
 	public:
 		Uint32 black, green, red, blue, white;
 		Uint32 ladderColor, platformColor;

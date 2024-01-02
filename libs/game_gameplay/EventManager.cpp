@@ -7,11 +7,11 @@ extern "C" {
 	#include "../../SDL2-2.0.10/include/SDL.h"
 	#include "../../SDL2-2.0.10/include/SDL_main.h"
 
-	#include "EventHandler.h"
+	#include "EventManager.h"
 	#include "../Constants.h"
 }
 
-void EventHandler::handleEvents(bool *quit) {
+void EventManager::handleEvents(bool *quit) {
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 			case SDL_KEYDOWN: // event of pressing down a key on keyboard

@@ -5,7 +5,7 @@ extern "C" {
 #include "../../SDL2-2.0.10/include/SDL_main.h"
 }
 
-class EventHandler {
+class EventManager {
 public:
 	void handleEvents(bool* quit);
 private:

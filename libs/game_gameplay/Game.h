@@ -3,8 +3,8 @@
 extern "C" {
 	#include "../../SDL2-2.0.10/include/SDL.h"
 	#include "../../SDL2-2.0.10/include/SDL_main.h"
-	#include "../game_visual/VisualHandler.h"
-	#include "./EventHandler.h"
+	#include "../game_visual/VisualManager.h"
+	#include "./EventManager.h"
 }
 
 class Game {
@@ -27,9 +27,9 @@ class Game {
 		void handleDifferentComputers();
 		void updateWorldTime();
 		
-		void setUpGame(VisualHandler& visualHandler);
-		void handleGame(VisualHandler& visualHandler, EventHandler& eventHandler);
+		void setUpGame(VisualManager& visualManager);
+		void handleGame(VisualManager& visualManager, EventManager& eventManager);
 
 		void closeGame();
-		void closeGame(VisualHandler& visualHandler);
+		void closeGame(VisualManager& visualManager);
 };

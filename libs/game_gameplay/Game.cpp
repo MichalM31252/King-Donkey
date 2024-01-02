@@ -9,8 +9,8 @@ extern "C" {
 
 	#include "Game.h"
 	#include "../Constants.h"
-	#include "../game_visual/VisualHandler.h"
-	#include "./EventHandler.h"
+	#include "../game_visual/VisualManager.h"
+	#include "./EventManager.h"
 }
 
 
@@ -51,9 +51,7 @@ void Game::handleFPSTimer() { // logic
 	};
 }
 
-
-
-void Game::handleGame(VisualHandler& visualHandler, EventHandler& eventHandler) { // visualHandler is passed by reference, can't be an const because it's methods change the object
+void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) { // VisualManager is passed by reference, can't be an const because it's methods change the object
 	bool quit = false;
 	while (!quit) { // 1 frame of the game
 
@@ -62,11 +60,11 @@ void Game::handleGame(VisualHandler& visualHandler, EventHandler& eventHandler) 
 		this->handleFPSTimer();
 
 		// distance += etiSpeed * deltaTime; // make gameObjects dependent on deltaTime so it works the same on different computers          
-		// visualHandler.DrawSurface(screen, eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	   
+		// VisualManager.DrawSurface(screen, eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	   
 		
-		visualHandler.drawOutlineOfTheBoard();
-		visualHandler.drawAdditionalInfo(worldTime);
-		visualHandler.serveNextFrame();
+		visualManager.drawOutlineOfTheBoard();
+		visualManager.drawAdditionalInfo(worldTime);
+		visualManager.serveNextFrame();
 
 		eventHandler.handleEvents(&quit);
 
@@ -74,19 +72,19 @@ void Game::handleGame(VisualHandler& visualHandler, EventHandler& eventHandler) 
 	};
 }
 
-void Game::setUpGame(VisualHandler& visualHandler) {
-	visualHandler.setUpVisuals();
+void Game::setUpGame(VisualManager& visualManager) {
+	visualManager.setUpVisuals();
 	this->setUpFramerate();
 	this->setUpGameObjects();
 }
 
 void Game::initGame() {
-	VisualHandler visualHandler;
-	EventHandler eventHandler;
+	VisualManager visualManager;
+	EventManager eventHandler;
 
-	this->setUpGame(visualHandler);
-	this->handleGame(visualHandler, eventHandler);
-	this->closeGame(visualHandler);
+	this->setUpGame(visualManager);
+	this->handleGame(visualManager, eventHandler);
+	this->closeGame(visualManager);
 }
 
 void Game::closeGame(){
@@ -94,12 +92,12 @@ void Game::closeGame(){
 	exit(0);
 }
 
-void Game::closeGame(VisualHandler& visualHandler) { // change this into a vector to be more efficient (so it can destroy every gameobject)
-	SDL_FreeSurface(visualHandler.charset);
-	SDL_FreeSurface(visualHandler.screen);
-	SDL_DestroyTexture(visualHandler.scrtex);
-	SDL_DestroyWindow(visualHandler.window);
-	SDL_DestroyRenderer(visualHandler.renderer);
+void Game::closeGame(VisualManager& visualManager) { // change this into a vector to be more efficient (so it can destroy every gameobject)
+	SDL_FreeSurface(visualManager.charset);
+	SDL_FreeSurface(visualManager.screen);
+	SDL_DestroyTexture(visualManager.scrtex);
+	SDL_DestroyWindow(visualManager.window);
+	SDL_DestroyRenderer(visualManager.renderer);
 	SDL_Quit();
 	exit(0);
 }
