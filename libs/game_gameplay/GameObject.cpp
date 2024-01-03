@@ -1,5 +1,7 @@
 #include "GameObject.h"
 
+// rename 
+
 GameObject::GameObject(const char* texture, SDL_Renderer* rend)
 {
 	renderer = rend;

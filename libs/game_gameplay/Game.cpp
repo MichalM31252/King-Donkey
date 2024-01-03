@@ -4,13 +4,13 @@
 #include <string.h>
 
 extern "C" {
-	#include "../../SDL2-2.0.10/include/SDL.h"
-	#include "../../SDL2-2.0.10/include/SDL_main.h"
+#include "../../SDL2-2.0.10/include/SDL.h"
+#include "../../SDL2-2.0.10/include/SDL_main.h"
 
-	#include "Game.h"
-	#include "../Constants.h"
-	#include "../game_visual/VisualManager.h"
-	#include "./EventManager.h"
+#include "Game.h"
+#include "../Constants.h"
+#include "../game_visual/VisualManager.h"
+#include "./EventManager.h"
 }
 
 
@@ -59,11 +59,12 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		this->updateWorldTime();
 		this->handleFPSTimer();
 
-		// distance += etiSpeed * deltaTime; // make gameObjects dependent on deltaTime so it works the same on different computers          
-		// VisualManager.DrawSurface(screen, eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	   
-		
-		visualManager.drawOutlineOfTheBoard();
+		visualManager.drawOutlineOfTheBoard(); // this first because it overwrites everything
 		visualManager.drawAdditionalInfo(worldTime);
+
+		distance += etiSpeed * deltaTime; // make gameObjects dependent on deltaTime so it works the same on different computers          
+		visualManager.DrawSurface(visualManager.screen, visualManager.eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	 
+
 		visualManager.serveNextFrame();
 
 		eventHandler.handleEvents(&quit);

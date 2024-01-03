@@ -36,6 +36,7 @@
     <ClCompile Include="libs\game_info\Menu.cpp" />
     <ClCompile Include="libs\game_info\ScoreBar.cpp" />
     <ClCompile Include="libs\game_info\TimeBar.cpp" />
+    <ClCompile Include="libs\game_visual\TextureManager.cpp" />
     <ClCompile Include="libs\game_visual\VisualManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -62,6 +63,7 @@
     <ClInclude Include="libs\game_info\Menu.h" />
     <ClInclude Include="libs\game_info\ScoreBar.h" />
     <ClInclude Include="libs\game_info\TimeBar.h" />
+    <ClInclude Include="libs\game_visual\TextureManager.h" />
     <ClInclude Include="libs\game_visual\VisualManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

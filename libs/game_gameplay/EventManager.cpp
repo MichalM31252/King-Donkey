@@ -19,7 +19,8 @@ void EventManager::handleEvents(bool *quit) {
 					*quit = true; // Esc = Quit CLOSING THE PROGRAM HERE
 				} 			
 				else if (event.key.keysym.sym == SDLK_UP) {
-					// etiSpeed = 2.0; // Arrow Up Fly faster by changing speed
+					// 
+					// Speed = 2.0; // Arrow Up Fly faster by changing speed
 				} 
 				else if (event.key.keysym.sym == SDLK_DOWN) {
 					// etiSpeed = 0.3; // Reduce the speed

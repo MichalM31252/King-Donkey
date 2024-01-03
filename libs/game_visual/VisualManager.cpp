@@ -4,11 +4,13 @@
 #include <string.h>
 
 extern "C" {
-	#include "../../SDL2-2.0.10/include/SDL.h"
-	#include "../../SDL2-2.0.10/include/SDL_main.h"
+#include "../../SDL2-2.0.10/include/SDL.h"
+#include "../../SDL2-2.0.10/include/SDL_main.h"
 
-	#include "VisualManager.h"
-	#include "../Constants.h"
+#include "../game_visual/TextureManager.h"
+
+#include "VisualManager.h"
+#include "../Constants.h"
 }
 
 void VisualManager::SDLCheck() { // checks if SDL was initialized correctly
@@ -59,7 +61,7 @@ void VisualManager::SDLSetTexture() { // visual
 }
 
 void VisualManager::SDLSetEtiLogo() { // visual
-	eti = SDL_LoadBMP("./eti.bmp");
+	eti = SDL_LoadBMP("./Mario_Run1.bmp");
 	if (eti == NULL) {
 		printf("SDL_LoadBMP(eti.bmp) error: %s\n", SDL_GetError());
 		// this->closeGame(charset, screen, scrtex, window, renderer);
@@ -75,9 +77,14 @@ void VisualManager::SDLSetColorKey() { // visual
 }
 
 void VisualManager::serveNextFrame() { // visual
+
+	// eti is inside scrtex
+
 	SDL_UpdateTexture(scrtex, NULL, screen->pixels, screen->pitch);
-	SDL_RenderCopy(renderer, scrtex, NULL, NULL);
-	SDL_RenderPresent(renderer);
+
+	SDL_RenderCopy(renderer, scrtex, NULL, NULL); // scrtex here is what we want to render
+
+	SDL_RenderPresent(renderer); 
 }
 
 void VisualManager::setColors() {

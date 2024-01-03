@@ -5,6 +5,8 @@ extern "C" {
 #include "../../SDL2-2.0.10/include/SDL_main.h"
 }
 
+// rename 
+
 class GameObject
 {
 public:
