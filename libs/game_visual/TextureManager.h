@@ -9,6 +9,12 @@ extern "C" {
 
 class TextureManager {
 public:
-	static SDL_Texture* LoadTexture(const char* fileName, SDL_Renderer* renderer);
-	// static void Draw(SDL_Renderer* renderer, SDL_Texture* texture, SDL_Rect src, SDL_Rect dest);
+	void loadTexture(const char* fileName);
+	void drawSurface(SDL_Surface* screen, int x, int y);
+private:
+	SDL_Surface* sprite;
+	// this should be in TextureManager
+	SDL_Texture* objTexture;
+	SDL_Rect srcRect, destRect;
+	SDL_Renderer* renderer;
 };

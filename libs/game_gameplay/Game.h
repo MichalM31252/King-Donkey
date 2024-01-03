@@ -1,10 +1,11 @@
 #pragma once
 
 extern "C" {
-	#include "../../SDL2-2.0.10/include/SDL.h"
-	#include "../../SDL2-2.0.10/include/SDL_main.h"
-	#include "../game_visual/VisualManager.h"
-	#include "./EventManager.h"
+#include "../../SDL2-2.0.10/include/SDL.h"
+#include "../../SDL2-2.0.10/include/SDL_main.h"
+#include "../game_visual/VisualManager.h"
+#include "../game_gameplay/GameObject.h"
+#include "./EventManager.h"
 }
 
 class Game {
@@ -22,7 +23,7 @@ class Game {
 
 
 		void setUpFramerate();
-		void setUpGameObjects();
+		void setUpGameObjects(SDL_Surface* screen);
 		void handleFPSTimer();
 		void handleDifferentComputers();
 		void updateWorldTime();

@@ -8,6 +8,10 @@ const int SCREEN_HEIGHT = 480;
 const double SECONDS_BETWEEN_REFRESH = 0.5;
 const double REFRESH_RATE = 1.0 / SECONDS_BETWEEN_REFRESH;
 
+// GameObject Const
+const int STARTING_X_PLAYER = 128;
+const int STARTING_Y_PLAYER = 128;
+
 // Source File constants
 // YOU CAN"T PLACE DEFINES IN DIFFERENT FILES
 //#define SDL_PATH ./SDL2-2.0.10/include/SDL.h

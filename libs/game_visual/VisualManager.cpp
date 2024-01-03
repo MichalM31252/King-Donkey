@@ -10,6 +10,7 @@ extern "C" {
 #include "../game_visual/TextureManager.h"
 
 #include "VisualManager.h"
+#include "../../libs/game_gameplay/GameObject.h"
 #include "../Constants.h"
 }
 
@@ -65,7 +66,7 @@ void VisualManager::SDLSetEtiLogo() { // visual
 	if (eti == NULL) {
 		printf("SDL_LoadBMP(eti.bmp) error: %s\n", SDL_GetError());
 		// this->closeGame(charset, screen, scrtex, window, renderer);
-	};
+	}
 }
 
 void VisualManager::SDLHideCursor() { // visual
@@ -78,7 +79,7 @@ void VisualManager::SDLSetColorKey() { // visual
 
 void VisualManager::serveNextFrame() { // visual
 
-	// eti is inside scrtex
+	// draw the gameObjects here
 
 	SDL_UpdateTexture(scrtex, NULL, screen->pixels, screen->pitch);
 
@@ -118,7 +119,9 @@ void VisualManager::setUpVisuals() {
 	this->SDLSetCharset();
 	this->SDLSetScreen();
 	this->SDLSetTexture();
-	this->SDLSetEtiLogo();
+
+	// this->SDLSetEtiLogo();
+	
 	this->SDLHideCursor();
 	this->SDLSetColorKey();
 	this->setColors();
@@ -147,20 +150,6 @@ void VisualManager::DrawString(SDL_Surface* screen, int x, int y, const char* te
 		x += 8;
 		text++;
 	};
-};
-
-
-// narysowanie na ekranie screen powierzchni sprite w punkcie (x, y)
-// (x, y) to punkt œrodka obrazka sprite na ekranie
-// draw a surface sprite on a surface screen in point (x, y)
-// (x, y) is the center of sprite on screen
-void VisualManager::DrawSurface(SDL_Surface* screen, SDL_Surface* sprite, int x, int y) {
-	SDL_Rect dest;
-	dest.x = x - sprite->w / 2;
-	dest.y = y - sprite->h / 2;
-	dest.w = sprite->w;
-	dest.h = sprite->h;
-	SDL_BlitSurface(sprite, NULL, screen, &dest);
 };
 
 

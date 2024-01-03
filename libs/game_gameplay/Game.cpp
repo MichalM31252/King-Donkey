@@ -10,6 +10,7 @@ extern "C" {
 #include "Game.h"
 #include "../Constants.h"
 #include "../game_visual/VisualManager.h"
+#include "../game_gameplay/GameObject.h"
 #include "./EventManager.h"
 }
 
@@ -27,9 +28,13 @@ void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I
 	worldTime = 0; // how long the game is running
 }
 
-void Game::setUpGameObjects() { // (logic)
-	distance = 0; // the distance of the eti sign (this could maybe work for collision detection)
-	etiSpeed = 1; // speed of the eti sign
+void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
+
+	// GameObject kingDonkey(0, 0, 0); // this can be here
+	// GameObject princess(0, 0, 0); // this can be here
+	// GameObject barrel(0, 0, 0); 
+	// GameObject ladder(0, 0, 0);
+	// GameObject platform(0, 0, 0);
 }
 
 void Game::handleDifferentComputers() { // (logic) make every object dependent on deltaTime so it works the same on different computers
@@ -62,8 +67,15 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		visualManager.drawOutlineOfTheBoard(); // this first because it overwrites everything
 		visualManager.drawAdditionalInfo(worldTime);
 
-		distance += etiSpeed * deltaTime; // make gameObjects dependent on deltaTime so it works the same on different computers          
-		visualManager.DrawSurface(visualManager.screen, visualManager.eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	 
+		// visualManager.drawGameObjects(); or something like that ??
+
+		GameObject player(STARTING_X_PLAYER, STARTING_Y_PLAYER, 1);
+		player.init("Mario_Run1.bmp");
+		player.render(visualManager.screen);
+		// distance += etiSpeed * deltaTime; // make gam  eObjects dependent on deltaTime so it works the same on different computers          
+		// visualManager.DrawSurface(visualManager.screen, visualManager.eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	 
+		// visualManager.DrawSurface(visualManager.screen, visualManager.eti, 64, 64); // an image on the specified position	 
+
 
 		visualManager.serveNextFrame();
 
@@ -76,7 +88,7 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 void Game::setUpGame(VisualManager& visualManager) {
 	visualManager.setUpVisuals();
 	this->setUpFramerate();
-	this->setUpGameObjects();
+	this->setUpGameObjects(visualManager.screen); // here
 }
 
 void Game::initGame() {
