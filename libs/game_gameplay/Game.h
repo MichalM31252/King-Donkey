@@ -13,8 +13,7 @@ class Game {
 		// logic
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
-		double distance, etiSpeed; // this can be used here
-
+		GameObject* player;
 		// visual
 
 
