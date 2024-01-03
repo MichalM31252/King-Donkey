@@ -1,9 +1,10 @@
 #include "GameObject.h"
 
 #include "../../libs/game_visual/TextureManager.h"
+#include "../../libs/Constants.h"
 // rename 
 
-GameObject::GameObject(int x, int y, int speed)
+GameObject::GameObject(int x, int y, double speed)
 {
 	// x pos 
 	// y pos 
@@ -44,4 +45,30 @@ void GameObject::init(const char* fileName) {
 
 void GameObject::render(SDL_Surface* screen){
 	this->textureManager.drawSurface(screen,this->xpos,this->ypos);
+}
+
+void GameObject::moveLeft(double deltaTime) {
+	this->objectSpeed = DEFAULT_PLAYER_SPEED;
+	this->xpos -= deltaTime * this->objectSpeed;
+}
+
+void GameObject::moveRight(double deltaTime) {
+	this->objectSpeed = DEFAULT_PLAYER_SPEED;
+	this->xpos += deltaTime * this->objectSpeed;
+}
+
+void GameObject::moveUp(double deltaTime) {
+	// under the circumstance that a player is on the ladder
+	this->objectSpeed = DEFAULT_PLAYER_SPEED;
+	this->ypos -= deltaTime * this->objectSpeed;
+}
+
+void GameObject::moveDown(double deltaTime) {
+	// under the circumstance that a player is on the ladder
+	this->objectSpeed = DEFAULT_PLAYER_SPEED;
+	this->ypos += deltaTime * this->objectSpeed;
+}
+
+void GameObject::moveStop() {
+	this->objectSpeed = 0;
 }

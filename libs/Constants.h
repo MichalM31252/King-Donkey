@@ -12,6 +12,8 @@ const double REFRESH_RATE = 1.0 / SECONDS_BETWEEN_REFRESH;
 const int STARTING_X_PLAYER = 128;
 const int STARTING_Y_PLAYER = 128;
 
+const double DEFAULT_PLAYER_SPEED = 1000;
+
 // Source File constants
 // YOU CAN"T PLACE DEFINES IN DIFFERENT FILES
 //#define SDL_PATH ./SDL2-2.0.10/include/SDL.h

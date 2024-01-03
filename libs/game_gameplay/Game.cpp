@@ -14,12 +14,6 @@ extern "C" {
 #include "./EventManager.h"
 }
 
-
-
-
-
-
-
 void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
 	tick1 = SDL_GetTicks();
 	frames = 0; // frames that happend
@@ -32,6 +26,7 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	GameObject *pla = new GameObject(STARTING_X_PLAYER, STARTING_Y_PLAYER, 1);
 	pla->init("Mario_Run1.bmp");
 	this->player = pla;
+
 	// GameObject kingDonkey(0, 0, 0); // this can be here
 	// GameObject princess(0, 0, 0); // this can be here
 	// GameObject barrel(0, 0, 0); 
@@ -74,18 +69,15 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		//GameObject player(STARTING_X_PLAYER, STARTING_Y_PLAYER, 1);
 		//player.init("Mario_Run1.bmp");
 		//player.render(visualManager.screen);
-		
-		
 		this->player->render(visualManager.screen);
 
 		// distance += etiSpeed * deltaTime; // make gam  eObjects dependent on deltaTime so it works the same on different computers          
 		// visualManager.DrawSurface(visualManager.screen, visualManager.eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	 
 		// visualManager.DrawSurface(visualManager.screen, visualManager.eti, 64, 64); // an image on the specified position	 
 
-
 		visualManager.serveNextFrame();
 
-		eventHandler.handleEvents(&quit);
+		eventHandler.handleEvents(& quit, this->deltaTime, player);
 
 		frames++;
 	};
