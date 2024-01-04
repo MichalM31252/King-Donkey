@@ -9,9 +9,9 @@ GameObject::GameObject(int x, int y, double speed)
 	// x pos 
 	// y pos 
 
-	this->xpos = x; // position of the gameObject
-	this->ypos = y;
-	this->objectSpeed = speed;
+	xpos = x; // position of the gameObject
+	ypos = y;
+	objectSpeed = speed;
 	// texture (path) gameObject or texture manager, 
 	// nah game object should get the texture and pass it to the texture manager
 	// for now the texture manager is not need but it will be needed in the future for animations so use it 
@@ -28,11 +28,14 @@ void GameObject::update()
 	// update the position for example of the player or the barrel
 
 	// this is handled by the DrawSurface function
-	//srcRect.h = 32;
+
+	// this is how big the image is
+	//srcRect.h = 32; 
 	//srcRect.w = 32;
 	//srcRect.x = 0;
 	//srcRect.y = 0;
 
+	// most likely the hitbox
 	//destRect.x = xpos;
 	//destRect.y = ypos;
 	//destRect.w = srcRect.w * 2;
@@ -44,31 +47,36 @@ void GameObject::init(const char* fileName) {
 }
 
 void GameObject::render(SDL_Surface* screen){
-	this->textureManager.drawSurface(screen,this->xpos,this->ypos);
+	textureManager.drawSurface(screen,xpos,ypos);
+}
+
+void GameObject::setPosition(int x, int y) {
+	xpos = x;
+	ypos = y;
 }
 
 void GameObject::moveLeft(double deltaTime) {
-	this->objectSpeed = DEFAULT_PLAYER_SPEED;
-	this->xpos -= deltaTime * this->objectSpeed;
+	objectSpeed = DEFAULT_PLAYER_SPEED;
+	xpos -= deltaTime * objectSpeed;
 }
 
 void GameObject::moveRight(double deltaTime) {
-	this->objectSpeed = DEFAULT_PLAYER_SPEED;
-	this->xpos += deltaTime * this->objectSpeed;
+	objectSpeed = DEFAULT_PLAYER_SPEED;
+	xpos += deltaTime * objectSpeed;
 }
 
 void GameObject::moveUp(double deltaTime) {
 	// under the circumstance that a player is on the ladder
-	this->objectSpeed = DEFAULT_PLAYER_SPEED;
-	this->ypos -= deltaTime * this->objectSpeed;
+	objectSpeed = DEFAULT_PLAYER_SPEED;
+	ypos -= deltaTime * objectSpeed;
 }
 
 void GameObject::moveDown(double deltaTime) {
 	// under the circumstance that a player is on the ladder
-	this->objectSpeed = DEFAULT_PLAYER_SPEED;
-	this->ypos += deltaTime * this->objectSpeed;
+	objectSpeed = DEFAULT_PLAYER_SPEED;
+	ypos += deltaTime * objectSpeed;
 }
 
 void GameObject::moveStop() {
-	this->objectSpeed = 0;
+	objectSpeed = 0;
 }

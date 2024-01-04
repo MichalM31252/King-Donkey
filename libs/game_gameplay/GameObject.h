@@ -14,10 +14,12 @@ public:
 	void init(const char* fileName);
 	void update(); // update the game object // for moving for example
 	void render(SDL_Surface* screen); // render the game object // for showing the game object // pass everything needed to show it
-	void moveLeft(double delta); // -1 up, 1 is down
-	void moveRight(double delta); // -1 up, 1 is down
-	void moveUp(double delta); // -1 left, 1 right
-	void moveDown(double delta); // -1 left, 1 right
+	
+	void setPosition(int x, int y);
+	void moveLeft(double delta); 
+	void moveRight(double delta);
+	void moveUp(double delta); 
+	void moveDown(double delta);
 	void moveStop();
 private:
 	int xpos, ypos;

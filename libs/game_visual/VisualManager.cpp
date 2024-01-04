@@ -17,7 +17,7 @@ extern "C" {
 void VisualManager::SDLCheck() { // checks if SDL was initialized correctly
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		printf("SDL_Init error: %s\n", SDL_GetError());
-		// this->closeGame();
+		// closeGame();
 	}
 }
 
@@ -25,7 +25,7 @@ void VisualManager::SDLCreateWindowAndRenderer() { // visual
 	rc = SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
 	if (rc != 0) {
 		printf("SDL_CreateWindowAndRenderer error: %s\n", SDL_GetError());
-		// this->closeGame();
+		// closeGame();
 	};
 }
 
@@ -49,7 +49,7 @@ void VisualManager::SDLSetCharset() { // visual
 	charset = SDL_LoadBMP("./cs8x8.bmp");
 	if (charset == NULL) {
 		printf("SDL_LoadBMP(cs8x8.bmp) error: %s\n", SDL_GetError());
-		// this->closeGame(charset, screen, scrtex, window, renderer);
+		// closeGame(charset, screen, scrtex, window, renderer);
 	};
 }
 
@@ -65,7 +65,7 @@ void VisualManager::SDLSetEtiLogo() { // visual
 	eti = SDL_LoadBMP("./Mario_Run1.bmp");
 	if (eti == NULL) {
 		printf("SDL_LoadBMP(eti.bmp) error: %s\n", SDL_GetError());
-		// this->closeGame(charset, screen, scrtex, window, renderer);
+		// closeGame(charset, screen, scrtex, window, renderer);
 	}
 }
 
@@ -89,42 +89,41 @@ void VisualManager::serveNextFrame() { // visual
 }
 
 void VisualManager::setColors() {
-	black = SDL_MapRGB(this->screen->format, 0x00, 0x00, 0x00);
-	green = SDL_MapRGB(this->screen->format, 0x00, 0xFF, 0x00);
-	red = SDL_MapRGB(this->screen->format, 0xFF, 0x00, 0x00);
-	blue = SDL_MapRGB(this->screen->format, 0x00, 0x00, 0xFF);
-	white = SDL_MapRGB(this->screen->format, 0xFF, 0xFF, 0xFF);
-	ladderColor = SDL_MapRGB(this->screen->format, 0x00, 0xcf, 0xcf);
-	platformColor = SDL_MapRGB(this->screen->format, 0xef, 0x1e, 0x4f); // just draw a line instead of a big platform
+	black = SDL_MapRGB(screen->format, 0x00, 0x00, 0x00);
+	green = SDL_MapRGB(screen->format, 0x00, 0xFF, 0x00);
+	red = SDL_MapRGB(screen->format, 0xFF, 0x00, 0x00);
+	blue = SDL_MapRGB(screen->format, 0x00, 0x00, 0xFF);
+	white = SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF);
+	ladderColor = SDL_MapRGB(screen->format, 0x00, 0xcf, 0xcf);
+	platformColor = SDL_MapRGB(screen->format, 0xef, 0x1e, 0x4f); // just draw a line instead of a big platform
 };
 
 void VisualManager::drawOutlineOfTheBoard() { // draws the outline of the board
-	this->DrawRectangle(this->screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, this->blue, this->black); 
+	DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black); 
 }
 
 void VisualManager::drawAdditionalInfo(double worldTime) { // draws current time, score and lives on the top of the screen
-	this->DrawRectangle(screen, 1, 1, SCREEN_WIDTH - 2, 18, this->blue, this->blue);
+	DrawRectangle(screen, 1, 1, SCREEN_WIDTH - 2, 18, blue, blue);
 	char text[128];
 	sprintf(text, "Time: %.1lf s  Score: 00000  Lives: 3", worldTime);
 	DrawString(screen, screen->w / 2 - strlen(text) * 8 / 2, 7, text, charset);
 }
 
 void VisualManager::setUpVisuals() {
-	this->SDLCheck();
-	this->SDLCreateWindowAndRenderer();
-	this->SDLSetHint();
-	this->SDLSetRenderLogicalSize();
-	this->SDLSetDefaultDrawColor();
-	this->SDLSetWindowTitle();
-	this->SDLSetCharset();
-	this->SDLSetScreen();
-	this->SDLSetTexture();
-
-	// this->SDLSetEtiLogo();
+	SDLCheck();
+	SDLCreateWindowAndRenderer();
+	SDLSetHint();
+	SDLSetRenderLogicalSize();
+	SDLSetDefaultDrawColor();
+	SDLSetWindowTitle();
+	SDLSetCharset();
+	SDLSetScreen();
+	SDLSetTexture();
 	
-	this->SDLHideCursor();
-	this->SDLSetColorKey();
-	this->setColors();
+	
+	SDLHideCursor();
+	SDLSetColorKey();
+	setColors();
 }
 
 // narysowanie napisu txt na powierzchni screen, zaczynaj¹c od punktu (x, y)

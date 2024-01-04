@@ -16,10 +16,8 @@ class Game {
 		GameObject* player;
 		// visual
 
-
 		// Game(); Constructor NEEDED ADD DEFAULT VALUES
 		void initGame();
-
 
 		void setUpFramerate();
 		void setUpGameObjects(SDL_Surface* screen);

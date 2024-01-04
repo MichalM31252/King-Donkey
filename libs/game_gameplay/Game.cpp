@@ -25,7 +25,7 @@ void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I
 void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	GameObject *pla = new GameObject(STARTING_X_PLAYER, STARTING_Y_PLAYER, 1);
 	pla->init("Mario_Run1.bmp");
-	this->player = pla;
+	player = pla;
 
 	// GameObject kingDonkey(0, 0, 0); // this can be here
 	// GameObject princess(0, 0, 0); // this can be here
@@ -57,9 +57,9 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 	bool quit = false;
 	while (!quit) { // 1 frame of the game
 
-		this->handleDifferentComputers();
-		this->updateWorldTime();
-		this->handleFPSTimer();
+		handleDifferentComputers();
+		updateWorldTime();
+		handleFPSTimer();
 
 		visualManager.drawOutlineOfTheBoard(); // this first because it overwrites everything
 		visualManager.drawAdditionalInfo(worldTime);
@@ -69,7 +69,7 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		//GameObject player(STARTING_X_PLAYER, STARTING_Y_PLAYER, 1);
 		//player.init("Mario_Run1.bmp");
 		//player.render(visualManager.screen);
-		this->player->render(visualManager.screen);
+		player->render(visualManager.screen);
 
 		// distance += etiSpeed * deltaTime; // make gam  eObjects dependent on deltaTime so it works the same on different computers          
 		// visualManager.DrawSurface(visualManager.screen, visualManager.eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	 
@@ -77,7 +77,7 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 
 		visualManager.serveNextFrame();
 
-		eventHandler.handleEvents(& quit, this->deltaTime, player);
+		eventHandler.handleEvents(& quit, deltaTime, player);
 
 		frames++;
 	};
@@ -85,17 +85,17 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 
 void Game::setUpGame(VisualManager& visualManager) {
 	visualManager.setUpVisuals();
-	this->setUpFramerate();
-	this->setUpGameObjects(visualManager.screen); // here
+	setUpFramerate();
+	setUpGameObjects(visualManager.screen); // here
 }
 
 void Game::initGame() {
 	VisualManager visualManager;
 	EventManager eventHandler;
 
-	this->setUpGame(visualManager);
-	this->handleGame(visualManager, eventHandler);
-	this->closeGame(visualManager);
+	setUpGame(visualManager);
+	handleGame(visualManager, eventHandler);
+	closeGame(visualManager);
 }
 
 void Game::closeGame(){

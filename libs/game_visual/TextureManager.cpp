@@ -13,7 +13,8 @@ void TextureManager::loadTexture(const char* fileName) {
 	sprite = SDL_LoadBMP(fileName);
 	if (sprite == NULL) {
 		printf("SDL_LoadBMP(eti.bmp) error: %s\n", SDL_GetError());
-		// this->closeGame(charset, screen, scrtex, window, renderer);
+		// 
+// closeGame(charset, screen, scrtex, window, renderer);
 	}
 }
 
@@ -23,9 +24,9 @@ void TextureManager::loadTexture(const char* fileName) {
 // (x, y) is the center of sprite on screen
 void TextureManager::drawSurface(SDL_Surface* screen, int x, int y) {
 	SDL_Rect dest;
-	dest.x = x - this->sprite->w / 2;
-	dest.y = y - this->sprite->h / 2;
-	dest.w = this->sprite->w;
-	dest.h = this->sprite->h;
-	SDL_BlitSurface(this->sprite, NULL, screen, &dest);
+	dest.x = x - sprite->w / 2;
+	dest.y = y - sprite->h / 2;
+	dest.w = sprite->w;
+	dest.h = sprite->h;
+	SDL_BlitSurface(sprite, NULL, screen, &dest);
 };
