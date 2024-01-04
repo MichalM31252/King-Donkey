@@ -120,7 +120,6 @@ void VisualManager::setUpVisuals() {
 	SDLSetScreen();
 	SDLSetTexture();
 	
-	
 	SDLHideCursor();
 	SDLSetColorKey();
 	setColors();
