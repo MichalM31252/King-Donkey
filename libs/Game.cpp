@@ -74,6 +74,8 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		visualManager.drawOutlineOfTheBoard(); // this first because it overwrites everything
 		visualManager.drawAdditionalInfo(worldTime);
 
+		player->update(deltaTime);
+
 		player->render(visualManager.screen);
 		donkeyKong->render(visualManager.screen);
 		// visualManager.drawGameObjects(); or something like that ??

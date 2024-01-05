@@ -9,14 +9,15 @@ public:
 	bool canLeaveScreen;
 	double gravity, objectSpeed;
 	bool isFalling;
-	int currentDirectionOfMovement;
+	int currentDirectionOfMovementHorizontal, currentDirectionOfMovementVertical;
 
 	DynamicGameObject();
+	void update(double deltaTime);
 	void moveStart();
-	void moveLeft(double delta);
-	void moveRight(double delta);
-	void moveUp(double delta);
-	void moveDown(double delta);
+	void startMovingLeft(double delta);
+	void startMovingRight(double delta);
+	void startMovingUp(double delta);
+	void startMovingDown(double delta);
 	void moveStop();
 
 	void startFalling();

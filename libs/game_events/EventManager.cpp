@@ -15,25 +15,22 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player) {
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 			case SDL_KEYDOWN: // event of pressing down a key on keyboard
+				player->moveStart();
 				switch (event.key.keysym.sym) {
 					case SDLK_ESCAPE:
 						*quit = true; // Esc = Quit CLOSING THE PROGRAM HERE
 						break;
-					case SDLK_UP:
-						player->moveStart();
-						player->moveUp(deltaTime);
+					case SDLK_UP: // this should be start moving and not moving 
+						player->startMovingUp(deltaTime);
 						break;
-					case SDLK_LEFT:
-						player->moveStart();
-						player->moveLeft(deltaTime);
+					case SDLK_LEFT: // this should be start moving
+						player->startMovingLeft(deltaTime);
 						break;
-					case SDLK_RIGHT:
-						player->moveStart();
-						player->moveRight(deltaTime);
+					case SDLK_RIGHT: // this should be start moving
+						player->startMovingRight(deltaTime);
 						break;
-					case SDLK_DOWN:
-						player->moveStart();
-						player->moveDown(deltaTime);
+					case SDLK_DOWN: // this should be start moving
+						player->startMovingDown(deltaTime);
 						break;
 				}
 				break;
