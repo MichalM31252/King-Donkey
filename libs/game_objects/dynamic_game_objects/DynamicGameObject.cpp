@@ -5,8 +5,10 @@ extern "C" {
 // objectSpeed should be moved to physics
 
 DynamicGameObject::DynamicGameObject() {
-	objectSpeed = 0;
-	/*physics = Physics();*/
+	canLeaveScreen = false;
+	gravity = DEFAULT_GRAVITY;
+	isFalling = false;
+	currentDirectionOfMovement = 0;
 }
 
 void DynamicGameObject::moveStart() {
@@ -33,4 +35,12 @@ void DynamicGameObject::moveDown(double deltaTime) {
 
 void DynamicGameObject::moveStop() {
 	objectSpeed = 0;
+}
+
+void DynamicGameObject::startFalling() {
+	isFalling = true;
+}
+
+void DynamicGameObject::stopFalling() {
+	isFalling = false;
 }

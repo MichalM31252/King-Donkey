@@ -13,6 +13,8 @@ class GameObject
 public:
 
 	SDL_Rect destRect;
+	TextureManager textureManager;
+	char *tag[30]; // name of the object to differentiate between them barrel, player, ladder, etc
 
 	GameObject(); // constructor
 	void init(const char* fileName);
@@ -21,7 +23,7 @@ public:
 	void setUpDestRect();
 	void setPosition(int x, int y);
 private:
-	TextureManager textureManager;
+	
 	// size of the gameObject rectangle
 };
 

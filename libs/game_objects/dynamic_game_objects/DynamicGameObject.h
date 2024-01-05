@@ -2,13 +2,15 @@
 
 extern "C" {
 #include "../GameObject.h"
-#include "./Physics.h"
 }
 
 class DynamicGameObject : public GameObject {
 public:
-	double objectSpeed;
-	Physics physics;
+	bool canLeaveScreen;
+	double gravity, objectSpeed;
+	bool isFalling;
+	int currentDirectionOfMovement;
+
 	DynamicGameObject();
 	void moveStart();
 	void moveLeft(double delta);
@@ -16,4 +18,7 @@ public:
 	void moveUp(double delta);
 	void moveDown(double delta);
 	void moveStop();
+
+	void startFalling();
+	void stopFalling();
 };

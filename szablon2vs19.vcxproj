@@ -32,7 +32,6 @@
     <ClCompile Include="libs\game_objects\dynamic_game_objects\DynamicGameObject.cpp" />
     <ClCompile Include="libs\game_objects\dynamic_game_objects\dynamic_game_object_child\Barrel.cpp" />
     <ClCompile Include="libs\game_objects\dynamic_game_objects\dynamic_game_object_child\Player.cpp" />
-    <ClCompile Include="libs\game_objects\dynamic_game_objects\Physics.cpp" />
     <ClCompile Include="libs\game_objects\GameObject.cpp" />
     <ClCompile Include="libs\game_objects\TextureManager.cpp" />
     <ClCompile Include="libs\game_screen\ScreenManager.cpp" />
@@ -57,7 +56,6 @@
     <ClInclude Include="libs\game_objects\dynamic_game_objects\DynamicGameObject.h" />
     <ClInclude Include="libs\game_objects\dynamic_game_objects\dynamic_game_object_child\Barrel.h" />
     <ClInclude Include="libs\game_objects\dynamic_game_objects\dynamic_game_object_child\Player.h" />
-    <ClInclude Include="libs\game_objects\dynamic_game_objects\Physics.h" />
     <ClInclude Include="libs\game_objects\GameObject.h" />
     <ClInclude Include="libs\game_objects\TextureManager.h" />
     <ClInclude Include="libs\game_screen\ScreenManager.h" />
