@@ -1,6 +1,5 @@
 extern "C" {
-#include "../../libs/game_gameplay/Physics.h"
-#include "../../libs/game_gameplay/DynamicGameObject.h"
+#include "Physics.h"
 #include "../Constants.h"
 }
 
@@ -10,10 +9,10 @@ Physics::Physics() {
 	currentDirectionOfMovement = 0;
 }
 
-void Physics::startFalling(DynamicGameObject* object) {
+void Physics::startFalling() {
 	isFalling = true;
 }
 
-void Physics::stopFalling(DynamicGameObject* object) {
+void Physics::stopFalling() {
 	isFalling = false;
 }

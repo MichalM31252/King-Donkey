@@ -6,7 +6,6 @@
 extern "C" {
 #include "../../SDL2-2.0.10/include/SDL.h"
 #include "../../SDL2-2.0.10/include/SDL_main.h"
-#include "../../libs/game_gameplay/GameObject.h"
 #include "../../libs/game_gameplay/DynamicGameObject.h"
 #include "EventManager.h"
 #include "../Constants.h"
@@ -21,15 +20,19 @@ void EventManager::handleEvents(bool* quit, double deltaTime, DynamicGameObject*
 						*quit = true; // Esc = Quit CLOSING THE PROGRAM HERE
 						break;
 					case SDLK_UP:
+						player->moveStart();
 						player->moveUp(deltaTime);
 						break;
 					case SDLK_LEFT:
+						player->moveStart();
 						player->moveLeft(deltaTime);
 						break;
 					case SDLK_RIGHT:
+						player->moveStart();
 						player->moveRight(deltaTime);
 						break;
 					case SDLK_DOWN:
+						player->moveStart();
 						player->moveDown(deltaTime);
 						break;
 				}

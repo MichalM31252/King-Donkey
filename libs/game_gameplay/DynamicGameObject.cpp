@@ -6,7 +6,7 @@ extern "C" {
 
 DynamicGameObject::DynamicGameObject() {
 	objectSpeed = 0;
-	physics = Physics();
+	/*physics = Physics();*/
 }
 
 void DynamicGameObject::moveStart() {

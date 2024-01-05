@@ -9,6 +9,7 @@ class DynamicGameObject : public GameObject {
 public:
 	double objectSpeed;
 	Physics physics;
+	DynamicGameObject();
 	void moveStart();
 	void moveLeft(double delta);
 	void moveRight(double delta);

@@ -2,13 +2,15 @@
 
 extern "C" {
 #include "../Constants.h"
-#include "../../libs/game_gameplay/DynamicGameObject.h"
 }
 
 class Physics {
+public:
 	double gravity;
 	bool isFalling;
 	int currentDirectionOfMovement;
-	void startFalling(DynamicGameObject* object);
-	void stopFalling(DynamicGameObject* object);
+
+	Physics();
+	void startFalling();
+	void stopFalling();
 };
