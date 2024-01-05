@@ -4,25 +4,30 @@ extern "C" {
 
 // objectSpeed should be moved to physics
 
-void DynamicGameObject::moveLeft(double deltaTime) {
+DynamicGameObject::DynamicGameObject() {
+	objectSpeed = 0;
+	physics = Physics();
+}
+
+void DynamicGameObject::moveStart() {
 	objectSpeed = DEFAULT_PLAYER_SPEED;
+}
+
+void DynamicGameObject::moveLeft(double deltaTime) {
 	destRect.x -= deltaTime * objectSpeed;
 }
 
 void DynamicGameObject::moveRight(double deltaTime) {
-	objectSpeed = DEFAULT_PLAYER_SPEED;
 	destRect.x += deltaTime * objectSpeed;
 }
 
 void DynamicGameObject::moveUp(double deltaTime) {
 	// under the circumstance that a player is on the ladder
-	objectSpeed = DEFAULT_PLAYER_SPEED;
 	destRect.y -= deltaTime * objectSpeed;
 }
 
 void DynamicGameObject::moveDown(double deltaTime) {
 	// under the circumstance that a player is on the ladder
-	objectSpeed = DEFAULT_PLAYER_SPEED;
 	destRect.y += deltaTime * objectSpeed;
 }
 

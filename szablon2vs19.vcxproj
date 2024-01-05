@@ -21,17 +21,13 @@
   <ItemGroup>
     <ClCompile Include="libs\game_file_interface\FileInterface.cpp" />
     <ClCompile Include="libs\game_gameplay\Barrel.cpp" />
-    <ClCompile Include="libs\game_gameplay\Board.cpp" />
     <ClCompile Include="libs\game_gameplay\Collider.cpp" />
     <ClCompile Include="libs\game_gameplay\EventManager.cpp" />
-    <ClCompile Include="libs\game_gameplay\Floor.cpp" />
     <ClCompile Include="libs\game_gameplay\Game.cpp" />
     <ClCompile Include="libs\game_gameplay\GameObject.cpp" />
-    <ClCompile Include="libs\game_gameplay\Ladder.cpp" />
     <ClCompile Include="libs\game_gameplay\DynamicGameObject.cpp" />
-    <ClCompile Include="libs\game_gameplay\Platform.cpp" />
+    <ClCompile Include="libs\game_gameplay\Physics.cpp" />
     <ClCompile Include="libs\game_gameplay\Player.cpp" />
-    <ClCompile Include="libs\game_gameplay\Stage.cpp" />
     <ClCompile Include="libs\game_info\AdditionalInfo.cpp" />
     <ClCompile Include="libs\game_info\HallOfFame.cpp" />
     <ClCompile Include="libs\game_info\LivesBar.cpp" />
@@ -50,17 +46,13 @@
     <ClInclude Include="libs\Constants.h" />
     <ClInclude Include="libs\game_file_interface\FileInterface.h" />
     <ClInclude Include="libs\game_gameplay\Barrel.h" />
-    <ClInclude Include="libs\game_gameplay\Board.h" />
     <ClInclude Include="libs\game_gameplay\Collider.h" />
     <ClInclude Include="libs\game_gameplay\EventManager.h" />
-    <ClInclude Include="libs\game_gameplay\Floor.h" />
     <ClInclude Include="libs\game_gameplay\Game.h" />
     <ClInclude Include="libs\game_gameplay\GameObject.h" />
-    <ClInclude Include="libs\game_gameplay\Ladder.h" />
     <ClInclude Include="libs\game_gameplay\DynamicGameObject.h" />
-    <ClInclude Include="libs\game_gameplay\Platform.h" />
+    <ClInclude Include="libs\game_gameplay\Physics.h" />
     <ClInclude Include="libs\game_gameplay\Player.h" />
-    <ClInclude Include="libs\game_gameplay\Stage.h" />
     <ClInclude Include="libs\game_info\AdditionalInfo.h" />
     <ClInclude Include="libs\game_info\HallOfFame.h" />
     <ClInclude Include="libs\game_info\LivesBar.h" />

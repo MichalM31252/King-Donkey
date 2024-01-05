@@ -18,6 +18,8 @@ const int STARTING_Y_DONKEY_KONG = 32;
 const double DEFAULT_PLAYER_SPEED = 1000;
 const double DEFAULT_BARREL_SPEED = 1000;
 
+const double DEFAULT_GRAVITY = 1000;
+
 // Source File constants
 // YOU CAN"T PLACE DEFINES IN DIFFERENT FILES
 //#define SDL_PATH ./SDL2-2.0.10/include/SDL.h
