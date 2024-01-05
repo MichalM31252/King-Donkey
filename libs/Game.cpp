@@ -11,6 +11,7 @@ extern "C" {
 #include "./Constants.h"
 #include "./game_screen/ScreenManager.h"
 #include "./game_objects/dynamic_game_objects/DynamicGameObject.h"
+#include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h"
 #include "./game_events/EventManager.h"
 #include "./game_events/CollisionManager.h"
 }
@@ -24,7 +25,7 @@ void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I
 }
 
 void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
-	DynamicGameObject *pla = new DynamicGameObject();
+	Player *pla = new Player();
 	pla->init("Mario_Run1.bmp");
 	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
 	pla->setUpDestRect();

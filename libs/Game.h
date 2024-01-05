@@ -5,6 +5,7 @@ extern "C" {
 #include "../SDL2-2.0.10/include/SDL_main.h"
 #include "./game_screen/ScreenManager.h"
 #include "./game_objects/dynamic_game_objects/DynamicGameObject.h"
+#include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h"
 #include "./game_events/EventManager.h"
 }
 
@@ -13,7 +14,8 @@ class Game {
 		// logic
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
-		DynamicGameObject *player, *donkeyKong;
+		DynamicGameObject *donkeyKong;
+		Player* player;
 		
 
 		// Game(); Constructor NEEDED ADD DEFAULT VALUES
