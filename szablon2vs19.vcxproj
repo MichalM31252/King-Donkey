@@ -22,6 +22,7 @@
     <ClCompile Include="libs\game_file_interface\FileInterface.cpp" />
     <ClCompile Include="libs\game_gameplay\Barrel.cpp" />
     <ClCompile Include="libs\game_gameplay\Board.cpp" />
+    <ClCompile Include="libs\game_gameplay\Collider.cpp" />
     <ClCompile Include="libs\game_gameplay\EventManager.cpp" />
     <ClCompile Include="libs\game_gameplay\Floor.cpp" />
     <ClCompile Include="libs\game_gameplay\Game.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="libs\game_file_interface\FileInterface.h" />
     <ClInclude Include="libs\game_gameplay\Barrel.h" />
     <ClInclude Include="libs\game_gameplay\Board.h" />
+    <ClInclude Include="libs\game_gameplay\Collider.h" />
     <ClInclude Include="libs\game_gameplay\EventManager.h" />
     <ClInclude Include="libs\game_gameplay\Floor.h" />
     <ClInclude Include="libs\game_gameplay\Game.h" />

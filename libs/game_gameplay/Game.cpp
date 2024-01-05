@@ -12,6 +12,7 @@ extern "C" {
 #include "../game_visual/VisualManager.h"
 #include "../game_gameplay/GameObject.h"
 #include "./EventManager.h"
+#include "../game_gameplay/Collider.h"
 }
 
 void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
@@ -23,9 +24,17 @@ void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I
 }
 
 void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
-	GameObject *pla = new GameObject(STARTING_X_PLAYER, STARTING_Y_PLAYER, 1);
+	GameObject *pla = new GameObject();
 	pla->init("Mario_Run1.bmp");
+	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
+	pla->setUpDestRect();
 	player = pla;
+
+	GameObject *donkeyK = new GameObject();
+	donkeyK->init("DonkeyKong.bmp");
+	donkeyK->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
+	donkeyK->setUpDestRect();
+	donkeyKong = donkeyK;
 
 	// GameObject kingDonkey(0, 0, 0); // this can be here
 	// GameObject princess(0, 0, 0); // this can be here
@@ -64,20 +73,30 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		visualManager.drawOutlineOfTheBoard(); // this first because it overwrites everything
 		visualManager.drawAdditionalInfo(worldTime);
 
+		player->render(visualManager.screen);
+		donkeyKong->render(visualManager.screen);
 		// visualManager.drawGameObjects(); or something like that ??
 
 		//GameObject player(STARTING_X_PLAYER, STARTING_Y_PLAYER, 1);
 		//player.init("Mario_Run1.bmp");
 		//player.render(visualManager.screen);
-		player->render(visualManager.screen);
+		
 
 		// distance += etiSpeed * deltaTime; // make gam  eObjects dependent on deltaTime so it works the same on different computers          
 		// visualManager.DrawSurface(visualManager.screen, visualManager.eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	 
 		// visualManager.DrawSurface(visualManager.screen, visualManager.eti, 64, 64); // an image on the specified position	 
 
+		Collider collider;
+
+		collider.checkCollision(player->destRect, donkeyKong->destRect);
+		if (collider.isColliding) {
+			printf("COLLIDING\n");
+			closeGame(visualManager);
+		}
+
 		visualManager.serveNextFrame();
 
-		eventHandler.handleEvents(& quit, deltaTime, player);
+		eventHandler.handleEvents(&quit, deltaTime, player);
 
 		frames++;
 	};

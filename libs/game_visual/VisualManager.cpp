@@ -21,7 +21,7 @@ void VisualManager::SDLCheck() { // checks if SDL was initialized correctly
 	}
 }
 
-void VisualManager::SDLCreateWindowAndRenderer() { // visual
+void VisualManager::SDLCreateWindowAndRenderer() { 
 	rc = SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
 	if (rc != 0) {
 		printf("SDL_CreateWindowAndRenderer error: %s\n", SDL_GetError());
@@ -29,23 +29,23 @@ void VisualManager::SDLCreateWindowAndRenderer() { // visual
 	};
 }
 
-void VisualManager::SDLSetHint() { // visual
+void VisualManager::SDLSetHint() { 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 }
 
-void VisualManager::SDLSetRenderLogicalSize() { // visual
+void VisualManager::SDLSetRenderLogicalSize() { 
 	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void VisualManager::SDLSetDefaultDrawColor() { // visual
+void VisualManager::SDLSetDefaultDrawColor() { 
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
 
-void VisualManager::SDLSetWindowTitle() { // visual
+void VisualManager::SDLSetWindowTitle() { 
 	SDL_SetWindowTitle(window, "192928 Michal Malinowski");
 }
 
-void VisualManager::SDLSetCharset() { // visual
+void VisualManager::SDLSetCharset() { 
 	charset = SDL_LoadBMP("./cs8x8.bmp");
 	if (charset == NULL) {
 		printf("SDL_LoadBMP(cs8x8.bmp) error: %s\n", SDL_GetError());
@@ -53,15 +53,15 @@ void VisualManager::SDLSetCharset() { // visual
 	};
 }
 
-void VisualManager::SDLSetScreen() { // visual
+void VisualManager::SDLSetScreen() { 
 	screen = SDL_CreateRGBSurface(0, SCREEN_WIDTH, SCREEN_HEIGHT, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
 }
 
-void VisualManager::SDLSetTexture() { // visual
+void VisualManager::SDLSetTexture() { 
 	scrtex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void VisualManager::SDLSetEtiLogo() { // visual
+void VisualManager::SDLSetEtiLogo() { 
 	eti = SDL_LoadBMP("./Mario_Run1.bmp");
 	if (eti == NULL) {
 		printf("SDL_LoadBMP(eti.bmp) error: %s\n", SDL_GetError());
@@ -69,15 +69,15 @@ void VisualManager::SDLSetEtiLogo() { // visual
 	}
 }
 
-void VisualManager::SDLHideCursor() { // visual
+void VisualManager::SDLHideCursor() { 
 	SDL_ShowCursor(SDL_DISABLE); // hides the cursor
 }
 
-void VisualManager::SDLSetColorKey() { // visual
+void VisualManager::SDLSetColorKey() { 
 	SDL_SetColorKey(charset, true, 0x000000);
 }
 
-void VisualManager::serveNextFrame() { // visual
+void VisualManager::serveNextFrame() { 
 
 	// draw the gameObjects here
 
@@ -119,7 +119,6 @@ void VisualManager::setUpVisuals() {
 	SDLSetCharset();
 	SDLSetScreen();
 	SDLSetTexture();
-	
 	SDLHideCursor();
 	SDLSetColorKey();
 	setColors();
@@ -150,7 +149,6 @@ void VisualManager::DrawString(SDL_Surface* screen, int x, int y, const char* te
 	};
 };
 
-
 // rysowanie pojedynczego pixela
 // draw a single pixel
 void VisualManager::DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) {
@@ -158,7 +156,6 @@ void VisualManager::DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) 
 	Uint8* p = (Uint8*)surface->pixels + y * surface->pitch + x * bpp;
 	*(Uint32*)p = color;
 };
-
 
 // rysowanie linii o d³ugoœci l w pionie (gdy dx = 0, dy = 1) 
 // b¹dŸ poziomie (gdy dx = 1, dy = 0)
@@ -170,7 +167,6 @@ void VisualManager::DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, i
 		y += dy;
 	};
 };
-
 
 // rysowanie prostok¹ta o d³ugoœci boków l i k
 // draw a rectangle of size l by k

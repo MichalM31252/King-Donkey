@@ -15,24 +15,22 @@ void EventManager::handleEvents(bool* quit, double deltaTime, GameObject* player
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 			case SDL_KEYDOWN: // event of pressing down a key on keyboard
-				if (event.key.keysym.sym == SDLK_ESCAPE) {
-					*quit = true; // Esc = Quit CLOSING THE PROGRAM HERE
-				} 			
-				else if (event.key.keysym.sym == SDLK_UP) {
-					player->moveUp(deltaTime);
-					// Speed = 2.0; // Arrow Up Fly faster by changing speed
-				} 
-				else if (event.key.keysym.sym == SDLK_LEFT) {
-					player->moveLeft(deltaTime);
-					// Speed = 2.0; // Arrow Up Fly faster by changing speed
-				}
-				else if (event.key.keysym.sym == SDLK_RIGHT) {
-					player->moveRight(deltaTime);
-					// Speed = 2.0; // Arrow Up Fly faster by changing speed
-				}
-				else if (event.key.keysym.sym == SDLK_DOWN) {
-					player->moveDown(deltaTime);
-					// etiSpeed = 0.3; // Reduce the speed
+				switch (event.key.keysym.sym) {
+					case SDLK_ESCAPE:
+						*quit = true; // Esc = Quit CLOSING THE PROGRAM HERE
+						break;
+					case SDLK_UP:
+						player->moveUp(deltaTime);
+						break;
+					case SDLK_LEFT:
+						player->moveLeft(deltaTime);
+						break;
+					case SDLK_RIGHT:
+						player->moveRight(deltaTime);
+						break;
+					case SDLK_DOWN:
+						player->moveDown(deltaTime);
+						break;
 				}
 				break;
 			case SDL_KEYUP: // similarly event when you stop pressing

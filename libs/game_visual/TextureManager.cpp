@@ -12,9 +12,8 @@ extern "C" {
 void TextureManager::loadTexture(const char* fileName) {
 	sprite = SDL_LoadBMP(fileName);
 	if (sprite == NULL) {
-		printf("SDL_LoadBMP(eti.bmp) error: %s\n", SDL_GetError());
-		// 
-// closeGame(charset, screen, scrtex, window, renderer);
+		printf("SDL_LoadBMP error: %s\n", SDL_GetError());
+		// closeGame(charset, screen, scrtex, window, renderer);
 	}
 }
 

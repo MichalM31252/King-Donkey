@@ -4,22 +4,13 @@
 #include "../../libs/Constants.h"
 // rename 
 
-GameObject::GameObject(int x, int y, double speed)
+GameObject::GameObject()
 {
-	// x pos 
-	// y pos 
-
-	xpos = x; // position of the gameObject
-	ypos = y;
-	objectSpeed = speed;
-	// texture (path) gameObject or texture manager, 
-	// nah game object should get the texture and pass it to the texture manager
-	// for now the texture manager is not need but it will be needed in the future for animations so use it 
-	
-	// this class needs the renderer and the screen to actually place anything on the screen 
-	// nah that should be done using the TextureManager
-
-
+	textureManager = TextureManager();
+	SDL_Rect destRect = SDL_Rect();
+	objectSpeed = 0;
+	xpos = 0;
+	ypos = 0;
 }
 
 void GameObject::update()
@@ -50,6 +41,14 @@ void GameObject::render(SDL_Surface* screen){
 	textureManager.drawSurface(screen,xpos,ypos);
 }
 
+void GameObject::setUpDestRect() {
+	// most likely the hitbox
+	destRect.x = xpos;
+	destRect.y = ypos;
+	destRect.w = textureManager.sprite->w;
+	destRect.h = textureManager.sprite->h;
+}
+
 void GameObject::setPosition(int x, int y) {
 	xpos = x;
 	ypos = y;
@@ -58,23 +57,27 @@ void GameObject::setPosition(int x, int y) {
 void GameObject::moveLeft(double deltaTime) {
 	objectSpeed = DEFAULT_PLAYER_SPEED;
 	xpos -= deltaTime * objectSpeed;
+	destRect.x = xpos;
 }
 
 void GameObject::moveRight(double deltaTime) {
 	objectSpeed = DEFAULT_PLAYER_SPEED;
 	xpos += deltaTime * objectSpeed;
+	destRect.x = xpos;
 }
 
 void GameObject::moveUp(double deltaTime) {
 	// under the circumstance that a player is on the ladder
 	objectSpeed = DEFAULT_PLAYER_SPEED;
 	ypos -= deltaTime * objectSpeed;
+	destRect.y = ypos;
 }
 
 void GameObject::moveDown(double deltaTime) {
 	// under the circumstance that a player is on the ladder
 	objectSpeed = DEFAULT_PLAYER_SPEED;
 	ypos += deltaTime * objectSpeed;
+	destRect.y = ypos;
 }
 
 void GameObject::moveStop() {
