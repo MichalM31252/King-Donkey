@@ -8,5 +8,4 @@ class Collider {
 public:
 	bool isColliding = false;
 	void checkCollision(SDL_Rect a, SDL_Rect b);
-
 };

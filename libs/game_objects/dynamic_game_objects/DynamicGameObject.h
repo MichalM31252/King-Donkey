@@ -1,8 +1,8 @@
 #pragma once
 
 extern "C" {
-#include "../../libs/game_gameplay/GameObject.h"
-#include "../../libs/game_gameplay/Physics.h"
+#include "../GameObject.h"
+#include "./Physics.h"
 }
 
 class DynamicGameObject : public GameObject {

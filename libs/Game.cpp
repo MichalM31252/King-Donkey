@@ -4,15 +4,15 @@
 #include <string.h>
 
 extern "C" {
-#include "../../SDL2-2.0.10/include/SDL.h"
-#include "../../SDL2-2.0.10/include/SDL_main.h"
+#include "../SDL2-2.0.10/include/SDL.h"
+#include "../SDL2-2.0.10/include/SDL_main.h"
 
-#include "Game.h"
-#include "../Constants.h"
-#include "../game_visual/VisualManager.h"
-#include "../game_gameplay/GameObject.h"
-#include "./EventManager.h"
-#include "../game_gameplay/Collider.h"
+#include "./Game.h"
+#include "./Constants.h"
+#include "./game_screen/ScreenManager.h"
+#include "./game_objects/dynamic_game_objects/DynamicGameObject.h"
+#include "./game_events/EventManager.h"
+#include "./game_events/CollisionManager.h"
 }
 
 void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)

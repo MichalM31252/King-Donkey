@@ -19,23 +19,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="libs\game_file_interface\FileInterface.cpp" />
-    <ClCompile Include="libs\game_gameplay\Barrel.cpp" />
-    <ClCompile Include="libs\game_gameplay\Collider.cpp" />
-    <ClCompile Include="libs\game_gameplay\EventManager.cpp" />
-    <ClCompile Include="libs\game_gameplay\Game.cpp" />
-    <ClCompile Include="libs\game_gameplay\GameObject.cpp" />
-    <ClCompile Include="libs\game_gameplay\DynamicGameObject.cpp" />
-    <ClCompile Include="libs\game_gameplay\Physics.cpp" />
-    <ClCompile Include="libs\game_gameplay\Player.cpp" />
+    <ClCompile Include="libs\Game.cpp" />
+    <ClCompile Include="libs\game_events\CollisionManager.cpp" />
+    <ClCompile Include="libs\game_events\EventManager.cpp" />
+    <ClCompile Include="libs\game_file_manager\FileManager.cpp" />
     <ClCompile Include="libs\game_info\AdditionalInfo.cpp" />
     <ClCompile Include="libs\game_info\HallOfFame.cpp" />
     <ClCompile Include="libs\game_info\LivesBar.cpp" />
     <ClCompile Include="libs\game_info\Menu.cpp" />
     <ClCompile Include="libs\game_info\ScoreBar.cpp" />
     <ClCompile Include="libs\game_info\TimeBar.cpp" />
-    <ClCompile Include="libs\game_visual\TextureManager.cpp" />
-    <ClCompile Include="libs\game_visual\VisualManager.cpp" />
+    <ClCompile Include="libs\game_objects\dynamic_game_objects\DynamicGameObject.cpp" />
+    <ClCompile Include="libs\game_objects\dynamic_game_objects\dynamic_game_object_child\Barrel.cpp" />
+    <ClCompile Include="libs\game_objects\dynamic_game_objects\dynamic_game_object_child\Player.cpp" />
+    <ClCompile Include="libs\game_objects\dynamic_game_objects\Physics.cpp" />
+    <ClCompile Include="libs\game_objects\GameObject.cpp" />
+    <ClCompile Include="libs\game_objects\TextureManager.cpp" />
+    <ClCompile Include="libs\game_screen\ScreenManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -44,23 +44,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\Constants.h" />
-    <ClInclude Include="libs\game_file_interface\FileInterface.h" />
-    <ClInclude Include="libs\game_gameplay\Barrel.h" />
-    <ClInclude Include="libs\game_gameplay\Collider.h" />
-    <ClInclude Include="libs\game_gameplay\EventManager.h" />
-    <ClInclude Include="libs\game_gameplay\Game.h" />
-    <ClInclude Include="libs\game_gameplay\GameObject.h" />
-    <ClInclude Include="libs\game_gameplay\DynamicGameObject.h" />
-    <ClInclude Include="libs\game_gameplay\Physics.h" />
-    <ClInclude Include="libs\game_gameplay\Player.h" />
+    <ClInclude Include="libs\Game.h" />
+    <ClInclude Include="libs\game_events\CollisionManager.h" />
+    <ClInclude Include="libs\game_events\EventManager.h" />
+    <ClInclude Include="libs\game_file_manager\FileManager.h" />
     <ClInclude Include="libs\game_info\AdditionalInfo.h" />
     <ClInclude Include="libs\game_info\HallOfFame.h" />
     <ClInclude Include="libs\game_info\LivesBar.h" />
     <ClInclude Include="libs\game_info\Menu.h" />
     <ClInclude Include="libs\game_info\ScoreBar.h" />
     <ClInclude Include="libs\game_info\TimeBar.h" />
-    <ClInclude Include="libs\game_visual\TextureManager.h" />
-    <ClInclude Include="libs\game_visual\VisualManager.h" />
+    <ClInclude Include="libs\game_objects\dynamic_game_objects\DynamicGameObject.h" />
+    <ClInclude Include="libs\game_objects\dynamic_game_objects\dynamic_game_object_child\Barrel.h" />
+    <ClInclude Include="libs\game_objects\dynamic_game_objects\dynamic_game_object_child\Player.h" />
+    <ClInclude Include="libs\game_objects\dynamic_game_objects\Physics.h" />
+    <ClInclude Include="libs\game_objects\GameObject.h" />
+    <ClInclude Include="libs\game_objects\TextureManager.h" />
+    <ClInclude Include="libs\game_screen\ScreenManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

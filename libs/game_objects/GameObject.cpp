@@ -1,7 +1,7 @@
 #include "GameObject.h"
 
-#include "../../libs/game_visual/TextureManager.h"
-#include "../../libs/Constants.h"
+#include "./TextureManager.h"
+#include "../Constants.h"
 // rename 
 
 GameObject::GameObject()

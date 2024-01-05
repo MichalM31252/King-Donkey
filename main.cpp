@@ -8,8 +8,7 @@ extern "C" {
 	#include "./SDL2-2.0.10/include/SDL.h"
 	#include "./SDL2-2.0.10/include/SDL_main.h"
 
-	#include "./libs/Constants.h"
-	#include "./libs/game_gameplay/Game.h"
+	#include "./libs/Game.h"
 }
 
 // main

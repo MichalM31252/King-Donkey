@@ -1,7 +1,7 @@
 extern "C" {
 #include "../../SDL2-2.0.10/include/SDL.h"
 #include "../../SDL2-2.0.10/include/SDL_main.h"
-#include "../../libs/game_gameplay/Collider.h"
+#include "./CollisionManager.h"
 }
 
 void Collider::checkCollision(SDL_Rect a, SDL_Rect b) {
