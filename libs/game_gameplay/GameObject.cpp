@@ -8,9 +8,6 @@ GameObject::GameObject()
 {
 	textureManager = TextureManager();
 	SDL_Rect destRect = SDL_Rect();
-	objectSpeed = 0;
-	xpos = 0;
-	ypos = 0;
 }
 
 void GameObject::update()
@@ -26,7 +23,7 @@ void GameObject::update()
 	//srcRect.x = 0;
 	//srcRect.y = 0;
 
-	// most likely the hitbox
+	// hitbox
 	//destRect.x = xpos;
 	//destRect.y = ypos;
 	//destRect.w = srcRect.w * 2;
@@ -38,48 +35,18 @@ void GameObject::init(const char* fileName) {
 }
 
 void GameObject::render(SDL_Surface* screen){
-	textureManager.drawSurface(screen,xpos,ypos);
+	textureManager.drawSurface(screen,destRect.x, destRect.y);
 }
 
 void GameObject::setUpDestRect() {
 	// most likely the hitbox
-	destRect.x = xpos;
-	destRect.y = ypos;
-	destRect.w = textureManager.sprite->w;
-	destRect.h = textureManager.sprite->h;
+	// ADD SRC_RECT FOR THE IMAGE SIZE TO BE SURE ABOUT THE HITBOX
+	destRect.w = textureManager.sprite->w / 2; // this shouldnt be have the size fix this
+	destRect.h = textureManager.sprite->h / 2;
 }
 
 void GameObject::setPosition(int x, int y) {
-	xpos = x;
-	ypos = y;
+	destRect.x = x;
+	destRect.y = y;
 }
 
-void GameObject::moveLeft(double deltaTime) {
-	objectSpeed = DEFAULT_PLAYER_SPEED;
-	xpos -= deltaTime * objectSpeed;
-	destRect.x = xpos;
-}
-
-void GameObject::moveRight(double deltaTime) {
-	objectSpeed = DEFAULT_PLAYER_SPEED;
-	xpos += deltaTime * objectSpeed;
-	destRect.x = xpos;
-}
-
-void GameObject::moveUp(double deltaTime) {
-	// under the circumstance that a player is on the ladder
-	objectSpeed = DEFAULT_PLAYER_SPEED;
-	ypos -= deltaTime * objectSpeed;
-	destRect.y = ypos;
-}
-
-void GameObject::moveDown(double deltaTime) {
-	// under the circumstance that a player is on the ladder
-	objectSpeed = DEFAULT_PLAYER_SPEED;
-	ypos += deltaTime * objectSpeed;
-	destRect.y = ypos;
-}
-
-void GameObject::moveStop() {
-	objectSpeed = 0;
-}

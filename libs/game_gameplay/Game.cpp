@@ -24,13 +24,13 @@ void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I
 }
 
 void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
-	GameObject *pla = new GameObject();
+	DynamicGameObject *pla = new DynamicGameObject();
 	pla->init("Mario_Run1.bmp");
 	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
 	pla->setUpDestRect();
 	player = pla;
 
-	GameObject *donkeyK = new GameObject();
+	DynamicGameObject*donkeyK = new DynamicGameObject();
 	donkeyK->init("DonkeyKong.bmp");
 	donkeyK->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
 	donkeyK->setUpDestRect();

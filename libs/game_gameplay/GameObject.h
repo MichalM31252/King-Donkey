@@ -19,18 +19,9 @@ public:
 	void update(); // update the game object // for moving for example
 	void render(SDL_Surface* screen); // render the game object // for showing the game object // pass everything needed to show it
 	void setUpDestRect();
-
 	void setPosition(int x, int y);
-	void moveLeft(double delta); 
-	void moveRight(double delta);
-	void moveUp(double delta); 
-	void moveDown(double delta);
-	void moveStop();
 private:
-	int xpos, ypos;
-	double objectSpeed;
 	TextureManager textureManager;
-	
 	// size of the gameObject rectangle
 };
 

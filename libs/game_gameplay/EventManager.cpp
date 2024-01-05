@@ -7,11 +7,12 @@ extern "C" {
 #include "../../SDL2-2.0.10/include/SDL.h"
 #include "../../SDL2-2.0.10/include/SDL_main.h"
 #include "../../libs/game_gameplay/GameObject.h"
+#include "../../libs/game_gameplay/DynamicGameObject.h"
 #include "EventManager.h"
 #include "../Constants.h"
 }
 
-void EventManager::handleEvents(bool* quit, double deltaTime, GameObject* player) {
+void EventManager::handleEvents(bool* quit, double deltaTime, DynamicGameObject* player) {
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 			case SDL_KEYDOWN: // event of pressing down a key on keyboard

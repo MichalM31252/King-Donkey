@@ -28,6 +28,7 @@
     <ClCompile Include="libs\game_gameplay\Game.cpp" />
     <ClCompile Include="libs\game_gameplay\GameObject.cpp" />
     <ClCompile Include="libs\game_gameplay\Ladder.cpp" />
+    <ClCompile Include="libs\game_gameplay\DynamicGameObject.cpp" />
     <ClCompile Include="libs\game_gameplay\Platform.cpp" />
     <ClCompile Include="libs\game_gameplay\Player.cpp" />
     <ClCompile Include="libs\game_gameplay\Stage.cpp" />
@@ -56,6 +57,7 @@
     <ClInclude Include="libs\game_gameplay\Game.h" />
     <ClInclude Include="libs\game_gameplay\GameObject.h" />
     <ClInclude Include="libs\game_gameplay\Ladder.h" />
+    <ClInclude Include="libs\game_gameplay\DynamicGameObject.h" />
     <ClInclude Include="libs\game_gameplay\Platform.h" />
     <ClInclude Include="libs\game_gameplay\Player.h" />
     <ClInclude Include="libs\game_gameplay\Stage.h" />
