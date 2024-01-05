@@ -13,16 +13,22 @@ DynamicGameObject::DynamicGameObject() {
 	objectSpeed = 0;
 }
 
-void DynamicGameObject::update(double deltaTime) {
+void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
 	if (isFalling) {
 		destRect.y += deltaTime * gravity;
 	}
 	if (!canLeaveScreen) {
-		if (destRect.x < STARTING_X) {
+		if (destRect.x < STARTING_X) { // left
 			destRect.x = STARTING_X;
 		}
-		else if (destRect.x > SCREEN_WIDTH) {
-			destRect.x = STARTING_X;
+		if (destRect.x + destRect.w > SCREEN_WIDTH) { // right
+			destRect.x = SCREEN_WIDTH - destRect.w;
+		}
+		if (destRect.y + destRect.h > SCREEN_HEIGHT) { // bottom
+			destRect.y = SCREEN_HEIGHT + destRect.h;
+		}
+		if (destRect.y < STARTING_Y) { // top
+			destRect.y = SCREEN_HEIGHT;
 		}
 	}
 	if (objectSpeed > 0) {

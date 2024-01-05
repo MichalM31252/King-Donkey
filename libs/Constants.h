@@ -4,6 +4,7 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 const int STARTING_X = 0;
+const int STARTING_Y = 0;
 
 // Refresh constants
 const double SECONDS_BETWEEN_REFRESH = 0.5;

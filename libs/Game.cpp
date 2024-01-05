@@ -31,7 +31,7 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	pla->setUpDestRect();
 	player = pla;
 
-	DynamicGameObject*donkeyK = new DynamicGameObject();
+	DynamicGameObject *donkeyK = new DynamicGameObject();
 	donkeyK->init("DonkeyKong.bmp");
 	donkeyK->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
 	donkeyK->setUpDestRect();

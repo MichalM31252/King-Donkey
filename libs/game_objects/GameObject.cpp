@@ -41,8 +41,8 @@ void GameObject::render(SDL_Surface* screen){
 void GameObject::setUpDestRect() {
 	// most likely the hitbox
 	// ADD SRC_RECT FOR THE IMAGE SIZE TO BE SURE ABOUT THE HITBOX
-	destRect.w = textureManager.sprite->w / 2; // this shouldnt be have the size fix this
-	destRect.h = textureManager.sprite->h / 2;
+	destRect.w = textureManager.sprite->w; // this shouldnt be have the size fix this
+	destRect.h = textureManager.sprite->h;
 }
 
 void GameObject::setPosition(int x, int y) {
