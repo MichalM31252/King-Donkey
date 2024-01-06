@@ -14,6 +14,7 @@ extern "C" {
 #include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h"
 #include "./game_events/EventManager.h"
 #include "./game_events/CollisionManager.h"
+#include "./Platform.h"
 }
 
 void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
@@ -27,7 +28,7 @@ void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I
 void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	Player *pla = new Player();
 	pla->init("Mario_Run1.bmp");
-	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
+	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER - 100);
 	pla->setUpSrcRect();
 	pla->setUpDestRect();
 	player = pla;
@@ -38,6 +39,10 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	donkeyK->setUpSrcRect();
 	donkeyK->setUpDestRect();
 	donkeyKong = donkeyK;
+
+	Platform *plat = new Platform();
+	plat->setPosition(10, 400, SCREEN_WIDTH - 10, 400);
+	platform = plat;
 
 	// GameObject kingDonkey(0, 0, 0); // this can be here
 	// GameObject princess(0, 0, 0); // this can be here
@@ -91,7 +96,7 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		// showing everything on the screen 
 		player->render(visualManager.screen);
 		donkeyKong->render(visualManager.screen);
-
+		platform->render(visualManager.screen);
 
 
 

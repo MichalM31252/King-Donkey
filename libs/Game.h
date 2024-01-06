@@ -7,6 +7,7 @@ extern "C" {
 #include "./game_objects/dynamic_game_objects/DynamicGameObject.h"
 #include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h"
 #include "./game_events/EventManager.h"
+#include "./Platform.h"
 }
 
 class Game {
@@ -16,6 +17,8 @@ class Game {
 		double deltaTime, worldTime, fpsTimer, fps;
 		GameObject *donkeyKong;
 		Player* player;
+		Platform* platform;
+
 		
 
 		// Game(); Constructor NEEDED ADD DEFAULT VALUES

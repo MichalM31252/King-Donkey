@@ -15,23 +15,6 @@ GameObject::GameObject()
 	//srcRect.y = 0;
 }
 
-void GameObject::update()
-{
-	// you need the dest rect for collision create a function that will get that info
-	// update the position for example of the player or the barrel
-
-	// this is handled by the DrawSurface function
-
-	// this is how big the image is
-
-
-	// hitbox
-	//destRect.x = xpos;
-	//destRect.y = ypos;
-	// destRect.w = srcRect.w;
-	// destRect.h = srcRect.h;
-}
-
 void GameObject::init(const char* fileName) {
 	textureManager.loadTexture(fileName);
 }
