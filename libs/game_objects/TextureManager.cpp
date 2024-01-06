@@ -21,10 +21,10 @@ void TextureManager::loadTexture(const char* fileName) {
 // (x, y) to punkt œrodka obrazka sprite na ekranie
 // draw a surface sprite on a surface screen in point (x, y)
 // (x, y) is the center of sprite on screen
-void TextureManager::drawSurface(SDL_Surface* screen, int x, int y) {
+void TextureManager::drawSurface(SDL_Surface* screen, int xpos, int ypos) {
 	SDL_Rect dest;
-	dest.x = x; // was dest.x = x - sprite->w / 2;
-	dest.y = y; // was dest.y = y - sprite->h / 2;
+	dest.x = xpos; // was dest.x = x - sprite->w / 2;
+	dest.y = ypos; // was dest.y = y - sprite->h / 2;
 	dest.w = sprite->w;
 	dest.h = sprite->h;
 	SDL_BlitSurface(sprite, NULL, screen, &dest);

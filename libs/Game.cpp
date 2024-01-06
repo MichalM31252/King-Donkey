@@ -28,12 +28,14 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	Player *pla = new Player();
 	pla->init("Mario_Run1.bmp");
 	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
+	pla->setUpSrcRect();
 	pla->setUpDestRect();
 	player = pla;
 
-	DynamicGameObject *donkeyK = new DynamicGameObject();
+	GameObject *donkeyK = new GameObject();
 	donkeyK->init("DonkeyKong.bmp");
 	donkeyK->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
+	donkeyK->setUpSrcRect();
 	donkeyK->setUpDestRect();
 	donkeyKong = donkeyK;
 
@@ -74,10 +76,25 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		visualManager.drawOutlineOfTheBoard(); // this first because it overwrites everything
 		visualManager.drawAdditionalInfo(worldTime);
 
+		// Updating the game objects
 		player->update(deltaTime);
+		// donkeyKong->update(deltaTime);
 
+		// Checking for collision
+		Collider collider;
+		collider.checkCollision(player->destRect, donkeyKong->destRect);
+		if (collider.isColliding) {
+			printf("COLLIDING\n");
+			closeGame(visualManager);
+		}
+
+		// showing everything on the screen 
 		player->render(visualManager.screen);
 		donkeyKong->render(visualManager.screen);
+
+
+
+
 		// visualManager.drawGameObjects(); or something like that ??
 
 		//GameObject player(STARTING_X_PLAYER, STARTING_Y_PLAYER, 1);
@@ -89,13 +106,7 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		// visualManager.DrawSurface(visualManager.screen, visualManager.eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	 
 		// visualManager.DrawSurface(visualManager.screen, visualManager.eti, 64, 64); // an image on the specified position	 
 
-		Collider collider;
 
-		collider.checkCollision(player->destRect, donkeyKong->destRect);
-		if (collider.isColliding) {
-			printf("COLLIDING\n");
-			closeGame(visualManager);
-		}
 
 		visualManager.serveNextFrame();
 

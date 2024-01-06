@@ -8,6 +8,11 @@ GameObject::GameObject()
 {
 	textureManager = TextureManager();
 	SDL_Rect destRect = SDL_Rect();
+
+	//srcRect.h = 32;
+	//srcRect.w = 32;
+	//srcRect.x = 0;
+	//srcRect.y = 0;
 }
 
 void GameObject::update()
@@ -18,16 +23,13 @@ void GameObject::update()
 	// this is handled by the DrawSurface function
 
 	// this is how big the image is
-	//srcRect.h = 32; 
-	//srcRect.w = 32;
-	//srcRect.x = 0;
-	//srcRect.y = 0;
+
 
 	// hitbox
 	//destRect.x = xpos;
 	//destRect.y = ypos;
-	//destRect.w = srcRect.w * 2;
-	//destRect.h = srcRect.h * 2;
+	// destRect.w = srcRect.w;
+	// destRect.h = srcRect.h;
 }
 
 void GameObject::init(const char* fileName) {
@@ -35,18 +37,23 @@ void GameObject::init(const char* fileName) {
 }
 
 void GameObject::render(SDL_Surface* screen){
-	textureManager.drawSurface(screen,destRect.x, destRect.y);
+	textureManager.drawSurface(screen, xpos, ypos);
+}
+
+void GameObject::setUpSrcRect() {
+	srcRect.w = textureManager.sprite->w;
+	srcRect.h = textureManager.sprite->h;
 }
 
 void GameObject::setUpDestRect() {
-	// most likely the hitbox
-	// ADD SRC_RECT FOR THE IMAGE SIZE TO BE SURE ABOUT THE HITBOX
-	destRect.w = textureManager.sprite->w;
-	destRect.h = textureManager.sprite->h;
+	destRect.w = srcRect.w;
+	destRect.h = srcRect.h;
 }
 
 void GameObject::setPosition(int x, int y) { // top left corner of the game object (hitbox) // change it to center so it will be easier to work with
-	destRect.x = x;
-	destRect.y = y;
+	xpos = x;
+	ypos = y;
+	destRect.x = xpos;
+	destRect.y = ypos;
 }
 

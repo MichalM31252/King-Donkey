@@ -14,7 +14,7 @@ class Game {
 		// logic
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
-		DynamicGameObject *donkeyKong;
+		GameObject *donkeyKong;
 		Player* player;
 		
 

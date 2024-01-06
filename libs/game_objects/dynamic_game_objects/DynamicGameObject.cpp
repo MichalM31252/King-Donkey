@@ -15,26 +15,30 @@ DynamicGameObject::DynamicGameObject() {
 
 void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
 	if (isFalling) {
-		destRect.y += deltaTime * gravity;
+		ypos += deltaTime * gravity;
 	}
 	if (!canLeaveScreen) {
-		if (destRect.x < STARTING_X + destRect.w) { // left
-			destRect.x = STARTING_X + destRect.w;
+		if (xpos < STARTING_X) { // left
+			xpos = STARTING_X;
 		}
-		if (destRect.x + destRect.w > SCREEN_WIDTH) { // right
-			destRect.x = SCREEN_WIDTH - destRect.w;
+		if (xpos + destRect.w > SCREEN_WIDTH) { // right
+			xpos = SCREEN_WIDTH - destRect.w;
 		}
-		if (destRect.y + destRect.h > SCREEN_HEIGHT) { // bottom
-			destRect.y = SCREEN_HEIGHT - destRect.h;
+		if (ypos + destRect.h > SCREEN_HEIGHT) { // bottom
+			ypos = SCREEN_HEIGHT - destRect.h;
 		}
-		if (destRect.y < STARTING_Y) { // top
-			destRect.y = destRect.h;
+		if (ypos < STARTING_Y + TOP_BAR_HEIGHT) { // top
+			ypos = STARTING_Y + TOP_BAR_HEIGHT;
 		}
 	}
 	if (objectSpeed > 0) {
-		destRect.x += deltaTime * objectSpeed * currentDirectionOfMovementHorizontal;
-		destRect.y += deltaTime * objectSpeed * currentDirectionOfMovementVertical;
+		xpos += deltaTime * objectSpeed * currentDirectionOfMovementHorizontal;
+		ypos += deltaTime * objectSpeed * currentDirectionOfMovementVertical;
 	}
+
+	destRect.x = xpos;
+	destRect.y = ypos;
+
 }
 
 void DynamicGameObject::moveStart() {

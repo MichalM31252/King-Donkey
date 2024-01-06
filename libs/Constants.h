@@ -6,6 +6,8 @@ const int SCREEN_HEIGHT = 480;
 const int STARTING_X = 0;
 const int STARTING_Y = 0;
 
+const int TOP_BAR_HEIGHT = 18;
+
 // Refresh constants
 const double SECONDS_BETWEEN_REFRESH = 0.5;
 const double REFRESH_RATE = 1.0 / SECONDS_BETWEEN_REFRESH;
