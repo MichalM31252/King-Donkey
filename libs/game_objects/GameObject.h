@@ -12,7 +12,6 @@ class GameObject
 {  
 public:
 	int xpos, ypos; // position of the game object
-	double xaccumulated, yaccumulated;
 	SDL_Rect destRect, srcRect; // destRect is the physical representation of the game object // srcRect is whats going to be mapped onto the destRect
 	TextureManager textureManager;
 	char *tag[30]; // name of the object to differentiate between them barrel, player, ladder, etc

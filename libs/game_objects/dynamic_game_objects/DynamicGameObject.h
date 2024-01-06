@@ -6,10 +6,11 @@ extern "C" {
 
 class DynamicGameObject : public GameObject {
 public:
+	double accumulatedXMove, accumulatedYMove;
 	bool canLeaveScreen;
 	double gravity, objectSpeed;
 	bool isFalling;
-	int currentDirectionOfMovementHorizontal, currentDirectionOfMovementVertical;
+	double currentDirectionOfMovementHorizontal, currentDirectionOfMovementVertical;
 
 	DynamicGameObject();
 	void update(double deltaTime);

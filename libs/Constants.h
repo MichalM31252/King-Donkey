@@ -19,8 +19,8 @@ const int STARTING_Y_PLAYER = 400;
 const int STARTING_X_DONKEY_KONG = 96;
 const int STARTING_Y_DONKEY_KONG = 96;
 
-const double DEFAULT_PLAYER_SPEED = 50;
-const double DEFAULT_BARREL_SPEED = 50;
+const double DEFAULT_PLAYER_SPEED = 100;
+const double DEFAULT_BARREL_SPEED = 100;
 
 const double DEFAULT_GRAVITY = 1000;
 

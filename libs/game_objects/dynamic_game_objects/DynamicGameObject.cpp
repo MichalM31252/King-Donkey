@@ -8,9 +8,11 @@ DynamicGameObject::DynamicGameObject() {
 	canLeaveScreen = false;
 	gravity = DEFAULT_GRAVITY;
 	isFalling = false;
-	currentDirectionOfMovementHorizontal = 0; // 1 = right, -1 = left
-	currentDirectionOfMovementVertical = 0; // 1 = down, -1 = up
+	currentDirectionOfMovementHorizontal = 0.0; // 1 = right, -1 = left
+	currentDirectionOfMovementVertical = 0.0; // 1 = down, -1 = up
 	objectSpeed = 0;
+	accumulatedXMove = 0;
+	accumulatedYMove = 0;
 }
 
 void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
@@ -32,10 +34,51 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 		}
 	}
 	if (objectSpeed > 0) {
-		xpos += deltaTime * objectSpeed * currentDirectionOfMovementHorizontal;
-		ypos += deltaTime * objectSpeed * currentDirectionOfMovementVertical;
+		accumulatedXMove += deltaTime * objectSpeed * currentDirectionOfMovementHorizontal;
+		accumulatedYMove += deltaTime * objectSpeed * currentDirectionOfMovementVertical;
 	}
 
+	//accumulatedXMove += deltaTime;
+	//accumulatedYMove += deltaTime;
+
+	// YOU NEED TO TRACK IF THE PLAYER CHANGED DIRECTIONS
+	// IF HE CHANGED THEN SET ACCUMULATED MOVEMENT TO 0
+
+	
+	if (currentDirectionOfMovementHorizontal > 0.0 || currentDirectionOfMovementVertical > 0.0) { // for positive numbers 
+		if (accumulatedXMove >= 1.0 * currentDirectionOfMovementHorizontal) { // right
+			int pixelsToMove = accumulatedXMove / 1;
+			double pixelsMoved = pixelsToMove;
+			xpos += pixelsToMove;
+			accumulatedXMove -= pixelsMoved;
+		}
+		if (accumulatedYMove >= 1.0 * currentDirectionOfMovementVertical) { // down
+			int pixelsToMove = accumulatedYMove / 1;
+			double pixelsMoved = pixelsToMove;
+			ypos += pixelsToMove;
+			accumulatedYMove -= pixelsMoved;
+		}
+	}
+	if (currentDirectionOfMovementHorizontal < 0.0 || currentDirectionOfMovementVertical < 0.0) { // for negative numbers
+		if (accumulatedXMove <= 1.0 * currentDirectionOfMovementHorizontal) { // up
+			int pixelsToMove = accumulatedXMove / 1;
+			double pixelsMoved = pixelsToMove;
+			xpos += pixelsToMove;
+			accumulatedXMove -= pixelsMoved;
+		}
+		if (accumulatedYMove <= 1.0 * currentDirectionOfMovementVertical) { // left
+			int pixelsToMove = accumulatedYMove / 1;
+			double pixelsMoved = pixelsToMove;
+			ypos += pixelsToMove;
+			accumulatedYMove -= pixelsMoved;
+		}
+	}
+
+	
+
+
+
+	//if 
 	destRect.x = xpos;
 	destRect.y = ypos;
 
@@ -46,26 +89,28 @@ void DynamicGameObject::moveStart() {
 }
 
 void DynamicGameObject::startMovingLeft(double deltaTime) {
-	currentDirectionOfMovementHorizontal = -1;
-	currentDirectionOfMovementVertical = 0;
+	currentDirectionOfMovementHorizontal = -1.0;
+	currentDirectionOfMovementVertical = 0.0;
 }
 
 void DynamicGameObject::startMovingRight(double deltaTime) {
-	currentDirectionOfMovementHorizontal = 1;
-	currentDirectionOfMovementVertical = 0;
+	currentDirectionOfMovementHorizontal = 1.0;
+	currentDirectionOfMovementVertical = 0.0;
 }
 
 void DynamicGameObject::startMovingUp(double deltaTime) {
-	currentDirectionOfMovementVertical = -1;
-	currentDirectionOfMovementHorizontal = 0;
+	currentDirectionOfMovementVertical = -1.0;
+	currentDirectionOfMovementHorizontal = 0.0;
 }
 
 void DynamicGameObject::startMovingDown(double deltaTime) { 	// under the circumstance that a player is on the ladder
-	currentDirectionOfMovementVertical = 1;
-	currentDirectionOfMovementHorizontal = 0;
+	currentDirectionOfMovementVertical = 1.0;
+	currentDirectionOfMovementHorizontal = 0.0;
 }
 
 void DynamicGameObject::moveStop() {
+	accumulatedYMove = 0;
+	accumulatedXMove = 0;
 	objectSpeed = 0;
 }
 
