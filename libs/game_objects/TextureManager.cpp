@@ -23,8 +23,8 @@ void TextureManager::loadTexture(const char* fileName) {
 // (x, y) is the center of sprite on screen
 void TextureManager::drawSurface(SDL_Surface* screen, int x, int y) {
 	SDL_Rect dest;
-	dest.x = x - sprite->w / 2;
-	dest.y = y - sprite->h / 2;
+	dest.x = x; // was dest.x = x - sprite->w / 2;
+	dest.y = y; // was dest.y = y - sprite->h / 2;
 	dest.w = sprite->w;
 	dest.h = sprite->h;
 	SDL_BlitSurface(sprite, NULL, screen, &dest);

@@ -41,11 +41,11 @@ void GameObject::render(SDL_Surface* screen){
 void GameObject::setUpDestRect() {
 	// most likely the hitbox
 	// ADD SRC_RECT FOR THE IMAGE SIZE TO BE SURE ABOUT THE HITBOX
-	destRect.w = textureManager.sprite->w; // this shouldnt be have the size fix this
+	destRect.w = textureManager.sprite->w;
 	destRect.h = textureManager.sprite->h;
 }
 
-void GameObject::setPosition(int x, int y) {
+void GameObject::setPosition(int x, int y) { // top left corner of the game object (hitbox) // change it to center so it will be easier to work with
 	destRect.x = x;
 	destRect.y = y;
 }
