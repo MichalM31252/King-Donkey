@@ -33,22 +33,20 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 			ypos = STARTING_Y + TOP_BAR_HEIGHT;
 		}
 	}
+
+	/////////////////////////////////////
+	// moving the entity
+
 	if (objectSpeed > 0) {
 		accumulatedXMove += deltaTime * objectSpeed * currentDirectionOfMovementHorizontal;
 		accumulatedYMove += deltaTime * objectSpeed * currentDirectionOfMovementVertical;
 	}
-
-	//accumulatedXMove += deltaTime;
-	//accumulatedYMove += deltaTime;
-
-	// YOU NEED TO TRACK IF THE PLAYER CHANGED DIRECTIONS
-	// IF HE CHANGED THEN SET ACCUMULATED MOVEMENT TO 0
-
-	
 	if (currentDirectionOfMovementHorizontal > 0.0 || currentDirectionOfMovementVertical > 0.0) { // for positive numbers 
 		if (accumulatedXMove >= 1.0 * currentDirectionOfMovementHorizontal) { // right
 			int pixelsToMove = accumulatedXMove / 1;
 			double pixelsMoved = pixelsToMove;
+			// its possible for a plyer to move +2 pixels at a time
+
 			xpos += pixelsToMove;
 			accumulatedXMove -= pixelsMoved;
 		}
@@ -74,14 +72,13 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 		}
 	}
 
-	
+	/////////////////////////////////////////
+	// Interaction with the platform 
 
 
 
-	//if 
 	destRect.x = xpos;
 	destRect.y = ypos;
-
 }
 
 void DynamicGameObject::moveStart() {

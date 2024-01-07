@@ -40,15 +40,18 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	donkeyK->setUpDestRect();
 	donkeyKong = donkeyK;
 
-	Platform *plat = new Platform();
-	plat->setPosition(10, 400, SCREEN_WIDTH - 10, 400);
-	platform = plat;
+	//Platform *plat1 = new Platform();
+	//plat1->setPosition(SCREEN_WIDTH - 300, 400, SCREEN_WIDTH - 10, 400);
+	//platform1 = plat1;
 
-	// GameObject kingDonkey(0, 0, 0); // this can be here
-	// GameObject princess(0, 0, 0); // this can be here
-	// GameObject barrel(0, 0, 0); 
-	// GameObject ladder(0, 0, 0);
-	// GameObject platform(0, 0, 0);
+	//Platform* plat2 = new Platform();
+	//plat2->setPosition(SCREEN_WIDTH - 600, 300, SCREEN_WIDTH - 300, 399);
+	//platform2 = plat2;
+
+	Platform* plat2 = new Platform();
+	plat2->setPosition(300, 300, 400, 400);
+	platform2 = plat2;
+
 }
 
 void Game::handleDifferentComputers() { // (logic) make every object dependent on deltaTime so it works the same on different computers
@@ -93,10 +96,15 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 			closeGame(visualManager);
 		}
 
+		// left bottom corner checking
+		
+		collider.checkPlayerCollisionWithLayerOfPlatform(player->xpos, player->ypos, player->destRect.h, platform2->x1pos, platform2->y1pos, platform2->x2pos, platform2->y2pos);
+
 		// showing everything on the screen 
 		player->render(visualManager.screen);
 		donkeyKong->render(visualManager.screen);
-		platform->render(visualManager.screen);
+		//platform1->render(visualManager.screen);
+		platform2->render(visualManager.screen);
 
 
 

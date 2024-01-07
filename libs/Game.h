@@ -17,9 +17,7 @@ class Game {
 		double deltaTime, worldTime, fpsTimer, fps;
 		GameObject *donkeyKong;
 		Player* player;
-		Platform* platform;
-
-		
+		Platform *platform1, *platform2;
 
 		// Game(); Constructor NEEDED ADD DEFAULT VALUES
 		void initGame();
