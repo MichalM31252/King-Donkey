@@ -36,6 +36,7 @@
     <ClCompile Include="libs\game_objects\TextureManager.cpp" />
     <ClCompile Include="libs\game_screen\ScreenManager.cpp" />
     <ClCompile Include="libs\Platform.cpp" />
+    <ClCompile Include="libs\PlatformHolder.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +62,7 @@
     <ClInclude Include="libs\game_objects\TextureManager.h" />
     <ClInclude Include="libs\game_screen\ScreenManager.h" />
     <ClInclude Include="libs\Platform.h" />
+    <ClInclude Include="libs\PlatformHolder.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

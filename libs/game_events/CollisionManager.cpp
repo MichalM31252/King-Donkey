@@ -17,19 +17,13 @@ void Collider::checkCollision(SDL_Rect a, SDL_Rect b) {
 	}
 }
 
-void Collider::checkPlayerCollisionWithLayerOfPlatform(double xposObject, double yposObject, int hObject, double x1Platform, double y1Platform, double x2Platform, double y2Platform) {
+bool Collider::checkPlayerCollisionWithPlatform(double xposObject, double yposObject, int hObject, double x1Platform, double y1Platform, double x2Platform, double y2Platform) {
 	double a = y2Platform - y1Platform;
 	double b = x1Platform - x2Platform;
 	double c = a * x1Platform + b * y1Platform;
-
 	// Ax + By = C
 
 	// so basically a platform can only have a function that to an integer argument always returns an integer value 
-
-	if (xposObject == 40.0 && yposObject == 300) {
-		int b = 1;
-	}
-
 	if ( a * xposObject + b * yposObject == c) { // if ( a * xposObject + b * yposObject == c) {
 		// yes player is inside this layer
 		// move him one pixel above the top layer on this x
@@ -37,7 +31,7 @@ void Collider::checkPlayerCollisionWithLayerOfPlatform(double xposObject, double
 		// okay lets hope 1 layer is enough for now 
 		// just move him 1 pixel higher
 		if ((xposObject >= x1Platform && xposObject <= x2Platform) || (xposObject <= x1Platform && xposObject >= x2Platform)) { // stays in the width of the platform
-			printf("COLLIDING\n");
+			return true;
 		}
 	}
 

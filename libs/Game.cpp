@@ -98,7 +98,7 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 
 		// left bottom corner checking
 		
-		collider.checkPlayerCollisionWithLayerOfPlatform(player->xpos, player->ypos, player->destRect.h, platform2->x1pos, platform2->y1pos, platform2->x2pos, platform2->y2pos);
+		collider.checkPlayerCollisionWithPlatform(player->xpos, player->ypos, player->destRect.h, platform2->x1pos, platform2->y1pos, platform2->x2pos, platform2->y2pos);
 
 		// showing everything on the screen 
 		player->render(visualManager.screen);

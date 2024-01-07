@@ -37,6 +37,8 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 	/////////////////////////////////////
 	// moving the entity
 
+	// for each pixelsToMove check if passing through a platform
+
 	if (objectSpeed > 0) {
 		accumulatedXMove += deltaTime * objectSpeed * currentDirectionOfMovementHorizontal;
 		accumulatedYMove += deltaTime * objectSpeed * currentDirectionOfMovementVertical;
@@ -45,8 +47,6 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 		if (accumulatedXMove >= 1.0 * currentDirectionOfMovementHorizontal) { // right
 			int pixelsToMove = accumulatedXMove / 1;
 			double pixelsMoved = pixelsToMove;
-			// its possible for a plyer to move +2 pixels at a time
-
 			xpos += pixelsToMove;
 			accumulatedXMove -= pixelsMoved;
 		}
