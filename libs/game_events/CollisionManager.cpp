@@ -36,5 +36,7 @@ bool Collider::checkPlayerCollisionWithPlatform(double xposObject, double yposOb
 		}
 	}
 
+	// this is only when the platform is tilted towards left 
+
 	// double y = ((-1.0 * a * xposPlayer) - c) / b; // move player to this // nah this is the y on the line
 }

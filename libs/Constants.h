@@ -8,16 +8,19 @@ const int STARTING_Y = 0;
 
 const int TOP_BAR_HEIGHT = 18;
 
+// Platform 
+const int MAXIMUM_AMOUNT_OF_PLATFORMS = 100;
+
 // Refresh constants
 const double SECONDS_BETWEEN_REFRESH = 0.5;
 const double REFRESH_RATE = 1.0 / SECONDS_BETWEEN_REFRESH;
 
 // GameObject Const
-const int STARTING_X_PLAYER = 512;
-const int STARTING_Y_PLAYER = 400;
+const int STARTING_X_PLAYER = 50;
+const int STARTING_Y_PLAYER = 520; // WHAT
 
-const int STARTING_X_DONKEY_KONG = 96;
-const int STARTING_Y_DONKEY_KONG = 96;
+const int STARTING_X_DONKEY_KONG = 64;
+const int STARTING_Y_DONKEY_KONG = 64;
 
 const double DEFAULT_PLAYER_SPEED = 200;
 const double DEFAULT_BARREL_SPEED = 200;

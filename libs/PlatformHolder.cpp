@@ -5,12 +5,12 @@ extern "C" {
 
 void init(PlatformHolder* platformHolder) {
 	
-	platformHolder->platforms = new Platform[2]; // this is the reason why platforms are not pointers
+	platformHolder->platforms = new Platform[MAXIMUM_AMOUNT_OF_PLATFORMS]; // this is the reason why platforms are not pointers
 	platformHolder->numberOfElements = 0; // number of elements currently inside
-	platformHolder->sizeOfArray = 2;
+	platformHolder->sizeOfArray = MAXIMUM_AMOUNT_OF_PLATFORMS;
 }
 
-void addPlatform(PlatformHolder* platformHolder, Platform* platform) { // make sure this works in the debbuger
+void addPlatform(PlatformHolder* platformHolder, Platform* platform) { // this doesn't work
 	if (platformHolder->numberOfElements == platformHolder->sizeOfArray) {
 		Platform* temp = new Platform[platformHolder->sizeOfArray];
 		

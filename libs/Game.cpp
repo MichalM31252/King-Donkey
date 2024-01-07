@@ -42,21 +42,34 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	donkeyKong = donkeyK;
 
 	Platform *plat1 = new Platform();
-	plat1->setPosition(SCREEN_WIDTH - 300, 400, SCREEN_WIDTH - 10, 400);
-	platform1 = plat1;
+	plat1->setPosition(1, 470, 399, 470); // 1
 
 	Platform* plat2 = new Platform();
-	plat2->setPosition(300, 300, 400, 400);
-	platform2 = plat2;
+	plat2->setPosition(400, 470, 500, 370); // 2
+
+	Platform* plat3 = new Platform();
+	plat3->setPosition(501, 370, SCREEN_WIDTH - 1, 370); // 3
+
+	Platform* plat4 = new Platform();
+	plat4->setPosition(1, 130, SCREEN_WIDTH - 1, 130); // 4
+
+	//Platform *plat1 = new Platform();
+	//plat1->setPosition(400, 400, SCREEN_WIDTH - 10, 400);
+
+	//Platform* plat2 = new Platform();
+	//plat2->setPosition(300, 300, 400, 400);
+
+	//Platform* plat3 = new Platform();
+	//plat3->setPosition(200, 300, 100, 300);
 
 	PlatformHolder* platH = new PlatformHolder();
 	init(platH);
-	addPlatform(platH, platform1);
-	addPlatform(platH, platform2);
+	addPlatform(platH, plat1);
+	addPlatform(platH, plat2);
+	addPlatform(platH, plat3);
+	addPlatform(platH, plat4);
+
 	platformHolder = platH;
-
-
-
 }
 
 void Game::handleDifferentComputers() { // (logic) make every object dependent on deltaTime so it works the same on different computers
@@ -112,7 +125,8 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		/*platform2->render(visualManager.screen);*/
 
 		for (int i = 0; i < platformHolder->numberOfElements; i++) {
-			collider.checkPlayerCollisionWithPlatform(player->xpos, player->ypos, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos);
+			collider.checkPlayerCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos); // checking from left bottom corner
+			collider.checkPlayerCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos); // checking from right bottom corner
 			platformHolder->platforms[i].render(visualManager.screen);
 		}
 

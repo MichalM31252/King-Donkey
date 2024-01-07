@@ -19,7 +19,6 @@ class Game {
 		GameObject *donkeyKong;
 		Player* player;
 		PlatformHolder* platformHolder;
-		Platform *platform1, *platform2;
 
 		// Game(); Constructor NEEDED ADD DEFAULT VALUES
 		void initGame();
