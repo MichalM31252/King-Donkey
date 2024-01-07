@@ -15,6 +15,7 @@ extern "C" {
 #include "./game_events/EventManager.h"
 #include "./game_events/CollisionManager.h"
 #include "./Platform.h"
+#include "./PlatformHolder.h"
 }
 
 void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
@@ -40,17 +41,21 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	donkeyK->setUpDestRect();
 	donkeyKong = donkeyK;
 
-	//Platform *plat1 = new Platform();
-	//plat1->setPosition(SCREEN_WIDTH - 300, 400, SCREEN_WIDTH - 10, 400);
-	//platform1 = plat1;
-
-	//Platform* plat2 = new Platform();
-	//plat2->setPosition(SCREEN_WIDTH - 600, 300, SCREEN_WIDTH - 300, 399);
-	//platform2 = plat2;
+	Platform *plat1 = new Platform();
+	plat1->setPosition(SCREEN_WIDTH - 300, 400, SCREEN_WIDTH - 10, 400);
+	platform1 = plat1;
 
 	Platform* plat2 = new Platform();
 	plat2->setPosition(300, 300, 400, 400);
 	platform2 = plat2;
+
+	PlatformHolder* platH = new PlatformHolder();
+	init(platH);
+	addPlatform(platH, platform1);
+	addPlatform(platH, platform2);
+	platformHolder = platH;
+
+
 
 }
 
@@ -97,16 +102,19 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		}
 
 		// left bottom corner checking
+
 		
-		collider.checkPlayerCollisionWithPlatform(player->xpos, player->ypos, player->destRect.h, platform2->x1pos, platform2->y1pos, platform2->x2pos, platform2->y2pos);
 
 		// showing everything on the screen 
 		player->render(visualManager.screen);
 		donkeyKong->render(visualManager.screen);
 		//platform1->render(visualManager.screen);
-		platform2->render(visualManager.screen);
+		/*platform2->render(visualManager.screen);*/
 
-
+		for (int i = 0; i < platformHolder->numberOfElements; i++) {
+			collider.checkPlayerCollisionWithPlatform(player->xpos, player->ypos, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos);
+			platformHolder->platforms[i].render(visualManager.screen);
+		}
 
 		// visualManager.drawGameObjects(); or something like that ??
 

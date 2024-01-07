@@ -1,19 +1,20 @@
 #pragma once
 
 extern "C" {
-	#include "./Platform.h"
+#include "./Platform.h"
 }
 
 
 struct PlatformHolder {
-	int* platforms;
+	Platform* platforms;
 	int numberOfElements;
-	int sizeOfHolder;
+	int sizeOfArray;
 };
 
-void initPlatformHolder();
-void addPlatform();
-void renderEveryPlatform();
+void init(PlatformHolder* platformHolder);
+void addPlatform(PlatformHolder* platformHolder, Platform* platform);
+void emptyPlatformHolder(PlatformHolder* platformHolder);
+
 // void addEveryPlatform(); // do this when reading from a file
 
 

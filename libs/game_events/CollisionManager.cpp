@@ -31,6 +31,7 @@ bool Collider::checkPlayerCollisionWithPlatform(double xposObject, double yposOb
 		// okay lets hope 1 layer is enough for now 
 		// just move him 1 pixel higher
 		if ((xposObject >= x1Platform && xposObject <= x2Platform) || (xposObject <= x1Platform && xposObject >= x2Platform)) { // stays in the width of the platform
+			printf("COLLIDING\n");
 			return true;
 		}
 	}
