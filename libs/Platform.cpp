@@ -20,7 +20,7 @@ void Platform::render(SDL_Surface* screen) {
 	// get length of the platform
 	// y = x the functions is dx = 1 dy = 1
 	int length = sqrt(pow(x2pos - x1pos, 2) + pow(y2pos - y1pos, 2));
-	if (y1pos != y2pos) {
+	if (y1pos != y2pos) { // xdddddddddddddddddd // pray this is y = x
 		int differenceBetweenX = sqrt(pow(x2pos - x1pos, 2));
 		int x = x1pos;
 		int y = y1pos;

@@ -4,9 +4,9 @@ extern "C" {
 #include "../../SDL2-2.0.10/include/SDL_main.h"
 }
 
-class Collider {
+class CollisionManager {
 public:
 	bool isColliding = false;
-	void checkCollision(SDL_Rect a, SDL_Rect b);
-	bool checkPlayerCollisionWithPlatform(double xposObject, double yposObject, int hObject, double x1Platform, double y1Platform, double x2Platform, double y2Platform);
+	bool checkCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
+	bool checkObjectCollisionWithPlatform(double xposObject, double yposObject, int hObject, double x1Platform, double y1Platform, double x2Platform, double y2Platform);
 };

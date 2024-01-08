@@ -17,7 +17,7 @@ const double REFRESH_RATE = 1.0 / SECONDS_BETWEEN_REFRESH;
 
 // GameObject Const
 const int STARTING_X_PLAYER = 50;
-const int STARTING_Y_PLAYER = 520; // WHAT
+const int STARTING_Y_PLAYER = 480;
 
 const int STARTING_X_DONKEY_KONG = 64;
 const int STARTING_Y_DONKEY_KONG = 64;
@@ -25,7 +25,7 @@ const int STARTING_Y_DONKEY_KONG = 64;
 const double DEFAULT_PLAYER_SPEED = 200;
 const double DEFAULT_BARREL_SPEED = 200;
 
-const double DEFAULT_GRAVITY = 1000;
+const double DEFAULT_GRAVITY = 100;
 
 // Source File constants
 // YOU CAN"T PLACE DEFINES IN DIFFERENT FILES

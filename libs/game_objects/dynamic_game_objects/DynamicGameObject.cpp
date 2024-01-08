@@ -17,8 +17,55 @@ DynamicGameObject::DynamicGameObject() {
 
 void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
 	if (isFalling) {
-		ypos += deltaTime * gravity;
+		accumulatedYMove += deltaTime * gravity;
+		int pixelsToMove = accumulatedYMove / 1;
+		if (pixelsToMove >= 1) {
+			ypos += 1;
+			accumulatedYMove -= 1;
+		}
+
 	}
+	if (objectSpeed > 0) {
+		accumulatedXMove += deltaTime * objectSpeed * currentDirectionOfMovementHorizontal;
+		accumulatedYMove += deltaTime * objectSpeed * currentDirectionOfMovementVertical;
+	}
+
+	// WATCHOUT DIFFERENT += -= SIGNS AND VARIABLES IN EVERY IF
+	// just add a function this is not faster this way?????
+	// moving left, down, right, top
+	if (currentDirectionOfMovementHorizontal > 0.0 || currentDirectionOfMovementVertical > 0.0) { // for positive numbers 
+		if (accumulatedXMove > currentDirectionOfMovementHorizontal) { // right // THIS CANT BE BIGGER OR EQUAL BECAUSE WHEN STARTING IT IS ALWAYS TRUE 0 <= 0
+			int pixelsToMove = accumulatedXMove / 1;
+			if (pixelsToMove > 1) {
+				xpos += 1;
+				accumulatedXMove -= 1;
+			}
+		}
+		if (accumulatedYMove > currentDirectionOfMovementVertical) { // down
+			int pixelsToMove = accumulatedYMove / 1;
+			if (pixelsToMove > 1) {
+				ypos += 1;
+				accumulatedYMove -= 1;
+			}
+		}
+	}
+	if (currentDirectionOfMovementHorizontal < 0.0 || currentDirectionOfMovementVertical < 0.0) { // for negative numbers
+		if (accumulatedXMove < currentDirectionOfMovementHorizontal) { // 
+			int pixelsToMove = accumulatedXMove / 1;
+			if (pixelsToMove < 1) {
+				xpos -= 1;
+				accumulatedXMove += 1;
+			}
+		}
+		if (accumulatedYMove < currentDirectionOfMovementVertical) { // up
+			int pixelsToMove = accumulatedYMove / 1;
+			if (pixelsToMove < 1) {
+				ypos -= 1;
+				accumulatedYMove += 1;
+			}
+		}
+	}
+
 	if (!canLeaveScreen) {
 		if (xpos < STARTING_X) { // left
 			xpos = STARTING_X;
@@ -34,48 +81,7 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 		}
 	}
 
-	/////////////////////////////////////
-	// moving the entity
-
-	// for each pixelsToMove check if passing through a platform
-
-	if (objectSpeed > 0) {
-		accumulatedXMove += deltaTime * objectSpeed * currentDirectionOfMovementHorizontal;
-		accumulatedYMove += deltaTime * objectSpeed * currentDirectionOfMovementVertical;
-	}
-	if (currentDirectionOfMovementHorizontal > 0.0 || currentDirectionOfMovementVertical > 0.0) { // for positive numbers 
-		if (accumulatedXMove >= 1.0 * currentDirectionOfMovementHorizontal) { // right
-			int pixelsToMove = accumulatedXMove / 1;
-			double pixelsMoved = pixelsToMove;
-			xpos += pixelsToMove;
-			accumulatedXMove -= pixelsMoved;
-		}
-		if (accumulatedYMove >= 1.0 * currentDirectionOfMovementVertical) { // down
-			int pixelsToMove = accumulatedYMove / 1;
-			double pixelsMoved = pixelsToMove;
-			ypos += pixelsToMove;
-			accumulatedYMove -= pixelsMoved;
-		}
-	}
-	if (currentDirectionOfMovementHorizontal < 0.0 || currentDirectionOfMovementVertical < 0.0) { // for negative numbers
-		if (accumulatedXMove <= 1.0 * currentDirectionOfMovementHorizontal) { // up
-			int pixelsToMove = accumulatedXMove / 1;
-			double pixelsMoved = pixelsToMove;
-			xpos += pixelsToMove;
-			accumulatedXMove -= pixelsMoved;
-		}
-		if (accumulatedYMove <= 1.0 * currentDirectionOfMovementVertical) { // left
-			int pixelsToMove = accumulatedYMove / 1;
-			double pixelsMoved = pixelsToMove;
-			ypos += pixelsToMove;
-			accumulatedYMove -= pixelsMoved;
-		}
-	}
-
-	/////////////////////////////////////////
-	// Interaction with the platform 
-
-
+	// for each pixelsToMove check if passing through a platform !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	destRect.x = xpos;
 	destRect.y = ypos;
@@ -118,5 +124,5 @@ void DynamicGameObject::startFalling() {
 }
 
 void DynamicGameObject::stopFalling() {
-	isFalling = false;
+	this->isFalling = false;
 }

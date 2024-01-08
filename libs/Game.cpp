@@ -45,7 +45,7 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	plat1->setPosition(1, 470, 399, 470); // 1
 
 	Platform* plat2 = new Platform();
-	plat2->setPosition(400, 470, 500, 370); // 2
+	plat2->setPosition(399, 469, 500, 370); // 2
 
 	Platform* plat3 = new Platform();
 	plat3->setPosition(501, 370, SCREEN_WIDTH - 1, 370); // 3
@@ -102,17 +102,46 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		visualManager.drawOutlineOfTheBoard(); // this first because it overwrites everything
 		visualManager.drawAdditionalInfo(worldTime);
 
+		CollisionManager collisionManager;
+
+		collisionManager.checkCollisionBetweenRects(player->destRect, donkeyKong->destRect);
+		if (collisionManager.isColliding) {
+			closeGame(visualManager);
+		}
+		int flag = 0;
+		for (int i = 0; i < platformHolder->numberOfElements; i++) {
+			// this should be check one pixel below current position because from the logics perspective the player is inside the platform
+			// maybe check current pixel and one below it to check if platform is rising
+			if (collisionManager.checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager.checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) { // checking from left bottom corner || from the right corner
+				
+				// check here one pixel below 
+				// if there is no pixel below but the current pixel is inside the platf that means the player is inside the platform and he should be moved 1 pixel up
+				// if there is a pixel below but no inside the player that means the player is in the right position
+				// in both options the player should not fall
+				
+				// player->ypos--;
+				flag = 1;
+			}
+			platformHolder->platforms[i].render(visualManager.screen);
+		}
+
+		//if (flag) {
+		//	player->stopFalling();
+		//}
+		//else {
+		//	player->startFalling();
+		//}
+
+		//if (player->isFalling && player->xpos > 200) {
+		//	int ok = 1;
+		//}
+
 		// Updating the game objects
 		player->update(deltaTime);
 		// donkeyKong->update(deltaTime);
 
 		// Checking for collision
-		Collider collider;
-		collider.checkCollision(player->destRect, donkeyKong->destRect);
-		if (collider.isColliding) {
-			printf("COLLIDING\n");
-			closeGame(visualManager);
-		}
+
 
 		// left bottom corner checking
 
@@ -121,20 +150,10 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		// showing everything on the screen 
 		player->render(visualManager.screen);
 		donkeyKong->render(visualManager.screen);
-		//platform1->render(visualManager.screen);
-		/*platform2->render(visualManager.screen);*/
 
-		for (int i = 0; i < platformHolder->numberOfElements; i++) {
-			collider.checkPlayerCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos); // checking from left bottom corner
-			collider.checkPlayerCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos); // checking from right bottom corner
-			platformHolder->platforms[i].render(visualManager.screen);
-		}
+		// screenManager->drawElements
 
-		// visualManager.drawGameObjects(); or something like that ??
 
-		//GameObject player(STARTING_X_PLAYER, STARTING_Y_PLAYER, 1);
-		//player.init("Mario_Run1.bmp");
-		//player.render(visualManager.screen);
 		
 
 		// distance += etiSpeed * deltaTime; // make gam  eObjects dependent on deltaTime so it works the same on different computers          
