@@ -108,6 +108,8 @@ void DynamicGameObject::startMovingDown(double deltaTime) { 	// under the circum
 void DynamicGameObject::moveStop() {
 	accumulatedYMove = 0;
 	accumulatedXMove = 0;
+	currentDirectionOfMovementHorizontal = 0;
+	currentDirectionOfMovementVertical = 0;
 	objectSpeed = 0;
 }
 

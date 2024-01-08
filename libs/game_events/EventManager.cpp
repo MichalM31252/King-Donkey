@@ -21,7 +21,7 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player) {
 						*quit = true; // Esc = Quit CLOSING THE PROGRAM HERE
 						break;
 					case SDLK_UP: // this should be start moving and not moving 
-						player->startMovingUp(deltaTime);
+						// player->startMovingUp(deltaTime); // only ladder but it doesnt exist yet so its commented
 						break;
 					case SDLK_LEFT: // this should be start moving
 						player->startMovingLeft(deltaTime);
@@ -30,7 +30,7 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player) {
 						player->startMovingRight(deltaTime);
 						break;
 					case SDLK_DOWN: // this should be start moving
-						player->startMovingDown(deltaTime);
+						// player->startMovingDown(deltaTime); // only ladder but it doesnt exist yet so its commented
 						break;
 				}
 				break;
