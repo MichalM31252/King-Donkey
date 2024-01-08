@@ -7,7 +7,7 @@ extern "C" {
 DynamicGameObject::DynamicGameObject() {
 	canLeaveScreen = false;
 	gravity = DEFAULT_GRAVITY;
-	isFalling = false;
+	isFalling = true;
 	currentDirectionOfMovementHorizontal = 0.0; // 1 = right, -1 = left
 	currentDirectionOfMovementVertical = 0.0; // 1 = down, -1 = up
 	objectSpeed = 0;
@@ -16,15 +16,6 @@ DynamicGameObject::DynamicGameObject() {
 }
 
 void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
-	if (isFalling) {
-		accumulatedYMove += deltaTime * gravity;
-		int pixelsToMove = accumulatedYMove / 1;
-		if (pixelsToMove >= 1) {
-			ypos += 1;
-			accumulatedYMove -= 1;
-		}
-
-	}
 	if (objectSpeed > 0) {
 		accumulatedXMove += deltaTime * objectSpeed * currentDirectionOfMovementHorizontal;
 		accumulatedYMove += deltaTime * objectSpeed * currentDirectionOfMovementVertical;

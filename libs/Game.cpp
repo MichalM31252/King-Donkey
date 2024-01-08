@@ -42,16 +42,16 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	donkeyKong = donkeyK;
 
 	Platform *plat1 = new Platform();
-	plat1->setPosition(1, 470, 399, 470); // 1
+	plat1->setPosition(1, 400, 400, 400); // 1
 
 	Platform* plat2 = new Platform();
-	plat2->setPosition(399, 469, 500, 370); // 2
+	plat2->setPosition(400, 400, 500, 300); // 2
 
 	Platform* plat3 = new Platform();
-	plat3->setPosition(501, 370, SCREEN_WIDTH - 1, 370); // 3
+	plat3->setPosition(500, 300, SCREEN_WIDTH - 1, 300); // 3
 
-	Platform* plat4 = new Platform();
-	plat4->setPosition(1, 130, SCREEN_WIDTH - 1, 130); // 4
+	//Platform* plat4 = new Platform();
+	//plat4->setPosition(1, 130, SCREEN_WIDTH - 1, 130); // 4
 
 	//Platform *plat1 = new Platform();
 	//plat1->setPosition(400, 400, SCREEN_WIDTH - 10, 400);
@@ -67,7 +67,7 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	addPlatform(platH, plat1);
 	addPlatform(platH, plat2);
 	addPlatform(platH, plat3);
-	addPlatform(platH, plat4);
+	//addPlatform(platH, plat4);
 
 	platformHolder = platH;
 }
@@ -108,29 +108,41 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		if (collisionManager.isColliding) {
 			closeGame(visualManager);
 		}
+
 		int flag = 0;
 		for (int i = 0; i < platformHolder->numberOfElements; i++) {
 			// this should be check one pixel below current position because from the logics perspective the player is inside the platform
 			// maybe check current pixel and one below it to check if platform is rising
+			
+			// player collision with platform
 			if (collisionManager.checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager.checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) { // checking from left bottom corner || from the right corner
-				
-				// check here one pixel below 
-				// if there is no pixel below but the current pixel is inside the platf that means the player is inside the platform and he should be moved 1 pixel up
-				// if there is a pixel below but no inside the player that means the player is in the right position
-				// in both options the player should not fall
-				
-				// player->ypos--;
+				printf("COLLIDING WITH PLATFORM\n");
+				player->ypos--;
+			}
+			if (collisionManager.checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager.checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) {
+				printf("COLLIDING WITH PLATFORM FROM BELOW\n");
 				flag = 1;
 			}
 			platformHolder->platforms[i].render(visualManager.screen);
 		}
 
-		//if (flag) {
-		//	player->stopFalling();
-		//}
-		//else {
-		//	player->startFalling();
-		//}
+		if (flag) {
+			player->stopFalling();
+			// player->ypos--;
+		}
+		else {
+			player->startFalling();
+
+			player->accumulatedYMove += deltaTime * player->gravity;
+			int pixelsToMove = player->accumulatedYMove / 1;
+			if (pixelsToMove >= 1) {
+				player->ypos += 1;
+				player->accumulatedYMove -= 1;
+			}
+			
+		}
+
+
 
 		//if (player->isFalling && player->xpos > 200) {
 		//	int ok = 1;

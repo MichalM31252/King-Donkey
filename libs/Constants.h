@@ -17,7 +17,7 @@ const double REFRESH_RATE = 1.0 / SECONDS_BETWEEN_REFRESH;
 
 // GameObject Const
 const int STARTING_X_PLAYER = 50;
-const int STARTING_Y_PLAYER = 480;
+const int STARTING_Y_PLAYER = 350;
 
 const int STARTING_X_DONKEY_KONG = 64;
 const int STARTING_Y_DONKEY_KONG = 64;
