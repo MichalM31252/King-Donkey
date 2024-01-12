@@ -29,9 +29,11 @@ class Game {
 		void handleDifferentComputers();
 		void updateWorldTime();
 		
-		void setUpGame(VisualManager& visualManager);
-		void handleGame(VisualManager& visualManager, EventManager& eventManager);
+		void setUpGame(ScreenManager& screenManager);
+		void setUpRound(ScreenManager& screenManager);
+		void handleRound(ScreenManager& screenManager);
+		void handleCurrentRound(ScreenManager& screenManager, EventManager& eventHandler, int* startAnotherRound);
 
 		void closeGame();
-		void closeGame(VisualManager& visualManager);
+		void closeGame(ScreenManager& screenManager);
 };

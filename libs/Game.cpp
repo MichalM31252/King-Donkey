@@ -91,7 +91,7 @@ void Game::handleFPSTimer() { // logic
 	};
 }
 
-void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) { // VisualManager is passed by reference, can't be an const because it's methods change the object
+void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventHandler, int *startAnotherRound) { // VisualManager is passed by reference, can't be an const because it's methods change the object
 	bool quit = false;
 	while (!quit) { // 1 frame of the game
 
@@ -99,14 +99,14 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		updateWorldTime();
 		handleFPSTimer();
 
-		visualManager.drawOutlineOfTheBoard(); // this first because it overwrites everything
-		visualManager.drawAdditionalInfo(worldTime);
+		screenManager.drawOutlineOfTheBoard(); // this first because it overwrites everything
+		screenManager.drawAdditionalInfo(worldTime);
 
 		CollisionManager collisionManager;
 
 		collisionManager.checkCollisionBetweenRects(player->destRect, donkeyKong->destRect);
 		if (collisionManager.isColliding) {
-			closeGame(visualManager);
+			closeGame(screenManager);
 		}
 
 		int flag = 0;
@@ -123,7 +123,7 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 				printf("COLLIDING WITH PLATFORM FROM BELOW\n");
 				flag = 1;
 			}
-			platformHolder->platforms[i].render(visualManager.screen);
+			platformHolder->platforms[i].render(screenManager.screen);
 		}
 
 		if (flag) {
@@ -160,8 +160,8 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 		
 
 		// showing everything on the screen 
-		player->render(visualManager.screen);
-		donkeyKong->render(visualManager.screen);
+		player->render(screenManager.screen);
+		donkeyKong->render(screenManager.screen);
 
 		// screenManager->drawElements
 
@@ -174,27 +174,39 @@ void Game::handleGame(VisualManager& visualManager, EventManager& eventHandler) 
 
 
 
-		visualManager.serveNextFrame();
+		screenManager.serveNextFrame();
 
-		eventHandler.handleEvents(&quit, deltaTime, player);
+		eventHandler.handleEvents(&quit, deltaTime, player, startAnotherRound);
 
 		frames++;
 	};
 }
 
-void Game::setUpGame(VisualManager& visualManager) {
-	visualManager.setUpVisuals();
+void Game::setUpRound(ScreenManager& screenManager) { // (logic)
 	setUpFramerate();
-	setUpGameObjects(visualManager.screen); // here
+	setUpGameObjects(screenManager.screen);
+}
+
+void Game::handleRound(ScreenManager& screenManager) { // yeah make this a different class in the future	
+	EventManager eventHandler;
+	
+	setUpRound(screenManager);
+	int startAnotherRound = 0;
+	handleCurrentRound(screenManager, eventHandler, &startAnotherRound);
+
+	if (startAnotherRound) {
+		handleRound(screenManager);
+	}
+	// if this returns n then recurence -> handleRound(screenManager, eventHandler);
 }
 
 void Game::initGame() {
-	VisualManager visualManager;
-	EventManager eventHandler;
+	ScreenManager screenManager;
 
-	setUpGame(visualManager);
-	handleGame(visualManager, eventHandler);
-	closeGame(visualManager);
+	screenManager.setUpSDL(); // only this should be set once
+	handleRound(screenManager);
+
+	closeGame(screenManager);
 }
 
 void Game::closeGame(){
@@ -202,12 +214,12 @@ void Game::closeGame(){
 	exit(0);
 }
 
-void Game::closeGame(VisualManager& visualManager) { // change this into a vector to be more efficient (so it can destroy every gameobject)
-	SDL_FreeSurface(visualManager.charset);
-	SDL_FreeSurface(visualManager.screen);
-	SDL_DestroyTexture(visualManager.scrtex);
-	SDL_DestroyWindow(visualManager.window);
-	SDL_DestroyRenderer(visualManager.renderer);
+void Game::closeGame(ScreenManager& screenManager) { // change this into a vector to be more efficient (so it can destroy every gameobject)
+	SDL_FreeSurface(screenManager.charset);
+	SDL_FreeSurface(screenManager.screen);
+	SDL_DestroyTexture(screenManager.scrtex);
+	SDL_DestroyWindow(screenManager.window);
+	SDL_DestroyRenderer(screenManager.renderer);
 	SDL_Quit();
 	exit(0);
 }

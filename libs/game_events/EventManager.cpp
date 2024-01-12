@@ -11,7 +11,7 @@ extern "C" {
 #include "../Constants.h"
 }
 
-void EventManager::handleEvents(bool* quit, double deltaTime, Player* player) {
+void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, int *startAnotherRound) {
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 			case SDL_KEYDOWN: // event of pressing down a key on keyboard
@@ -31,6 +31,10 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player) {
 						break;
 					case SDLK_DOWN: // this should be start moving
 						//player->startMovingDown(deltaTime); // only ladder but it doesnt exist yet so its commented
+						break;
+					case SDLK_n:
+						*startAnotherRound = 1;
+						*quit = true;
 						break;
 				}
 				break;

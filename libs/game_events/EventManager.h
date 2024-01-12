@@ -8,7 +8,7 @@ extern "C" {
 
 class EventManager {
 public:
-	void handleEvents(bool* quit, double deltaTime, Player* player);
+	void handleEvents(bool* quit, double deltaTime, Player* player, int* startAnotherRound);
 private:
 	SDL_Event event; // this can be used here
 };

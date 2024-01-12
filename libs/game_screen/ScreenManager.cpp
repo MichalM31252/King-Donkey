@@ -14,14 +14,14 @@ extern "C" {
 #include "../Constants.h"
 }
 
-void VisualManager::SDLCheck() { // checks if SDL was initialized correctly
+void ScreenManager::SDLCheck() { // checks if SDL was initialized correctly
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		printf("SDL_Init error: %s\n", SDL_GetError());
 		// closeGame();
 	}
 }
 
-void VisualManager::SDLCreateWindowAndRenderer() { 
+void ScreenManager::SDLCreateWindowAndRenderer() { 
 	rc = SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
 	if (rc != 0) {
 		printf("SDL_CreateWindowAndRenderer error: %s\n", SDL_GetError());
@@ -29,23 +29,23 @@ void VisualManager::SDLCreateWindowAndRenderer() {
 	};
 }
 
-void VisualManager::SDLSetHint() { 
+void ScreenManager::SDLSetHint() { 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 }
 
-void VisualManager::SDLSetRenderLogicalSize() { 
+void ScreenManager::SDLSetRenderLogicalSize() { 
 	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void VisualManager::SDLSetDefaultDrawColor() { 
+void ScreenManager::SDLSetDefaultDrawColor() { 
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
 
-void VisualManager::SDLSetWindowTitle() { 
+void ScreenManager::SDLSetWindowTitle() { 
 	SDL_SetWindowTitle(window, "192928 Michal Malinowski");
 }
 
-void VisualManager::SDLSetCharset() { 
+void ScreenManager::SDLSetCharset() { 
 	charset = SDL_LoadBMP("./cs8x8.bmp");
 	if (charset == NULL) {
 		printf("SDL_LoadBMP(cs8x8.bmp) error: %s\n", SDL_GetError());
@@ -53,15 +53,15 @@ void VisualManager::SDLSetCharset() {
 	};
 }
 
-void VisualManager::SDLSetScreen() { 
+void ScreenManager::SDLSetScreen() { 
 	screen = SDL_CreateRGBSurface(0, SCREEN_WIDTH, SCREEN_HEIGHT, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
 }
 
-void VisualManager::SDLSetTexture() { 
+void ScreenManager::SDLSetTexture() { 
 	scrtex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void VisualManager::SDLSetEtiLogo() { 
+void ScreenManager::SDLSetEtiLogo() { 
 	eti = SDL_LoadBMP("./Mario_Run1.bmp");
 	if (eti == NULL) {
 		printf("SDL_LoadBMP(eti.bmp) error: %s\n", SDL_GetError());
@@ -69,15 +69,15 @@ void VisualManager::SDLSetEtiLogo() {
 	}
 }
 
-void VisualManager::SDLHideCursor() { 
+void ScreenManager::SDLHideCursor() { 
 	SDL_ShowCursor(SDL_DISABLE); // hides the cursor
 }
 
-void VisualManager::SDLSetColorKey() { 
+void ScreenManager::SDLSetColorKey() { 
 	SDL_SetColorKey(charset, true, 0x000000);
 }
 
-void VisualManager::serveNextFrame() { 
+void ScreenManager::serveNextFrame() { 
 
 	// draw the gameObjects here
 
@@ -88,7 +88,7 @@ void VisualManager::serveNextFrame() {
 	SDL_RenderPresent(renderer); 
 }
 
-void VisualManager::setColors() {
+void ScreenManager::setColors() {
 	black = SDL_MapRGB(screen->format, 0x00, 0x00, 0x00);
 	green = SDL_MapRGB(screen->format, 0x00, 0xFF, 0x00);
 	red = SDL_MapRGB(screen->format, 0xFF, 0x00, 0x00);
@@ -98,18 +98,18 @@ void VisualManager::setColors() {
 	platformColor = SDL_MapRGB(screen->format, 0xef, 0x1e, 0x4f); // just draw a line instead of a big platform
 };
 
-void VisualManager::drawOutlineOfTheBoard() { // draws the outline of the board
+void ScreenManager::drawOutlineOfTheBoard() { // draws the outline of the board
 	DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black); 
 }
 
-void VisualManager::drawAdditionalInfo(double worldTime) { // draws current time, score and lives on the top of the screen
+void ScreenManager::drawAdditionalInfo(double worldTime) { // draws current time, score and lives on the top of the screen
 	DrawRectangle(screen, 1, 1, SCREEN_WIDTH - 2, TOP_BAR_HEIGHT, blue, blue);
 	char text[128];
 	sprintf(text, "Time: %.1lf s  Score: 00000  Lives: 3", worldTime);
 	DrawString(screen, screen->w / 2 - strlen(text) * 8 / 2, 7, text, charset);
 }
 
-void VisualManager::setUpVisuals() {
+void ScreenManager::setUpSDL() {
 	SDLCheck();
 	SDLCreateWindowAndRenderer();
 	SDLSetHint();
@@ -128,7 +128,7 @@ void VisualManager::setUpVisuals() {
 // charset to bitmapa 128x128 zawierajπca znaki
 // draw a text txt on surface screen, starting from the point (x, y)
 // charset is a 128x128 bitmap containing character images
-void VisualManager::DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset) {
+void ScreenManager::DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset) {
 	int px, py, c;
 	SDL_Rect s, d;
 	s.w = 8;
@@ -151,7 +151,7 @@ void VisualManager::DrawString(SDL_Surface* screen, int x, int y, const char* te
 
 // rysowanie pojedynczego pixela
 // draw a single pixel
-void VisualManager::DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) {
+void ScreenManager::DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) {
 	int bpp = surface->format->BytesPerPixel;
 	Uint8* p = (Uint8*)surface->pixels + y * surface->pitch + x * bpp;
 	*(Uint32*)p = color;
@@ -160,7 +160,7 @@ void VisualManager::DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) 
 // rysowanie linii o d≥ugoúci l w pionie (gdy dx = 0, dy = 1) 
 // bπdü poziomie (gdy dx = 1, dy = 0)
 // draw a vertical (when dx = 0, dy = 1) or horizontal (when dx = 1, dy = 0) line
-void VisualManager::DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color) {
+void ScreenManager::DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color) {
 	for (int i = 0; i < l; i++) {
 		DrawPixel(screen, x, y, color);
 		x += dx;
@@ -170,7 +170,7 @@ void VisualManager::DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, i
 
 // rysowanie prostokπta o d≥ugoúci bokÛw l i k
 // draw a rectangle of size l by k
-void VisualManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) { // x, y - top left corner
+void ScreenManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) { // x, y - top left corner
 	int i;
 	DrawLine(screen, x, y, k, 0, 1, outlineColor);
 	DrawLine(screen, x + l - 1, y, k, 0, 1, outlineColor);
