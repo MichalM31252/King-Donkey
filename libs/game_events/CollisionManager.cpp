@@ -41,3 +41,15 @@ bool CollisionManager::checkObjectCollisionWithPlatform(double xposObject, doubl
 	}
 	return false;
 }
+
+bool CollisionManager::checkIfInsideLadder(SDL_Rect a, SDL_Rect b) { // a is player for ex, b is ladder for example
+	if (a.x >= b.x && a.x + a.w <= b.x + b.w) { // on the right side of b && and on the left side of right part of b 
+		// this if doesnt work 
+		// WHY B.Y IS 100px it should be 170px
+		if (a.y + a.h <= b.y + b.h && a.y + a.h >= b.y) { // above or on the same level as bottom of the ladder && below the top of the ladder 
+			// for now this wont let the player get on top of the ladder 
+			return true;
+		}
+	}
+	return false;
+}

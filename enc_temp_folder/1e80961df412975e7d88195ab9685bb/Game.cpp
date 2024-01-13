@@ -44,8 +44,8 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	GameObject *ladd = new GameObject();
 	ladd->init("Ladder.bmp");
 	ladd->setPosition(525, 130);
-	ladd->setSrcRect(45, 169); // yeah this actually sets the size
-	ladd->setDestRect(45, 169);
+	ladd->setSrcRect(45, 175); // yeah this actually sets the size
+	ladd->setDestRect(45, 175);
 	//ladd->destRect.w = 45;
 	//ladd->destRect.h = 100;
 	ladder = ladd;
