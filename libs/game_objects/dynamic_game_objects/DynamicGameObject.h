@@ -11,6 +11,7 @@ public:
 	double gravity, objectSpeed;
 	bool isFalling;
 	double currentDirectionOfMovementHorizontal, currentDirectionOfMovementVertical;
+	bool isClimbing, isInsideLadder;
 
 	DynamicGameObject();
 	void update(double deltaTime);

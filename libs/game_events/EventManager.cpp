@@ -20,10 +20,9 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 					case SDLK_ESCAPE:
 						*quit = true; // Esc = Quit CLOSING THE PROGRAM HERE
 						break;
-					case SDLK_UP: // this should be start moving and not moving 
+					case SDLK_UP: // why is he still in the ladder 
 						if (player->isInsideLadder) {
-							player->isClimbing = true;
-
+							player->isClimbing = true; // the problem is most likely with this 
 							player->startMovingUp(deltaTime);
 						}
 						// check collision with ladder
@@ -45,7 +44,6 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 					case SDLK_DOWN: // this should be start moving
 						if (player->isInsideLadder) {
 							player->isClimbing = true;
-
 							player->startMovingDown(deltaTime);
 						}
 

@@ -13,12 +13,16 @@ DynamicGameObject::DynamicGameObject() {
 	objectSpeed = 0;
 	accumulatedXMove = 0;
 	accumulatedYMove = 0;
+	isClimbing = false;
+	isInsideLadder = false;
 }
 
 void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
 	if (objectSpeed > 0) {
 		accumulatedXMove += deltaTime * objectSpeed * currentDirectionOfMovementHorizontal;
-		accumulatedYMove += deltaTime * objectSpeed * currentDirectionOfMovementVertical;
+		if (isClimbing) {
+			accumulatedYMove += deltaTime * objectSpeed * currentDirectionOfMovementVertical;
+		}
 	}
 
 	// WATCHOUT DIFFERENT += -= SIGNS AND VARIABLES IN EVERY IF

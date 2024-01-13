@@ -60,7 +60,7 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	plat3->setPosition(500, 300, SCREEN_WIDTH - 1, 300); // 3
 
 	Platform* plat4 = new Platform();
-	plat4->setPosition(1, 130, SCREEN_WIDTH - 1, 130); // 4
+	plat4->setPosition(1, 130, 570, 130); // 4
 
 	//Platform *plat1 = new Platform();
 	//plat1->setPosition(400, 400, SCREEN_WIDTH - 10, 400);
@@ -146,16 +146,12 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 			player->isClimbing = false;
 		}
 
-		if (flag) { // if overlapping with platform
+		// if overlapping with platform from below
+		if (flag) { 
 			player->stopFalling();
 			// player->ypos--;
 		}
 		else {
-
-			// if player // isClimbing = True
-
-
-			// else: stuff below
 			if (!player->isClimbing) {
 				player->startFalling();
 

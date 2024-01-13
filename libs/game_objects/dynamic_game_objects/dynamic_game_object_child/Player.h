@@ -6,7 +6,6 @@ extern "C" {
 
 class Player : public DynamicGameObject {
 public:
-	bool isClimbing, isInsideLadder;
 	Player();
 	void jump();
 };
