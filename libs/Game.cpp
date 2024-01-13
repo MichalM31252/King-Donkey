@@ -44,8 +44,10 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	GameObject *ladd = new GameObject();
 	ladd->init("Ladder.bmp");
 	ladd->setPosition(525, 129);
+
 	ladd->setSrcRect(45, 170); // yeah this actually sets the size
 	ladd->setDestRect(45, 170);
+
 	//ladd->destRect.w = 45;
 	//ladd->destRect.h = 100;
 	ladder = ladd;
@@ -136,13 +138,11 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 
 			// player collision with platform
 			if (collisionManager.checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager.checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) { // checking from left bottom corner || from the right corner
-				printf("COLLIDING WITH PLATFORM\n");
 				if (!player->isClimbing) { // we dont want collision with platform when climbing
 					player->ypos--; // Big problem // This throws the player on top of the platform
 				}
 			}
 			if (collisionManager.checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager.checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) {
-				printf("COLLIDING WITH PLATFORM FROM BELOW\n");
 				flag = 1;
 			}
 			platformHolder->platforms[i].render(screenManager.screen);

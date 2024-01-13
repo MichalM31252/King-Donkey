@@ -8,11 +8,6 @@ GameObject::GameObject()
 {
 	textureManager = TextureManager();
 	SDL_Rect destRect = SDL_Rect();
-
-	//srcRect.h = 32;
-	//srcRect.w = 32;
-	//srcRect.x = 0;
-	//srcRect.y = 0;
 }
 
 void GameObject::init(const char* fileName) {

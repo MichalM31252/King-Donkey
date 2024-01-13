@@ -35,7 +35,6 @@ bool CollisionManager::checkObjectCollisionWithPlatform(double xposObject, doubl
 		// double y = ((-1.0 * a * xposPlayer) - c) / b; // move player to this // nah this is the y on the line
 
 		if ((xposObject >= x1Platform && xposObject <= x2Platform) || (xposObject <= x1Platform && xposObject >= x2Platform)) { // stays in the width of the platform
-			printf("COLLIDING\n");
 			return true;
 		}
 	}
