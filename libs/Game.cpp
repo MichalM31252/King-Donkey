@@ -114,8 +114,8 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		CollisionManager collisionManager;
 
 		// COLLISION WITH KONG
-		collisionManager.checkCollisionBetweenRects(player->destRect, donkeyKong->destRect);
-		if (collisionManager.isColliding) {
+		
+		if (collisionManager.checkCollisionBetweenRects(player->destRect, donkeyKong->destRect)) {
 			closeGame(screenManager);
 		}
 
@@ -149,7 +149,7 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		// if overlapping with platform from below
 		if (flag) { 
 			player->stopFalling();
-			// player->ypos--;
+			// check here if there is a ladder 2px below the player
 		}
 		else {
 			if (!player->isClimbing) {
