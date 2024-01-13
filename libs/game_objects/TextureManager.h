@@ -11,7 +11,8 @@ class TextureManager {
 public:
 	SDL_Surface* sprite;
 	void loadTexture(const char* fileName);
-	void drawSurface(SDL_Surface* screen, int x, int y);	
+	void drawSurface(SDL_Surface* screen, int x, int y);
+	void drawSurfaceLadder(SDL_Surface* screen, int xpos, int ypos, SDL_Rect dest);
 	// this should be in TextureManager
 	//SDL_Texture* objTexture;
 	//SDL_Rect srcRect, destRect;

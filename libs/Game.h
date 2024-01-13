@@ -17,8 +17,10 @@ class Game {
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
 		GameObject *donkeyKong;
+		GameObject *ladder;
 		Player* player;
 		PlatformHolder* platformHolder;
+
 
 		// Game(); Constructor NEEDED ADD DEFAULT VALUES
 		void initGame();

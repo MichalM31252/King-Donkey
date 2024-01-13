@@ -19,8 +19,11 @@ public:
 	GameObject(); // constructor
 	void init(const char* fileName);
 	void render(SDL_Surface* screen); // render the game object // for showing the game object // pass everything needed to show it
+	void renderLadder(SDL_Surface* screen);
 	void setUpSrcRect();
+	void setSrcRect(int w, int h);
 	void setUpDestRect();
+	void setDestRect(int w, int h);
 	void setPosition(int x, int y);
 private:
 	

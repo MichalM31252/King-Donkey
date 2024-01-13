@@ -29,3 +29,7 @@ void TextureManager::drawSurface(SDL_Surface* screen, int xpos, int ypos) {
 	dest.h = sprite->h;
 	SDL_BlitSurface(sprite, NULL, screen, &dest);
 };
+
+void TextureManager::drawSurfaceLadder(SDL_Surface* screen, int xpos, int ypos, SDL_Rect dest) {
+	SDL_BlitSurface(sprite, NULL, screen, &dest); // it doesnt overwrite the original size of the image
+};

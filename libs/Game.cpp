@@ -41,6 +41,15 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	donkeyK->setUpDestRect();
 	donkeyKong = donkeyK;
 
+	GameObject *ladd = new GameObject();
+	ladd->init("Ladder.bmp");
+	ladd->setPosition(525, 130);
+	ladd->setSrcRect(45, 100);
+	ladd->setDestRect(45, 100);
+	//ladd->destRect.w = 45;
+	//ladd->destRect.h = 100;
+	ladder = ladd;
+
 	Platform *plat1 = new Platform();
 	plat1->setPosition(1, 400, 400, 400); // 1
 
@@ -50,8 +59,8 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	Platform* plat3 = new Platform();
 	plat3->setPosition(500, 300, SCREEN_WIDTH - 1, 300); // 3
 
-	//Platform* plat4 = new Platform();
-	//plat4->setPosition(1, 130, SCREEN_WIDTH - 1, 130); // 4
+	Platform* plat4 = new Platform();
+	plat4->setPosition(1, 130, SCREEN_WIDTH - 1, 130); // 4
 
 	//Platform *plat1 = new Platform();
 	//plat1->setPosition(400, 400, SCREEN_WIDTH - 10, 400);
@@ -67,7 +76,7 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	addPlatform(platH, plat1);
 	addPlatform(platH, plat2);
 	addPlatform(platH, plat3);
-	//addPlatform(platH, plat4);
+	addPlatform(platH, plat4);
 
 	platformHolder = platH;
 }
@@ -131,6 +140,12 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 			// player->ypos--;
 		}
 		else {
+
+			// if player // isClimbing = True
+
+
+			// else: stuff below
+
 			player->startFalling();
 
 			player->accumulatedYMove += deltaTime * player->gravity;
@@ -160,9 +175,10 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		
 
 		// showing everything on the screen 
-		player->render(screenManager.screen);
+		
 		donkeyKong->render(screenManager.screen);
-
+		ladder->renderLadder(screenManager.screen);
+		player->render(screenManager.screen);
 		// screenManager->drawElements
 
 
