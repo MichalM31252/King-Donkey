@@ -43,9 +43,9 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 
 	GameObject *ladd = new GameObject();
 	ladd->init("Ladder.bmp");
-	ladd->setPosition(525, 130);
-	ladd->setSrcRect(45, 169); // yeah this actually sets the size
-	ladd->setDestRect(45, 169);
+	ladd->setPosition(525, 129);
+	ladd->setSrcRect(45, 170); // yeah this actually sets the size
+	ladd->setDestRect(45, 170);
 	//ladd->destRect.w = 45;
 	//ladd->destRect.h = 100;
 	ladder = ladd;
@@ -119,24 +119,6 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 			closeGame(screenManager);
 		}
 
-		// COLLSION WITH A PLATFORM
-		int flag = 0;
-		for (int i = 0; i < platformHolder->numberOfElements; i++) {
-			// this should be check one pixel below current position because from the logics perspective the player is inside the platform
-			// maybe check current pixel and one below it to check if platform is rising
-			
-			// player collision with platform
-			if (collisionManager.checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager.checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) { // checking from left bottom corner || from the right corner
-				printf("COLLIDING WITH PLATFORM\n");
-				player->ypos--;
-			}
-			if (collisionManager.checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager.checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) {
-				printf("COLLIDING WITH PLATFORM FROM BELOW\n");
-				flag = 1;
-			}
-			platformHolder->platforms[i].render(screenManager.screen);
-		}
-
 		// PLAYER OVERLAPPING WITH LADDER
 		if (collisionManager.checkIfInsideLadder(player->destRect, ladder->destRect)) {
 			player->isInsideLadder = true;
@@ -146,13 +128,33 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 			player->isClimbing = false;
 		}
 
-		// if overlapping with platform from below
-		if (flag) { 
-			player->stopFalling();
-			// check here if there is a ladder 2px below the player
+		// COLLSION WITH A PLATFORM
+		int flag = 0;
+		for (int i = 0; i < platformHolder->numberOfElements; i++) {
+			// this should be check one pixel below current position because from the logics perspective the player is inside the platform
+			// maybe check current pixel and one below it to check if platform is rising
+
+			// player collision with platform
+			if (collisionManager.checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager.checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) { // checking from left bottom corner || from the right corner
+				printf("COLLIDING WITH PLATFORM\n");
+				if (!player->isClimbing) { // we dont want collision with platform when climbing
+					player->ypos--; // Big problem // This throws the player on top of the platform
+				}
+			}
+			if (collisionManager.checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager.checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) {
+				printf("COLLIDING WITH PLATFORM FROM BELOW\n");
+				flag = 1;
+			}
+			platformHolder->platforms[i].render(screenManager.screen);
 		}
-		else {
-			if (!player->isClimbing) {
+
+		// if climbing ignore the flag (collision with platform from below)
+		if (!player->isClimbing) {
+			if (flag) {
+				player->stopFalling();
+				// check here if there is a ladder 2px below the player
+			}
+			else {
 				player->startFalling();
 
 				player->accumulatedYMove += deltaTime * player->gravity;
@@ -166,6 +168,8 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 
 
 
+
+
 		//if (player->isFalling && player->xpos > 200) {
 		//	int ok = 1;
 		//}
@@ -173,29 +177,12 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		// Updating the game objects
 		player->update(deltaTime);
 		// donkeyKong->update(deltaTime);
-
-		// Checking for collision
-
-
-		// left bottom corner checking
-
-		
-
 		// showing everything on the screen 
 		
 		donkeyKong->render(screenManager.screen);
 		ladder->renderLadder(screenManager.screen);
 		player->render(screenManager.screen);
 		// screenManager->drawElements
-
-
-		
-
-		// distance += etiSpeed * deltaTime; // make gam  eObjects dependent on deltaTime so it works the same on different computers          
-		// visualManager.DrawSurface(visualManager.screen, visualManager.eti, SCREEN_WIDTH / 2 + sin(distance) * SCREEN_HEIGHT / 3, SCREEN_HEIGHT / 2 + cos(distance) * SCREEN_HEIGHT / 3); // an image on the specified position	 
-		// visualManager.DrawSurface(visualManager.screen, visualManager.eti, 64, 64); // an image on the specified position	 
-
-
 
 		screenManager.serveNextFrame();
 

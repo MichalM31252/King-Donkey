@@ -43,6 +43,7 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 						break;
 					case SDLK_DOWN: // this should be start moving
 						if (player->isInsideLadder) {
+							// make sure that there is a ladder 1px below the player
 							player->isClimbing = true;
 							player->startMovingDown(deltaTime);
 						}
