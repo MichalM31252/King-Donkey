@@ -29,7 +29,7 @@ void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I
 void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	Player *pla = new Player();
 	pla->init("Mario_Run1.bmp");
-	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER - 100);
+	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
 	pla->setUpSrcRect();
 	pla->setUpDestRect();
 	player = pla;
@@ -41,17 +41,24 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	donkeyK->setUpDestRect();
 	donkeyKong = donkeyK;
 
+	GameObject *prin = new GameObject();
+	prin->init("Princess.bmp");
+	prin->setPosition(STARTING_X_PRINCESS, STARTING_Y_PRINCESS);
+	prin->setUpSrcRect();
+	prin->setUpDestRect();
+	princess = prin;
+
 	GameObject *ladd1 = new GameObject();
 	ladd1->init("Ladder.bmp");
 	ladd1->setPosition(525, 129);
 	ladd1->setSrcRect(45, 170); // yeah this actually sets the size
 	ladd1->setDestRect(45, 170);
 
-	GameObject* ladd2 = new GameObject();
+	GameObject *ladd2 = new GameObject();
 	ladd2->init("Ladder.bmp");
-	ladd2->setPosition(525, 129);
-	ladd2->setSrcRect(45, 170); // yeah this actually sets the size
-	ladd2->setDestRect(45, 170);
+	ladd2->setPosition(250, 80);
+	ladd2->setSrcRect(45, 50); // yeah this actually sets the size
+	ladd2->setDestRect(45, 50);
 
 	LadderHolder* laddH = new LadderHolder();
 	initLadderHolder(laddH);
@@ -60,7 +67,6 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	addLadder(laddH, ladd2);
 
 	ladderHolder = laddH;
-
 
 	Platform *plat1 = new Platform();
 	plat1->setPosition(1, 400, 400, 400); // 1
@@ -74,6 +80,9 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	Platform* plat4 = new Platform();
 	plat4->setPosition(1, 130, 570, 130); // 4
 
+	Platform* plat5 = new Platform();
+	plat5->setPosition(200, 80, 250 + 45, 80); // 4
+
 	PlatformHolder* platH = new PlatformHolder();
 	initPlatformHolder(platH);
 
@@ -81,6 +90,7 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	addPlatform(platH, plat2);
 	addPlatform(platH, plat3);
 	addPlatform(platH, plat4);
+	addPlatform(platH, plat5);
 
 	platformHolder = platH;
 }
@@ -118,8 +128,12 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		CollisionManager collisionManager;
 
 		// COLLISION WITH KONG
-		
 		if (collisionManager.checkCollisionBetweenRects(player->destRect, donkeyKong->destRect)) {
+			closeGame(screenManager);
+		}
+
+		// COLLISION WITH PRINCESS
+		if (collisionManager.checkCollisionBetweenRects(player->destRect, princess->destRect)) {
 			closeGame(screenManager);
 		}
 
@@ -176,21 +190,13 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 			}
 		}
 
-
-
-
-
-		//if (player->isFalling && player->xpos > 200) {
-		//	int ok = 1;
-		//}
-
 		// Updating the game objects
 		player->update(deltaTime);
 		// donkeyKong->update(deltaTime);
 		// showing everything on the screen 
 		
 		donkeyKong->render(screenManager.screen);
-
+		princess->render(screenManager.screen);
 		player->render(screenManager.screen);
 		// screenManager->drawElements
 

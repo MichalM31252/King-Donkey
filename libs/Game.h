@@ -18,6 +18,7 @@ class Game {
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
 		GameObject *donkeyKong;
+		GameObject *princess;
 		Player* player;
 		PlatformHolder* platformHolder;
 		LadderHolder* ladderHolder;

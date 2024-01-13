@@ -18,10 +18,13 @@ const double REFRESH_RATE = 1.0 / SECONDS_BETWEEN_REFRESH;
 
 // GameObject Const
 const int STARTING_X_PLAYER = 50;
-const int STARTING_Y_PLAYER = 350;
+const int STARTING_Y_PLAYER = 300;
 
 const int STARTING_X_DONKEY_KONG = 64;
 const int STARTING_Y_DONKEY_KONG = 64;
+
+const int STARTING_X_PRINCESS = 200;
+const int STARTING_Y_PRINCESS = 32;
 
 const double DEFAULT_PLAYER_SPEED = 200;
 const double DEFAULT_BARREL_SPEED = 200;
