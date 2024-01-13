@@ -10,6 +10,7 @@ const int TOP_BAR_HEIGHT = 18;
 
 // Platform 
 const int MAXIMUM_AMOUNT_OF_PLATFORMS = 100;
+const int MAXIMUM_AMOUNT_OF_LADDERS = 100;
 
 // Refresh constants
 const double SECONDS_BETWEEN_REFRESH = 0.5;

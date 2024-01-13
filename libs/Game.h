@@ -9,6 +9,7 @@ extern "C" {
 #include "./game_events/EventManager.h"
 #include "./Platform.h"
 #include "./PlatformHolder.h"
+#include "./LadderHolder.h"
 }
 
 class Game {
@@ -17,9 +18,9 @@ class Game {
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
 		GameObject *donkeyKong;
-		GameObject *ladder;
 		Player* player;
 		PlatformHolder* platformHolder;
+		LadderHolder* ladderHolder;
 
 
 		// Game(); Constructor NEEDED ADD DEFAULT VALUES
@@ -31,7 +32,6 @@ class Game {
 		void handleDifferentComputers();
 		void updateWorldTime();
 		
-		void setUpGame(ScreenManager& screenManager);
 		void setUpRound(ScreenManager& screenManager);
 		void handleRound(ScreenManager& screenManager);
 		void handleCurrentRound(ScreenManager& screenManager, EventManager& eventHandler, int* startAnotherRound);

@@ -11,7 +11,7 @@ struct PlatformHolder {
 	int sizeOfArray;
 };
 
-void init(PlatformHolder* platformHolder);
+void initPlatformHolder(PlatformHolder* platformHolder);
 void addPlatform(PlatformHolder* platformHolder, Platform* platform);
 void emptyPlatformHolder(PlatformHolder* platformHolder);
 

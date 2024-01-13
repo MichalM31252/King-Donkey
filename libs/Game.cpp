@@ -41,16 +41,26 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	donkeyK->setUpDestRect();
 	donkeyKong = donkeyK;
 
-	GameObject *ladd = new GameObject();
-	ladd->init("Ladder.bmp");
-	ladd->setPosition(525, 129);
+	GameObject *ladd1 = new GameObject();
+	ladd1->init("Ladder.bmp");
+	ladd1->setPosition(525, 129);
+	ladd1->setSrcRect(45, 170); // yeah this actually sets the size
+	ladd1->setDestRect(45, 170);
 
-	ladd->setSrcRect(45, 170); // yeah this actually sets the size
-	ladd->setDestRect(45, 170);
+	GameObject* ladd2 = new GameObject();
+	ladd2->init("Ladder.bmp");
+	ladd2->setPosition(525, 129);
+	ladd2->setSrcRect(45, 170); // yeah this actually sets the size
+	ladd2->setDestRect(45, 170);
 
-	//ladd->destRect.w = 45;
-	//ladd->destRect.h = 100;
-	ladder = ladd;
+	LadderHolder* laddH = new LadderHolder();
+	initLadderHolder(laddH);
+
+	addLadder(laddH, ladd1);
+	addLadder(laddH, ladd2);
+
+	ladderHolder = laddH;
+
 
 	Platform *plat1 = new Platform();
 	plat1->setPosition(1, 400, 400, 400); // 1
@@ -64,17 +74,9 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	Platform* plat4 = new Platform();
 	plat4->setPosition(1, 130, 570, 130); // 4
 
-	//Platform *plat1 = new Platform();
-	//plat1->setPosition(400, 400, SCREEN_WIDTH - 10, 400);
-
-	//Platform* plat2 = new Platform();
-	//plat2->setPosition(300, 300, 400, 400);
-
-	//Platform* plat3 = new Platform();
-	//plat3->setPosition(200, 300, 100, 300);
-
 	PlatformHolder* platH = new PlatformHolder();
-	init(platH);
+	initPlatformHolder(platH);
+
 	addPlatform(platH, plat1);
 	addPlatform(platH, plat2);
 	addPlatform(platH, plat3);
@@ -122,7 +124,15 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		}
 
 		// PLAYER OVERLAPPING WITH LADDER
-		if (collisionManager.checkIfInsideLadder(player->destRect, ladder->destRect)) {
+		int flagLadder = 0;
+		for (int i = 0; i < ladderHolder->numberOfElements; i++) {
+			if (collisionManager.checkIfInsideLadder(player->destRect, ladderHolder->ladders[i].destRect)) {
+				flagLadder = 1;
+			}
+			ladderHolder->ladders[i].renderLadder(screenManager.screen);;
+		}
+
+		if (flagLadder) {
 			player->isInsideLadder = true;
 		}
 		else {
@@ -131,7 +141,7 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		}
 
 		// COLLSION WITH A PLATFORM
-		int flag = 0;
+		int flagPlatform = 0;
 		for (int i = 0; i < platformHolder->numberOfElements; i++) {
 			// this should be check one pixel below current position because from the logics perspective the player is inside the platform
 			// maybe check current pixel and one below it to check if platform is rising
@@ -143,14 +153,14 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 				}
 			}
 			if (collisionManager.checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager.checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) {
-				flag = 1;
+				flagPlatform = 1;
 			}
 			platformHolder->platforms[i].render(screenManager.screen);
 		}
 
 		// if climbing ignore the flag (collision with platform from below)
 		if (!player->isClimbing) {
-			if (flag) {
+			if (flagPlatform) {
 				player->stopFalling();
 				// check here if there is a ladder 2px below the player
 			}
@@ -180,7 +190,7 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		// showing everything on the screen 
 		
 		donkeyKong->render(screenManager.screen);
-		ladder->renderLadder(screenManager.screen);
+
 		player->render(screenManager.screen);
 		// screenManager->drawElements
 
