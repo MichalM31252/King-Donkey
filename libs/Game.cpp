@@ -99,16 +99,20 @@ void Game::setUpLadders1() { // (logic)
 	ladderHolder = laddH;
 }
 
-void Game::setUpBarrels1() {
+void Game::setUpBarrels() {
 	DynamicGameObject* barrel1 = new DynamicGameObject();
-	DynamicGameObject* barrel2 = new DynamicGameObject();
-	DynamicGameObject* barrel3 = new DynamicGameObject();
+	barrel1->init("Barrel.bmp");
+	barrel1->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
+	barrel1->setUpSrcRect();
+	barrel1->setUpDestRect();
 
 	BarrelHolder* barrelH = new BarrelHolder();
 	initBarrelHolder(barrelH);
 	addBarrel(barrelH, barrel1);
-	addBarrel(barrelH, barrel2);
-	addBarrel(barrelH, barrel3);
+
+	barrelDispenser = new BarrelDispenser();
+	barrelDispenser->barrelHolder = barrelH;
+	barrelDispenser->setPosition(donkeyKong->xpos + donkeyKong->destRect.w + SMALL_MARGIN, donkeyKong->ypos);
 }
 
 void Game::setUpPlatforms2() { // (logic)
@@ -228,7 +232,6 @@ void Game::setUpBoard(int boardId) { // (logic)
 	if (boardId == 1) {
 		setUpPlatforms1();
 		setUpLadders1();
-		setUpBarrels1();
 	}
 	if (boardId == 2) {
 		setUpPlatforms2();
@@ -238,6 +241,7 @@ void Game::setUpBoard(int boardId) { // (logic)
 		setUpPlatforms3();
 		setUpLadders3();
 	}
+	setUpBarrels();
 }
 
 void Game::handleDifferentComputers() { // (logic) make every object dependent on deltaTime so it works the same on different computers
@@ -300,15 +304,15 @@ void Game::handleCollisionWithJumping() {
 	}
 }
 
-void Game::handleFalling() {
-	if (!player->isJumping) {
-		player->startFalling();
+void Game::handleFalling(DynamicGameObject *dynamicGameObject) {
+	if (!dynamicGameObject->isJumping) {
+		dynamicGameObject->startFalling();
 
-		player->accumulatedYMove += deltaTime * player->gravity;
-		int pixelsToMove = player->accumulatedYMove / 1;
+		dynamicGameObject->accumulatedYMove += deltaTime * dynamicGameObject->gravity;
+		int pixelsToMove = dynamicGameObject->accumulatedYMove / 1;
 		if (pixelsToMove >= 1) {
-			player->ypos += 1;
-			player->accumulatedYMove -= 1;
+			dynamicGameObject->ypos += 1;
+			dynamicGameObject->accumulatedYMove -= 1;
 		}
 	}
 }
@@ -347,6 +351,8 @@ void Game::drawElements(ScreenManager& screenManager) {
 		ladderHolder->ladders[i].renderLadder(screenManager.screen);
 	}
 
+	barrelDispenser->barrelHolder->barrels[0].render(screenManager.screen);
+
 	player->render(screenManager.screen);
 }
 
@@ -363,6 +369,7 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 
 		CollisionManager collisionManager;
 
+		// player collision
 		handleCollisionWithKong(&collisionManager, screenManager);
 		handleCollisionWithPrincess(&collisionManager, screenManager);
 		int flagLadder = 0;
@@ -370,13 +377,12 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		int flagPlatform = 0;
 		handleCollisionWithPlatform(&collisionManager, screenManager, player ,&flagPlatform);
 
-		// if climbing ignore the flag (collision with platform from below)
 		if (!player->isClimbing) {
 			if (flagPlatform) {
 				handleCollisionWithJumping();
 			}
 			else {
-				handleFalling();
+				handleFalling(player);
 			}
 			if (player->isJumping) { // handle jumping
 				handleJumping();
@@ -387,6 +393,12 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 			player->stopJumping();
 			player->startFalling();
 		}
+
+		// barrel collision
+		flagPlatform = 0;
+		handleCollisionWithPlatform(&collisionManager, screenManager, &barrelDispenser->barrelHolder->barrels[0], &flagPlatform);
+		handleFalling(&barrelDispenser->barrelHolder->barrels[0]);
+		barrelDispenser->barrelHolder->barrels[0].update(deltaTime);
 
 		// Updating the game objects
 		player->update(deltaTime);

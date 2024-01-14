@@ -8,10 +8,14 @@ const int STARTING_Y = 0;
 
 const int TOP_BAR_HEIGHT = 18;
 
+const int SMALL_MARGIN = 5;
+const int MEDIUM_MARGIN = 25;
+const int LARGE_MARGIN = 100;
+
 // Platform 
 const int MAXIMUM_AMOUNT_OF_PLATFORMS = 100;
 const int MAXIMUM_AMOUNT_OF_LADDERS = 100;
-const int MAXIMUM_AMOUNT_OF_BARRELS = 3;
+const int MAXIMUM_AMOUNT_OF_BARRELS = 1;
 
 // Ladder 
 const int LADDER_WIDTH = 45;

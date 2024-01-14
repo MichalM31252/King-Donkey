@@ -12,6 +12,7 @@ extern "C" {
 #include "./PlatformHolder.h"
 #include "./LadderHolder.h"
 #include "./BarrelHolder.h"
+#include "./BarrelDispenser.h"
 }
 
 class Game {
@@ -24,7 +25,7 @@ class Game {
 		Player* player;
 		PlatformHolder* platformHolder;
 		LadderHolder* ladderHolder;
-		BarrelHolder* barrelHolder;
+		BarrelDispenser* barrelDispenser;
 		
 
 		// Game(); Constructor NEEDED ADD DEFAULT VALUES
@@ -46,13 +47,14 @@ class Game {
 
 		void setUpPlatforms1();
 		void setUpLadders1();
-		void setUpBarrels1();
 
 		void setUpPlatforms2();
 		void setUpLadders2();
 
 		void setUpPlatforms3();
 		void setUpLadders3();
+
+		void setUpBarrels();
 
 		void handleCurrentRound(ScreenManager& screenManager, EventManager& eventHandler, int* startAnotherRound);
 
@@ -62,7 +64,7 @@ class Game {
 		void handleCollisionWithLadder(CollisionManager* collisionManager, ScreenManager& screenManager, int* flagLadder);
 		void handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject *gameObject, int* flagPlatform);
 		void handleCollisionWithJumping();
-		void handleFalling();
+		void handleFalling(DynamicGameObject* dynamicGameObject);
 		void handleJumping();
 
 		void drawElements(ScreenManager& screenManager);
