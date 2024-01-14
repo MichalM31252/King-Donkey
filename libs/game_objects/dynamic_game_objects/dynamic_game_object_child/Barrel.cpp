@@ -2,5 +2,4 @@
 
 Barrel::Barrel() {
 	*tag = "Barrel";
-
 }

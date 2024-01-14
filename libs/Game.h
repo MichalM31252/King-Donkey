@@ -17,7 +17,7 @@ extern "C" {
 
 class Game {
 	public:
-		// logic
+		
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
 		GameObject *donkeyKong;
@@ -26,9 +26,7 @@ class Game {
 		PlatformHolder* platformHolder;
 		LadderHolder* ladderHolder;
 		BarrelDispenser* barrelDispenser;
-		
-
-		// Game(); Constructor NEEDED ADD DEFAULT VALUES
+	
 		void initGame();
 
 		void setUpFramerate();
@@ -55,6 +53,9 @@ class Game {
 		void setUpLadders3();
 
 		void setUpBarrels();
+
+		void handlePlayer(CollisionManager* collisionManager, ScreenManager& screenManager);
+		void handleBarrels(CollisionManager* collisionManager, ScreenManager& screenManager, bool* quit, int* startAnotherRound);
 
 		void handleCurrentRound(ScreenManager& screenManager, EventManager& eventHandler, int* startAnotherRound);
 

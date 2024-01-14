@@ -69,14 +69,14 @@ void Game::setUpPlatforms1() { // (logic)
 	Platform* plat5 = new Platform();
 	plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80); // 4
 
-	PlatformHolder* platH = new PlatformHolder();
-	initPlatformHolder(platH);
-	addPlatform(platH, plat1);
-	addPlatform(platH, plat2);
-	addPlatform(platH, plat3);
-	addPlatform(platH, plat4);
-	addPlatform(platH, plat5);
-	platformHolder = platH;
+	PlatformHolder* pH = new PlatformHolder();
+	initPlatformHolder(pH);
+	addPlatform(pH, plat1);
+	addPlatform(pH, plat2);
+	addPlatform(pH, plat3);
+	addPlatform(pH, plat4);
+	addPlatform(pH, plat5);
+	platformHolder = pH;
 }
 
 void Game::setUpLadders1() { // (logic)
@@ -118,22 +118,22 @@ void Game::setUpBarrels() {
 
 void Game::setUpPlatforms2() { // (logic)
 	Platform* plat1 = new Platform();
-	plat1->setPosition(1, 400, SCREEN_WIDTH - 1, 400); // 1
+	plat1->setPosition(TINY_MARGIN, 400, SCREEN_WIDTH - 1, 400); // 1
 
 	Platform* plat2 = new Platform();
 	plat2->setPosition(130, 130, 300, 300); // 4
 
 	Platform* plat3 = new Platform();
-	plat3->setPosition(1, 130, 130, 130); // 4
+	plat3->setPosition(TINY_MARGIN, 130, 130, 130); // 4
 
 	Platform* plat4 = new Platform();
-	plat4->setPosition(1, 130, 130, 130); // 4
+	plat4->setPosition(TINY_MARGIN, 130, 130, 130); // 4
 
 	Platform* plat5 = new Platform();
-	plat5->setPosition(200, 80, SCREEN_WIDTH - 100 - LADDER_WIDTH, 80); // 4
+	plat5->setPosition(200, 80, SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 80); // 4
 
 	Platform* plat6 = new Platform();
-	plat6->setPosition(SCREEN_WIDTH - 100 - LADDER_WIDTH - LADDER_WIDTH, 230, SCREEN_WIDTH - 100, 230); // 4
+	plat6->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH - LADDER_WIDTH, 230, SCREEN_WIDTH - LARGE_MARGIN, 230); // 4
 
 	PlatformHolder* platH = new PlatformHolder();
 	initPlatformHolder(platH);
@@ -149,13 +149,13 @@ void Game::setUpPlatforms2() { // (logic)
 void Game::setUpLadders2() { // (logic)
 	GameObject* ladd1 = new GameObject();
 	ladd1->init("Ladder.bmp");
-	ladd1->setPosition(SCREEN_WIDTH - 100 - LADDER_WIDTH, 229);
+	ladd1->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 229);
 	ladd1->setSrcRect(LADDER_WIDTH, 170); // yeah this actually sets the size
 	ladd1->setDestRect(LADDER_WIDTH, 170);
 
 	GameObject* ladd2 = new GameObject();
 	ladd2->init("Ladder.bmp");
-	ladd2->setPosition(SCREEN_WIDTH - 100 - LADDER_WIDTH - LADDER_WIDTH, 79);
+	ladd2->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH - LADDER_WIDTH, 79);
 	ladd2->setSrcRect(LADDER_WIDTH, 150); // yeah this actually sets the size
 	ladd2->setDestRect(LADDER_WIDTH, 150);
 
@@ -168,16 +168,16 @@ void Game::setUpLadders2() { // (logic)
 
 void Game::setUpPlatforms3() { // (logic)
 	Platform* plat1 = new Platform();
-	plat1->setPosition(0, 400, SCREEN_WIDTH - 1, 400); // 1
+	plat1->setPosition(STARTING_X, 400, SCREEN_WIDTH - TINY_MARGIN, 400); // 1
 
 	Platform* plat2 = new Platform();
-	plat2->setPosition(100, 300, SCREEN_WIDTH - 100, 300); // 2
+	plat2->setPosition(LARGE_MARGIN, 300, SCREEN_WIDTH - LARGE_MARGIN, 300); // 2
 
 	Platform* plat3 = new Platform();
-	plat3->setPosition(100, 200, SCREEN_WIDTH - 100, 200); // 3
+	plat3->setPosition(LARGE_MARGIN, 200, SCREEN_WIDTH - LARGE_MARGIN, 200); // 3
 
 	Platform* plat4 = new Platform();
-	plat4->setPosition(1, 130, SCREEN_WIDTH - 100, 130); // 4
+	plat4->setPosition(TINY_MARGIN, 130, SCREEN_WIDTH - LARGE_MARGIN, 130); // 4
 
 	Platform* plat5 = new Platform();
 	plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80); // 4
@@ -195,19 +195,19 @@ void Game::setUpPlatforms3() { // (logic)
 void Game::setUpLadders3() { // (logic)
 	GameObject* ladd1 = new GameObject();
 	ladd1->init("Ladder.bmp");
-	ladd1->setPosition(SCREEN_WIDTH - 100 - LADDER_WIDTH, 299);
-	ladd1->setSrcRect(LADDER_WIDTH, 100); // yeah this actually sets the size
-	ladd1->setDestRect(LADDER_WIDTH, 100);
+	ladd1->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 299);
+	ladd1->setSrcRect(LADDER_WIDTH, LARGE_MARGIN); // yeah this actually sets the size
+	ladd1->setDestRect(LADDER_WIDTH, LARGE_MARGIN);
 
 	GameObject* ladd2 = new GameObject();
 	ladd2->init("Ladder.bmp");
-	ladd2->setPosition(100, 199);
-	ladd2->setSrcRect(LADDER_WIDTH, 100); // yeah this actually sets the size
-	ladd2->setDestRect(LADDER_WIDTH, 100);
+	ladd2->setPosition(LARGE_MARGIN, 199);
+	ladd2->setSrcRect(LADDER_WIDTH, LARGE_MARGIN); // yeah this actually sets the size
+	ladd2->setDestRect(LADDER_WIDTH, LARGE_MARGIN);
 
 	GameObject* ladd3 = new GameObject();
 	ladd3->init("Ladder.bmp");
-	ladd3->setPosition(SCREEN_WIDTH - 100 - LADDER_WIDTH, 129);
+	ladd3->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 129);
 	ladd3->setSrcRect(LADDER_WIDTH, 70); // yeah this actually sets the size
 	ladd3->setDestRect(LADDER_WIDTH, 70);
 
@@ -251,11 +251,11 @@ void Game::handleDifferentComputers() { // (logic) make every object dependent o
 	tick1 = tick2;
 }
 
-void Game::updateWorldTime() { // logic
+void Game::updateWorldTime() { 
 	worldTime += deltaTime;
 }
 
-void Game::handleFPSTimer() { // logic
+void Game::handleFPSTimer() { 
 	fpsTimer += deltaTime;
 	if (fpsTimer > SECONDS_BETWEEN_REFRESH) {
 		fps = frames * REFRESH_RATE;
@@ -281,7 +281,7 @@ void Game::handleCollisionWithPrincess(CollisionManager* collisionManager, Scree
 void Game::handleCollisionWithBarrel(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject* barrel, bool *quit, int *startAnotherRound) {
 	if (collisionManager->checkCollisionBetweenRects(player->destRect, barrel->destRect)) {
 		*quit = true;
-		*startAnotherRound = true;
+		*startAnotherRound = 1;
 	}
 }
 
@@ -366,6 +366,60 @@ void Game::drawElements(ScreenManager& screenManager) {
 	player->render(screenManager.screen);
 }
 
+void Game::handlePlayer(CollisionManager* collisionManager, ScreenManager& screenManager) {
+	// player collision
+	handleCollisionWithKong(collisionManager, screenManager);
+	handleCollisionWithPrincess(collisionManager, screenManager);
+	int flagLadder = 0;
+	handleCollisionWithLadder(collisionManager, screenManager, &flagLadder);
+	int flagPlatform = 0;
+	handleCollisionWithPlatform(collisionManager, screenManager, player, &flagPlatform);
+
+	if (!player->isClimbing) {
+		if (flagPlatform) {
+			handleCollisionWithJumping();
+		}
+		else {
+			handleFalling(player);
+		}
+		if (player->isJumping) { // handle jumping
+			handleJumping();
+		}
+	}
+
+	if (player->isJumping && player->ypos <= player->jumpHeightStop) {
+		player->stopJumping();
+		player->startFalling();
+	}
+}
+
+void Game::handleBarrels(CollisionManager* collisionManager, ScreenManager& screenManager, bool *quit, int* startAnotherRound) {
+	barrelDispenser->updateBarrelDispenser(deltaTime);
+
+	for (int i = 0; i < barrelDispenser->barrelHolder->numberOfElements; i++) {
+
+		handleCollisionWithBarrel(collisionManager, screenManager, &barrelDispenser->barrelHolder->barrels[i], quit, startAnotherRound);
+
+		int flagPlatform = 0;
+		handleCollisionWithPlatform(collisionManager, screenManager, &barrelDispenser->barrelHolder->barrels[i], &flagPlatform);
+
+		// first barrel is touching and the second not
+
+		if (flagPlatform) {
+			if (barrelDispenser->barrelHolder->barrels[i].isFalling) {
+				barrelDispenser->barrelHolder->barrels[i].stopFalling();
+				barrelDispenser->barrelHolder->barrels[i].stopMove();
+			}
+			barrelDispenser->barrelHolder->barrels[i].moveStart(DEFAULT_BARREL_SPEED);
+			barrelDispenser->barrelHolder->barrels[i].startMovingRight(deltaTime);
+		}
+		else {
+			handleFalling(&barrelDispenser->barrelHolder->barrels[i]); // THE PROBLEM IS HERE
+		}
+		barrelDispenser->barrelHolder->barrels[i].update(deltaTime);
+	}
+}
+
 void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventHandler, int *startAnotherRound) { // VisualManager is passed by reference, can't be an const because it's methods change the object
 	bool quit = false;
 	while (!quit) { // 1 frame of the game
@@ -379,59 +433,8 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 
 		CollisionManager collisionManager;
 
-		// player collision
-		handleCollisionWithKong(&collisionManager, screenManager);
-		handleCollisionWithPrincess(&collisionManager, screenManager);
-		int flagLadder = 0;
-		handleCollisionWithLadder(&collisionManager, screenManager, &flagLadder);
-		int flagPlatform = 0;
-		handleCollisionWithPlatform(&collisionManager, screenManager, player ,&flagPlatform);
-
-		if (!player->isClimbing) {
-			if (flagPlatform) {
-				handleCollisionWithJumping();
-			}
-			else {
-				handleFalling(player);
-			}
-			if (player->isJumping) { // handle jumping
-				handleJumping();
-			}
-		}
-
-		if (player->isJumping && player->ypos <= player->jumpHeightStop) {
-			player->stopJumping();
-			player->startFalling();
-		}
-
-		// barrel collision
-		
-
-		barrelDispenser->updateBarrelDispenser(deltaTime);
-
-		for (int i = 0; i < barrelDispenser->barrelHolder->numberOfElements; i++) {
-
-			handleCollisionWithBarrel(&collisionManager, screenManager, &barrelDispenser->barrelHolder->barrels[i], &quit, startAnotherRound);
-
-			flagPlatform = 0;
-			handleCollisionWithPlatform(&collisionManager, screenManager, &barrelDispenser->barrelHolder->barrels[i], &flagPlatform);
-
-			// first barrel is touching and the second not
-
-			if (flagPlatform) {
-				if (barrelDispenser->barrelHolder->barrels[i].isFalling) {
-					barrelDispenser->barrelHolder->barrels[i].stopFalling();
-					barrelDispenser->barrelHolder->barrels[i].stopMove();
-				}
-				barrelDispenser->barrelHolder->barrels[i].moveStart(DEFAULT_BARREL_SPEED);
-				barrelDispenser->barrelHolder->barrels[i].startMovingRight(deltaTime);
-			}
-			else {
-				handleFalling(&barrelDispenser->barrelHolder->barrels[i]); // THE PROBLEM IS HERE
-			}
-			barrelDispenser->barrelHolder->barrels[i].update(deltaTime);
-		}
-
+		handlePlayer(&collisionManager, screenManager); // player collision
+		handleBarrels(&collisionManager, screenManager, &quit, startAnotherRound); // barrel collision
 
 		// Updating the game objects
 		player->update(deltaTime);
@@ -452,18 +455,18 @@ void Game::handleRound(ScreenManager& screenManager, int startAnotherRound) { //
 	setUpFramerate();
 
 	if (startAnotherRound) {
-		if (startAnotherRound == 1) {
-			setUpBoard(1);
+		if (startAnotherRound == BOARD_ID_A) {
+			setUpBoard(BOARD_ID_A);
 		}
-		if (startAnotherRound == 2) {
-			setUpBoard(2);
+		if (startAnotherRound == BOARD_ID_B) {
+			setUpBoard(BOARD_ID_B);
 		}
-		if (startAnotherRound == 3) {
-			setUpBoard(3);
+		if (startAnotherRound == BOARD_ID_C) {
+			setUpBoard(BOARD_ID_C);
 		}
 	}
 	else {
-		setUpBoard(1);
+		setUpBoard(BOARD_ID_A);
 	}
 
 	handleCurrentRound(screenManager, eventHandler, &startAnotherRound);

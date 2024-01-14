@@ -3,7 +3,6 @@ extern "C" {
 }
 
 // objectSpeed should be moved to physics
-
 DynamicGameObject::DynamicGameObject() {
 	canLeaveScreen = false;
 	gravity = DEFAULT_GRAVITY;

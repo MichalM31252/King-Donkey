@@ -2,7 +2,6 @@
 
 #include "./TextureManager.h"
 #include "../Constants.h"
-// rename 
 
 GameObject::GameObject()
 {

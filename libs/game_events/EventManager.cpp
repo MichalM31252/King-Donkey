@@ -50,20 +50,17 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 						*startAnotherRound = 1;
 						*quit = true;
 						break;
-					case SDLK_1:
+					case SDLK_1: // load level 1
 						*startAnotherRound = 1;
 						*quit = true;
-						// load level 1
 						break;
-					case SDLK_2:
+					case SDLK_2: // load level 2
 						*startAnotherRound = 2;
 						*quit = true;
-						// load level 2
 						break;
-					case SDLK_3:
+					case SDLK_3: // load level 3
 						*startAnotherRound = 3;
 						*quit = true;
-						// load level 3
 						break;
 				}
 				break;

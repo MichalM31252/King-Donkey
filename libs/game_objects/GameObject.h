@@ -6,7 +6,6 @@ extern "C" {
 #include "./TextureManager.h"
 #include "../Constants.h"
 }
-// rename 
 
 class GameObject
 {  

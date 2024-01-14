@@ -8,9 +8,15 @@ const int STARTING_Y = 0;
 
 const int TOP_BAR_HEIGHT = 18;
 
+const int TINY_MARGIN = 1;
 const int SMALL_MARGIN = 5;
 const int MEDIUM_MARGIN = 25;
 const int LARGE_MARGIN = 100;
+
+// Board constants
+const int BOARD_ID_A = 1;
+const int BOARD_ID_B = 2;
+const int BOARD_ID_C = 3;
 
 // Platform 
 const int MAXIMUM_AMOUNT_OF_PLATFORMS = 1000;
