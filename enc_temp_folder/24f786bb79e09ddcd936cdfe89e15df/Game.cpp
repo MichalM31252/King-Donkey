@@ -405,9 +405,6 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		for (int i = 0; i < barrelDispenser->barrelHolder->numberOfElements; i++) {
 			flagPlatform = 0;
 			handleCollisionWithPlatform(&collisionManager, screenManager, &barrelDispenser->barrelHolder->barrels[i], &flagPlatform);
-
-			// first barrel is touching and the second not
-
 			if (flagPlatform) {
 				if (barrelDispenser->barrelHolder->barrels[i].isFalling) {
 					barrelDispenser->barrelHolder->barrels[i].stopFalling();
@@ -417,7 +414,7 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 				barrelDispenser->barrelHolder->barrels[i].startMovingRight(deltaTime);
 			}
 			else {
-				handleFalling(&barrelDispenser->barrelHolder->barrels[i]); // THE PROBLEM IS HERE
+				handleFalling(&barrelDispenser->barrelHolder->barrels[0]); // THE PROBLEM IS HERE
 			}
 			barrelDispenser->barrelHolder->barrels[i].update(deltaTime);
 		}

@@ -15,10 +15,21 @@ void BarrelDispenser::setPosition(int x, int y) {
 	ypos = y;
 }
 
-void BarrelDispenser::updateBarrelDispenser() {
-
+void BarrelDispenser::updateBarrelDispenser(double deltaTime) {
+	accumulatedTime += deltaTime;
+	if (accumulatedTime >= 5.00) {
+		throwBarrel();
+		accumulatedTime = 0.00;
+	}
 }
 
 void BarrelDispenser::throwBarrel() {
+	DynamicGameObject* barrel = new DynamicGameObject();
+	barrel->init("Barrel.bmp");
+	barrel->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
+	barrel->setUpSrcRect();
+	barrel->setUpDestRect();
+	barrel->objectSpeed = DEFAULT_BARREL_SPEED;
 
+	addBarrel(barrelHolder, barrel);
 }

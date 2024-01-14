@@ -15,7 +15,7 @@ const int LARGE_MARGIN = 100;
 // Platform 
 const int MAXIMUM_AMOUNT_OF_PLATFORMS = 100;
 const int MAXIMUM_AMOUNT_OF_LADDERS = 100;
-const int MAXIMUM_AMOUNT_OF_BARRELS = 1;
+const int MAXIMUM_AMOUNT_OF_BARRELS = 100;
 
 // Ladder 
 const int LADDER_WIDTH = 45;

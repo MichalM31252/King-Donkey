@@ -9,9 +9,12 @@ extern "C" {
 class BarrelDispenser {
 public:
 	int xpos, ypos;
+	double deltaTime;
+	double accumulatedTime;
 	BarrelHolder* barrelHolder;
+
 	void initBarrelDispenser(BarrelDispenser* barrelDispenser);
 	void setPosition(int x, int y);
-	void updateBarrelDispenser();
+	void updateBarrelDispenser(double deltaTime);
 	void throwBarrel();
 };
