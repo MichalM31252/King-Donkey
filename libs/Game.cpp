@@ -56,16 +56,14 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 
 	GameObject *ladd2 = new GameObject();
 	ladd2->init("Ladder.bmp");
-	ladd2->setPosition(250, 80);
+	ladd2->setPosition(250, 79);
 	ladd2->setSrcRect(45, 50); // yeah this actually sets the size
 	ladd2->setDestRect(45, 50);
 
 	LadderHolder* laddH = new LadderHolder();
 	initLadderHolder(laddH);
-
 	addLadder(laddH, ladd1);
 	addLadder(laddH, ladd2);
-
 	ladderHolder = laddH;
 
 	Platform *plat1 = new Platform();
@@ -85,13 +83,11 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 
 	PlatformHolder* platH = new PlatformHolder();
 	initPlatformHolder(platH);
-
 	addPlatform(platH, plat1);
 	addPlatform(platH, plat2);
 	addPlatform(platH, plat3);
 	addPlatform(platH, plat4);
 	addPlatform(platH, plat5);
-
 	platformHolder = platH;
 }
 
@@ -223,13 +219,12 @@ void Game::handleRound(ScreenManager& screenManager) { // yeah make this a diffe
 	if (startAnotherRound) {
 		handleRound(screenManager);
 	}
-	// if this returns n then recurence -> handleRound(screenManager, eventHandler);
 }
 
 void Game::initGame() {
 	ScreenManager screenManager;
+	screenManager.setUpSDL(); // this should be set once
 
-	screenManager.setUpSDL(); // only this should be set once
 	handleRound(screenManager);
 
 	closeGame(screenManager);

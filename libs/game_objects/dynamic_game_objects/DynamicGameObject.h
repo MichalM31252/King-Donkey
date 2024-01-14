@@ -12,6 +12,7 @@ public:
 	bool isFalling;
 	double currentDirectionOfMovementHorizontal, currentDirectionOfMovementVertical;
 	bool isClimbing, isInsideLadder;
+	bool isJumping;
 
 	DynamicGameObject();
 	void update(double deltaTime);

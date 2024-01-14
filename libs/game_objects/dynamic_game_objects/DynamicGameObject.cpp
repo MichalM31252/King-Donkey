@@ -15,6 +15,7 @@ DynamicGameObject::DynamicGameObject() {
 	accumulatedYMove = 0;
 	isClimbing = false;
 	isInsideLadder = false;
+	
 }
 
 void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions

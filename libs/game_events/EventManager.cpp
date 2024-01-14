@@ -25,31 +25,26 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 							player->isClimbing = true; // the problem is most likely with this 
 							player->startMovingUp(deltaTime);
 						}
-						// check collision with ladder
-						// if yes:
-						// isClimbing = true;
-						// if 1px below player is platform then :
-						// player->isClimbing = false;
 						break;
-					case SDLK_LEFT: // this should be start moving
+					case SDLK_LEFT:
 						if (!player->isClimbing) {
 							player->startMovingLeft(deltaTime);
 						}
 						break;
-					case SDLK_RIGHT: // this should be start moving
+					case SDLK_RIGHT:
 						if (!player->isClimbing) {
 							player->startMovingRight(deltaTime);
 						}
 						break;
-					case SDLK_DOWN: // this should be start moving
+					case SDLK_DOWN:
 						if (player->isInsideLadder) {
-							// make sure that there is a ladder 1px below the player
 							player->isClimbing = true;
 							player->startMovingDown(deltaTime);
 						}
-
-						// do not add is climbing false when key down because the player will start falling when keys are not pressed
-
+						break;
+					case SDLK_SPACE:
+						player->gravity *= -1;
+						player->startFalling();
 						break;
 					case SDLK_n:
 						*startAnotherRound = 1;
