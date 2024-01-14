@@ -26,47 +26,35 @@ void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I
 	worldTime = 0; // how long the game is running
 }
 
-void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
-	Player *pla = new Player();
+void Game::setUpPlayer() { // (logic)
+	Player* pla = new Player();
 	pla->init("Mario_Run1.bmp");
 	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
 	pla->setUpSrcRect();
 	pla->setUpDestRect();
 	player = pla;
+}
 
-	GameObject *donkeyK = new GameObject();
+void Game::setUpDonkeyKong() {
+	GameObject* donkeyK = new GameObject();
 	donkeyK->init("DonkeyKong.bmp");
 	donkeyK->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
 	donkeyK->setUpSrcRect();
 	donkeyK->setUpDestRect();
 	donkeyKong = donkeyK;
+}
 
-	GameObject *prin = new GameObject();
+void Game::setUpPrincess() {
+	GameObject* prin = new GameObject();
 	prin->init("Princess.bmp");
 	prin->setPosition(STARTING_X_PRINCESS, STARTING_Y_PRINCESS);
 	prin->setUpSrcRect();
 	prin->setUpDestRect();
 	princess = prin;
+}
 
-	GameObject *ladd1 = new GameObject();
-	ladd1->init("Ladder.bmp");
-	ladd1->setPosition(525, 129);
-	ladd1->setSrcRect(45, 170); // yeah this actually sets the size
-	ladd1->setDestRect(45, 170);
-
-	GameObject *ladd2 = new GameObject();
-	ladd2->init("Ladder.bmp");
-	ladd2->setPosition(250, 79);
-	ladd2->setSrcRect(45, 50); // yeah this actually sets the size
-	ladd2->setDestRect(45, 50);
-
-	LadderHolder* laddH = new LadderHolder();
-	initLadderHolder(laddH);
-	addLadder(laddH, ladd1);
-	addLadder(laddH, ladd2);
-	ladderHolder = laddH;
-
-	Platform *plat1 = new Platform();
+void Game::setUpPlatforms() { // (logic)
+	Platform* plat1 = new Platform();
 	plat1->setPosition(1, 400, 400, 400); // 1
 
 	Platform* plat2 = new Platform();
@@ -89,6 +77,34 @@ void Game::setUpGameObjects(SDL_Surface* screen) { // (logic)
 	addPlatform(platH, plat4);
 	addPlatform(platH, plat5);
 	platformHolder = platH;
+}
+
+void Game::setUpLadders() { // (logic)
+	GameObject* ladd1 = new GameObject();
+	ladd1->init("Ladder.bmp");
+	ladd1->setPosition(525, 129);
+	ladd1->setSrcRect(45, 170); // yeah this actually sets the size
+	ladd1->setDestRect(45, 170);
+
+	GameObject* ladd2 = new GameObject();
+	ladd2->init("Ladder.bmp");
+	ladd2->setPosition(250, 79);
+	ladd2->setSrcRect(45, 50); // yeah this actually sets the size
+	ladd2->setDestRect(45, 50);
+
+	LadderHolder* laddH = new LadderHolder();
+	initLadderHolder(laddH);
+	addLadder(laddH, ladd1);
+	addLadder(laddH, ladd2);
+	ladderHolder = laddH;
+}
+
+void Game::setUpBoard(int boardId) { // (logic)
+	setUpPlayer();
+	setUpDonkeyKong();
+	setUpPrincess();
+	setUpPlatforms();
+	setUpLadders();
 }
 
 void Game::handleDifferentComputers() { // (logic) make every object dependent on deltaTime so it works the same on different computers
@@ -228,20 +244,30 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 	};
 }
 
-void Game::setUpRound(ScreenManager& screenManager) { // (logic)
-	setUpFramerate();
-	setUpGameObjects(screenManager.screen);
-}
-
-void Game::handleRound(ScreenManager& screenManager) { // yeah make this a different class in the future	
+void Game::handleRound(ScreenManager& screenManager, int startAnotherRound) { // yeah make this a different class in the future	
 	EventManager eventHandler;
 	
-	setUpRound(screenManager);
-	int startAnotherRound = 0;
+	setUpFramerate();
+
+	if (startAnotherRound) {
+		if (startAnotherRound == 1) {
+			setUpBoard(1);
+		}
+		if (startAnotherRound == 2) {
+			setUpBoard(2);
+		}
+		if (startAnotherRound == 3) {
+			setUpBoard(3);
+		}
+	}
+	else {
+		setUpBoard(1);
+	}
+
 	handleCurrentRound(screenManager, eventHandler, &startAnotherRound);
 
 	if (startAnotherRound) {
-		handleRound(screenManager);
+		handleRound(screenManager, startAnotherRound);
 	}
 }
 
@@ -249,7 +275,8 @@ void Game::initGame() {
 	ScreenManager screenManager;
 	screenManager.setUpSDL(); // this should be set once
 
-	handleRound(screenManager);
+	int startAnotherRound = 0;
+	handleRound(screenManager, startAnotherRound);
 
 	closeGame(screenManager);
 }

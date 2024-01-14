@@ -28,13 +28,21 @@ class Game {
 		void initGame();
 
 		void setUpFramerate();
-		void setUpGameObjects(SDL_Surface* screen);
 		void handleFPSTimer();
 		void handleDifferentComputers();
 		void updateWorldTime();
 		
-		void setUpRound(ScreenManager& screenManager);
-		void handleRound(ScreenManager& screenManager);
+
+		void handleRound(ScreenManager& screenManager, int startAnotherRound);
+
+		void setUpBoard(int boardId);
+
+		void setUpPlayer();
+		void setUpDonkeyKong();
+		void setUpPrincess();
+		void setUpPlatforms();
+		void setUpLadders();
+
 		void handleCurrentRound(ScreenManager& screenManager, EventManager& eventHandler, int* startAnotherRound);
 
 		void closeGame();

@@ -19,6 +19,7 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 				switch (event.key.keysym.sym) {
 					case SDLK_ESCAPE:
 						*quit = true; // Esc = Quit CLOSING THE PROGRAM HERE
+						*startAnotherRound = 0;
 						break;
 					case SDLK_UP: // why is he still in the ladder 
 						if (player->isInsideLadder) {
@@ -49,6 +50,21 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 						*startAnotherRound = 1;
 						*quit = true;
 						break;
+					case SDLK_1:
+						*startAnotherRound = 1;
+						*quit = true;
+						// load level 1
+						break;
+					case SDLK_2:
+						*startAnotherRound = 2;
+						*quit = true;
+						// load level 2
+						break;
+					case SDLK_3:
+						*startAnotherRound = 3;
+						*quit = true;
+						// load level 3
+						break;
 				}
 				break;
 			case SDL_KEYUP: // similarly event when you stop pressing
@@ -56,6 +72,7 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 				break;
 			case SDL_QUIT: // This is for closing the window by the regular "X" button
 				*quit = true;
+				*startAnotherRound = 0;
 				break;
 		}
 	}
