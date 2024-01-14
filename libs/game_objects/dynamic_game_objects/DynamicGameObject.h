@@ -15,6 +15,12 @@ public:
 	bool checkIfJumpPossible, isJumping;
 	int jumpHeightStop;
 
+	bool isPlayer;
+	int currentRunningSpriteId;
+	int currentRunningSpriteIdBarrel;
+	void decideSpritePlayer();
+	void decideSpriteBarrel();
+
 	DynamicGameObject();
 	void update(double deltaTime);
 	void moveStart(double speed);

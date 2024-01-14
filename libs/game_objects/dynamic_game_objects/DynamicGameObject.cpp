@@ -17,6 +17,44 @@ DynamicGameObject::DynamicGameObject() {
 	checkIfJumpPossible = false;
 	isJumping = false;
 	jumpHeightStop = SCREEN_HEIGHT;
+
+	isPlayer = false;
+	currentRunningSpriteId = 1;
+	currentRunningSpriteIdBarrel = 1;
+}
+
+void DynamicGameObject::decideSpritePlayer() {
+	if (currentRunningSpriteId == 1) {
+		textureManager.loadTexture("Mario_Run1.bmp");
+		currentRunningSpriteId++;
+	}
+	else if (currentRunningSpriteId == 2) {
+		textureManager.loadTexture("Mario_Run2.bmp");
+		currentRunningSpriteId++;
+	}
+	else {
+		textureManager.loadTexture("Mario_Run3.bmp");
+		currentRunningSpriteId = 1;
+	}
+}
+
+void DynamicGameObject::decideSpriteBarrel() {
+	if (currentRunningSpriteIdBarrel == 1) {
+		textureManager.loadTexture("Barrel_1.bmp");
+		currentRunningSpriteIdBarrel++;
+	}
+	else if (currentRunningSpriteIdBarrel == 2) {
+		textureManager.loadTexture("Barrel_2.bmp");
+		currentRunningSpriteIdBarrel++;
+	}
+	else if (currentRunningSpriteIdBarrel == 3) {
+		textureManager.loadTexture("Barrel_3.bmp");
+		currentRunningSpriteIdBarrel++;
+	}
+	else{
+		textureManager.loadTexture("Barrel_4.bmp");
+		currentRunningSpriteIdBarrel = 1;
+	}
 }
 
 void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
@@ -27,6 +65,9 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 		}
 	}
 
+
+
+
 	// WATCHOUT DIFFERENT += -= SIGNS AND VARIABLES IN EVERY IF
 	// moving left, down, right, top
 	if (currentDirectionOfMovementHorizontal > 0.0 || currentDirectionOfMovementVertical > 0.0) { // for positive numbers 
@@ -35,6 +76,12 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 			if (pixelsToMove > 1) {
 				xpos += 1;
 				accumulatedXMove -= 1;
+				if (!isJumping && isPlayer && !isFalling) {
+					decideSpritePlayer();
+				}
+				if (!isPlayer) {
+					decideSpriteBarrel();
+				}
 			}
 		}
 		if (accumulatedYMove > currentDirectionOfMovementVertical) { // down
@@ -46,11 +93,17 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 		}
 	}
 	if (currentDirectionOfMovementHorizontal < 0.0 || currentDirectionOfMovementVertical < 0.0) { // for negative numbers
-		if (accumulatedXMove < currentDirectionOfMovementHorizontal) { // 
+		if (accumulatedXMove < currentDirectionOfMovementHorizontal) { // left
 			int pixelsToMove = accumulatedXMove / 1;
 			if (pixelsToMove < 1) {
 				xpos -= 1;
 				accumulatedXMove += 1;
+				if (!isJumping && isPlayer && !isFalling) {
+					decideSpritePlayer();
+				}
+				if (!isPlayer) {
+					decideSpriteBarrel();
+				}
 			}
 		}
 		if (accumulatedYMove < currentDirectionOfMovementVertical) { // up

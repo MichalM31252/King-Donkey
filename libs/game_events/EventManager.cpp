@@ -25,6 +25,7 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 					case SDLK_UP: // why is he still in the ladder 
 						if (player->isInsideLadder) {
 							player->isClimbing = true; // the problem is most likely with this 
+							player->textureManager.loadTexture("Mario_Climb.bmp");
 							player->startMovingUp(deltaTime);
 						}
 						break;
@@ -41,6 +42,7 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 					case SDLK_DOWN:
 						if (player->isInsideLadder) {
 							player->isClimbing = true;
+							player->textureManager.loadTexture("Mario_Climb.bmp");
 							player->startMovingDown(deltaTime);
 						}
 						break;
