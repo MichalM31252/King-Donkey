@@ -265,7 +265,6 @@ void Game::handleCollisionWithLadder(CollisionManager* collisionManager, ScreenM
 		if (collisionManager->checkIfInsideLadder(player->destRect, ladderHolder->ladders[i].destRect)) {
 			*flagLadder = 1;
 		}
-		ladderHolder->ladders[i].renderLadder(screenManager.screen);;
 	}
 
 	if (*flagLadder) {
@@ -310,21 +309,16 @@ void Game::handleJumping() {
 	}
 }
 
-void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, int* flagPlatform) {
+void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject *gameObject , int* flagPlatform) {
 	for (int i = 0; i < platformHolder->numberOfElements; i++) {
-		// this should be check one pixel below current position because from the logics perspective the player is inside the platform
-		// maybe check current pixel and one below it to check if platform is rising
-
-		// player collision with platform
-		if (collisionManager->checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager->checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) { // checking from left bottom corner || from the right corner
-			if (!player->isClimbing) { // we dont want collision with platform when climbing
-				player->ypos--; // Big problem // This throws the player on top of the platform
+		if (collisionManager->checkObjectCollisionWithPlatform(gameObject->xpos, gameObject->ypos + gameObject->destRect.h, gameObject->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager->checkObjectCollisionWithPlatform(gameObject->xpos + gameObject->destRect.w, gameObject->ypos + gameObject->destRect.h, gameObject->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) { // checking from left bottom corner || from the right corner
+			if (!gameObject->isClimbing) { // we dont want collision with platform when climbing
+				gameObject->ypos--; // Big problem // This throws the player on top of the platform
 			}
 		}
-		if (collisionManager->checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager->checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) {
+		if (collisionManager->checkObjectCollisionWithPlatform(gameObject->xpos, gameObject->ypos + gameObject->destRect.h + 1, gameObject->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager->checkObjectCollisionWithPlatform(gameObject->xpos + gameObject->destRect.w, gameObject->ypos + gameObject->destRect.h + 1, gameObject->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) {
 			*flagPlatform = 1;
 		}
-		platformHolder->platforms[i].render(screenManager.screen);
 	}
 }
 
@@ -346,7 +340,7 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		int flagLadder = 0;
 		handleCollisionWithLadder(&collisionManager, screenManager, &flagLadder);
 		int flagPlatform = 0;
-		handleCollisionWithPlatform(&collisionManager, screenManager, &flagPlatform);
+		handleCollisionWithPlatform(&collisionManager, screenManager, player ,&flagPlatform);
 
 		// if climbing ignore the flag (collision with platform from below)
 		if (!player->isClimbing) {
@@ -373,6 +367,15 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		
 		donkeyKong->render(screenManager.screen);
 		princess->render(screenManager.screen);
+
+		for (int i = 0; i < platformHolder->numberOfElements; i++) {
+			platformHolder->platforms[i].render(screenManager.screen);
+		}
+
+		for (int i = 0; i < ladderHolder->numberOfElements; i++) {
+			ladderHolder->ladders[i].renderLadder(screenManager.screen);
+		}
+
 		player->render(screenManager.screen);
 		// screenManager->drawElements
 
