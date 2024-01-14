@@ -1,9 +1,12 @@
 #define _USE_MATH_DEFINES
+
+
+extern "C" {
+
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
 
-extern "C" {
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
 
@@ -337,8 +340,8 @@ void Game::handleJumping() {
 void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject *gameObject , int* flagPlatform) {
 	for (int i = 0; i < platformHolder->numberOfElements; i++) {
 		if (collisionManager->checkObjectCollisionWithPlatform(gameObject->xpos, gameObject->ypos + gameObject->destRect.h, gameObject->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager->checkObjectCollisionWithPlatform(gameObject->xpos + gameObject->destRect.w, gameObject->ypos + gameObject->destRect.h, gameObject->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) { // checking from left bottom corner || from the right corner
-			if (!gameObject->isClimbing) { // we dont want collision with platform when climbing
-				gameObject->ypos--; // Big problem // This throws the player on top of the platform
+			if (!gameObject->isClimbing) {
+				gameObject->ypos--;
 			}
 		}
 		if (collisionManager->checkObjectCollisionWithPlatform(gameObject->xpos, gameObject->ypos + gameObject->destRect.h + 1, gameObject->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager->checkObjectCollisionWithPlatform(gameObject->xpos + gameObject->destRect.w, gameObject->ypos + gameObject->destRect.h + 1, gameObject->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) {
@@ -366,8 +369,7 @@ void Game::drawElements(ScreenManager& screenManager) {
 	player->render(screenManager.screen);
 }
 
-void Game::handlePlayer(CollisionManager* collisionManager, ScreenManager& screenManager) {
-	// player collision
+void Game::handlePlayer(CollisionManager* collisionManager, ScreenManager& screenManager) { // player collision
 	handleCollisionWithKong(collisionManager, screenManager);
 	handleCollisionWithPrincess(collisionManager, screenManager);
 	int flagLadder = 0;
@@ -403,8 +405,6 @@ void Game::handleBarrels(CollisionManager* collisionManager, ScreenManager& scre
 		int flagPlatform = 0;
 		handleCollisionWithPlatform(collisionManager, screenManager, &barrelDispenser->barrelHolder->barrels[i], &flagPlatform);
 
-		// first barrel is touching and the second not
-
 		if (flagPlatform) {
 			if (barrelDispenser->barrelHolder->barrels[i].isFalling) {
 				barrelDispenser->barrelHolder->barrels[i].stopFalling();
@@ -422,7 +422,7 @@ void Game::handleBarrels(CollisionManager* collisionManager, ScreenManager& scre
 
 void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventHandler, int *startAnotherRound) { // VisualManager is passed by reference, can't be an const because it's methods change the object
 	bool quit = false;
-	while (!quit) { // 1 frame of the game
+	while (!quit) {
 
 		handleDifferentComputers();
 		updateWorldTime();
@@ -436,7 +436,7 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		handlePlayer(&collisionManager, screenManager); // player collision
 		handleBarrels(&collisionManager, screenManager, &quit, startAnotherRound); // barrel collision
 
-		// Updating the game objects
+		// Updating the player
 		player->update(deltaTime);
 
 		drawElements(screenManager);

@@ -46,10 +46,3 @@ const double DEFAULT_BARREL_SPEED = 50;
 const double DEFAULT_BARREL_SPAWN_RATE = 5.0;
 
 const double DEFAULT_GRAVITY = 100;
-
-// Source File constants
-// YOU CAN"T PLACE DEFINES IN DIFFERENT FILES
-//#define SDL_PATH ./SDL2-2.0.10/include/SDL.h
-//#define SDL_MAIN_PATH ./SDL2-2.0.10/include/SDL_main.h
-//#define FROM_LIBS_TO_MAIN "/."
-//#define FROM_GAME__TO_MAIN "../."

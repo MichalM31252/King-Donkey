@@ -9,7 +9,7 @@ void initBarrelHolder(BarrelHolder* barrelHolder) {
 	barrelHolder->sizeOfArray = MAXIMUM_AMOUNT_OF_BARRELS;
 }
 
-void addBarrel(BarrelHolder* barrelHolder, DynamicGameObject* barrel) { // this doesn't work
+void addBarrel(BarrelHolder* barrelHolder, DynamicGameObject* barrel) {
 	if (barrelHolder->numberOfElements == barrelHolder->sizeOfArray) {
 		DynamicGameObject* temp = new DynamicGameObject[barrelHolder->sizeOfArray];
 

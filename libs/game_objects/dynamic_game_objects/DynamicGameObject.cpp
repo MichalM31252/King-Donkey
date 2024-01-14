@@ -28,7 +28,6 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 	}
 
 	// WATCHOUT DIFFERENT += -= SIGNS AND VARIABLES IN EVERY IF
-	// just add a function this is not faster this way?????
 	// moving left, down, right, top
 	if (currentDirectionOfMovementHorizontal > 0.0 || currentDirectionOfMovementVertical > 0.0) { // for positive numbers 
 		if (accumulatedXMove > currentDirectionOfMovementHorizontal) { // right // THIS CANT BE BIGGER OR EQUAL BECAUSE WHEN STARTING IT IS ALWAYS TRUE 0 <= 0
@@ -103,7 +102,7 @@ void DynamicGameObject::startMovingUp(double deltaTime) {
 	currentDirectionOfMovementHorizontal = 0.0;
 }
 
-void DynamicGameObject::startMovingDown(double deltaTime) { 	// under the circumstance that a player is on the ladder
+void DynamicGameObject::startMovingDown(double deltaTime) { 
 	currentDirectionOfMovementVertical = 1.0;
 	currentDirectionOfMovementHorizontal = 0.0;
 }
