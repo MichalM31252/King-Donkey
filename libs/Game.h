@@ -61,6 +61,7 @@ class Game {
 
 		void handleCollisionWithKong(CollisionManager* collisionManager, ScreenManager& screenManager);
 		void handleCollisionWithPrincess(CollisionManager* collisionManager, ScreenManager& screenManager);
+		void handleCollisionWithBarrel(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
 		void handleCollisionWithLadder(CollisionManager* collisionManager, ScreenManager& screenManager, int* flagLadder);
 		void handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject *gameObject, int* flagPlatform);
 		void handleCollisionWithJumping();

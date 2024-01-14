@@ -13,9 +13,9 @@ const int MEDIUM_MARGIN = 25;
 const int LARGE_MARGIN = 100;
 
 // Platform 
-const int MAXIMUM_AMOUNT_OF_PLATFORMS = 100;
-const int MAXIMUM_AMOUNT_OF_LADDERS = 100;
-const int MAXIMUM_AMOUNT_OF_BARRELS = 100;
+const int MAXIMUM_AMOUNT_OF_PLATFORMS = 1000;
+const int MAXIMUM_AMOUNT_OF_LADDERS = 1000;
+const int MAXIMUM_AMOUNT_OF_BARRELS = 1000;
 
 // Ladder 
 const int LADDER_WIDTH = 45;
@@ -37,6 +37,7 @@ const int STARTING_Y_PRINCESS = 32;
 
 const double DEFAULT_PLAYER_SPEED = 200;
 const double DEFAULT_BARREL_SPEED = 50;
+const double DEFAULT_BARREL_SPAWN_RATE = 5.0;
 
 const double DEFAULT_GRAVITY = 100;
 

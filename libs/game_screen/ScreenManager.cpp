@@ -105,7 +105,7 @@ void ScreenManager::drawOutlineOfTheBoard() { // draws the outline of the board
 void ScreenManager::drawAdditionalInfo(double worldTime) { // draws current time, score and lives on the top of the screen
 	DrawRectangle(screen, 1, 1, SCREEN_WIDTH - 2, TOP_BAR_HEIGHT, blue, blue);
 	char text[128];
-	sprintf(text, "Time: %.1lf s  Score: 00000  Lives: 3", worldTime);
+	sprintf(text, "Time: %.1lf s  Score: 00000  Lives: 1", worldTime);
 	DrawString(screen, screen->w / 2 - strlen(text) * 8 / 2, 7, text, charset);
 }
 

@@ -278,6 +278,13 @@ void Game::handleCollisionWithPrincess(CollisionManager* collisionManager, Scree
 	}
 }
 
+void Game::handleCollisionWithBarrel(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject* barrel, bool *quit, int *startAnotherRound) {
+	if (collisionManager->checkCollisionBetweenRects(player->destRect, barrel->destRect)) {
+		*quit = true;
+		*startAnotherRound = true;
+	}
+}
+
 void Game::handleCollisionWithLadder(CollisionManager* collisionManager, ScreenManager& screenManager, int *flagLadder) {
 	for (int i = 0; i < ladderHolder->numberOfElements; i++) {
 		if (collisionManager->checkIfInsideLadder(player->destRect, ladderHolder->ladders[i].destRect)) {
@@ -403,6 +410,9 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		barrelDispenser->updateBarrelDispenser(deltaTime);
 
 		for (int i = 0; i < barrelDispenser->barrelHolder->numberOfElements; i++) {
+
+			handleCollisionWithBarrel(&collisionManager, screenManager, &barrelDispenser->barrelHolder->barrels[i], &quit, startAnotherRound);
+
 			flagPlatform = 0;
 			handleCollisionWithPlatform(&collisionManager, screenManager, &barrelDispenser->barrelHolder->barrels[i], &flagPlatform);
 
