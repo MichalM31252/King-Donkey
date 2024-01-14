@@ -25,34 +25,34 @@ DynamicGameObject::DynamicGameObject() {
 
 void DynamicGameObject::decideSpritePlayer() {
 	if (currentRunningSpriteId == 1) {
-		textureManager.loadTexture("Mario_Run1.bmp");
+		textureManager.loadTexture(PLAYER_1_FILENAME);
 		currentRunningSpriteId++;
 	}
 	else if (currentRunningSpriteId == 2) {
-		textureManager.loadTexture("Mario_Run2.bmp");
+		textureManager.loadTexture(PLAYER_2_FILENAME);
 		currentRunningSpriteId++;
 	}
 	else {
-		textureManager.loadTexture("Mario_Run3.bmp");
+		textureManager.loadTexture(PLAYER_3_FILENAME);
 		currentRunningSpriteId = 1;
 	}
 }
 
 void DynamicGameObject::decideSpriteBarrel() {
 	if (currentRunningSpriteIdBarrel == 1) {
-		textureManager.loadTexture("Barrel_1.bmp");
+		textureManager.loadTexture(BARREL_1_FILENAME);
 		currentRunningSpriteIdBarrel++;
 	}
 	else if (currentRunningSpriteIdBarrel == 2) {
-		textureManager.loadTexture("Barrel_2.bmp");
+		textureManager.loadTexture(BARREL_2_FILENAME);
 		currentRunningSpriteIdBarrel++;
 	}
 	else if (currentRunningSpriteIdBarrel == 3) {
-		textureManager.loadTexture("Barrel_3.bmp");
+		textureManager.loadTexture(BARREL_3_FILENAME);
 		currentRunningSpriteIdBarrel++;
 	}
 	else{
-		textureManager.loadTexture("Barrel_4.bmp");
+		textureManager.loadTexture(BARREL_4_FILENAME);
 		currentRunningSpriteIdBarrel = 1;
 	}
 }

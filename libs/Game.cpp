@@ -31,7 +31,7 @@ void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I
 
 void Game::setUpPlayer() { // (logic)
 	Player* pla = new Player();
-	pla->init("Mario_Run1.bmp");
+	pla->init(PLAYER_1_FILENAME);
 	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
 	pla->setUpSrcRect();
 	pla->setUpDestRect();
@@ -105,7 +105,7 @@ void Game::setUpLadders1() { // (logic)
 
 void Game::setUpBarrels() {
 	DynamicGameObject* barrel1 = new DynamicGameObject();
-	barrel1->init("Barrel_1.bmp");
+	barrel1->init(BARREL_1_FILENAME);
 	barrel1->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
 	barrel1->setUpSrcRect();
 	barrel1->setUpDestRect();
@@ -330,7 +330,7 @@ void Game::handleFalling(DynamicGameObject *dynamicGameObject) {
 }
 
 void Game::handleJumping() {
-	player->textureManager.loadTexture("Mario_Run3.bmp");
+	player->textureManager.loadTexture(PLAYER_3_FILENAME);
 	player->accumulatedYMove -= deltaTime * player->gravity;
 	int pixelsToMove = player->accumulatedYMove / 1;
 	if (pixelsToMove <= -1) {
@@ -381,7 +381,7 @@ void Game::handlePlayer(CollisionManager* collisionManager, ScreenManager& scree
 
 	if (!player->isClimbing) {
 		if (flagPlatform) {
-			player->textureManager.loadTexture("Mario_Run1.bmp");
+			player->textureManager.loadTexture(PLAYER_1_FILENAME);
 			handleCollisionWithJumping();
 		}
 		else {
