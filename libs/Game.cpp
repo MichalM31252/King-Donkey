@@ -101,19 +101,22 @@ void Game::setUpLadders1() { // (logic)
 
 void Game::setUpPlatforms2() { // (logic)
 	Platform* plat1 = new Platform();
-	plat1->setPosition(1, 400, 400, 400); // 1
+	plat1->setPosition(1, 400, SCREEN_WIDTH - 1, 400); // 1
 
 	Platform* plat2 = new Platform();
-	plat2->setPosition(400, 400, 500, 300); // 2
+	plat2->setPosition(130, 130, 300, 300); // 4
 
 	Platform* plat3 = new Platform();
-	plat3->setPosition(500, 300, SCREEN_WIDTH - 1, 300); // 3
+	plat3->setPosition(1, 130, 130, 130); // 4
 
 	Platform* plat4 = new Platform();
-	plat4->setPosition(1, 130, 570, 130); // 4
+	plat4->setPosition(1, 130, 130, 130); // 4
 
 	Platform* plat5 = new Platform();
-	plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80); // 4
+	plat5->setPosition(200, 80, SCREEN_WIDTH - 100 - LADDER_WIDTH, 80); // 4
+
+	Platform* plat6 = new Platform();
+	plat6->setPosition(SCREEN_WIDTH - 100 - LADDER_WIDTH - LADDER_WIDTH, 230, SCREEN_WIDTH - 100, 230); // 4
 
 	PlatformHolder* platH = new PlatformHolder();
 	initPlatformHolder(platH);
@@ -122,21 +125,22 @@ void Game::setUpPlatforms2() { // (logic)
 	addPlatform(platH, plat3);
 	addPlatform(platH, plat4);
 	addPlatform(platH, plat5);
+	addPlatform(platH, plat6);
 	platformHolder = platH;
 }
 
 void Game::setUpLadders2() { // (logic)
 	GameObject* ladd1 = new GameObject();
 	ladd1->init("Ladder.bmp");
-	ladd1->setPosition(525, 129);
+	ladd1->setPosition(SCREEN_WIDTH - 100 - LADDER_WIDTH, 229);
 	ladd1->setSrcRect(LADDER_WIDTH, 170); // yeah this actually sets the size
 	ladd1->setDestRect(LADDER_WIDTH, 170);
 
 	GameObject* ladd2 = new GameObject();
 	ladd2->init("Ladder.bmp");
-	ladd2->setPosition(250, 79);
-	ladd2->setSrcRect(LADDER_WIDTH, 50); // yeah this actually sets the size
-	ladd2->setDestRect(LADDER_WIDTH, 50);
+	ladd2->setPosition(SCREEN_WIDTH - 100 - LADDER_WIDTH - LADDER_WIDTH, 79);
+	ladd2->setSrcRect(LADDER_WIDTH, 150); // yeah this actually sets the size
+	ladd2->setDestRect(LADDER_WIDTH, 150);
 
 	LadderHolder* laddH = new LadderHolder();
 	initLadderHolder(laddH);
