@@ -246,6 +246,88 @@ void Game::handleFPSTimer() { // logic
 	};
 }
 
+// COLLISIONS
+
+void Game::handleCollisionWithKong(CollisionManager *collisionManager, ScreenManager& screenManager) { // COLLISION WITH KONG
+	if (collisionManager->checkCollisionBetweenRects(player->destRect, donkeyKong->destRect)) {
+		closeGame(screenManager);
+	}
+}
+
+void Game::handleCollisionWithPrincess(CollisionManager* collisionManager, ScreenManager& screenManager) { // COLLISION WITH PRINCESS
+	if (collisionManager->checkCollisionBetweenRects(player->destRect, princess->destRect)) {
+		closeGame(screenManager);
+	}
+}
+
+void Game::handleCollisionWithLadder(CollisionManager* collisionManager, ScreenManager& screenManager, int *flagLadder) {
+	for (int i = 0; i < ladderHolder->numberOfElements; i++) {
+		if (collisionManager->checkIfInsideLadder(player->destRect, ladderHolder->ladders[i].destRect)) {
+			*flagLadder = 1;
+		}
+		ladderHolder->ladders[i].renderLadder(screenManager.screen);;
+	}
+
+	if (*flagLadder) {
+		player->isInsideLadder = true;
+	}
+	else {
+		player->isInsideLadder = false;
+		player->isClimbing = false;
+	}
+}
+
+void Game::handleCollisionWithJumping() {
+	if (player->isFalling) {
+		player->stopFalling();
+		player->checkIfJumpPossible = false;
+	}
+	if (!player->isFalling && player->checkIfJumpPossible) {
+		player->startJumping();
+		player->checkIfJumpPossible = false;
+	}
+}
+
+void Game::handleFalling() {
+	if (!player->isJumping) {
+		player->startFalling();
+
+		player->accumulatedYMove += deltaTime * player->gravity;
+		int pixelsToMove = player->accumulatedYMove / 1;
+		if (pixelsToMove >= 1) {
+			player->ypos += 1;
+			player->accumulatedYMove -= 1;
+		}
+	}
+}
+
+void Game::handleJumping() {
+	player->accumulatedYMove -= deltaTime * player->gravity;
+	int pixelsToMove = player->accumulatedYMove / 1;
+	if (pixelsToMove <= -1) {
+		player->ypos -= 1;
+		player->accumulatedYMove += 1;
+	}
+}
+
+void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, int* flagPlatform) {
+	for (int i = 0; i < platformHolder->numberOfElements; i++) {
+		// this should be check one pixel below current position because from the logics perspective the player is inside the platform
+		// maybe check current pixel and one below it to check if platform is rising
+
+		// player collision with platform
+		if (collisionManager->checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager->checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) { // checking from left bottom corner || from the right corner
+			if (!player->isClimbing) { // we dont want collision with platform when climbing
+				player->ypos--; // Big problem // This throws the player on top of the platform
+			}
+		}
+		if (collisionManager->checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager->checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) {
+			*flagPlatform = 1;
+		}
+		platformHolder->platforms[i].render(screenManager.screen);
+	}
+}
+
 void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventHandler, int *startAnotherRound) { // VisualManager is passed by reference, can't be an const because it's methods change the object
 	bool quit = false;
 	while (!quit) { // 1 frame of the game
@@ -259,85 +341,23 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 
 		CollisionManager collisionManager;
 
-		// COLLISION WITH KONG
-		if (collisionManager.checkCollisionBetweenRects(player->destRect, donkeyKong->destRect)) {
-			closeGame(screenManager);
-		}
-
-		// COLLISION WITH PRINCESS
-		if (collisionManager.checkCollisionBetweenRects(player->destRect, princess->destRect)) {
-			closeGame(screenManager);
-		}
-
-		// PLAYER OVERLAPPING WITH LADDER
+		handleCollisionWithKong(&collisionManager, screenManager);
+		handleCollisionWithPrincess(&collisionManager, screenManager);
 		int flagLadder = 0;
-		for (int i = 0; i < ladderHolder->numberOfElements; i++) {
-			if (collisionManager.checkIfInsideLadder(player->destRect, ladderHolder->ladders[i].destRect)) {
-				flagLadder = 1;
-			}
-			ladderHolder->ladders[i].renderLadder(screenManager.screen);;
-		}
-
-		if (flagLadder) {
-			player->isInsideLadder = true;
-		}
-		else {
-			player->isInsideLadder = false;
-			player->isClimbing = false;
-		}
-
-		// COLLSION WITH A PLATFORM
+		handleCollisionWithLadder(&collisionManager, screenManager, &flagLadder);
 		int flagPlatform = 0;
-		for (int i = 0; i < platformHolder->numberOfElements; i++) {
-			// this should be check one pixel below current position because from the logics perspective the player is inside the platform
-			// maybe check current pixel and one below it to check if platform is rising
-
-			// player collision with platform
-			if (collisionManager.checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager.checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) { // checking from left bottom corner || from the right corner
-				if (!player->isClimbing) { // we dont want collision with platform when climbing
-					player->ypos--; // Big problem // This throws the player on top of the platform
-				}
-			}
-			if (collisionManager.checkObjectCollisionWithPlatform(player->xpos, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager.checkObjectCollisionWithPlatform(player->xpos + player->destRect.w, player->ypos + player->destRect.h + 1, player->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) {
-				flagPlatform = 1;
-			}
-			platformHolder->platforms[i].render(screenManager.screen);
-		}
+		handleCollisionWithPlatform(&collisionManager, screenManager, &flagPlatform);
 
 		// if climbing ignore the flag (collision with platform from below)
 		if (!player->isClimbing) {
 			if (flagPlatform) {
-				if (player->isFalling) {
-					player->stopFalling();
-					player->checkIfJumpPossible = false;
-				}
-				if (!player->isFalling && player->checkIfJumpPossible) {
-					player->startJumping();
-					player->checkIfJumpPossible	= false;
-				}
-				// you need to start jumping here because the player needs to be on top of the platform
-
-				// check here if there is a ladder 2px below the player
+				handleCollisionWithJumping();
 			}
 			else {
-				if (!player->isJumping){
-					player->startFalling();
-
-					player->accumulatedYMove += deltaTime * player->gravity;
-					int pixelsToMove = player->accumulatedYMove / 1;
-					if (pixelsToMove >= 1) {
-						player->ypos += 1;
-						player->accumulatedYMove -= 1;
-					}
-				}
+				handleFalling();
 			}
 			if (player->isJumping) { // handle jumping
-				player->accumulatedYMove -= deltaTime * player->gravity;
-				int pixelsToMove = player->accumulatedYMove / 1;
-				if (pixelsToMove <= -1) {
-					player->ypos -= 1;
-					player->accumulatedYMove += 1;
-				}
+				handleJumping();
 			}
 		}
 

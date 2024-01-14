@@ -7,6 +7,7 @@ extern "C" {
 #include "./game_objects/dynamic_game_objects/DynamicGameObject.h"
 #include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h"
 #include "./game_events/EventManager.h"
+#include "./game_events/CollisionManager.h"
 #include "./Platform.h"
 #include "./PlatformHolder.h"
 #include "./LadderHolder.h"
@@ -51,6 +52,16 @@ class Game {
 		void setUpLadders3();
 
 		void handleCurrentRound(ScreenManager& screenManager, EventManager& eventHandler, int* startAnotherRound);
+
+
+		void handleCollisionWithKong(CollisionManager* collisionManager, ScreenManager& screenManager);
+		void handleCollisionWithPrincess(CollisionManager* collisionManager, ScreenManager& screenManager);
+		void handleCollisionWithLadder(CollisionManager* collisionManager, ScreenManager& screenManager, int* flagLadder);
+		void handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, int* flagPlatform);
+		void handleCollisionWithJumping();
+		void handleFalling();
+		void handleJumping();
+
 
 		void closeGame();
 		void closeGame(ScreenManager& screenManager);
