@@ -12,7 +12,8 @@ public:
 	bool isFalling;
 	double currentDirectionOfMovementHorizontal, currentDirectionOfMovementVertical;
 	bool isClimbing, isInsideLadder;
-	bool isJumping;
+	bool checkIfJumpPossible, isJumping;
+	int jumpHeightStop;
 
 	DynamicGameObject();
 	void update(double deltaTime);
@@ -21,7 +22,11 @@ public:
 	void startMovingRight(double delta);
 	void startMovingUp(double delta);
 	void startMovingDown(double delta);
-	void moveStop();
+	void stopMove();
+
+	void initJump();
+	void startJumping();
+	void stopJumping();
 
 	void startFalling();
 	void stopFalling();

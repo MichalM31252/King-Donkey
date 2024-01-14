@@ -171,19 +171,43 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		// if climbing ignore the flag (collision with platform from below)
 		if (!player->isClimbing) {
 			if (flagPlatform) {
-				player->stopFalling();
+				if (player->isFalling) {
+					player->stopFalling();
+					player->checkIfJumpPossible = false;
+				}
+				if (!player->isFalling && player->checkIfJumpPossible) {
+					player->startJumping();
+					player->checkIfJumpPossible	= false;
+				}
+				// you need to start jumping here because the player needs to be on top of the platform
+
 				// check here if there is a ladder 2px below the player
 			}
 			else {
-				player->startFalling();
+				if (!player->isJumping){
+					player->startFalling();
 
-				player->accumulatedYMove += deltaTime * player->gravity;
-				int pixelsToMove = player->accumulatedYMove / 1;
-				if (pixelsToMove >= 1) {
-					player->ypos += 1;
-					player->accumulatedYMove -= 1;
+					player->accumulatedYMove += deltaTime * player->gravity;
+					int pixelsToMove = player->accumulatedYMove / 1;
+					if (pixelsToMove >= 1) {
+						player->ypos += 1;
+						player->accumulatedYMove -= 1;
+					}
 				}
 			}
+			if (player->isJumping) { // handle jumping
+				player->accumulatedYMove -= deltaTime * player->gravity;
+				int pixelsToMove = player->accumulatedYMove / 1;
+				if (pixelsToMove <= -1) {
+					player->ypos -= 1;
+					player->accumulatedYMove += 1;
+				}
+			}
+		}
+
+		if (player->isJumping && player->ypos <= player->jumpHeightStop) {
+			player->stopJumping();
+			player->startFalling();
 		}
 
 		// Updating the game objects

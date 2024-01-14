@@ -15,7 +15,9 @@ DynamicGameObject::DynamicGameObject() {
 	accumulatedYMove = 0;
 	isClimbing = false;
 	isInsideLadder = false;
-	
+	checkIfJumpPossible = false;
+	isJumping = false;
+	jumpHeightStop = SCREEN_HEIGHT;
 }
 
 void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
@@ -107,7 +109,7 @@ void DynamicGameObject::startMovingDown(double deltaTime) { 	// under the circum
 	currentDirectionOfMovementHorizontal = 0.0;
 }
 
-void DynamicGameObject::moveStop() {
+void DynamicGameObject::stopMove() {
 	accumulatedYMove = 0;
 	accumulatedXMove = 0;
 	currentDirectionOfMovementHorizontal = 0;
@@ -115,10 +117,26 @@ void DynamicGameObject::moveStop() {
 	objectSpeed = 0;
 }
 
+void DynamicGameObject::startJumping() {
+	isJumping = true;
+	jumpHeightStop = ypos - DEFAULT_JUMP_HEIGHT;
+}
+
+void DynamicGameObject::stopJumping() {
+	isJumping = false;
+	jumpHeightStop = SCREEN_HEIGHT;
+	accumulatedYMove = 0;
+}
+
 void DynamicGameObject::startFalling() {
 	isFalling = true;
 }
 
 void DynamicGameObject::stopFalling() {
-	this->isFalling = false;
+	isFalling = false;
+}
+
+void DynamicGameObject::initJump() {
+	checkIfJumpPossible = true;
+	accumulatedYMove = 0;
 }

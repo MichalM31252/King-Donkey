@@ -43,8 +43,7 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 						}
 						break;
 					case SDLK_SPACE:
-						player->gravity *= -1;
-						player->startFalling();
+						player->initJump();
 						break;
 					case SDLK_n:
 						*startAnotherRound = 1;
@@ -53,7 +52,7 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 				}
 				break;
 			case SDL_KEYUP: // similarly event when you stop pressing
-				player->moveStop();
+				player->stopMove();
 				break;
 			case SDL_QUIT: // This is for closing the window by the regular "X" button
 				*quit = true;
