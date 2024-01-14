@@ -40,8 +40,15 @@ class Game {
 		void setUpPlayer();
 		void setUpDonkeyKong();
 		void setUpPrincess();
-		void setUpPlatforms();
-		void setUpLadders();
+
+		void setUpPlatforms1();
+		void setUpLadders1();
+
+		void setUpPlatforms2();
+		void setUpLadders2();
+
+		void setUpPlatforms3();
+		void setUpLadders3();
 
 		void handleCurrentRound(ScreenManager& screenManager, EventManager& eventHandler, int* startAnotherRound);
 

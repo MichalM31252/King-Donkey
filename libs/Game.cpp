@@ -53,7 +53,7 @@ void Game::setUpPrincess() {
 	princess = prin;
 }
 
-void Game::setUpPlatforms() { // (logic)
+void Game::setUpPlatforms1() { // (logic)
 	Platform* plat1 = new Platform();
 	plat1->setPosition(1, 400, 400, 400); // 1
 
@@ -67,7 +67,7 @@ void Game::setUpPlatforms() { // (logic)
 	plat4->setPosition(1, 130, 570, 130); // 4
 
 	Platform* plat5 = new Platform();
-	plat5->setPosition(200, 80, 250 + 45, 80); // 4
+	plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80); // 4
 
 	PlatformHolder* platH = new PlatformHolder();
 	initPlatformHolder(platH);
@@ -79,18 +79,18 @@ void Game::setUpPlatforms() { // (logic)
 	platformHolder = platH;
 }
 
-void Game::setUpLadders() { // (logic)
+void Game::setUpLadders1() { // (logic)
 	GameObject* ladd1 = new GameObject();
 	ladd1->init("Ladder.bmp");
 	ladd1->setPosition(525, 129);
-	ladd1->setSrcRect(45, 170); // yeah this actually sets the size
-	ladd1->setDestRect(45, 170);
+	ladd1->setSrcRect(LADDER_WIDTH, 170); // yeah this actually sets the size
+	ladd1->setDestRect(LADDER_WIDTH, 170);
 
 	GameObject* ladd2 = new GameObject();
 	ladd2->init("Ladder.bmp");
 	ladd2->setPosition(250, 79);
-	ladd2->setSrcRect(45, 50); // yeah this actually sets the size
-	ladd2->setDestRect(45, 50);
+	ladd2->setSrcRect(LADDER_WIDTH, 50); // yeah this actually sets the size
+	ladd2->setDestRect(LADDER_WIDTH, 50);
 
 	LadderHolder* laddH = new LadderHolder();
 	initLadderHolder(laddH);
@@ -99,12 +99,128 @@ void Game::setUpLadders() { // (logic)
 	ladderHolder = laddH;
 }
 
+void Game::setUpPlatforms2() { // (logic)
+	Platform* plat1 = new Platform();
+	plat1->setPosition(1, 400, 400, 400); // 1
+
+	Platform* plat2 = new Platform();
+	plat2->setPosition(400, 400, 500, 300); // 2
+
+	Platform* plat3 = new Platform();
+	plat3->setPosition(500, 300, SCREEN_WIDTH - 1, 300); // 3
+
+	Platform* plat4 = new Platform();
+	plat4->setPosition(1, 130, 570, 130); // 4
+
+	Platform* plat5 = new Platform();
+	plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80); // 4
+
+	PlatformHolder* platH = new PlatformHolder();
+	initPlatformHolder(platH);
+	addPlatform(platH, plat1);
+	addPlatform(platH, plat2);
+	addPlatform(platH, plat3);
+	addPlatform(platH, plat4);
+	addPlatform(platH, plat5);
+	platformHolder = platH;
+}
+
+void Game::setUpLadders2() { // (logic)
+	GameObject* ladd1 = new GameObject();
+	ladd1->init("Ladder.bmp");
+	ladd1->setPosition(525, 129);
+	ladd1->setSrcRect(LADDER_WIDTH, 170); // yeah this actually sets the size
+	ladd1->setDestRect(LADDER_WIDTH, 170);
+
+	GameObject* ladd2 = new GameObject();
+	ladd2->init("Ladder.bmp");
+	ladd2->setPosition(250, 79);
+	ladd2->setSrcRect(LADDER_WIDTH, 50); // yeah this actually sets the size
+	ladd2->setDestRect(LADDER_WIDTH, 50);
+
+	LadderHolder* laddH = new LadderHolder();
+	initLadderHolder(laddH);
+	addLadder(laddH, ladd1);
+	addLadder(laddH, ladd2);
+	ladderHolder = laddH;
+}
+
+void Game::setUpPlatforms3() { // (logic)
+	Platform* plat1 = new Platform();
+	plat1->setPosition(0, 400, SCREEN_WIDTH - 1, 400); // 1
+
+	Platform* plat2 = new Platform();
+	plat2->setPosition(100, 300, SCREEN_WIDTH - 100, 300); // 2
+
+	Platform* plat3 = new Platform();
+	plat3->setPosition(100, 200, SCREEN_WIDTH - 100, 200); // 3
+
+	Platform* plat4 = new Platform();
+	plat4->setPosition(1, 130, SCREEN_WIDTH - 100, 130); // 4
+
+	Platform* plat5 = new Platform();
+	plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80); // 4
+
+	PlatformHolder* platH = new PlatformHolder();
+	initPlatformHolder(platH);
+	addPlatform(platH, plat1);
+	addPlatform(platH, plat2);
+	addPlatform(platH, plat3);
+	addPlatform(platH, plat4);
+	addPlatform(platH, plat5);
+	platformHolder = platH;
+}
+
+void Game::setUpLadders3() { // (logic)
+	GameObject* ladd1 = new GameObject();
+	ladd1->init("Ladder.bmp");
+	ladd1->setPosition(SCREEN_WIDTH - 100 - LADDER_WIDTH, 299);
+	ladd1->setSrcRect(LADDER_WIDTH, 100); // yeah this actually sets the size
+	ladd1->setDestRect(LADDER_WIDTH, 100);
+
+	GameObject* ladd2 = new GameObject();
+	ladd2->init("Ladder.bmp");
+	ladd2->setPosition(100, 199);
+	ladd2->setSrcRect(LADDER_WIDTH, 100); // yeah this actually sets the size
+	ladd2->setDestRect(LADDER_WIDTH, 100);
+
+	GameObject* ladd3 = new GameObject();
+	ladd3->init("Ladder.bmp");
+	ladd3->setPosition(SCREEN_WIDTH - 100 - LADDER_WIDTH, 129);
+	ladd3->setSrcRect(LADDER_WIDTH, 70); // yeah this actually sets the size
+	ladd3->setDestRect(LADDER_WIDTH, 70);
+
+	GameObject* ladd4 = new GameObject();
+	ladd4->init("Ladder.bmp");
+	ladd4->setPosition(250, 79);
+	ladd4->setSrcRect(LADDER_WIDTH, 50); // yeah this actually sets the size
+	ladd4->setDestRect(LADDER_WIDTH, 50);
+
+	LadderHolder* laddH = new LadderHolder();
+	initLadderHolder(laddH);
+	addLadder(laddH, ladd1);
+	addLadder(laddH, ladd2);
+	addLadder(laddH, ladd3);
+	addLadder(laddH, ladd4);
+	ladderHolder = laddH;
+}
+
 void Game::setUpBoard(int boardId) { // (logic)
 	setUpPlayer();
 	setUpDonkeyKong();
 	setUpPrincess();
-	setUpPlatforms();
-	setUpLadders();
+	if (boardId == 1) {
+		setUpPlatforms1();
+		setUpLadders1();
+	}
+	if (boardId == 2) {
+		setUpPlatforms2();
+		setUpLadders2();
+	}
+	if (boardId == 3) {
+		setUpPlatforms3();
+		setUpLadders3();
+	}
 }
 
 void Game::handleDifferentComputers() { // (logic) make every object dependent on deltaTime so it works the same on different computers
