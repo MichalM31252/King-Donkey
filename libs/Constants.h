@@ -36,7 +36,7 @@ const int STARTING_X_PRINCESS = 200;
 const int STARTING_Y_PRINCESS = 32;
 
 const double DEFAULT_PLAYER_SPEED = 200;
-const double DEFAULT_BARREL_SPEED = 200;
+const double DEFAULT_BARREL_SPEED = 50;
 
 const double DEFAULT_GRAVITY = 100;
 

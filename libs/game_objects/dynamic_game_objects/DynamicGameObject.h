@@ -17,7 +17,7 @@ public:
 
 	DynamicGameObject();
 	void update(double deltaTime);
-	void moveStart();
+	void moveStart(double speed);
 	void startMovingLeft(double delta);
 	void startMovingRight(double delta);
 	void startMovingUp(double delta);

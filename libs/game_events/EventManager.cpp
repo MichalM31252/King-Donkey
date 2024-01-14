@@ -15,7 +15,7 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 			case SDL_KEYDOWN: // event of pressing down a key on keyboard
-				player->moveStart();
+				player->moveStart(DEFAULT_PLAYER_SPEED);
 				switch (event.key.keysym.sym) {
 					case SDLK_ESCAPE:
 						*quit = true; // Esc = Quit CLOSING THE PROGRAM HERE

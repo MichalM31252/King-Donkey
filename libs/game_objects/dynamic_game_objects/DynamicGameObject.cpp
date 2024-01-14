@@ -85,8 +85,8 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 	destRect.y = ypos;
 }
 
-void DynamicGameObject::moveStart() {
-	objectSpeed = DEFAULT_PLAYER_SPEED;
+void DynamicGameObject::moveStart(double speed) {
+	objectSpeed = speed;
 }
 
 void DynamicGameObject::startMovingLeft(double deltaTime) {

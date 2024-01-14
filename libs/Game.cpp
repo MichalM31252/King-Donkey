@@ -105,6 +105,7 @@ void Game::setUpBarrels() {
 	barrel1->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
 	barrel1->setUpSrcRect();
 	barrel1->setUpDestRect();
+	barrel1->objectSpeed = DEFAULT_BARREL_SPEED;
 
 	BarrelHolder* barrelH = new BarrelHolder();
 	initBarrelHolder(barrelH);
@@ -397,7 +398,17 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		// barrel collision
 		flagPlatform = 0;
 		handleCollisionWithPlatform(&collisionManager, screenManager, &barrelDispenser->barrelHolder->barrels[0], &flagPlatform);
-		handleFalling(&barrelDispenser->barrelHolder->barrels[0]);
+		if (flagPlatform) {
+			if (barrelDispenser->barrelHolder->barrels[0].isFalling) {
+				barrelDispenser->barrelHolder->barrels[0].stopFalling();
+				barrelDispenser->barrelHolder->barrels[0].stopMove();
+			}
+			barrelDispenser->barrelHolder->barrels[0].moveStart(DEFAULT_BARREL_SPEED);
+			barrelDispenser->barrelHolder->barrels[0].startMovingRight(deltaTime);
+		}
+		else {
+			handleFalling(&barrelDispenser->barrelHolder->barrels[0]); // THE PROBLEM IS HERE
+		}
 		barrelDispenser->barrelHolder->barrels[0].update(deltaTime);
 
 		// Updating the game objects
