@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="libs\BarrelDispenser.cpp" />
+    <ClCompile Include="libs\BarrelHolder.cpp" />
     <ClCompile Include="libs\Game.cpp" />
     <ClCompile Include="libs\game_events\CollisionManager.cpp" />
     <ClCompile Include="libs\game_events\EventManager.cpp" />
@@ -45,6 +47,8 @@
     <Image Include="eti.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="libs\BarrelDispenser.h" />
+    <ClInclude Include="libs\BarrelHolder.h" />
     <ClInclude Include="libs\Constants.h" />
     <ClInclude Include="libs\Game.h" />
     <ClInclude Include="libs\game_events\CollisionManager.h" />

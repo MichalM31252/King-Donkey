@@ -11,6 +11,7 @@ const int TOP_BAR_HEIGHT = 18;
 // Platform 
 const int MAXIMUM_AMOUNT_OF_PLATFORMS = 100;
 const int MAXIMUM_AMOUNT_OF_LADDERS = 100;
+const int MAXIMUM_AMOUNT_OF_BARRELS = 3;
 
 // Ladder 
 const int LADDER_WIDTH = 45;

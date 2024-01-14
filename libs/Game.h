@@ -11,6 +11,7 @@ extern "C" {
 #include "./Platform.h"
 #include "./PlatformHolder.h"
 #include "./LadderHolder.h"
+#include "./BarrelHolder.h"
 }
 
 class Game {
@@ -23,7 +24,8 @@ class Game {
 		Player* player;
 		PlatformHolder* platformHolder;
 		LadderHolder* ladderHolder;
-
+		BarrelHolder* barrelHolder;
+		
 
 		// Game(); Constructor NEEDED ADD DEFAULT VALUES
 		void initGame();
@@ -44,6 +46,7 @@ class Game {
 
 		void setUpPlatforms1();
 		void setUpLadders1();
+		void setUpBarrels1();
 
 		void setUpPlatforms2();
 		void setUpLadders2();
@@ -62,6 +65,7 @@ class Game {
 		void handleFalling();
 		void handleJumping();
 
+		void drawElements(ScreenManager& screenManager);
 
 		void closeGame();
 		void closeGame(ScreenManager& screenManager);

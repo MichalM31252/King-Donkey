@@ -99,6 +99,18 @@ void Game::setUpLadders1() { // (logic)
 	ladderHolder = laddH;
 }
 
+void Game::setUpBarrels1() {
+	DynamicGameObject* barrel1 = new DynamicGameObject();
+	DynamicGameObject* barrel2 = new DynamicGameObject();
+	DynamicGameObject* barrel3 = new DynamicGameObject();
+
+	BarrelHolder* barrelH = new BarrelHolder();
+	initBarrelHolder(barrelH);
+	addBarrel(barrelH, barrel1);
+	addBarrel(barrelH, barrel2);
+	addBarrel(barrelH, barrel3);
+}
+
 void Game::setUpPlatforms2() { // (logic)
 	Platform* plat1 = new Platform();
 	plat1->setPosition(1, 400, SCREEN_WIDTH - 1, 400); // 1
@@ -216,6 +228,7 @@ void Game::setUpBoard(int boardId) { // (logic)
 	if (boardId == 1) {
 		setUpPlatforms1();
 		setUpLadders1();
+		setUpBarrels1();
 	}
 	if (boardId == 2) {
 		setUpPlatforms2();
@@ -322,6 +335,21 @@ void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, Scree
 	}
 }
 
+void Game::drawElements(ScreenManager& screenManager) {
+	donkeyKong->render(screenManager.screen);
+	princess->render(screenManager.screen);
+
+	for (int i = 0; i < platformHolder->numberOfElements; i++) {
+		platformHolder->platforms[i].render(screenManager.screen);
+	}
+
+	for (int i = 0; i < ladderHolder->numberOfElements; i++) {
+		ladderHolder->ladders[i].renderLadder(screenManager.screen);
+	}
+
+	player->render(screenManager.screen);
+}
+
 void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventHandler, int *startAnotherRound) { // VisualManager is passed by reference, can't be an const because it's methods change the object
 	bool quit = false;
 	while (!quit) { // 1 frame of the game
@@ -362,22 +390,8 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 
 		// Updating the game objects
 		player->update(deltaTime);
-		// donkeyKong->update(deltaTime);
-		// showing everything on the screen 
-		
-		donkeyKong->render(screenManager.screen);
-		princess->render(screenManager.screen);
 
-		for (int i = 0; i < platformHolder->numberOfElements; i++) {
-			platformHolder->platforms[i].render(screenManager.screen);
-		}
-
-		for (int i = 0; i < ladderHolder->numberOfElements; i++) {
-			ladderHolder->ladders[i].renderLadder(screenManager.screen);
-		}
-
-		player->render(screenManager.screen);
-		// screenManager->drawElements
+		drawElements(screenManager);
 
 		screenManager.serveNextFrame();
 
