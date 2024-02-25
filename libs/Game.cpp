@@ -21,7 +21,7 @@ extern "C" {
 #include "./PlatformHolder.h"
 }
 
-void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
+void Game::createFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
 	tick1 = SDL_GetTicks();
 	frames = 0; // frames that happend
 	fpsTimer = 0; // 
@@ -29,35 +29,35 @@ void Game::setUpFramerate() { // (logic) (use constructor instead) (ok what do I
 	worldTime = 0; // how long the game is running
 }
 
-void Game::setUpPlayer() { // (logic)
+void Game::createPlayer() { // (logic)
 	Player* pla = new Player();
 	pla->init("Mario_Run1.bmp");
 	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
-	pla->setUpSrcRect();
-	pla->setUpDestRect();
+	pla->createSrcRect();
+	pla->createDestRect();
 	pla->isPlayer = true;
 	player = pla;
 }
 
-void Game::setUpDonkeyKong() {
+void Game::createDonkeyKong() {
 	GameObject* donkeyK = new GameObject();
 	donkeyK->init("DonkeyKong.bmp");
 	donkeyK->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
-	donkeyK->setUpSrcRect();
-	donkeyK->setUpDestRect();
+	donkeyK->createSrcRect();
+	donkeyK->createDestRect();
 	donkeyKong = donkeyK;
 }
 
-void Game::setUpPrincess() {
+void Game::createPrincess() {
 	GameObject* prin = new GameObject();
 	prin->init("Princess.bmp");
 	prin->setPosition(STARTING_X_PRINCESS, STARTING_Y_PRINCESS);
-	prin->setUpSrcRect();
-	prin->setUpDestRect();
+	prin->createSrcRect();
+	prin->createDestRect();
 	princess = prin;
 }
 
-void Game::setUpPlatforms1() { // (logic)
+void Game::createPlatforms1() { // (logic)
 	Platform* plat1 = new Platform();
 	plat1->setPosition(1, 400, 400, 400); // 1
 
@@ -83,7 +83,7 @@ void Game::setUpPlatforms1() { // (logic)
 	platformHolder = pH;
 }
 
-void Game::setUpLadders1() { // (logic)
+void Game::createLadders1() { // (logic)
 	GameObject* ladd1 = new GameObject();
 	ladd1->init("Ladder.bmp");
 	ladd1->setPosition(525, 129);
@@ -103,12 +103,12 @@ void Game::setUpLadders1() { // (logic)
 	ladderHolder = laddH;
 }
 
-void Game::setUpBarrels() {
+void Game::createBarrels() {
 	DynamicGameObject* barrel1 = new DynamicGameObject();
 	barrel1->init("Barrel_1.bmp");
 	barrel1->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
-	barrel1->setUpSrcRect();
-	barrel1->setUpDestRect();
+	barrel1->createSrcRect();
+	barrel1->createDestRect();
 	barrel1->objectSpeed = DEFAULT_BARREL_SPEED;
 
 	BarrelHolder* barrelH = new BarrelHolder();
@@ -120,7 +120,7 @@ void Game::setUpBarrels() {
 	barrelDispenser->setPosition(donkeyKong->xpos + donkeyKong->destRect.w +  + SMALL_MARGIN, donkeyKong->ypos);
 }
 
-void Game::setUpPlatforms2() { // (logic)
+void Game::createPlatforms2() { // (logic)
 	Platform* plat1 = new Platform();
 	plat1->setPosition(TINY_MARGIN, 400, SCREEN_WIDTH - 1, 400); // 1
 
@@ -150,7 +150,7 @@ void Game::setUpPlatforms2() { // (logic)
 	platformHolder = platH;
 }
 
-void Game::setUpLadders2() { // (logic)
+void Game::createLadders2() { // (logic)
 	GameObject* ladd1 = new GameObject();
 	ladd1->init("Ladder.bmp");
 	ladd1->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 229);
@@ -170,7 +170,7 @@ void Game::setUpLadders2() { // (logic)
 	ladderHolder = laddH;
 }
 
-void Game::setUpPlatforms3() { // (logic)
+void Game::createPlatforms3() { // (logic)
 	Platform* plat1 = new Platform();
 	plat1->setPosition(STARTING_X, 400, SCREEN_WIDTH - TINY_MARGIN, 400); // 1
 
@@ -196,7 +196,7 @@ void Game::setUpPlatforms3() { // (logic)
 	platformHolder = platH;
 }
 
-void Game::setUpLadders3() { // (logic)
+void Game::createLadders3() { // (logic)
 	GameObject* ladd1 = new GameObject();
 	ladd1->init("Ladder.bmp");
 	ladd1->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 299);
@@ -230,23 +230,23 @@ void Game::setUpLadders3() { // (logic)
 	ladderHolder = laddH;
 }
 
-void Game::setUpBoard(int boardId) { // (logic)
-	setUpPlayer();
-	setUpDonkeyKong();
-	setUpPrincess();
+void Game::createBoard(int boardId) { // (logic)
+	createPlayer();
+	createDonkeyKong();
+	createPrincess();
 	if (boardId == 1) {
-		setUpPlatforms1();
-		setUpLadders1();
+		createPlatforms1();
+		createLadders1();
 	}
 	if (boardId == 2) {
-		setUpPlatforms2();
-		setUpLadders2();
+		createPlatforms2();
+		createLadders2();
 	}
 	if (boardId == 3) {
-		setUpPlatforms3();
-		setUpLadders3();
+		createPlatforms3();
+		createLadders3();
 	}
-	setUpBarrels();
+	createBarrels();
 }
 
 void Game::handleDifferentComputers() { // (logic) make every object dependent on deltaTime so it works the same on different computers
@@ -291,7 +291,7 @@ void Game::handleCollisionWithBarrel(CollisionManager* collisionManager, ScreenM
 
 void Game::handleCollisionWithLadder(CollisionManager* collisionManager, ScreenManager& screenManager, int *flagLadder) {
 	for (int i = 0; i < ladderHolder->numberOfElements; i++) {
-		if (collisionManager->checkIfInsideLadder(player->destRect, ladderHolder->ladders[i].destRect)) {
+		if (collisionManager->checkIfRectInsideLadder(player->destRect, ladderHolder->ladders[i].destRect)) {
 			*flagLadder = 1;
 		}
 	}
@@ -456,21 +456,21 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 void Game::handleRound(ScreenManager& screenManager, int startAnotherRound) { // yeah make this a different class in the future	
 	EventManager eventHandler;
 	
-	setUpFramerate();
+	createFramerate();
 
 	if (startAnotherRound) {
 		if (startAnotherRound == BOARD_ID_A) {
-			setUpBoard(BOARD_ID_A);
+			createBoard(BOARD_ID_A);
 		}
 		if (startAnotherRound == BOARD_ID_B) {
-			setUpBoard(BOARD_ID_B);
+			createBoard(BOARD_ID_B);
 		}
 		if (startAnotherRound == BOARD_ID_C) {
-			setUpBoard(BOARD_ID_C);
+			createBoard(BOARD_ID_C);
 		}
 	}
 	else {
-		setUpBoard(BOARD_ID_A);
+		createBoard(BOARD_ID_A);
 	}
 
 	handleCurrentRound(screenManager, eventHandler, &startAnotherRound);
@@ -482,7 +482,7 @@ void Game::handleRound(ScreenManager& screenManager, int startAnotherRound) { //
 
 void Game::initGame() {
 	ScreenManager screenManager;
-	screenManager.setUpSDL(); // this should be set once
+	screenManager.createSDL(); // this should be set once
 
 	int startAnotherRound = 0;
 	handleRound(screenManager, startAnotherRound);

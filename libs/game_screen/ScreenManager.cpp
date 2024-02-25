@@ -95,7 +95,7 @@ void ScreenManager::drawAdditionalInfo(double worldTime) { // draws current time
 	DrawString(screen, screen->w / 2 - strlen(text) * 8 / 2, 7, text, charset);
 }
 
-void ScreenManager::setUpSDL() {
+void ScreenManager::createSDL() {
 	SDLCheck();
 	SDLCreateWindowAndRenderer();
 	SDLSetHint();

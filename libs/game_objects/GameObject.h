@@ -19,9 +19,9 @@ public:
 	void init(const char* fileName);
 	void render(SDL_Surface* screen);
 	void renderLadder(SDL_Surface* screen);
-	void setUpSrcRect();
+	void createSrcRect();
 	void setSrcRect(int w, int h);
-	void setUpDestRect();
+	void createDestRect();
 	void setDestRect(int w, int h);
 	void setPosition(int x, int y);
 };

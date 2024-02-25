@@ -23,7 +23,7 @@ void GameObject::renderLadder(SDL_Surface* screen) {
 	textureManager.drawSurfaceLadder(screen, xpos, ypos, destRect);
 }
 
-void GameObject::setUpSrcRect() {
+void GameObject::createSrcRect() {
 	srcRect.w = textureManager.sprite->w;
 	srcRect.h = textureManager.sprite->h;
 }
@@ -33,7 +33,7 @@ void GameObject::setSrcRect(int w, int h) {
 	srcRect.h = h;
 }
 
-void GameObject::setUpDestRect() {
+void GameObject::createDestRect() {
 	destRect.w = srcRect.w;
 	destRect.h = srcRect.h;
 }

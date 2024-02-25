@@ -31,9 +31,9 @@ bool CollisionManager::checkObjectCollisionWithPlatform(double xposObject, doubl
 	return false;
 }
 
-bool CollisionManager::checkIfInsideLadder(SDL_Rect a, SDL_Rect b) { // a is player for ex, b is ladder
-	if (a.x >= b.x && a.x + a.w <= b.x + b.w) {
-		if (a.y + a.h <= b.y + b.h && a.y + a.h >= b.y) {
+bool CollisionManager::checkIfRectInsideLadder(SDL_Rect playerDestRect, SDL_Rect ladderDestRect) { // a is player for ex, b is ladder
+	if (playerDestRect.x >= ladderDestRect.x && playerDestRect.x + playerDestRect.w <= ladderDestRect.x + ladderDestRect.w) {
+		if (playerDestRect.y + playerDestRect.h <= ladderDestRect.y + ladderDestRect.h && playerDestRect.y + playerDestRect.h >= ladderDestRect.y) {
 			return true;
 		}
 	}

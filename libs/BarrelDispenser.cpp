@@ -27,8 +27,8 @@ void BarrelDispenser::throwBarrel() {
 	DynamicGameObject* barrel = new DynamicGameObject();
 	barrel->init("Barrel_1.bmp");
 	barrel->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
-	barrel->setUpSrcRect();
-	barrel->setUpDestRect();
+	barrel->createSrcRect();
+	barrel->createDestRect();
 	barrel->objectSpeed = DEFAULT_BARREL_SPEED;
 
 	addBarrel(barrelHolder, barrel);

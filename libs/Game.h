@@ -29,7 +29,7 @@ class Game {
 	
 		void initGame();
 
-		void setUpFramerate();
+		void createFramerate();
 		void handleFPSTimer();
 		void handleDifferentComputers();
 		void updateWorldTime();
@@ -37,22 +37,22 @@ class Game {
 
 		void handleRound(ScreenManager& screenManager, int startAnotherRound);
 
-		void setUpBoard(int boardId);
+		void createBoard(int boardId);
 
-		void setUpPlayer();
-		void setUpDonkeyKong();
-		void setUpPrincess();
+		void createPlayer();
+		void createDonkeyKong();
+		void createPrincess();
 
-		void setUpPlatforms1();
-		void setUpLadders1();
+		void createPlatforms1();
+		void createLadders1();
 
-		void setUpPlatforms2();
-		void setUpLadders2();
+		void createPlatforms2();
+		void createLadders2();
 
-		void setUpPlatforms3();
-		void setUpLadders3();
+		void createPlatforms3();
+		void createLadders3();
 
-		void setUpBarrels();
+		void createBarrels();
 
 		void handlePlayer(CollisionManager* collisionManager, ScreenManager& screenManager);
 		void handleBarrels(CollisionManager* collisionManager, ScreenManager& screenManager, bool* quit, int* startAnotherRound);
