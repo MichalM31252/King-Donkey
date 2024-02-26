@@ -9,6 +9,7 @@ extern "C" {
 class EventManager {
 public:
 	void handleEvents(bool* quit, double deltaTime, Player* player, int* startAnotherRound);
+	void onKeyUp(double deltaTime, Player* player);
 private:
 	SDL_Event event; // this can be used here
 };

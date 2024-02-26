@@ -23,11 +23,7 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 						*startAnotherRound = 0;
 						break;
 					case SDLK_UP: // why is he still in the ladder 
-						if (player->isInsideLadder) {
-							player->isClimbing = true; // the problem is most likely with this 
-							player->textureManager.loadTexture(PLAYER_CLIMB);
-							player->startMovingUp(deltaTime);
-						}
+						onKeyUp(deltaTime, player);	
 						break;
 					case SDLK_LEFT:
 						if (!player->isClimbing) {
@@ -75,5 +71,13 @@ void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, in
 				*startAnotherRound = 0;
 				break;
 		}
+	}
+}
+
+void EventManager::onKeyUp(double deltaTime, Player* player) {
+	if (player->isInsideLadder) {
+		player->isClimbing = true; // the problem is most likely with this 
+		player->textureManager.loadTexture(PLAYER_CLIMB);
+		player->startMovingUp(deltaTime);
 	}
 }
