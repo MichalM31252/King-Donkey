@@ -15,69 +15,112 @@ extern "C" {
 void EventManager::handleEvents(bool* quit, double deltaTime, Player* player, int *startAnotherRound) {
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
-			case SDL_KEYDOWN: // event of pressing down a key on keyboard
-				player->moveStart(DEFAULT_PLAYER_SPEED);
-				switch (event.key.keysym.sym) {
-					case SDLK_ESCAPE:
-						*quit = true; // Esc = Quit CLOSING THE PROGRAM HERE
-						*startAnotherRound = 0;
-						break;
-					case SDLK_UP: // why is he still in the ladder 
-						onKeyUp(deltaTime, player);	
-						break;
-					case SDLK_LEFT:
-						if (!player->isClimbing) {
-							player->startMovingLeft(deltaTime);
-						}
-						break;
-					case SDLK_RIGHT:
-						if (!player->isClimbing) {
-							player->startMovingRight(deltaTime);
-						}
-						break;
-					case SDLK_DOWN:
-						if (player->isInsideLadder) {
-							player->isClimbing = true;
-							player->textureManager.loadTexture(PLAYER_CLIMB);
-							player->startMovingDown(deltaTime);
-						}
-						break;
-					case SDLK_SPACE:
-						player->initJump();
-						break;
-					case SDLK_n:
-						*startAnotherRound = 1;
-						*quit = true;
-						break;
-					case SDLK_1: // load level 1
-						*startAnotherRound = 1;
-						*quit = true;
-						break;
-					case SDLK_2: // load level 2
-						*startAnotherRound = 2;
-						*quit = true;
-						break;
-					case SDLK_3: // load level 3
-						*startAnotherRound = 3;
-						*quit = true;
-						break;
-				}
+			case SDL_KEYDOWN:
+				onKeyDown(quit, deltaTime, player, startAnotherRound);
 				break;
-			case SDL_KEYUP: // similarly event when you stop pressing
-				player->stopMove();
+			case SDL_KEYUP:
+				onKeyUp(player);
 				break;
-			case SDL_QUIT: // This is for closing the window by the regular "X" button
-				*quit = true;
-				*startAnotherRound = 0;
+			case SDL_QUIT:
+				initializeQuit(quit, startAnotherRound);
 				break;
 		}
 	}
 }
 
-void EventManager::onKeyUp(double deltaTime, Player* player) {
+void EventManager::onKeyDown(bool* quit, double deltaTime, Player* player, int* startAnotherRound) {
+	player->moveStart(DEFAULT_PLAYER_SPEED);
+	switch (event.key.keysym.sym) {
+		case SDLK_ESCAPE:
+			initializeQuit(quit, startAnotherRound);
+			break;
+		case SDLK_UP: // why is he still in the ladder 
+			onKeyPressArrowUp(deltaTime, player);
+			break;
+		case SDLK_LEFT:
+			onKeyPressArrowLeft(deltaTime, player);
+			break;
+		case SDLK_RIGHT:
+			onKeyPressArrowRight(deltaTime, player);
+			break;
+		case SDLK_DOWN:
+			onKeyPressArrowDown(deltaTime, player);
+			break;
+		case SDLK_SPACE:
+			onKeyPressSpace(player);
+			break;
+		case SDLK_n:
+			onKeyPressN(quit, startAnotherRound);
+			break;
+		case SDLK_1: // load level 1
+			onKeyPress1(quit, startAnotherRound);
+			break;
+		case SDLK_2: // load level 2
+			onKeyPress2(quit, startAnotherRound);
+			break;
+		case SDLK_3: // load level 3
+			onKeyPress3(quit, startAnotherRound);
+			break;
+	}
+}
+
+void EventManager::initializeQuit(bool* quit, int* startAnotherRound) {
+	*quit = true;
+	*startAnotherRound = 0;
+}
+
+void EventManager::onKeyPressArrowUp(double deltaTime, Player* player) {
 	if (player->isInsideLadder) {
 		player->isClimbing = true; // the problem is most likely with this 
 		player->textureManager.loadTexture(PLAYER_CLIMB);
 		player->startMovingUp(deltaTime);
 	}
+}
+
+void EventManager::onKeyPressArrowLeft(double deltaTime, Player* player) {
+	if (!player->isClimbing) {
+		player->startMovingLeft(deltaTime);
+	}
+}
+
+void EventManager::onKeyPressArrowRight(double deltaTime, Player* player) {
+	if (!player->isClimbing) {
+		player->startMovingRight(deltaTime);
+	}
+}
+
+void EventManager::onKeyPressArrowDown(double deltaTime, Player* player) {
+	if (player->isInsideLadder) {
+		player->isClimbing = true;
+		player->textureManager.loadTexture(PLAYER_CLIMB);
+		player->startMovingDown(deltaTime);
+	}
+}
+
+void EventManager::onKeyPressSpace(Player* player) {
+	player->initJump();
+}
+
+void EventManager::onKeyPressN(bool* quit, int *startAnotherRound) {
+	*startAnotherRound = 1;
+	*quit = true;
+}
+
+void EventManager::onKeyPress1(bool* quit, int* startAnotherRound) {
+	*startAnotherRound = 1;
+	*quit = true;
+}
+
+void EventManager::onKeyPress2(bool* quit, int* startAnotherRound) {
+	*startAnotherRound = 2;
+	*quit = true;
+}
+
+void EventManager::onKeyPress3(bool* quit, int* startAnotherRound) {
+	*startAnotherRound = 3;
+	*quit = true;
+}
+
+void EventManager::onKeyUp(Player* player) {
+	player->stopMove();
 }

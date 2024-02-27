@@ -2,13 +2,15 @@
 extern "C" {
 #include "../../SDL2-2.0.10/include/SDL.h"
 #include "../../SDL2-2.0.10/include/SDL_main.h"
-	// add here game object
+#include "../Platform.h"
+#include "../game_objects/GameObject.h"
+#include "../game_objects/dynamic_game_objects/DynamicGameObject.h"
 }
 
 class CollisionManager {
 public:
 	bool isColliding = false;
-	bool checkCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
-	bool checkObjectCollisionWithPlatform(double xposObject, double yposObject, int hObject, double x1Platform, double y1Platform, double x2Platform, double y2Platform);
-	bool checkIfRectInsideLadder(SDL_Rect a, SDL_Rect b);
+	bool isCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
+	bool isDynamicGameObjectCollidingWithPlatform(DynamicGameObject* dynamicGameObject, Platform* platform);
+	bool isRectInsideLadder(SDL_Rect a, SDL_Rect b);
 };

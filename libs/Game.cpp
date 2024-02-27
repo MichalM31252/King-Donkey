@@ -271,19 +271,19 @@ void Game::handleFPSTimer() {
 // COLLISIONS
 
 void Game::handleCollisionWithKong(CollisionManager *collisionManager, ScreenManager& screenManager) { // COLLISION WITH KONG
-	if (collisionManager->checkCollisionBetweenRects(player->destRect, donkeyKong->destRect)) {
+	if (collisionManager->isCollisionBetweenRects(player->destRect, donkeyKong->destRect)) {
 		closeGame(screenManager);
 	}
 }
 
 void Game::handleCollisionWithPrincess(CollisionManager* collisionManager, ScreenManager& screenManager) { // COLLISION WITH PRINCESS
-	if (collisionManager->checkCollisionBetweenRects(player->destRect, princess->destRect)) {
+	if (collisionManager->isCollisionBetweenRects(player->destRect, princess->destRect)) {
 		closeGame(screenManager);
 	}
 }
 
 void Game::handleCollisionWithBarrel(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject* barrel, bool *quit, int *startAnotherRound) {
-	if (collisionManager->checkCollisionBetweenRects(player->destRect, barrel->destRect)) {
+	if (collisionManager->isCollisionBetweenRects(player->destRect, barrel->destRect)) {
 		*quit = true;
 		*startAnotherRound = 1;
 	}
@@ -291,7 +291,7 @@ void Game::handleCollisionWithBarrel(CollisionManager* collisionManager, ScreenM
 
 void Game::handleCollisionWithLadder(CollisionManager* collisionManager, ScreenManager& screenManager, int *flagLadder) {
 	for (int i = 0; i < ladderHolder->numberOfElements; i++) {
-		if (collisionManager->checkIfRectInsideLadder(player->destRect, ladderHolder->ladders[i].destRect)) {
+		if (collisionManager->isRectInsideLadder(player->destRect, ladderHolder->ladders[i].destRect)) {
 			*flagLadder = 1;
 		}
 	}
@@ -341,12 +341,13 @@ void Game::handleJumping() {
 
 void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject *gameObject , int* flagPlatform) {
 	for (int i = 0; i < platformHolder->numberOfElements; i++) {
-		if (collisionManager->checkObjectCollisionWithPlatform(gameObject->xpos, gameObject->ypos + gameObject->destRect.h, gameObject->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager->checkObjectCollisionWithPlatform(gameObject->xpos + gameObject->destRect.w, gameObject->ypos + gameObject->destRect.h, gameObject->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) { // checking from left bottom corner || from the right corner
+
+		if (collisionManager->isDynamicGameObjectCollidingWithPlatform(gameObject, &platformHolder->platforms[i])) { // checking from left bottom corner || from the right corner // REMEMBER TO ADD CHECKING BOTH SIDES
 			if (!gameObject->isClimbing) {
 				gameObject->ypos--;
 			}
 		}
-		if (collisionManager->checkObjectCollisionWithPlatform(gameObject->xpos, gameObject->ypos + gameObject->destRect.h + 1, gameObject->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos) || collisionManager->checkObjectCollisionWithPlatform(gameObject->xpos + gameObject->destRect.w, gameObject->ypos + gameObject->destRect.h + 1, gameObject->destRect.h, platformHolder->platforms[i].x1pos, platformHolder->platforms[i].y1pos, platformHolder->platforms[i].x2pos, platformHolder->platforms[i].y2pos)) {
+		if (collisionManager->isDynamicGameObjectCollidingWithPlatform(gameObject, &platformHolder->platforms[i])) { // REMEMBER TO CHECK LEFT AND RIGHT SIDE OF THE PLATFORM
 			*flagPlatform = 1;
 		}
 	}
