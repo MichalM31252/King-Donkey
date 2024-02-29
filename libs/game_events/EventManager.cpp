@@ -1,6 +1,5 @@
 #define _USE_MATH_DEFINES
 
-
 extern "C" {
 #include <math.h>
 #include <stdio.h>

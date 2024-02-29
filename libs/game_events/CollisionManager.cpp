@@ -2,7 +2,6 @@ extern "C" {
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
-
 #include "../../SDL2-2.0.10/include/SDL.h"
 #include "../../SDL2-2.0.10/include/SDL_main.h"
 #include "./CollisionManager.h"
@@ -23,15 +22,25 @@ bool CollisionManager::isDynamicGameObjectCollidingWithPlatform(DynamicGameObjec
 	double a = platform->y2pos - platform->y1pos;
 	double b = platform->x1pos - platform->x2pos;
 	double c = a * platform->x1pos + b * platform->y1pos;
+	
 	// Ax + By = C
 
-	if ( a * dynamicGameObject->xpos + b * dynamicGameObject->ypos == c) {
-		if ((dynamicGameObject->xpos >= platform->x1pos && dynamicGameObject->xpos <= platform->x2pos) || (dynamicGameObject->xpos <= platform->x1pos && dynamicGameObject->xpos >= platform->x2pos)) {
+	// check lower-left corner
+	// check lower-right corner
+
+	if ( a * dynamicGameObject->xpos + b * dynamicGameObject->ypos == c) { // is point part of the line
+		if ((dynamicGameObject->xpos >= platform->x1pos && dynamicGameObject->xpos <= platform->x2pos) || (dynamicGameObject->xpos <= platform->x1pos && dynamicGameObject->xpos >= platform->x2pos)) { // what's the point of this
+			// is x between start and end of the platform
+			// but won't the upper condition be enough??
+			// no idk why
+			// it's because the line we consider in the function is infinite, so we need to check if the point is between the start and end of the platform
 			return true;
 		}
 	}
 	return false;
 }
+
+
 
 bool CollisionManager::isRectInsideLadder(SDL_Rect playerDestRect, SDL_Rect ladderDestRect) { // a is player for ex, b is ladder // poor readability
 	if (playerDestRect.x >= ladderDestRect.x && playerDestRect.x + playerDestRect.w <= ladderDestRect.x + ladderDestRect.w) {

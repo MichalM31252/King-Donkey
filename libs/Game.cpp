@@ -343,6 +343,8 @@ void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, Scree
 	for (int i = 0; i < platformHolder->numberOfElements; i++) {
 
 		if (collisionManager->isDynamicGameObjectCollidingWithPlatform(gameObject, &platformHolder->platforms[i])) { // checking from left bottom corner || from the right corner // REMEMBER TO ADD CHECKING BOTH SIDES
+			// remember to check if bottom left or bottom right corner is colliding
+			// and also right now it checks the upper corner not the bottom one as it is supposed to
 			if (!gameObject->isClimbing) {
 				gameObject->ypos--;
 			}
