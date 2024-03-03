@@ -12,5 +12,6 @@ public:
 	bool isColliding = false;
 	bool isCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
 	bool isDynamicGameObjectCollidingWithPlatform(DynamicGameObject* dynamicGameObject, Platform* platform);
+	bool isPointAPartOfLine(const int x, const int y, Platform* platform);
 	bool isRectInsideLadder(SDL_Rect a, SDL_Rect b);
 };

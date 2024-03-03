@@ -340,19 +340,37 @@ void Game::handleJumping() {
 }
 
 void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject *gameObject , int* flagPlatform) {
+	// check bottom left corner
+	// check bottom right corner
+	int yPosition = gameObject->ypos + gameObject->destRect.h;
+	int xPositionBottomLeftCorner = gameObject->xpos;
+	int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
+
 	for (int i = 0; i < platformHolder->numberOfElements; i++) {
 
-		if (collisionManager->isDynamicGameObjectCollidingWithPlatform(gameObject, &platformHolder->platforms[i])) { // checking from left bottom corner || from the right corner // REMEMBER TO ADD CHECKING BOTH SIDES
-			// remember to check if bottom left or bottom right corner is colliding
-			// and also right now it checks the upper corner not the bottom one as it is supposed to
+		//bottom left corner 
+		if (collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, &platformHolder->platforms[i])) { // isPointInsideLine
 			if (!gameObject->isClimbing) {
 				gameObject->ypos--;
 			}
 		}
-		if (collisionManager->isDynamicGameObjectCollidingWithPlatform(gameObject, &platformHolder->platforms[i])) { // REMEMBER TO CHECK LEFT AND RIGHT SIDE OF THE PLATFORM
+		if (collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, &platformHolder->platforms[i])) { // isPointOnTopOfLine
+			*flagPlatform = 1;
+		}
+
+		//bottom right corner 
+		if (collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition, &platformHolder->platforms[i])) { // isPointInsideLine
+			if (!gameObject->isClimbing) {
+				gameObject->ypos--;
+			}
+		}
+		if (collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, &platformHolder->platforms[i])) {// isPointOnTopOfLine
 			*flagPlatform = 1;
 		}
 	}
+
+	// after that you need to add collision for the top left and top right corner
+	// but in their case you need to stop the player from moving up
 }
 
 void Game::drawElements(ScreenManager& screenManager) {

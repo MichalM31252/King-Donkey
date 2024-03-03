@@ -18,7 +18,8 @@ bool CollisionManager::isCollisionBetweenRects(SDL_Rect a, SDL_Rect b) {
 	}
 }
 
-bool CollisionManager::isDynamicGameObjectCollidingWithPlatform(DynamicGameObject* dynamicGameObject, Platform* platform) { // make this function check for x1 and x2 
+//bool CollisionManager::isDynamicGameObjectCollidingWithPlatform(DynamicGameObject* dynamicGameObject, Platform* platform) { // make this function check for x1 and x2 
+bool CollisionManager::isPointAPartOfLine(const int x, const int y, Platform* platform) { // make this function check for x1 and x2 
 	double a = platform->y2pos - platform->y1pos;
 	double b = platform->x1pos - platform->x2pos;
 	double c = a * platform->x1pos + b * platform->y1pos;
@@ -28,8 +29,9 @@ bool CollisionManager::isDynamicGameObjectCollidingWithPlatform(DynamicGameObjec
 	// check lower-left corner
 	// check lower-right corner
 
-	if ( a * dynamicGameObject->xpos + b * dynamicGameObject->ypos == c) { // is point part of the line
-		if ((dynamicGameObject->xpos >= platform->x1pos && dynamicGameObject->xpos <= platform->x2pos) || (dynamicGameObject->xpos <= platform->x1pos && dynamicGameObject->xpos >= platform->x2pos)) { // what's the point of this
+	// this checks 
+	if ( a * x + b * y == c) { // is point part of the line
+		if ((x >= platform->x1pos && x <= platform->x2pos) || (x <= platform->x1pos && x >= platform->x2pos)) { // what's the point of this
 			// is x between start and end of the platform
 			// but won't the upper condition be enough??
 			// no idk why
@@ -37,6 +39,7 @@ bool CollisionManager::isDynamicGameObjectCollidingWithPlatform(DynamicGameObjec
 			return true;
 		}
 	}
+
 	return false;
 }
 
