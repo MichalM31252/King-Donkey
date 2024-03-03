@@ -32,10 +32,6 @@ bool CollisionManager::isPointAPartOfLine(const int x, const int y, Platform* pl
 	// this checks 
 	if ( a * x + b * y == c) { // is point part of the line
 		if ((x >= platform->x1pos && x <= platform->x2pos) || (x <= platform->x1pos && x >= platform->x2pos)) { // what's the point of this
-			// is x between start and end of the platform
-			// but won't the upper condition be enough??
-			// no idk why
-			// it's because the line we consider in the function is infinite, so we need to check if the point is between the start and end of the platform
 			return true;
 		}
 	}

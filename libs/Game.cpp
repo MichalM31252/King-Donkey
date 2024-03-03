@@ -352,6 +352,7 @@ void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, Scree
 		if (collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, &platformHolder->platforms[i])) { // isPointInsideLine
 			if (!gameObject->isClimbing) {
 				gameObject->ypos--;
+				yPosition--;
 			}
 		}
 		if (collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, &platformHolder->platforms[i])) { // isPointOnTopOfLine
@@ -362,6 +363,7 @@ void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, Scree
 		if (collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition, &platformHolder->platforms[i])) { // isPointInsideLine
 			if (!gameObject->isClimbing) {
 				gameObject->ypos--;
+				yPosition--;
 			}
 		}
 		if (collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, &platformHolder->platforms[i])) {// isPointOnTopOfLine
@@ -416,7 +418,6 @@ void Game::handlePlayer(CollisionManager* collisionManager, ScreenManager& scree
 	if (player->isJumping && player->ypos <= player->jumpHeightStop) {
 		player->stopJumping();
 		player->startFalling();
-		
 	}
 }
 
