@@ -3,8 +3,7 @@ extern "C" {
 #include "./PlatformHolder.h"
 }
 
-void initPlatformHolder(PlatformHolder* platformHolder) {
-	
+void initPlatformHolder(PlatformHolder* platformHolder) {	
 	platformHolder->platforms = new Platform[MAXIMUM_AMOUNT_OF_PLATFORMS]; // this is the reason why platforms are not pointers
 	platformHolder->numberOfElements = 0; // number of elements currently inside
 	platformHolder->sizeOfArray = MAXIMUM_AMOUNT_OF_PLATFORMS;

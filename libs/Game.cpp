@@ -1,6 +1,5 @@
 #define _USE_MATH_DEFINES
 
-
 extern "C" {
 
 #include <math.h>
@@ -370,28 +369,36 @@ void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, Scree
 			*flagPlatform = 1;
 		}
 	}
-
 	// after that you need to add collision for the top left and top right corner
 	// but in their case you need to stop the player from moving up
+}
+
+void drawPlatforms(PlatformHolder* platformHolder, ScreenManager& screenManager) {
+	for (int i = 0; i < platformHolder->numberOfElements; i++) {
+		platformHolder->platforms[i].render(screenManager.screen);
+	}
+}
+
+void drawLadders(LadderHolder* ladderHolder, ScreenManager& screenManager) {
+	for (int i = 0; i < ladderHolder->numberOfElements; i++) {
+		ladderHolder->ladders[i].renderLadder(screenManager.screen);
+	}
+}
+
+void drawBarrels(BarrelHolder* barrelHolder, ScreenManager& screenManager) {
+	for (int i = 0; i < barrelHolder->numberOfElements; i++) {
+		barrelHolder->barrels[i].render(screenManager.screen);
+	}
 }
 
 void Game::drawElements(ScreenManager& screenManager) {
 	donkeyKong->render(screenManager.screen);
 	princess->render(screenManager.screen);
-
-	for (int i = 0; i < platformHolder->numberOfElements; i++) {
-		platformHolder->platforms[i].render(screenManager.screen);
-	}
-
-	for (int i = 0; i < ladderHolder->numberOfElements; i++) {
-		ladderHolder->ladders[i].renderLadder(screenManager.screen);
-	}
-
-	for (int i = 0; i < barrelDispenser->barrelHolder->numberOfElements; i++) {
-		barrelDispenser->barrelHolder->barrels[i].render(screenManager.screen);
-	}
-
 	player->render(screenManager.screen);
+
+	drawPlatforms(platformHolder, screenManager);
+	drawLadders(ladderHolder, screenManager);
+	drawBarrels(barrelDispenser->barrelHolder, screenManager);
 }
 
 void Game::handlePlayer(CollisionManager* collisionManager, ScreenManager& screenManager) { // player collision
@@ -458,11 +465,9 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 		screenManager.drawAdditionalInfo(worldTime);
 
 		CollisionManager collisionManager;
-
 		handlePlayer(&collisionManager, screenManager); // player collision
 		handleBarrels(&collisionManager, screenManager, &quit, startAnotherRound); // barrel collision
 
-		// Updating the player
 		player->update(deltaTime);
 
 		drawElements(screenManager);

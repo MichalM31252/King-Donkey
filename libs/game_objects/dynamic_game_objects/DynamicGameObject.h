@@ -23,6 +23,11 @@ public:
 
 	DynamicGameObject();
 	void update(double deltaTime);
+
+	void stayInBounds();
+	void updatePosition();
+	void startAccumulatingDistance(double deltaTime);
+
 	void moveStart(double speed);
 	void startMovingLeft(double delta);
 	void startMovingRight(double delta);

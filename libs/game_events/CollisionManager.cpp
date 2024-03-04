@@ -18,24 +18,17 @@ bool CollisionManager::isCollisionBetweenRects(SDL_Rect a, SDL_Rect b) {
 	}
 }
 
-//bool CollisionManager::isDynamicGameObjectCollidingWithPlatform(DynamicGameObject* dynamicGameObject, Platform* platform) { // make this function check for x1 and x2 
 bool CollisionManager::isPointAPartOfLine(const int x, const int y, Platform* platform) { // make this function check for x1 and x2 
 	double a = platform->y2pos - platform->y1pos;
 	double b = platform->x1pos - platform->x2pos;
 	double c = a * platform->x1pos + b * platform->y1pos;
 	
 	// Ax + By = C
-
-	// check lower-left corner
-	// check lower-right corner
-
-	// this checks 
 	if ( a * x + b * y == c) { // is point part of the line
 		if ((x >= platform->x1pos && x <= platform->x2pos) || (x <= platform->x1pos && x >= platform->x2pos)) { // what's the point of this
 			return true;
 		}
 	}
-
 	return false;
 }
 

@@ -63,6 +63,10 @@ void EventManager::onKeyDown(bool* quit, double deltaTime, Player* player, int* 
 	}
 }
 
+void EventManager::onKeyUp(Player* player) { // yeah this needs to be fixed you need to check if space was let go or arrow was let go
+	player->stopMove(); 
+}
+
 void EventManager::initializeQuit(bool* quit, int* startAnotherRound) {
 	*quit = true;
 	*startAnotherRound = 0;
@@ -120,6 +124,3 @@ void EventManager::onKeyPress3(bool* quit, int* startAnotherRound) {
 	*quit = true;
 }
 
-void EventManager::onKeyUp(Player* player) {
-	player->stopMove();
-}

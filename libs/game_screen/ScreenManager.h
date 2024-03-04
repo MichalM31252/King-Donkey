@@ -18,16 +18,16 @@ class ScreenManager {
 
 		void SDLCheck();
 		void SDLCreateWindowAndRenderer();
-		void SDLSetHint();
-		void SDLSetRenderLogicalSize();
-		void SDLSetDefaultDrawColor();
-		void SDLSetWindowTitle();
-		void SDLSetCharset();
-		void SDLSetScreen();
-		void SDLSetTexture();
+		void setSDLHint();
+		void setSDLRenderLogicalSize();
+		void setSDLDefaultDrawColor();
+		void setSDLWindowTitle();
+		void setSDLCharset();
+		void setSDLScreen();
+		void setSDLTexture();
 
-		void SDLHideCursor();
-		void SDLSetColorKey();
+		void hideSDLCursor();
+		void setSDLColorKey();
 
 		void setColors();
 		void drawOutlineOfTheBoard();

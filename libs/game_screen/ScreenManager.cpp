@@ -26,51 +26,48 @@ void ScreenManager::SDLCreateWindowAndRenderer() {
 	};
 }
 
-void ScreenManager::SDLSetHint() { 
+void ScreenManager::setSDLHint() { 
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 }
 
-void ScreenManager::SDLSetRenderLogicalSize() { 
+void ScreenManager::setSDLRenderLogicalSize() { 
 	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void ScreenManager::SDLSetDefaultDrawColor() { 
+void ScreenManager::setSDLDefaultDrawColor() { 
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
 
-void ScreenManager::SDLSetWindowTitle() { 
+void ScreenManager::setSDLWindowTitle() { 
 	SDL_SetWindowTitle(window, "192928 Michal Malinowski");
 }
 
-void ScreenManager::SDLSetCharset() { 
+void ScreenManager::setSDLCharset() { 
 	charset = SDL_LoadBMP("./cs8x8.bmp");
 	if (charset == NULL) {
 		printf("SDL_LoadBMP(cs8x8.bmp) error: %s\n", SDL_GetError());
 	};
 }
 
-void ScreenManager::SDLSetScreen() { 
+void ScreenManager::setSDLScreen() { 
 	screen = SDL_CreateRGBSurface(0, SCREEN_WIDTH, SCREEN_HEIGHT, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
 }
 
-void ScreenManager::SDLSetTexture() { 
+void ScreenManager::setSDLTexture() { 
 	scrtex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void ScreenManager::SDLHideCursor() { 
+void ScreenManager::hideSDLCursor() { 
 	SDL_ShowCursor(SDL_DISABLE); // hides the cursor
 }
 
-void ScreenManager::SDLSetColorKey() { 
+void ScreenManager::setSDLColorKey() { 
 	SDL_SetColorKey(charset, true, 0x000000);
 }
 
 void ScreenManager::serveNextFrame() { 
-
 	SDL_UpdateTexture(scrtex, NULL, screen->pixels, screen->pitch);
-
 	SDL_RenderCopy(renderer, scrtex, NULL, NULL); // scrtex here is what we want to render
-
 	SDL_RenderPresent(renderer); 
 }
 
@@ -98,15 +95,15 @@ void ScreenManager::drawAdditionalInfo(double worldTime) { // draws current time
 void ScreenManager::createSDL() {
 	SDLCheck();
 	SDLCreateWindowAndRenderer();
-	SDLSetHint();
-	SDLSetRenderLogicalSize();
-	SDLSetDefaultDrawColor();
-	SDLSetWindowTitle();
-	SDLSetCharset();
-	SDLSetScreen();
-	SDLSetTexture();
-	SDLHideCursor();
-	SDLSetColorKey();
+	setSDLHint();
+	setSDLRenderLogicalSize();
+	setSDLDefaultDrawColor();
+	setSDLWindowTitle();
+	setSDLCharset();
+	setSDLScreen();
+	setSDLTexture();
+	hideSDLCursor();
+	setSDLColorKey();
 	setColors();
 }
 

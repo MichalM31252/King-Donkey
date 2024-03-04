@@ -23,6 +23,7 @@ DynamicGameObject::DynamicGameObject() {
 	currentRunningSpriteIdBarrel = 1;
 }
 
+// These two methods should be moved to a sprite manager
 void DynamicGameObject::decideSpritePlayer() {
 	if (currentRunningSpriteId == 1) {
 		textureManager.loadTexture(PLAYER_1_FILENAME);
@@ -57,19 +58,18 @@ void DynamicGameObject::decideSpriteBarrel() {
 	}
 }
 
-void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
+void DynamicGameObject::startAccumulatingDistance(double deltaTime) {
 	if (objectSpeed > 0) {
 		accumulatedXMove += deltaTime * objectSpeed * currentDirectionOfMovementHorizontal;
 		if (isClimbing) {
 			accumulatedYMove += deltaTime * objectSpeed * currentDirectionOfMovementVertical;
 		}
 	}
+}
 
-
-
-
+void DynamicGameObject::updatePosition() {
 	// WATCHOUT DIFFERENT += -= SIGNS AND VARIABLES IN EVERY IF
-	// moving left, down, right, top
+// moving left, down, right, top
 	if (currentDirectionOfMovementHorizontal > 0.0 || currentDirectionOfMovementVertical > 0.0) { // for positive numbers 
 		if (accumulatedXMove > currentDirectionOfMovementHorizontal) { // right // THIS CANT BE BIGGER OR EQUAL BECAUSE WHEN STARTING IT IS ALWAYS TRUE 0 <= 0
 			int pixelsToMove = accumulatedXMove / 1;
@@ -114,7 +114,9 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 			}
 		}
 	}
+}
 
+void DynamicGameObject::stayInBounds() {
 	if (!canLeaveScreen) {
 		if (xpos < STARTING_X) { // left
 			xpos = STARTING_X;
@@ -129,9 +131,15 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 			ypos = STARTING_Y + TOP_BAR_HEIGHT;
 		}
 	}
+}
 
-	// for each pixelsToMove check if passing through a platform !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
 
+	startAccumulatingDistance(deltaTime);
+	updatePosition();
+	stayInBounds();
+
+	// to remove these you need to merge the three methods into one and then updateObjectPosition
 	destRect.x = xpos;
 	destRect.y = ypos;
 }
