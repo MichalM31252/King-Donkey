@@ -20,6 +20,7 @@ extern "C" {
 #include "./PlatformHolder.h"
 }
 
+// MOVE TO SCREEN MANAGER ? 
 void Game::createFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
 	tick1 = SDL_GetTicks();
 	frames = 0; // frames that happend
@@ -37,6 +38,7 @@ void Game::createPlayer() { // (logic)
 	pla->isPlayer = true;
 	player = pla;
 }
+
 
 void Game::createDonkeyKong() {
 	GameObject* donkeyK = new GameObject();
@@ -267,20 +269,21 @@ void Game::handleFPSTimer() {
 	};
 }
 
-// COLLISIONS
-
+// MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithKong(CollisionManager *collisionManager, ScreenManager& screenManager) { // COLLISION WITH KONG
 	if (collisionManager->isCollisionBetweenRects(player->destRect, donkeyKong->destRect)) {
 		closeGame(screenManager);
 	}
 }
 
+// MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithPrincess(CollisionManager* collisionManager, ScreenManager& screenManager) { // COLLISION WITH PRINCESS
 	if (collisionManager->isCollisionBetweenRects(player->destRect, princess->destRect)) {
 		closeGame(screenManager);
 	}
 }
 
+// MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithBarrel(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject* barrel, bool *quit, int *startAnotherRound) {
 	if (collisionManager->isCollisionBetweenRects(player->destRect, barrel->destRect)) {
 		*quit = true;
@@ -288,6 +291,7 @@ void Game::handleCollisionWithBarrel(CollisionManager* collisionManager, ScreenM
 	}
 }
 
+// MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithLadder(CollisionManager* collisionManager, ScreenManager& screenManager, int *flagLadder) {
 	for (int i = 0; i < ladderHolder->numberOfElements; i++) {
 		if (collisionManager->isRectInsideLadder(player->destRect, ladderHolder->ladders[i].destRect)) {
@@ -304,6 +308,8 @@ void Game::handleCollisionWithLadder(CollisionManager* collisionManager, ScreenM
 	}
 }
 
+
+// MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithJumping() {
 	if (player->isFalling) {
 		player->stopFalling();
@@ -315,6 +321,7 @@ void Game::handleCollisionWithJumping() {
 	}
 }
 
+// MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject *gameObject , int* flagPlatform) {
 	// check bottom left corner
 	// check bottom right corner
@@ -350,24 +357,28 @@ void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, Scree
 	// but in their case you need to stop the player from moving up
 }
 
+// MOVE TO TEXTURE MANAGER
 void drawPlatforms(PlatformHolder* platformHolder, ScreenManager& screenManager) {
 	for (int i = 0; i < platformHolder->numberOfElements; i++) {
 		platformHolder->platforms[i].render(screenManager.screen);
 	}
 }
 
+// MOVE TO TEXTURE MANAGER
 void drawLadders(LadderHolder* ladderHolder, ScreenManager& screenManager) {
 	for (int i = 0; i < ladderHolder->numberOfElements; i++) {
 		ladderHolder->ladders[i].renderLadder(screenManager.screen);
 	}
 }
 
+// MOVE TO TEXTURE MANAGER
 void drawBarrels(BarrelHolder* barrelHolder, ScreenManager& screenManager) {
 	for (int i = 0; i < barrelHolder->numberOfElements; i++) {
 		barrelHolder->barrels[i].render(screenManager.screen);
 	}
 }
 
+// MOVE TO TEXTURE MANAGER
 void Game::drawElements(ScreenManager& screenManager) {
 	donkeyKong->render(screenManager.screen);
 	princess->render(screenManager.screen);
@@ -378,6 +389,8 @@ void Game::drawElements(ScreenManager& screenManager) {
 	drawBarrels(barrelDispenser->barrelHolder, screenManager);
 }
 
+
+// MOVE TO GAME OBJECT OVERSEER
 void Game::handlePlayer(CollisionManager* collisionManager, ScreenManager& screenManager) { // player collision
 	handleCollisionWithKong(collisionManager, screenManager);
 	handleCollisionWithPrincess(collisionManager, screenManager);
@@ -405,6 +418,7 @@ void Game::handlePlayer(CollisionManager* collisionManager, ScreenManager& scree
 	}
 }
 
+// MOVE TO GAME OBJECT OVERSEER
 void Game::handleBarrels(CollisionManager* collisionManager, ScreenManager& screenManager, bool *quit, int* startAnotherRound) {
 	barrelDispenser->updateBarrelDispenser(deltaTime);
 
@@ -430,6 +444,7 @@ void Game::handleBarrels(CollisionManager* collisionManager, ScreenManager& scre
 	}
 }
 
+// MOVE TO ROUND MANAGER
 void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventHandler, int *startAnotherRound) { // VisualManager is passed by reference, can't be an const because it's methods change the object
 	bool quit = false;
 	while (!quit) {
@@ -457,11 +472,10 @@ void Game::handleCurrentRound(ScreenManager& screenManager, EventManager& eventH
 	};
 }
 
+// MOVE TO ROUND MANAGER
 void Game::handleRound(ScreenManager& screenManager, int startAnotherRound) { // yeah make this a different class in the future	
 	EventManager eventHandler;
-	
 	createFramerate();
-
 	if (startAnotherRound) {
 		if (startAnotherRound == BOARD_ID_A) {
 			createBoard(BOARD_ID_A);
