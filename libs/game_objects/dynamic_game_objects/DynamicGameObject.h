@@ -8,8 +8,8 @@ class DynamicGameObject : public GameObject {
 public:
 	double accumulatedXMove, accumulatedYMove;
 	bool canLeaveScreen;
-	double gravity, objectSpeed;
-	bool isFalling;
+	double objectSpeed;
+	
 	double currentDirectionOfMovementHorizontal, currentDirectionOfMovementVertical;
 	bool isClimbing, isInsideLadder;
 	bool checkIfJumpPossible, isJumping;
@@ -18,6 +18,8 @@ public:
 	bool isPlayer;
 	int currentRunningSpriteId;
 	int currentRunningSpriteIdBarrel;
+
+	// this should be in a sprite manager
 	void decideSpritePlayer();
 	void decideSpriteBarrel();
 

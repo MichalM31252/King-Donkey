@@ -315,29 +315,6 @@ void Game::handleCollisionWithJumping() {
 	}
 }
 
-void Game::handleFalling(DynamicGameObject *dynamicGameObject) {
-	if (!dynamicGameObject->isJumping) {
-		dynamicGameObject->startFalling();
-
-		dynamicGameObject->accumulatedYMove += deltaTime * dynamicGameObject->gravity;
-		int pixelsToMove = dynamicGameObject->accumulatedYMove / 1;
-		if (pixelsToMove >= 1) {
-			dynamicGameObject->ypos += 1;
-			dynamicGameObject->accumulatedYMove -= 1;
-		}
-	}
-}
-
-void Game::handleJumping() {
-	player->textureManager.loadTexture(PLAYER_3_FILENAME);
-	player->accumulatedYMove -= deltaTime * player->gravity;
-	int pixelsToMove = player->accumulatedYMove / 1;
-	if (pixelsToMove <= -1) {
-		player->ypos -= 1;
-		player->accumulatedYMove += 1;
-	}
-}
-
 void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject *gameObject , int* flagPlatform) {
 	// check bottom left corner
 	// check bottom right corner

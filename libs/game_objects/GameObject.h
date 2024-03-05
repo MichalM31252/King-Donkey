@@ -20,8 +20,8 @@ public:
 	void render(SDL_Surface* screen);
 	void renderLadder(SDL_Surface* screen);
 	void createSrcRect();
-	void setSrcRect(int w, int h);
 	void createDestRect();
+	void setSrcRect(int w, int h);
 	void setDestRect(int w, int h);
 	void setPosition(int x, int y);
 };

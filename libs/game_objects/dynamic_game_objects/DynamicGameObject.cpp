@@ -5,8 +5,6 @@ extern "C" {
 // objectSpeed should be moved to physics
 DynamicGameObject::DynamicGameObject() {
 	canLeaveScreen = false;
-	gravity = DEFAULT_GRAVITY;
-	isFalling = true;
 	currentDirectionOfMovementHorizontal = 0.0; // 1 = right, -1 = left
 	currentDirectionOfMovementVertical = 0.0; // 1 = down, -1 = up
 	objectSpeed = 0;
@@ -39,6 +37,7 @@ void DynamicGameObject::decideSpritePlayer() {
 	}
 }
 
+// This should be moved to a sprite manager
 void DynamicGameObject::decideSpriteBarrel() {
 	if (currentRunningSpriteIdBarrel == 1) {
 		textureManager.loadTexture(BARREL_1_FILENAME);
@@ -69,7 +68,7 @@ void DynamicGameObject::startAccumulatingDistance(double deltaTime) {
 
 void DynamicGameObject::updatePosition() {
 	// WATCHOUT DIFFERENT += -= SIGNS AND VARIABLES IN EVERY IF
-// moving left, down, right, top
+	// moving left, down, right, top
 	if (currentDirectionOfMovementHorizontal > 0.0 || currentDirectionOfMovementVertical > 0.0) { // for positive numbers 
 		if (accumulatedXMove > currentDirectionOfMovementHorizontal) { // right // THIS CANT BE BIGGER OR EQUAL BECAUSE WHEN STARTING IT IS ALWAYS TRUE 0 <= 0
 			int pixelsToMove = accumulatedXMove / 1;
@@ -134,7 +133,6 @@ void DynamicGameObject::stayInBounds() {
 }
 
 void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
-
 	startAccumulatingDistance(deltaTime);
 	updatePosition();
 	stayInBounds();
