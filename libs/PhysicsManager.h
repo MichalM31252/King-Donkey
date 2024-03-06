@@ -6,8 +6,8 @@ extern "C" {
 
 class PhysicsManager {
 public:
-	bool isFalling;
-	double gravity;
+	// stop falling
+	// start falling
 
 	void handleFalling(DynamicGameObject* dynamicGameObject, double deltaTime);
 };

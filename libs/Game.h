@@ -66,8 +66,6 @@ class Game {
 		void handleCollisionWithLadder(CollisionManager* collisionManager, ScreenManager& screenManager, int* flagLadder);
 		void handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject *gameObject, int* flagPlatform);
 		void handleCollisionWithJumping();
-		void handleFalling(DynamicGameObject* dynamicGameObject);
-		void handleJumping();
 
 		void drawElements(ScreenManager& screenManager);
 

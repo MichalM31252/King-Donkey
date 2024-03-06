@@ -7,5 +7,5 @@ extern "C" {
 class Player : public DynamicGameObject {
 public:
 	Player();
-	void jump();
+	void jump(double deltaTime);
 };

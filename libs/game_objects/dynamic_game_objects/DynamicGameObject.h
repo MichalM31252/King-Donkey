@@ -9,6 +9,9 @@ public:
 	double accumulatedXMove, accumulatedYMove;
 	bool canLeaveScreen;
 	double objectSpeed;
+
+	bool isFalling;
+	double gravity;
 	
 	double currentDirectionOfMovementHorizontal, currentDirectionOfMovementVertical;
 	bool isClimbing, isInsideLadder;

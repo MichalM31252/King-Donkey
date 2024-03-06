@@ -18,6 +18,7 @@ extern "C" {
 #include "./game_events/CollisionManager.h"
 #include "./Platform.h"
 #include "./PlatformHolder.h"
+#include "./PhysicsManager.h"
 }
 
 // MOVE TO SCREEN MANAGER ? 
@@ -298,7 +299,6 @@ void Game::handleCollisionWithLadder(CollisionManager* collisionManager, ScreenM
 			*flagLadder = 1;
 		}
 	}
-
 	if (*flagLadder) {
 		player->isInsideLadder = true;
 	}
@@ -405,10 +405,11 @@ void Game::handlePlayer(CollisionManager* collisionManager, ScreenManager& scree
 			handleCollisionWithJumping();
 		}
 		else {
-			handleFalling(player);
+			PhysicsManager physicsManager;
+			physicsManager.handleFalling(player, deltaTime);
 		}
 		if (player->isJumping) { // handle jumping
-			handleJumping();
+			player->jump(deltaTime);
 		}
 	}
 
@@ -438,7 +439,8 @@ void Game::handleBarrels(CollisionManager* collisionManager, ScreenManager& scre
 			barrelDispenser->barrelHolder->barrels[i].startMovingRight(deltaTime);
 		}
 		else {
-			handleFalling(&barrelDispenser->barrelHolder->barrels[i]); // THE PROBLEM IS HERE
+			PhysicsManager physicsManager;
+			physicsManager.handleFalling(&barrelDispenser->barrelHolder->barrels[i], deltaTime); // THE PROBLEM IS HERE
 		}
 		barrelDispenser->barrelHolder->barrels[i].update(deltaTime);
 	}

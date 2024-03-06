@@ -16,6 +16,9 @@ DynamicGameObject::DynamicGameObject() {
 	isJumping = false;
 	jumpHeightStop = SCREEN_HEIGHT;
 
+	isFalling = false;
+	gravity = DEFAULT_GRAVITY;
+
 	isPlayer = false;
 	currentRunningSpriteId = 1;
 	currentRunningSpriteIdBarrel = 1;
