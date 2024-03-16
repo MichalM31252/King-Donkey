@@ -1,24 +1,7 @@
 #define _USE_MATH_DEFINES
 
 extern "C" {
-
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
-
-#include "../SDL2-2.0.10/include/SDL.h"
-#include "../SDL2-2.0.10/include/SDL_main.h"
-
 #include "./Game.h"
-#include "./Constants.h"
-#include "./game_screen/ScreenManager.h"
-#include "./game_objects/dynamic_game_objects/DynamicGameObject.h"
-#include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h"
-#include "./game_events/EventManager.h"
-#include "./game_events/CollisionManager.h"
-#include "./Platform.h"
-#include "./PlatformHolder.h"
-#include "./PhysicsManager.h"
 }
 
 // MOVE TO SCREEN MANAGER ? 

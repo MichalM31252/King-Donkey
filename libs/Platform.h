@@ -1,8 +1,11 @@
 #pragma once
 
 extern "C" {
+#include <math.h>
+
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
+
 #include "./Constants.h"
 }
 // rename 
