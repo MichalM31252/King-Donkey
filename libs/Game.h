@@ -1,6 +1,10 @@
 #pragma once
 
 extern "C" {
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
 #include "./game_screen/ScreenManager.h"
@@ -13,6 +17,8 @@ extern "C" {
 #include "./LadderHolder.h"
 #include "./BarrelHolder.h"
 #include "./BarrelDispenser.h"
+#include "./Constants.h"
+#include "./PhysicsManager.h"
 }
 
 class Game {

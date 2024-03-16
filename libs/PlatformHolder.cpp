@@ -1,5 +1,4 @@
 extern "C" {
-#include "./Platform.h"
 #include "./PlatformHolder.h"
 }
 

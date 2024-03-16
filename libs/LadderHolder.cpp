@@ -1,5 +1,4 @@
 extern "C" {
-#include "./game_objects/GameObject.h"
 #include "./LadderHolder.h"
 }
 

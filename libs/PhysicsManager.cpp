@@ -1,7 +1,5 @@
 extern "C" {
 #include "./PhysicsManager.h"
-#include "./Constants.h"
-#include "./game_objects/dynamic_game_objects/DynamicGameObject.h"
 }
 
 //PhysicsManager::PhysicsManager() {

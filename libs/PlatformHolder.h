@@ -4,7 +4,6 @@ extern "C" {
 #include "./Platform.h"
 }
 
-
 struct PlatformHolder {
 	Platform* platforms;
 	int numberOfElements;
