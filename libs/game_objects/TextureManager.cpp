@@ -1,10 +1,6 @@
 extern "C" {
-#include "../../SDL2-2.0.10/include/SDL.h"
-#include "../../SDL2-2.0.10/include/SDL_main.h"
 #include "./TextureManager.h"
 #include "../../libs/game_objects/GameObject.h"
-#include <stdio.h>
-#include <string.h>
 }
 
 void TextureManager::loadTexture(const char* fileName) {

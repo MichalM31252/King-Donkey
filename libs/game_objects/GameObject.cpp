@@ -1,8 +1,6 @@
 
 extern "C" {
 #include "GameObject.h"
-#include "./TextureManager.h"
-#include "../Constants.h"
 }
 
 GameObject::GameObject()
