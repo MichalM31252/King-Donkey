@@ -23,7 +23,7 @@
     <ClCompile Include="libs\BarrelHolder.cpp" />
     <ClCompile Include="libs\Game.cpp" />
     <ClCompile Include="libs\game_events\CollisionManager.cpp" />
-    <ClCompile Include="libs\game_events\KeyboardController.cpp" />
+    <ClCompile Include="libs\game_events\KeyboardManager.cpp" />
     <ClCompile Include="libs\game_file_manager\FileManager.cpp" />
     <ClCompile Include="libs\game_info\AdditionalInfo.cpp" />
     <ClCompile Include="libs\game_info\HallOfFame.cpp" />
@@ -53,7 +53,7 @@
     <ClInclude Include="libs\Constants.h" />
     <ClInclude Include="libs\Game.h" />
     <ClInclude Include="libs\game_events\CollisionManager.h" />
-    <ClInclude Include="libs\game_events\KeyboardController.h" />
+    <ClInclude Include="libs\game_events\KeyboardManager.h" />
     <ClInclude Include="libs\game_file_manager\FileManager.h" />
     <ClInclude Include="libs\game_info\AdditionalInfo.h" />
     <ClInclude Include="libs\game_info\HallOfFame.h" />

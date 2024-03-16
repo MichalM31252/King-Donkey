@@ -1,10 +1,10 @@
 #define _USE_MATH_DEFINES
 
 extern "C" {
-#include "KeyboardController.h"
+#include "KeyboardManager.h"
 }
 
-void KeyboardController::handleEvents(bool* quit, double deltaTime, Player* player, int *startAnotherRound) {
+void KeyboardManager::handleEvents(bool* quit, double deltaTime, Player* player, int *startAnotherRound) {
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 			case SDL_KEYDOWN:
@@ -20,7 +20,7 @@ void KeyboardController::handleEvents(bool* quit, double deltaTime, Player* play
 	}
 }
 
-void KeyboardController::onKeyDown(bool* quit, double deltaTime, Player* player, int* startAnotherRound) {
+void KeyboardManager::onKeyDown(bool* quit, double deltaTime, Player* player, int* startAnotherRound) {
 	player->moveStart(DEFAULT_PLAYER_SPEED);
 	switch (event.key.keysym.sym) {
 		case SDLK_ESCAPE:
@@ -56,16 +56,16 @@ void KeyboardController::onKeyDown(bool* quit, double deltaTime, Player* player,
 	}
 }
 
-void KeyboardController::onKeyUp(Player* player) { // yeah this needs to be fixed you need to check if space was let go or arrow was let go
+void KeyboardManager::onKeyUp(Player* player) { // yeah this needs to be fixed you need to check if space was let go or arrow was let go
 	player->stopMove(); 
 }
 
-void KeyboardController::initializeQuit(bool* quit, int* startAnotherRound) {
+void KeyboardManager::initializeQuit(bool* quit, int* startAnotherRound) {
 	*quit = true;
 	*startAnotherRound = 0;
 }
 
-void KeyboardController::onKeyPressArrowUp(double deltaTime, Player* player) {
+void KeyboardManager::onKeyPressArrowUp(double deltaTime, Player* player) {
 	if (player->isInsideLadder) {
 		player->isClimbing = true; // the problem is most likely with this 
 		player->textureManager.loadTexture(PLAYER_CLIMB);
@@ -73,19 +73,19 @@ void KeyboardController::onKeyPressArrowUp(double deltaTime, Player* player) {
 	}
 }
 
-void KeyboardController::onKeyPressArrowLeft(double deltaTime, Player* player) {
+void KeyboardManager::onKeyPressArrowLeft(double deltaTime, Player* player) {
 	if (!player->isClimbing) {
 		player->startMovingLeft(deltaTime);
 	}
 }
 
-void KeyboardController::onKeyPressArrowRight(double deltaTime, Player* player) {
+void KeyboardManager::onKeyPressArrowRight(double deltaTime, Player* player) {
 	if (!player->isClimbing) {
 		player->startMovingRight(deltaTime);
 	}
 }
 
-void KeyboardController::onKeyPressArrowDown(double deltaTime, Player* player) {
+void KeyboardManager::onKeyPressArrowDown(double deltaTime, Player* player) {
 	if (player->isInsideLadder) {
 		player->isClimbing = true;
 		player->textureManager.loadTexture(PLAYER_CLIMB);
@@ -93,26 +93,26 @@ void KeyboardController::onKeyPressArrowDown(double deltaTime, Player* player) {
 	}
 }
 
-void KeyboardController::onKeyPressSpace(Player* player) {
+void KeyboardManager::onKeyPressSpace(Player* player) {
 	player->initJump();
 }
 
-void KeyboardController::onKeyPressN(bool* quit, int *startAnotherRound) {
+void KeyboardManager::onKeyPressN(bool* quit, int *startAnotherRound) {
 	*startAnotherRound = 1;
 	*quit = true;
 }
 
-void KeyboardController::onKeyPress1(bool* quit, int* startAnotherRound) {
+void KeyboardManager::onKeyPress1(bool* quit, int* startAnotherRound) {
 	*startAnotherRound = 1;
 	*quit = true;
 }
 
-void KeyboardController::onKeyPress2(bool* quit, int* startAnotherRound) {
+void KeyboardManager::onKeyPress2(bool* quit, int* startAnotherRound) {
 	*startAnotherRound = 2;
 	*quit = true;
 }
 
-void KeyboardController::onKeyPress3(bool* quit, int* startAnotherRound) {
+void KeyboardManager::onKeyPress3(bool* quit, int* startAnotherRound) {
 	*startAnotherRound = 3;
 	*quit = true;
 }

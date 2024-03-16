@@ -10,7 +10,7 @@ extern "C" {
 #include "./game_screen/ScreenManager.h"
 #include "./game_objects/dynamic_game_objects/DynamicGameObject.h"
 #include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h"
-#include "./game_events/KeyboardController.h"
+#include "./game_events/KeyboardManager.h"
 #include "./game_events/CollisionManager.h"
 #include "./Platform.h"
 #include "./PlatformHolder.h"
@@ -63,7 +63,7 @@ class Game {
 		void handlePlayer(CollisionManager* collisionManager, ScreenManager& screenManager);
 		void handleBarrels(CollisionManager* collisionManager, ScreenManager& screenManager, bool* quit, int* startAnotherRound);
 
-		void handleCurrentRound(ScreenManager& screenManager, KeyboardController& eventHandler, int* startAnotherRound);
+		void handleCurrentRound(ScreenManager& screenManager, KeyboardManager& eventHandler, int* startAnotherRound);
 
 
 		void handleCollisionWithKong(CollisionManager* collisionManager, ScreenManager& screenManager);

@@ -429,7 +429,7 @@ void Game::handleBarrels(CollisionManager* collisionManager, ScreenManager& scre
 }
 
 // MOVE TO ROUND MANAGER
-void Game::handleCurrentRound(ScreenManager& screenManager, KeyboardController& eventHandler, int *startAnotherRound) { // VisualManager is passed by reference, can't be an const because it's methods change the object
+void Game::handleCurrentRound(ScreenManager& screenManager, KeyboardManager& eventHandler, int *startAnotherRound) { // VisualManager is passed by reference, can't be an const because it's methods change the object
 	bool quit = false;
 	while (!quit) {
 
@@ -458,7 +458,7 @@ void Game::handleCurrentRound(ScreenManager& screenManager, KeyboardController& 
 
 // MOVE TO ROUND MANAGER
 void Game::handleRound(ScreenManager& screenManager, int startAnotherRound) { // yeah make this a different class in the future	
-	KeyboardController eventHandler;
+	KeyboardManager eventHandler;
 	createFramerate();
 	if (startAnotherRound) {
 		if (startAnotherRound == BOARD_ID_A) {
