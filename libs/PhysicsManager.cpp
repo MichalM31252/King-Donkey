@@ -2,10 +2,6 @@ extern "C" {
 #include "./PhysicsManager.h"
 }
 
-//PhysicsManager::PhysicsManager() {
-//	
-//}
-
 void PhysicsManager::handleFalling(DynamicGameObject* dynamicGameObject, double deltaTime) {
 	if (!dynamicGameObject->isJumping) {
 		dynamicGameObject->startFalling();

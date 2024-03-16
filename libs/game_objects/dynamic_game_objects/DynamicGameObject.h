@@ -2,6 +2,7 @@
 
 extern "C" {
 #include "../GameObject.h"
+#include "../../Constants.h"
 }
 
 class DynamicGameObject : public GameObject {

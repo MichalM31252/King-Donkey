@@ -7,9 +7,6 @@ extern "C" {
 
 #include "../../SDL2-2.0.10/include/SDL.h"
 #include "../../SDL2-2.0.10/include/SDL_main.h"
-
-#include "../game_objects/TextureManager.h"
-#include "../game_objects/GameObject.h"
 #include "../Constants.h"
 }
 

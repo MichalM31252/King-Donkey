@@ -2,6 +2,7 @@
 
 extern "C" {
 #include "./Platform.h"
+#include "./Constants.h"
 }
 
 struct PlatformHolder {
