@@ -12,7 +12,7 @@ extern "C" {
 #include "../Constants.h"
 }
 
-class EventManager {
+class KeyboardController {
 public:
 	void handleEvents(bool* quit, double deltaTime, Player* player, int* startAnotherRound);
 
