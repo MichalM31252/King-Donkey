@@ -1,6 +1,5 @@
 extern "C" {
 #include "./TextureManager.h"
-#include "../../libs/game_objects/GameObject.h"
 }
 
 void TextureManager::loadTexture(const char* fileName) {

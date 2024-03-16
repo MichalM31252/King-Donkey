@@ -23,7 +23,6 @@ void Game::createPlayer() { // (logic)
 	player = pla;
 }
 
-
 void Game::createDonkeyKong() {
 	GameObject* donkeyK = new GameObject();
 	donkeyK->init("DonkeyKong.bmp");
