@@ -1,16 +1,6 @@
 #define _USE_MATH_DEFINES
 extern "C" {
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
-#include "../../SDL2-2.0.10/include/SDL.h"
-#include "../../SDL2-2.0.10/include/SDL_main.h"
-
-#include "../game_objects/TextureManager.h"
-
 #include "ScreenManager.h"
-#include "../game_objects/GameObject.h"
-#include "../Constants.h"
 }
 
 void ScreenManager::SDLCheck() { // checks if SDL was initialized correctly
