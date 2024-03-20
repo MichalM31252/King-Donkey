@@ -22,6 +22,8 @@
     <ClCompile Include="libs\BarrelDispenser.cpp" />
     <ClCompile Include="libs\BarrelHolder.cpp" />
     <ClCompile Include="libs\Game.cpp" />
+    <ClCompile Include="libs\GameObjectContainer.cpp" />
+    <ClCompile Include="libs\GameObjectManager.cpp" />
     <ClCompile Include="libs\game_events\CollisionManager.cpp" />
     <ClCompile Include="libs\game_events\KeyboardManager.cpp" />
     <ClCompile Include="libs\game_file_manager\FileManager.cpp" />
@@ -52,6 +54,8 @@
     <ClInclude Include="libs\BarrelHolder.h" />
     <ClInclude Include="libs\Constants.h" />
     <ClInclude Include="libs\Game.h" />
+    <ClInclude Include="libs\GameObjectContainer.h" />
+    <ClInclude Include="libs\GameObjectManager.h" />
     <ClInclude Include="libs\game_events\CollisionManager.h" />
     <ClInclude Include="libs\game_events\KeyboardManager.h" />
     <ClInclude Include="libs\game_file_manager\FileManager.h" />
