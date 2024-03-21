@@ -21,6 +21,8 @@ void Game::createPlayer() { // (logic)
 	pla->createDestRect();
 	pla->isPlayer = true;
 	player = pla;
+
+	gameObjectContainer->player = pla; //
 }
 
 void Game::createDonkeyKong() {
@@ -30,6 +32,8 @@ void Game::createDonkeyKong() {
 	donkeyK->createSrcRect();
 	donkeyK->createDestRect();
 	donkeyKong = donkeyK;
+
+	gameObjectContainer->donkeyKong = donkeyK; // 
 }
 
 void Game::createPrincess() {
@@ -39,6 +43,8 @@ void Game::createPrincess() {
 	prin->createSrcRect();
 	prin->createDestRect();
 	princess = prin;
+
+	gameObjectContainer->princess = prin;//
 }
 
 void Game::createPlatforms1() { // (logic)
@@ -101,7 +107,7 @@ void Game::createBarrels() {
 
 	barrelDispenser = new BarrelDispenser();
 	barrelDispenser->barrelHolder = barrelH;
-	barrelDispenser->setPosition(donkeyKong->xpos + donkeyKong->destRect.w +  + SMALL_MARGIN, donkeyKong->ypos);
+	barrelDispenser->setPosition(gameObjectContainer->donkeyKong->xpos + gameObjectContainer->donkeyKong->destRect.w +  + SMALL_MARGIN, gameObjectContainer->donkeyKong->ypos);
 }
 
 void Game::createPlatforms2() { // (logic)
@@ -254,21 +260,21 @@ void Game::handleFPSTimer() {
 
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithKong(CollisionManager *collisionManager) { // COLLISION WITH KONG
-	if (collisionManager->isCollisionBetweenRects(player->destRect, donkeyKong->destRect)) {
+	if (collisionManager->isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->donkeyKong->destRect)) {
 		closeGame();
 	}
 }
 
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithPrincess(CollisionManager* collisionManager) { // COLLISION WITH PRINCESS
-	if (collisionManager->isCollisionBetweenRects(player->destRect, princess->destRect)) {
+	if (collisionManager->isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->princess->destRect)) {
 		closeGame();
 	}
 }
 
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithBarrel(CollisionManager* collisionManager, DynamicGameObject* barrel, bool *quit, int *startAnotherRound) {
-	if (collisionManager->isCollisionBetweenRects(player->destRect, barrel->destRect)) {
+	if (collisionManager->isCollisionBetweenRects(gameObjectContainer->player->destRect, barrel->destRect)) {
 		*quit = true;
 		*startAnotherRound = 1;
 	}
@@ -277,29 +283,29 @@ void Game::handleCollisionWithBarrel(CollisionManager* collisionManager, Dynamic
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithLadder(CollisionManager* collisionManager, int *flagLadder) {
 	for (int i = 0; i < ladderHolder->numberOfElements; i++) {
-		if (collisionManager->isRectInsideLadder(player->destRect, ladderHolder->ladders[i].destRect)) {
+		if (collisionManager->isRectInsideLadder(gameObjectContainer->player->destRect, ladderHolder->ladders[i].destRect)) {
 			*flagLadder = 1;
 		}
 	}
 	if (*flagLadder) {
-		player->isInsideLadder = true;
+		gameObjectContainer->player->isInsideLadder = true;
 	}
 	else {
-		player->isInsideLadder = false;
-		player->isClimbing = false;
+		gameObjectContainer->player->isInsideLadder = false;
+		gameObjectContainer->player->isClimbing = false;
 	}
 }
 
 
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithJumping() {
-	if (player->isFalling) {
-		player->stopFalling();
-		player->checkIfJumpPossible = false;
+	if (gameObjectContainer->player->isFalling) {
+		gameObjectContainer->player->stopFalling();
+		gameObjectContainer->player->checkIfJumpPossible = false;
 	}
-	if (!player->isFalling && player->checkIfJumpPossible) {
-		player->startJumping();
-		player->checkIfJumpPossible = false;
+	if (!gameObjectContainer->player->isFalling && gameObjectContainer->player->checkIfJumpPossible) {
+		gameObjectContainer->player->startJumping();
+		gameObjectContainer->player->checkIfJumpPossible = false;
 	}
 }
 
@@ -362,9 +368,9 @@ void drawBarrels(BarrelHolder* barrelHolder, ScreenManager& screenManager) {
 
 // MOVE TO TEXTURE MANAGER
 void Game::drawElements(ScreenManager& screenManager) {
-	donkeyKong->render(screenManager.screen);
-	princess->render(screenManager.screen);
-	player->render(screenManager.screen);
+	gameObjectContainer->donkeyKong->render(screenManager.screen);
+	gameObjectContainer->princess->render(screenManager.screen);
+	gameObjectContainer->player->render(screenManager.screen);
 
 	drawPlatforms(platformHolder, screenManager);
 	drawLadders(ladderHolder, screenManager);
@@ -379,24 +385,24 @@ void Game::handlePlayer(CollisionManager* collisionManager, ScreenManager& scree
 	int flagLadder = 0;
 	handleCollisionWithLadder(collisionManager, &flagLadder);
 	int flagPlatform = 0;
-	handleCollisionWithPlatform(collisionManager, screenManager, player, &flagPlatform);
+	handleCollisionWithPlatform(collisionManager, screenManager, gameObjectContainer->player, &flagPlatform);
 
-	if (!player->isClimbing) {
+	if (!gameObjectContainer->player->isClimbing) {
 		if (flagPlatform) {
-			player->textureManager.loadTexture(PLAYER_1_FILENAME);
+			gameObjectContainer->player->textureManager.loadTexture(PLAYER_1_FILENAME);
 			handleCollisionWithJumping();
 		}
 		else {
-			PhysicsManager::handleFalling(player, deltaTime);
+			PhysicsManager::handleFalling(gameObjectContainer->player, deltaTime);
 		}
-		if (player->isJumping) { // handle jumping
-			player->jump(deltaTime);
+		if (gameObjectContainer->player->isJumping) { // handle jumping
+			gameObjectContainer->player->jump(deltaTime);
 		}
 	}
 
-	if (player->isJumping && player->ypos <= player->jumpHeightStop) {
-		player->stopJumping();
-		player->startFalling();
+	if (gameObjectContainer->player->isJumping && gameObjectContainer->player->ypos <= gameObjectContainer->player->jumpHeightStop) {
+		gameObjectContainer->player->stopJumping();
+		gameObjectContainer->player->startFalling();
 	}
 }
 
@@ -443,14 +449,14 @@ void Game::handleCurrentRound(ScreenManager& screenManager, KeyboardManager& eve
 		handlePlayer(&collisionManager, screenManager); // player collision
 		handleBarrels(&collisionManager, screenManager, &quit, startAnotherRound); // barrel collision
 
-		player->update(deltaTime);
+		gameObjectContainer->player->update(deltaTime);
 		// 
 
 		drawElements(screenManager);
 
 		screenManager.serveNextFrame();
 
-		eventHandler.handleEvents(&quit, deltaTime, player, startAnotherRound);
+		eventHandler.handleEvents(&quit, deltaTime, gameObjectContainer->player, startAnotherRound);
 
 		frames++;
 	};
@@ -484,6 +490,10 @@ void Game::handleRound(ScreenManager& screenManager, int startAnotherRound) { //
 
 void Game::initGame() {
 	ScreenManager screenManager;
+
+	GameObjectContainer* ga = new GameObjectContainer();
+	gameObjectContainer = ga;
+
 	screenManager.createSDL(); // this should be set once
 
 	int startAnotherRound = 0;

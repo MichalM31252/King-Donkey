@@ -7,6 +7,7 @@
 #include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h" // // // // // //
 
 class GameObjectContainer {
+public:
 	GameObject* donkeyKong;
 	GameObject* princess;
 	Player* player;
