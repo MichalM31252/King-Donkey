@@ -10,7 +10,6 @@ extern "C" {
 #include "./game_screen/ScreenManager.h"
 #include "./game_events/KeyboardManager.h"
 #include "./Constants.h"
-
 #include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h" // // // // // //
 #include "./Platform.h" // // // //
 #include "./BarrelHolder.h" // // // 
@@ -22,13 +21,15 @@ class Game {
 		
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
+		
+		// Placed in GameObjectContainer 
 		GameObject *donkeyKong;
 		GameObject *princess;
 		Player* player;
 		PlatformHolder* platformHolder;
 		LadderHolder* ladderHolder;
 		BarrelDispenser* barrelDispenser;
-	
+		//
 		void initGame();
 
 		void createFramerate();
@@ -56,21 +57,23 @@ class Game {
 
 		void createBarrels();
 
+		// REMOVE SCREEN MANAGER WHERE ITS NOT NEEDED
+
 		void handlePlayer(CollisionManager* collisionManager, ScreenManager& screenManager);
 		void handleBarrels(CollisionManager* collisionManager, ScreenManager& screenManager, bool* quit, int* startAnotherRound);
 
 		void handleCurrentRound(ScreenManager& screenManager, KeyboardManager& eventHandler, int* startAnotherRound);
 
+		void handleCollisionWithKong(CollisionManager* collisionManager);
+		void handleCollisionWithPrincess(CollisionManager* collisionManager);
+		void handleCollisionWithBarrel(CollisionManager* collisionManager, DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
+		void handleCollisionWithLadder(CollisionManager* collisionManager, int* flagLadder);
 
-		void handleCollisionWithKong(CollisionManager* collisionManager, ScreenManager& screenManager);
-		void handleCollisionWithPrincess(CollisionManager* collisionManager, ScreenManager& screenManager);
-		void handleCollisionWithBarrel(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
-		void handleCollisionWithLadder(CollisionManager* collisionManager, ScreenManager& screenManager, int* flagLadder);
 		void handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject *gameObject, int* flagPlatform);
 		void handleCollisionWithJumping();
 
 		void drawElements(ScreenManager& screenManager);
 
 		void closeGame();
-		void closeGame(ScreenManager& screenManager);
+		// void closeGame(ScreenManager& screenManager);
 };

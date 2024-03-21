@@ -6,5 +6,5 @@ extern "C" {
 
 class PhysicsManager {
 public:
-	void handleFalling(DynamicGameObject* dynamicGameObject, double deltaTime);
+	static void handleFalling(DynamicGameObject* dynamicGameObject, double deltaTime);
 };
