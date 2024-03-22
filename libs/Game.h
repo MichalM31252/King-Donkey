@@ -23,7 +23,6 @@ class Game {
 		double deltaTime, worldTime, fpsTimer, fps;
 		
 		// Place in GameObjectContainer 
-		BarrelDispenser* barrelDispenser;
 		//
 
 		GameObjectContainer* gameObjectContainer;
@@ -79,6 +78,6 @@ class Game {
 		// move to GameObjectManager
 
 		void drawPlatforms(ScreenManager& screenManager);
-
 		void drawLadders(ScreenManager& screenManager);
+		void drawBarrels(ScreenManager& screenManager);
 };

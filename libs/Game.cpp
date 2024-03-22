@@ -103,9 +103,9 @@ void Game::createBarrels() {
 	initBarrelHolder(barrelH);
 	addBarrel(barrelH, barrel1);
 
-	barrelDispenser = new BarrelDispenser();
-	barrelDispenser->barrelHolder = barrelH;
-	barrelDispenser->setPosition(gameObjectContainer->donkeyKong->xpos + gameObjectContainer->donkeyKong->destRect.w +  + SMALL_MARGIN, gameObjectContainer->donkeyKong->ypos);
+	gameObjectContainer->barrelDispenser = new BarrelDispenser();
+	gameObjectContainer->barrelDispenser->barrelHolder = barrelH;
+	gameObjectContainer->barrelDispenser->setPosition(gameObjectContainer->donkeyKong->xpos + gameObjectContainer->donkeyKong->destRect.w +  + SMALL_MARGIN, gameObjectContainer->donkeyKong->ypos);
 }
 
 void Game::createPlatforms2() { // (logic)
@@ -361,9 +361,9 @@ void Game::drawLadders(ScreenManager& screenManager) {
 }
 
 // MOVE TO TEXTURE MANAGER
-void drawBarrels(BarrelHolder* barrelHolder, ScreenManager& screenManager) {
-	for (int i = 0; i < barrelHolder->numberOfElements; i++) {
-		barrelHolder->barrels[i].render(screenManager.screen);
+void Game::drawBarrels(ScreenManager& screenManager) {
+	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
+		gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].render(screenManager.screen);
 	}
 }
 
@@ -375,7 +375,7 @@ void Game::drawElements(ScreenManager& screenManager) {
 
 	drawPlatforms(screenManager);
 	drawLadders(screenManager);
-	drawBarrels(barrelDispenser->barrelHolder, screenManager);
+	drawBarrels(screenManager);
 }
 
 
@@ -409,27 +409,27 @@ void Game::handlePlayer(CollisionManager* collisionManager, ScreenManager& scree
 
 // MOVE TO GAME OBJECT MANAGER
 void Game::handleBarrels(CollisionManager* collisionManager, ScreenManager& screenManager, bool *quit, int* startAnotherRound) {
-	barrelDispenser->updateBarrelDispenser(deltaTime);
+	gameObjectContainer->barrelDispenser->updateBarrelDispenser(deltaTime);
 
-	for (int i = 0; i < barrelDispenser->barrelHolder->numberOfElements; i++) {
+	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
 
-		handleCollisionWithBarrel(collisionManager, &barrelDispenser->barrelHolder->barrels[i], quit, startAnotherRound);
+		handleCollisionWithBarrel(collisionManager, &gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], quit, startAnotherRound);
 
 		int flagPlatform = 0;
-		handleCollisionWithPlatform(collisionManager, screenManager, &barrelDispenser->barrelHolder->barrels[i], &flagPlatform);
+		handleCollisionWithPlatform(collisionManager, screenManager, &gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], &flagPlatform);
 
 		if (flagPlatform) {
-			if (barrelDispenser->barrelHolder->barrels[i].isFalling) {
-				barrelDispenser->barrelHolder->barrels[i].stopFalling();
-				barrelDispenser->barrelHolder->barrels[i].stopMove();
+			if (gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].isFalling) {
+				gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].stopFalling();
+				gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].stopMove();
 			}
-			barrelDispenser->barrelHolder->barrels[i].moveStart(DEFAULT_BARREL_SPEED);
-			barrelDispenser->barrelHolder->barrels[i].startMovingRight(deltaTime);
+			gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].moveStart(DEFAULT_BARREL_SPEED);
+			gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].startMovingRight(deltaTime);
 		}
 		else {
-			PhysicsManager::handleFalling(&barrelDispenser->barrelHolder->barrels[i], deltaTime); // THE PROBLEM IS HERE
+			PhysicsManager::handleFalling(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], deltaTime); // THE PROBLEM IS HERE
 		}
-		barrelDispenser->barrelHolder->barrels[i].update(deltaTime);
+		gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].update(deltaTime);
 	}
 }
 
