@@ -20,7 +20,6 @@ void Game::createPlayer() { // (logic)
 	pla->createSrcRect();
 	pla->createDestRect();
 	pla->isPlayer = true;
-	player = pla;
 
 	gameObjectContainer->player = pla; //
 }
@@ -31,7 +30,6 @@ void Game::createDonkeyKong() {
 	donkeyK->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
 	donkeyK->createSrcRect();
 	donkeyK->createDestRect();
-	donkeyKong = donkeyK;
 
 	gameObjectContainer->donkeyKong = donkeyK; // 
 }
@@ -42,7 +40,6 @@ void Game::createPrincess() {
 	prin->setPosition(STARTING_X_PRINCESS, STARTING_Y_PRINCESS);
 	prin->createSrcRect();
 	prin->createDestRect();
-	princess = prin;
 
 	gameObjectContainer->princess = prin;//
 }
@@ -70,7 +67,8 @@ void Game::createPlatforms1() { // (logic)
 	addPlatform(pH, plat3);
 	addPlatform(pH, plat4);
 	addPlatform(pH, plat5);
-	platformHolder = pH;
+
+	gameObjectContainer->platformHolder = pH; //
 }
 
 void Game::createLadders1() { // (logic)
@@ -137,7 +135,8 @@ void Game::createPlatforms2() { // (logic)
 	addPlatform(platH, plat4);
 	addPlatform(platH, plat5);
 	addPlatform(platH, plat6);
-	platformHolder = platH;
+
+	gameObjectContainer->platformHolder = platH; //
 }
 
 void Game::createLadders2() { // (logic)
@@ -183,7 +182,8 @@ void Game::createPlatforms3() { // (logic)
 	addPlatform(platH, plat3);
 	addPlatform(platH, plat4);
 	addPlatform(platH, plat5);
-	platformHolder = platH;
+
+	gameObjectContainer->platformHolder = platH; //
 }
 
 void Game::createLadders3() { // (logic)
@@ -317,27 +317,27 @@ void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, Scree
 	int xPositionBottomLeftCorner = gameObject->xpos;
 	int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
 
-	for (int i = 0; i < platformHolder->numberOfElements; i++) {
+	for (int i = 0; i < gameObjectContainer->platformHolder->numberOfElements; i++) {
 
 		//bottom left corner 
-		if (collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, &platformHolder->platforms[i])) { // isPointInsideLine
+		if (collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, &gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
 			if (!gameObject->isClimbing) {
 				gameObject->ypos--;
 				yPosition--;
 			}
 		}
-		if (collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, &platformHolder->platforms[i])) { // isPointOnTopOfLine
+		if (collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, &gameObjectContainer->platformHolder->platforms[i])) { // isPointOnTopOfLine
 			*flagPlatform = 1;
 		}
 
 		//bottom right corner 
-		if (collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition, &platformHolder->platforms[i])) { // isPointInsideLine
+		if (collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition, &gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
 			if (!gameObject->isClimbing) {
 				gameObject->ypos--;
 				yPosition--;
 			}
 		}
-		if (collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, &platformHolder->platforms[i])) {// isPointOnTopOfLine
+		if (collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, &gameObjectContainer->platformHolder->platforms[i])) {// isPointOnTopOfLine
 			*flagPlatform = 1;
 		}
 	}
@@ -346,9 +346,9 @@ void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, Scree
 }
 
 // MOVE TO TEXTURE MANAGER
-void drawPlatforms(PlatformHolder* platformHolder, ScreenManager& screenManager) {
-	for (int i = 0; i < platformHolder->numberOfElements; i++) {
-		platformHolder->platforms[i].render(screenManager.screen);
+void Game::drawPlatforms(ScreenManager& screenManager) {
+	for (int i = 0; i < gameObjectContainer->platformHolder->numberOfElements; i++) {
+		gameObjectContainer->platformHolder->platforms[i].render(screenManager.screen);
 	}
 }
 
@@ -372,7 +372,7 @@ void Game::drawElements(ScreenManager& screenManager) {
 	gameObjectContainer->princess->render(screenManager.screen);
 	gameObjectContainer->player->render(screenManager.screen);
 
-	drawPlatforms(platformHolder, screenManager);
+	drawPlatforms(screenManager);
 	drawLadders(ladderHolder, screenManager);
 	drawBarrels(barrelDispenser->barrelHolder, screenManager);
 }

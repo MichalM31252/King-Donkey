@@ -23,10 +23,7 @@ class Game {
 		double deltaTime, worldTime, fpsTimer, fps;
 		
 		// Place in GameObjectContainer 
-		GameObject *donkeyKong; // 
-		GameObject *princess; // 
-		Player* player; 
-		PlatformHolder* platformHolder;
+		PlatformHolder* platformHolder; 
 		LadderHolder* ladderHolder;
 		BarrelDispenser* barrelDispenser;
 		//
@@ -79,4 +76,9 @@ class Game {
 
 		void closeGame();
 		// void closeGame(ScreenManager& screenManager);
+
+
+		// move to GameObjectManager
+
+		void drawPlatforms(ScreenManager& screenManager);
 };
