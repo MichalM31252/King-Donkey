@@ -23,8 +23,6 @@ class Game {
 		double deltaTime, worldTime, fpsTimer, fps;
 		
 		// Place in GameObjectContainer 
-		PlatformHolder* platformHolder; 
-		LadderHolder* ladderHolder;
 		BarrelDispenser* barrelDispenser;
 		//
 
@@ -81,4 +79,6 @@ class Game {
 		// move to GameObjectManager
 
 		void drawPlatforms(ScreenManager& screenManager);
+
+		void drawLadders(ScreenManager& screenManager);
 };

@@ -88,7 +88,7 @@ void Game::createLadders1() { // (logic)
 	initLadderHolder(laddH);
 	addLadder(laddH, ladd1);
 	addLadder(laddH, ladd2);
-	ladderHolder = laddH;
+	gameObjectContainer->ladderHolder = laddH;
 }
 
 void Game::createBarrels() {
@@ -156,7 +156,8 @@ void Game::createLadders2() { // (logic)
 	initLadderHolder(laddH);
 	addLadder(laddH, ladd1);
 	addLadder(laddH, ladd2);
-	ladderHolder = laddH;
+
+	gameObjectContainer->ladderHolder = laddH;
 }
 
 void Game::createPlatforms3() { // (logic)
@@ -217,7 +218,7 @@ void Game::createLadders3() { // (logic)
 	addLadder(laddH, ladd2);
 	addLadder(laddH, ladd3);
 	addLadder(laddH, ladd4);
-	ladderHolder = laddH;
+	gameObjectContainer->ladderHolder = laddH;
 }
 
 void Game::createBoard(int boardId) { // (logic)
@@ -282,8 +283,8 @@ void Game::handleCollisionWithBarrel(CollisionManager* collisionManager, Dynamic
 
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithLadder(CollisionManager* collisionManager, int *flagLadder) {
-	for (int i = 0; i < ladderHolder->numberOfElements; i++) {
-		if (collisionManager->isRectInsideLadder(gameObjectContainer->player->destRect, ladderHolder->ladders[i].destRect)) {
+	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
+		if (collisionManager->isRectInsideLadder(gameObjectContainer->player->destRect, gameObjectContainer->ladderHolder->ladders[i].destRect)) {
 			*flagLadder = 1;
 		}
 	}
@@ -353,9 +354,9 @@ void Game::drawPlatforms(ScreenManager& screenManager) {
 }
 
 // MOVE TO TEXTURE MANAGER
-void drawLadders(LadderHolder* ladderHolder, ScreenManager& screenManager) {
-	for (int i = 0; i < ladderHolder->numberOfElements; i++) {
-		ladderHolder->ladders[i].renderLadder(screenManager.screen);
+void Game::drawLadders(ScreenManager& screenManager) {
+	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
+		gameObjectContainer->ladderHolder->ladders[i].renderLadder(screenManager.screen);
 	}
 }
 
@@ -373,7 +374,7 @@ void Game::drawElements(ScreenManager& screenManager) {
 	gameObjectContainer->player->render(screenManager.screen);
 
 	drawPlatforms(screenManager);
-	drawLadders(ladderHolder, screenManager);
+	drawLadders(screenManager);
 	drawBarrels(barrelDispenser->barrelHolder, screenManager);
 }
 
