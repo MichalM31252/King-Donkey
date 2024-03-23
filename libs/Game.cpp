@@ -261,21 +261,21 @@ void Game::handleFPSTimer() {
 
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithKong() { // COLLISION WITH KONG
-	if (collisionManager->isCollisionBetweenRects(gameObjectManager->gameObjectContainer->player->destRect, gameObjectManager->gameObjectContainer->donkeyKong->destRect)) {
+	if (gameObjectManager->collisionManager->isCollisionBetweenRects(gameObjectManager->gameObjectContainer->player->destRect, gameObjectManager->gameObjectContainer->donkeyKong->destRect)) {
 		closeGame();
 	}
 }
 
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithPrincess() { // COLLISION WITH PRINCESS
-	if (collisionManager->isCollisionBetweenRects(gameObjectManager->gameObjectContainer->player->destRect, gameObjectManager->gameObjectContainer->princess->destRect)) {
+	if (gameObjectManager->collisionManager->isCollisionBetweenRects(gameObjectManager->gameObjectContainer->player->destRect, gameObjectManager->gameObjectContainer->princess->destRect)) {
 		closeGame();
 	}
 }
 
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithBarrel(DynamicGameObject* barrel, bool *quit, int *startAnotherRound) {
-	if (collisionManager->isCollisionBetweenRects(gameObjectManager->gameObjectContainer->player->destRect, barrel->destRect)) {
+	if (gameObjectManager->collisionManager->isCollisionBetweenRects(gameObjectManager->gameObjectContainer->player->destRect, barrel->destRect)) {
 		*quit = true;
 		*startAnotherRound = 1;
 	}
@@ -284,7 +284,7 @@ void Game::handleCollisionWithBarrel(DynamicGameObject* barrel, bool *quit, int 
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithLadder(int *flagLadder) {
 	for (int i = 0; i < gameObjectManager->gameObjectContainer->ladderHolder->numberOfElements; i++) {
-		if (collisionManager->isRectInsideLadder(gameObjectManager->gameObjectContainer->player->destRect, gameObjectManager->gameObjectContainer->ladderHolder->ladders[i].destRect)) {
+		if (gameObjectManager->collisionManager->isRectInsideLadder(gameObjectManager->gameObjectContainer->player->destRect, gameObjectManager->gameObjectContainer->ladderHolder->ladders[i].destRect)) {
 			*flagLadder = 1;
 		}
 	}
@@ -321,24 +321,24 @@ void Game::handleCollisionWithPlatform(DynamicGameObject *gameObject , int* flag
 	for (int i = 0; i < gameObjectManager->gameObjectContainer->platformHolder->numberOfElements; i++) {
 
 		//bottom left corner 
-		if (collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, &gameObjectManager->gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
+		if (gameObjectManager->collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, &gameObjectManager->gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
 			if (!gameObject->isClimbing) {
 				gameObject->ypos--;
 				yPosition--;
 			}
 		}
-		if (collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, &gameObjectManager->gameObjectContainer->platformHolder->platforms[i])) { // isPointOnTopOfLine
+		if (gameObjectManager->collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, &gameObjectManager->gameObjectContainer->platformHolder->platforms[i])) { // isPointOnTopOfLine
 			*flagPlatform = 1;
 		}
 
 		//bottom right corner 
-		if (collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition, &gameObjectManager->gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
+		if (gameObjectManager->collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition, &gameObjectManager->gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
 			if (!gameObject->isClimbing) {
 				gameObject->ypos--;
 				yPosition--;
 			}
 		}
-		if (collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, &gameObjectManager->gameObjectContainer->platformHolder->platforms[i])) {// isPointOnTopOfLine
+		if (gameObjectManager->collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, &gameObjectManager->gameObjectContainer->platformHolder->platforms[i])) {// isPointOnTopOfLine
 			*flagPlatform = 1;
 		}
 	}
@@ -446,9 +446,6 @@ void Game::handleCurrentRound(KeyboardManager& eventHandler, int *startAnotherRo
 		screenManager->drawAdditionalInfo(worldTime);
 
 		// This should be a part of GameObjectManager
-		CollisionManager *collisionM = new CollisionManager();
-		collisionManager = collisionM;
-
 
 		handlePlayer(); // player collision
 		handleBarrels(&quit, startAnotherRound); // barrel collision

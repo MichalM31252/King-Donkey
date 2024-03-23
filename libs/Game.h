@@ -23,9 +23,7 @@ class Game {
 		double deltaTime, worldTime, fpsTimer, fps;
 
 		GameObjectManager* gameObjectManager;
-
 		ScreenManager* screenManager;
-		CollisionManager* collisionManager; // In process of moving to GameObjectManager
 
 		void initGame();
 
