@@ -499,10 +499,6 @@ void Game::initGame() {
 	GameObjectManager* gameObjectMan = new GameObjectManager();
 	gameObjectManager = gameObjectMan;
 
-	// move to game object manager constructor
-	GameObjectContainer* ga = new GameObjectContainer();
-	gameObjectManager->gameObjectContainer = ga;
-
 	screenManager->createSDL(); // this should be set once
 
 	int startAnotherRound = 0;
