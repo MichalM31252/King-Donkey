@@ -21,11 +21,9 @@ class Game {
 		
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
-		
-		// Place in GameObjectContainer 
-		//
 
 		GameObjectContainer* gameObjectContainer;
+		ScreenManager* screenManager;
 
 		void initGame();
 
@@ -35,7 +33,7 @@ class Game {
 		void updateWorldTime();
 		
 
-		void handleRound(ScreenManager& screenManager, int startAnotherRound);
+		void handleRound(int startAnotherRound);
 
 		void createBoard(int boardId);
 
@@ -56,20 +54,20 @@ class Game {
 
 		// REMOVE SCREEN MANAGER WHERE ITS NOT NEEDED
 
-		void handlePlayer(CollisionManager* collisionManager, ScreenManager& screenManager);
-		void handleBarrels(CollisionManager* collisionManager, ScreenManager& screenManager, bool* quit, int* startAnotherRound);
+		void handlePlayer(CollisionManager* collisionManager);
+		void handleBarrels(CollisionManager* collisionManager, bool* quit, int* startAnotherRound);
 
-		void handleCurrentRound(ScreenManager& screenManager, KeyboardManager& eventHandler, int* startAnotherRound);
+		void handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound);
 
 		void handleCollisionWithKong(CollisionManager* collisionManager);
 		void handleCollisionWithPrincess(CollisionManager* collisionManager);
 		void handleCollisionWithBarrel(CollisionManager* collisionManager, DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
 		void handleCollisionWithLadder(CollisionManager* collisionManager, int* flagLadder);
 
-		void handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject *gameObject, int* flagPlatform);
+		void handleCollisionWithPlatform(CollisionManager* collisionManager, DynamicGameObject *gameObject, int* flagPlatform);
 		void handleCollisionWithJumping();
 
-		void drawElements(ScreenManager& screenManager);
+		void drawElements();
 
 		void closeGame();
 		// void closeGame(ScreenManager& screenManager);
@@ -77,7 +75,7 @@ class Game {
 
 		// move to GameObjectManager
 
-		void drawPlatforms(ScreenManager& screenManager);
-		void drawLadders(ScreenManager& screenManager);
-		void drawBarrels(ScreenManager& screenManager);
+		void drawPlatforms();
+		void drawLadders();
+		void drawBarrels();
 };
