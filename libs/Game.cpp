@@ -260,21 +260,21 @@ void Game::handleFPSTimer() {
 }
 
 // MOVE TO COLLISION MANAGER
-void Game::handleCollisionWithKong(CollisionManager *collisionManager) { // COLLISION WITH KONG
+void Game::handleCollisionWithKong() { // COLLISION WITH KONG
 	if (collisionManager->isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->donkeyKong->destRect)) {
 		closeGame();
 	}
 }
 
 // MOVE TO COLLISION MANAGER
-void Game::handleCollisionWithPrincess(CollisionManager* collisionManager) { // COLLISION WITH PRINCESS
+void Game::handleCollisionWithPrincess() { // COLLISION WITH PRINCESS
 	if (collisionManager->isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->princess->destRect)) {
 		closeGame();
 	}
 }
 
 // MOVE TO COLLISION MANAGER
-void Game::handleCollisionWithBarrel(CollisionManager* collisionManager, DynamicGameObject* barrel, bool *quit, int *startAnotherRound) {
+void Game::handleCollisionWithBarrel(DynamicGameObject* barrel, bool *quit, int *startAnotherRound) {
 	if (collisionManager->isCollisionBetweenRects(gameObjectContainer->player->destRect, barrel->destRect)) {
 		*quit = true;
 		*startAnotherRound = 1;
@@ -282,7 +282,7 @@ void Game::handleCollisionWithBarrel(CollisionManager* collisionManager, Dynamic
 }
 
 // MOVE TO COLLISION MANAGER
-void Game::handleCollisionWithLadder(CollisionManager* collisionManager, int *flagLadder) {
+void Game::handleCollisionWithLadder(int *flagLadder) {
 	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
 		if (collisionManager->isRectInsideLadder(gameObjectContainer->player->destRect, gameObjectContainer->ladderHolder->ladders[i].destRect)) {
 			*flagLadder = 1;
@@ -311,7 +311,7 @@ void Game::handleCollisionWithJumping() {
 }
 
 // MOVE TO COLLISION MANAGER
-void Game::handleCollisionWithPlatform(CollisionManager* collisionManager, DynamicGameObject *gameObject , int* flagPlatform) {
+void Game::handleCollisionWithPlatform(DynamicGameObject *gameObject , int* flagPlatform) {
 	// check bottom left corner
 	// check bottom right corner
 	int yPosition = gameObject->ypos + gameObject->destRect.h;
@@ -380,13 +380,13 @@ void Game::drawElements() {
 
 
 // MOVE TO GAME OBJECT MANAGER
-void Game::handlePlayer(CollisionManager* collisionManager) { // player collision
-	handleCollisionWithKong(collisionManager);
-	handleCollisionWithPrincess(collisionManager);
+void Game::handlePlayer() { // player collision
+	handleCollisionWithKong();
+	handleCollisionWithPrincess();
 	int flagLadder = 0;
-	handleCollisionWithLadder(collisionManager, &flagLadder);
+	handleCollisionWithLadder(&flagLadder);
 	int flagPlatform = 0;
-	handleCollisionWithPlatform(collisionManager, gameObjectContainer->player, &flagPlatform);
+	handleCollisionWithPlatform(gameObjectContainer->player, &flagPlatform);
 
 	if (!gameObjectContainer->player->isClimbing) {
 		if (flagPlatform) {
@@ -408,15 +408,15 @@ void Game::handlePlayer(CollisionManager* collisionManager) { // player collisio
 }
 
 // MOVE TO GAME OBJECT MANAGER
-void Game::handleBarrels(CollisionManager* collisionManager, bool *quit, int* startAnotherRound) {
+void Game::handleBarrels(bool *quit, int* startAnotherRound) {
 	gameObjectContainer->barrelDispenser->updateBarrelDispenser(deltaTime);
 
 	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
 
-		handleCollisionWithBarrel(collisionManager, &gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], quit, startAnotherRound);
+		handleCollisionWithBarrel(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], quit, startAnotherRound);
 
 		int flagPlatform = 0;
-		handleCollisionWithPlatform(collisionManager, &gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], &flagPlatform);
+		handleCollisionWithPlatform(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], &flagPlatform);
 
 		if (flagPlatform) {
 			if (gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].isFalling) {
@@ -446,9 +446,11 @@ void Game::handleCurrentRound(KeyboardManager& eventHandler, int *startAnotherRo
 		screenManager->drawAdditionalInfo(worldTime);
 
 		// This should be a part of GameObjectManager
-		CollisionManager collisionManager;
-		handlePlayer(&collisionManager); // player collision
-		handleBarrels(&collisionManager, &quit, startAnotherRound); // barrel collision
+		CollisionManager *collisionM = new CollisionManager();
+		collisionManager = collisionM;
+
+		handlePlayer(); // player collision
+		handleBarrels(&quit, startAnotherRound); // barrel collision
 
 		gameObjectContainer->player->update(deltaTime);
 		// 

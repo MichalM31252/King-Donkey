@@ -24,6 +24,7 @@ class Game {
 
 		GameObjectContainer* gameObjectContainer;
 		ScreenManager* screenManager;
+		CollisionManager* collisionManager;
 
 		void initGame();
 
@@ -54,17 +55,17 @@ class Game {
 
 		// REMOVE SCREEN MANAGER WHERE ITS NOT NEEDED
 
-		void handlePlayer(CollisionManager* collisionManager);
-		void handleBarrels(CollisionManager* collisionManager, bool* quit, int* startAnotherRound);
+		void handlePlayer();
+		void handleBarrels(bool* quit, int* startAnotherRound);
 
 		void handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound);
 
-		void handleCollisionWithKong(CollisionManager* collisionManager);
-		void handleCollisionWithPrincess(CollisionManager* collisionManager);
-		void handleCollisionWithBarrel(CollisionManager* collisionManager, DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
-		void handleCollisionWithLadder(CollisionManager* collisionManager, int* flagLadder);
+		void handleCollisionWithKong();
+		void handleCollisionWithPrincess();
+		void handleCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
+		void handleCollisionWithLadder(int* flagLadder);
 
-		void handleCollisionWithPlatform(CollisionManager* collisionManager, DynamicGameObject *gameObject, int* flagPlatform);
+		void handleCollisionWithPlatform(DynamicGameObject *gameObject, int* flagPlatform);
 		void handleCollisionWithJumping();
 
 		void drawElements();
