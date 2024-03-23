@@ -5,8 +5,15 @@
 #include "./game_objects/TextureManager.h"
 #include "./GameObjectContainer.h"
 
-class GameObjectsManager {
+class GameObjectManager {
 public:
-	GameObjectsManager();
-	~GameObjectsManager();
+	GameObjectContainer* gameObjectContainer;
+	CollisionManager* collisionManager;
+	TextureManager* textureManager;
+
+	PhysicsManager* physicsManager; // this only holds a static method so it doesn't need to be a pointer and it doesn't need to be here
+
+
+	GameObjectManager();
+	~GameObjectManager();
 };

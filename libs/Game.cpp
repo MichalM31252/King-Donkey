@@ -21,7 +21,7 @@ void Game::createPlayer() { // (logic)
 	pla->createDestRect();
 	pla->isPlayer = true;
 
-	gameObjectContainer->player = pla; //
+	gameObjectManager->gameObjectContainer->player = pla; //
 }
 
 void Game::createDonkeyKong() {
@@ -31,7 +31,7 @@ void Game::createDonkeyKong() {
 	donkeyK->createSrcRect();
 	donkeyK->createDestRect();
 
-	gameObjectContainer->donkeyKong = donkeyK; // 
+	gameObjectManager->gameObjectContainer->donkeyKong = donkeyK; // 
 }
 
 void Game::createPrincess() {
@@ -41,7 +41,7 @@ void Game::createPrincess() {
 	prin->createSrcRect();
 	prin->createDestRect();
 
-	gameObjectContainer->princess = prin;//
+	gameObjectManager->gameObjectContainer->princess = prin;//
 }
 
 void Game::createPlatforms1() { // (logic)
@@ -68,7 +68,7 @@ void Game::createPlatforms1() { // (logic)
 	addPlatform(pH, plat4);
 	addPlatform(pH, plat5);
 
-	gameObjectContainer->platformHolder = pH; //
+	gameObjectManager->gameObjectContainer->platformHolder = pH; //
 }
 
 void Game::createLadders1() { // (logic)
@@ -88,7 +88,7 @@ void Game::createLadders1() { // (logic)
 	initLadderHolder(laddH);
 	addLadder(laddH, ladd1);
 	addLadder(laddH, ladd2);
-	gameObjectContainer->ladderHolder = laddH;
+	gameObjectManager->gameObjectContainer->ladderHolder = laddH;
 }
 
 void Game::createBarrels() {
@@ -103,9 +103,9 @@ void Game::createBarrels() {
 	initBarrelHolder(barrelH);
 	addBarrel(barrelH, barrel1);
 
-	gameObjectContainer->barrelDispenser = new BarrelDispenser();
-	gameObjectContainer->barrelDispenser->barrelHolder = barrelH;
-	gameObjectContainer->barrelDispenser->setPosition(gameObjectContainer->donkeyKong->xpos + gameObjectContainer->donkeyKong->destRect.w +  + SMALL_MARGIN, gameObjectContainer->donkeyKong->ypos);
+	gameObjectManager->gameObjectContainer->barrelDispenser = new BarrelDispenser();
+	gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder = barrelH;
+	gameObjectManager->gameObjectContainer->barrelDispenser->setPosition(gameObjectManager->gameObjectContainer->donkeyKong->xpos + gameObjectManager->gameObjectContainer->donkeyKong->destRect.w +  + SMALL_MARGIN, gameObjectManager->gameObjectContainer->donkeyKong->ypos);
 }
 
 void Game::createPlatforms2() { // (logic)
@@ -136,7 +136,7 @@ void Game::createPlatforms2() { // (logic)
 	addPlatform(platH, plat5);
 	addPlatform(platH, plat6);
 
-	gameObjectContainer->platformHolder = platH; //
+	gameObjectManager->gameObjectContainer->platformHolder = platH; //
 }
 
 void Game::createLadders2() { // (logic)
@@ -157,7 +157,7 @@ void Game::createLadders2() { // (logic)
 	addLadder(laddH, ladd1);
 	addLadder(laddH, ladd2);
 
-	gameObjectContainer->ladderHolder = laddH;
+	gameObjectManager->gameObjectContainer->ladderHolder = laddH;
 }
 
 void Game::createPlatforms3() { // (logic)
@@ -184,7 +184,7 @@ void Game::createPlatforms3() { // (logic)
 	addPlatform(platH, plat4);
 	addPlatform(platH, plat5);
 
-	gameObjectContainer->platformHolder = platH; //
+	gameObjectManager->gameObjectContainer->platformHolder = platH; //
 }
 
 void Game::createLadders3() { // (logic)
@@ -218,7 +218,7 @@ void Game::createLadders3() { // (logic)
 	addLadder(laddH, ladd2);
 	addLadder(laddH, ladd3);
 	addLadder(laddH, ladd4);
-	gameObjectContainer->ladderHolder = laddH;
+	gameObjectManager->gameObjectContainer->ladderHolder = laddH;
 }
 
 void Game::createBoard(int boardId) { // (logic)
@@ -261,21 +261,21 @@ void Game::handleFPSTimer() {
 
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithKong() { // COLLISION WITH KONG
-	if (collisionManager->isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->donkeyKong->destRect)) {
+	if (collisionManager->isCollisionBetweenRects(gameObjectManager->gameObjectContainer->player->destRect, gameObjectManager->gameObjectContainer->donkeyKong->destRect)) {
 		closeGame();
 	}
 }
 
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithPrincess() { // COLLISION WITH PRINCESS
-	if (collisionManager->isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->princess->destRect)) {
+	if (collisionManager->isCollisionBetweenRects(gameObjectManager->gameObjectContainer->player->destRect, gameObjectManager->gameObjectContainer->princess->destRect)) {
 		closeGame();
 	}
 }
 
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithBarrel(DynamicGameObject* barrel, bool *quit, int *startAnotherRound) {
-	if (collisionManager->isCollisionBetweenRects(gameObjectContainer->player->destRect, barrel->destRect)) {
+	if (collisionManager->isCollisionBetweenRects(gameObjectManager->gameObjectContainer->player->destRect, barrel->destRect)) {
 		*quit = true;
 		*startAnotherRound = 1;
 	}
@@ -283,30 +283,30 @@ void Game::handleCollisionWithBarrel(DynamicGameObject* barrel, bool *quit, int 
 
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithLadder(int *flagLadder) {
-	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
-		if (collisionManager->isRectInsideLadder(gameObjectContainer->player->destRect, gameObjectContainer->ladderHolder->ladders[i].destRect)) {
+	for (int i = 0; i < gameObjectManager->gameObjectContainer->ladderHolder->numberOfElements; i++) {
+		if (collisionManager->isRectInsideLadder(gameObjectManager->gameObjectContainer->player->destRect, gameObjectManager->gameObjectContainer->ladderHolder->ladders[i].destRect)) {
 			*flagLadder = 1;
 		}
 	}
 	if (*flagLadder) {
-		gameObjectContainer->player->isInsideLadder = true;
+		gameObjectManager->gameObjectContainer->player->isInsideLadder = true;
 	}
 	else {
-		gameObjectContainer->player->isInsideLadder = false;
-		gameObjectContainer->player->isClimbing = false;
+		gameObjectManager->gameObjectContainer->player->isInsideLadder = false;
+		gameObjectManager->gameObjectContainer->player->isClimbing = false;
 	}
 }
 
 
 // MOVE TO COLLISION MANAGER
 void Game::handleCollisionWithJumping() {
-	if (gameObjectContainer->player->isFalling) {
-		gameObjectContainer->player->stopFalling();
-		gameObjectContainer->player->checkIfJumpPossible = false;
+	if (gameObjectManager->gameObjectContainer->player->isFalling) {
+		gameObjectManager->gameObjectContainer->player->stopFalling();
+		gameObjectManager->gameObjectContainer->player->checkIfJumpPossible = false;
 	}
-	if (!gameObjectContainer->player->isFalling && gameObjectContainer->player->checkIfJumpPossible) {
-		gameObjectContainer->player->startJumping();
-		gameObjectContainer->player->checkIfJumpPossible = false;
+	if (!gameObjectManager->gameObjectContainer->player->isFalling && gameObjectManager->gameObjectContainer->player->checkIfJumpPossible) {
+		gameObjectManager->gameObjectContainer->player->startJumping();
+		gameObjectManager->gameObjectContainer->player->checkIfJumpPossible = false;
 	}
 }
 
@@ -318,27 +318,27 @@ void Game::handleCollisionWithPlatform(DynamicGameObject *gameObject , int* flag
 	int xPositionBottomLeftCorner = gameObject->xpos;
 	int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
 
-	for (int i = 0; i < gameObjectContainer->platformHolder->numberOfElements; i++) {
+	for (int i = 0; i < gameObjectManager->gameObjectContainer->platformHolder->numberOfElements; i++) {
 
 		//bottom left corner 
-		if (collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, &gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
+		if (collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, &gameObjectManager->gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
 			if (!gameObject->isClimbing) {
 				gameObject->ypos--;
 				yPosition--;
 			}
 		}
-		if (collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, &gameObjectContainer->platformHolder->platforms[i])) { // isPointOnTopOfLine
+		if (collisionManager->isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, &gameObjectManager->gameObjectContainer->platformHolder->platforms[i])) { // isPointOnTopOfLine
 			*flagPlatform = 1;
 		}
 
 		//bottom right corner 
-		if (collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition, &gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
+		if (collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition, &gameObjectManager->gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
 			if (!gameObject->isClimbing) {
 				gameObject->ypos--;
 				yPosition--;
 			}
 		}
-		if (collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, &gameObjectContainer->platformHolder->platforms[i])) {// isPointOnTopOfLine
+		if (collisionManager->isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, &gameObjectManager->gameObjectContainer->platformHolder->platforms[i])) {// isPointOnTopOfLine
 			*flagPlatform = 1;
 		}
 	}
@@ -348,30 +348,30 @@ void Game::handleCollisionWithPlatform(DynamicGameObject *gameObject , int* flag
 
 // MOVE TO TEXTURE MANAGER
 void Game::drawPlatforms() {
-	for (int i = 0; i < gameObjectContainer->platformHolder->numberOfElements; i++) {
-		gameObjectContainer->platformHolder->platforms[i].render(screenManager->screen);
+	for (int i = 0; i < gameObjectManager->gameObjectContainer->platformHolder->numberOfElements; i++) {
+		gameObjectManager->gameObjectContainer->platformHolder->platforms[i].render(screenManager->screen);
 	}
 }
 
 // MOVE TO TEXTURE MANAGER
 void Game::drawLadders() {
-	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
-		gameObjectContainer->ladderHolder->ladders[i].renderLadder(screenManager->screen);
+	for (int i = 0; i < gameObjectManager->gameObjectContainer->ladderHolder->numberOfElements; i++) {
+		gameObjectManager->gameObjectContainer->ladderHolder->ladders[i].renderLadder(screenManager->screen);
 	}
 }
 
 // MOVE TO TEXTURE MANAGER
 void Game::drawBarrels() {
-	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
-		gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].render(screenManager->screen);
+	for (int i = 0; i < gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
+		gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].render(screenManager->screen);
 	}
 }
 
 // MOVE TO TEXTURE MANAGER
-void Game::drawElements() {
-	gameObjectContainer->donkeyKong->render(screenManager->screen);
-	gameObjectContainer->princess->render(screenManager->screen);
-	gameObjectContainer->player->render(screenManager->screen);
+void Game::drawElements() { // don't repeat yourself
+	gameObjectManager->gameObjectContainer->donkeyKong->render(screenManager->screen);
+	gameObjectManager->gameObjectContainer->princess->render(screenManager->screen);
+	gameObjectManager->gameObjectContainer->player->render(screenManager->screen);
 
 	drawPlatforms();
 	drawLadders();
@@ -386,50 +386,50 @@ void Game::handlePlayer() { // player collision
 	int flagLadder = 0;
 	handleCollisionWithLadder(&flagLadder);
 	int flagPlatform = 0;
-	handleCollisionWithPlatform(gameObjectContainer->player, &flagPlatform);
+	handleCollisionWithPlatform(gameObjectManager->gameObjectContainer->player, &flagPlatform);
 
-	if (!gameObjectContainer->player->isClimbing) {
+	if (!gameObjectManager->gameObjectContainer->player->isClimbing) {
 		if (flagPlatform) {
-			gameObjectContainer->player->textureManager.loadTexture(PLAYER_1_FILENAME);
+			gameObjectManager->gameObjectContainer->player->textureManager.loadTexture(PLAYER_1_FILENAME);
 			handleCollisionWithJumping();
 		}
 		else {
-			PhysicsManager::handleFalling(gameObjectContainer->player, deltaTime);
+			PhysicsManager::handleFalling(gameObjectManager->gameObjectContainer->player, deltaTime);
 		}
-		if (gameObjectContainer->player->isJumping) { // handle jumping
-			gameObjectContainer->player->jump(deltaTime);
+		if (gameObjectManager->gameObjectContainer->player->isJumping) { // handle jumping
+			gameObjectManager->gameObjectContainer->player->jump(deltaTime);
 		}
 	}
 
-	if (gameObjectContainer->player->isJumping && gameObjectContainer->player->ypos <= gameObjectContainer->player->jumpHeightStop) {
-		gameObjectContainer->player->stopJumping();
-		gameObjectContainer->player->startFalling();
+	if (gameObjectManager->gameObjectContainer->player->isJumping && gameObjectManager->gameObjectContainer->player->ypos <= gameObjectManager->gameObjectContainer->player->jumpHeightStop) {
+		gameObjectManager->gameObjectContainer->player->stopJumping();
+		gameObjectManager->gameObjectContainer->player->startFalling();
 	}
 }
 
 // MOVE TO GAME OBJECT MANAGER
 void Game::handleBarrels(bool *quit, int* startAnotherRound) {
-	gameObjectContainer->barrelDispenser->updateBarrelDispenser(deltaTime);
+	gameObjectManager->gameObjectContainer->barrelDispenser->updateBarrelDispenser(deltaTime);
 
-	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
+	for (int i = 0; i < gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
 
-		handleCollisionWithBarrel(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], quit, startAnotherRound);
+		handleCollisionWithBarrel(&gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], quit, startAnotherRound);
 
 		int flagPlatform = 0;
-		handleCollisionWithPlatform(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], &flagPlatform);
+		handleCollisionWithPlatform(&gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], &flagPlatform);
 
 		if (flagPlatform) {
-			if (gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].isFalling) {
-				gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].stopFalling();
-				gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].stopMove();
+			if (gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].isFalling) {
+				gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].stopFalling();
+				gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].stopMove();
 			}
-			gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].moveStart(DEFAULT_BARREL_SPEED);
-			gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].startMovingRight(deltaTime);
+			gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].moveStart(DEFAULT_BARREL_SPEED);
+			gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].startMovingRight(deltaTime);
 		}
 		else {
-			PhysicsManager::handleFalling(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], deltaTime); // THE PROBLEM IS HERE
+			PhysicsManager::handleFalling(&gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], deltaTime); // THE PROBLEM IS HERE
 		}
-		gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].update(deltaTime);
+		gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].update(deltaTime);
 	}
 }
 
@@ -449,17 +449,18 @@ void Game::handleCurrentRound(KeyboardManager& eventHandler, int *startAnotherRo
 		CollisionManager *collisionM = new CollisionManager();
 		collisionManager = collisionM;
 
+
 		handlePlayer(); // player collision
 		handleBarrels(&quit, startAnotherRound); // barrel collision
 
-		gameObjectContainer->player->update(deltaTime);
+		gameObjectManager->gameObjectContainer->player->update(deltaTime);
 		// 
 
 		drawElements();
 
 		screenManager->serveNextFrame();
 
-		eventHandler.handleEvents(&quit, deltaTime, gameObjectContainer->player, startAnotherRound);
+		eventHandler.handleEvents(&quit, deltaTime, gameObjectManager->gameObjectContainer->player, startAnotherRound);
 
 		frames++;
 	};
@@ -493,11 +494,14 @@ void Game::handleRound(int startAnotherRound) { // yeah make this a different cl
 
 void Game::initGame() {
 	ScreenManager *screenMan = new ScreenManager();
-
 	screenManager = screenMan;
 
+	GameObjectManager* gameObjectMan = new GameObjectManager();
+	gameObjectManager = gameObjectMan;
+
+	// move to game object manager constructor
 	GameObjectContainer* ga = new GameObjectContainer();
-	gameObjectContainer = ga;
+	gameObjectManager->gameObjectContainer = ga;
 
 	screenManager->createSDL(); // this should be set once
 

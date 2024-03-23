@@ -2,10 +2,10 @@ extern "C" {
 #include "./GameObjectManager.h"
 }
 
-GameObjectsManager::GameObjectsManager() {
+GameObjectManager::GameObjectManager() {
   
 }
 
-GameObjectsManager::~GameObjectsManager() {
+GameObjectManager::~GameObjectManager() {
 
 }

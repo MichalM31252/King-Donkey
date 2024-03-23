@@ -10,9 +10,9 @@ extern "C" {
 #include "./game_screen/ScreenManager.h"
 #include "./game_events/KeyboardManager.h"
 #include "./Constants.h"
-#include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h" // // // // // //
-#include "./Platform.h" // // // //
-#include "./BarrelHolder.h" // // // 
+#include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h"
+#include "./Platform.h"
+#include "./BarrelHolder.h"
 #include "./GameObjectManager.h"
 }
 
@@ -22,9 +22,10 @@ class Game {
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
 
-		GameObjectContainer* gameObjectContainer;
+		GameObjectManager* gameObjectManager;
+
 		ScreenManager* screenManager;
-		CollisionManager* collisionManager;
+		CollisionManager* collisionManager; // In process of moving to GameObjectManager
 
 		void initGame();
 
@@ -68,7 +69,7 @@ class Game {
 		void handleCollisionWithPlatform(DynamicGameObject *gameObject, int* flagPlatform);
 		void handleCollisionWithJumping();
 
-		void drawElements();
+		
 
 		void closeGame();
 		// void closeGame(ScreenManager& screenManager);
@@ -76,6 +77,7 @@ class Game {
 
 		// move to GameObjectManager
 
+		void drawElements();
 		void drawPlatforms();
 		void drawLadders();
 		void drawBarrels();
