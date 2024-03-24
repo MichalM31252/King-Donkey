@@ -8,17 +8,12 @@ extern "C" {
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
 #include "./game_screen/ScreenManager.h"
-#include "./game_objects/dynamic_game_objects/DynamicGameObject.h"
-#include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h"
-#include "./game_events/EventManager.h"
-#include "./game_events/CollisionManager.h"
-#include "./Platform.h"
-#include "./PlatformHolder.h"
-#include "./LadderHolder.h"
-#include "./BarrelHolder.h"
-#include "./BarrelDispenser.h"
+#include "./game_events/KeyboardManager.h"
 #include "./Constants.h"
-#include "./PhysicsManager.h"
+#include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h"
+#include "./Platform.h"
+#include "./BarrelHolder.h"
+#include "./GameObjectManager.h"
 }
 
 class Game {
@@ -26,13 +21,10 @@ class Game {
 		
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
-		GameObject *donkeyKong;
-		GameObject *princess;
-		Player* player;
-		PlatformHolder* platformHolder;
-		LadderHolder* ladderHolder;
-		BarrelDispenser* barrelDispenser;
-	
+
+		GameObjectManager* gameObjectManager;
+		ScreenManager* screenManager;
+
 		void initGame();
 
 		void createFramerate();
@@ -41,7 +33,7 @@ class Game {
 		void updateWorldTime();
 		
 
-		void handleRound(ScreenManager& screenManager, int startAnotherRound);
+		void handleRound(int startAnotherRound);
 
 		void createBoard(int boardId);
 
@@ -60,21 +52,31 @@ class Game {
 
 		void createBarrels();
 
-		void handlePlayer(CollisionManager* collisionManager, ScreenManager& screenManager);
-		void handleBarrels(CollisionManager* collisionManager, ScreenManager& screenManager, bool* quit, int* startAnotherRound);
+		// REMOVE SCREEN MANAGER WHERE ITS NOT NEEDED
 
-		void handleCurrentRound(ScreenManager& screenManager, EventManager& eventHandler, int* startAnotherRound);
+		void handlePlayer();
+		void handleBarrels(bool* quit, int* startAnotherRound);
 
+		void handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound);
 
-		void handleCollisionWithKong(CollisionManager* collisionManager, ScreenManager& screenManager);
-		void handleCollisionWithPrincess(CollisionManager* collisionManager, ScreenManager& screenManager);
-		void handleCollisionWithBarrel(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
-		void handleCollisionWithLadder(CollisionManager* collisionManager, ScreenManager& screenManager, int* flagLadder);
-		void handleCollisionWithPlatform(CollisionManager* collisionManager, ScreenManager& screenManager, DynamicGameObject *gameObject, int* flagPlatform);
+		void handleCollisionWithKong();
+		void handleCollisionWithPrincess();
+		void handleCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
+		void handleCollisionWithLadder(int* flagLadder);
+
+		void handleCollisionWithPlatform(DynamicGameObject *gameObject, int* flagPlatform);
 		void handleCollisionWithJumping();
 
-		void drawElements(ScreenManager& screenManager);
+		
 
 		void closeGame();
-		void closeGame(ScreenManager& screenManager);
+		// void closeGame(ScreenManager& screenManager);
+
+
+		// move to GameObjectManager
+
+		void drawElements();
+		void drawPlatforms();
+		void drawLadders();
+		void drawBarrels();
 };
