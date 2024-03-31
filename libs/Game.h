@@ -18,7 +18,7 @@ extern "C" {
 
 class Game {
 	public:
-		
+		// Shouldn't this be in screen manager?
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
 

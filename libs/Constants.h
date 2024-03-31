@@ -48,13 +48,13 @@ const double DEFAULT_BARREL_SPAWN_RATE = 5.0;
 const double DEFAULT_GRAVITY = 100;
 
 // Player
-const char PLAYER_1_FILENAME[] = "Mario_Run1.bmp";
-const char PLAYER_2_FILENAME[] = "Mario_Run2.bmp";
-const char PLAYER_3_FILENAME[] = "Mario_Run3.bmp";
-const char PLAYER_CLIMB[] = "Mario_Climb.bmp";
+const char PLAYER_1_FILENAME[] = "./assets/Mario_Run1.bmp";
+const char PLAYER_2_FILENAME[] = "./assets/Mario_Run2.bmp";
+const char PLAYER_3_FILENAME[] = "./assets/Mario_Run3.bmp";
+const char PLAYER_CLIMB[] = "./assets/Mario_Climb.bmp";
 
 // Barrel 
-const char BARREL_1_FILENAME[] = "Barrel_1.bmp";
-const char BARREL_2_FILENAME[] = "Barrel_2.bmp";
-const char BARREL_3_FILENAME[] = "Barrel_3.bmp";
-const char BARREL_4_FILENAME[] = "Barrel_4.bmp";
+const char BARREL_1_FILENAME[] = "./assets/Barrel_1.bmp";
+const char BARREL_2_FILENAME[] = "./assets/Barrel_2.bmp";
+const char BARREL_3_FILENAME[] = "./assets/Barrel_3.bmp";
+const char BARREL_4_FILENAME[] = "./assets/Barrel_4.bmp";

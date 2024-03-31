@@ -13,7 +13,8 @@ void Game::createFramerate() { // (logic) (use constructor instead) (ok what do 
 	worldTime = 0; // how long the game is running
 }
 
-void Game::createPlayer() { // (logic)
+// Move to game object manager
+void Game::createPlayer() {
 	Player* pla = new Player();
 	pla->init(PLAYER_1_FILENAME);
 	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
@@ -24,9 +25,10 @@ void Game::createPlayer() { // (logic)
 	gameObjectManager->gameObjectContainer->player = pla; //
 }
 
-void Game::createDonkeyKong() {
+// Move to game object manager
+void Game::createDonkeyKong() { 
 	GameObject* donkeyK = new GameObject();
-	donkeyK->init("DonkeyKong.bmp");
+	donkeyK->init("./assets/DonkeyKong.bmp");
 	donkeyK->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
 	donkeyK->createSrcRect();
 	donkeyK->createDestRect();
@@ -34,9 +36,10 @@ void Game::createDonkeyKong() {
 	gameObjectManager->gameObjectContainer->donkeyKong = donkeyK; // 
 }
 
-void Game::createPrincess() {
+// Move to game object manager
+void Game::createPrincess() { 
 	GameObject* prin = new GameObject();
-	prin->init("Princess.bmp");
+	prin->init("./assets/Princess.bmp");
 	prin->setPosition(STARTING_X_PRINCESS, STARTING_Y_PRINCESS);
 	prin->createSrcRect();
 	prin->createDestRect();
@@ -44,7 +47,8 @@ void Game::createPrincess() {
 	gameObjectManager->gameObjectContainer->princess = prin;//
 }
 
-void Game::createPlatforms1() { // (logic)
+// Move to stage manager / game object manager ??? idk yet
+void Game::createPlatforms1() { 
 	Platform* plat1 = new Platform();
 	plat1->setPosition(1, 400, 400, 400); // 1
 
@@ -71,15 +75,16 @@ void Game::createPlatforms1() { // (logic)
 	gameObjectManager->gameObjectContainer->platformHolder = pH; //
 }
 
+// Move to stage manager / game object manager ??? idk yet
 void Game::createLadders1() { // (logic)
 	GameObject* ladd1 = new GameObject();
-	ladd1->init("Ladder.bmp");
+	ladd1->init("./assets/Ladder.bmp");
 	ladd1->setPosition(525, 129);
 	ladd1->setSrcRect(LADDER_WIDTH, 170); // yeah this actually sets the size
 	ladd1->setDestRect(LADDER_WIDTH, 170);
 
 	GameObject* ladd2 = new GameObject();
-	ladd2->init("Ladder.bmp");
+	ladd2->init("./assets/Ladder.bmp");
 	ladd2->setPosition(250, 79);
 	ladd2->setSrcRect(LADDER_WIDTH, 50); // yeah this actually sets the size
 	ladd2->setDestRect(LADDER_WIDTH, 50);
@@ -91,6 +96,7 @@ void Game::createLadders1() { // (logic)
 	gameObjectManager->gameObjectContainer->ladderHolder = laddH;
 }
 
+// Move to game object manager
 void Game::createBarrels() {
 	DynamicGameObject* barrel1 = new DynamicGameObject();
 	barrel1->init(BARREL_1_FILENAME);
@@ -108,6 +114,7 @@ void Game::createBarrels() {
 	gameObjectManager->gameObjectContainer->barrelDispenser->setPosition(gameObjectManager->gameObjectContainer->donkeyKong->xpos + gameObjectManager->gameObjectContainer->donkeyKong->destRect.w +  + SMALL_MARGIN, gameObjectManager->gameObjectContainer->donkeyKong->ypos);
 }
 
+// Move to stage manager / game object manager ??? idk yet
 void Game::createPlatforms2() { // (logic)
 	Platform* plat1 = new Platform();
 	plat1->setPosition(TINY_MARGIN, 400, SCREEN_WIDTH - 1, 400); // 1
@@ -139,15 +146,16 @@ void Game::createPlatforms2() { // (logic)
 	gameObjectManager->gameObjectContainer->platformHolder = platH; //
 }
 
-void Game::createLadders2() { // (logic)
+// Move to stage manager / game object manager ??? idk yet
+void Game::createLadders2() { 
 	GameObject* ladd1 = new GameObject();
-	ladd1->init("Ladder.bmp");
+	ladd1->init("./assets/Ladder.bmp");
 	ladd1->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 229);
 	ladd1->setSrcRect(LADDER_WIDTH, 170); // yeah this actually sets the size
 	ladd1->setDestRect(LADDER_WIDTH, 170);
 
 	GameObject* ladd2 = new GameObject();
-	ladd2->init("Ladder.bmp");
+	ladd2->init("./assets/Ladder.bmp");
 	ladd2->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH - LADDER_WIDTH, 79);
 	ladd2->setSrcRect(LADDER_WIDTH, 150); // yeah this actually sets the size
 	ladd2->setDestRect(LADDER_WIDTH, 150);
@@ -160,7 +168,8 @@ void Game::createLadders2() { // (logic)
 	gameObjectManager->gameObjectContainer->ladderHolder = laddH;
 }
 
-void Game::createPlatforms3() { // (logic)
+// Move to stage manager / game object manager ??? idk yet
+void Game::createPlatforms3() { 
 	Platform* plat1 = new Platform();
 	plat1->setPosition(STARTING_X, 400, SCREEN_WIDTH - TINY_MARGIN, 400); // 1
 
@@ -187,27 +196,28 @@ void Game::createPlatforms3() { // (logic)
 	gameObjectManager->gameObjectContainer->platformHolder = platH; //
 }
 
-void Game::createLadders3() { // (logic)
+// Move to stage manager / game object manager ??? idk yet
+void Game::createLadders3() { 
 	GameObject* ladd1 = new GameObject();
-	ladd1->init("Ladder.bmp");
+	ladd1->init("./assets/Ladder.bmp");
 	ladd1->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 299);
 	ladd1->setSrcRect(LADDER_WIDTH, LARGE_MARGIN); // yeah this actually sets the size
 	ladd1->setDestRect(LADDER_WIDTH, LARGE_MARGIN);
 
 	GameObject* ladd2 = new GameObject();
-	ladd2->init("Ladder.bmp");
+	ladd2->init("./assets/Ladder.bmp");
 	ladd2->setPosition(LARGE_MARGIN, 199);
 	ladd2->setSrcRect(LADDER_WIDTH, LARGE_MARGIN); // yeah this actually sets the size
 	ladd2->setDestRect(LADDER_WIDTH, LARGE_MARGIN);
 
 	GameObject* ladd3 = new GameObject();
-	ladd3->init("Ladder.bmp");
+	ladd3->init("./assets/Ladder.bmp");
 	ladd3->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 129);
 	ladd3->setSrcRect(LADDER_WIDTH, 70); // yeah this actually sets the size
 	ladd3->setDestRect(LADDER_WIDTH, 70);
 
 	GameObject* ladd4 = new GameObject();
-	ladd4->init("Ladder.bmp");
+	ladd4->init("./assets/Ladder.bmp");
 	ladd4->setPosition(250, 79);
 	ladd4->setSrcRect(LADDER_WIDTH, 50); // yeah this actually sets the size
 	ladd4->setDestRect(LADDER_WIDTH, 50);
@@ -221,6 +231,7 @@ void Game::createLadders3() { // (logic)
 	gameObjectManager->gameObjectContainer->ladderHolder = laddH;
 }
 
+// Move to stage manager
 void Game::createBoard(int boardId) { // (logic)
 	createPlayer();
 	createDonkeyKong();
@@ -240,16 +251,19 @@ void Game::createBoard(int boardId) { // (logic)
 	createBarrels();
 }
 
+// move to screen manager
 void Game::handleDifferentComputers() { // (logic) make every object dependent on deltaTime so it works the same on different computers
 	tick2 = SDL_GetTicks();
 	deltaTime = (tick2 - tick1) * 0.001;
 	tick1 = tick2;
 }
 
+// move to screen manager ???
 void Game::updateWorldTime() { 
 	worldTime += deltaTime;
 }
 
+// move to screen manager
 void Game::handleFPSTimer() { 
 	fpsTimer += deltaTime;
 	if (fpsTimer > SECONDS_BETWEEN_REFRESH) {
@@ -260,14 +274,14 @@ void Game::handleFPSTimer() {
 }
 
 // MOVE TO COLLISION MANAGER
-void Game::handleCollisionWithKong() { // COLLISION WITH KONG
+void Game::handleCollisionWithKong() {
 	if (gameObjectManager->collisionManager->isCollisionBetweenRects(gameObjectManager->gameObjectContainer->player->destRect, gameObjectManager->gameObjectContainer->donkeyKong->destRect)) {
 		closeGame();
 	}
 }
 
 // MOVE TO COLLISION MANAGER
-void Game::handleCollisionWithPrincess() { // COLLISION WITH PRINCESS
+void Game::handleCollisionWithPrincess() {
 	if (gameObjectManager->collisionManager->isCollisionBetweenRects(gameObjectManager->gameObjectContainer->player->destRect, gameObjectManager->gameObjectContainer->princess->destRect)) {
 		closeGame();
 	}

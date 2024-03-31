@@ -33,7 +33,7 @@ void ScreenManager::setSDLWindowTitle() {
 }
 
 void ScreenManager::setSDLCharset() { 
-	charset = SDL_LoadBMP("./cs8x8.bmp");
+	charset = SDL_LoadBMP("./assets/cs8x8.bmp");
 	if (charset == NULL) {
 		printf("SDL_LoadBMP(cs8x8.bmp) error: %s\n", SDL_GetError());
 	};
