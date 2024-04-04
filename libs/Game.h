@@ -25,6 +25,8 @@ class Game {
 		GameObjectManager* gameObjectManager;
 		ScreenManager* screenManager;
 
+		Game();
+
 		void initGame();
 
 		void createFramerate();
@@ -34,23 +36,6 @@ class Game {
 		
 
 		void handleRound(int startAnotherRound);
-
-		void createBoard(int boardId);
-
-		void createPlayer();
-		void createDonkeyKong();
-		void createPrincess();
-
-		void createPlatforms1();
-		void createLadders1();
-
-		void createPlatforms2();
-		void createLadders2();
-
-		void createPlatforms3();
-		void createLadders3();
-
-		void createBarrels();
 
 		// REMOVE SCREEN MANAGER WHERE ITS NOT NEEDED
 
