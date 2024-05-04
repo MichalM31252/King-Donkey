@@ -1,0 +1,5 @@
+- dodaj normalne animacje na podstawie ticku a nie na podstawie klatek
+- dodaj normalny movement (aby nie był taki pobugowany)
+- fix quit mechanism (not passing as an arugment, figure out something better
+- remove excess parameters from methods
+- fix goofy looking ladders
