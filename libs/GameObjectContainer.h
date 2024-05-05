@@ -8,12 +8,11 @@
 
 // turn this into a struct in the future
 
-class GameObjectContainer {
-public:
-	GameObject* donkeyKong;
-	GameObject* princess;
-	Player* player;
-	PlatformHolder* platformHolder;
-	LadderHolder* ladderHolder;
-	BarrelDispenser* barrelDispenser;
+struct GameObjectContainer {
+    GameObject* donkeyKong;
+    GameObject* princess;
+    Player* player;
+    PlatformHolder* platformHolder;
+    LadderHolder* ladderHolder;
+    BarrelDispenser* barrelDispenser;
 };
