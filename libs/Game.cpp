@@ -12,35 +12,67 @@ Game::Game() {
 	gameObjectManager = gameObjectMan;
 }
 
-// MOVE TO SCREEN MANAGER ? 
-void Game::createFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
-	tick1 = SDL_GetTicks();
-	frames = 0; // frames that happend
-	fpsTimer = 0; // 
-	fps = 0; // frames per second
-	worldTime = 0; // how long the game is running
-}
 
-// move to screen manager
-void Game::handleDifferentComputers() { // (logic) make every object dependent on deltaTime so it works the same on different computers
-	tick2 = SDL_GetTicks();
-	deltaTime = (tick2 - tick1) * 0.001;
-	tick1 = tick2;
-}
+// MOVE TO ROUND MANAGER
+void Game::handleCurrentRound(KeyboardManager& eventHandler, int *startAnotherRound) { // VisualManager is passed by reference, can't be an const because it's methods change the object
+	bool quit = false;
+	while (!quit) {
 
-// move to screen manager ???
-void Game::updateWorldTime() { 
-	worldTime += deltaTime;
-}
+		screenManager->handleDifferentComputers();
+		screenManager->updateWorldTime();
+		screenManager->handleFPSTimer();
 
-// move to screen manager
-void Game::handleFPSTimer() { 
-	fpsTimer += deltaTime;
-	if (fpsTimer > SECONDS_BETWEEN_REFRESH) {
-		fps = frames * REFRESH_RATE;
-		frames = 0;
-		fpsTimer -= SECONDS_BETWEEN_REFRESH;
+		screenManager->drawOutlineOfTheBoard();
+		screenManager->drawAdditionalInfo(screenManager->worldTime);
+
+		handlePlayer(); // player collision
+		handleBarrels(&quit, startAnotherRound); // barrel collision
+
+		gameObjectManager->gameObjectContainer->player->update(screenManager->deltaTime);
+
+		drawElements();
+
+		screenManager->serveNextFrame();
+
+		eventHandler.handleEvents(&quit, screenManager->deltaTime, gameObjectManager->gameObjectContainer->player, startAnotherRound);
+
+		screenManager->frames++;
 	};
+}
+
+// MOVE TO ROUND MANAGER
+void Game::handleRound(int startAnotherRound) { // yeah make this a different class in the future	
+	KeyboardManager eventHandler;
+	screenManager->createFramerate();
+	if (startAnotherRound) {
+		if (startAnotherRound == BOARD_ID_A) {
+			gameObjectManager->createBoard(BOARD_ID_A);
+		}
+		if (startAnotherRound == BOARD_ID_B) {
+			gameObjectManager->createBoard(BOARD_ID_B);
+		}
+		if (startAnotherRound == BOARD_ID_C) {
+			gameObjectManager->createBoard(BOARD_ID_C);
+		}
+	}
+	else {
+		gameObjectManager->createBoard(BOARD_ID_A);
+	}
+
+	handleCurrentRound(eventHandler, &startAnotherRound);
+
+	if (startAnotherRound) {
+		handleRound(startAnotherRound);
+	}
+}
+
+void Game::initGame() {
+	screenManager->createSDL(); // this should be set once
+
+	int startAnotherRound = 0;
+	handleRound(startAnotherRound);
+
+	closeGame();
 }
 
 // MOVE TO COLLISION MANAGER
@@ -58,7 +90,7 @@ void Game::handleCollisionWithPrincess() {
 }
 
 // MOVE TO COLLISION MANAGER
-void Game::handleCollisionWithBarrel(DynamicGameObject* barrel, bool *quit, int *startAnotherRound) {
+void Game::handleCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound) {
 	if (gameObjectManager->collisionManager->isCollisionBetweenRects(gameObjectManager->gameObjectContainer->player->destRect, barrel->destRect)) {
 		*quit = true;
 		*startAnotherRound = 1;
@@ -66,7 +98,7 @@ void Game::handleCollisionWithBarrel(DynamicGameObject* barrel, bool *quit, int 
 }
 
 // MOVE TO COLLISION MANAGER
-void Game::handleCollisionWithLadder(int *flagLadder) {
+void Game::handleCollisionWithLadder(int* flagLadder) {
 	for (int i = 0; i < gameObjectManager->gameObjectContainer->ladderHolder->numberOfElements; i++) {
 		if (gameObjectManager->collisionManager->isRectInsideLadder(gameObjectManager->gameObjectContainer->player->destRect, gameObjectManager->gameObjectContainer->ladderHolder->ladders[i].destRect)) {
 			*flagLadder = 1;
@@ -95,7 +127,7 @@ void Game::handleCollisionWithJumping() {
 }
 
 // MOVE TO COLLISION MANAGER
-void Game::handleCollisionWithPlatform(DynamicGameObject *gameObject , int* flagPlatform) {
+void Game::handleCollisionWithPlatform(DynamicGameObject* gameObject, int* flagPlatform) {
 	// check bottom left corner
 	// check bottom right corner
 	int yPosition = gameObject->ypos + gameObject->destRect.h;
@@ -162,7 +194,6 @@ void Game::drawElements() { // don't repeat yourself
 	drawBarrels();
 }
 
-
 // MOVE TO GAME OBJECT MANAGER
 void Game::handlePlayer() { // player collision
 	handleCollisionWithKong();
@@ -178,10 +209,10 @@ void Game::handlePlayer() { // player collision
 			handleCollisionWithJumping();
 		}
 		else {
-			PhysicsManager::handleFalling(gameObjectManager->gameObjectContainer->player, deltaTime);
+			PhysicsManager::handleFalling(gameObjectManager->gameObjectContainer->player, screenManager->deltaTime);
 		}
 		if (gameObjectManager->gameObjectContainer->player->isJumping) { // handle jumping
-			gameObjectManager->gameObjectContainer->player->jump(deltaTime);
+			gameObjectManager->gameObjectContainer->player->jump(screenManager->deltaTime);
 		}
 	}
 
@@ -192,8 +223,8 @@ void Game::handlePlayer() { // player collision
 }
 
 // MOVE TO GAME OBJECT MANAGER
-void Game::handleBarrels(bool *quit, int* startAnotherRound) {
-	gameObjectManager->gameObjectContainer->barrelDispenser->updateBarrelDispenser(deltaTime);
+void Game::handleBarrels(bool* quit, int* startAnotherRound) {
+	gameObjectManager->gameObjectContainer->barrelDispenser->updateBarrelDispenser(screenManager->deltaTime);
 
 	for (int i = 0; i < gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
 
@@ -208,78 +239,13 @@ void Game::handleBarrels(bool *quit, int* startAnotherRound) {
 				gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].stopMove();
 			}
 			gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].moveStart(DEFAULT_BARREL_SPEED);
-			gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].startMovingRight(deltaTime);
+			gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].startMovingRight(screenManager->deltaTime);
 		}
 		else {
-			PhysicsManager::handleFalling(&gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], deltaTime); // THE PROBLEM IS HERE
+			PhysicsManager::handleFalling(&gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], screenManager->deltaTime); // THE PROBLEM IS HERE
 		}
-		gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].update(deltaTime);
+		gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].update(screenManager->deltaTime);
 	}
-}
-
-// MOVE TO ROUND MANAGER
-void Game::handleCurrentRound(KeyboardManager& eventHandler, int *startAnotherRound) { // VisualManager is passed by reference, can't be an const because it's methods change the object
-	bool quit = false;
-	while (!quit) {
-
-		handleDifferentComputers();
-		updateWorldTime();
-		handleFPSTimer();
-
-		screenManager->drawOutlineOfTheBoard(); // this first because it overwrites everything
-		screenManager->drawAdditionalInfo(worldTime);
-
-		// This should be a part of GameObjectManager
-
-		handlePlayer(); // player collision
-		handleBarrels(&quit, startAnotherRound); // barrel collision
-
-		gameObjectManager->gameObjectContainer->player->update(deltaTime);
-		// 
-
-		drawElements();
-
-		screenManager->serveNextFrame();
-
-		eventHandler.handleEvents(&quit, deltaTime, gameObjectManager->gameObjectContainer->player, startAnotherRound);
-
-		frames++;
-	};
-}
-
-// MOVE TO ROUND MANAGER
-void Game::handleRound(int startAnotherRound) { // yeah make this a different class in the future	
-	KeyboardManager eventHandler;
-	createFramerate();
-	if (startAnotherRound) {
-		if (startAnotherRound == BOARD_ID_A) {
-			gameObjectManager->createBoard(BOARD_ID_A);
-		}
-		if (startAnotherRound == BOARD_ID_B) {
-			gameObjectManager->createBoard(BOARD_ID_B);
-		}
-		if (startAnotherRound == BOARD_ID_C) {
-			gameObjectManager->createBoard(BOARD_ID_C);
-		}
-	}
-	else {
-		gameObjectManager->createBoard(BOARD_ID_A);
-	}
-
-	handleCurrentRound(eventHandler, &startAnotherRound);
-
-	if (startAnotherRound) {
-		handleRound(startAnotherRound);
-	}
-}
-
-void Game::initGame() {
-	screenManager->createSDL(); // this should be set once
-
-	int startAnotherRound = 0;
-	handleRound(startAnotherRound);
-
-	closeGame();
 }
 
 void Game::closeGame(){

@@ -3,6 +3,37 @@ extern "C" {
 #include "ScreenManager.h"
 }
 
+// MOVE TO SCREEN MANAGER ? 
+void ScreenManager::createFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
+	tick1 = SDL_GetTicks();
+	frames = 0; // frames that happend
+	fpsTimer = 0; // 
+	fps = 0; // frames per second
+	worldTime = 0; // how long the game is running
+}
+
+// move to screen manager
+void ScreenManager::handleDifferentComputers() { // (logic) make every object dependent on deltaTime so it works the same on different computers
+	tick2 = SDL_GetTicks();
+	deltaTime = (tick2 - tick1) * 0.001;
+	tick1 = tick2;
+}
+
+// move to screen manager ???
+void ScreenManager::updateWorldTime() {
+	worldTime += deltaTime;
+}
+
+// move to screen manager
+void ScreenManager::handleFPSTimer() {
+	fpsTimer += deltaTime;
+	if (fpsTimer > SECONDS_BETWEEN_REFRESH) {
+		fps = frames * REFRESH_RATE;
+		frames = 0;
+		fpsTimer -= SECONDS_BETWEEN_REFRESH;
+	};
+}
+
 void ScreenManager::SDLCheck() { // checks if SDL was initialized correctly
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		printf("SDL_Init error: %s\n", SDL_GetError());

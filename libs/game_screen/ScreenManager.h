@@ -12,6 +12,9 @@ extern "C" {
 
 class ScreenManager {
 	public:
+		int tick1, tick2, frames;
+		double deltaTime, worldTime, fpsTimer, fps;
+
 		Uint32 black, green, red, blue, white;
 		Uint32 ladderColor, platformColor;
 
@@ -38,6 +41,11 @@ class ScreenManager {
 		void drawOutlineOfTheBoard();
 		void drawAdditionalInfo(double worldTime);
 		void createSDL();
+
+		void createFramerate();
+		void handleFPSTimer();
+		void handleDifferentComputers();
+		void updateWorldTime();
 
 		void serveNextFrame();
 

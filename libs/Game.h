@@ -18,10 +18,6 @@ extern "C" {
 
 class Game {
 	public:
-		// Shouldn't this be in screen manager?
-		int tick1, tick2, frames;
-		double deltaTime, worldTime, fpsTimer, fps;
-
 		GameObjectManager* gameObjectManager;
 		ScreenManager* screenManager;
 
@@ -29,39 +25,26 @@ class Game {
 
 		void initGame();
 
-		void createFramerate();
-		void handleFPSTimer();
-		void handleDifferentComputers();
-		void updateWorldTime();
-		
 
+		void handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound);
 		void handleRound(int startAnotherRound);
-
-		// REMOVE SCREEN MANAGER WHERE ITS NOT NEEDED
 
 		void handlePlayer();
 		void handleBarrels(bool* quit, int* startAnotherRound);
 
-		void handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound);
+		void drawElements();
+		void drawPlatforms();
+		void drawLadders();
+		void drawBarrels();
 
 		void handleCollisionWithKong();
 		void handleCollisionWithPrincess();
 		void handleCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
 		void handleCollisionWithLadder(int* flagLadder);
 
-		void handleCollisionWithPlatform(DynamicGameObject *gameObject, int* flagPlatform);
+		void handleCollisionWithPlatform(DynamicGameObject* gameObject, int* flagPlatform);
 		void handleCollisionWithJumping();
-
-		
 
 		void closeGame();
 		// void closeGame(ScreenManager& screenManager);
-
-
-		// move to GameObjectManager
-
-		void drawElements();
-		void drawPlatforms();
-		void drawLadders();
-		void drawBarrels();
 };
