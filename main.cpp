@@ -13,6 +13,6 @@ int main(int argc, char** argv) {
 
 	game.initGame();
 
-	// zwolnienie powierzchni / freeing all surfaces
+	// freeing all surfaces
 	return 0;
 };

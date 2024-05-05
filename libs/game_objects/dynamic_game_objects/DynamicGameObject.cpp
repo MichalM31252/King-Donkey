@@ -24,18 +24,20 @@ DynamicGameObject::DynamicGameObject() {
 	currentRunningSpriteIdBarrel = 1;
 }
 
-// These two methods should be moved to a sprite manager
+// THIS SHOULD BE IN SCREEN MANAGER
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void DynamicGameObject::decideSpritePlayer() {
 	if (currentRunningSpriteId == 1) {
-		textureManager.loadTexture(PLAYER_1_FILENAME);
+		ScreenManager::loadTexture(this, PLAYER_1_FILENAME);
 		currentRunningSpriteId++;
 	}
 	else if (currentRunningSpriteId == 2) {
-		textureManager.loadTexture(PLAYER_2_FILENAME);
+		ScreenManager::loadTexture(this, PLAYER_2_FILENAME);
 		currentRunningSpriteId++;
 	}
 	else {
-		textureManager.loadTexture(PLAYER_3_FILENAME);
+		ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
 		currentRunningSpriteId = 1;
 	}
 }
@@ -43,22 +45,24 @@ void DynamicGameObject::decideSpritePlayer() {
 // This should be moved to a sprite manager
 void DynamicGameObject::decideSpriteBarrel() {
 	if (currentRunningSpriteIdBarrel == 1) {
-		textureManager.loadTexture(BARREL_1_FILENAME);
+		ScreenManager::loadTexture(this, BARREL_1_FILENAME);
 		currentRunningSpriteIdBarrel++;
 	}
 	else if (currentRunningSpriteIdBarrel == 2) {
-		textureManager.loadTexture(BARREL_2_FILENAME);
+		ScreenManager::loadTexture(this, BARREL_2_FILENAME);
 		currentRunningSpriteIdBarrel++;
 	}
 	else if (currentRunningSpriteIdBarrel == 3) {
-		textureManager.loadTexture(BARREL_3_FILENAME);
+		ScreenManager::loadTexture(this, BARREL_3_FILENAME);
 		currentRunningSpriteIdBarrel++;
 	}
 	else{
-		textureManager.loadTexture(BARREL_4_FILENAME);
+		ScreenManager::loadTexture(this, BARREL_4_FILENAME);
 		currentRunningSpriteIdBarrel = 1;
 	}
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void DynamicGameObject::startAccumulatingDistance(double deltaTime) {
 	if (objectSpeed > 0) {

@@ -13,7 +13,9 @@ GameObjectManager::GameObjectManager() {
 // Move to game object manager
 void GameObjectManager::createPlayer() {
 	Player* pla = new Player();
-	pla->init(PLAYER_1_FILENAME);
+
+	ScreenManager::initGameObject(pla, PLAYER_1_FILENAME);
+
 	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
 	pla->createSrcRect();
 	pla->createDestRect();
@@ -25,7 +27,9 @@ void GameObjectManager::createPlayer() {
 // Move to game object manager
 void GameObjectManager::createDonkeyKong() {
 	GameObject* donkeyK = new GameObject();
-	donkeyK->init("./assets/DonkeyKong.bmp");
+
+	ScreenManager::initGameObject(donkeyK, "./assets/DonkeyKong.bmp");
+
 	donkeyK->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
 	donkeyK->createSrcRect();
 	donkeyK->createDestRect();
@@ -36,7 +40,9 @@ void GameObjectManager::createDonkeyKong() {
 // Move to game object manager
 void GameObjectManager::createPrincess() {
 	GameObject* prin = new GameObject();
-	prin->init("./assets/Princess.bmp");
+
+	ScreenManager::initGameObject(prin, "./assets/Princess.bmp");
+
 	prin->setPosition(STARTING_X_PRINCESS, STARTING_Y_PRINCESS);
 	prin->createSrcRect();
 	prin->createDestRect();
@@ -73,15 +79,22 @@ void GameObjectManager::createPlatforms1() {
 }
 
 // Move to stage manager / game object manager ??? idk yet
+
+// ERROR HERE ?????
+
 void GameObjectManager::createLadders1() { // (logic)
 	GameObject* ladd1 = new GameObject();
-	ladd1->init("./assets/Ladder.bmp");
+
+	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
+
 	ladd1->setPosition(525, 129);
 	ladd1->setSrcRect(LADDER_WIDTH, 170); // yeah this actually sets the size
 	ladd1->setDestRect(LADDER_WIDTH, 170);
 
 	GameObject* ladd2 = new GameObject();
-	ladd2->init("./assets/Ladder.bmp");
+
+	ScreenManager::initGameObject(ladd2, "./assets/Ladder.bmp");
+
 	ladd2->setPosition(250, 79);
 	ladd2->setSrcRect(LADDER_WIDTH, 50); // yeah this actually sets the size
 	ladd2->setDestRect(LADDER_WIDTH, 50);
@@ -96,7 +109,9 @@ void GameObjectManager::createLadders1() { // (logic)
 // Move to game object manager
 void GameObjectManager::createBarrels() {
 	DynamicGameObject* barrel1 = new DynamicGameObject();
-	barrel1->init(BARREL_1_FILENAME);
+
+	ScreenManager::initGameObject(barrel1, BARREL_1_FILENAME);
+
 	barrel1->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
 	barrel1->createSrcRect();
 	barrel1->createDestRect();
@@ -146,13 +161,17 @@ void GameObjectManager::createPlatforms2() { // (logic)
 // Move to stage manager / game object manager ??? idk yet
 void GameObjectManager::createLadders2() {
 	GameObject* ladd1 = new GameObject();
-	ladd1->init("./assets/Ladder.bmp");
+
+	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
+
 	ladd1->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 229);
 	ladd1->setSrcRect(LADDER_WIDTH, 170); // yeah this actually sets the size
 	ladd1->setDestRect(LADDER_WIDTH, 170);
 
 	GameObject* ladd2 = new GameObject();
-	ladd2->init("./assets/Ladder.bmp");
+
+	ScreenManager::initGameObject(ladd2, "./assets/Ladder.bmp");
+
 	ladd2->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH - LADDER_WIDTH, 79);
 	ladd2->setSrcRect(LADDER_WIDTH, 150); // yeah this actually sets the size
 	ladd2->setDestRect(LADDER_WIDTH, 150);
@@ -196,25 +215,33 @@ void GameObjectManager::createPlatforms3() {
 // Move to stage manager / game object manager ??? idk yet
 void GameObjectManager::createLadders3() {
 	GameObject* ladd1 = new GameObject();
-	ladd1->init("./assets/Ladder.bmp");
+
+	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
+
 	ladd1->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 299);
 	ladd1->setSrcRect(LADDER_WIDTH, LARGE_MARGIN); // yeah this actually sets the size
 	ladd1->setDestRect(LADDER_WIDTH, LARGE_MARGIN);
 
 	GameObject* ladd2 = new GameObject();
-	ladd2->init("./assets/Ladder.bmp");
+
+	ScreenManager::initGameObject(ladd2, "./assets/Ladder.bmp");
+
 	ladd2->setPosition(LARGE_MARGIN, 199);
 	ladd2->setSrcRect(LADDER_WIDTH, LARGE_MARGIN); // yeah this actually sets the size
 	ladd2->setDestRect(LADDER_WIDTH, LARGE_MARGIN);
 
 	GameObject* ladd3 = new GameObject();
-	ladd3->init("./assets/Ladder.bmp");
+
+	ScreenManager::initGameObject(ladd3, "./assets/Ladder.bmp");
+
 	ladd3->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 129);
 	ladd3->setSrcRect(LADDER_WIDTH, 70); // yeah this actually sets the size
 	ladd3->setDestRect(LADDER_WIDTH, 70);
 
 	GameObject* ladd4 = new GameObject();
-	ladd4->init("./assets/Ladder.bmp");
+
+	ScreenManager::initGameObject(ladd4, "./assets/Ladder.bmp");
+
 	ladd4->setPosition(250, 79);
 	ladd4->setSrcRect(LADDER_WIDTH, 50); // yeah this actually sets the size
 	ladd4->setDestRect(LADDER_WIDTH, 50);
@@ -247,9 +274,6 @@ void GameObjectManager::createBoard(int boardId) { // (logic)
 	}
 	createBarrels();
 }
-
-
-
 
 GameObjectManager::~GameObjectManager() {
 

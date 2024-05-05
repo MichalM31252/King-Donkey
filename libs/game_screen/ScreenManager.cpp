@@ -128,6 +128,38 @@ void ScreenManager::createSDL() {
 	setColors();
 }
 
+void ScreenManager::loadTexture(GameObject* gameObject, const char* fileName) {
+	gameObject->sprite = SDL_LoadBMP(fileName);
+	if (gameObject->sprite == NULL) {
+		printf("SDL_LoadBMP error: %s\n", SDL_GetError());
+	}
+}
+
+// draw a surface sprite on a surface screen in point (x, y)
+// (x, y) is the center of sprite on screen
+void ScreenManager::drawSurface(SDL_Surface* screen, GameObject* gameObject, int xpos, int ypos) { // yeah there is the problem
+	SDL_Rect dest;
+	dest.x = xpos;
+	dest.y = ypos;
+	dest.w = gameObject->sprite->w;
+	dest.h = gameObject->sprite->h;
+	SDL_BlitSurface(gameObject->sprite, NULL, screen, &dest);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void ScreenManager::drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, int xpos, int ypos, SDL_Rect dest) { // not the best solution but works
+	ladder->sprite->w = dest.w;
+	ladder->sprite->h = dest.h;
+	SDL_BlitSurface(ladder->sprite, NULL, screen, &dest); // it doesnt overwrite the original size of the image
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // draw a text txt on surface screen, starting from the point (x, y)
 // charset is a 128x128 bitmap containing character images
 void ScreenManager::DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset) {
@@ -174,6 +206,24 @@ void ScreenManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int 
 	DrawLine(screen, x + l - 1, y, k, 0, 1, outlineColor);
 	DrawLine(screen, x, y, l, 1, 0, outlineColor);
 	DrawLine(screen, x, y + k - 1, l, 1, 0, outlineColor);
-	for (i = y + 1; i < y + k - 1; i++)
+	for (i = y + 1; i < y + k - 1; i++) {
 		DrawLine(screen, x + 1, i, l - 2, 1, 0, fillColor);
+	}
+		
 };
+
+//////////////////////////////////////////////////////////////////////
+
+void ScreenManager::initGameObject(GameObject* gameObject, const char* fileName) {
+	loadTexture(gameObject, fileName);
+}
+
+void ScreenManager::renderGameObject(GameObject* gameObject, SDL_Surface* screen) {
+	drawSurface(screen, gameObject, gameObject->xpos, gameObject->ypos);
+}
+
+void ScreenManager::renderLadder(GameObject* gameObject, SDL_Surface* screen) {
+	drawSurfaceLadder(screen, gameObject, gameObject->xpos, gameObject->ypos, gameObject->destRect);
+}
+
+//////////////////////////////////////////////////////////////////////

@@ -25,25 +25,39 @@ class Game {
 
 		void initGame();
 
-
+		// Round manager
+		/////////////////////////////////////////////////////////////////////////////////////
+		
 		void handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound);
 		void handleRound(int startAnotherRound);
 
+		/////////////////////////////////////////////////////////////////////////////////////
+
+		// game object manager
+		/////////////////////////////////////////////////////////////////////////////////////
+
 		void handlePlayer();
 		void handleBarrels(bool* quit, int* startAnotherRound);
+
+		// Screen manager or texture manager
+		/////////////////////////////////////////////////////////////////////////////////////
 
 		void drawElements();
 		void drawPlatforms();
 		void drawLadders();
 		void drawBarrels();
 
+		// Game object manager or collision manager?
+		/////////////////////////////////////////////////////////////////////////////////////
+
 		void handleCollisionWithKong();
 		void handleCollisionWithPrincess();
 		void handleCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
 		void handleCollisionWithLadder(int* flagLadder);
-
 		void handleCollisionWithPlatform(DynamicGameObject* gameObject, int* flagPlatform);
 		void handleCollisionWithJumping();
+
+		/////////////////////////////////////////////////////////////////////////////////////
 
 		void closeGame();
 		// void closeGame(ScreenManager& screenManager);

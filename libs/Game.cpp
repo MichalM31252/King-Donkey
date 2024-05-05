@@ -170,24 +170,27 @@ void Game::drawPlatforms() {
 }
 
 // MOVE TO TEXTURE MANAGER
+
+// CRASHES AT THE SECOND LADDER ?????
+
 void Game::drawLadders() {
 	for (int i = 0; i < gameObjectManager->gameObjectContainer->ladderHolder->numberOfElements; i++) {
-		gameObjectManager->gameObjectContainer->ladderHolder->ladders[i].renderLadder(screenManager->screen);
+		screenManager->renderLadder(&gameObjectManager->gameObjectContainer->ladderHolder->ladders[i], screenManager->screen);
 	}
 }
 
 // MOVE TO TEXTURE MANAGER
 void Game::drawBarrels() {
 	for (int i = 0; i < gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
-		gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].render(screenManager->screen);
+		screenManager->renderGameObject(&gameObjectManager->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], screenManager->screen);
 	}
 }
 
 // MOVE TO TEXTURE MANAGER
 void Game::drawElements() { // don't repeat yourself
-	gameObjectManager->gameObjectContainer->donkeyKong->render(screenManager->screen);
-	gameObjectManager->gameObjectContainer->princess->render(screenManager->screen);
-	gameObjectManager->gameObjectContainer->player->render(screenManager->screen);
+	screenManager->renderGameObject(gameObjectManager->gameObjectContainer->donkeyKong, screenManager->screen);
+	screenManager->renderGameObject(gameObjectManager->gameObjectContainer->princess, screenManager->screen);
+	screenManager->renderGameObject(gameObjectManager->gameObjectContainer->player, screenManager->screen);
 
 	drawPlatforms();
 	drawLadders();
@@ -205,7 +208,7 @@ void Game::handlePlayer() { // player collision
 
 	if (!gameObjectManager->gameObjectContainer->player->isClimbing) {
 		if (flagPlatform) {
-			gameObjectManager->gameObjectContainer->player->textureManager.loadTexture(PLAYER_1_FILENAME);
+			screenManager->loadTexture(gameObjectManager->gameObjectContainer->player, PLAYER_1_FILENAME);
 			handleCollisionWithJumping();
 		}
 		else {
