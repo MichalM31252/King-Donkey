@@ -14,7 +14,7 @@ Game::Game() {
 
 
 // MOVE TO ROUND MANAGER
-void Game::handleCurrentRound(KeyboardManager& eventHandler, int *startAnotherRound) { // VisualManager is passed by reference, can't be an const because it's methods change the object
+void Game::handleCurrentRound(KeyboardManager& eventHandler, int *startAnotherRound) {
 	bool quit = false;
 	while (!quit) {
 
@@ -41,7 +41,7 @@ void Game::handleCurrentRound(KeyboardManager& eventHandler, int *startAnotherRo
 }
 
 // MOVE TO ROUND MANAGER
-void Game::handleRound(int startAnotherRound) { // yeah make this a different class in the future	
+void Game::handleRound(int startAnotherRound) {
 	KeyboardManager eventHandler;
 	screenManager->createFramerate();
 	if (startAnotherRound) {
@@ -67,7 +67,7 @@ void Game::handleRound(int startAnotherRound) { // yeah make this a different cl
 }
 
 void Game::initGame() {
-	screenManager->createSDL(); // this should be set once
+	screenManager->createSDL();
 
 	int startAnotherRound = 0;
 	handleRound(startAnotherRound);
@@ -158,8 +158,6 @@ void Game::handleCollisionWithPlatform(DynamicGameObject* gameObject, int* flagP
 			*flagPlatform = 1;
 		}
 	}
-	// after that you need to add collision for the top left and top right corner
-	// but in their case you need to stop the player from moving up
 }
 
 // MOVE TO TEXTURE MANAGER
@@ -170,9 +168,6 @@ void Game::drawPlatforms() {
 }
 
 // MOVE TO TEXTURE MANAGER
-
-// CRASHES AT THE SECOND LADDER ?????
-
 void Game::drawLadders() {
 	for (int i = 0; i < gameObjectManager->gameObjectContainer->ladderHolder->numberOfElements; i++) {
 		screenManager->renderLadder(&gameObjectManager->gameObjectContainer->ladderHolder->ladders[i], screenManager->screen);

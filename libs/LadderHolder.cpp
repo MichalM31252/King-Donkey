@@ -3,12 +3,12 @@ extern "C" {
 }
 
 void initLadderHolder(LadderHolder* ladderHolder) {
-	ladderHolder->ladders = new GameObject[MAXIMUM_AMOUNT_OF_LADDERS]; // this is the reason why platforms are not pointers
-	ladderHolder->numberOfElements = 0; // number of elements currently inside
+	ladderHolder->ladders = new GameObject[MAXIMUM_AMOUNT_OF_LADDERS];
+	ladderHolder->numberOfElements = 0;
 	ladderHolder->sizeOfArray = MAXIMUM_AMOUNT_OF_PLATFORMS;
 }
 
-void addLadder(LadderHolder* ladderHolder, GameObject* ladder) { // this doesn't work
+void addLadder(LadderHolder* ladderHolder, GameObject* ladder) {
 	if (ladderHolder->numberOfElements == ladderHolder->sizeOfArray) {
 		GameObject* temp = new GameObject[ladderHolder->sizeOfArray];
 

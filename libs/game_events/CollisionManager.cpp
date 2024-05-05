@@ -18,7 +18,7 @@ bool CollisionManager::isPointAPartOfLine(const int x, const int y, Platform* pl
 	
 	// Ax + By = C
 	if ( a * x + b * y == c) { // is point part of the line
-		if ((x >= platform->x1pos && x <= platform->x2pos) || (x <= platform->x1pos && x >= platform->x2pos)) { // what's the point of this
+		if ((x >= platform->x1pos && x <= platform->x2pos) || (x <= platform->x1pos && x >= platform->x2pos)) {
 			return true;
 		}
 	}

@@ -26,7 +26,7 @@ void KeyboardManager::onKeyDown(bool* quit, double deltaTime, Player* player, in
 		case SDLK_ESCAPE:
 			initializeQuit(quit, startAnotherRound);
 			break;
-		case SDLK_UP: // why is he still in the ladder 
+		case SDLK_UP:
 			onKeyPressArrowUp(deltaTime, player);
 			break;
 		case SDLK_LEFT:
@@ -67,7 +67,7 @@ void KeyboardManager::initializeQuit(bool* quit, int* startAnotherRound) {
 
 void KeyboardManager::onKeyPressArrowUp(double deltaTime, Player* player) {
 	if (player->isInsideLadder) {
-		player->isClimbing = true; // the problem is most likely with this 
+		player->isClimbing = true;
 
 		ScreenManager::loadTexture(player, PLAYER_CLIMB);
 

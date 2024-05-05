@@ -8,9 +8,9 @@ extern "C" {
 class GameObject
 {  
 public:
-	int xpos, ypos; // position of the game object
+	int xpos, ypos;
 	SDL_Rect destRect, srcRect; // destRect is the physical representation of the game object // srcRect is whats going to be mapped onto the destRect
-	SDL_Surface* sprite;// the image of the game object
+	SDL_Surface* sprite; // the image of the game object
 	char *tag[30]; // name of the object to differentiate between them barrel, player, ladder, etc
 
 	void createSrcRect();

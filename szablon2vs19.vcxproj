@@ -22,7 +22,6 @@
     <ClCompile Include="libs\BarrelDispenser.cpp" />
     <ClCompile Include="libs\BarrelHolder.cpp" />
     <ClCompile Include="libs\Game.cpp" />
-    <ClCompile Include="libs\GameObjectContainer.cpp" />
     <ClCompile Include="libs\GameObjectManager.cpp" />
     <ClCompile Include="libs\game_events\CollisionManager.cpp" />
     <ClCompile Include="libs\game_events\KeyboardManager.cpp" />
