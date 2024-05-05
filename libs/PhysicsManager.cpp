@@ -13,4 +13,3 @@ void PhysicsManager::handleFalling(DynamicGameObject* dynamicGameObject, double 
 		}
 	}
 }
-

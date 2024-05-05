@@ -15,6 +15,8 @@ extern "C" {
 }
 
 class KeyboardManager {
+private:
+	SDL_Event event; // this can be used here
 public:
 	void handleEvents(bool* quit, double deltaTime, Player* player, int* startAnotherRound);
 
@@ -32,6 +34,5 @@ public:
 	void onKeyPress2(bool* quit, int* startAnotherRound);
 	void onKeyPress3(bool* quit, int* startAnotherRound);
 	
-private:
-	SDL_Event event; // this can be used here
+
 };

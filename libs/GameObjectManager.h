@@ -9,7 +9,6 @@ class GameObjectManager {
 public:
 	GameObjectContainer* gameObjectContainer;
 	CollisionManager* collisionManager;
-	PhysicsManager* physicsManager; // this only holds a static method so it doesn't need to be a pointer and it doesn't need to be here
 
 	GameObjectManager();
 

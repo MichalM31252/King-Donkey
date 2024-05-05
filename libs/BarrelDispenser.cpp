@@ -22,11 +22,7 @@ void BarrelDispenser::updateBarrelDispenser(double deltaTime) {
 
 void BarrelDispenser::throwBarrel() {
 	DynamicGameObject* barrel = new DynamicGameObject();
-
 	ScreenManager::initGameObject(barrel, BARREL_1_FILENAME);
-
-
-	// THIS SHOULD HAPPEN EVERY TIME AN OBJECT IS ADDED TO GAME OBJECT CONTAINER TEMPORARY FIX
 	barrel->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
 	barrel->createSrcRect();
 	barrel->createDestRect();

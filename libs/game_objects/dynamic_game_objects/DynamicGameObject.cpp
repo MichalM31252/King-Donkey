@@ -77,7 +77,7 @@ void DynamicGameObject::updatePosition() {
 	// WATCHOUT DIFFERENT += -= SIGNS AND VARIABLES IN EVERY IF
 	// moving left, down, right, top
 	if (currentDirectionOfMovementHorizontal > 0.0 || currentDirectionOfMovementVertical > 0.0) { // for positive numbers 
-		if (accumulatedXMove > currentDirectionOfMovementHorizontal) { // right // THIS CANT BE BIGGER OR EQUAL BECAUSE WHEN STARTING IT IS ALWAYS TRUE 0 <= 0
+		if (accumulatedXMove > currentDirectionOfMovementHorizontal) { // right
 			int pixelsToMove = accumulatedXMove / 1;
 			if (pixelsToMove > 1) {
 				xpos += 1;

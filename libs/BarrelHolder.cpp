@@ -3,8 +3,8 @@ extern "C" {
 }
 
 void initBarrelHolder(BarrelHolder* barrelHolder) {
-	barrelHolder->barrels = new DynamicGameObject[MAXIMUM_AMOUNT_OF_BARRELS]; // this is the reason why platforms are not pointers
-	barrelHolder->numberOfElements = 0; // number of elements currently inside
+	barrelHolder->barrels = new DynamicGameObject[MAXIMUM_AMOUNT_OF_BARRELS];
+	barrelHolder->numberOfElements = 0;
 	barrelHolder->sizeOfArray = MAXIMUM_AMOUNT_OF_BARRELS;
 }
 
