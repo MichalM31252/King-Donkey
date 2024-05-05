@@ -2,6 +2,7 @@
 
 extern "C" {
 #include "../DynamicGameObject.h"
+#include "../../../game_screen/ScreenManager.h"
 }
 
 class Player : public DynamicGameObject {

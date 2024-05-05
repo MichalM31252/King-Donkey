@@ -18,65 +18,47 @@ extern "C" {
 
 class Game {
 	public:
-		
-		int tick1, tick2, frames;
-		double deltaTime, worldTime, fpsTimer, fps;
-
 		GameObjectManager* gameObjectManager;
 		ScreenManager* screenManager;
 
+		Game();
+
 		void initGame();
 
-		void createFramerate();
-		void handleFPSTimer();
-		void handleDifferentComputers();
-		void updateWorldTime();
+		// Round manager
+		/////////////////////////////////////////////////////////////////////////////////////
 		
-
+		void handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound);
 		void handleRound(int startAnotherRound);
 
-		void createBoard(int boardId);
+		/////////////////////////////////////////////////////////////////////////////////////
 
-		void createPlayer();
-		void createDonkeyKong();
-		void createPrincess();
-
-		void createPlatforms1();
-		void createLadders1();
-
-		void createPlatforms2();
-		void createLadders2();
-
-		void createPlatforms3();
-		void createLadders3();
-
-		void createBarrels();
-
-		// REMOVE SCREEN MANAGER WHERE ITS NOT NEEDED
+		// game object manager
+		/////////////////////////////////////////////////////////////////////////////////////
 
 		void handlePlayer();
 		void handleBarrels(bool* quit, int* startAnotherRound);
 
-		void handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound);
-
-		void handleCollisionWithKong();
-		void handleCollisionWithPrincess();
-		void handleCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
-		void handleCollisionWithLadder(int* flagLadder);
-
-		void handleCollisionWithPlatform(DynamicGameObject *gameObject, int* flagPlatform);
-		void handleCollisionWithJumping();
-
-		
-
-		void closeGame();
-		// void closeGame(ScreenManager& screenManager);
-
-
-		// move to GameObjectManager
+		// Screen manager or texture manager
+		/////////////////////////////////////////////////////////////////////////////////////
 
 		void drawElements();
 		void drawPlatforms();
 		void drawLadders();
 		void drawBarrels();
+
+		// Game object manager or collision manager?
+		/////////////////////////////////////////////////////////////////////////////////////
+
+		void handleCollisionWithKong();
+		void handleCollisionWithPrincess();
+		void handleCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
+		void handleCollisionWithLadder(int* flagLadder);
+		void handleCollisionWithPlatform(DynamicGameObject* gameObject, int* flagPlatform);
+		void handleCollisionWithJumping();
+
+		/////////////////////////////////////////////////////////////////////////////////////
+
+		void closeGame();
+		// void closeGame(ScreenManager& screenManager);
 };

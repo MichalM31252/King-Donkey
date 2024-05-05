@@ -38,7 +38,6 @@
     <ClCompile Include="libs\PhysicsManager.cpp" />
     <ClCompile Include="libs\game_objects\dynamic_game_objects\dynamic_game_object_child\Player.cpp" />
     <ClCompile Include="libs\game_objects\GameObject.cpp" />
-    <ClCompile Include="libs\game_objects\TextureManager.cpp" />
     <ClCompile Include="libs\game_screen\ScreenManager.cpp" />
     <ClCompile Include="libs\LadderHolder.cpp" />
     <ClCompile Include="libs\Platform.cpp" />
@@ -70,7 +69,6 @@
     <ClInclude Include="libs\game_objects\dynamic_game_objects\dynamic_game_object_child\Player.h" />
     <ClInclude Include="libs\PhysicsManager.h" />
     <ClInclude Include="libs\game_objects\GameObject.h" />
-    <ClInclude Include="libs\game_objects\TextureManager.h" />
     <ClInclude Include="libs\game_screen\ScreenManager.h" />
     <ClInclude Include="libs\LadderHolder.h" />
     <ClInclude Include="libs\Platform.h" />

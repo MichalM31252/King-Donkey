@@ -15,8 +15,8 @@ extern "C" {
 class CollisionManager {
 public:
 	bool isColliding = false;
-	bool isCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
-	bool isDynamicGameObjectCollidingWithPlatform(DynamicGameObject* dynamicGameObject, Platform* platform);
-	bool isPointAPartOfLine(const int x, const int y, Platform* platform);
-	bool isRectInsideLadder(SDL_Rect a, SDL_Rect b);
+	static bool isCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
+	static bool isDynamicGameObjectCollidingWithPlatform(DynamicGameObject* dynamicGameObject, Platform* platform);
+	static bool isPointAPartOfLine(const int x, const int y, Platform* platform);
+	static bool isRectInsideLadder(SDL_Rect a, SDL_Rect b);
 };

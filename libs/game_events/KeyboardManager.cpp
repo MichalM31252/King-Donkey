@@ -68,7 +68,9 @@ void KeyboardManager::initializeQuit(bool* quit, int* startAnotherRound) {
 void KeyboardManager::onKeyPressArrowUp(double deltaTime, Player* player) {
 	if (player->isInsideLadder) {
 		player->isClimbing = true; // the problem is most likely with this 
-		player->textureManager.loadTexture(PLAYER_CLIMB);
+
+		ScreenManager::loadTexture(player, PLAYER_CLIMB);
+
 		player->startMovingUp(deltaTime);
 	}
 }
@@ -88,7 +90,9 @@ void KeyboardManager::onKeyPressArrowRight(double deltaTime, Player* player) {
 void KeyboardManager::onKeyPressArrowDown(double deltaTime, Player* player) {
 	if (player->isInsideLadder) {
 		player->isClimbing = true;
-		player->textureManager.loadTexture(PLAYER_CLIMB);
+
+		ScreenManager::loadTexture(player, PLAYER_CLIMB);
+
 		player->startMovingDown(deltaTime);
 	}
 }

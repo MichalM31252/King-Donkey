@@ -3,6 +3,7 @@
 extern "C" {
 #include "../GameObject.h"
 #include "../../Constants.h"
+#include "../../game_screen/ScreenManager.h"
 }
 
 class DynamicGameObject : public GameObject {

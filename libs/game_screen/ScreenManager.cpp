@@ -3,6 +3,37 @@ extern "C" {
 #include "ScreenManager.h"
 }
 
+// MOVE TO SCREEN MANAGER ? 
+void ScreenManager::createFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
+	tick1 = SDL_GetTicks();
+	frames = 0; // frames that happend
+	fpsTimer = 0; // 
+	fps = 0; // frames per second
+	worldTime = 0; // how long the game is running
+}
+
+// move to screen manager
+void ScreenManager::handleDifferentComputers() { // (logic) make every object dependent on deltaTime so it works the same on different computers
+	tick2 = SDL_GetTicks();
+	deltaTime = (tick2 - tick1) * 0.001;
+	tick1 = tick2;
+}
+
+// move to screen manager ???
+void ScreenManager::updateWorldTime() {
+	worldTime += deltaTime;
+}
+
+// move to screen manager
+void ScreenManager::handleFPSTimer() {
+	fpsTimer += deltaTime;
+	if (fpsTimer > SECONDS_BETWEEN_REFRESH) {
+		fps = frames * REFRESH_RATE;
+		frames = 0;
+		fpsTimer -= SECONDS_BETWEEN_REFRESH;
+	};
+}
+
 void ScreenManager::SDLCheck() { // checks if SDL was initialized correctly
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		printf("SDL_Init error: %s\n", SDL_GetError());
@@ -33,7 +64,7 @@ void ScreenManager::setSDLWindowTitle() {
 }
 
 void ScreenManager::setSDLCharset() { 
-	charset = SDL_LoadBMP("./cs8x8.bmp");
+	charset = SDL_LoadBMP("./assets/cs8x8.bmp");
 	if (charset == NULL) {
 		printf("SDL_LoadBMP(cs8x8.bmp) error: %s\n", SDL_GetError());
 	};
@@ -97,6 +128,38 @@ void ScreenManager::createSDL() {
 	setColors();
 }
 
+void ScreenManager::loadTexture(GameObject* gameObject, const char* fileName) {
+	gameObject->sprite = SDL_LoadBMP(fileName);
+	if (gameObject->sprite == NULL) {
+		printf("SDL_LoadBMP error: %s\n", SDL_GetError());
+	}
+}
+
+// draw a surface sprite on a surface screen in point (x, y)
+// (x, y) is the center of sprite on screen
+void ScreenManager::drawSurface(SDL_Surface* screen, GameObject* gameObject, int xpos, int ypos) { // yeah there is the problem
+	SDL_Rect dest;
+	dest.x = xpos;
+	dest.y = ypos;
+	dest.w = gameObject->sprite->w;
+	dest.h = gameObject->sprite->h;
+	SDL_BlitSurface(gameObject->sprite, NULL, screen, &dest);
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void ScreenManager::drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, int xpos, int ypos, SDL_Rect dest) { // not the best solution but works
+	ladder->sprite->w = dest.w;
+	ladder->sprite->h = dest.h;
+	SDL_BlitSurface(ladder->sprite, NULL, screen, &dest); // it doesnt overwrite the original size of the image
+};
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // draw a text txt on surface screen, starting from the point (x, y)
 // charset is a 128x128 bitmap containing character images
 void ScreenManager::DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset) {
@@ -143,6 +206,24 @@ void ScreenManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int 
 	DrawLine(screen, x + l - 1, y, k, 0, 1, outlineColor);
 	DrawLine(screen, x, y, l, 1, 0, outlineColor);
 	DrawLine(screen, x, y + k - 1, l, 1, 0, outlineColor);
-	for (i = y + 1; i < y + k - 1; i++)
+	for (i = y + 1; i < y + k - 1; i++) {
 		DrawLine(screen, x + 1, i, l - 2, 1, 0, fillColor);
+	}
+		
 };
+
+//////////////////////////////////////////////////////////////////////
+
+void ScreenManager::initGameObject(GameObject* gameObject, const char* fileName) {
+	loadTexture(gameObject, fileName);
+}
+
+void ScreenManager::renderGameObject(GameObject* gameObject, SDL_Surface* screen) {
+	drawSurface(screen, gameObject, gameObject->xpos, gameObject->ypos);
+}
+
+void ScreenManager::renderLadder(GameObject* gameObject, SDL_Surface* screen) {
+	drawSurfaceLadder(screen, gameObject, gameObject->xpos, gameObject->ypos, gameObject->destRect);
+}
+
+//////////////////////////////////////////////////////////////////////

@@ -7,7 +7,7 @@ Player::Player() {
 }
 
 void Player::jump(double deltaTime) {
-	textureManager.loadTexture(PLAYER_3_FILENAME);
+	ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
 	accumulatedYMove -= deltaTime * gravity;
 	int pixelsToMove = accumulatedYMove / 1;
 	if (pixelsToMove <= -1) {

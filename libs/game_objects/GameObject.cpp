@@ -3,27 +3,9 @@ extern "C" {
 #include "GameObject.h"
 }
 
-GameObject::GameObject()
-{
-	textureManager = TextureManager();
-	SDL_Rect destRect = SDL_Rect();
-}
-
-void GameObject::init(const char* fileName) {
-	textureManager.loadTexture(fileName);
-}
-
-void GameObject::render(SDL_Surface* screen){
-	textureManager.drawSurface(screen, xpos, ypos);
-}
-
-void GameObject::renderLadder(SDL_Surface* screen) {
-	textureManager.drawSurfaceLadder(screen, xpos, ypos, destRect);
-}
-
 void GameObject::createSrcRect() {
-	srcRect.w = textureManager.sprite->w;
-	srcRect.h = textureManager.sprite->h;
+	srcRect.w = sprite->w;
+	srcRect.h = sprite->h;
 }
 
 void GameObject::setSrcRect(int w, int h) {

@@ -10,6 +10,8 @@ extern "C" {
 
 #include "../game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h"
 #include "../Constants.h"
+
+#include "../game_screen/ScreenManager.h"
 }
 
 class KeyboardManager {
