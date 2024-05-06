@@ -1,8 +1,8 @@
 extern "C" {
-#include "./GameObjectManager.h"
+#include "./GameObjectFactory.h"
 }
 
-GameObjectManager::GameObjectManager() {
+GameObjectFactory::GameObjectFactory() {
 	GameObjectContainer* ga = new GameObjectContainer();
 	gameObjectContainer = ga;
 
@@ -11,7 +11,7 @@ GameObjectManager::GameObjectManager() {
 }
 
 // Move to game object manager
-void GameObjectManager::createPlayer() {
+void GameObjectFactory::createPlayer() {
 	Player* pla = new Player();
 
 	ScreenManager::initGameObject(pla, PLAYER_1_FILENAME);
@@ -25,7 +25,7 @@ void GameObjectManager::createPlayer() {
 }
 
 // Move to game object manager
-void GameObjectManager::createDonkeyKong() {
+void GameObjectFactory::createDonkeyKong() {
 	GameObject* donkeyK = new GameObject();
 
 	ScreenManager::initGameObject(donkeyK, "./assets/DonkeyKong.bmp");
@@ -38,7 +38,7 @@ void GameObjectManager::createDonkeyKong() {
 }
 
 // Move to game object manager
-void GameObjectManager::createPrincess() {
+void GameObjectFactory::createPrincess() {
 	GameObject* prin = new GameObject();
 
 	ScreenManager::initGameObject(prin, "./assets/Princess.bmp");
@@ -51,7 +51,7 @@ void GameObjectManager::createPrincess() {
 }
 
 // Move to stage manager / game object manager ??? idk yet
-void GameObjectManager::createPlatforms1() {
+void GameObjectFactory::createPlatforms1() {
 	Platform* plat1 = new Platform();
 	plat1->setPosition(1, 400, 400, 400);
 
@@ -80,7 +80,7 @@ void GameObjectManager::createPlatforms1() {
 
 // Move to stage manager / game object manager ??? idk yet
 
-void GameObjectManager::createLadders1() {
+void GameObjectFactory::createLadders1() {
 	GameObject* ladd1 = new GameObject();
 
 	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
@@ -104,7 +104,7 @@ void GameObjectManager::createLadders1() {
 	gameObjectContainer->ladderHolder = laddH;
 }
 
-void GameObjectManager::createBarrels() {
+void GameObjectFactory::createBarrels() {
 	DynamicGameObject* barrel1 = new DynamicGameObject();
 
 	ScreenManager::initGameObject(barrel1, BARREL_1_FILENAME);
@@ -124,7 +124,7 @@ void GameObjectManager::createBarrels() {
 }
 
 // Move to stage manager / game object manager ??? idk yet
-void GameObjectManager::createPlatforms2() { 
+void GameObjectFactory::createPlatforms2() { 
 	Platform* plat1 = new Platform();
 	plat1->setPosition(TINY_MARGIN, 400, SCREEN_WIDTH - 1, 400);
 
@@ -156,7 +156,7 @@ void GameObjectManager::createPlatforms2() {
 }
 
 // Move to stage manager / game object manager
-void GameObjectManager::createLadders2() {
+void GameObjectFactory::createLadders2() {
 	GameObject* ladd1 = new GameObject();
 
 	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
@@ -182,7 +182,7 @@ void GameObjectManager::createLadders2() {
 }
 
 // Move to stage manager / game object manager ??? idk yet
-void GameObjectManager::createPlatforms3() {
+void GameObjectFactory::createPlatforms3() {
 	Platform* plat1 = new Platform();
 	plat1->setPosition(STARTING_X, 400, SCREEN_WIDTH - TINY_MARGIN, 400); 
 
@@ -210,7 +210,7 @@ void GameObjectManager::createPlatforms3() {
 }
 
 // Move to stage manager / game object manager ??? idk yet
-void GameObjectManager::createLadders3() {
+void GameObjectFactory::createLadders3() {
 	GameObject* ladd1 = new GameObject();
 
 	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
@@ -253,7 +253,7 @@ void GameObjectManager::createLadders3() {
 }
 
 // Move to stage manager
-void GameObjectManager::createBoard(int boardId) {
+void GameObjectFactory::createBoard(int boardId) {
 	createPlayer();
 	createDonkeyKong();
 	createPrincess();
@@ -272,6 +272,6 @@ void GameObjectManager::createBoard(int boardId) {
 	createBarrels();
 }
 
-GameObjectManager::~GameObjectManager() {
+GameObjectFactory::~GameObjectFactory() {
 
 }

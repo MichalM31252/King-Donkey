@@ -124,6 +124,9 @@ void ScreenManager::createSDL() {
 	setColors();
 }
 
+// Can be moved to Game Object Visualiser
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void ScreenManager::loadTexture(GameObject* gameObject, const char* fileName) {
 	gameObject->sprite = SDL_LoadBMP(fileName);
 	if (gameObject->sprite == NULL) {
@@ -195,7 +198,6 @@ void ScreenManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int 
 	for (i = y + 1; i < y + k - 1; i++) {
 		DrawLine(screen, x + 1, i, l - 2, 1, 0, fillColor);
 	}
-		
 };
 
 void ScreenManager::initGameObject(GameObject* gameObject, const char* fileName) {

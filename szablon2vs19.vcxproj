@@ -22,7 +22,7 @@
     <ClCompile Include="libs\BarrelDispenser.cpp" />
     <ClCompile Include="libs\BarrelHolder.cpp" />
     <ClCompile Include="libs\Game.cpp" />
-    <ClCompile Include="libs\GameObjectManager.cpp" />
+    <ClCompile Include="libs\GameObjectFactory.cpp" />
     <ClCompile Include="libs\game_events\CollisionManager.cpp" />
     <ClCompile Include="libs\game_events\KeyboardManager.cpp" />
     <ClCompile Include="libs\game_file_manager\FileManager.cpp" />
@@ -41,6 +41,7 @@
     <ClCompile Include="libs\LadderHolder.cpp" />
     <ClCompile Include="libs\Platform.cpp" />
     <ClCompile Include="libs\PlatformHolder.cpp" />
+    <ClCompile Include="libs\StageManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -53,7 +54,7 @@
     <ClInclude Include="libs\Constants.h" />
     <ClInclude Include="libs\Game.h" />
     <ClInclude Include="libs\GameObjectContainer.h" />
-    <ClInclude Include="libs\GameObjectManager.h" />
+    <ClInclude Include="libs\GameObjectFactory.h" />
     <ClInclude Include="libs\game_events\CollisionManager.h" />
     <ClInclude Include="libs\game_events\KeyboardManager.h" />
     <ClInclude Include="libs\game_file_manager\FileManager.h" />
@@ -72,6 +73,7 @@
     <ClInclude Include="libs\LadderHolder.h" />
     <ClInclude Include="libs\Platform.h" />
     <ClInclude Include="libs\PlatformHolder.h" />
+    <ClInclude Include="libs\StageManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

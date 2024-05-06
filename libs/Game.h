@@ -13,12 +13,12 @@ extern "C" {
 #include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h"
 #include "./Platform.h"
 #include "./BarrelHolder.h"
-#include "./GameObjectManager.h"
+#include "./GameObjectFactory.h"
 }
 
 class Game {
 	public:
-		GameObjectManager* gameObjectManager;
+		GameObjectFactory* gameObjectFactory;
 		ScreenManager* screenManager;
 
 		Game();
