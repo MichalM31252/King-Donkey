@@ -23,6 +23,7 @@
     <ClCompile Include="libs\BarrelHolder.cpp" />
     <ClCompile Include="libs\Game.cpp" />
     <ClCompile Include="libs\GameObjectFactory.cpp" />
+    <ClCompile Include="libs\GameObjectVisualiser.cpp" />
     <ClCompile Include="libs\game_events\CollisionManager.cpp" />
     <ClCompile Include="libs\game_events\KeyboardManager.cpp" />
     <ClCompile Include="libs\game_file_manager\FileManager.cpp" />
@@ -55,6 +56,7 @@
     <ClInclude Include="libs\Game.h" />
     <ClInclude Include="libs\GameObjectContainer.h" />
     <ClInclude Include="libs\GameObjectFactory.h" />
+    <ClInclude Include="libs\GameObjectVisualiser.h" />
     <ClInclude Include="libs\game_events\CollisionManager.h" />
     <ClInclude Include="libs\game_events\KeyboardManager.h" />
     <ClInclude Include="libs\game_file_manager\FileManager.h" />
