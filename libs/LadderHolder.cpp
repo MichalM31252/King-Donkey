@@ -1,5 +1,5 @@
 extern "C" {
-#include "./LadderHolder.h"
+#include "LadderHolder.h"
 }
 
 void initLadderHolder(LadderHolder* ladderHolder) {

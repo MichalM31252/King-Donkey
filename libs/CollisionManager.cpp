@@ -1,5 +1,5 @@
 extern "C" {
-#include "./CollisionManager.h"
+#include "CollisionManager.h"
 }
 
 bool CollisionManager::isCollisionBetweenRects(SDL_Rect a, SDL_Rect b) {

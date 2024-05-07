@@ -1,5 +1,5 @@
 extern "C" {
-#include "./DynamicGameObject.h"
+#include "DynamicGameObject.h"
 }
 
 // objectSpeed should be moved to physics

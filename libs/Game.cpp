@@ -1,7 +1,7 @@
 #define _USE_MATH_DEFINES
 
 extern "C" {
-#include "./Game.h"
+#include "Game.h"
 }
 
 Game::Game() {

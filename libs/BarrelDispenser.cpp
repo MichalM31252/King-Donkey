@@ -1,5 +1,5 @@
 extern "C" {
-#include "./BarrelDispenser.h"
+#include "BarrelDispenser.h"
 }
 
 void BarrelDispenser::initBarrelDispenser(BarrelDispenser* barrelDispenser) {

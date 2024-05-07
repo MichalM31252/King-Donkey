@@ -5,10 +5,10 @@ extern "C" {
 #include <stdio.h>
 #include <string.h>
 
-#include "../../SDL2-2.0.10/include/SDL.h"
-#include "../../SDL2-2.0.10/include/SDL_main.h"
-#include "../game_objects/GameObject.h"
-#include "../Constants.h"
+#include "../SDL2-2.0.10/include/SDL.h"
+#include "../SDL2-2.0.10/include/SDL_main.h"
+#include "GameObject.h"
+#include "Constants.h"
 }
 
 class ScreenManager {

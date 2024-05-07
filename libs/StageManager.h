@@ -1,9 +1,8 @@
 #pragma once
 
-#include "./game_events/CollisionManager.h"
-#include "./PhysicsManager.h"
-#include "./GameObjectFactory.h"
-#include "./GameObjectVisualiser.h"
+#include "CollisionManager.h"
+#include "PhysicsManager.h"
+#include "GameObjectFactory.h"
 
 class StageManager {
 private:

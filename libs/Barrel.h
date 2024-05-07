@@ -1,7 +1,7 @@
 #pragma once
 
 extern "C" {
-#include "../DynamicGameObject.h"
+#include "DynamicGameObject.h"
 }
 
 class Barrel : public DynamicGameObject {

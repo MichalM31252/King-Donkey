@@ -1,8 +1,8 @@
 #pragma once
 
 extern "C" {
-#include "./game_objects/GameObject.h"
-#include "./Constants.h"
+#include "GameObject.h"
+#include "Constants.h"
 }
 
 struct LadderHolder {

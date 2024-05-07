@@ -1,5 +1,5 @@
 extern "C" {
-#include "./PhysicsManager.h"
+#include "PhysicsManager.h"
 }
 
 void PhysicsManager::handleFalling(DynamicGameObject* dynamicGameObject, double deltaTime) {

@@ -1,5 +1,5 @@
 extern "C" {
-#include "./BarrelHolder.h"
+#include "BarrelHolder.h"
 }
 
 void initBarrelHolder(BarrelHolder* barrelHolder) {

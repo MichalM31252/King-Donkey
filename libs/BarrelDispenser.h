@@ -1,11 +1,10 @@
 #pragma once
 
 extern "C" {
-#include "./game_objects/dynamic_game_objects/DynamicGameObject.h"
-#include "./BarrelHolder.h"
-#include "./BarrelDispenser.h"
-
-#include "game_screen/ScreenManager.h"
+#include "DynamicGameObject.h"
+#include "BarrelHolder.h"
+#include "BarrelDispenser.h"
+#include "ScreenManager.h"
 }
 
 class BarrelDispenser {

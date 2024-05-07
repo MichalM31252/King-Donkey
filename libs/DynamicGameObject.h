@@ -1,9 +1,9 @@
 #pragma once
 
 extern "C" {
-#include "../GameObject.h"
-#include "../../Constants.h"
-#include "../../game_screen/ScreenManager.h"
+#include "GameObject.h"
+#include "Constants.h"
+#include "ScreenManager.h"
 }
 
 class DynamicGameObject : public GameObject {

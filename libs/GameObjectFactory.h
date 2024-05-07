@@ -1,9 +1,9 @@
 #pragma once
-#include "./PhysicsManager.h"
-#include "./game_events/CollisionManager.h"
-#include "./GameObjectContainer.h"
+#include "PhysicsManager.h"
+#include "CollisionManager.h"
+#include "GameObjectContainer.h"
 
-#include "./game_screen/ScreenManager.h" // temporary fix
+#include "ScreenManager.h" // temporary fix
 
 class GameObjectFactory {
 public:

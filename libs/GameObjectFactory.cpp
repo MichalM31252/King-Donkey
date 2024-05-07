@@ -1,5 +1,5 @@
 extern "C" {
-#include "./GameObjectFactory.h"
+#include "GameObjectFactory.h"
 }
 
 GameObjectFactory::GameObjectFactory() {

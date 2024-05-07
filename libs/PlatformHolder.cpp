@@ -1,5 +1,5 @@
 extern "C" {
-#include "./PlatformHolder.h"
+#include "PlatformHolder.h"
 }
 
 void initPlatformHolder(PlatformHolder* platformHolder) {	

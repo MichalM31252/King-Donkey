@@ -7,13 +7,13 @@ extern "C" {
 
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
-#include "./game_screen/ScreenManager.h"
-#include "./game_events/KeyboardManager.h"
-#include "./Constants.h"
-#include "./game_objects/dynamic_game_objects/dynamic_game_object_child/Player.h"
-#include "./Platform.h"
-#include "./BarrelHolder.h"
-#include "./GameObjectFactory.h"
+#include "ScreenManager.h"
+#include "KeyboardManager.h"
+#include "Constants.h"
+#include "Player.h"
+#include "Platform.h"
+#include "BarrelHolder.h"
+#include "GameObjectFactory.h"
 }
 
 class Game {
