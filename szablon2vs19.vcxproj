@@ -31,6 +31,7 @@
     <ClCompile Include="libs\PhysicsManager.cpp" />
     <ClCompile Include="libs\Player.cpp" />
     <ClCompile Include="libs\GameObject.cpp" />
+    <ClCompile Include="libs\RoundManager.cpp" />
     <ClCompile Include="libs\ScreenManager.cpp" />
     <ClCompile Include="libs\LadderHolder.cpp" />
     <ClCompile Include="libs\Platform.cpp" />
@@ -57,6 +58,7 @@
     <ClInclude Include="libs\Player.h" />
     <ClInclude Include="libs\PhysicsManager.h" />
     <ClInclude Include="libs\GameObject.h" />
+    <ClInclude Include="libs\RoundManager.h" />
     <ClInclude Include="libs\ScreenManager.h" />
     <ClInclude Include="libs\LadderHolder.h" />
     <ClInclude Include="libs\Platform.h" />
