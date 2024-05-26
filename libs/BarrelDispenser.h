@@ -4,7 +4,6 @@ extern "C" {
 #include "DynamicGameObject.h"
 #include "BarrelHolder.h"
 #include "BarrelDispenser.h"
-#include "ScreenManager.h"
 }
 
 class BarrelDispenser {
