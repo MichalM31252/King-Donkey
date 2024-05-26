@@ -10,14 +10,19 @@ extern "C" {
 
 #include "Player.h"
 #include "Constants.h"
-
-#include "ScreenManager.h"
+#include "GameObjectContainer.h"
 }
 
 class KeyboardManager {
 private:
 	SDL_Event event; // this can be used here
 public:
+
+	GameObjectContainer gameObjectContainer;	
+
+	KeyboardManager();
+	KeyboardManager(GameObjectContainer& gameObjectContainer);
+
 	void handleEvents(bool* quit, double deltaTime, Player* player, int* startAnotherRound);
 
 	void onKeyDown(bool* quit, double deltaTime, Player* player, int* startAnotherRound);

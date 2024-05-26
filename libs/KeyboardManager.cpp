@@ -4,6 +4,14 @@ extern "C" {
 #include "KeyboardManager.h"
 }
 
+KeyboardManager::KeyboardManager() {
+
+}
+
+KeyboardManager::KeyboardManager(GameObjectContainer& gameObjectContainer) {
+	this->gameObjectContainer = gameObjectContainer;
+}
+
 void KeyboardManager::handleEvents(bool* quit, double deltaTime, Player* player, int *startAnotherRound) {
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
