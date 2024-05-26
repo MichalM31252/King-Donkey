@@ -10,7 +10,7 @@ StageManager::StageManager()
 StageManager::StageManager(GameObjectContainer& gameObjectContainer)
 {
 	// assign gameObjectContainer to each one of these managers
-	this->collisionManager = new CollisionManager();
+	this->collisionManager = new CollisionManager(gameObjectContainer);
 	this->screenManager = new ScreenManager();
 	this->collisionManager = new CollisionManager();
 	this->gameObjectFactory = new GameObjectFactory();
