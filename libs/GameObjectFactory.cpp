@@ -10,6 +10,12 @@ GameObjectFactory::GameObjectFactory() {
 	collisionManager = collisionM;
 }
 
+GameObjectFactory::GameObjectFactory(GameObjectContainer& gameObjectContainer) {
+	this->gameObjectContainer = &gameObjectContainer;
+	CollisionManager* collisionM = new CollisionManager();
+	collisionManager = collisionM;
+}
+
 // Move to game object manager
 void GameObjectFactory::createPlayer() {
 	Player* pla = new Player();
