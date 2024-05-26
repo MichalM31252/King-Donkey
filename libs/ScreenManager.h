@@ -25,6 +25,9 @@ class ScreenManager {
 		SDL_Window* window; // widnows window
 		SDL_Renderer* renderer; // we send here to render the screen
 
+		// ScreenManager();
+		// ScreenManager(GameObjectContainer& gameObjectContainer);
+
 		void SDLCheck();
 		void SDLCreateWindowAndRenderer();
 		void setSDLHint();

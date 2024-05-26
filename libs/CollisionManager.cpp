@@ -2,6 +2,14 @@ extern "C" {
 #include "CollisionManager.h"
 }
 
+CollisionManager::CollisionManager() {
+	this->gameObjectContainer = GameObjectContainer();
+}
+
+CollisionManager::CollisionManager(GameObjectContainer& gameObjectContainer) {
+	this->gameObjectContainer = gameObjectContainer;
+}
+
 bool CollisionManager::isCollisionBetweenRects(SDL_Rect a, SDL_Rect b) {
 	if (SDL_HasIntersection(&a, &b)) {
 		return true;

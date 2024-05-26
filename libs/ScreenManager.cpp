@@ -2,6 +2,17 @@
 extern "C" {
 #include "ScreenManager.h"
 }
+  
+//ScreenManager::ScreenManager() {
+//	//createFramerate();
+//	//createSDL();
+//}
+//
+//ScreenManager::ScreenManager(GameObjectContainer& gameObjectContainer) {
+//	this->gameObjectContainer = gameObjectContainer;
+//	//createFramerate();
+//	//createSDL();
+//}
 
 void ScreenManager::createFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
 	tick1 = SDL_GetTicks();

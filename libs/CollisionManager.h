@@ -10,11 +10,17 @@ extern "C" {
 #include "Platform.h"
 #include "GameObject.h"
 #include "DynamicGameObject.h"
+#include "GameObjectContainer.h"
 }
 
 class CollisionManager {
 public:
+	GameObjectContainer gameObjectContainer;
 	bool isColliding = false;
+
+	CollisionManager();
+	CollisionManager(GameObjectContainer& gameObjectContainer);
+	
 	static bool isCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
 	static bool isDynamicGameObjectCollidingWithPlatform(DynamicGameObject* dynamicGameObject, Platform* platform);
 	static bool isPointAPartOfLine(const int x, const int y, Platform* platform);
