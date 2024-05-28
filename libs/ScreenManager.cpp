@@ -2,17 +2,42 @@
 extern "C" {
 #include "ScreenManager.h"
 }
-  
-//ScreenManager::ScreenManager() {
-//	//createFramerate();
-//	//createSDL();
-//}
-//
-//ScreenManager::ScreenManager(GameObjectContainer& gameObjectContainer) {
-//	this->gameObjectContainer = gameObjectContainer;
-//	//createFramerate();
-//	//createSDL();
-//}
+ 
+// THIS SHOULD BE IN SCREEN MANAGER, make a static function
+void ScreenManager::decideSpritePlayer(DynamicGameObject* player, int& currentRunningSpriteId) {
+	if (currentRunningSpriteId == 1) {
+		ScreenManager::loadTexture(player, PLAYER_1_FILENAME);
+		currentRunningSpriteId++;
+	}
+	else if (currentRunningSpriteId == 2) {
+		ScreenManager::loadTexture(player, PLAYER_2_FILENAME);
+		currentRunningSpriteId++;
+	}
+	else {
+		ScreenManager::loadTexture(player, PLAYER_3_FILENAME);
+		currentRunningSpriteId = 1;
+	}
+}
+
+// THIS SHOULD BE IN SCREEN MANAGER, make a static function
+void ScreenManager::decideSpriteBarrel(DynamicGameObject* barrel, int& currentRunningSpriteIdBarrel) {
+	if (currentRunningSpriteIdBarrel == 1) {
+		ScreenManager::loadTexture(barrel, BARREL_1_FILENAME);
+		currentRunningSpriteIdBarrel++;
+	}
+	else if (currentRunningSpriteIdBarrel == 2) {
+		ScreenManager::loadTexture(barrel, BARREL_2_FILENAME);
+		currentRunningSpriteIdBarrel++;
+	}
+	else if (currentRunningSpriteIdBarrel == 3) {
+		ScreenManager::loadTexture(barrel, BARREL_3_FILENAME);
+		currentRunningSpriteIdBarrel++;
+	}
+	else {
+		ScreenManager::loadTexture(barrel, BARREL_4_FILENAME);
+		currentRunningSpriteIdBarrel = 1;
+	}
+}
 
 void ScreenManager::createFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
 	tick1 = SDL_GetTicks();
@@ -135,7 +160,7 @@ void ScreenManager::createSDL() {
 	setColors();
 }
 
-// Can be moved to Game Object Visualiser
+// maybe create a class in the future game object visualiser
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void ScreenManager::loadTexture(GameObject* gameObject, const char* fileName) {

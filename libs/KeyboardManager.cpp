@@ -2,6 +2,7 @@
 
 extern "C" {
 #include "KeyboardManager.h"
+#include "ScreenManager.h" // temporary fix
 }
 
 KeyboardManager::KeyboardManager() {

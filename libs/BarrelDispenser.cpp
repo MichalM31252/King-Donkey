@@ -1,5 +1,6 @@
 extern "C" {
 #include "BarrelDispenser.h"
+#include "ScreenManager.h" // temporary fix
 }
 
 void BarrelDispenser::initBarrelDispenser(BarrelDispenser* barrelDispenser) {

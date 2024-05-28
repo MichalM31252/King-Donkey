@@ -1,5 +1,6 @@
 extern "C" {
 #include "GameObjectFactory.h"
+#include "ScreenManager.h" // temporary fix
 }
 
 GameObjectFactory::GameObjectFactory() {
