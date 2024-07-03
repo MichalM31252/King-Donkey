@@ -18,10 +18,10 @@ private:
 	SDL_Event event; // this can be used here
 public:
 
-	GameObjectContainer gameObjectContainer;	
+	GameObjectContainer *gameObjectContainer;	
 
 	KeyboardManager();
-	KeyboardManager(GameObjectContainer& gameObjectContainer);
+	KeyboardManager(GameObjectContainer* gameObjectContainer);
 
 	void handleEvents(bool* quit, double deltaTime, Player* player, int* startAnotherRound);
 

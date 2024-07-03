@@ -18,8 +18,11 @@ extern "C" {
 
 class Game {
 	public:
+		GameObjectContainer* gameObjectContainer;
+
 		GameObjectFactory* gameObjectFactory;
 		ScreenManager* screenManager;
+		CollisionManager* collisionManager;
 
 		Game();
 
@@ -46,18 +49,6 @@ class Game {
 		void drawPlatforms();
 		void drawLadders();
 		void drawBarrels();
-
-		// Game object manager or collision manager?
-		/////////////////////////////////////////////////////////////////////////////////////
-
-		void handleCollisionWithKong();
-		void handleCollisionWithPrincess();
-		void handleCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
-		void handleCollisionWithLadder(int* flagLadder);
-		void handleCollisionWithPlatform(DynamicGameObject* gameObject, int* flagPlatform);
-		void handleCollisionWithJumping();
-
-		/////////////////////////////////////////////////////////////////////////////////////
 
 		void closeGame();
 };

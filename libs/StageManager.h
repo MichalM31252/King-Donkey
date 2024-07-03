@@ -16,5 +16,5 @@ private:
 	ScreenManager* screenManager;
 
 	StageManager();
-	StageManager(GameObjectContainer &gameObjectContainer);
+	StageManager(GameObjectContainer *gameObjectContainer);
 };

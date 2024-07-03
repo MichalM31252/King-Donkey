@@ -9,7 +9,7 @@ public:
 	CollisionManager* collisionManager;
 
 	GameObjectFactory();
-	GameObjectFactory(GameObjectContainer& gameObjectContainer);
+	GameObjectFactory(GameObjectContainer* gameObjectContainer);
 
 	void createPlayer();
 	void createDonkeyKong();

@@ -7,7 +7,7 @@ StageManager::StageManager()
 
 }
 
-StageManager::StageManager(GameObjectContainer& gameObjectContainer)
+StageManager::StageManager(GameObjectContainer* gameObjectContainer)
 {
 	// assign gameObjectContainer to each one of these managers
 	this->collisionManager = new CollisionManager(gameObjectContainer);

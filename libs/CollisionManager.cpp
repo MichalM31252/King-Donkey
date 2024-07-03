@@ -3,14 +3,10 @@ extern "C" {
 }
 
 CollisionManager::CollisionManager() {
-	this->gameObjectContainer = GameObjectContainer();
+	this->gameObjectContainer = new GameObjectContainer();
 }
 
 CollisionManager::CollisionManager(GameObjectContainer* gameObjectContainer) {
-	this->gameObjectContainer = *gameObjectContainer;
-}
-
-CollisionManager::CollisionManager(GameObjectContainer& gameObjectContainer) {
 	this->gameObjectContainer = gameObjectContainer;
 }
 
@@ -46,4 +42,94 @@ bool CollisionManager::isRectInsideLadder(SDL_Rect playerDestRect, SDL_Rect ladd
 		}
 	}
 	return false;
+}
+
+// MOVE TO COLLISION MANAGER
+void CollisionManager::handleCollisionWithKong() {
+	if (isCollisionBetweenRects( gameObjectContainer->player->destRect, gameObjectContainer->donkeyKong->destRect)) {
+		closeGame();
+	}
+}
+
+// MOVE TO COLLISION MANAGER
+void CollisionManager::handleCollisionWithPrincess() {
+	if (isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->princess->destRect)) {
+		closeGame();
+	}
+}
+
+// MOVE TO COLLISION MANAGER
+void CollisionManager::handleCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound) {
+	if (isCollisionBetweenRects(gameObjectContainer->player->destRect, barrel->destRect)) {
+		*quit = true;
+		*startAnotherRound = 1;
+	}
+}
+
+// MOVE TO COLLISION MANAGER
+void CollisionManager::handleCollisionWithLadder(int* flagLadder) {
+	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
+		if (isRectInsideLadder(gameObjectContainer->player->destRect, gameObjectContainer->ladderHolder->ladders[i].destRect)) {
+			*flagLadder = 1;
+		}
+	}
+	if (*flagLadder) {
+		gameObjectContainer->player->isInsideLadder = true;
+	}
+	else {
+		gameObjectContainer->player->isInsideLadder = false;
+		gameObjectContainer->player->isClimbing = false;
+	}
+}
+
+
+// MOVE TO COLLISION MANAGER
+void CollisionManager::handleCollisionWithJumping() {
+	if (gameObjectContainer->player->isFalling) {
+		gameObjectContainer->player->stopFalling();
+		gameObjectContainer->player->checkIfJumpPossible = false;
+	}
+	if (!gameObjectContainer->player->isFalling && gameObjectContainer->player->checkIfJumpPossible) {
+		gameObjectContainer->player->startJumping();
+		gameObjectContainer->player->checkIfJumpPossible = false;
+	}
+}
+
+// MOVE TO COLLISION MANAGER
+void CollisionManager::handleCollisionWithPlatform(DynamicGameObject* gameObject, int* flagPlatform) {
+	// check bottom left corner
+	// check bottom right corner
+	int yPosition = gameObject->ypos + gameObject->destRect.h;
+	int xPositionBottomLeftCorner = gameObject->xpos;
+	int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
+
+	for (int i = 0; i < gameObjectContainer->platformHolder->numberOfElements; i++) {
+
+		//bottom left corner 
+		if (isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, &gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
+			if (!gameObject->isClimbing) {
+				gameObject->ypos--;
+				yPosition--;
+			}
+		}
+		if (isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, &gameObjectContainer->platformHolder->platforms[i])) { // isPointOnTopOfLine
+			*flagPlatform = 1;
+		}
+
+		//bottom right corner 
+		if (isPointAPartOfLine(xPositionBottomRightCorner, yPosition, &gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
+			if (!gameObject->isClimbing) {
+				gameObject->ypos--;
+				yPosition--;
+			}
+		}
+		if (isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, &gameObjectContainer->platformHolder->platforms[i])) {// isPointOnTopOfLine
+			*flagPlatform = 1;
+		}
+	}
+}
+
+void CollisionManager::closeGame() {
+	SDL_Quit();
+	exit(0);
 }

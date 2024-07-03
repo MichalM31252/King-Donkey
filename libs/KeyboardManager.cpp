@@ -9,7 +9,7 @@ KeyboardManager::KeyboardManager() {
 
 }
 
-KeyboardManager::KeyboardManager(GameObjectContainer& gameObjectContainer) {
+KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer) {
 	this->gameObjectContainer = gameObjectContainer;
 }
 
