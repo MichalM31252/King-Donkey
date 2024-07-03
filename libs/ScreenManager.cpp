@@ -146,7 +146,7 @@ void ScreenManager::drawOutlineOfTheBoard() {
 	DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black); 
 }
 
-void ScreenManager::drawAdditionalInfo(double worldTime) {
+void ScreenManager::drawAdditionalInfo() {
 	DrawRectangle(screen, 1, 1, SCREEN_WIDTH - 2, TOP_BAR_HEIGHT, blue, blue);
 	char text[128];
 	sprintf(text, "Time: %.1lf s  Score: 00000  Lives: 1", worldTime);
@@ -281,9 +281,6 @@ void ScreenManager::drawBarrels() {
 
 // MOVE TO TEXTURE MANAGER
 void ScreenManager::drawElements() { // don't repeat yourself
-
-	// game object container empty here
-
 	renderGameObject(gameObjectContainer->donkeyKong, screen);
 	renderGameObject(gameObjectContainer->princess, screen);
 	renderGameObject(gameObjectContainer->player, screen);

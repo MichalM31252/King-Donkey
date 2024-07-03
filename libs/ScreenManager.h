@@ -45,7 +45,7 @@ class ScreenManager {
 
 		void setColors();
 		void drawOutlineOfTheBoard();
-		void drawAdditionalInfo(double worldTime);
+		void drawAdditionalInfo();
 		void createSDL();
 
 		void createFramerate();

@@ -23,6 +23,15 @@ Game::Game() {
 	collisionManager = collisionMan;
 }
 
+void Game::initGame() {
+	screenManager->createSDL();
+
+	int startAnotherRound = 0;
+	handleRound(startAnotherRound);
+
+	closeGame();
+}
+
 // MOVE TO ROUND MANAGER
 void Game::handleCurrentRound(KeyboardManager& eventHandler, int *startAnotherRound) {
 	bool quit = false;
@@ -31,21 +40,18 @@ void Game::handleCurrentRound(KeyboardManager& eventHandler, int *startAnotherRo
 		screenManager->handleDifferentComputers();
 		screenManager->updateWorldTime();
 		screenManager->handleFPSTimer();
-
 		screenManager->drawOutlineOfTheBoard();
-		screenManager->drawAdditionalInfo(screenManager->worldTime);
+		screenManager->drawAdditionalInfo();
 
 		handlePlayer(); // player collision
 		handleBarrels(&quit, startAnotherRound); // barrel collision
 
-		gameObjectFactory->gameObjectContainer->player->update(screenManager->deltaTime);
+		gameObjectContainer->player->update(screenManager->deltaTime);
+		// maybe also update the barrels here ???
+		eventHandler.handleEvents(&quit, screenManager->deltaTime, gameObjectContainer->player, startAnotherRound);
 
 		screenManager->drawElements();
-
 		screenManager->serveNextFrame();
-
-		eventHandler.handleEvents(&quit, screenManager->deltaTime, gameObjectFactory->gameObjectContainer->player, startAnotherRound);
-
 		screenManager->frames++;
 	};
 }
@@ -76,66 +82,58 @@ void Game::handleRound(int startAnotherRound) {
 	}
 }
 
-void Game::initGame() {
-	screenManager->createSDL();
-
-	int startAnotherRound = 0;
-	handleRound(startAnotherRound);
-
-	closeGame();
-}
-
 // MOVE TO GAME OBJECT MANAGER
 void Game::handlePlayer() { // player collision
 	collisionManager->handleCollisionWithKong();
 	collisionManager->handleCollisionWithPrincess();
-	int flagLadder = 0;
-	collisionManager->handleCollisionWithLadder(&flagLadder);
-	int flagPlatform = 0;
-	collisionManager->handleCollisionWithPlatform(gameObjectFactory->gameObjectContainer->player, &flagPlatform);
 
-	if (!gameObjectFactory->gameObjectContainer->player->isClimbing) {
-		if (flagPlatform) {
-			screenManager->loadTexture(gameObjectFactory->gameObjectContainer->player, PLAYER_1_FILENAME);
+	collisionManager->handlePlayerCollisionWithLadder();
+	
+	int isPlayerInsidePlatform = 0;
+	collisionManager->handleCollisionWithPlatform(gameObjectContainer->player, &isPlayerInsidePlatform);
+
+	if (!gameObjectContainer->player->isClimbing) {
+		if (isPlayerInsidePlatform) {
+			screenManager->loadTexture(gameObjectContainer->player, PLAYER_1_FILENAME);
 			collisionManager->handleCollisionWithJumping();
 		}
 		else {
-			PhysicsManager::handleFalling(gameObjectFactory->gameObjectContainer->player, screenManager->deltaTime);
+			PhysicsManager::handleFalling(gameObjectContainer->player, screenManager->deltaTime);
 		}
-		if (gameObjectFactory->gameObjectContainer->player->isJumping) { // handle jumping
-			gameObjectFactory->gameObjectContainer->player->jump(screenManager->deltaTime);
+		if (gameObjectContainer->player->isJumping) { // handle jumping
+			gameObjectContainer->player->jump(screenManager->deltaTime);
 		}
 	}
 
-	if (gameObjectFactory->gameObjectContainer->player->isJumping && gameObjectFactory->gameObjectContainer->player->ypos <= gameObjectFactory->gameObjectContainer->player->jumpHeightStop) {
-		gameObjectFactory->gameObjectContainer->player->stopJumping();
-		gameObjectFactory->gameObjectContainer->player->startFalling();
+	if (gameObjectContainer->player->isJumping && gameObjectContainer->player->ypos <= gameObjectContainer->player->jumpHeightStop) {
+		gameObjectContainer->player->stopJumping();
+		gameObjectContainer->player->startFalling();
 	}
 }
 
 // MOVE TO GAME OBJECT MANAGER
 void Game::handleBarrels(bool* quit, int* startAnotherRound) {
-	gameObjectFactory->gameObjectContainer->barrelDispenser->updateBarrelDispenser(screenManager->deltaTime);
+	gameObjectContainer->barrelDispenser->updateBarrelDispenser(screenManager->deltaTime);
 
-	for (int i = 0; i < gameObjectFactory->gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
+	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
 
-		collisionManager->handleCollisionWithBarrel(&gameObjectFactory->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], quit, startAnotherRound);
+		collisionManager->handleCollisionWithBarrel(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], quit, startAnotherRound);
 
-		int flagPlatform = 0;
-		collisionManager->handleCollisionWithPlatform(&gameObjectFactory->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], &flagPlatform);
+		int isGameObjectInsidePlatform = 0;
+		collisionManager->handleCollisionWithPlatform(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], &isGameObjectInsidePlatform);
 
-		if (flagPlatform) {
-			if (gameObjectFactory->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].isFalling) {
-				gameObjectFactory->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].stopFalling();
-				gameObjectFactory->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].stopMove();
+		if (isGameObjectInsidePlatform) {
+			if (gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].isFalling) {
+				gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].stopFalling();
+				gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].stopMove();
 			}
-			gameObjectFactory->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].moveStart(DEFAULT_BARREL_SPEED);
-			gameObjectFactory->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].startMovingRight(screenManager->deltaTime);
+			gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].moveStart(DEFAULT_BARREL_SPEED);
+			gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].startMovingRight(screenManager->deltaTime);
 		}
 		else {
-			PhysicsManager::handleFalling(&gameObjectFactory->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], screenManager->deltaTime); // THE PROBLEM IS HERE
+			PhysicsManager::handleFalling(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], screenManager->deltaTime); // THE PROBLEM IS HERE
 		}
-		gameObjectFactory->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].update(screenManager->deltaTime);
+		gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].update(screenManager->deltaTime);
 	}
 }
 

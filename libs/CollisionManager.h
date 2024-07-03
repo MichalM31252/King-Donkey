@@ -32,8 +32,8 @@ public:
 	void handleCollisionWithKong();
 	void handleCollisionWithPrincess();
 	void handleCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
-	void handleCollisionWithLadder(int* flagLadder);
-	void handleCollisionWithPlatform(DynamicGameObject* gameObject, int* flagPlatform);
+	void handlePlayerCollisionWithLadder();
+	void handleCollisionWithPlatform(DynamicGameObject* gameObject, int* isGameObjectInsidePlatform);
 	void handleCollisionWithJumping();
 
 	/////////////////////////////////////////////////////////////////////////////////////

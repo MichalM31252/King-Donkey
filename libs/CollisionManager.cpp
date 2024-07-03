@@ -65,19 +65,15 @@ void CollisionManager::handleCollisionWithBarrel(DynamicGameObject* barrel, bool
 }
 
 // MOVE TO COLLISION MANAGER
-void CollisionManager::handleCollisionWithLadder(int* flagLadder) {
+void CollisionManager::handlePlayerCollisionWithLadder() {
 	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
 		if (isRectInsideLadder(gameObjectContainer->player->destRect, gameObjectContainer->ladderHolder->ladders[i].destRect)) {
-			*flagLadder = 1;
+			gameObjectContainer->player->isInsideLadder = true;
+			return;
 		}
 	}
-	if (*flagLadder) {
-		gameObjectContainer->player->isInsideLadder = true;
-	}
-	else {
-		gameObjectContainer->player->isInsideLadder = false;
-		gameObjectContainer->player->isClimbing = false;
-	}
+	gameObjectContainer->player->isInsideLadder = false;
+	gameObjectContainer->player->isClimbing = false;
 }
 
 
@@ -94,7 +90,7 @@ void CollisionManager::handleCollisionWithJumping() {
 }
 
 // MOVE TO COLLISION MANAGER
-void CollisionManager::handleCollisionWithPlatform(DynamicGameObject* gameObject, int* flagPlatform) {
+void CollisionManager::handleCollisionWithPlatform(DynamicGameObject* gameObject, int* isGameObjectInsidePlatform) {
 	// check bottom left corner
 	// check bottom right corner
 	int yPosition = gameObject->ypos + gameObject->destRect.h;
@@ -111,7 +107,7 @@ void CollisionManager::handleCollisionWithPlatform(DynamicGameObject* gameObject
 			}
 		}
 		if (isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, &gameObjectContainer->platformHolder->platforms[i])) { // isPointOnTopOfLine
-			*flagPlatform = 1;
+			*isGameObjectInsidePlatform = 1;
 		}
 
 		//bottom right corner 
@@ -122,7 +118,7 @@ void CollisionManager::handleCollisionWithPlatform(DynamicGameObject* gameObject
 			}
 		}
 		if (isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, &gameObjectContainer->platformHolder->platforms[i])) {// isPointOnTopOfLine
-			*flagPlatform = 1;
+			*isGameObjectInsidePlatform = 1;
 		}
 	}
 }
