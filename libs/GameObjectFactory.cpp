@@ -7,13 +7,13 @@ GameObjectFactory::GameObjectFactory() {
 	GameObjectContainer* ga = new GameObjectContainer();
 	gameObjectContainer = ga;
 
-	CollisionManager* collisionM = new CollisionManager();
+	CollisionManager* collisionM = new CollisionManager(gameObjectContainer);
 	collisionManager = collisionM;
 }
 
 GameObjectFactory::GameObjectFactory(GameObjectContainer& gameObjectContainer) {
 	this->gameObjectContainer = &gameObjectContainer;
-	CollisionManager* collisionM = new CollisionManager();
+	CollisionManager* collisionM = new CollisionManager(gameObjectContainer);
 	collisionManager = collisionM;
 }
 

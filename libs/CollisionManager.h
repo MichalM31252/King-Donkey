@@ -19,6 +19,7 @@ public:
 	bool isColliding = false;
 
 	CollisionManager();
+	CollisionManager(GameObjectContainer* gameObjectContainer);
 	CollisionManager(GameObjectContainer& gameObjectContainer);
 	
 	static bool isCollisionBetweenRects(SDL_Rect a, SDL_Rect b);

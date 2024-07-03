@@ -6,6 +6,10 @@ CollisionManager::CollisionManager() {
 	this->gameObjectContainer = GameObjectContainer();
 }
 
+CollisionManager::CollisionManager(GameObjectContainer* gameObjectContainer) {
+	this->gameObjectContainer = *gameObjectContainer;
+}
+
 CollisionManager::CollisionManager(GameObjectContainer& gameObjectContainer) {
 	this->gameObjectContainer = gameObjectContainer;
 }
