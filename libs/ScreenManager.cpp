@@ -2,7 +2,15 @@
 extern "C" {
 #include "ScreenManager.h"
 }
- 
+
+ScreenManager::ScreenManager() {
+	
+}
+
+ScreenManager::ScreenManager(GameObjectContainer* gameObjectContainer) {
+	this->gameObjectContainer = gameObjectContainer;
+}
+
 // THIS SHOULD BE IN SCREEN MANAGER, make a static function
 void ScreenManager::decideSpritePlayer(DynamicGameObject* player, int& currentRunningSpriteId) {
 	if (currentRunningSpriteId == 1) {
@@ -246,4 +254,41 @@ void ScreenManager::renderGameObject(GameObject* gameObject, SDL_Surface* screen
 
 void ScreenManager::renderLadder(GameObject* gameObject, SDL_Surface* screen) {
 	drawSurfaceLadder(screen, gameObject, gameObject->xpos, gameObject->ypos, gameObject->destRect);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// MOVE TO TEXTURE MANAGER
+void ScreenManager::drawPlatforms() {
+	for (int i = 0; i < gameObjectContainer->platformHolder->numberOfElements; i++) {
+		gameObjectContainer->platformHolder->platforms[i].render(screen);
+	}
+}
+
+// MOVE TO TEXTURE MANAGER
+void ScreenManager::drawLadders() {
+	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
+		renderLadder(&gameObjectContainer->ladderHolder->ladders[i], screen);
+	}
+}
+
+// MOVE TO TEXTURE MANAGER
+void ScreenManager::drawBarrels() {
+	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
+		renderGameObject(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], screen);
+	}
+}
+
+// MOVE TO TEXTURE MANAGER
+void ScreenManager::drawElements() { // don't repeat yourself
+
+	// game object container empty here
+
+	renderGameObject(gameObjectContainer->donkeyKong, screen);
+	renderGameObject(gameObjectContainer->princess, screen);
+	renderGameObject(gameObjectContainer->player, screen);
+
+	drawPlatforms();
+	drawLadders();
+	drawBarrels();
 }

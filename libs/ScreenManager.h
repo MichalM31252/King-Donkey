@@ -8,6 +8,7 @@ extern "C" {
 #include "../SDL2-2.0.10/include/SDL_main.h"
 #include "DynamicGameObject.h"
 #include "Constants.h"
+#include "GameObjectContainer.h"
 }
 
 class ScreenManager {
@@ -24,8 +25,10 @@ class ScreenManager {
 		SDL_Window* window; // widnows window
 		SDL_Renderer* renderer; // we send here to render the screen
 
-		// ScreenManager();
-		// ScreenManager(GameObjectContainer& gameObjectContainer);
+		GameObjectContainer* gameObjectContainer;
+
+		ScreenManager();
+		ScreenManager(GameObjectContainer* gameObjectContainer);
 
 		void SDLCheck();
 		void SDLCreateWindowAndRenderer();
@@ -67,4 +70,9 @@ class ScreenManager {
 		static void initGameObject(GameObject* gameObject, const char* fileName);
 		void renderGameObject(GameObject* gameObject, SDL_Surface* screen);
 		void renderLadder(GameObject* gameObject, SDL_Surface* screen);
+
+		void drawElements();
+		void drawPlatforms();
+		void drawLadders();
+		void drawBarrels();
 };

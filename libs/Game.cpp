@@ -6,10 +6,14 @@ extern "C" {
 }
 
 Game::Game() {
+
+	// the only thing that should be here is the stage manager
+	// first move every method from this class to its respective manager then implement the stage manager
+
 	GameObjectContainer* gameObjectC = new GameObjectContainer();
 	gameObjectContainer = gameObjectC;
 
-	ScreenManager* screenMan = new ScreenManager();
+	ScreenManager* screenMan = new ScreenManager(gameObjectContainer);
 	screenManager = screenMan;
 
 	GameObjectFactory* gameObjectMan = new GameObjectFactory(gameObjectContainer);
@@ -36,7 +40,7 @@ void Game::handleCurrentRound(KeyboardManager& eventHandler, int *startAnotherRo
 
 		gameObjectFactory->gameObjectContainer->player->update(screenManager->deltaTime);
 
-		drawElements();
+		screenManager->drawElements();
 
 		screenManager->serveNextFrame();
 
@@ -79,38 +83,6 @@ void Game::initGame() {
 	handleRound(startAnotherRound);
 
 	closeGame();
-}
-
-// MOVE TO TEXTURE MANAGER
-void Game::drawPlatforms() {
-	for (int i = 0; i < gameObjectFactory->gameObjectContainer->platformHolder->numberOfElements; i++) {
-		gameObjectFactory->gameObjectContainer->platformHolder->platforms[i].render(screenManager->screen);
-	}
-}
-
-// MOVE TO TEXTURE MANAGER
-void Game::drawLadders() {
-	for (int i = 0; i < gameObjectFactory->gameObjectContainer->ladderHolder->numberOfElements; i++) {
-		screenManager->renderLadder(&gameObjectFactory->gameObjectContainer->ladderHolder->ladders[i], screenManager->screen);
-	}
-}
-
-// MOVE TO TEXTURE MANAGER
-void Game::drawBarrels() {
-	for (int i = 0; i < gameObjectFactory->gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
-		screenManager->renderGameObject(&gameObjectFactory->gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], screenManager->screen);
-	}
-}
-
-// MOVE TO TEXTURE MANAGER
-void Game::drawElements() { // don't repeat yourself
-	screenManager->renderGameObject(gameObjectFactory->gameObjectContainer->donkeyKong, screenManager->screen);
-	screenManager->renderGameObject(gameObjectFactory->gameObjectContainer->princess, screenManager->screen);
-	screenManager->renderGameObject(gameObjectFactory->gameObjectContainer->player, screenManager->screen);
-
-	drawPlatforms();
-	drawLadders();
-	drawBarrels();
 }
 
 // MOVE TO GAME OBJECT MANAGER

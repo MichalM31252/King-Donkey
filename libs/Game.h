@@ -45,10 +45,5 @@ class Game {
 		// Screen manager or texture manager
 		/////////////////////////////////////////////////////////////////////////////////////
 
-		void drawElements();
-		void drawPlatforms();
-		void drawLadders();
-		void drawBarrels();
-
 		void closeGame();
 };
