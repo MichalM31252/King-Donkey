@@ -6,10 +6,12 @@
 
 - [ ] Fix animations
 - [ ] Fix the delay between keys and player
-- [ ] Fix the look of ladders
+- [ ] Fix the ladders
 - [ ] Update file structure
 - [ ] Remove unnescessary pointers to make code more readable
 - [ ] Refactor platform mechanism
+- [ ] Change player sprite based on the direction of movement
+- [ ] Fix memory leaks
 
 # STATISTICS
 
