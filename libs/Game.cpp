@@ -48,6 +48,7 @@ void Game::handleCurrentRound(KeyboardManager& eventHandler, int *startAnotherRo
 
 		gameObjectContainer->player->update(screenManager->deltaTime);
 		// maybe also update the barrels here ???
+
 		eventHandler.handleEvents(&quit, screenManager->deltaTime, gameObjectContainer->player, startAnotherRound);
 
 		screenManager->drawElements();
@@ -56,10 +57,7 @@ void Game::handleCurrentRound(KeyboardManager& eventHandler, int *startAnotherRo
 	};
 }
 
-// MOVE TO ROUND MANAGER
-void Game::handleRound(int startAnotherRound) {
-	KeyboardManager eventHandler;
-	screenManager->createFramerate();
+void Game::decideWhichBoardToCreate(int startAnotherRound) {
 	if (startAnotherRound) {
 		if (startAnotherRound == BOARD_ID_A) {
 			gameObjectFactory->createBoard(BOARD_ID_A);
@@ -74,7 +72,14 @@ void Game::handleRound(int startAnotherRound) {
 	else {
 		gameObjectFactory->createBoard(BOARD_ID_A);
 	}
+}
 
+// MOVE TO ROUND MANAGER
+void Game::handleRound(int startAnotherRound) {
+	KeyboardManager eventHandler;
+	screenManager->createFramerate();
+
+	decideWhichBoardToCreate(startAnotherRound);
 	handleCurrentRound(eventHandler, &startAnotherRound);
 
 	if (startAnotherRound) {
@@ -84,9 +89,8 @@ void Game::handleRound(int startAnotherRound) {
 
 // MOVE TO GAME OBJECT MANAGER
 void Game::handlePlayer() { // player collision
-	collisionManager->handleCollisionWithKong();
-	collisionManager->handleCollisionWithPrincess();
-
+	collisionManager->handlePlayerCollisionWithKong();
+	collisionManager->handlePlayerCollisionWithPrincess();
 	collisionManager->handlePlayerCollisionWithLadder();
 	
 	int isPlayerInsidePlatform = 0;
@@ -98,6 +102,7 @@ void Game::handlePlayer() { // player collision
 			collisionManager->handleCollisionWithJumping();
 		}
 		else {
+			// again start falling not handle falling
 			PhysicsManager::handleFalling(gameObjectContainer->player, screenManager->deltaTime);
 		}
 		if (gameObjectContainer->player->isJumping) { // handle jumping
@@ -117,13 +122,16 @@ void Game::handleBarrels(bool* quit, int* startAnotherRound) {
 
 	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
 
-		collisionManager->handleCollisionWithBarrel(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], quit, startAnotherRound);
+		DynamicGameObject barrel = gameObjectContainer->barrelDispenser->barrelHolder->barrels[i];
+
+		collisionManager->handlePlayerCollisionWithBarrel(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], quit, startAnotherRound);
 
 		int isGameObjectInsidePlatform = 0;
 		collisionManager->handleCollisionWithPlatform(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], &isGameObjectInsidePlatform);
 
 		if (isGameObjectInsidePlatform) {
 			if (gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].isFalling) {
+				// stopObjectFromFallingThroughPlatform
 				gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].stopFalling();
 				gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].stopMove();
 			}
@@ -131,6 +139,7 @@ void Game::handleBarrels(bool* quit, int* startAnotherRound) {
 			gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].startMovingRight(screenManager->deltaTime);
 		}
 		else {
+			// idk but shououldnt this be renamed to start falling?
 			PhysicsManager::handleFalling(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], screenManager->deltaTime); // THE PROBLEM IS HERE
 		}
 		gameObjectContainer->barrelDispenser->barrelHolder->barrels[i].update(screenManager->deltaTime);

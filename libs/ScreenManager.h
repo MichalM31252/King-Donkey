@@ -13,6 +13,9 @@ extern "C" {
 
 class ScreenManager {
 	public:
+		GameObjectContainer* gameObjectContainer;
+
+
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
 
@@ -24,8 +27,6 @@ class ScreenManager {
 		SDL_Texture* scrtex; // 
 		SDL_Window* window; // widnows window
 		SDL_Renderer* renderer; // we send here to render the screen
-
-		GameObjectContainer* gameObjectContainer;
 
 		ScreenManager();
 		ScreenManager(GameObjectContainer* gameObjectContainer);

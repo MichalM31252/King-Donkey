@@ -29,9 +29,9 @@ public:
 	// Game object manager or collision manager?
 	/////////////////////////////////////////////////////////////////////////////////////
 
-	void handleCollisionWithKong();
-	void handleCollisionWithPrincess();
-	void handleCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
+	void handlePlayerCollisionWithKong();
+	void handlePlayerCollisionWithPrincess();
+	void handlePlayerCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
 	void handlePlayerCollisionWithLadder();
 	void handleCollisionWithPlatform(DynamicGameObject* gameObject, int* isGameObjectInsidePlatform);
 	void handleCollisionWithJumping();

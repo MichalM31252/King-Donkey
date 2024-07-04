@@ -43,21 +43,21 @@ bool CollisionManager::isRectInsideLadder(SDL_Rect playerDestRect, SDL_Rect ladd
 }
 
 // MOVE TO COLLISION MANAGER
-void CollisionManager::handleCollisionWithKong() {
+void CollisionManager::handlePlayerCollisionWithKong() {
 	if (isCollisionBetweenRects( gameObjectContainer->player->destRect, gameObjectContainer->donkeyKong->destRect)) {
 		closeGame();
 	}
 }
 
 // MOVE TO COLLISION MANAGER
-void CollisionManager::handleCollisionWithPrincess() {
+void CollisionManager::handlePlayerCollisionWithPrincess() {
 	if (isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->princess->destRect)) {
 		closeGame();
 	}
 }
 
 // MOVE TO COLLISION MANAGER
-void CollisionManager::handleCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound) {
+void CollisionManager::handlePlayerCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound) {
 	if (isCollisionBetweenRects(gameObjectContainer->player->destRect, barrel->destRect)) {
 		*quit = true;
 		*startAnotherRound = 1;
