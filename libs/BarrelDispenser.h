@@ -7,10 +7,10 @@ extern "C" {
 }
 
 class BarrelDispenser {
-public:
+private:
 	int xpos, ypos;
-	double deltaTime;
 	double accumulatedTime;
+public:
 	BarrelHolder* barrelHolder;
 
 	void initBarrelDispenser(BarrelDispenser* barrelDispenser);
