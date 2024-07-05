@@ -37,7 +37,6 @@
     <ClCompile Include="libs\PlatformHolder.cpp" />
     <ClCompile Include="libs\StageManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="RoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="cs8x8.bmp" />
@@ -63,7 +62,6 @@
     <ClInclude Include="libs\Platform.h" />
     <ClInclude Include="libs\PlatformHolder.h" />
     <ClInclude Include="libs\StageManager.h" />
-    <ClInclude Include="RoundManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
