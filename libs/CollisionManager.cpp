@@ -6,8 +6,9 @@ CollisionManager::CollisionManager() {
 	this->gameObjectContainer = new GameObjectContainer();
 }
 
-CollisionManager::CollisionManager(GameObjectContainer* gameObjectContainer) {
+CollisionManager::CollisionManager(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager) {
 	this->gameObjectContainer = gameObjectContainer;
+	this->screenManager = screenManager;
 }
 
 bool CollisionManager::isCollisionBetweenRects(SDL_Rect a, SDL_Rect b) {
@@ -120,6 +121,68 @@ void CollisionManager::handleCollisionWithPlatform(DynamicGameObject* gameObject
 		if (isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, &gameObjectContainer->platformHolder->platforms[i])) {// isPointOnTopOfLine
 			*isGameObjectInsidePlatform = 1;
 		}
+	}
+}
+
+
+// MOVE TO GAME OBJECT MANAGER
+void CollisionManager::handlePlayerCollision() { // player collision
+
+	Player* player = gameObjectContainer->player;
+	int isPlayerInsidePlatform = 0;
+
+	handleCollisionWithPlatform(gameObjectContainer->player, &isPlayerInsidePlatform);
+	handlePlayerCollisionWithKong();
+	handlePlayerCollisionWithPrincess();
+	handlePlayerCollisionWithLadder();
+
+	if (!player->isClimbing) {
+		if (isPlayerInsidePlatform) {
+			screenManager->loadTexture(player, PLAYER_1_FILENAME);
+			handleCollisionWithJumping();
+		}
+		else {
+			// again start falling not handle falling
+			PhysicsManager::handleFalling(player, screenManager->deltaTime);
+		}
+		if (player->isJumping) { // handle jumping
+			player->jump(screenManager->deltaTime);
+		}
+	}
+
+	if (player->isJumping && player->ypos <= player->jumpHeightStop) {
+		player->stopJumping();
+		player->startFalling();
+	}
+}
+
+// MOVE TO GAME OBJECT MANAGER
+void CollisionManager::handleBarrelsCollision(bool* quit, int* startAnotherRound) {
+	gameObjectContainer->barrelDispenser->updateBarrelDispenser(screenManager->deltaTime);
+
+	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
+
+		DynamicGameObject* barrel = &gameObjectContainer->barrelDispenser->barrelHolder->barrels[i];
+
+		handlePlayerCollisionWithBarrel(barrel, quit, startAnotherRound);
+
+		int isGameObjectInsidePlatform = 0;
+		handleCollisionWithPlatform(barrel, &isGameObjectInsidePlatform);
+
+		if (isGameObjectInsidePlatform) {
+			if ((*barrel).isFalling) {
+				// stopObjectFromFallingThroughPlatform
+				(*barrel).stopFalling();
+				(*barrel).stopMove();
+			}
+			(*barrel).moveStart(DEFAULT_BARREL_SPEED);
+			(*barrel).startMovingRight(screenManager->deltaTime);
+		}
+		else {
+			// idk but shououldnt this be renamed to start falling?
+			PhysicsManager::handleFalling(barrel, screenManager->deltaTime); // THE PROBLEM IS HERE
+		}
+		(*barrel).update(screenManager->deltaTime);
 	}
 }
 

@@ -19,7 +19,7 @@ Game::Game() {
 	GameObjectFactory* gameObjectMan = new GameObjectFactory(gameObjectContainer);
 	gameObjectFactory = gameObjectMan;
 
-	CollisionManager* collisionMan = new CollisionManager(gameObjectContainer);
+	CollisionManager* collisionMan = new CollisionManager(gameObjectContainer, screenManager);
 	collisionManager = collisionMan;
 
 	RoundManager* roundMan = new RoundManager(screenManager, gameObjectFactory, gameObjectContainer, collisionManager);
