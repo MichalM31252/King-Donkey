@@ -14,6 +14,7 @@ extern "C" {
 #include "Platform.h"
 #include "BarrelHolder.h"
 #include "GameObjectFactory.h"
+#include "RoundManager.h"
 }
 
 class Game {
@@ -23,28 +24,11 @@ class Game {
 		GameObjectFactory* gameObjectFactory;
 		ScreenManager* screenManager;
 		CollisionManager* collisionManager;
+		RoundManager* roundManager;
 
 		Game();
 
 		void initGame();
-
-		// Round manager
-		/////////////////////////////////////////////////////////////////////////////////////
-		
-		void handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound);
-		void decideWhichBoardToCreate(int startAnotherRound);
-		void handleRound(int startAnotherRound);
-
-		/////////////////////////////////////////////////////////////////////////////////////
-
-		// game object manager
-		/////////////////////////////////////////////////////////////////////////////////////
-
-		void handlePlayer();
-		void handleBarrels(bool* quit, int* startAnotherRound);
-
-		// Screen manager or texture manager
-		/////////////////////////////////////////////////////////////////////////////////////
 
 		void closeGame();
 };
