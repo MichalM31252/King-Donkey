@@ -12,6 +12,7 @@
 - [ ] Refactor platform mechanism
 - [ ] Change player sprite based on the direction of movement
 - [ ] Fix memory leaks
+- [ ] Implement a normal vector for BarrelHolder, LadderHolder, PlatformHolder instead of your own implementation
 
 # STATISTICS
 
