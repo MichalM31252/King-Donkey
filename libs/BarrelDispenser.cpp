@@ -1,5 +1,9 @@
 extern "C" {
 #include "BarrelDispenser.h"
+
+// why is this needed ?? // because you need to set the texture for an object
+#include "ScreenManager.h" // temporary fix
+
 }
 
 void BarrelDispenser::initBarrelDispenser(BarrelDispenser* barrelDispenser) {
@@ -22,7 +26,9 @@ void BarrelDispenser::updateBarrelDispenser(double deltaTime) {
 
 void BarrelDispenser::throwBarrel() {
 	DynamicGameObject* barrel = new DynamicGameObject();
-	ScreenManager::initGameObject(barrel, BARREL_1_FILENAME);
+
+	ScreenManager::initGameObject(barrel, BARREL_1_FILENAME); // this needs refactoring 
+	
 	barrel->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
 	barrel->createSrcRect();
 	barrel->createDestRect();

@@ -14,50 +14,21 @@ extern "C" {
 #include "Platform.h"
 #include "BarrelHolder.h"
 #include "GameObjectFactory.h"
+#include "RoundManager.h"
 }
 
 class Game {
 	public:
+		GameObjectContainer* gameObjectContainer;
+
 		GameObjectFactory* gameObjectFactory;
 		ScreenManager* screenManager;
+		CollisionManager* collisionManager;
+		RoundManager* roundManager;
 
 		Game();
 
 		void initGame();
-
-		// Round manager
-		/////////////////////////////////////////////////////////////////////////////////////
-		
-		void handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound);
-		void handleRound(int startAnotherRound);
-
-		/////////////////////////////////////////////////////////////////////////////////////
-
-		// game object manager
-		/////////////////////////////////////////////////////////////////////////////////////
-
-		void handlePlayer();
-		void handleBarrels(bool* quit, int* startAnotherRound);
-
-		// Screen manager or texture manager
-		/////////////////////////////////////////////////////////////////////////////////////
-
-		void drawElements();
-		void drawPlatforms();
-		void drawLadders();
-		void drawBarrels();
-
-		// Game object manager or collision manager?
-		/////////////////////////////////////////////////////////////////////////////////////
-
-		void handleCollisionWithKong();
-		void handleCollisionWithPrincess();
-		void handleCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
-		void handleCollisionWithLadder(int* flagLadder);
-		void handleCollisionWithPlatform(DynamicGameObject* gameObject, int* flagPlatform);
-		void handleCollisionWithJumping();
-
-		/////////////////////////////////////////////////////////////////////////////////////
 
 		void closeGame();
 };

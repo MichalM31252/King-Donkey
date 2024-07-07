@@ -3,7 +3,6 @@
 extern "C" {
 #include "GameObject.h"
 #include "Constants.h"
-#include "ScreenManager.h"
 }
 
 class DynamicGameObject : public GameObject {
@@ -23,12 +22,6 @@ public:
 	bool isPlayer;
 	int currentRunningSpriteId;
 	int currentRunningSpriteIdBarrel;
-
-	// this should be in a different class
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-	void decideSpritePlayer();
-	void decideSpriteBarrel();
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	DynamicGameObject();
 	void update(double deltaTime);

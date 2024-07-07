@@ -4,14 +4,13 @@ extern "C" {
 #include "DynamicGameObject.h"
 #include "BarrelHolder.h"
 #include "BarrelDispenser.h"
-#include "ScreenManager.h"
 }
 
 class BarrelDispenser {
-public:
+private:
 	int xpos, ypos;
-	double deltaTime;
 	double accumulatedTime;
+public:
 	BarrelHolder* barrelHolder;
 
 	void initBarrelDispenser(BarrelDispenser* barrelDispenser);

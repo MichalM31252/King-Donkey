@@ -2,6 +2,15 @@
 
 extern "C" {
 #include "KeyboardManager.h"
+#include "ScreenManager.h" // temporary fix
+}
+
+KeyboardManager::KeyboardManager() {
+
+}
+
+KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer) {
+	this->gameObjectContainer = gameObjectContainer;
 }
 
 void KeyboardManager::handleEvents(bool* quit, double deltaTime, Player* player, int *startAnotherRound) {

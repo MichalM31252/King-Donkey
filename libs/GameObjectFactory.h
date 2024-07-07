@@ -3,14 +3,13 @@
 #include "CollisionManager.h"
 #include "GameObjectContainer.h"
 
-#include "ScreenManager.h" // temporary fix
-
 class GameObjectFactory {
 public:
 	GameObjectContainer* gameObjectContainer;
 	CollisionManager* collisionManager;
 
 	GameObjectFactory();
+	GameObjectFactory(GameObjectContainer* gameObjectContainer);
 
 	void createPlayer();
 	void createDonkeyKong();

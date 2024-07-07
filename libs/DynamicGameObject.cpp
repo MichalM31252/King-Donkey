@@ -1,5 +1,6 @@
 extern "C" {
 #include "DynamicGameObject.h"
+#include "ScreenManager.h" // Temporary solution
 }
 
 // objectSpeed should be moved to physics
@@ -24,46 +25,6 @@ DynamicGameObject::DynamicGameObject() {
 	currentRunningSpriteIdBarrel = 1;
 }
 
-// THIS SHOULD BE IN SCREEN MANAGER
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void DynamicGameObject::decideSpritePlayer() {
-	if (currentRunningSpriteId == 1) {
-		ScreenManager::loadTexture(this, PLAYER_1_FILENAME);
-		currentRunningSpriteId++;
-	}
-	else if (currentRunningSpriteId == 2) {
-		ScreenManager::loadTexture(this, PLAYER_2_FILENAME);
-		currentRunningSpriteId++;
-	}
-	else {
-		ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
-		currentRunningSpriteId = 1;
-	}
-}
-
-// This should be moved to a sprite manager
-void DynamicGameObject::decideSpriteBarrel() {
-	if (currentRunningSpriteIdBarrel == 1) {
-		ScreenManager::loadTexture(this, BARREL_1_FILENAME);
-		currentRunningSpriteIdBarrel++;
-	}
-	else if (currentRunningSpriteIdBarrel == 2) {
-		ScreenManager::loadTexture(this, BARREL_2_FILENAME);
-		currentRunningSpriteIdBarrel++;
-	}
-	else if (currentRunningSpriteIdBarrel == 3) {
-		ScreenManager::loadTexture(this, BARREL_3_FILENAME);
-		currentRunningSpriteIdBarrel++;
-	}
-	else{
-		ScreenManager::loadTexture(this, BARREL_4_FILENAME);
-		currentRunningSpriteIdBarrel = 1;
-	}
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 void DynamicGameObject::startAccumulatingDistance(double deltaTime) {
 	if (objectSpeed > 0) {
 		accumulatedXMove += deltaTime * objectSpeed * currentDirectionOfMovementHorizontal;
@@ -83,10 +44,10 @@ void DynamicGameObject::updatePosition() {
 				xpos += 1;
 				accumulatedXMove -= 1;
 				if (!isJumping && isPlayer && !isFalling) {
-					decideSpritePlayer();
+					ScreenManager::decideSpritePlayer(this, currentRunningSpriteId);
 				}
 				if (!isPlayer) {
-					decideSpriteBarrel();
+					ScreenManager::decideSpriteBarrel(this, currentRunningSpriteIdBarrel);
 				}
 			}
 		}
@@ -105,10 +66,10 @@ void DynamicGameObject::updatePosition() {
 				xpos -= 1;
 				accumulatedXMove += 1;
 				if (!isJumping && isPlayer && !isFalling) {
-					decideSpritePlayer();
+					ScreenManager::decideSpritePlayer(this, currentRunningSpriteId);
 				}
 				if (!isPlayer) {
-					decideSpriteBarrel();
+					ScreenManager::decideSpriteBarrel(this, currentRunningSpriteIdBarrel);
 				}
 			}
 		}
@@ -122,6 +83,7 @@ void DynamicGameObject::updatePosition() {
 	}
 }
 
+// logic, not screen manager
 void DynamicGameObject::stayInBounds() {
 	if (!canLeaveScreen) {
 		if (xpos < STARTING_X) { // left

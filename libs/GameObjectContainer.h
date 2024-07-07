@@ -1,12 +1,9 @@
 #pragma once
-
-#include "BarrelDispenser.h"
-#include "LadderHolder.h"
-#include "PlatformHolder.h"
-#include "DynamicGameObject.h"
-#include "Player.h"
-
-// turn this into a struct in the future
+#include "BarrelDispenser.h" // no screen manager
+#include "LadderHolder.h" // no screen manager
+#include "PlatformHolder.h" // no screen manager
+#include "DynamicGameObject.h" // has screen manager
+#include "Player.h" // no screen manager
 
 struct GameObjectContainer {
     GameObject* donkeyKong;

@@ -4,15 +4,18 @@ extern "C" {
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
-
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
-#include "GameObject.h"
+#include "DynamicGameObject.h"
 #include "Constants.h"
+#include "GameObjectContainer.h"
 }
 
 class ScreenManager {
 	public:
+		GameObjectContainer* gameObjectContainer;
+
+
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
 
@@ -24,6 +27,9 @@ class ScreenManager {
 		SDL_Texture* scrtex; // 
 		SDL_Window* window; // widnows window
 		SDL_Renderer* renderer; // we send here to render the screen
+
+		ScreenManager();
+		ScreenManager(GameObjectContainer* gameObjectContainer);
 
 		void SDLCheck();
 		void SDLCreateWindowAndRenderer();
@@ -40,7 +46,7 @@ class ScreenManager {
 
 		void setColors();
 		void drawOutlineOfTheBoard();
-		void drawAdditionalInfo(double worldTime);
+		void drawAdditionalInfo();
 		void createSDL();
 
 		void createFramerate();
@@ -59,7 +65,15 @@ class ScreenManager {
 		void DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color);
 		void DrawRectangle(SDL_Surface* screen, int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor);
 
+		static void decideSpriteBarrel(DynamicGameObject* barrel, int& currentRunningSpriteIdBarrel); // remove currentRunningSpriteIdBarrel in the future, remove static in the future
+		static void decideSpritePlayer(DynamicGameObject* player, int& currentRunningSpriteId); // remove currentRunningSpriteId in the future, remove static in the future
+
 		static void initGameObject(GameObject* gameObject, const char* fileName);
 		void renderGameObject(GameObject* gameObject, SDL_Surface* screen);
 		void renderLadder(GameObject* gameObject, SDL_Surface* screen);
+
+		void drawElements();
+		void drawPlatforms();
+		void drawLadders();
+		void drawBarrels();
 };

@@ -1,13 +1,14 @@
 extern "C" {
 #include "GameObjectFactory.h"
+#include "ScreenManager.h" // temporary fix
 }
 
 GameObjectFactory::GameObjectFactory() {
-	GameObjectContainer* ga = new GameObjectContainer();
-	gameObjectContainer = ga;
 
-	CollisionManager* collisionM = new CollisionManager();
-	collisionManager = collisionM;
+}
+
+GameObjectFactory::GameObjectFactory(GameObjectContainer* gameObjectContainer) {
+	this->gameObjectContainer = gameObjectContainer;
 }
 
 // Move to game object manager

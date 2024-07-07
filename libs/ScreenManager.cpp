@@ -3,6 +3,50 @@ extern "C" {
 #include "ScreenManager.h"
 }
 
+ScreenManager::ScreenManager() {
+	
+}
+
+ScreenManager::ScreenManager(GameObjectContainer* gameObjectContainer) {
+	this->gameObjectContainer = gameObjectContainer;
+}
+
+// THIS SHOULD BE IN SCREEN MANAGER, make a static function
+void ScreenManager::decideSpritePlayer(DynamicGameObject* player, int& currentRunningSpriteId) {
+	if (currentRunningSpriteId == 1) {
+		ScreenManager::loadTexture(player, PLAYER_1_FILENAME);
+		currentRunningSpriteId++;
+	}
+	else if (currentRunningSpriteId == 2) {
+		ScreenManager::loadTexture(player, PLAYER_2_FILENAME);
+		currentRunningSpriteId++;
+	}
+	else {
+		ScreenManager::loadTexture(player, PLAYER_3_FILENAME);
+		currentRunningSpriteId = 1;
+	}
+}
+
+// THIS SHOULD BE IN SCREEN MANAGER, make a static function
+void ScreenManager::decideSpriteBarrel(DynamicGameObject* barrel, int& currentRunningSpriteIdBarrel) {
+	if (currentRunningSpriteIdBarrel == 1) {
+		ScreenManager::loadTexture(barrel, BARREL_1_FILENAME);
+		currentRunningSpriteIdBarrel++;
+	}
+	else if (currentRunningSpriteIdBarrel == 2) {
+		ScreenManager::loadTexture(barrel, BARREL_2_FILENAME);
+		currentRunningSpriteIdBarrel++;
+	}
+	else if (currentRunningSpriteIdBarrel == 3) {
+		ScreenManager::loadTexture(barrel, BARREL_3_FILENAME);
+		currentRunningSpriteIdBarrel++;
+	}
+	else {
+		ScreenManager::loadTexture(barrel, BARREL_4_FILENAME);
+		currentRunningSpriteIdBarrel = 1;
+	}
+}
+
 void ScreenManager::createFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
 	tick1 = SDL_GetTicks();
 	frames = 0; // frames that happend
@@ -102,7 +146,7 @@ void ScreenManager::drawOutlineOfTheBoard() {
 	DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black); 
 }
 
-void ScreenManager::drawAdditionalInfo(double worldTime) {
+void ScreenManager::drawAdditionalInfo() {
 	DrawRectangle(screen, 1, 1, SCREEN_WIDTH - 2, TOP_BAR_HEIGHT, blue, blue);
 	char text[128];
 	sprintf(text, "Time: %.1lf s  Score: 00000  Lives: 1", worldTime);
@@ -124,7 +168,7 @@ void ScreenManager::createSDL() {
 	setColors();
 }
 
-// Can be moved to Game Object Visualiser
+// maybe create a class in the future game object visualiser
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void ScreenManager::loadTexture(GameObject* gameObject, const char* fileName) {
@@ -210,4 +254,38 @@ void ScreenManager::renderGameObject(GameObject* gameObject, SDL_Surface* screen
 
 void ScreenManager::renderLadder(GameObject* gameObject, SDL_Surface* screen) {
 	drawSurfaceLadder(screen, gameObject, gameObject->xpos, gameObject->ypos, gameObject->destRect);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// MOVE TO TEXTURE MANAGER
+void ScreenManager::drawPlatforms() {
+	for (int i = 0; i < gameObjectContainer->platformHolder->numberOfElements; i++) {
+		gameObjectContainer->platformHolder->platforms[i].render(screen);
+	}
+}
+
+// MOVE TO TEXTURE MANAGER
+void ScreenManager::drawLadders() {
+	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
+		renderLadder(&gameObjectContainer->ladderHolder->ladders[i], screen);
+	}
+}
+
+// MOVE TO TEXTURE MANAGER
+void ScreenManager::drawBarrels() {
+	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
+		renderGameObject(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], screen);
+	}
+}
+
+// MOVE TO TEXTURE MANAGER
+void ScreenManager::drawElements() { // don't repeat yourself
+	renderGameObject(gameObjectContainer->donkeyKong, screen);
+	renderGameObject(gameObjectContainer->princess, screen);
+	renderGameObject(gameObjectContainer->player, screen);
+
+	drawPlatforms();
+	drawLadders();
+	drawBarrels();
 }
