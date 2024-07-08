@@ -4,6 +4,7 @@ extern "C" {
 
 CollisionManager::CollisionManager() {
 	this->gameObjectContainer = new GameObjectContainer();
+	this->screenManager = new ScreenManager();
 }
 
 CollisionManager::CollisionManager(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager) {
@@ -175,7 +176,7 @@ void CollisionManager::handleBarrelsCollision(bool* quit, int* startAnotherRound
 				(*barrel).stopFalling();
 				(*barrel).stopMove();
 			}
-			(*barrel).moveStart(DEFAULT_BARREL_SPEED);
+			(*barrel).startMovingAtSpeed(DEFAULT_BARREL_SPEED);
 			(*barrel).startMovingRight(screenManager->deltaTime);
 		}
 		else {

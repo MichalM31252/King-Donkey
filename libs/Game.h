@@ -29,6 +29,5 @@ class Game {
 		Game();
 
 		void initGame();
-
 		void closeGame();
 };

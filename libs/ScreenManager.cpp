@@ -11,6 +11,10 @@ ScreenManager::ScreenManager(GameObjectContainer* gameObjectContainer) {
 	this->gameObjectContainer = gameObjectContainer;
 }
 
+void ScreenManager::decideSpriteForGameObject(DynamicGameObject* gameObject) {
+	
+}
+
 // THIS SHOULD BE IN SCREEN MANAGER, make a static function
 void ScreenManager::decideSpritePlayer(DynamicGameObject* player, int& currentRunningSpriteId) {
 	if (currentRunningSpriteId == 1) {

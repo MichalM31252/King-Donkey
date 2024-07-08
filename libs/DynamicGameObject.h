@@ -32,12 +32,15 @@ public:
 	void stayInBounds();
 	void updatePosition();
 	void startAccumulatingDistance(double deltaTime);
-	void moveStart(double speed);
+	void startMovingAtSpeed(double speed);
 	void startMovingLeft(double delta);
 	void startMovingRight(double delta);
 	void startMovingUp(double delta);
 	void startMovingDown(double delta);
 	void stopMove();
+
+
+
 	void initJump();
 	void startJumping();
 	void stopJumping();
