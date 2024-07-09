@@ -10,6 +10,7 @@ DynamicGameObject::DynamicGameObject() {
 	accumulatedXMove = 0;
 	accumulatedYMove = 0;
 	canLeaveScreen = false; // leave here
+	objectSpeed = 0; // leave here
 
 	currentSpriteId = 1;
 
@@ -19,13 +20,12 @@ DynamicGameObject::DynamicGameObject() {
 	
 	// assign to specific class (player, barrel)
 	isPlayer = false; // leave here (for now)
-	objectSpeed = 0; // leave here
-
+	
 	isClimbing = false; // player
 	isJumping = false; // player
-	isInsideLadder = false; // player
-	checkIfJumpPossible = false; // player
-	jumpHeightStop = SCREEN_HEIGHT; // player 
+	
+	checkIfJumpPossible = false; // player / no this should be somwhere else
+	jumpHeightStop = SCREEN_HEIGHT; // player / no this should be somwhere else
 }
 
 void DynamicGameObject::startAccumulatingDistance(double deltaTime) {
@@ -47,10 +47,10 @@ void DynamicGameObject::updatePosition() {
 				xpos += 1;
 				accumulatedXMove -= 1;
 				if (!isJumping && isPlayer && !isFalling) {
-					ScreenManager::decideSpritePlayer(this);
+					ScreenManager::loadNextSpritePlayer(this);
 				}
 				if (!isPlayer) {
-					ScreenManager::decideSpriteBarrel(this);
+					ScreenManager::loadNextSpriteBarrel(this);
 				}
 			}
 		}
@@ -69,10 +69,10 @@ void DynamicGameObject::updatePosition() {
 				xpos -= 1;
 				accumulatedXMove += 1;
 				if (!isJumping && isPlayer && !isFalling) {
-					ScreenManager::decideSpritePlayer(this);
+					ScreenManager::loadNextSpritePlayer(this);
 				}
 				if (!isPlayer) {
-					ScreenManager::decideSpriteBarrel(this);
+					ScreenManager::loadNextSpriteBarrel(this);
 				}
 			}
 		}
@@ -145,27 +145,6 @@ void DynamicGameObject::stopMove() {
 	currentDirectionOfMovementVertical = 0;
 	objectSpeed = 0;
 }
-
-// Shouldnt this be moved to player class?
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void DynamicGameObject::startJumping() {
-	isJumping = true;
-	jumpHeightStop = ypos - DEFAULT_JUMP_HEIGHT;
-}
-
-void DynamicGameObject::stopJumping() {
-	isJumping = false;
-	jumpHeightStop = SCREEN_HEIGHT;
-	accumulatedYMove = 0;
-}
-
-void DynamicGameObject::initJump() {
-	checkIfJumpPossible = true;
-	accumulatedYMove = 0;
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void DynamicGameObject::startFalling() {
 	isFalling = true;

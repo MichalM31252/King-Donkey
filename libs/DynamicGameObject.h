@@ -15,7 +15,7 @@ public:
 	double gravity;
 	
 	double currentDirectionOfMovementHorizontal, currentDirectionOfMovementVertical;
-	bool isClimbing, isInsideLadder;
+	bool isClimbing;
 	bool checkIfJumpPossible, isJumping;
 	int jumpHeightStop;
 
@@ -38,12 +38,6 @@ public:
 	void startMovingUp(double delta);
 	void startMovingDown(double delta);
 	void stopMove();
-
-
-
-	void initJump();
-	void startJumping();
-	void stopJumping();
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 

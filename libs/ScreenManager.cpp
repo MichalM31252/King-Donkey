@@ -16,7 +16,7 @@ void ScreenManager::decideSpriteForGameObject(DynamicGameObject* gameObject) {
 }
 
 // THIS SHOULD BE IN SCREEN MANAGER, make a static function
-void ScreenManager::decideSpritePlayer(DynamicGameObject* player) {
+void ScreenManager::loadNextSpritePlayer(DynamicGameObject* player) {
 	if (player->currentSpriteId== 1) {
 		ScreenManager::loadTexture(player, PLAYER_1_FILENAME);
 		player->currentSpriteId++;
@@ -32,7 +32,7 @@ void ScreenManager::decideSpritePlayer(DynamicGameObject* player) {
 }
 
 // THIS SHOULD BE IN SCREEN MANAGER, make a static function
-void ScreenManager::decideSpriteBarrel(DynamicGameObject* barrel) {
+void ScreenManager::loadNextSpriteBarrel(DynamicGameObject* barrel) {
 	if (barrel->currentSpriteId == 1) {
 		ScreenManager::loadTexture(barrel, BARREL_1_FILENAME);
 		barrel->currentSpriteId++;
