@@ -11,11 +11,10 @@ DynamicGameObject::DynamicGameObject() {
 	accumulatedYMove = 0;
 	canLeaveScreen = false; // leave here
 
+	currentSpriteId = 1;
+
 	// merge this into a signle variable
 	// maybe add this to game object class since princess and donkeykong can have animations but they dont move
-	currentRunningSpriteId = 1;
-	currentRunningSpriteIdBarrel = 1;
-
 	gravity = DEFAULT_GRAVITY; // physics manager ??
 	
 	// assign to specific class (player, barrel)
@@ -48,10 +47,10 @@ void DynamicGameObject::updatePosition() {
 				xpos += 1;
 				accumulatedXMove -= 1;
 				if (!isJumping && isPlayer && !isFalling) {
-					ScreenManager::decideSpritePlayer(this, currentRunningSpriteId);
+					ScreenManager::decideSpritePlayer(this);
 				}
 				if (!isPlayer) {
-					ScreenManager::decideSpriteBarrel(this, currentRunningSpriteIdBarrel);
+					ScreenManager::decideSpriteBarrel(this);
 				}
 			}
 		}
@@ -70,10 +69,10 @@ void DynamicGameObject::updatePosition() {
 				xpos -= 1;
 				accumulatedXMove += 1;
 				if (!isJumping && isPlayer && !isFalling) {
-					ScreenManager::decideSpritePlayer(this, currentRunningSpriteId);
+					ScreenManager::decideSpritePlayer(this);
 				}
 				if (!isPlayer) {
-					ScreenManager::decideSpriteBarrel(this, currentRunningSpriteIdBarrel);
+					ScreenManager::decideSpriteBarrel(this);
 				}
 			}
 		}

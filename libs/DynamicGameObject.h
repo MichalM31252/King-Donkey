@@ -20,8 +20,8 @@ public:
 	int jumpHeightStop;
 
 	bool isPlayer;
-	int currentRunningSpriteId;
-	int currentRunningSpriteIdBarrel;
+
+	int currentSpriteId;
 
 	DynamicGameObject();
 	void update(double deltaTime);
