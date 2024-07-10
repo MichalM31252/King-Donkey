@@ -5,6 +5,9 @@ extern "C" {
 
 Player::Player() {
 	*tag = "Player";
+	isClimbing = false; // player
+	isJumping = false; // player
+	isInsideLadder = false; // player
 }
 
 void Player::jump(double deltaTime) {
@@ -16,3 +19,24 @@ void Player::jump(double deltaTime) {
 		accumulatedYMove += 1;
 	}
 }
+
+// Shouldnt this be moved to player class?
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Player::startJumping() {
+	isJumping = true;
+	jumpHeightStop = ypos - DEFAULT_JUMP_HEIGHT;
+}
+
+void Player::stopJumping() {
+	isJumping = false;
+	jumpHeightStop = SCREEN_HEIGHT;
+	accumulatedYMove = 0;
+}
+
+void Player::initJump() {
+	checkIfJumpPossible = true;
+	accumulatedYMove = 0;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////

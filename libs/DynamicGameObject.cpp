@@ -5,24 +5,27 @@ extern "C" {
 
 // objectSpeed should be moved to physics
 DynamicGameObject::DynamicGameObject() {
-	canLeaveScreen = false;
 	currentDirectionOfMovementHorizontal = 0.0; // 1 = right, -1 = left
 	currentDirectionOfMovementVertical = 0.0; // 1 = down, -1 = up
-	objectSpeed = 0;
 	accumulatedXMove = 0;
 	accumulatedYMove = 0;
-	isClimbing = false;
-	isInsideLadder = false;
-	checkIfJumpPossible = false;
-	isJumping = false;
-	jumpHeightStop = SCREEN_HEIGHT;
+	canLeaveScreen = false; // leave here
+	objectSpeed = 0; // leave here
 
-	isFalling = false;
-	gravity = DEFAULT_GRAVITY;
+	currentSpriteId = 1;
 
-	isPlayer = false;
-	currentRunningSpriteId = 1;
-	currentRunningSpriteIdBarrel = 1;
+	// merge this into a signle variable
+	// maybe add this to game object class since princess and donkeykong can have animations but they dont move
+	gravity = DEFAULT_GRAVITY; // physics manager ??
+	
+	// assign to specific class (player, barrel)
+	isPlayer = false; // leave here (for now)
+	
+	isClimbing = false; // player
+	isJumping = false; // player
+	
+	checkIfJumpPossible = false; // player / no this should be somwhere else
+	jumpHeightStop = SCREEN_HEIGHT; // player / no this should be somwhere else
 }
 
 void DynamicGameObject::startAccumulatingDistance(double deltaTime) {
@@ -44,10 +47,10 @@ void DynamicGameObject::updatePosition() {
 				xpos += 1;
 				accumulatedXMove -= 1;
 				if (!isJumping && isPlayer && !isFalling) {
-					ScreenManager::decideSpritePlayer(this, currentRunningSpriteId);
+					ScreenManager::loadNextSpritePlayer(this);
 				}
 				if (!isPlayer) {
-					ScreenManager::decideSpriteBarrel(this, currentRunningSpriteIdBarrel);
+					ScreenManager::loadNextSpriteBarrel(this);
 				}
 			}
 		}
@@ -66,10 +69,10 @@ void DynamicGameObject::updatePosition() {
 				xpos -= 1;
 				accumulatedXMove += 1;
 				if (!isJumping && isPlayer && !isFalling) {
-					ScreenManager::decideSpritePlayer(this, currentRunningSpriteId);
+					ScreenManager::loadNextSpritePlayer(this);
 				}
 				if (!isPlayer) {
-					ScreenManager::decideSpriteBarrel(this, currentRunningSpriteIdBarrel);
+					ScreenManager::loadNextSpriteBarrel(this);
 				}
 			}
 		}
@@ -111,7 +114,7 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 	destRect.y = ypos;
 }
 
-void DynamicGameObject::moveStart(double speed) {
+void DynamicGameObject::startMovingAtSpeed(double speed) {
 	objectSpeed = speed;
 }
 
@@ -143,26 +146,10 @@ void DynamicGameObject::stopMove() {
 	objectSpeed = 0;
 }
 
-void DynamicGameObject::startJumping() {
-	isJumping = true;
-	jumpHeightStop = ypos - DEFAULT_JUMP_HEIGHT;
-}
-
-void DynamicGameObject::stopJumping() {
-	isJumping = false;
-	jumpHeightStop = SCREEN_HEIGHT;
-	accumulatedYMove = 0;
-}
-
 void DynamicGameObject::startFalling() {
 	isFalling = true;
 }
 
 void DynamicGameObject::stopFalling() {
 	isFalling = false;
-}
-
-void DynamicGameObject::initJump() {
-	checkIfJumpPossible = true;
-	accumulatedYMove = 0;
 }

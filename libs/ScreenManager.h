@@ -15,7 +15,6 @@ class ScreenManager {
 	public:
 		GameObjectContainer* gameObjectContainer;
 
-
 		int tick1, tick2, frames;
 		double deltaTime, worldTime, fpsTimer, fps;
 
@@ -65,8 +64,9 @@ class ScreenManager {
 		void DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color);
 		void DrawRectangle(SDL_Surface* screen, int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor);
 
-		static void decideSpriteBarrel(DynamicGameObject* barrel, int& currentRunningSpriteIdBarrel); // remove currentRunningSpriteIdBarrel in the future, remove static in the future
-		static void decideSpritePlayer(DynamicGameObject* player, int& currentRunningSpriteId); // remove currentRunningSpriteId in the future, remove static in the future
+		static void decideSpriteForGameObject(DynamicGameObject* gameObject);
+		static void loadNextSpriteBarrel(DynamicGameObject* barrel); // remove currentRunningSpriteIdBarrel in the future, remove static in the future
+		static void loadNextSpritePlayer(DynamicGameObject* player); // remove currentRunningSpriteId in the future, remove static in the future
 
 		static void initGameObject(GameObject* gameObject, const char* fileName);
 		void renderGameObject(GameObject* gameObject, SDL_Surface* screen);

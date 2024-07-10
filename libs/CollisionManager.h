@@ -20,7 +20,6 @@ public:
 	GameObjectContainer *gameObjectContainer;
 	ScreenManager* screenManager;
 
-
 	bool isColliding = false;
 
 	CollisionManager();

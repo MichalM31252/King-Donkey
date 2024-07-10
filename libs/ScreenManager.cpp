@@ -11,39 +11,43 @@ ScreenManager::ScreenManager(GameObjectContainer* gameObjectContainer) {
 	this->gameObjectContainer = gameObjectContainer;
 }
 
+void ScreenManager::decideSpriteForGameObject(DynamicGameObject* gameObject) {
+	
+}
+
 // THIS SHOULD BE IN SCREEN MANAGER, make a static function
-void ScreenManager::decideSpritePlayer(DynamicGameObject* player, int& currentRunningSpriteId) {
-	if (currentRunningSpriteId == 1) {
+void ScreenManager::loadNextSpritePlayer(DynamicGameObject* player) {
+	if (player->currentSpriteId== 1) {
 		ScreenManager::loadTexture(player, PLAYER_1_FILENAME);
-		currentRunningSpriteId++;
+		player->currentSpriteId++;
 	}
-	else if (currentRunningSpriteId == 2) {
+	else if (player->currentSpriteId == 2) {
 		ScreenManager::loadTexture(player, PLAYER_2_FILENAME);
-		currentRunningSpriteId++;
+		player->currentSpriteId++;
 	}
 	else {
 		ScreenManager::loadTexture(player, PLAYER_3_FILENAME);
-		currentRunningSpriteId = 1;
+		player->currentSpriteId = 1;
 	}
 }
 
 // THIS SHOULD BE IN SCREEN MANAGER, make a static function
-void ScreenManager::decideSpriteBarrel(DynamicGameObject* barrel, int& currentRunningSpriteIdBarrel) {
-	if (currentRunningSpriteIdBarrel == 1) {
+void ScreenManager::loadNextSpriteBarrel(DynamicGameObject* barrel) {
+	if (barrel->currentSpriteId == 1) {
 		ScreenManager::loadTexture(barrel, BARREL_1_FILENAME);
-		currentRunningSpriteIdBarrel++;
+		barrel->currentSpriteId++;
 	}
-	else if (currentRunningSpriteIdBarrel == 2) {
+	else if (barrel->currentSpriteId == 2) {
 		ScreenManager::loadTexture(barrel, BARREL_2_FILENAME);
-		currentRunningSpriteIdBarrel++;
+		barrel->currentSpriteId++;
 	}
-	else if (currentRunningSpriteIdBarrel == 3) {
+	else if (barrel->currentSpriteId == 3) {
 		ScreenManager::loadTexture(barrel, BARREL_3_FILENAME);
-		currentRunningSpriteIdBarrel++;
+		barrel->currentSpriteId++;
 	}
 	else {
 		ScreenManager::loadTexture(barrel, BARREL_4_FILENAME);
-		currentRunningSpriteIdBarrel = 1;
+		barrel->currentSpriteId = 1;
 	}
 }
 

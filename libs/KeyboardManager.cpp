@@ -30,7 +30,7 @@ void KeyboardManager::handleEvents(bool* quit, double deltaTime, Player* player,
 }
 
 void KeyboardManager::onKeyDown(bool* quit, double deltaTime, Player* player, int* startAnotherRound) {
-	player->moveStart(DEFAULT_PLAYER_SPEED);
+	player->startMovingAtSpeed(DEFAULT_PLAYER_SPEED);
 	switch (event.key.keysym.sym) {
 		case SDLK_ESCAPE:
 			initializeQuit(quit, startAnotherRound);

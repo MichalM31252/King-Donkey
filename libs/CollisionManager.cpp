@@ -4,6 +4,7 @@ extern "C" {
 
 CollisionManager::CollisionManager() {
 	this->gameObjectContainer = new GameObjectContainer();
+	this->screenManager = new ScreenManager();
 }
 
 CollisionManager::CollisionManager(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager) {
@@ -43,21 +44,18 @@ bool CollisionManager::isRectInsideLadder(SDL_Rect playerDestRect, SDL_Rect ladd
 	return false;
 }
 
-// MOVE TO COLLISION MANAGER
 void CollisionManager::handlePlayerCollisionWithKong() {
 	if (isCollisionBetweenRects( gameObjectContainer->player->destRect, gameObjectContainer->donkeyKong->destRect)) {
 		closeGame();
 	}
 }
 
-// MOVE TO COLLISION MANAGER
 void CollisionManager::handlePlayerCollisionWithPrincess() {
 	if (isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->princess->destRect)) {
 		closeGame();
 	}
 }
 
-// MOVE TO COLLISION MANAGER
 void CollisionManager::handlePlayerCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound) {
 	if (isCollisionBetweenRects(gameObjectContainer->player->destRect, barrel->destRect)) {
 		*quit = true;
@@ -65,7 +63,6 @@ void CollisionManager::handlePlayerCollisionWithBarrel(DynamicGameObject* barrel
 	}
 }
 
-// MOVE TO COLLISION MANAGER
 void CollisionManager::handlePlayerCollisionWithLadder() {
 	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
 		if (isRectInsideLadder(gameObjectContainer->player->destRect, gameObjectContainer->ladderHolder->ladders[i].destRect)) {
@@ -77,20 +74,20 @@ void CollisionManager::handlePlayerCollisionWithLadder() {
 	gameObjectContainer->player->isClimbing = false;
 }
 
-
-// MOVE TO COLLISION MANAGER
+// WHAT DOES THIS CODE EVEN DO?
 void CollisionManager::handleCollisionWithJumping() {
 	if (gameObjectContainer->player->isFalling) {
+		// i think this function is called when player lands on the platform after jumping and just falling (start of the game and going left from the platform)
 		gameObjectContainer->player->stopFalling();
 		gameObjectContainer->player->checkIfJumpPossible = false;
 	}
 	if (!gameObjectContainer->player->isFalling && gameObjectContainer->player->checkIfJumpPossible) {
+		// this gets called after you press space (just jumping, you cant jump again after jumping)
 		gameObjectContainer->player->startJumping();
 		gameObjectContainer->player->checkIfJumpPossible = false;
 	}
 }
 
-// MOVE TO COLLISION MANAGER
 void CollisionManager::handleCollisionWithPlatform(DynamicGameObject* gameObject, int* isGameObjectInsidePlatform) {
 	// check bottom left corner
 	// check bottom right corner
@@ -124,8 +121,6 @@ void CollisionManager::handleCollisionWithPlatform(DynamicGameObject* gameObject
 	}
 }
 
-
-// MOVE TO GAME OBJECT MANAGER
 void CollisionManager::handlePlayerCollision() { // player collision
 
 	Player* player = gameObjectContainer->player;
@@ -136,16 +131,19 @@ void CollisionManager::handlePlayerCollision() { // player collision
 	handlePlayerCollisionWithPrincess();
 	handlePlayerCollisionWithLadder();
 
+
 	if (!player->isClimbing) {
 		if (isPlayerInsidePlatform) {
 			screenManager->loadTexture(player, PLAYER_1_FILENAME);
+			// what does this function do?
 			handleCollisionWithJumping();
 		}
 		else {
 			// again start falling not handle falling
 			PhysicsManager::handleFalling(player, screenManager->deltaTime);
 		}
-		if (player->isJumping) { // handle jumping
+		if (player->isJumping) { 
+			// this should be renamed to start jumping
 			player->jump(screenManager->deltaTime);
 		}
 	}
@@ -156,7 +154,6 @@ void CollisionManager::handlePlayerCollision() { // player collision
 	}
 }
 
-// MOVE TO GAME OBJECT MANAGER
 void CollisionManager::handleBarrelsCollision(bool* quit, int* startAnotherRound) {
 	gameObjectContainer->barrelDispenser->updateBarrelDispenser(screenManager->deltaTime);
 
@@ -175,7 +172,7 @@ void CollisionManager::handleBarrelsCollision(bool* quit, int* startAnotherRound
 				(*barrel).stopFalling();
 				(*barrel).stopMove();
 			}
-			(*barrel).moveStart(DEFAULT_BARREL_SPEED);
+			(*barrel).startMovingAtSpeed(DEFAULT_BARREL_SPEED);
 			(*barrel).startMovingRight(screenManager->deltaTime);
 		}
 		else {

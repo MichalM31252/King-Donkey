@@ -15,13 +15,13 @@ public:
 	double gravity;
 	
 	double currentDirectionOfMovementHorizontal, currentDirectionOfMovementVertical;
-	bool isClimbing, isInsideLadder;
+	bool isClimbing;
 	bool checkIfJumpPossible, isJumping;
 	int jumpHeightStop;
 
 	bool isPlayer;
-	int currentRunningSpriteId;
-	int currentRunningSpriteIdBarrel;
+
+	int currentSpriteId;
 
 	DynamicGameObject();
 	void update(double deltaTime);
@@ -32,15 +32,12 @@ public:
 	void stayInBounds();
 	void updatePosition();
 	void startAccumulatingDistance(double deltaTime);
-	void moveStart(double speed);
+	void startMovingAtSpeed(double speed);
 	void startMovingLeft(double delta);
 	void startMovingRight(double delta);
 	void startMovingUp(double delta);
 	void startMovingDown(double delta);
 	void stopMove();
-	void initJump();
-	void startJumping();
-	void stopJumping();
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 

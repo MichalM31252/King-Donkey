@@ -6,6 +6,11 @@ extern "C" {
 
 class Player : public DynamicGameObject {
 public:
+	bool isInsideLadder;
+
 	Player();
 	void jump(double deltaTime);
+	void initJump();
+	void startJumping();
+	void stopJumping();
 };
