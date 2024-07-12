@@ -46,12 +46,6 @@ void DynamicGameObject::updatePosition() {
 			if (pixelsToMove > 1) {
 				xpos += 1;
 				accumulatedXMove -= 1;
-				if (!isJumping && isPlayer && !isFalling) {
-					ScreenManager::loadNextSpritePlayer(this);
-				}
-				if (!isPlayer) {
-					ScreenManager::loadNextSpriteBarrel(this);
-				}
 			}
 		}
 		if (accumulatedYMove > currentDirectionOfMovementVertical) { // down
@@ -68,12 +62,6 @@ void DynamicGameObject::updatePosition() {
 			if (pixelsToMove < 1) {
 				xpos -= 1;
 				accumulatedXMove += 1;
-				if (!isJumping && isPlayer && !isFalling) {
-					ScreenManager::loadNextSpritePlayer(this);
-				}
-				if (!isPlayer) {
-					ScreenManager::loadNextSpriteBarrel(this);
-				}
 			}
 		}
 		if (accumulatedYMove < currentDirectionOfMovementVertical) { // up
@@ -104,9 +92,21 @@ void DynamicGameObject::stayInBounds() {
 	}
 }
 
+void DynamicGameObject::decideSprite() {
+	if (objectSpeed > 0 && !isClimbing) {
+		if (!isJumping && isPlayer && !isFalling) {
+			ScreenManager::loadNextSpritePlayer(this);
+		}
+		if (!isPlayer) {
+			ScreenManager::loadNextSpriteBarrel(this);
+		}
+	}
+}
+
 void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
 	startAccumulatingDistance(deltaTime);
 	updatePosition();
+	decideSprite();
 	stayInBounds();
 
 	// to remove these you need to merge the three methods into one and then updateObjectPosition

@@ -31,6 +31,7 @@ public:
 
 	void stayInBounds();
 	void updatePosition();
+	void decideSprite();
 	void startAccumulatingDistance(double deltaTime);
 	void startMovingAtSpeed(double speed);
 	void startMovingLeft(double delta);
