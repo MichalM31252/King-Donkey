@@ -2,7 +2,7 @@
 
 extern "C" {
 #include "Game.h"
-#include "CollisionManager.h" // temporary fix
+#include "CollisionResolver.h" // temporary fix
 }
 
 Game::Game() {
@@ -19,10 +19,10 @@ Game::Game() {
 	GameObjectFactory* gameObjectMan = new GameObjectFactory(gameObjectContainer);
 	gameObjectFactory = gameObjectMan;
 
-	CollisionManager* collisionMan = new CollisionManager(gameObjectContainer, screenManager);
-	collisionManager = collisionMan;
+	CollisionResolver* collisionMan = new CollisionResolver(gameObjectContainer, screenManager);
+	collisionResolver = collisionMan;
 
-	RoundManager* roundMan = new RoundManager(screenManager, gameObjectFactory, gameObjectContainer, collisionManager);
+	RoundManager* roundMan = new RoundManager(screenManager, gameObjectFactory, gameObjectContainer, collisionResolver);
 	roundManager = roundMan;
 }
 

@@ -15,15 +15,17 @@ extern "C" {
 #include "ScreenManager.h"
 }
 
-class CollisionManager {
+// Does something when objects collide
+
+class CollisionResolver {
 public:
 	GameObjectContainer *gameObjectContainer;
 	ScreenManager* screenManager;
 
 	bool isColliding = false;
 
-	CollisionManager();
-	CollisionManager(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager);
+	CollisionResolver();
+	CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager);
 	
 	static bool isCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
 	static bool isDynamicGameObjectCollidingWithPlatform(DynamicGameObject* dynamicGameObject, Platform* platform);

@@ -9,7 +9,7 @@ StageManager::StageManager(){
 StageManager::StageManager(GameObjectContainer* gameObjectContainer){ // assign gameObjectContainer to each one of these managers
 
 	this->screenManager = new ScreenManager();  // the program breaks here when you add gameObjectContainer
-	this->collisionManager = new CollisionManager(gameObjectContainer, screenManager);
+	this->collisionResolver = new CollisionResolver(gameObjectContainer, screenManager);
 	this->gameObjectFactory = new GameObjectFactory(gameObjectContainer);
 	this->keyboardManager = new KeyboardManager(gameObjectContainer);
 

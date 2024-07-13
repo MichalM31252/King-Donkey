@@ -1,18 +1,18 @@
 extern "C" {
-#include "CollisionManager.h"
+#include "CollisionResolver.h"
 }
 
-CollisionManager::CollisionManager() {
+CollisionResolver::CollisionResolver() {
 	this->gameObjectContainer = new GameObjectContainer();
 	this->screenManager = new ScreenManager();
 }
 
-CollisionManager::CollisionManager(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager) {
+CollisionResolver::CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager) {
 	this->gameObjectContainer = gameObjectContainer;
 	this->screenManager = screenManager;
 }
 
-bool CollisionManager::isCollisionBetweenRects(SDL_Rect a, SDL_Rect b) {
+bool CollisionResolver::isCollisionBetweenRects(SDL_Rect a, SDL_Rect b) {
 	if (SDL_HasIntersection(&a, &b)) {
 		return true;
 	}
@@ -21,7 +21,7 @@ bool CollisionManager::isCollisionBetweenRects(SDL_Rect a, SDL_Rect b) {
 	}
 }
 
-bool CollisionManager::isPointAPartOfLine(const int x, const int y, Platform* platform) { // make this function check for x1 and x2 
+bool CollisionResolver::isPointAPartOfLine(const int x, const int y, Platform* platform) { // make this function check for x1 and x2 
 	double a = platform->y2pos - platform->y1pos;
 	double b = platform->x1pos - platform->x2pos;
 	double c = a * platform->x1pos + b * platform->y1pos;
@@ -35,7 +35,7 @@ bool CollisionManager::isPointAPartOfLine(const int x, const int y, Platform* pl
 	return false;
 }
 
-bool CollisionManager::isRectInsideLadder(SDL_Rect playerDestRect, SDL_Rect ladderDestRect) { // a is player for ex, b is ladder // poor readability
+bool CollisionResolver::isRectInsideLadder(SDL_Rect playerDestRect, SDL_Rect ladderDestRect) { // a is player for ex, b is ladder // poor readability
 	if (playerDestRect.x >= ladderDestRect.x && playerDestRect.x + playerDestRect.w <= ladderDestRect.x + ladderDestRect.w) {
 		if (playerDestRect.y + playerDestRect.h <= ladderDestRect.y + ladderDestRect.h && playerDestRect.y + playerDestRect.h >= ladderDestRect.y) {
 			return true;
@@ -44,26 +44,26 @@ bool CollisionManager::isRectInsideLadder(SDL_Rect playerDestRect, SDL_Rect ladd
 	return false;
 }
 
-void CollisionManager::handlePlayerCollisionWithKong() {
+void CollisionResolver::handlePlayerCollisionWithKong() {
 	if (isCollisionBetweenRects( gameObjectContainer->player->destRect, gameObjectContainer->donkeyKong->destRect)) {
 		closeGame();
 	}
 }
 
-void CollisionManager::handlePlayerCollisionWithPrincess() {
+void CollisionResolver::handlePlayerCollisionWithPrincess() {
 	if (isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->princess->destRect)) {
 		closeGame();
 	}
 }
 
-void CollisionManager::handlePlayerCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound) {
+void CollisionResolver::handlePlayerCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound) {
 	if (isCollisionBetweenRects(gameObjectContainer->player->destRect, barrel->destRect)) {
 		*quit = true;
 		*startAnotherRound = 1;
 	}
 }
 
-void CollisionManager::handlePlayerCollisionWithLadder() {
+void CollisionResolver::handlePlayerCollisionWithLadder() {
 	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
 		if (isRectInsideLadder(gameObjectContainer->player->destRect, gameObjectContainer->ladderHolder->ladders[i].destRect)) {
 			gameObjectContainer->player->isInsideLadder = true;
@@ -75,7 +75,7 @@ void CollisionManager::handlePlayerCollisionWithLadder() {
 }
 
 // WHAT DOES THIS CODE EVEN DO?
-void CollisionManager::handleCollisionWithJumping() {
+void CollisionResolver::handleCollisionWithJumping() {
 	if (gameObjectContainer->player->isFalling) {
 		// i think this function is called when player lands on the platform after jumping and just falling (start of the game and going left from the platform)
 		gameObjectContainer->player->stopFalling();
@@ -88,7 +88,7 @@ void CollisionManager::handleCollisionWithJumping() {
 	}
 }
 
-void CollisionManager::handleCollisionWithPlatform(DynamicGameObject* gameObject, int* isGameObjectInsidePlatform) {
+void CollisionResolver::handleCollisionWithPlatform(DynamicGameObject* gameObject, int* isGameObjectInsidePlatform) {
 	// check bottom left corner
 	// check bottom right corner
 	int yPosition = gameObject->ypos + gameObject->destRect.h;
@@ -121,7 +121,7 @@ void CollisionManager::handleCollisionWithPlatform(DynamicGameObject* gameObject
 	}
 }
 
-void CollisionManager::handlePlayerCollision() { // player collision
+void CollisionResolver::handlePlayerCollision() { // player collision
 
 	Player* player = gameObjectContainer->player;
 	int isPlayerInsidePlatform = 0;
@@ -154,7 +154,7 @@ void CollisionManager::handlePlayerCollision() { // player collision
 	}
 }
 
-void CollisionManager::handleBarrelsCollision(bool* quit, int* startAnotherRound) {
+void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRound) {
 	gameObjectContainer->barrelDispenser->updateBarrelDispenser(screenManager->deltaTime);
 
 	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
@@ -183,7 +183,7 @@ void CollisionManager::handleBarrelsCollision(bool* quit, int* startAnotherRound
 	}
 }
 
-void CollisionManager::closeGame() {
+void CollisionResolver::closeGame() {
 	SDL_Quit();
 	exit(0);
 }

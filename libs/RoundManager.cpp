@@ -4,14 +4,14 @@ RoundManager::RoundManager() {
 	screenManager = new ScreenManager();
 	gameObjectFactory = new GameObjectFactory();
 	gameObjectContainer = new GameObjectContainer();
-	collisionManager = new CollisionManager(gameObjectContainer, screenManager);
+	collisionResolver = new CollisionResolver(gameObjectContainer, screenManager);
 }
 
-RoundManager::RoundManager(ScreenManager* screenManager, GameObjectFactory* gameObjectFactory, GameObjectContainer* gameObjectContainer, CollisionManager* collisionManager) {
+RoundManager::RoundManager(ScreenManager* screenManager, GameObjectFactory* gameObjectFactory, GameObjectContainer* gameObjectContainer, CollisionResolver* collisionResolver) {
 	this->screenManager = screenManager;
 	this->gameObjectFactory = gameObjectFactory;
 	this->gameObjectContainer = gameObjectContainer;
-	this->collisionManager = collisionManager;
+	this->collisionResolver = collisionResolver;
 }
 
 // MOVE TO ROUND MANAGER
@@ -28,8 +28,8 @@ void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startA
 		screenManager->serveNextFrame();
 		screenManager->frames++;
 
-		collisionManager->handlePlayerCollision(); // player collision
-		collisionManager->handleBarrelsCollision(&quit, startAnotherRound); // barrel collision
+		collisionResolver->handlePlayerCollision(); // player collision
+		collisionResolver->handleBarrelsCollision(&quit, startAnotherRound); // barrel collision
 
 		gameObjectContainer->player->update(screenManager->deltaTime);
 		// maybe also update the barrels here ???

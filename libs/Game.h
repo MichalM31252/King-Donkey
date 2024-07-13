@@ -23,7 +23,7 @@ class Game {
 
 		GameObjectFactory* gameObjectFactory;
 		ScreenManager* screenManager;
-		CollisionManager* collisionManager;
+		CollisionResolver* collisionResolver;
 		RoundManager* roundManager;
 
 		Game();
