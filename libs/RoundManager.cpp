@@ -28,6 +28,8 @@ void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startA
 		screenManager->serveNextFrame();
 		screenManager->frames++;
 
+		eventHandler.handleEvents(&quit, screenManager->deltaTime, gameObjectContainer->player, startAnotherRound);
+
 		collisionResolver->handlePlayerCollision(); // player collision
 		collisionResolver->handleBarrelsCollision(&quit, startAnotherRound); // barrel collision
 
@@ -35,7 +37,6 @@ void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startA
 		// maybe also update the barrels here ???
 
 		// this is for keyboard events // should be changed
-		eventHandler.handleEvents(&quit, screenManager->deltaTime, gameObjectContainer->player, startAnotherRound);
 	};
 }
 // MOVE TO ROUND MANAGER
