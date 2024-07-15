@@ -3,7 +3,8 @@ extern "C" {
 #include "ScreenManager.h" // Temporary solution
 }
 
-// objectSpeed should be moved to physics
+// CURRENT TASK - remove: isPlayer, isClimbing, isJumping from this class
+
 DynamicGameObject::DynamicGameObject() {
 	currentDirectionOfMovementHorizontal = 0.0; // 1 = right, -1 = left
 	currentDirectionOfMovementVertical = 0.0; // 1 = down, -1 = up
@@ -13,13 +14,9 @@ DynamicGameObject::DynamicGameObject() {
 	objectSpeed = 0; // leave here
 
 	currentSpriteId = 1;
-
-	// merge this into a signle variable
 	// maybe add this to game object class since princess and donkeykong can have animations but they dont move
-	gravity = DEFAULT_GRAVITY; // physics manager ??
 	
-	// assign to specific class (player, barrel)
-	isPlayer = false; // leave here (for now)
+	gravity = DEFAULT_GRAVITY; // physics manager ??
 	
 	isClimbing = false; // player
 	isJumping = false; // player
@@ -92,21 +89,9 @@ void DynamicGameObject::stayInBounds() {
 	}
 }
 
-void DynamicGameObject::decideSprite() {
-	if (objectSpeed > 0 && !isClimbing) {
-		if (!isJumping && isPlayer && !isFalling) {
-			ScreenManager::loadNextSpritePlayer(this);
-		}
-		if (!isPlayer) {
-			ScreenManager::loadNextSpriteBarrel(this);
-		}
-	}
-}
-
 void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
 	startAccumulatingDistance(deltaTime);
 	updatePosition();
-	decideSprite();
 	stayInBounds();
 
 	// to remove these you need to merge the three methods into one and then updateObjectPosition

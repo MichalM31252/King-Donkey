@@ -20,7 +20,6 @@ void GameObjectFactory::createPlayer() {
 	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
 	pla->createSrcRect();
 	pla->createDestRect();
-	pla->isPlayer = true;
 
 	gameObjectContainer->player = pla;
 }

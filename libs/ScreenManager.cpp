@@ -11,46 +11,6 @@ ScreenManager::ScreenManager(GameObjectContainer* gameObjectContainer) {
 	this->gameObjectContainer = gameObjectContainer;
 }
 
-void ScreenManager::decideSpriteForGameObject(DynamicGameObject* gameObject) {
-	
-}
-
-// THIS SHOULD BE IN SCREEN MANAGER, make a static function
-void ScreenManager::loadNextSpritePlayer(DynamicGameObject* player) {
-	if (player->currentSpriteId== 1) {
-		ScreenManager::loadTexture(player, PLAYER_1_FILENAME);
-		player->currentSpriteId++;
-	}
-	else if (player->currentSpriteId == 2) {
-		ScreenManager::loadTexture(player, PLAYER_2_FILENAME);
-		player->currentSpriteId++;
-	}
-	else {
-		ScreenManager::loadTexture(player, PLAYER_3_FILENAME);
-		player->currentSpriteId = 1;
-	}
-}
-
-// THIS SHOULD BE IN SCREEN MANAGER, make a static function
-void ScreenManager::loadNextSpriteBarrel(DynamicGameObject* barrel) {
-	if (barrel->currentSpriteId == 1) {
-		ScreenManager::loadTexture(barrel, BARREL_1_FILENAME);
-		barrel->currentSpriteId++;
-	}
-	else if (barrel->currentSpriteId == 2) {
-		ScreenManager::loadTexture(barrel, BARREL_2_FILENAME);
-		barrel->currentSpriteId++;
-	}
-	else if (barrel->currentSpriteId == 3) {
-		ScreenManager::loadTexture(barrel, BARREL_3_FILENAME);
-		barrel->currentSpriteId++;
-	}
-	else {
-		ScreenManager::loadTexture(barrel, BARREL_4_FILENAME);
-		barrel->currentSpriteId = 1;
-	}
-}
-
 void ScreenManager::createFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
 	tick1 = SDL_GetTicks();
 	frames = 0; // frames that happend

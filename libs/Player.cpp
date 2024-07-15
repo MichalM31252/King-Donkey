@@ -35,3 +35,26 @@ void Player::initJump() {
 	checkIfJumpPossible = true;
 	accumulatedYMove = 0;
 }
+
+void Player::loadNextRunningSprite() {
+	if (this->currentSpriteId == 1) {
+		ScreenManager::loadTexture(this, PLAYER_1_FILENAME);
+		this->currentSpriteId++;
+	}
+	else if (this->currentSpriteId == 2) {
+		ScreenManager::loadTexture(this, PLAYER_2_FILENAME);
+		this->currentSpriteId++;
+	}
+	else {
+		ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
+		this->currentSpriteId = 1;
+	}
+}
+
+void Player::loadJumpingSprite(){
+	ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
+}
+
+void Player::loadClimbingSprite(){
+	ScreenManager::loadTexture(this, PLAYER_CLIMB);
+}
