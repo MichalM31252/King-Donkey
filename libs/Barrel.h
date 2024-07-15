@@ -8,5 +8,5 @@ extern "C" {
 class Barrel : public DynamicGameObject {
 public:
 	Barrel();
-	void loadNextBarrelSprite();
+	void loadNextSprite();
 };

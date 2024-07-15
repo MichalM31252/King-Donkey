@@ -6,7 +6,7 @@ Barrel::Barrel() {
 	*tag = "Barrel";
 }
 
-void Barrel::loadNextBarrelSprite() {
+void Barrel::loadNextSprite() {
 	if (this->currentSpriteId == 1) {
 		ScreenManager::loadTexture(this, BARREL_1_FILENAME);
 		this->currentSpriteId++;
