@@ -16,7 +16,7 @@ void BarrelDispenser::setPosition(int x, int y) {
 	ypos = y;
 }
 
-void BarrelDispenser::updateBarrelDispenser(double deltaTime) {
+void BarrelDispenser::update(double deltaTime) {
 	accumulatedTime += deltaTime;
 	if (accumulatedTime >= DEFAULT_BARREL_SPAWN_RATE) {
 		throwBarrel();

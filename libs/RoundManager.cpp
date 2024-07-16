@@ -30,13 +30,21 @@ void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startA
 
 		eventHandler.handleEvents(&quit, screenManager->deltaTime, gameObjectContainer->player, startAnotherRound);
 
-		collisionResolver->handlePlayerCollision(); // player collision
-		collisionResolver->handleBarrelsCollision(&quit, startAnotherRound); // barrel collision
-
 		gameObjectContainer->player->update(screenManager->deltaTime);
-		// maybe also update the barrels here ???
+		// gameObjectContainer-> 
+		// add barrelHolder here
 
-		// this is for keyboard events // should be changed
+		gameObjectContainer->barrelDispenser->update(screenManager->deltaTime);
+
+		for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
+			DynamicGameObject* barrel = &gameObjectContainer->barrelDispenser->barrelHolder->barrels[i];
+			(*barrel).update(screenManager->deltaTime);
+		}
+
+		collisionResolver->handlePlayerCollision();
+		collisionResolver->handleBarrelsCollision(&quit, startAnotherRound);
+
+		// maybe also update the barrels here ???
 	};
 }
 // MOVE TO ROUND MANAGER

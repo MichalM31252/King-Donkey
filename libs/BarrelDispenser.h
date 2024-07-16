@@ -15,6 +15,6 @@ public:
 
 	void initBarrelDispenser(BarrelDispenser* barrelDispenser);
 	void setPosition(int x, int y);
-	void updateBarrelDispenser(double deltaTime);
+	void update(double deltaTime);
 	void throwBarrel();
 };

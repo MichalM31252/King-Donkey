@@ -155,8 +155,6 @@ void CollisionResolver::handlePlayerCollision() { // player collision
 }
 
 void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRound) {
-	gameObjectContainer->barrelDispenser->updateBarrelDispenser(screenManager->deltaTime);
-
 	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
 
 		DynamicGameObject* barrel = &gameObjectContainer->barrelDispenser->barrelHolder->barrels[i];
