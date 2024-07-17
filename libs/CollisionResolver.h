@@ -13,6 +13,7 @@ extern "C" {
 #include "GameObjectContainer.h"
 #include "PhysicsManager.h"
 #include "ScreenManager.h"
+#include "CollisionDetector.h"
 }
 
 // Does something when objects collide
@@ -26,11 +27,6 @@ public:
 
 	CollisionResolver();
 	CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager);
-	
-	static bool isCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
-	static bool isDynamicGameObjectCollidingWithPlatform(DynamicGameObject* dynamicGameObject, Platform* platform);
-	static bool isPointAPartOfLine(const int x, const int y, Platform* platform);
-	static bool isRectInsideLadder(SDL_Rect a, SDL_Rect b);
 
 	// Game object manager or collision manager?
 	/////////////////////////////////////////////////////////////////////////////////////

@@ -28,6 +28,7 @@ DynamicGameObject::DynamicGameObject() {
 void DynamicGameObject::startAccumulatingDistance(double deltaTime) {
 	if (objectSpeed > 0) {
 		accumulatedXMove += deltaTime * objectSpeed * currentDirectionOfMovementHorizontal;
+		// WRITE HERE A FUNCTION TO CHECK IF PLAYER IS INSIDE A LADDER
 		if (isClimbing) {
 			accumulatedYMove += deltaTime * objectSpeed * currentDirectionOfMovementVertical;
 		}
