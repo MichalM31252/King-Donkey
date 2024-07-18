@@ -72,4 +72,10 @@ class ScreenManager {
 		void drawPlatforms();
 		void drawLadders();
 		void drawBarrels();
+
+		bool isPlayerSpriteInNeedOfUpdate(DynamicGameObject* player);
+		void updatePlayerSprite(DynamicGameObject* player);
+
+		bool isBarrelSpriteInNeedOfUpdate(DynamicGameObject* barrel);
+		void updateBarrelSprite(DynamicGameObject* barrel);
 };

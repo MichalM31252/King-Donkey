@@ -243,6 +243,26 @@ void ScreenManager::drawBarrels() {
 	}
 }
 
+bool ScreenManager::isPlayerSpriteInNeedOfUpdate(DynamicGameObject* player)
+{
+	return false;
+}
+
+void ScreenManager::updatePlayerSprite(DynamicGameObject* player)
+{
+
+}
+
+bool ScreenManager::isBarrelSpriteInNeedOfUpdate(DynamicGameObject* barrel)
+{
+	return false;
+}
+
+void ScreenManager::updateBarrelSprite(DynamicGameObject* barrel)
+{
+
+}
+
 // MOVE TO TEXTURE MANAGER
 void ScreenManager::drawElements() { // don't repeat yourself
 	renderGameObject(gameObjectContainer->donkeyKong, screen);
