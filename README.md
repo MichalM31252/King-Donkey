@@ -13,6 +13,11 @@
 - [ ] Change player sprite based on the direction of movement
 - [ ] Fix memory leaks
 - [ ] Implement a normal vector for BarrelHolder, LadderHolder, PlatformHolder instead of your own implementation
+- [ ] Fix every code smell
+- [ ] Change classes that can be static to static classes
+- [ ] Fix inconsistent indentations
+- [ ] Add menu
+- [ ] Add a pickup items (hammer, prizes)
 
 # STATISTICS
 
