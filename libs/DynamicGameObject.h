@@ -13,7 +13,7 @@ public:
 
 	bool isFalling;
 	double gravity;
-	
+
 	double currentDirectionOfMovementHorizontal, currentDirectionOfMovementVertical;
 	bool isClimbing;
 	bool checkIfJumpPossible, isJumping;

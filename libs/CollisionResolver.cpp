@@ -13,7 +13,7 @@ CollisionResolver::CollisionResolver(GameObjectContainer* gameObjectContainer, S
 }
 
 void CollisionResolver::handlePlayerCollisionWithKong() {
-	if (CollisionDetector::isCollisionBetweenRects( gameObjectContainer->player->destRect, gameObjectContainer->donkeyKong->destRect)) {
+	if (CollisionDetector::isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->donkeyKong->destRect)) {
 		closeGame();
 	}
 }
@@ -112,7 +112,7 @@ void CollisionResolver::handlePlayerCollision() { // player collision
 			// again start falling not handle falling
 			PhysicsManager::handleFalling(player, screenManager->deltaTime);
 		}
-		if (player->isJumping) { 
+		if (player->isJumping) {
 			// this should be renamed to start jumping
 			player->jump(screenManager->deltaTime);
 		}

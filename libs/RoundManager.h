@@ -7,7 +7,7 @@
 
 class RoundManager {
 
-	public:
+public:
 
 	ScreenManager* screenManager;
 	GameObjectFactory* gameObjectFactory;

@@ -23,7 +23,7 @@ void Platform::render(SDL_Surface* screen) {
 				y--;
 			}
 		}
-		if (y1pos < y2pos){
+		if (y1pos < y2pos) {
 			for (int i = 0; i < differenceBetweenX; i++) {
 				DrawPixel(screen, x, y, 0xffffffff);
 				x++;

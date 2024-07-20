@@ -15,12 +15,12 @@ DynamicGameObject::DynamicGameObject() {
 
 	currentSpriteId = 1;
 	// maybe add this to game object class since princess and donkeykong can have animations but they dont move
-	
+
 	gravity = DEFAULT_GRAVITY; // physics manager ??
-	
+
 	isClimbing = false; // player
 	isJumping = false; // player
-	
+
 	checkIfJumpPossible = false; // player / no this should be somwhere else
 	jumpHeightStop = SCREEN_HEIGHT; // player / no this should be somwhere else
 }
@@ -119,7 +119,7 @@ void DynamicGameObject::startMovingUp(double deltaTime) {
 	currentDirectionOfMovementHorizontal = 0.0;
 }
 
-void DynamicGameObject::startMovingDown(double deltaTime) { 
+void DynamicGameObject::startMovingDown(double deltaTime) {
 	currentDirectionOfMovementVertical = 1.0;
 	currentDirectionOfMovementHorizontal = 0.0;
 }

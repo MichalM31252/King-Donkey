@@ -20,7 +20,7 @@ extern "C" {
 
 class CollisionResolver {
 public:
-	GameObjectContainer *gameObjectContainer;
+	GameObjectContainer* gameObjectContainer;
 	ScreenManager* screenManager;
 
 	bool isColliding = false;

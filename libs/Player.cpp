@@ -51,10 +51,10 @@ void Player::loadNextRunningSprite() {
 	}
 }
 
-void Player::loadJumpingSprite(){
+void Player::loadJumpingSprite() {
 	ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
 }
 
-void Player::loadClimbingSprite(){
+void Player::loadClimbingSprite() {
 	ScreenManager::loadTexture(this, PLAYER_CLIMB);
 }

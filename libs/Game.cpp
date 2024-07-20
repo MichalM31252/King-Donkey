@@ -36,7 +36,7 @@ void Game::initGame() {
 	closeGame();
 }
 
-void Game::closeGame(){
+void Game::closeGame() {
 	SDL_Quit();
 	exit(0);
 }

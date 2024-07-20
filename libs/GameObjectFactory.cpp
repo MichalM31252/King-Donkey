@@ -124,7 +124,7 @@ void GameObjectFactory::createBarrels() {
 }
 
 // Move to stage manager / game object manager ??? idk yet
-void GameObjectFactory::createPlatforms2() { 
+void GameObjectFactory::createPlatforms2() {
 	Platform* plat1 = new Platform();
 	plat1->setPosition(TINY_MARGIN, 400, SCREEN_WIDTH - 1, 400);
 
@@ -184,7 +184,7 @@ void GameObjectFactory::createLadders2() {
 // Move to stage manager / game object manager ??? idk yet
 void GameObjectFactory::createPlatforms3() {
 	Platform* plat1 = new Platform();
-	plat1->setPosition(STARTING_X, 400, SCREEN_WIDTH - TINY_MARGIN, 400); 
+	plat1->setPosition(STARTING_X, 400, SCREEN_WIDTH - TINY_MARGIN, 400);
 
 	Platform* plat2 = new Platform();
 	plat2->setPosition(LARGE_MARGIN, 300, SCREEN_WIDTH - LARGE_MARGIN, 300);

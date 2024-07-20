@@ -2,11 +2,11 @@
 
 #include "StageManager.h"
 
-StageManager::StageManager(){
+StageManager::StageManager() {
 
 }
 
-StageManager::StageManager(GameObjectContainer* gameObjectContainer){ // assign gameObjectContainer to each one of these managers
+StageManager::StageManager(GameObjectContainer* gameObjectContainer) { // assign gameObjectContainer to each one of these managers
 
 	this->screenManager = new ScreenManager();  // the program breaks here when you add gameObjectContainer
 	this->collisionResolver = new CollisionResolver(gameObjectContainer, screenManager);

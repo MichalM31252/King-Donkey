@@ -18,7 +18,7 @@ private:
 	SDL_Event event; // this can be used here
 public:
 
-	GameObjectContainer *gameObjectContainer;	
+	GameObjectContainer* gameObjectContainer;
 
 	KeyboardManager();
 	KeyboardManager(GameObjectContainer* gameObjectContainer);
@@ -38,6 +38,6 @@ public:
 	void onKeyPress1(bool* quit, int* startAnotherRound);
 	void onKeyPress2(bool* quit, int* startAnotherRound);
 	void onKeyPress3(bool* quit, int* startAnotherRound);
-	
+
 
 };

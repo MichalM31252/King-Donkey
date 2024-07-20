@@ -4,7 +4,7 @@ extern "C" {
 }
 
 ScreenManager::ScreenManager() {
-	
+
 }
 
 ScreenManager::ScreenManager(GameObjectContainer* gameObjectContainer) {
@@ -44,56 +44,56 @@ void ScreenManager::SDLCheck() {
 	}
 }
 
-void ScreenManager::SDLCreateWindowAndRenderer() { 
+void ScreenManager::SDLCreateWindowAndRenderer() {
 	rc = SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
 	if (rc != 0) {
 		printf("SDL_CreateWindowAndRenderer error: %s\n", SDL_GetError());
 	};
 }
 
-void ScreenManager::setSDLHint() { 
+void ScreenManager::setSDLHint() {
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 }
 
-void ScreenManager::setSDLRenderLogicalSize() { 
+void ScreenManager::setSDLRenderLogicalSize() {
 	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void ScreenManager::setSDLDefaultDrawColor() { 
+void ScreenManager::setSDLDefaultDrawColor() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
 
-void ScreenManager::setSDLWindowTitle() { 
+void ScreenManager::setSDLWindowTitle() {
 	SDL_SetWindowTitle(window, "192928 Michal Malinowski");
 }
 
-void ScreenManager::setSDLCharset() { 
+void ScreenManager::setSDLCharset() {
 	charset = SDL_LoadBMP("./assets/cs8x8.bmp");
 	if (charset == NULL) {
 		printf("SDL_LoadBMP(cs8x8.bmp) error: %s\n", SDL_GetError());
 	};
 }
 
-void ScreenManager::setSDLScreen() { 
+void ScreenManager::setSDLScreen() {
 	screen = SDL_CreateRGBSurface(0, SCREEN_WIDTH, SCREEN_HEIGHT, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
 }
 
-void ScreenManager::setSDLTexture() { 
+void ScreenManager::setSDLTexture() {
 	scrtex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void ScreenManager::hideSDLCursor() { 
+void ScreenManager::hideSDLCursor() {
 	SDL_ShowCursor(SDL_DISABLE);
 }
 
-void ScreenManager::setSDLColorKey() { 
+void ScreenManager::setSDLColorKey() {
 	SDL_SetColorKey(charset, true, 0x000000);
 }
 
-void ScreenManager::serveNextFrame() { 
+void ScreenManager::serveNextFrame() {
 	SDL_UpdateTexture(scrtex, NULL, screen->pixels, screen->pitch);
 	SDL_RenderCopy(renderer, scrtex, NULL, NULL);
-	SDL_RenderPresent(renderer); 
+	SDL_RenderPresent(renderer);
 }
 
 void ScreenManager::setColors() {
@@ -107,7 +107,7 @@ void ScreenManager::setColors() {
 };
 
 void ScreenManager::drawOutlineOfTheBoard() {
-	DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black); 
+	DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black);
 }
 
 void ScreenManager::drawAdditionalInfo() {
