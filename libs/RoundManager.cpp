@@ -18,7 +18,6 @@ RoundManager::RoundManager(ScreenManager* screenManager, GameObjectFactory* game
 void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound) {
 	bool quit = false;
 	while (!quit) {
-
 		screenManager->handleDifferentComputers();
 		screenManager->updateWorldTime();
 		screenManager->handleFPSTimer();
@@ -32,7 +31,7 @@ void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startA
 
 		gameObjectContainer->player->update(screenManager->deltaTime);
 		collisionResolver->handlePlayerCollision();
-		// update sprite of player here
+		screenManager->handlePlayerSprite(gameObjectContainer->player);
 
 		gameObjectContainer->barrelDispenser->update(screenManager->deltaTime);
 

@@ -78,7 +78,7 @@ void KeyboardManager::onKeyPressArrowUp(double deltaTime, Player* player) {
 	if (player->isInsideLadder) {
 		player->isClimbing = true;
 
-		ScreenManager::loadTexture(player, PLAYER_CLIMB);
+		ScreenManager::loadTexture(player, PLAYER_CLIMB_1);
 
 		player->startMovingUp(deltaTime);
 	}
@@ -99,7 +99,7 @@ void KeyboardManager::onKeyPressArrowRight(double deltaTime, Player* player) {
 void KeyboardManager::onKeyPressArrowDown(double deltaTime, Player* player) {
 	if (player->isInsideLadder) {
 		player->isClimbing = true;
-		ScreenManager::loadTexture(player, PLAYER_CLIMB);
+		ScreenManager::loadTexture(player, PLAYER_CLIMB_1);
 		player->startMovingDown(deltaTime);
 	}
 }

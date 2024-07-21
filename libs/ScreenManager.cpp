@@ -132,16 +132,6 @@ void ScreenManager::createSDL() {
 	setColors();
 }
 
-// maybe create a class in the future game object visualiser
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void ScreenManager::loadTexture(GameObject* gameObject, const char* fileName) {
-	gameObject->sprite = SDL_LoadBMP(fileName);
-	if (gameObject->sprite == NULL) {
-		printf("SDL_LoadBMP error: %s\n", SDL_GetError());
-	}
-}
-
 // draw a surface sprite on a surface screen in point (x, y)
 // (x, y) is the center of sprite on screen
 void ScreenManager::drawSurface(SDL_Surface* screen, GameObject* gameObject, int xpos, int ypos) {
@@ -208,6 +198,18 @@ void ScreenManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int 
 	}
 };
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MOVE TO TEXTURE MANAGER
+
+void ScreenManager::loadTexture(GameObject* gameObject, const char* fileName) {
+	gameObject->sprite = SDL_LoadBMP(fileName);
+	if (gameObject->sprite == NULL) {
+		printf("SDL_LoadBMP error: %s\n", SDL_GetError());
+	}
+}
+
 void ScreenManager::initGameObject(GameObject* gameObject, const char* fileName) {
 	loadTexture(gameObject, fileName);
 }
@@ -220,50 +222,58 @@ void ScreenManager::renderLadder(GameObject* gameObject, SDL_Surface* screen) {
 	drawSurfaceLadder(screen, gameObject, gameObject->xpos, gameObject->ypos, gameObject->destRect);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// MOVE TO TEXTURE MANAGER
 void ScreenManager::drawPlatforms() {
 	for (int i = 0; i < gameObjectContainer->platformHolder->numberOfElements; i++) {
 		gameObjectContainer->platformHolder->platforms[i].render(screen);
 	}
 }
 
-// MOVE TO TEXTURE MANAGER
 void ScreenManager::drawLadders() {
 	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
 		renderLadder(&gameObjectContainer->ladderHolder->ladders[i], screen);
 	}
 }
 
-// MOVE TO TEXTURE MANAGER
 void ScreenManager::drawBarrels() {
 	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
 		renderGameObject(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], screen);
 	}
 }
 
-bool ScreenManager::isPlayerSpriteInNeedOfUpdate(DynamicGameObject* player)
-{
-	return false;
+bool isPlayerJumping(Player* player) {
+	return player->isJumping;
 }
 
-void ScreenManager::updatePlayerSprite(DynamicGameObject* player)
+void ScreenManager::handlePlayerSprite(Player* player) // rename to handlePlayerSprite
 {
+	if (isPlayerJumping(player)) {
+		player->loadJumpingSprite();
+	}
+	else if (player->isClimbing) {
+		player->loadNextClimbingSprite();
+	}
+	else if (player->isFalling) {
+		player->loadJumpingSprite();
+	}
+	else {
+		player->loadNextRunningSprite();
+	}
+
+	// is player running 
+	//   after a specific amount of distance travelled change the sprite
+	// is player climbing
+	//   after a specific amount of distance travelled change the sprite
+	// is player touching the barrel
+	//  play death animation
+	// is player idle
+	//   play idle animation
 
 }
+//void ScreenManager::handleBarrelSprite(Barrel* barrel)
+//{
+//	// after a specific amount of distance travelled change the sprite
+//}
 
-bool ScreenManager::isBarrelSpriteInNeedOfUpdate(DynamicGameObject* barrel)
-{
-	return false;
-}
-
-void ScreenManager::updateBarrelSprite(DynamicGameObject* barrel)
-{
-
-}
-
-// MOVE TO TEXTURE MANAGER
 void ScreenManager::drawElements() { // don't repeat yourself
 	renderGameObject(gameObjectContainer->donkeyKong, screen);
 	renderGameObject(gameObjectContainer->princess, screen);

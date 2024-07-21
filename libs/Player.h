@@ -17,4 +17,5 @@ public:
 	void loadNextRunningSprite();
 	void loadJumpingSprite();
 	void loadClimbingSprite();
+	void loadNextClimbingSprite();
 };

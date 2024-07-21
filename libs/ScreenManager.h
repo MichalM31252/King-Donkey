@@ -9,6 +9,10 @@ extern "C" {
 #include "DynamicGameObject.h"
 #include "Constants.h"
 #include "GameObjectContainer.h"
+
+// remove in the future
+#include "Barrel.h"
+#include "Player.h"
 }
 
 class ScreenManager {
@@ -73,9 +77,6 @@ public:
 	void drawLadders();
 	void drawBarrels();
 
-	bool isPlayerSpriteInNeedOfUpdate(DynamicGameObject* player);
-	void updatePlayerSprite(DynamicGameObject* player);
-
-	bool isBarrelSpriteInNeedOfUpdate(DynamicGameObject* barrel);
-	void updateBarrelSprite(DynamicGameObject* barrel);
+	void handlePlayerSprite(Player* player);
+	// void handleBarrelSprite(Barrel* barrel);
 };

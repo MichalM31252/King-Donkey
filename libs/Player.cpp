@@ -56,5 +56,10 @@ void Player::loadJumpingSprite() {
 }
 
 void Player::loadClimbingSprite() {
-	ScreenManager::loadTexture(this, PLAYER_CLIMB);
+	ScreenManager::loadTexture(this, PLAYER_CLIMB_1);
 }
+
+void Player::loadNextClimbingSprite() {
+
+}
+
