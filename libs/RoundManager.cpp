@@ -30,6 +30,8 @@ void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startA
 		eventHandler.handleEvents(&quit, screenManager->deltaTime, gameObjectContainer->player, startAnotherRound);
 
 		gameObjectContainer->player->update(screenManager->deltaTime);
+
+
 		collisionResolver->handlePlayerCollision();
 		screenManager->handlePlayerSprite(gameObjectContainer->player);
 

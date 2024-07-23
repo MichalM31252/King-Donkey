@@ -7,14 +7,15 @@ extern "C" {
 
 class DynamicGameObject : public GameObject {
 public:
-	double accumulatedXMove, accumulatedYMove;
+	double accumulatedMoveLeft, accumulatedMoveUp, accumulatedMoveRight, accumulatedMoveDown;
 	bool canLeaveScreen;
 	double objectSpeed;
 
 	bool isFalling;
 	double gravity;
 
-	double currentDirectionOfMovementHorizontal, currentDirectionOfMovementVertical;
+	int currentDirectionOfMovement;
+
 	bool isClimbing;
 	bool checkIfJumpPossible, isJumping;
 	int jumpHeightStop;

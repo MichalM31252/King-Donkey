@@ -52,7 +52,7 @@ void ScreenManager::SDLCreateWindowAndRenderer() {
 }
 
 void ScreenManager::setSDLHint() {
-	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 }
 
 void ScreenManager::setSDLRenderLogicalSize() {
