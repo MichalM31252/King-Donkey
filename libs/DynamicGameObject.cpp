@@ -104,8 +104,8 @@ void DynamicGameObject::stayInBounds() {
 }
 
 void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
-	startAccumulatingDistance(deltaTime);
 	updatePosition();
+	startAccumulatingDistance(deltaTime);
 	stayInBounds();
 
 	// to remove these you need to merge the three methods into one and then updateObjectPosition
@@ -134,13 +134,7 @@ void DynamicGameObject::startMovingLeft(double deltaTime) {
 }
 
 void DynamicGameObject::stopMove() {
-	accumulatedMoveRight = 0;
-	accumulatedMoveLeft = 0;
-	accumulatedMoveUp = 0;
-	accumulatedMoveDown = 0;
-
 	currentDirectionOfMovement = -1;
-	objectSpeed = 0;
 }
 
 void DynamicGameObject::startFalling() {

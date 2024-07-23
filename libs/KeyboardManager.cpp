@@ -16,58 +16,101 @@ KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer) {
 void KeyboardManager::handleEvents(bool* quit, double deltaTime, Player* player, int* startAnotherRound) {
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
-		case SDL_KEYDOWN:
-			onKeyDown(quit, deltaTime, player, startAnotherRound);
-			break;
-		case SDL_KEYUP:
-			onKeyUp(player);
-			break;
-		case SDL_QUIT:
-			initializeQuit(quit, startAnotherRound);
-			break;
+			case SDL_KEYDOWN:
+				onKeyPressed(quit, deltaTime, player, startAnotherRound);
+				break;
+			case SDL_KEYUP:
+				onKeyReleased(player);
+				break;
+			case SDL_QUIT:
+				initializeQuit(quit, startAnotherRound);
+				break;
 		}
 	}
 }
 
-void KeyboardManager::onKeyDown(bool* quit, double deltaTime, Player* player, int* startAnotherRound) {
+void KeyboardManager::onKeyPressed(bool* quit, double deltaTime, Player* player, int* startAnotherRound) {
 	player->startMovingAtSpeed(DEFAULT_PLAYER_SPEED);
 	switch (event.key.keysym.sym) {
-	case SDLK_ESCAPE:
-		initializeQuit(quit, startAnotherRound);
-		break;
-	case SDLK_UP:
-		onKeyPressArrowUp(deltaTime, player);
-		break;
-	case SDLK_LEFT:
-		onKeyPressArrowLeft(deltaTime, player);
-		break;
-	case SDLK_RIGHT:
-		onKeyPressArrowRight(deltaTime, player);
-		break;
-	case SDLK_DOWN:
-		onKeyPressArrowDown(deltaTime, player);
-		break;
-	case SDLK_SPACE:
-		onKeyPressSpace(player);
-		break;
-	case SDLK_n:
-		onKeyPressN(quit, startAnotherRound);
-		break;
-	case SDLK_1: // load level 1
-		onKeyPress1(quit, startAnotherRound);
-		break;
-	case SDLK_2: // load level 2
-		onKeyPress2(quit, startAnotherRound);
-		break;
-	case SDLK_3: // load level 3
-		onKeyPress3(quit, startAnotherRound);
-		break;
+		case SDLK_ESCAPE:
+			initializeQuit(quit, startAnotherRound);
+			break;
+		case SDLK_UP:
+			onKeyPressArrowUp(deltaTime, player);
+			break;
+		case SDLK_LEFT:
+			onKeyPressArrowLeft(deltaTime, player);
+			break;
+		case SDLK_RIGHT:
+			onKeyPressArrowRight(deltaTime, player);
+			break;
+		case SDLK_DOWN:
+			onKeyPressArrowDown(deltaTime, player);
+			break;
+		case SDLK_SPACE:
+			onKeyPressSpace(player);
+			break;
+		case SDLK_n:
+			onKeyPressN(quit, startAnotherRound);
+			break;
+		case SDLK_1: // load level 1
+			onKeyPress1(quit, startAnotherRound);
+			break;
+		case SDLK_2: // load level 2
+			onKeyPress2(quit, startAnotherRound);
+			break;
+		case SDLK_3: // load level 3
+			onKeyPress3(quit, startAnotherRound);
+			break;
 	}
 }
 
-void KeyboardManager::onKeyUp(Player* player) { // yeah this needs to be fixed you need to check if space was let go or arrow was let go
-	player->stopMove();
+void KeyboardManager::onKeyReleased(Player* player) { // yeah this needs to be fixed you need to check if space was let go or arrow was let go
+	switch (event.key.keysym.sym) {
+		case SDLK_UP:
+			onKeyReleasedArrowUp(player);
+			break;
+		case SDLK_LEFT:
+			onKeyReleasedArrowLeft(player);
+			break;
+		case SDLK_RIGHT:
+			onKeyReleasedArrowRight(player);
+			break;
+		case SDLK_DOWN:
+			onKeyReleasedArrowDown(player);
+			break;
+		}
+	// player->stopMove(); USE THIS ONLY AFTER ALL KEYS ARE RELEASED AND IT WILL FIX THE ISSUE
 }
+
+void KeyboardManager::onKeyReleasedArrowUp(Player* player) {
+	player->accumulatedMoveUp = 0;
+	if (player->currentDirectionOfMovement == 0) {
+		player->currentDirectionOfMovement = -1;
+	}
+}
+
+void KeyboardManager::onKeyReleasedArrowLeft(Player* player) {
+	player->accumulatedMoveLeft = 0;
+	if (player->currentDirectionOfMovement == 3) {
+		player->currentDirectionOfMovement = -1;
+	}
+}
+
+void KeyboardManager::onKeyReleasedArrowRight(Player* player) {
+	player->accumulatedMoveRight = 0;
+	if (player->currentDirectionOfMovement == 1) {
+		player->currentDirectionOfMovement = -1;
+	}
+}
+
+void KeyboardManager::onKeyReleasedArrowDown(Player* player) {
+	player->accumulatedMoveDown = 0;
+	if (player->currentDirectionOfMovement == 2) {
+		player->currentDirectionOfMovement = -1;
+	}
+}
+
 
 void KeyboardManager::initializeQuit(bool* quit, int* startAnotherRound) {
 	*quit = true;

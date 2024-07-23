@@ -12,11 +12,11 @@ Player::Player() {
 
 void Player::jump(double deltaTime) {
 	ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
-	accumulatedYMove -= deltaTime * gravity;
-	int pixelsToMove = accumulatedYMove / 1;
+	accumulatedMoveUp -= deltaTime * gravity;
+	int pixelsToMove = accumulatedMoveUp / 1;
 	if (pixelsToMove <= -1) {
 		ypos -= 1;
-		accumulatedYMove += 1;
+		accumulatedMoveUp += 1;
 	}
 }
 
@@ -28,12 +28,14 @@ void Player::startJumping() {
 void Player::stopJumping() {
 	isJumping = false;
 	jumpHeightStop = SCREEN_HEIGHT;
-	accumulatedYMove = 0;
+	accumulatedMoveDown = 0;
+	accumulatedMoveUp = 0;
 }
 
 void Player::initJump() {
 	checkIfJumpPossible = true;
-	accumulatedYMove = 0;
+	accumulatedMoveDown = 0;
+	accumulatedMoveUp = 0;
 }
 
 void Player::loadNextRunningSprite() {
