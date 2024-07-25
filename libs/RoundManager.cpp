@@ -4,21 +4,20 @@ RoundManager::RoundManager() {
 	screenManager = new ScreenManager();
 	gameObjectFactory = new GameObjectFactory();
 	gameObjectContainer = new GameObjectContainer();
-	collisionManager = new CollisionManager(gameObjectContainer, screenManager);
+	collisionResolver = new CollisionResolver(gameObjectContainer, screenManager);
 }
 
-RoundManager::RoundManager(ScreenManager* screenManager, GameObjectFactory* gameObjectFactory, GameObjectContainer* gameObjectContainer, CollisionManager* collisionManager) {
+RoundManager::RoundManager(ScreenManager* screenManager, GameObjectFactory* gameObjectFactory, GameObjectContainer* gameObjectContainer, CollisionResolver* collisionResolver) {
 	this->screenManager = screenManager;
 	this->gameObjectFactory = gameObjectFactory;
 	this->gameObjectContainer = gameObjectContainer;
-	this->collisionManager = collisionManager;
+	this->collisionResolver = collisionResolver;
 }
 
 // MOVE TO ROUND MANAGER
 void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound) {
 	bool quit = false;
 	while (!quit) {
-
 		screenManager->handleDifferentComputers();
 		screenManager->updateWorldTime();
 		screenManager->handleFPSTimer();
@@ -28,14 +27,25 @@ void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startA
 		screenManager->serveNextFrame();
 		screenManager->frames++;
 
-		collisionManager->handlePlayerCollision(); // player collision
-		collisionManager->handleBarrelsCollision(&quit, startAnotherRound); // barrel collision
+		eventHandler.handleEvents(&quit, screenManager->deltaTime, gameObjectContainer->player, startAnotherRound);
 
 		gameObjectContainer->player->update(screenManager->deltaTime);
-		// maybe also update the barrels here ???
 
-		// this is for keyboard events // should be changed
-		eventHandler.handleEvents(&quit, screenManager->deltaTime, gameObjectContainer->player, startAnotherRound);
+
+		collisionResolver->handlePlayerCollision();
+		screenManager->handlePlayerSprite(gameObjectContainer->player);
+
+		gameObjectContainer->barrelDispenser->update(screenManager->deltaTime);
+
+		for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
+			DynamicGameObject* barrel = &gameObjectContainer->barrelDispenser->barrelHolder->barrels[i];
+			(*barrel).update(screenManager->deltaTime);
+			// update sprite of barrel here
+		}
+
+		collisionResolver->handleBarrelsCollision(&quit, startAnotherRound);
+
+		// maybe also update the barrels here ???
 	};
 }
 // MOVE TO ROUND MANAGER

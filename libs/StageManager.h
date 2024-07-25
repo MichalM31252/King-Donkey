@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CollisionManager.h"
+#include "CollisionResolver.h"
 #include "PhysicsManager.h"
 #include "GameObjectFactory.h"
 #include "KeyboardManager.h"
@@ -9,12 +9,12 @@
 
 class StageManager {
 private:
-	CollisionManager* collisionManager;
+	CollisionResolver* collisionResolver;
 	PhysicsManager* physicsManager;
 	GameObjectFactory* gameObjectFactory;
 	KeyboardManager* keyboardManager;
 	ScreenManager* screenManager;
 
 	StageManager();
-	StageManager(GameObjectContainer *gameObjectContainer);
+	StageManager(GameObjectContainer* gameObjectContainer);
 };

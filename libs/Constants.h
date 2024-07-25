@@ -51,7 +51,9 @@ const double DEFAULT_GRAVITY = 100;
 const char PLAYER_1_FILENAME[] = "./assets/Mario_Run1.bmp";
 const char PLAYER_2_FILENAME[] = "./assets/Mario_Run2.bmp";
 const char PLAYER_3_FILENAME[] = "./assets/Mario_Run3.bmp";
-const char PLAYER_CLIMB[] = "./assets/Mario_Climb.bmp";
+
+const char PLAYER_CLIMB_1[] = "./assets/Mario_Climb1.bmp";
+const char PLAYER_CLIMB_2[] = "./assets/Mario_Climb2.bmp";
 
 // Barrel 
 const char BARREL_1_FILENAME[] = "./assets/Barrel_1.bmp";

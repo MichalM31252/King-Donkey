@@ -13,4 +13,9 @@ public:
 	void initJump();
 	void startJumping();
 	void stopJumping();
+
+	void loadNextRunningSprite();
+	void loadJumpingSprite();
+	void loadClimbingSprite();
+	void loadNextClimbingSprite();
 };

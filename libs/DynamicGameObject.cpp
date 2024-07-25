@@ -3,85 +3,84 @@ extern "C" {
 #include "ScreenManager.h" // Temporary solution
 }
 
-// objectSpeed should be moved to physics
+// CURRENT TASK - remove: isPlayer, isClimbing, isJumping from this class
+
 DynamicGameObject::DynamicGameObject() {
-	currentDirectionOfMovementHorizontal = 0.0; // 1 = right, -1 = left
-	currentDirectionOfMovementVertical = 0.0; // 1 = down, -1 = up
-	accumulatedXMove = 0;
-	accumulatedYMove = 0;
+	currentDirectionOfMovement = -1; // 0 - up , 1 - right, 2 - down, 3 - left
+
+	accumulatedMoveDown = 0;
+	accumulatedMoveLeft = 0;
+	accumulatedMoveRight = 0;
+	accumulatedMoveUp = 0;
+
 	canLeaveScreen = false; // leave here
 	objectSpeed = 0; // leave here
 
 	currentSpriteId = 1;
-
-	// merge this into a signle variable
 	// maybe add this to game object class since princess and donkeykong can have animations but they dont move
+
 	gravity = DEFAULT_GRAVITY; // physics manager ??
-	
-	// assign to specific class (player, barrel)
-	isPlayer = false; // leave here (for now)
-	
+
 	isClimbing = false; // player
 	isJumping = false; // player
-	
+
 	checkIfJumpPossible = false; // player / no this should be somwhere else
 	jumpHeightStop = SCREEN_HEIGHT; // player / no this should be somwhere else
 }
 
 void DynamicGameObject::startAccumulatingDistance(double deltaTime) {
-	if (objectSpeed > 0) {
-		accumulatedXMove += deltaTime * objectSpeed * currentDirectionOfMovementHorizontal;
+	if (currentDirectionOfMovement == 0) { // up
 		if (isClimbing) {
-			accumulatedYMove += deltaTime * objectSpeed * currentDirectionOfMovementVertical;
+			accumulatedMoveUp += deltaTime * objectSpeed;
 		}
+	}
+	else if (currentDirectionOfMovement == 1) { // right
+		accumulatedMoveRight += deltaTime * objectSpeed;
+	}
+	else if (currentDirectionOfMovement == 2) { // down
+		if (isClimbing) {
+			accumulatedMoveDown += deltaTime * objectSpeed;
+		}
+	}
+	else if (currentDirectionOfMovement == 3) { // left
+		accumulatedMoveLeft += deltaTime * objectSpeed;
+	}
+	else {
+		return;
 	}
 }
 
 void DynamicGameObject::updatePosition() {
-	// WATCHOUT DIFFERENT += -= SIGNS AND VARIABLES IN EVERY IF
-	// moving left, down, right, top
-	if (currentDirectionOfMovementHorizontal > 0.0 || currentDirectionOfMovementVertical > 0.0) { // for positive numbers 
-		if (accumulatedXMove > currentDirectionOfMovementHorizontal) { // right
-			int pixelsToMove = accumulatedXMove / 1;
-			if (pixelsToMove > 1) {
-				xpos += 1;
-				accumulatedXMove -= 1;
-				if (!isJumping && isPlayer && !isFalling) {
-					ScreenManager::loadNextSpritePlayer(this);
-				}
-				if (!isPlayer) {
-					ScreenManager::loadNextSpriteBarrel(this);
-				}
-			}
-		}
-		if (accumulatedYMove > currentDirectionOfMovementVertical) { // down
-			int pixelsToMove = accumulatedYMove / 1;
-			if (pixelsToMove > 1) {
-				ypos += 1;
-				accumulatedYMove -= 1;
-			}
+
+	//xpos += 1;
+	//accumulatedMoveRight -= 1;
+
+	if (accumulatedMoveRight > 1.0) { // right
+		int pixelsToMove = accumulatedMoveRight / 1;
+		if (pixelsToMove > 1) {
+			xpos += 1;
+			accumulatedMoveRight -= 1;
 		}
 	}
-	if (currentDirectionOfMovementHorizontal < 0.0 || currentDirectionOfMovementVertical < 0.0) { // for negative numbers
-		if (accumulatedXMove < currentDirectionOfMovementHorizontal) { // left
-			int pixelsToMove = accumulatedXMove / 1;
-			if (pixelsToMove < 1) {
-				xpos -= 1;
-				accumulatedXMove += 1;
-				if (!isJumping && isPlayer && !isFalling) {
-					ScreenManager::loadNextSpritePlayer(this);
-				}
-				if (!isPlayer) {
-					ScreenManager::loadNextSpriteBarrel(this);
-				}
-			}
+	if (accumulatedMoveDown > 1.0) { // down
+		int pixelsToMove = accumulatedMoveDown / 1;
+		if (pixelsToMove > 1) {
+			ypos += 1;
+			accumulatedMoveDown -= 1;
 		}
-		if (accumulatedYMove < currentDirectionOfMovementVertical) { // up
-			int pixelsToMove = accumulatedYMove / 1;
-			if (pixelsToMove < 1) {
-				ypos -= 1;
-				accumulatedYMove += 1;
-			}
+	}
+	if (accumulatedMoveLeft > 1.0) { // left
+		int pixelsToMove = accumulatedMoveLeft / 1;
+		if (pixelsToMove > 1) {
+			xpos -= 1;
+			accumulatedMoveLeft -= 1;
+		}
+	}
+	if (accumulatedMoveUp > 1.0) { // up
+		int pixelsToMove = accumulatedMoveUp / 1;
+		if (pixelsToMove > 1) {
+			ypos -= 1;
+			accumulatedMoveUp -= 1;
 		}
 	}
 }
@@ -105,8 +104,8 @@ void DynamicGameObject::stayInBounds() {
 }
 
 void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
-	startAccumulatingDistance(deltaTime);
 	updatePosition();
+	startAccumulatingDistance(deltaTime);
 	stayInBounds();
 
 	// to remove these you need to merge the three methods into one and then updateObjectPosition
@@ -118,32 +117,24 @@ void DynamicGameObject::startMovingAtSpeed(double speed) {
 	objectSpeed = speed;
 }
 
-void DynamicGameObject::startMovingLeft(double deltaTime) {
-	currentDirectionOfMovementHorizontal = -1.0;
-	currentDirectionOfMovementVertical = 0.0;
+void DynamicGameObject::startMovingUp(double deltaTime) {
+	currentDirectionOfMovement = 0;
 }
 
 void DynamicGameObject::startMovingRight(double deltaTime) {
-	currentDirectionOfMovementHorizontal = 1.0;
-	currentDirectionOfMovementVertical = 0.0;
+	currentDirectionOfMovement = 1;
 }
 
-void DynamicGameObject::startMovingUp(double deltaTime) {
-	currentDirectionOfMovementVertical = -1.0;
-	currentDirectionOfMovementHorizontal = 0.0;
+void DynamicGameObject::startMovingDown(double deltaTime) {
+	currentDirectionOfMovement = 2;
 }
 
-void DynamicGameObject::startMovingDown(double deltaTime) { 
-	currentDirectionOfMovementVertical = 1.0;
-	currentDirectionOfMovementHorizontal = 0.0;
+void DynamicGameObject::startMovingLeft(double deltaTime) {
+	currentDirectionOfMovement = 3;
 }
 
 void DynamicGameObject::stopMove() {
-	accumulatedYMove = 0;
-	accumulatedXMove = 0;
-	currentDirectionOfMovementHorizontal = 0;
-	currentDirectionOfMovementVertical = 0;
-	objectSpeed = 0;
+	currentDirectionOfMovement = -1;
 }
 
 void DynamicGameObject::startFalling() {

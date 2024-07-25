@@ -7,15 +7,15 @@
 
 class RoundManager {
 
-	public:
+public:
 
 	ScreenManager* screenManager;
 	GameObjectFactory* gameObjectFactory;
 	GameObjectContainer* gameObjectContainer;
-	CollisionManager* collisionManager;
+	CollisionResolver* collisionResolver;
 
 	RoundManager();
-	RoundManager(ScreenManager* screenManager, GameObjectFactory* gameObjectFactory, GameObjectContainer* gameObjectContainer, CollisionManager* collisionManager);
+	RoundManager(ScreenManager* screenManager, GameObjectFactory* gameObjectFactory, GameObjectContainer* gameObjectContainer, CollisionResolver* collisionResolver);
 
 	void handleRound(int startAnotherRound);
 	void handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound);

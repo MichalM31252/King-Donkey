@@ -5,7 +5,7 @@
 # Todo:
 
 - [ ] Fix animations
-- [ ] Fix the delay between keys and player
+- [x] Fix the delay between keys and player
 - [ ] Fix the ladders
 - [ ] Update file structure
 - [ ] Remove unnescessary pointers to make code more readable

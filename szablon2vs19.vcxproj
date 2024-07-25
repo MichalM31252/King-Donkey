@@ -21,9 +21,10 @@
   <ItemGroup>
     <ClCompile Include="libs\BarrelDispenser.cpp" />
     <ClCompile Include="libs\BarrelHolder.cpp" />
+    <ClCompile Include="libs\CollisionDetector.cpp" />
+    <ClCompile Include="libs\CollisionResolver.cpp" />
     <ClCompile Include="libs\Game.cpp" />
     <ClCompile Include="libs\GameObjectFactory.cpp" />
-    <ClCompile Include="libs\CollisionManager.cpp" />
     <ClCompile Include="libs\KeyboardManager.cpp" />
     <ClCompile Include="libs\FileManager.cpp" />
     <ClCompile Include="libs\DynamicGameObject.cpp" />
@@ -46,11 +47,12 @@
   <ItemGroup>
     <ClInclude Include="libs\BarrelDispenser.h" />
     <ClInclude Include="libs\BarrelHolder.h" />
+    <ClInclude Include="libs\CollisionDetector.h" />
+    <ClInclude Include="libs\CollisionResolver.h" />
     <ClInclude Include="libs\Constants.h" />
     <ClInclude Include="libs\Game.h" />
     <ClInclude Include="libs\GameObjectContainer.h" />
     <ClInclude Include="libs\GameObjectFactory.h" />
-    <ClInclude Include="libs\CollisionManager.h" />
     <ClInclude Include="libs\KeyboardManager.h" />
     <ClInclude Include="libs\FileManager.h" />
     <ClInclude Include="libs\DynamicGameObject.h" />

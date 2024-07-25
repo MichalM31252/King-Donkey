@@ -4,51 +4,11 @@ extern "C" {
 }
 
 ScreenManager::ScreenManager() {
-	
+
 }
 
 ScreenManager::ScreenManager(GameObjectContainer* gameObjectContainer) {
 	this->gameObjectContainer = gameObjectContainer;
-}
-
-void ScreenManager::decideSpriteForGameObject(DynamicGameObject* gameObject) {
-	
-}
-
-// THIS SHOULD BE IN SCREEN MANAGER, make a static function
-void ScreenManager::loadNextSpritePlayer(DynamicGameObject* player) {
-	if (player->currentSpriteId== 1) {
-		ScreenManager::loadTexture(player, PLAYER_1_FILENAME);
-		player->currentSpriteId++;
-	}
-	else if (player->currentSpriteId == 2) {
-		ScreenManager::loadTexture(player, PLAYER_2_FILENAME);
-		player->currentSpriteId++;
-	}
-	else {
-		ScreenManager::loadTexture(player, PLAYER_3_FILENAME);
-		player->currentSpriteId = 1;
-	}
-}
-
-// THIS SHOULD BE IN SCREEN MANAGER, make a static function
-void ScreenManager::loadNextSpriteBarrel(DynamicGameObject* barrel) {
-	if (barrel->currentSpriteId == 1) {
-		ScreenManager::loadTexture(barrel, BARREL_1_FILENAME);
-		barrel->currentSpriteId++;
-	}
-	else if (barrel->currentSpriteId == 2) {
-		ScreenManager::loadTexture(barrel, BARREL_2_FILENAME);
-		barrel->currentSpriteId++;
-	}
-	else if (barrel->currentSpriteId == 3) {
-		ScreenManager::loadTexture(barrel, BARREL_3_FILENAME);
-		barrel->currentSpriteId++;
-	}
-	else {
-		ScreenManager::loadTexture(barrel, BARREL_4_FILENAME);
-		barrel->currentSpriteId = 1;
-	}
 }
 
 void ScreenManager::createFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
@@ -84,56 +44,56 @@ void ScreenManager::SDLCheck() {
 	}
 }
 
-void ScreenManager::SDLCreateWindowAndRenderer() { 
+void ScreenManager::SDLCreateWindowAndRenderer() {
 	rc = SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
 	if (rc != 0) {
 		printf("SDL_CreateWindowAndRenderer error: %s\n", SDL_GetError());
 	};
 }
 
-void ScreenManager::setSDLHint() { 
-	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+void ScreenManager::setSDLHint() {
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 }
 
-void ScreenManager::setSDLRenderLogicalSize() { 
+void ScreenManager::setSDLRenderLogicalSize() {
 	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void ScreenManager::setSDLDefaultDrawColor() { 
+void ScreenManager::setSDLDefaultDrawColor() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
 
-void ScreenManager::setSDLWindowTitle() { 
+void ScreenManager::setSDLWindowTitle() {
 	SDL_SetWindowTitle(window, "192928 Michal Malinowski");
 }
 
-void ScreenManager::setSDLCharset() { 
+void ScreenManager::setSDLCharset() {
 	charset = SDL_LoadBMP("./assets/cs8x8.bmp");
 	if (charset == NULL) {
 		printf("SDL_LoadBMP(cs8x8.bmp) error: %s\n", SDL_GetError());
 	};
 }
 
-void ScreenManager::setSDLScreen() { 
+void ScreenManager::setSDLScreen() {
 	screen = SDL_CreateRGBSurface(0, SCREEN_WIDTH, SCREEN_HEIGHT, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
 }
 
-void ScreenManager::setSDLTexture() { 
+void ScreenManager::setSDLTexture() {
 	scrtex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void ScreenManager::hideSDLCursor() { 
+void ScreenManager::hideSDLCursor() {
 	SDL_ShowCursor(SDL_DISABLE);
 }
 
-void ScreenManager::setSDLColorKey() { 
+void ScreenManager::setSDLColorKey() {
 	SDL_SetColorKey(charset, true, 0x000000);
 }
 
-void ScreenManager::serveNextFrame() { 
+void ScreenManager::serveNextFrame() {
 	SDL_UpdateTexture(scrtex, NULL, screen->pixels, screen->pitch);
 	SDL_RenderCopy(renderer, scrtex, NULL, NULL);
-	SDL_RenderPresent(renderer); 
+	SDL_RenderPresent(renderer);
 }
 
 void ScreenManager::setColors() {
@@ -147,7 +107,7 @@ void ScreenManager::setColors() {
 };
 
 void ScreenManager::drawOutlineOfTheBoard() {
-	DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black); 
+	DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black);
 }
 
 void ScreenManager::drawAdditionalInfo() {
@@ -170,16 +130,6 @@ void ScreenManager::createSDL() {
 	hideSDLCursor();
 	setSDLColorKey();
 	setColors();
-}
-
-// maybe create a class in the future game object visualiser
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void ScreenManager::loadTexture(GameObject* gameObject, const char* fileName) {
-	gameObject->sprite = SDL_LoadBMP(fileName);
-	if (gameObject->sprite == NULL) {
-		printf("SDL_LoadBMP error: %s\n", SDL_GetError());
-	}
 }
 
 // draw a surface sprite on a surface screen in point (x, y)
@@ -248,6 +198,18 @@ void ScreenManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int 
 	}
 };
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MOVE TO TEXTURE MANAGER
+
+void ScreenManager::loadTexture(GameObject* gameObject, const char* fileName) {
+	gameObject->sprite = SDL_LoadBMP(fileName);
+	if (gameObject->sprite == NULL) {
+		printf("SDL_LoadBMP error: %s\n", SDL_GetError());
+	}
+}
+
 void ScreenManager::initGameObject(GameObject* gameObject, const char* fileName) {
 	loadTexture(gameObject, fileName);
 }
@@ -260,30 +222,58 @@ void ScreenManager::renderLadder(GameObject* gameObject, SDL_Surface* screen) {
 	drawSurfaceLadder(screen, gameObject, gameObject->xpos, gameObject->ypos, gameObject->destRect);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-// MOVE TO TEXTURE MANAGER
 void ScreenManager::drawPlatforms() {
 	for (int i = 0; i < gameObjectContainer->platformHolder->numberOfElements; i++) {
 		gameObjectContainer->platformHolder->platforms[i].render(screen);
 	}
 }
 
-// MOVE TO TEXTURE MANAGER
 void ScreenManager::drawLadders() {
 	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
 		renderLadder(&gameObjectContainer->ladderHolder->ladders[i], screen);
 	}
 }
 
-// MOVE TO TEXTURE MANAGER
 void ScreenManager::drawBarrels() {
 	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
 		renderGameObject(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], screen);
 	}
 }
 
-// MOVE TO TEXTURE MANAGER
+bool isPlayerJumping(Player* player) {
+	return player->isJumping;
+}
+
+void ScreenManager::handlePlayerSprite(Player* player) // rename to handlePlayerSprite
+{
+	if (isPlayerJumping(player)) {
+		player->loadJumpingSprite();
+	}
+	else if (player->isClimbing) {
+		player->loadNextClimbingSprite();
+	}
+	else if (player->isFalling) {
+		player->loadJumpingSprite();
+	}
+	else {
+		player->loadNextRunningSprite();
+	}
+
+	// is player running 
+	//   after a specific amount of distance travelled change the sprite
+	// is player climbing
+	//   after a specific amount of distance travelled change the sprite
+	// is player touching the barrel
+	//  play death animation
+	// is player idle
+	//   play idle animation
+
+}
+//void ScreenManager::handleBarrelSprite(Barrel* barrel)
+//{
+//	// after a specific amount of distance travelled change the sprite
+//}
+
 void ScreenManager::drawElements() { // don't repeat yourself
 	renderGameObject(gameObjectContainer->donkeyKong, screen);
 	renderGameObject(gameObjectContainer->princess, screen);

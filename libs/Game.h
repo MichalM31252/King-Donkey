@@ -18,16 +18,16 @@ extern "C" {
 }
 
 class Game {
-	public:
-		GameObjectContainer* gameObjectContainer;
+public:
+	GameObjectContainer* gameObjectContainer;
 
-		GameObjectFactory* gameObjectFactory;
-		ScreenManager* screenManager;
-		CollisionManager* collisionManager;
-		RoundManager* roundManager;
+	GameObjectFactory* gameObjectFactory;
+	ScreenManager* screenManager;
+	CollisionResolver* collisionResolver;
+	RoundManager* roundManager;
 
-		Game();
+	Game();
 
-		void initGame();
-		void closeGame();
+	void initGame();
+	void closeGame();
 };

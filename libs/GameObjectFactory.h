@@ -1,12 +1,12 @@
 #pragma once
 #include "PhysicsManager.h"
-#include "CollisionManager.h"
+#include "CollisionResolver.h"
 #include "GameObjectContainer.h"
 
 class GameObjectFactory {
 public:
 	GameObjectContainer* gameObjectContainer;
-	CollisionManager* collisionManager;
+	CollisionResolver* collisionResolver;
 
 	GameObjectFactory();
 	GameObjectFactory(GameObjectContainer* gameObjectContainer);
