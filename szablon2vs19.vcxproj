@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="libs\BarrelDispenser.cpp" />
+    <ClCompile Include="libs\BarrelFactory.cpp" />
     <ClCompile Include="libs\BarrelHolder.cpp" />
     <ClCompile Include="libs\CollisionDetector.cpp" />
     <ClCompile Include="libs\CollisionResolver.cpp" />
@@ -45,7 +45,7 @@
     <Image Include="eti.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="libs\BarrelDispenser.h" />
+    <ClInclude Include="libs\BarrelFactory.h" />
     <ClInclude Include="libs\BarrelHolder.h" />
     <ClInclude Include="libs\CollisionDetector.h" />
     <ClInclude Include="libs\CollisionResolver.h" />

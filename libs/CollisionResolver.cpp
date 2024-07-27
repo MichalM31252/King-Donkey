@@ -125,9 +125,9 @@ void CollisionResolver::handlePlayerCollision() { // player collision
 }
 
 void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRound) {
-	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
+	for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->numberOfElements; i++) {
 
-		DynamicGameObject* barrel = &gameObjectContainer->barrelDispenser->barrelHolder->barrels[i];
+		DynamicGameObject* barrel = &gameObjectContainer->barrelFactory->barrelHolder->barrels[i];
 
 		handlePlayerCollisionWithBarrel(barrel, quit, startAnotherRound);
 

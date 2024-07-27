@@ -1,22 +1,22 @@
 extern "C" {
-#include "BarrelDispenser.h"
+#include "BarrelFactory.h"
 
 	// why is this needed ?? // because you need to set the texture for an object
 #include "ScreenManager.h" // temporary fix
 
 }
 
-void BarrelDispenser::initBarrelDispenser(BarrelDispenser* barrelDispenser) {
-	barrelDispenser->barrelHolder = new BarrelHolder;
-	initBarrelHolder(barrelDispenser->barrelHolder);
+void BarrelFactory::initBarrelFactory(BarrelFactory* barrelFactory) {
+	barrelFactory->barrelHolder = new BarrelHolder;
+	initBarrelHolder(barrelFactory->barrelHolder);
 }
 
-void BarrelDispenser::setPosition(int x, int y) {
+void BarrelFactory::setPosition(int x, int y) {
 	xpos = x;
 	ypos = y;
 }
 
-void BarrelDispenser::update(double deltaTime) {
+void BarrelFactory::update(double deltaTime) {
 	accumulatedTime += deltaTime;
 	if (accumulatedTime >= DEFAULT_BARREL_SPAWN_RATE) {
 		throwBarrel();
@@ -24,7 +24,7 @@ void BarrelDispenser::update(double deltaTime) {
 	}
 }
 
-void BarrelDispenser::throwBarrel() {
+void BarrelFactory::throwBarrel() {
 	DynamicGameObject* barrel = new DynamicGameObject();
 
 	ScreenManager::initGameObject(barrel, BARREL_1_FILENAME); // this needs refactoring 

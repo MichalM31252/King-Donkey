@@ -118,9 +118,9 @@ void GameObjectFactory::createBarrels() {
 	initBarrelHolder(barrelH);
 	addBarrel(barrelH, barrel1);
 
-	gameObjectContainer->barrelDispenser = new BarrelDispenser();
-	gameObjectContainer->barrelDispenser->barrelHolder = barrelH;
-	gameObjectContainer->barrelDispenser->setPosition(gameObjectContainer->donkeyKong->xpos + gameObjectContainer->donkeyKong->destRect.w + +SMALL_MARGIN, gameObjectContainer->donkeyKong->ypos);
+	gameObjectContainer->barrelFactory = new BarrelFactory();
+	gameObjectContainer->barrelFactory->barrelHolder = barrelH;
+	gameObjectContainer->barrelFactory->setPosition(gameObjectContainer->donkeyKong->xpos + gameObjectContainer->donkeyKong->destRect.w + +SMALL_MARGIN, gameObjectContainer->donkeyKong->ypos);
 }
 
 // Move to stage manager / game object manager ??? idk yet

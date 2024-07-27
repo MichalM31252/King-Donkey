@@ -1,5 +1,5 @@
 #pragma once
-#include "BarrelDispenser.h" // no screen manager
+#include "BarrelFactory.h" // no screen manager
 #include "LadderHolder.h" // no screen manager
 #include "PlatformHolder.h" // no screen manager
 #include "DynamicGameObject.h" // has screen manager
@@ -11,5 +11,5 @@ struct GameObjectContainer {
 	Player* player;
 	PlatformHolder* platformHolder;
 	LadderHolder* ladderHolder;
-	BarrelDispenser* barrelDispenser;
+	BarrelFactory* barrelFactory;
 };

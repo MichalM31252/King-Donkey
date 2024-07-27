@@ -235,8 +235,8 @@ void ScreenManager::drawLadders() {
 }
 
 void ScreenManager::drawBarrels() {
-	for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
-		renderGameObject(&gameObjectContainer->barrelDispenser->barrelHolder->barrels[i], screen);
+	for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->numberOfElements; i++) {
+		renderGameObject(&gameObjectContainer->barrelFactory->barrelHolder->barrels[i], screen);
 	}
 }
 
