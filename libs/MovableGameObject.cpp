@@ -1,11 +1,11 @@
 extern "C" {
-#include "DynamicGameObject.h"
+#include "MovableGameObject.h"
 #include "ScreenManager.h" // Temporary solution
 }
 
 // CURRENT TASK - remove: isPlayer, isClimbing, isJumping from this class
 
-DynamicGameObject::DynamicGameObject() {
+MovableGameObject::MovableGameObject() {
 	currentDirectionOfMovement = -1; // 0 - up , 1 - right, 2 - down, 3 - left
 
 	accumulatedMoveDown = 0;
@@ -28,7 +28,7 @@ DynamicGameObject::DynamicGameObject() {
 	jumpHeightStop = SCREEN_HEIGHT; // player / no this should be somwhere else
 }
 
-void DynamicGameObject::startAccumulatingDistance(double deltaTime) {
+void MovableGameObject::startAccumulatingDistance(double deltaTime) {
 	if (currentDirectionOfMovement == 0) { // up
 		if (isClimbing) {
 			accumulatedMoveUp += deltaTime * objectSpeed;
@@ -50,7 +50,7 @@ void DynamicGameObject::startAccumulatingDistance(double deltaTime) {
 	}
 }
 
-void DynamicGameObject::updatePosition() {
+void MovableGameObject::updatePosition() {
 
 	//xpos += 1;
 	//accumulatedMoveRight -= 1;
@@ -86,7 +86,7 @@ void DynamicGameObject::updatePosition() {
 }
 
 // logic, not screen manager
-void DynamicGameObject::stayInBounds() {
+void MovableGameObject::stayInBounds() {
 	if (!canLeaveScreen) {
 		if (xpos < STARTING_X) { // left
 			xpos = STARTING_X;
@@ -103,7 +103,7 @@ void DynamicGameObject::stayInBounds() {
 	}
 }
 
-void DynamicGameObject::update(double deltaTime) { // break this up into smaller functions
+void MovableGameObject::update(double deltaTime) { // break this up into smaller functions
 	updatePosition();
 	startAccumulatingDistance(deltaTime);
 	stayInBounds();
@@ -113,34 +113,34 @@ void DynamicGameObject::update(double deltaTime) { // break this up into smaller
 	destRect.y = ypos;
 }
 
-void DynamicGameObject::startMovingAtSpeed(double speed) {
+void MovableGameObject::startMovingAtSpeed(double speed) {
 	objectSpeed = speed;
 }
 
-void DynamicGameObject::startMovingUp(double deltaTime) {
+void MovableGameObject::startMovingUp(double deltaTime) {
 	currentDirectionOfMovement = 0;
 }
 
-void DynamicGameObject::startMovingRight(double deltaTime) {
+void MovableGameObject::startMovingRight(double deltaTime) {
 	currentDirectionOfMovement = 1;
 }
 
-void DynamicGameObject::startMovingDown(double deltaTime) {
+void MovableGameObject::startMovingDown(double deltaTime) {
 	currentDirectionOfMovement = 2;
 }
 
-void DynamicGameObject::startMovingLeft(double deltaTime) {
+void MovableGameObject::startMovingLeft(double deltaTime) {
 	currentDirectionOfMovement = 3;
 }
 
-void DynamicGameObject::stopMove() {
+void MovableGameObject::stopMove() {
 	currentDirectionOfMovement = -1;
 }
 
-void DynamicGameObject::startFalling() {
+void MovableGameObject::startFalling() {
 	isFalling = true;
 }
 
-void DynamicGameObject::stopFalling() {
+void MovableGameObject::stopFalling() {
 	isFalling = false;
 }

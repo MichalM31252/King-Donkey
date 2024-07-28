@@ -105,7 +105,7 @@ void GameObjectFactory::createLadders1() {
 }
 
 void GameObjectFactory::createBarrels() {
-	DynamicGameObject* barrel1 = new DynamicGameObject();
+	MovableGameObject* barrel1 = new MovableGameObject();
 
 	ScreenManager::initGameObject(barrel1, BARREL_1_FILENAME);
 

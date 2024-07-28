@@ -1,10 +1,10 @@
 #pragma once
 
 extern "C" {
-#include "DynamicGameObject.h"
+#include "MovableGameObject.h"
 }
 
-class Player : public DynamicGameObject {
+class Player : public MovableGameObject {
 public:
 	bool isInsideLadder;
 

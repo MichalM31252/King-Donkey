@@ -25,7 +25,7 @@ void BarrelFactory::update(double deltaTime) {
 }
 
 void BarrelFactory::throwBarrel() {
-	DynamicGameObject* barrel = new DynamicGameObject();
+	MovableGameObject* barrel = new MovableGameObject();
 
 	ScreenManager::initGameObject(barrel, BARREL_1_FILENAME); // this needs refactoring 
 

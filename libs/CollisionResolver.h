@@ -9,7 +9,7 @@ extern "C" {
 
 #include "Platform.h"
 #include "GameObject.h"
-#include "DynamicGameObject.h"
+#include "MovableGameObject.h"
 #include "GameObjectContainer.h"
 #include "PhysicsManager.h"
 #include "ScreenManager.h"
@@ -33,9 +33,9 @@ public:
 
 	void handlePlayerCollisionWithKong();
 	void handlePlayerCollisionWithPrincess();
-	void handlePlayerCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
+	void handlePlayerCollisionWithBarrel(MovableGameObject* barrel, bool* quit, int* startAnotherRound);
 	void handlePlayerCollisionWithLadder();
-	void handleCollisionWithPlatform(DynamicGameObject* gameObject, int* isGameObjectInsidePlatform);
+	void handleCollisionWithPlatform(MovableGameObject* gameObject, int* isGameObjectInsidePlatform);
 	void handleCollisionWithJumping();
 
 	/////////////////////////////////////////////////////////////////////////////////////

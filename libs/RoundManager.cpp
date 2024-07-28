@@ -38,7 +38,7 @@ void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startA
 		gameObjectContainer->barrelFactory->update(screenManager->deltaTime);
 
 		for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->numberOfElements; i++) {
-			DynamicGameObject* barrel = &gameObjectContainer->barrelFactory->barrelHolder->barrels[i];
+			MovableGameObject* barrel = &gameObjectContainer->barrelFactory->barrelHolder->barrels[i];
 			(*barrel).update(screenManager->deltaTime);
 			// update sprite of barrel here
 		}

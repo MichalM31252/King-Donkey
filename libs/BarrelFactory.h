@@ -1,7 +1,7 @@
 #pragma once
 
 extern "C" {
-#include "DynamicGameObject.h"
+#include "MovableGameObject.h"
 #include "BarrelHolder.h"
 #include "BarrelFactory.h"
 }

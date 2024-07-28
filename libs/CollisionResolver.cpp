@@ -24,7 +24,7 @@ void CollisionResolver::handlePlayerCollisionWithPrincess() {
 	}
 }
 
-void CollisionResolver::handlePlayerCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound) {
+void CollisionResolver::handlePlayerCollisionWithBarrel(MovableGameObject* barrel, bool* quit, int* startAnotherRound) {
 	if (CollisionDetector::isCollisionBetweenRects(gameObjectContainer->player->destRect, barrel->destRect)) {
 		*quit = true;
 		*startAnotherRound = 1;
@@ -56,7 +56,7 @@ void CollisionResolver::handleCollisionWithJumping() {
 	}
 }
 
-void CollisionResolver::handleCollisionWithPlatform(DynamicGameObject* gameObject, int* isGameObjectInsidePlatform) {
+void CollisionResolver::handleCollisionWithPlatform(MovableGameObject* gameObject, int* isGameObjectInsidePlatform) {
 	// check bottom left corner
 	// check bottom right corner
 	int yPosition = gameObject->ypos + gameObject->destRect.h;
@@ -127,7 +127,7 @@ void CollisionResolver::handlePlayerCollision() { // player collision
 void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRound) {
 	for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->numberOfElements; i++) {
 
-		DynamicGameObject* barrel = &gameObjectContainer->barrelFactory->barrelHolder->barrels[i];
+		MovableGameObject* barrel = &gameObjectContainer->barrelFactory->barrelHolder->barrels[i];
 
 		handlePlayerCollisionWithBarrel(barrel, quit, startAnotherRound);
 

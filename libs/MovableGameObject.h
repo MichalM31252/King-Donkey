@@ -5,7 +5,7 @@ extern "C" {
 #include "Constants.h"
 }
 
-class DynamicGameObject : public GameObject {
+class MovableGameObject : public GameObject {
 public:
 	double accumulatedMoveLeft, accumulatedMoveUp, accumulatedMoveRight, accumulatedMoveDown;
 	bool canLeaveScreen;
@@ -24,7 +24,7 @@ public:
 
 	int currentSpriteId;
 
-	DynamicGameObject();
+	MovableGameObject();
 	void update(double deltaTime);
 
 	// move this to gameObjectsManager
