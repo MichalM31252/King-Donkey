@@ -240,13 +240,9 @@ void ScreenManager::drawBarrels() {
 	}
 }
 
-bool isPlayerJumping(Player* player) {
-	return player->isJumping;
-}
-
 void ScreenManager::handlePlayerSprite(Player* player) // rename to handlePlayerSprite
 {
-	if (isPlayerJumping(player)) {
+	if (player->isPlayerJumping()) {
 		player->loadJumpingSprite();
 	}
 	else if (player->isClimbing) {

@@ -110,7 +110,7 @@ void CollisionResolver::handlePlayerCollision() { // player collision
 		}
 		else {
 			// again start falling not handle falling
-			PhysicsManager::handleFalling(player, screenManager->deltaTime);
+			PhysicsManager::handleFallingForPlayer(player, screenManager->deltaTime);
 		}
 		if (player->isJumping) {
 			// this should be renamed to start jumping

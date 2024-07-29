@@ -7,6 +7,7 @@ extern "C" {
 class Player : public MovableGameObject {
 public:
 	bool isInsideLadder;
+	bool isJumping;
 
 	Player();
 	void jump(double deltaTime);
@@ -18,4 +19,5 @@ public:
 	void loadJumpingSprite();
 	void loadClimbingSprite();
 	void loadNextClimbingSprite();
+	bool isPlayerJumping();
 };

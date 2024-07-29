@@ -17,7 +17,7 @@ public:
 	int currentDirectionOfMovement;
 
 	bool isClimbing;
-	bool checkIfJumpPossible, isJumping;
+	bool checkIfJumpPossible;
 	int jumpHeightStop;
 
 	bool isPlayer;

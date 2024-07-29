@@ -3,7 +3,7 @@ extern "C" {
 #include "ScreenManager.h" // Temporary solution
 }
 
-// CURRENT TASK - remove: isPlayer, isClimbing, isJumping from this class
+// CURRENT TASK - remove: isPlayer, isClimbing, from this class
 
 MovableGameObject::MovableGameObject() {
 	currentDirectionOfMovement = -1; // 0 - up , 1 - right, 2 - down, 3 - left
@@ -22,7 +22,6 @@ MovableGameObject::MovableGameObject() {
 	gravity = DEFAULT_GRAVITY; // physics manager ??
 
 	isClimbing = false; // player
-	isJumping = false; // player
 
 	checkIfJumpPossible = false; // player / no this should be somwhere else
 	jumpHeightStop = SCREEN_HEIGHT; // player / no this should be somwhere else
