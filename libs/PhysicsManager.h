@@ -8,5 +8,5 @@ extern "C" {
 class PhysicsManager {
 public:
 	static void handleFallingForPlayer(Player* player, double deltaTime);
-	static void handleFalling(MovableGameObject* movableGameObject, double deltaTime);
+	static void handleFalling(MovableGameObject* object, double deltaTime);
 };
