@@ -51,36 +51,28 @@ void MovableGameObject::startAccumulatingDistance(double deltaTime) {
 
 void MovableGameObject::updatePosition() {
 
-	//xpos += 1;
-	//accumulatedMoveRight -= 1;
+	if (accumulatedMoveRight > 1.0f) {
+		int pixelsToMove = (int)accumulatedMoveRight;
+		xpos += pixelsToMove;
+		accumulatedMoveRight -= pixelsToMove;
+	}
 
-	if (accumulatedMoveRight > 1.0) { // right
-		int pixelsToMove = accumulatedMoveRight / 1;
-		if (pixelsToMove > 1) {
-			xpos += 1;
-			accumulatedMoveRight -= 1;
-		}
+	if (accumulatedMoveDown > 1.0f) {
+		int pixelsToMove = (int)accumulatedMoveDown;
+		ypos += pixelsToMove;
+		accumulatedMoveDown -= pixelsToMove;
 	}
-	if (accumulatedMoveDown > 1.0) { // down
-		int pixelsToMove = accumulatedMoveDown / 1;
-		if (pixelsToMove > 1) {
-			ypos += 1;
-			accumulatedMoveDown -= 1;
-		}
+
+	if (accumulatedMoveLeft > 1.0f) {
+		int pixelsToMove = (int)accumulatedMoveLeft;
+		xpos -= pixelsToMove;
+		accumulatedMoveLeft -= pixelsToMove;
 	}
-	if (accumulatedMoveLeft > 1.0) { // left
-		int pixelsToMove = accumulatedMoveLeft / 1;
-		if (pixelsToMove > 1) {
-			xpos -= 1;
-			accumulatedMoveLeft -= 1;
-		}
-	}
-	if (accumulatedMoveUp > 1.0) { // up
-		int pixelsToMove = accumulatedMoveUp / 1;
-		if (pixelsToMove > 1) {
-			ypos -= 1;
-			accumulatedMoveUp -= 1;
-		}
+
+	if (accumulatedMoveUp > 1.0f) {
+		int pixelsToMove = (int)accumulatedMoveUp;
+		ypos -= pixelsToMove;
+		accumulatedMoveUp -= pixelsToMove;
 	}
 }
 
