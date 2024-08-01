@@ -68,10 +68,8 @@ void CollisionResolver::handleCollisionWithPlatform(MovableGameObject* gameObjec
 		//bottom left corner 
 		if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, &gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
 			// write a function is player climbing
-			if (!gameObject->isClimbing) {
 				gameObject->ypos--;
 				yPosition--;
-			}
 		}
 		if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, &gameObjectContainer->platformHolder->platforms[i])) { // isPointOnTopOfLine
 			*isGameObjectInsidePlatform = 1;
@@ -80,10 +78,8 @@ void CollisionResolver::handleCollisionWithPlatform(MovableGameObject* gameObjec
 		//bottom right corner 
 		if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition, &gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
 			// write a function is player climbing
-			if (!gameObject->isClimbing) {
 				gameObject->ypos--;
 				yPosition--;
-			}
 		}
 		if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, &gameObjectContainer->platformHolder->platforms[i])) {// isPointOnTopOfLine
 			*isGameObjectInsidePlatform = 1;

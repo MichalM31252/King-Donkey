@@ -21,25 +21,19 @@ MovableGameObject::MovableGameObject() {
 
 	gravity = DEFAULT_GRAVITY; // physics manager ??
 
-	isClimbing = false; // player
-
 	checkIfJumpPossible = false; // player / no this should be somwhere else
 	jumpHeightStop = SCREEN_HEIGHT; // player / no this should be somwhere else
 }
 
 void MovableGameObject::startAccumulatingDistance(double deltaTime) {
 	if (currentDirectionOfMovement == 0) { // up
-		if (isClimbing) {
-			accumulatedMoveUp += deltaTime * objectSpeed;
-		}
+		accumulatedMoveUp += deltaTime * objectSpeed;
 	}
 	else if (currentDirectionOfMovement == 1) { // right
 		accumulatedMoveRight += deltaTime * objectSpeed;
 	}
 	else if (currentDirectionOfMovement == 2) { // down
-		if (isClimbing) {
-			accumulatedMoveDown += deltaTime * objectSpeed;
-		}
+		accumulatedMoveDown += deltaTime * objectSpeed;
 	}
 	else if (currentDirectionOfMovement == 3) { // left
 		accumulatedMoveLeft += deltaTime * objectSpeed;

@@ -10,6 +10,14 @@ Player::Player() {
 	isInsideLadder = false; // player
 }
 
+void Player::startClimbing() {
+	isClimbing = true;
+}
+
+void Player::stopClimbing() {
+	isClimbing = false;
+}
+
 void Player::jump(double deltaTime) {
 	ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
 	accumulatedMoveUp -= deltaTime * gravity;
@@ -67,5 +75,31 @@ void Player::loadNextClimbingSprite() {
 
 bool Player::isPlayerJumping() {
 	return this->isJumping;
+}
+
+void Player::startAccumulatingDistance(double deltaTime) {
+	if (currentDirectionOfMovement == 0 || currentDirectionOfMovement == 2) { // up or down
+		if (isClimbing) {
+			if (currentDirectionOfMovement == 0) {
+				accumulatedMoveUp += deltaTime * objectSpeed;
+			}
+			else {
+				accumulatedMoveDown += deltaTime * objectSpeed;
+			}
+		}
+	}
+	else {
+		MovableGameObject::startAccumulatingDistance(deltaTime);
+	}
+}
+
+void Player::update(double deltaTime) { // break this up into smaller functions
+	MovableGameObject::updatePosition();
+	startAccumulatingDistance(deltaTime);
+	MovableGameObject::stayInBounds();
+
+	// to remove these you need to merge the three methods into one and then updateObjectPosition
+	destRect.x = xpos;
+	destRect.y = ypos;
 }
 
