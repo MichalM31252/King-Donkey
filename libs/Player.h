@@ -24,6 +24,5 @@ public:
 	void loadNextClimbingSprite();
 	bool isPlayerJumping();
 
-	void startAccumulatingDistance(double deltaTime);
-	void update(double deltaTime);
+	void startAccumulatingDistance(double deltaTime) override;
 };

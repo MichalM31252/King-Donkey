@@ -24,14 +24,16 @@ public:
 	int currentSpriteId;
 
 	MovableGameObject();
+
 	void update(double deltaTime);
+	virtual void startAccumulatingDistance(double deltaTime);
 
 	// move this to gameObjectsManager
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	void stayInBounds();
 	void updatePosition();
-	void startAccumulatingDistance(double deltaTime);
+	
 	void startMovingAtSpeed(double speed);
 	void startMovingLeft(double delta);
 	void startMovingRight(double delta);

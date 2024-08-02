@@ -93,13 +93,3 @@ void Player::startAccumulatingDistance(double deltaTime) {
 	}
 }
 
-void Player::update(double deltaTime) { // break this up into smaller functions
-	MovableGameObject::updatePosition();
-	startAccumulatingDistance(deltaTime);
-	MovableGameObject::stayInBounds();
-
-	// to remove these you need to merge the three methods into one and then updateObjectPosition
-	destRect.x = xpos;
-	destRect.y = ypos;
-}
-
