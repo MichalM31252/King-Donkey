@@ -14,10 +14,11 @@
 - [ ] Fix memory leaks
 - [ ] Implement a normal vector for BarrelHolder, LadderHolder, PlatformHolder instead of your own implementation
 - [ ] Fix every code smell
-- [ ] Change classes that can be static to static classes
+- [ ] Change classes which don't need an instance to static ones
 - [ ] Fix inconsistent indentations
 - [ ] Add menu
 - [ ] Add a pickup items (hammer, prizes)
+- [ ] Refactor collision detection methods from single pixels to SDL_Rectangles
 
 # STATISTICS
 
