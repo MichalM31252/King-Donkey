@@ -8,6 +8,8 @@ Player::Player() {
 	isClimbing = false; // player
 	isJumping = false; // player
 	isInsideLadder = false; // player
+	checkIfJumpPossible = false; // player
+	jumpHeightStop = SCREEN_HEIGHT; // player
 }
 
 void Player::startClimbing() {

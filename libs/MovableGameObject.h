@@ -16,11 +16,6 @@ public:
 
 	int currentDirectionOfMovement;
 
-	bool checkIfJumpPossible;
-	int jumpHeightStop;
-
-	bool isPlayer;
-
 	int currentSpriteId;
 
 	MovableGameObject();

@@ -9,6 +9,8 @@ public:
 	bool isInsideLadder;
 	bool isJumping;
 	bool isClimbing;
+	bool checkIfJumpPossible;
+	int jumpHeightStop;
 
 	Player();
 	void jump(double deltaTime);

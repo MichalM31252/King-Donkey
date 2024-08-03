@@ -7,22 +7,14 @@ extern "C" {
 
 MovableGameObject::MovableGameObject() {
 	currentDirectionOfMovement = -1; // 0 - up , 1 - right, 2 - down, 3 - left
-
 	accumulatedMoveDown = 0;
 	accumulatedMoveLeft = 0;
 	accumulatedMoveRight = 0;
 	accumulatedMoveUp = 0;
-
 	canLeaveScreen = false; // leave here
 	objectSpeed = 0; // leave here
-
 	currentSpriteId = 1;
-	// maybe add this to game object class since princess and donkeykong can have animations but they dont move
-
 	gravity = DEFAULT_GRAVITY; // physics manager ??
-
-	checkIfJumpPossible = false; // player / no this should be somwhere else
-	jumpHeightStop = SCREEN_HEIGHT; // player / no this should be somwhere else
 }
 
 void MovableGameObject::startAccumulatingDistance(double deltaTime) {
