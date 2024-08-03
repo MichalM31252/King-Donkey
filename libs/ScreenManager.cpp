@@ -104,7 +104,7 @@ void ScreenManager::setColors() {
 	white = SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF);
 	ladderColor = SDL_MapRGB(screen->format, 0x00, 0xcf, 0xcf);
 	platformColor = SDL_MapRGB(screen->format, 0xef, 0x1e, 0x4f);
-};
+}     
 
 void ScreenManager::drawOutlineOfTheBoard() {
 	DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black);
@@ -240,8 +240,7 @@ void ScreenManager::drawBarrels() {
 	}
 }
 
-void ScreenManager::handlePlayerSprite(Player* player) // rename to handlePlayerSprite
-{
+void ScreenManager::handlePlayerSprite(Player* player){ // rename to handlePlayerSprite
 	if (player->isPlayerJumping()) {
 		player->loadJumpingSprite();
 	}

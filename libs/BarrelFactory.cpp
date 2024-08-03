@@ -1,9 +1,6 @@
 extern "C" {
 #include "BarrelFactory.h"
-
-	// why is this needed ?? // because you need to set the texture for an object
 #include "ScreenManager.h" // temporary fix
-
 }
 
 void BarrelFactory::initBarrelFactory(BarrelFactory* barrelFactory) {
@@ -26,7 +23,6 @@ void BarrelFactory::update(double deltaTime) {
 
 void BarrelFactory::throwBarrel() {
 	MovableGameObject* barrel = new MovableGameObject();
-
 	ScreenManager::initGameObject(barrel, BARREL_1_FILENAME); // this needs refactoring 
 
 	barrel->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);

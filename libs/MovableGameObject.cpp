@@ -11,8 +11,8 @@ MovableGameObject::MovableGameObject() {
 	accumulatedMoveLeft = 0;
 	accumulatedMoveRight = 0;
 	accumulatedMoveUp = 0;
-	canLeaveScreen = false; // leave here
-	objectSpeed = 0; // leave here
+	canLeaveScreen = false;
+	objectSpeed = 0;
 	currentSpriteId = 1;
 	gravity = DEFAULT_GRAVITY; // physics manager ??
 }
@@ -36,25 +36,21 @@ void MovableGameObject::startAccumulatingDistance(double deltaTime) {
 }
 
 void MovableGameObject::updatePosition() {
-
 	if (accumulatedMoveRight > 1.0f) {
 		int pixelsToMove = (int)accumulatedMoveRight;
 		xpos += pixelsToMove;
 		accumulatedMoveRight -= pixelsToMove;
 	}
-
 	if (accumulatedMoveDown > 1.0f) {
 		int pixelsToMove = (int)accumulatedMoveDown;
 		ypos += pixelsToMove;
 		accumulatedMoveDown -= pixelsToMove;
 	}
-
 	if (accumulatedMoveLeft > 1.0f) {
 		int pixelsToMove = (int)accumulatedMoveLeft;
 		xpos -= pixelsToMove;
 		accumulatedMoveLeft -= pixelsToMove;
 	}
-
 	if (accumulatedMoveUp > 1.0f) {
 		int pixelsToMove = (int)accumulatedMoveUp;
 		ypos -= pixelsToMove;
@@ -80,14 +76,16 @@ void MovableGameObject::stayInBounds() {
 	}
 }
 
+void MovableGameObject::updatePositionCoordinates() {
+	destRect.x = xpos;
+	destRect.y = ypos;
+}
+
 void MovableGameObject::update(double deltaTime) { // break this up into smaller functions
 	updatePosition();
 	startAccumulatingDistance(deltaTime);
 	stayInBounds();
-
-	// to remove these you need to merge the three methods into one and then updateObjectPosition
-	destRect.x = xpos;
-	destRect.y = ypos;
+	updatePositionCoordinates();
 }
 
 void MovableGameObject::startMovingAtSpeed(double speed) {

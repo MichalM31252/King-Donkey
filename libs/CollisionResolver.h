@@ -23,13 +23,8 @@ public:
 	GameObjectContainer* gameObjectContainer;
 	ScreenManager* screenManager;
 
-	bool isColliding = false;
-
 	CollisionResolver();
 	CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager);
-
-	// Game object manager or collision manager?
-	/////////////////////////////////////////////////////////////////////////////////////
 
 	void handlePlayerCollisionWithKong();
 	void handlePlayerCollisionWithPrincess();
@@ -37,8 +32,6 @@ public:
 	void handlePlayerCollisionWithLadder();
 	void handleCollisionWithPlatform(MovableGameObject* gameObject, int* isGameObjectInsidePlatform);
 	void handleCollisionWithJumping();
-
-	/////////////////////////////////////////////////////////////////////////////////////
 
 	void handlePlayerCollision();
 	void handleBarrelsCollision(bool* quit, int* startAnotherRound);

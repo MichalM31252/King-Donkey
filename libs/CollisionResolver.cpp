@@ -88,7 +88,6 @@ void CollisionResolver::handleCollisionWithPlatform(MovableGameObject* gameObjec
 }
 
 void CollisionResolver::handlePlayerCollision() { // player collision
-
 	Player* player = gameObjectContainer->player;
 	int isPlayerInsidePlatform = 0;
 
@@ -113,7 +112,6 @@ void CollisionResolver::handlePlayerCollision() { // player collision
 			player->jump(screenManager->deltaTime);
 		}
 	}
-
 	if (player->isJumping && player->ypos <= player->jumpHeightStop) {
 		player->stopJumping();
 		player->startFalling();
@@ -122,7 +120,6 @@ void CollisionResolver::handlePlayerCollision() { // player collision
 
 void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRound) {
 	for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->numberOfElements; i++) {
-
 		MovableGameObject* barrel = &gameObjectContainer->barrelFactory->barrelHolder->barrels[i];
 
 		handlePlayerCollisionWithBarrel(barrel, quit, startAnotherRound);

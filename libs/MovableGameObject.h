@@ -10,25 +10,18 @@ public:
 	double accumulatedMoveLeft, accumulatedMoveUp, accumulatedMoveRight, accumulatedMoveDown;
 	bool canLeaveScreen;
 	double objectSpeed;
-
 	bool isFalling;
 	double gravity;
-
 	int currentDirectionOfMovement;
-
 	int currentSpriteId;
 
 	MovableGameObject();
-
 	void update(double deltaTime);
 	virtual void startAccumulatingDistance(double deltaTime);
-
-	// move this to gameObjectsManager
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+	void updatePositionCoordinates();
 
 	void stayInBounds();
 	void updatePosition();
-	
 	void startMovingAtSpeed(double speed);
 	void startMovingLeft(double delta);
 	void startMovingRight(double delta);
@@ -36,13 +29,6 @@ public:
 	void startMovingDown(double delta);
 	void stopMove();
 
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	// move this to physcics manager
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	void startFalling();
 	void stopFalling();
-
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////
 };

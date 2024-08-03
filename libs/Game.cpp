@@ -6,7 +6,6 @@ extern "C" {
 }
 
 Game::Game() {
-
 	// the only thing that should be here is the stage manager
 	// first move every method from this class to its respective manager then implement the stage manager
 
@@ -28,11 +27,8 @@ Game::Game() {
 
 void Game::initGame() {
 	screenManager->createSDL();
-
 	int startAnotherRound = 0;
-
 	roundManager->handleRound(startAnotherRound);
-
 	closeGame();
 }
 
