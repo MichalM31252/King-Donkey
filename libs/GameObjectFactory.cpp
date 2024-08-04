@@ -11,7 +11,6 @@ GameObjectFactory::GameObjectFactory(GameObjectContainer* gameObjectContainer) {
 	this->gameObjectContainer = gameObjectContainer;
 }
 
-// Move to game object manager
 void GameObjectFactory::createPlayer() {
 	Player* pla = new Player();
 
@@ -24,7 +23,6 @@ void GameObjectFactory::createPlayer() {
 	gameObjectContainer->player = pla;
 }
 
-// Move to game object manager
 void GameObjectFactory::createDonkeyKong() {
 	GameObject* donkeyK = new GameObject();
 
@@ -37,7 +35,6 @@ void GameObjectFactory::createDonkeyKong() {
 	gameObjectContainer->donkeyKong = donkeyK;
 }
 
-// Move to game object manager
 void GameObjectFactory::createPrincess() {
 	GameObject* prin = new GameObject();
 
@@ -50,7 +47,6 @@ void GameObjectFactory::createPrincess() {
 	gameObjectContainer->princess = prin;
 }
 
-// Move to stage manager / game object manager ??? idk yet
 void GameObjectFactory::createPlatforms1() {
 	Platform* plat1 = new Platform();
 	plat1->setPosition(1, 400, 400, 400);
@@ -77,8 +73,6 @@ void GameObjectFactory::createPlatforms1() {
 
 	gameObjectContainer->platformHolder = pH;
 }
-
-// Move to stage manager / game object manager ??? idk yet
 
 void GameObjectFactory::createLadders1() {
 	GameObject* ladd1 = new GameObject();
@@ -123,7 +117,6 @@ void GameObjectFactory::createBarrels() {
 	gameObjectContainer->barrelFactory->setPosition(gameObjectContainer->donkeyKong->xpos + gameObjectContainer->donkeyKong->destRect.w + +SMALL_MARGIN, gameObjectContainer->donkeyKong->ypos);
 }
 
-// Move to stage manager / game object manager ??? idk yet
 void GameObjectFactory::createPlatforms2() {
 	Platform* plat1 = new Platform();
 	plat1->setPosition(TINY_MARGIN, 400, SCREEN_WIDTH - 1, 400);
@@ -155,7 +148,6 @@ void GameObjectFactory::createPlatforms2() {
 	gameObjectContainer->platformHolder = platH;
 }
 
-// Move to stage manager / game object manager
 void GameObjectFactory::createLadders2() {
 	GameObject* ladd1 = new GameObject();
 
@@ -181,7 +173,6 @@ void GameObjectFactory::createLadders2() {
 	gameObjectContainer->ladderHolder = laddH;
 }
 
-// Move to stage manager / game object manager ??? idk yet
 void GameObjectFactory::createPlatforms3() {
 	Platform* plat1 = new Platform();
 	plat1->setPosition(STARTING_X, 400, SCREEN_WIDTH - TINY_MARGIN, 400);
@@ -209,7 +200,6 @@ void GameObjectFactory::createPlatforms3() {
 	gameObjectContainer->platformHolder = platH;
 }
 
-// Move to stage manager / game object manager ??? idk yet
 void GameObjectFactory::createLadders3() {
 	GameObject* ladd1 = new GameObject();
 
@@ -252,7 +242,6 @@ void GameObjectFactory::createLadders3() {
 	gameObjectContainer->ladderHolder = laddH;
 }
 
-// Move to stage manager
 void GameObjectFactory::createBoard(int boardId) {
 	createPlayer();
 	createDonkeyKong();

@@ -4,9 +4,7 @@ bool CollisionDetector::isCollisionBetweenRects(SDL_Rect a, SDL_Rect b) {
 	if (SDL_HasIntersection(&a, &b)) {
 		return true;
 	}
-	else {
-		return false;
-	}
+	return false;
 }
 
 bool CollisionDetector::isPointAPartOfLine(const int x, const int y, Platform* platform) { // make this function check for x1 and x2 
