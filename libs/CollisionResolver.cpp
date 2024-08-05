@@ -56,33 +56,18 @@ void CollisionResolver::handleCollisionWithJumping() {
 	}
 }
 
-void CollisionResolver::handleCollisionWithPlatform(MovableGameObject* gameObject, int* isGameObjectInsidePlatform) {
-	// check bottom left corner
-	// check bottom right corner
+void CollisionResolver::handleCollisionWithPlatform(MovableGameObject* gameObject, int* isGameObjectOnTopOfPlatform) {
 	int yPosition = gameObject->ypos + gameObject->destRect.h;
-	int xPositionBottomLeftCorner = gameObject->xpos;
-	int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
 
-	for (int i = 0; i < gameObjectContainer->platformHolder->numberOfElements; i++) {
+	for (int i = 0; i < gameObjectContainer->platformHolder->numberOfElements; i++) {		
 
-		//bottom left corner 
-		if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, &gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
-			// write a function is player climbing
+		if (CollisionDetector::isGameObjectOnTopOfPlatform(gameObject, &gameObjectContainer->platformHolder->platforms[i])) {
+			*isGameObjectOnTopOfPlatform = 1;
+		}
+
+		if (CollisionDetector::isGameObjectInsidePlatform(gameObject, &gameObjectContainer->platformHolder->platforms[i])) {
 			gameObject->ypos--;
 			yPosition--;
-		}
-		if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, &gameObjectContainer->platformHolder->platforms[i])) { // isPointOnTopOfLine
-			*isGameObjectInsidePlatform = 1;
-		}
-
-		//bottom right corner 
-		if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition, &gameObjectContainer->platformHolder->platforms[i])) { // isPointInsideLine
-			// write a function is player climbing
-			gameObject->ypos--;
-			yPosition--;
-		}
-		if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, &gameObjectContainer->platformHolder->platforms[i])) {// isPointOnTopOfLine
-			*isGameObjectInsidePlatform = 1;
 		}
 	}
 }
@@ -111,10 +96,10 @@ void CollisionResolver::handlePlayerCollision() { // player collision
 			// this should be renamed to start jumping
 			player->jump(screenManager->deltaTime);
 		}
-	}
-	if (player->isJumping && player->ypos <= player->jumpHeightStop) {
-		player->stopJumping();
-		player->startFalling();
+		if (player->isJumping && player->ypos <= player->jumpHeightStop) {
+			player->stopJumping();
+			player->startFalling();
+		}
 	}
 }
 
@@ -124,10 +109,10 @@ void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRoun
 
 		handlePlayerCollisionWithBarrel(barrel, quit, startAnotherRound);
 
-		int isGameObjectInsidePlatform = 0;
-		handleCollisionWithPlatform(barrel, &isGameObjectInsidePlatform);
+		int isGameObjectOnTopOfPlatform = 0;
+		handleCollisionWithPlatform(barrel, &isGameObjectOnTopOfPlatform);
 
-		if (isGameObjectInsidePlatform) {
+		if (isGameObjectOnTopOfPlatform) {
 			if ((*barrel).isFalling) {
 				// stopObjectFromFallingThroughPlatform
 				(*barrel).stopFalling();

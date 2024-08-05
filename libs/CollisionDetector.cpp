@@ -29,3 +29,35 @@ bool CollisionDetector::isRectInsideLadder(SDL_Rect playerDestRect, SDL_Rect lad
 	}
 	return false;
 }
+
+bool CollisionDetector::isGameObjectOnTopOfPlatform(GameObject* gameObject, Platform* platform) {
+	int yPosition = gameObject->ypos + gameObject->destRect.h;
+	int xPositionBottomLeftCorner = gameObject->xpos;
+	int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
+
+	if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, platform)) {
+		return true;
+	}
+
+	if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, platform)) {
+		return true;
+	}
+
+	return false;
+}
+
+bool CollisionDetector::isGameObjectInsidePlatform(GameObject* gameObject, Platform* platform) { // refactor to boxes instead of pixels
+	int yPosition = gameObject->ypos + gameObject->destRect.h;
+	int xPositionBottomLeftCorner = gameObject->xpos;
+	int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
+
+	if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, platform)) { // check bottom left corner
+		return true;
+	}
+
+	if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition, platform)) { // check bottom right corner
+		return true;
+	}
+
+	return false;
+}

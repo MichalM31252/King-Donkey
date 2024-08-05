@@ -28,7 +28,9 @@ public:
 	static bool isCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
 	static bool isPointAPartOfLine(const int x, const int y, Platform* platform);
 	static bool isRectInsideLadder(SDL_Rect a, SDL_Rect b);
-	// isGameObjectInsidePlatform
+
+	static bool isGameObjectOnTopOfPlatform(GameObject* gameObject, Platform* platform);
+	static bool isGameObjectInsidePlatform(GameObject* gameObject, Platform* platform);
 	// isGameObjectInsideBarrel
 
 	// isPlayerClimbingTheLadder (check if player is inside ladder, then check if if player is not touching the platform (ok but what about falling))
