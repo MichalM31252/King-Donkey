@@ -56,15 +56,9 @@ void CollisionResolver::handleCollisionWithJumping() {
 	}
 }
 
-void CollisionResolver::handleCollisionWithPlatform(MovableGameObject* gameObject, int* isGameObjectOnTopOfPlatform) {
+void CollisionResolver::handleCollisionWithPlatform(MovableGameObject* gameObject) {
 	int yPosition = gameObject->ypos + gameObject->destRect.h;
-
 	for (int i = 0; i < gameObjectContainer->platformHolder->numberOfElements; i++) {		
-
-		if (CollisionDetector::isGameObjectOnTopOfPlatform(gameObject, &gameObjectContainer->platformHolder->platforms[i])) {
-			*isGameObjectOnTopOfPlatform = 1;
-		}
-
 		if (CollisionDetector::isGameObjectInsidePlatform(gameObject, &gameObjectContainer->platformHolder->platforms[i])) {
 			gameObject->ypos--;
 			yPosition--;
@@ -74,16 +68,15 @@ void CollisionResolver::handleCollisionWithPlatform(MovableGameObject* gameObjec
 
 void CollisionResolver::handlePlayerCollision() { // player collision
 	Player* player = gameObjectContainer->player;
-	int isPlayerInsidePlatform = 0;
 
-	handleCollisionWithPlatform(gameObjectContainer->player, &isPlayerInsidePlatform);
+	handleCollisionWithPlatform(gameObjectContainer->player);
 	handlePlayerCollisionWithKong();
 	handlePlayerCollisionWithPrincess();
 	handlePlayerCollisionWithLadder();
 
 	// write a function is player climbing
 	if (!player->isClimbing) {
-		if (isPlayerInsidePlatform) {
+		if (CollisionDetector::isGameObjectInsideAnyPlatform(player, gameObjectContainer->platformHolder)) {
 			screenManager->loadTexture(player, PLAYER_1_FILENAME);
 			// what does this function do?
 			handleCollisionWithJumping();
@@ -108,11 +101,9 @@ void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRoun
 		MovableGameObject* barrel = &gameObjectContainer->barrelFactory->barrelHolder->barrels[i];
 
 		handlePlayerCollisionWithBarrel(barrel, quit, startAnotherRound);
+		handleCollisionWithPlatform(barrel);
 
-		int isGameObjectOnTopOfPlatform = 0;
-		handleCollisionWithPlatform(barrel, &isGameObjectOnTopOfPlatform);
-
-		if (isGameObjectOnTopOfPlatform) {
+		if (CollisionDetector::isGameObjectOnTopOfPlatform(barrel, &gameObjectContainer->platformHolder->platforms[i])) {
 			if ((*barrel).isFalling) {
 				// stopObjectFromFallingThroughPlatform
 				(*barrel).stopFalling();

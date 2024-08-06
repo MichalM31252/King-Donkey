@@ -4,7 +4,7 @@ extern "C" {
 #include "../SDL2-2.0.10/include/SDL_main.h"
 #include "MovableGameObject.h"
 #include "Platform.h"
-
+#include "PlatformHolder.h"
 }
 // tracks every game object in the game and checks if they collide
 
@@ -31,6 +31,7 @@ public:
 
 	static bool isGameObjectOnTopOfPlatform(GameObject* gameObject, Platform* platform);
 	static bool isGameObjectInsidePlatform(GameObject* gameObject, Platform* platform);
+	static bool isGameObjectInsideAnyPlatform(GameObject* gameObject, PlatformHolder* platformHolder);
 	// isGameObjectInsideBarrel
 
 	// isPlayerClimbingTheLadder (check if player is inside ladder, then check if if player is not touching the platform (ok but what about falling))

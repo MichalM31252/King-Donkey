@@ -30,7 +30,7 @@ public:
 	void handlePlayerCollisionWithPrincess();
 	void handlePlayerCollisionWithBarrel(MovableGameObject* barrel, bool* quit, int* startAnotherRound);
 	void handlePlayerCollisionWithLadder();
-	void handleCollisionWithPlatform(MovableGameObject* gameObject, int* isGameObjectOnTopOfPlatform);
+	void handleCollisionWithPlatform(MovableGameObject* gameObject);
 	void handleCollisionWithJumping();
 
 	void handlePlayerCollision();
