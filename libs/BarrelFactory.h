@@ -1,19 +1,19 @@
 #pragma once
 
 extern "C" {
-#include "DynamicGameObject.h"
+#include "MovableGameObject.h"
 #include "BarrelHolder.h"
-#include "BarrelDispenser.h"
+#include "BarrelFactory.h"
 }
 
-class BarrelDispenser {
+class BarrelFactory {
 private:
 	int xpos, ypos;
 	double accumulatedTime;
 public:
 	BarrelHolder* barrelHolder;
 
-	void initBarrelDispenser(BarrelDispenser* barrelDispenser);
+	void initBarrelFactory(BarrelFactory* barrelFactory);
 	void setPosition(int x, int y);
 	void update(double deltaTime);
 	void throwBarrel();

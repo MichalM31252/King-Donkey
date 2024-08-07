@@ -8,6 +8,16 @@ Player::Player() {
 	isClimbing = false; // player
 	isJumping = false; // player
 	isInsideLadder = false; // player
+	checkIfJumpPossible = false; // player
+	jumpHeightStop = SCREEN_HEIGHT; // player
+}
+
+void Player::startClimbing() {
+	isClimbing = true;
+}
+
+void Player::stopClimbing() {
+	isClimbing = false;
 }
 
 void Player::jump(double deltaTime) {
@@ -63,5 +73,25 @@ void Player::loadClimbingSprite() {
 
 void Player::loadNextClimbingSprite() {
 
+}
+
+bool Player::isPlayerJumping() {
+	return this->isJumping;
+}
+
+void Player::startAccumulatingDistance(double deltaTime) {
+	if (currentDirectionOfMovement == 0 || currentDirectionOfMovement == 2) { // up or down
+		if (isClimbing) {
+			if (currentDirectionOfMovement == 0) {
+				accumulatedMoveUp += deltaTime * objectSpeed;
+			}
+			else {
+				accumulatedMoveDown += deltaTime * objectSpeed;
+			}
+		}
+	}
+	else {
+		MovableGameObject::startAccumulatingDistance(deltaTime);
+	}
 }
 

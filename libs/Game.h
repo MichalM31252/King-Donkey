@@ -20,7 +20,6 @@ extern "C" {
 class Game {
 public:
 	GameObjectContainer* gameObjectContainer;
-
 	GameObjectFactory* gameObjectFactory;
 	ScreenManager* screenManager;
 	CollisionResolver* collisionResolver;

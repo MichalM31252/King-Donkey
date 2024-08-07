@@ -1,10 +1,12 @@
 #pragma once
 
 extern "C" {
-#include "DynamicGameObject.h"
+#include "Player.h"
+#include "Barrel.h"
 }
 
 class PhysicsManager {
 public:
-	static void handleFalling(DynamicGameObject* dynamicGameObject, double deltaTime);
+	static void handleFallingForPlayer(Player* player, double deltaTime);
+	static void handleFalling(MovableGameObject* object, double deltaTime);
 };

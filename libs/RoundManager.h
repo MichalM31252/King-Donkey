@@ -6,9 +6,7 @@
 
 
 class RoundManager {
-
 public:
-
 	ScreenManager* screenManager;
 	GameObjectFactory* gameObjectFactory;
 	GameObjectContainer* gameObjectContainer;

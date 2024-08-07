@@ -9,7 +9,7 @@ extern "C" {
 
 #include "Platform.h"
 #include "GameObject.h"
-#include "DynamicGameObject.h"
+#include "MovableGameObject.h"
 #include "GameObjectContainer.h"
 #include "PhysicsManager.h"
 #include "ScreenManager.h"
@@ -23,22 +23,15 @@ public:
 	GameObjectContainer* gameObjectContainer;
 	ScreenManager* screenManager;
 
-	bool isColliding = false;
-
 	CollisionResolver();
 	CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager);
 
-	// Game object manager or collision manager?
-	/////////////////////////////////////////////////////////////////////////////////////
-
 	void handlePlayerCollisionWithKong();
 	void handlePlayerCollisionWithPrincess();
-	void handlePlayerCollisionWithBarrel(DynamicGameObject* barrel, bool* quit, int* startAnotherRound);
+	void handlePlayerCollisionWithBarrel(MovableGameObject* barrel, bool* quit, int* startAnotherRound);
 	void handlePlayerCollisionWithLadder();
-	void handleCollisionWithPlatform(DynamicGameObject* gameObject, int* isGameObjectInsidePlatform);
+	void handleCollisionWithPlatform(MovableGameObject* gameObject);
 	void handleCollisionWithJumping();
-
-	/////////////////////////////////////////////////////////////////////////////////////
 
 	void handlePlayerCollision();
 	void handleBarrelsCollision(bool* quit, int* startAnotherRound);

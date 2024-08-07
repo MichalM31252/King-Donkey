@@ -31,14 +31,13 @@ void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startA
 
 		gameObjectContainer->player->update(screenManager->deltaTime);
 
-
 		collisionResolver->handlePlayerCollision();
 		screenManager->handlePlayerSprite(gameObjectContainer->player);
 
-		gameObjectContainer->barrelDispenser->update(screenManager->deltaTime);
+		gameObjectContainer->barrelFactory->update(screenManager->deltaTime);
 
-		for (int i = 0; i < gameObjectContainer->barrelDispenser->barrelHolder->numberOfElements; i++) {
-			DynamicGameObject* barrel = &gameObjectContainer->barrelDispenser->barrelHolder->barrels[i];
+		for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->numberOfElements; i++) {
+			MovableGameObject* barrel = &gameObjectContainer->barrelFactory->barrelHolder->barrels[i];
 			(*barrel).update(screenManager->deltaTime);
 			// update sprite of barrel here
 		}

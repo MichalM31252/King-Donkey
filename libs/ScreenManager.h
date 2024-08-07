@@ -6,7 +6,7 @@ extern "C" {
 #include <string.h>
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
-#include "DynamicGameObject.h"
+#include "MovableGameObject.h"
 #include "Constants.h"
 #include "GameObjectContainer.h"
 
