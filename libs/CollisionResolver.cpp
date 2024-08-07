@@ -76,7 +76,7 @@ void CollisionResolver::handlePlayerCollision() { // player collision
 
 	// write a function is player climbing
 	if (!player->isClimbing) {
-		if (CollisionDetector::isGameObjectInsideAnyPlatform(player, gameObjectContainer->platformHolder)) {
+		if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(player, gameObjectContainer->platformHolder)) {
 			screenManager->loadTexture(player, PLAYER_1_FILENAME);
 			// what does this function do?
 			handleCollisionWithJumping();
@@ -103,7 +103,7 @@ void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRoun
 		handlePlayerCollisionWithBarrel(barrel, quit, startAnotherRound);
 		handleCollisionWithPlatform(barrel);
 
-		if (CollisionDetector::isGameObjectOnTopOfPlatform(barrel, &gameObjectContainer->platformHolder->platforms[i])) {
+		if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(barrel, gameObjectContainer->platformHolder)) {
 			if ((*barrel).isFalling) {
 				// stopObjectFromFallingThroughPlatform
 				(*barrel).stopFalling();

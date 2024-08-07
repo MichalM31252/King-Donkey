@@ -31,7 +31,7 @@ public:
 
 	static bool isGameObjectOnTopOfPlatform(GameObject* gameObject, Platform* platform);
 	static bool isGameObjectInsidePlatform(GameObject* gameObject, Platform* platform);
-	static bool isGameObjectInsideAnyPlatform(GameObject* gameObject, PlatformHolder* platformHolder);
+	static bool isGameObjectOnTopOfAnyPlatform(GameObject* gameObject, PlatformHolder* platformHolder);
 	// isGameObjectInsideBarrel
 
 	// isPlayerClimbingTheLadder (check if player is inside ladder, then check if if player is not touching the platform (ok but what about falling))

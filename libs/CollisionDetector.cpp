@@ -62,9 +62,9 @@ bool CollisionDetector::isGameObjectInsidePlatform(GameObject* gameObject, Platf
 	return false;
 }
 
-bool CollisionDetector::isGameObjectInsideAnyPlatform(GameObject* gameObject, PlatformHolder* platformHolder) {
+bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(GameObject* gameObject, PlatformHolder* platformHolder) {
 	for (int i = 0; i < platformHolder->numberOfElements; i++) {
-		if (CollisionDetector::isGameObjectInsidePlatform(gameObject, &platformHolder->platforms[i])) {
+		if (CollisionDetector::isGameObjectOnTopOfPlatform(gameObject, &platformHolder->platforms[i])) {
 			return true;
 		}
 	}
