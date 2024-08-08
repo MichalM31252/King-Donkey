@@ -28,3 +28,9 @@ void addBarrel(BarrelHolder* barrelHolder, MovableGameObject* barrel) {
 void emptyBarrelHolder(BarrelHolder* barrelHolder) {
 	delete[] barrelHolder->barrels;
 }
+
+void updateBarrels(BarrelHolder* barrelHolder, float deltaTime) {
+	for (int i = 0; i < barrelHolder->numberOfElements; i++) {
+		barrelHolder->barrels[i].update(deltaTime);
+	}
+}

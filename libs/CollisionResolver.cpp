@@ -74,7 +74,7 @@ void CollisionResolver::handlePlayerCollision() { // player collision
 	handlePlayerCollisionWithPrincess();
 	handlePlayerCollisionWithLadder();
 
-	// write a function is player climbing
+	// handle player jumping
 	if (!player->isClimbing) {
 		if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(player, gameObjectContainer->platformHolder)) {
 			screenManager->loadTexture(player, PLAYER_1_FILENAME);

@@ -13,3 +13,4 @@ struct BarrelHolder {
 void initBarrelHolder(BarrelHolder* barrelHolder);
 void addBarrel(BarrelHolder* barrelHolder, MovableGameObject* barrel);
 void emptyBarrelHolder(BarrelHolder* barrelHolder);
+void updateBarrels(BarrelHolder* barrelHolder, float deltaTime);
