@@ -16,6 +16,7 @@ private:
 	SDL_Event event; // this can be used here
 public:
 
+
 	GameObjectContainer* gameObjectContainer;
 
 	KeyboardManager();
