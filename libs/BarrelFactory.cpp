@@ -3,9 +3,9 @@ extern "C" {
 #include "ScreenManager.h" // temporary fix
 }
 
-void BarrelFactory::initBarrelFactory(BarrelFactory* barrelFactory) {
-	barrelFactory->barrelHolder = new BarrelHolder;
-	initBarrelHolder(barrelFactory->barrelHolder);
+void BarrelFactory::initBarrelFactory(BarrelFactory* barrelFactory) const{
+	barrelFactory->barrelHolder = std::make_unique<BarrelHolder>();
+	initBarrelHolder(barrelFactory->barrelHolder.get());
 }
 
 void BarrelFactory::setPosition(int x, int y) {
@@ -22,13 +22,13 @@ void BarrelFactory::update(double deltaTime) {
 }
 
 void BarrelFactory::throwBarrel() {
-	MovableGameObject* barrel = new MovableGameObject();
-	ScreenManager::initGameObject(barrel, BARREL_1_FILENAME); // this needs refactoring 
+	auto barrel = std::make_unique<MovableGameObject>();
+	ScreenManager::initGameObject(barrel.get(), BARREL_1_FILENAME);
 
 	barrel->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
 	barrel->createSrcRect();
 	barrel->createDestRect();
 	barrel->objectSpeed = DEFAULT_BARREL_SPEED;
 
-	addBarrel(barrelHolder, barrel);
+	addBarrel(barrelHolder.get(), std::move(barrel));
 }

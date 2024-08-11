@@ -99,7 +99,8 @@ void GameObjectFactory::createLadders1() {
 }
 
 void GameObjectFactory::createBarrels() {
-	MovableGameObject* barrel1 = new MovableGameObject();
+	// std::unique_ptr<BarrelHolder> barrelHolder
+	std::unique_ptr<MovableGameObject> barrel1 = std::make_unique<MovableGameObject>();
 
 	ScreenManager::initGameObject(barrel1, BARREL_1_FILENAME);
 
