@@ -98,8 +98,7 @@ void GameObjectFactory::createLadders1() {
 	gameObjectContainer->ladderHolder = laddH;
 }
 
-void GameObjectFactory::createBarrels() {
-	// std::unique_ptr<BarrelHolder> barrelHolder
+void GameObjectFactory::createBarrels() { // work on this 
 	std::unique_ptr<MovableGameObject> barrel1 = std::make_unique<MovableGameObject>();
 
 	ScreenManager::initGameObject(barrel1, BARREL_1_FILENAME);
@@ -109,7 +108,7 @@ void GameObjectFactory::createBarrels() {
 	barrel1->createDestRect();
 	barrel1->objectSpeed = DEFAULT_BARREL_SPEED;
 
-	BarrelHolder* barrelH = new BarrelHolder();
+	std::unique_ptr<BarrelHolder> barrelH = std::make_unique<BarrelHolder>();
 	initBarrelHolder(barrelH);
 	addBarrel(barrelH, barrel1);
 
@@ -150,7 +149,7 @@ void GameObjectFactory::createPlatforms2() {
 }
 
 void GameObjectFactory::createLadders2() {
-	GameObject* ladd1 = new GameObject();
+	std::unique_ptr<GameObject> ladd1 = std::make_unique<GameObject>();
 
 	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
 
@@ -158,7 +157,7 @@ void GameObjectFactory::createLadders2() {
 	ladd1->setSrcRect(LADDER_WIDTH, 170);
 	ladd1->setDestRect(LADDER_WIDTH, 170);
 
-	GameObject* ladd2 = new GameObject();
+	std::unique_ptr<GameObject> ladd2 = std::make_unique<GameObject>();
 
 	ScreenManager::initGameObject(ladd2, "./assets/Ladder.bmp");
 

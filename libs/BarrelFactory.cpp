@@ -5,7 +5,7 @@ extern "C" {
 
 void BarrelFactory::initBarrelFactory(BarrelFactory* barrelFactory) const{
 	barrelFactory->barrelHolder = std::make_unique<BarrelHolder>();
-	initBarrelHolder(barrelFactory->barrelHolder.get());
+	initBarrelHolder(barrelFactory->barrelHolder);
 }
 
 void BarrelFactory::setPosition(int x, int y) {
@@ -30,5 +30,5 @@ void BarrelFactory::throwBarrel() {
 	barrel->createDestRect();
 	barrel->objectSpeed = DEFAULT_BARREL_SPEED;
 
-	addBarrel(barrelHolder.get(), std::move(barrel));
+	addBarrel(barrelHolder, std::move(barrel));
 }

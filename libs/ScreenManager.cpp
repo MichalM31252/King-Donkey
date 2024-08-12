@@ -203,16 +203,24 @@ void ScreenManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MOVE TO TEXTURE MANAGER
 
-void ScreenManager::loadTexture(GameObject* gameObject, const char* fileName) {
+template<typename T>
+void ScreenManager::loadTexture(std::unique_ptr<T>& gameObject, const char* fileName) {
 	gameObject->sprite = SDL_LoadBMP(fileName);
 	if (gameObject->sprite == NULL) {
 		printf("SDL_LoadBMP error: %s\n", SDL_GetError());
 	}
 }
 
-void ScreenManager::initGameObject(GameObject* gameObject, const char* fileName) {
+template<typename T>
+void ScreenManager::initGameObject(std::unique_ptr<T>& gameObject, const char* fileName) {
 	loadTexture(gameObject, fileName);
 }
+
+// Explicit instantiations
+template void ScreenManager::initGameObject<GameObject>(std::unique_ptr<GameObject>& gameObject, const char* fileName);
+template void ScreenManager::initGameObject<MovableGameObject>(std::unique_ptr<MovableGameObject>& gameObject, const char* fileName);
+template void ScreenManager::loadTexture<GameObject>(std::unique_ptr<GameObject>& gameObject, const char* fileName);
+template void ScreenManager::loadTexture<MovableGameObject>(std::unique_ptr<MovableGameObject>& gameObject, const char* fileName);
 
 void ScreenManager::renderGameObject(GameObject* gameObject, SDL_Surface* screen) {
 	drawSurface(screen, gameObject, gameObject->xpos, gameObject->ypos);

@@ -59,7 +59,7 @@ public:
 
 	void serveNextFrame();
 
-	static void loadTexture(GameObject* gameObject, const char* fileName); // Temporary solution
+	
 
 	void drawSurface(SDL_Surface* screen, GameObject* gameObject, int xpos, int ypos);
 	void drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, int xpos, int ypos, SDL_Rect dest);
@@ -67,8 +67,13 @@ public:
 	void DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color);
 	void DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color);
 	void DrawRectangle(SDL_Surface* screen, int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor);
-
-	static void initGameObject(GameObject* gameObject, const char* fileName);
+	
+	template<typename T>
+	static void initGameObject(std::unique_ptr<T>& gameObject, const char* fileName);
+	
+	template<typename T>
+	static void loadTexture(std::unique_ptr<T>& gameObject, const char* fileName);
+	
 	void renderGameObject(GameObject* gameObject, SDL_Surface* screen);
 	void renderLadder(GameObject* gameObject, SDL_Surface* screen);
 
