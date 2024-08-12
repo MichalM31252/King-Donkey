@@ -165,7 +165,7 @@ void GameObjectFactory::createLadders2() {
 	ladd2->setSrcRect(LADDER_WIDTH, 150);
 	ladd2->setDestRect(LADDER_WIDTH, 150);
 
-	LadderHolder* laddH = new LadderHolder();
+	std::unique_ptr<LadderHolder> laddH = std::make_unique<LadderHolder>();
 	initLadderHolder(laddH);
 	addLadder(laddH, ladd1);
 	addLadder(laddH, ladd2);
