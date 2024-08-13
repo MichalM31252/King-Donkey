@@ -6,7 +6,7 @@
 #include "Player.h" // no screen manager
 
 struct GameObjectContainer {
-	GameObject* donkeyKong;
+	std::unique_ptr<GameObject> donkeyKong;
 	GameObject* princess;
 	std::unique_ptr<Player> player;
 	PlatformHolder* platformHolder;

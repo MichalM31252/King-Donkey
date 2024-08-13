@@ -12,7 +12,6 @@ GameObjectFactory::GameObjectFactory(std::unique_ptr<GameObjectContainer>& gameO
 }
 
 void GameObjectFactory::createPlayer() {
-	//Player* pla = new Player();
 	std::unique_ptr<Player> pla = std::make_unique<Player>();
 
 	ScreenManager::initGameObject(pla, PLAYER_1_FILENAME);
@@ -25,7 +24,7 @@ void GameObjectFactory::createPlayer() {
 }
 
 void GameObjectFactory::createDonkeyKong() {
-	GameObject* donkeyK = new GameObject();
+	std::unique_ptr<GameObject> donkeyK = std::make_unique<GameObject>();
 
 	ScreenManager::initGameObject(donkeyK, "./assets/DonkeyKong.bmp");
 
@@ -33,7 +32,8 @@ void GameObjectFactory::createDonkeyKong() {
 	donkeyK->createSrcRect();
 	donkeyK->createDestRect();
 
-	gameObjectContainer->donkeyKong = donkeyK;
+	// gameObjectContainer->donkeyKong = donkeyK;
+	gameObjectContainer->donkeyKong = std::move(donkeyK);
 }
 
 void GameObjectFactory::createPrincess() {
