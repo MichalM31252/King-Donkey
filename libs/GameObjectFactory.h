@@ -5,11 +5,11 @@
 
 class GameObjectFactory {
 public:
-	GameObjectContainer* gameObjectContainer;
-	CollisionResolver* collisionResolver;
+	std::unique_ptr<GameObjectContainer> gameObjectContainer;
+	std::unique_ptr<CollisionResolver> collisionResolver;
 
 	GameObjectFactory();
-	GameObjectFactory(GameObjectContainer* gameObjectContainer);
+	GameObjectFactory(std::unique_ptr<GameObjectContainer>& gameObjectContainer);
 
 	void createPlayer();
 	void createDonkeyKong();

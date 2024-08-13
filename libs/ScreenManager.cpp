@@ -219,6 +219,8 @@ void ScreenManager::initGameObject(std::unique_ptr<T>& gameObject, const char* f
 // Explicit instantiations
 template void ScreenManager::initGameObject<GameObject>(std::unique_ptr<GameObject>& gameObject, const char* fileName);
 template void ScreenManager::initGameObject<MovableGameObject>(std::unique_ptr<MovableGameObject>& gameObject, const char* fileName);
+template void ScreenManager::initGameObject<Player>(std::unique_ptr<Player>& gameObject, const char* fileName);
+
 template void ScreenManager::loadTexture<GameObject>(std::unique_ptr<GameObject>& gameObject, const char* fileName);
 template void ScreenManager::loadTexture<MovableGameObject>(std::unique_ptr<MovableGameObject>& gameObject, const char* fileName);
 

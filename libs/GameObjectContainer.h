@@ -8,7 +8,7 @@
 struct GameObjectContainer {
 	GameObject* donkeyKong;
 	GameObject* princess;
-	Player* player;
+	std::unique_ptr<Player> player;
 	PlatformHolder* platformHolder;
 	LadderHolder* ladderHolder;
 	BarrelFactory* barrelFactory;
