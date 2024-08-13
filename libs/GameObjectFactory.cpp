@@ -32,12 +32,11 @@ void GameObjectFactory::createDonkeyKong() {
 	donkeyK->createSrcRect();
 	donkeyK->createDestRect();
 
-	// gameObjectContainer->donkeyKong = donkeyK;
 	gameObjectContainer->donkeyKong = std::move(donkeyK);
 }
 
 void GameObjectFactory::createPrincess() {
-	GameObject* prin = new GameObject();
+	std::unique_ptr<GameObject> prin = std::make_unique<GameObject>();
 
 	ScreenManager::initGameObject(prin, "./assets/Princess.bmp");
 
@@ -45,7 +44,7 @@ void GameObjectFactory::createPrincess() {
 	prin->createSrcRect();
 	prin->createDestRect();
 
-	gameObjectContainer->princess = prin;
+	gameObjectContainer->princess = std::move(prin);
 }
 
 void GameObjectFactory::createPlatforms1() {
