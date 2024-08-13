@@ -5,14 +5,18 @@ extern "C" {
 #include "Constants.h"
 }
 
-struct PlatformHolder {
-	Platform* platforms;
-	int numberOfElements;
-	int sizeOfArray;
-};
+extern "C++" {
+#include <memory>
+#include <vector>
+}
 
-void initPlatformHolder(PlatformHolder* platformHolder);
-void addPlatform(PlatformHolder* platformHolder, Platform* platform);
-void emptyPlatformHolder(PlatformHolder* platformHolder);
+class PlatformHolder {
+private:
+    std::vector<std::unique_ptr<Platform>> platforms;
+public:
+    PlatformHolder();
+    void addPlatform(std::unique_ptr<Platform> platform);
+    size_t getNumberOfElements() const;
+};
 
 
