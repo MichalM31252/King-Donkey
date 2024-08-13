@@ -48,30 +48,29 @@ void GameObjectFactory::createPrincess() {
 }
 
 void GameObjectFactory::createPlatforms1() {
-	Platform* plat1 = new Platform();
+	std::unique_ptr<Platform> plat1 = std::make_unique<Platform>();
 	plat1->setPosition(1, 400, 400, 400);
 
-	Platform* plat2 = new Platform();
+	std::unique_ptr<Platform> plat2 = std::make_unique<Platform>();
 	plat2->setPosition(400, 400, 500, 300);
 
-	Platform* plat3 = new Platform();
+	std::unique_ptr<Platform> plat3 = std::make_unique<Platform>();
 	plat3->setPosition(500, 300, SCREEN_WIDTH - 1, 300);
 
-	Platform* plat4 = new Platform();
+	std::unique_ptr<Platform> plat4 = std::make_unique<Platform>();
 	plat4->setPosition(1, 130, 570, 130);
 
-	Platform* plat5 = new Platform();
+	std::unique_ptr<Platform> plat5 = std::make_unique<Platform>();
 	plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80);
 
-	PlatformHolder* pH = new PlatformHolder();
-	initPlatformHolder(pH);
-	addPlatform(pH, plat1);
-	addPlatform(pH, plat2);
-	addPlatform(pH, plat3);
-	addPlatform(pH, plat4);
-	addPlatform(pH, plat5);
+	std::unique_ptr<PlatformHolder> platH = std::make_unique<PlatformHolder>();
+	platH->addPlatform(std::move(plat1));
+	platH->addPlatform(std::move(plat2));
+	platH->addPlatform(std::move(plat3));
+	platH->addPlatform(std::move(plat4));
+	platH->addPlatform(std::move(plat5));
 
-	gameObjectContainer->platformHolder = pH;
+	gameObjectContainer->platformHolder = std::move(platH);
 }
 
 void GameObjectFactory::createLadders1() {

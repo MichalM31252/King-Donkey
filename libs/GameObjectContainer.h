@@ -9,7 +9,7 @@ struct GameObjectContainer {
 	std::unique_ptr<GameObject> donkeyKong;
 	std::unique_ptr<GameObject> princess;
 	std::unique_ptr<Player> player;
-	PlatformHolder* platformHolder;
+	std::unique_ptr<PlatformHolder> platformHolder;
 	LadderHolder* ladderHolder;
 	BarrelFactory* barrelFactory;
 };
