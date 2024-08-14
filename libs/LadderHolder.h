@@ -7,14 +7,14 @@ extern "C" {
 
 extern "C++" {
 #include <memory>
+#include <vector>
 }
 
-struct LadderHolder {
-    std::unique_ptr<GameObject[]> ladders;
-    int numberOfElements;
-    int sizeOfArray;
+class LadderHolder {
+private:
+    std::vector<std::unique_ptr<GameObject>> ladders;
+public:
+    LadderHolder();
+    void addLadder(std::unique_ptr<GameObject>& ladder);
+    size_t getNumberOfElements() const;
 };
-
-void initLadderHolder(std::unique_ptr<LadderHolder>& ladderHolder);
-void addLadder(std::unique_ptr<LadderHolder>& ladderHolder, std::unique_ptr<GameObject>& ladder);
-void emptyLadderHolder(std::unique_ptr<LadderHolder>& ladderHolder);
