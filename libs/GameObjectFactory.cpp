@@ -117,34 +117,33 @@ void GameObjectFactory::createBarrels() { // work on this
 }
 
 void GameObjectFactory::createPlatforms2() {
-	Platform* plat1 = new Platform();
+	std::unique_ptr<Platform> plat1 = std::make_unique<Platform>();
 	plat1->setPosition(TINY_MARGIN, 400, SCREEN_WIDTH - 1, 400);
 
-	Platform* plat2 = new Platform();
+	std::unique_ptr<Platform> plat2 = std::make_unique<Platform>();
 	plat2->setPosition(130, 130, 300, 300);
 
-	Platform* plat3 = new Platform();
+	std::unique_ptr<Platform> plat3 = std::make_unique<Platform>();
 	plat3->setPosition(TINY_MARGIN, 130, 130, 130);
 
-	Platform* plat4 = new Platform();
+	std::unique_ptr<Platform> plat4 = std::make_unique<Platform>();
 	plat4->setPosition(TINY_MARGIN, 130, 130, 130);
 
-	Platform* plat5 = new Platform();
+	std::unique_ptr<Platform> plat5 = std::make_unique<Platform>();
 	plat5->setPosition(200, 80, SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 80);
 
-	Platform* plat6 = new Platform();
+	std::unique_ptr<Platform> plat6 = std::make_unique<Platform>();
 	plat6->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH - LADDER_WIDTH, 230, SCREEN_WIDTH - LARGE_MARGIN, 230);
 
-	PlatformHolder* platH = new PlatformHolder();
-	initPlatformHolder(platH);
-	addPlatform(platH, plat1);
-	addPlatform(platH, plat2);
-	addPlatform(platH, plat3);
-	addPlatform(platH, plat4);
-	addPlatform(platH, plat5);
-	addPlatform(platH, plat6);
+	std::unique_ptr<PlatformHolder> platH = std::make_unique<PlatformHolder>();
+	platH->addPlatform(std::move(plat1));
+	platH->addPlatform(std::move(plat2));
+	platH->addPlatform(std::move(plat3));
+	platH->addPlatform(std::move(plat4));
+	platH->addPlatform(std::move(plat5));
+	platH->addPlatform(std::move(plat6));
 
-	gameObjectContainer->platformHolder = platH;
+	gameObjectContainer->platformHolder = std::move(platH);
 }
 
 void GameObjectFactory::createLadders2() {
@@ -173,30 +172,29 @@ void GameObjectFactory::createLadders2() {
 }
 
 void GameObjectFactory::createPlatforms3() {
-	Platform* plat1 = new Platform();
+	std::unique_ptr<Platform> plat1 = std::make_unique<Platform>();
 	plat1->setPosition(STARTING_X, 400, SCREEN_WIDTH - TINY_MARGIN, 400);
 
-	Platform* plat2 = new Platform();
+	std::unique_ptr<Platform> plat2 = std::make_unique<Platform>();
 	plat2->setPosition(LARGE_MARGIN, 300, SCREEN_WIDTH - LARGE_MARGIN, 300);
 
-	Platform* plat3 = new Platform();
+	std::unique_ptr<Platform> plat3 = std::make_unique<Platform>();
 	plat3->setPosition(LARGE_MARGIN, 200, SCREEN_WIDTH - LARGE_MARGIN, 200);
 
-	Platform* plat4 = new Platform();
+	std::unique_ptr<Platform> plat4 = std::make_unique<Platform>();
 	plat4->setPosition(TINY_MARGIN, 130, SCREEN_WIDTH - LARGE_MARGIN, 130);
 
-	Platform* plat5 = new Platform();
+	std::unique_ptr<Platform> plat5 = std::make_unique<Platform>();
 	plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80);
 
-	PlatformHolder* platH = new PlatformHolder();
-	initPlatformHolder(platH);
-	addPlatform(platH, plat1);
-	addPlatform(platH, plat2);
-	addPlatform(platH, plat3);
-	addPlatform(platH, plat4);
-	addPlatform(platH, plat5);
+	std::unique_ptr<PlatformHolder> platH = std::make_unique<PlatformHolder>();
+	platH->addPlatform(std::move(plat1));
+	platH->addPlatform(std::move(plat2));
+	platH->addPlatform(std::move(plat3));
+	platH->addPlatform(std::move(plat4));
+	platH->addPlatform(std::move(plat5));
 
-	gameObjectContainer->platformHolder = platH;
+	gameObjectContainer->platformHolder = std::move(platH);
 }
 
 void GameObjectFactory::createLadders3() {
