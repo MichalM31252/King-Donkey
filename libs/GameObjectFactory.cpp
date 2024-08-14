@@ -74,7 +74,7 @@ void GameObjectFactory::createPlatforms1() {
 }
 
 void GameObjectFactory::createLadders1() {
-	GameObject* ladd1 = new GameObject();
+	std::unique_ptr<GameObject> ladd1 = std::make_unique<GameObject>();
 
 	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
 
@@ -82,7 +82,8 @@ void GameObjectFactory::createLadders1() {
 	ladd1->setSrcRect(LADDER_WIDTH, 170);
 	ladd1->setDestRect(LADDER_WIDTH, 170);
 
-	GameObject* ladd2 = new GameObject();
+	// GameObject* ladd2 = new GameObject();
+	std::unique_ptr<GameObject> ladd2 = std::make_unique<GameObject>();
 
 	ScreenManager::initGameObject(ladd2, "./assets/Ladder.bmp");
 
@@ -90,11 +91,11 @@ void GameObjectFactory::createLadders1() {
 	ladd2->setSrcRect(LADDER_WIDTH, 50);
 	ladd2->setDestRect(LADDER_WIDTH, 50);
 
-	LadderHolder* laddH = new LadderHolder();
-	initLadderHolder(laddH);
-	addLadder(laddH, ladd1);
-	addLadder(laddH, ladd2);
-	gameObjectContainer->ladderHolder = laddH;
+	// LadderHolder* laddH = new LadderHolder();
+	std::unique_ptr<LadderHolder> laddH = std::make_unique<LadderHolder>();
+	laddH->addLadder(std::move(ladd1));
+	laddH->addLadder(std::move(ladd2));
+	gameObjectContainer->ladderHolder = std::move(laddH);
 }
 
 void GameObjectFactory::createBarrels() { // work on this 
@@ -164,11 +165,10 @@ void GameObjectFactory::createLadders2() {
 	ladd2->setDestRect(LADDER_WIDTH, 150);
 
 	std::unique_ptr<LadderHolder> laddH = std::make_unique<LadderHolder>();
-	initLadderHolder(laddH);
-	addLadder(laddH, ladd1);
-	addLadder(laddH, ladd2);
+	laddH->addLadder(std::move(ladd1));
+	laddH->addLadder(std::move(ladd2));
 
-	gameObjectContainer->ladderHolder = laddH;
+	gameObjectContainer->ladderHolder = std::move(laddH);
 }
 
 void GameObjectFactory::createPlatforms3() {
@@ -198,7 +198,7 @@ void GameObjectFactory::createPlatforms3() {
 }
 
 void GameObjectFactory::createLadders3() {
-	GameObject* ladd1 = new GameObject();
+	std::unique_ptr<GameObject> ladd1 = std::make_unique<GameObject>();
 
 	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
 
@@ -206,7 +206,7 @@ void GameObjectFactory::createLadders3() {
 	ladd1->setSrcRect(LADDER_WIDTH, LARGE_MARGIN);
 	ladd1->setDestRect(LADDER_WIDTH, LARGE_MARGIN);
 
-	GameObject* ladd2 = new GameObject();
+	std::unique_ptr<GameObject> ladd2 = std::make_unique<GameObject>();
 
 	ScreenManager::initGameObject(ladd2, "./assets/Ladder.bmp");
 
@@ -214,7 +214,7 @@ void GameObjectFactory::createLadders3() {
 	ladd2->setSrcRect(LADDER_WIDTH, LARGE_MARGIN);
 	ladd2->setDestRect(LADDER_WIDTH, LARGE_MARGIN);
 
-	GameObject* ladd3 = new GameObject();
+	std::unique_ptr<GameObject> ladd3 = std::make_unique<GameObject>();
 
 	ScreenManager::initGameObject(ladd3, "./assets/Ladder.bmp");
 
@@ -222,7 +222,7 @@ void GameObjectFactory::createLadders3() {
 	ladd3->setSrcRect(LADDER_WIDTH, 70);
 	ladd3->setDestRect(LADDER_WIDTH, 70);
 
-	GameObject* ladd4 = new GameObject();
+	std::unique_ptr<GameObject> ladd4 = std::make_unique<GameObject>();
 
 	ScreenManager::initGameObject(ladd4, "./assets/Ladder.bmp");
 
@@ -230,13 +230,12 @@ void GameObjectFactory::createLadders3() {
 	ladd4->setSrcRect(LADDER_WIDTH, 50);
 	ladd4->setDestRect(LADDER_WIDTH, 50);
 
-	LadderHolder* laddH = new LadderHolder();
-	initLadderHolder(laddH);
-	addLadder(laddH, ladd1);
-	addLadder(laddH, ladd2);
-	addLadder(laddH, ladd3);
-	addLadder(laddH, ladd4);
-	gameObjectContainer->ladderHolder = laddH;
+	std::unique_ptr<LadderHolder> laddH = std::make_unique<LadderHolder>();
+	laddH->addLadder(std::move(ladd1));
+	laddH->addLadder(std::move(ladd2));
+	laddH->addLadder(std::move(ladd3));
+	laddH->addLadder(std::move(ladd4));
+	gameObjectContainer->ladderHolder = std::move(laddH);
 }
 
 void GameObjectFactory::createBoard(int boardId) {

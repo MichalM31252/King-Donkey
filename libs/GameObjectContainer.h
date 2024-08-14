@@ -10,6 +10,6 @@ struct GameObjectContainer {
 	std::unique_ptr<GameObject> princess;
 	std::unique_ptr<Player> player;
 	std::unique_ptr<PlatformHolder> platformHolder;
-	LadderHolder* ladderHolder;
+	std::unique_ptr<LadderHolder> ladderHolder;
 	BarrelFactory* barrelFactory;
 };
