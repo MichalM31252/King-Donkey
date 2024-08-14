@@ -15,10 +15,13 @@
 - [ ] Implement a normal vector for BarrelHolder, LadderHolder, PlatformHolder instead of your own implementation
 - [ ] Fix every code smell
 - [ ] Change classes which don't need an instance to static ones
-- [ ] Fix inconsistent indentations
+- [x] Fix inconsistent indentations
 - [ ] Add menu
 - [ ] Add a pickup items (hammer, prizes)
 - [ ] Refactor collision detection methods from single pixels to SDL_Rectangles
+- [ ] Lower the number of code smells detected by sonarcloud to 0
+- [ ] Add pause mechanism
+- [ ] Add home screen
 
 # STATISTICS
 
