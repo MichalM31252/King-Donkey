@@ -11,9 +11,8 @@ extern "C++" {
 }
 
 class PlatformHolder {
-private:
-    std::vector<std::unique_ptr<Platform>> platforms;
 public:
+    std::vector<std::unique_ptr<Platform>> platforms;
     PlatformHolder();
     void addPlatform(std::unique_ptr<Platform> platform);
     size_t getNumberOfElements() const;

@@ -15,6 +15,10 @@ extern "C" {
 #include "Player.h"
 }
 
+extern "C++" {
+#include <memory>
+}
+
 class ScreenManager {
 public:
 	GameObjectContainer* gameObjectContainer;
@@ -61,8 +65,8 @@ public:
 
 	
 
-	void drawSurface(SDL_Surface* screen, GameObject* gameObject, int xpos, int ypos);
-	void drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, int xpos, int ypos, SDL_Rect dest);
+	void drawSurface(SDL_Surface* screen, std::unique_ptr<GameObject> gameObject, int xpos, int ypos);
+	void drawSurfaceLadder(SDL_Surface* screen, std::unique_ptr<GameObject> ladder, int xpos, int ypos, SDL_Rect dest);
 	void DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset);
 	void DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color);
 	void DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color);
@@ -74,8 +78,10 @@ public:
 	template<typename T>
 	static void loadTexture(std::unique_ptr<T>& gameObject, const char* fileName);
 	
-	void renderGameObject(GameObject* gameObject, SDL_Surface* screen);
-	void renderLadder(GameObject* gameObject, SDL_Surface* screen);
+	template<typename T>
+	void renderGameObject(std::unique_ptr<T> gameObject, SDL_Surface* screen);
+
+	void renderLadder(std::unique_ptr<GameObject> gameObject, SDL_Surface* screen);
 
 	void drawElements();
 	void drawPlatforms();

@@ -11,9 +11,8 @@ extern "C++" {
 }
 
 class LadderHolder {
-private:
-    std::vector<std::unique_ptr<GameObject>> ladders;
 public:
+    std::vector<std::unique_ptr<GameObject>> ladders;
     LadderHolder();
     void addLadder(std::unique_ptr<GameObject>& ladder);
     size_t getNumberOfElements() const;

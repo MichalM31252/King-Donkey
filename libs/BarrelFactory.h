@@ -16,7 +16,7 @@ private:
 public:
     std::unique_ptr<BarrelHolder> barrelHolder;
 
-    void initBarrelFactory(BarrelFactory* barrelFactory) const;
+    void initBarrelFactory(std::unique_ptr<BarrelFactory> barrelFactory);
     void setPosition(int x, int y);
     void update(double deltaTime);
     void throwBarrel();

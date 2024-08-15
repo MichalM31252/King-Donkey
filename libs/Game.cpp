@@ -6,35 +6,30 @@ extern "C" {
 }
 
 Game::Game() {
-	// the only thing that should be here is the stage manager
-	// first move every method from this class to its respective manager then implement the stage manager
+    // the only thing that should be here is the stage manager
+    // first move every method from this class to its respective manager then implement the stage manager
 
-	GameObjectContainer* gameObjectC = new GameObjectContainer();
-	gameObjectContainer = gameObjectC;
+    gameObjectContainer = std::make_unique<GameObjectContainer>();
 
-	ScreenManager* screenMan = new ScreenManager(gameObjectContainer);
-	screenManager = screenMan;
+    screenManager = std::make_unique<ScreenManager>(gameObjectContainer.get());
 
-	GameObjectFactory* gameObjectMan = new GameObjectFactory(gameObjectContainer);
-	gameObjectFactory = gameObjectMan;
+    gameObjectFactory = std::make_unique<GameObjectFactory>(gameObjectContainer.get());
 
-	CollisionResolver* collisionMan = new CollisionResolver(gameObjectContainer, screenManager);
-	collisionResolver = collisionMan;
+    collisionResolver = std::make_unique<CollisionResolver>(gameObjectContainer.get(), screenManager.get());
 
-	RoundManager* roundMan = new RoundManager(screenManager, gameObjectFactory, gameObjectContainer, collisionResolver);
-	roundManager = roundMan;
+    roundManager = std::make_unique<RoundManager>(screenManager.get(), gameObjectFactory.get(), gameObjectContainer.get(), collisionResolver.get());
 }
 
 void Game::initGame() {
-	screenManager->createSDL();
-	int startAnotherRound = 0;
-	roundManager->handleRound(startAnotherRound);
-	closeGame();
+    screenManager->createSDL();
+    int startAnotherRound = 0;
+    roundManager->handleRound(startAnotherRound);
+    closeGame();
 }
 
 void Game::closeGame() {
-	SDL_Quit();
-	exit(0);
+    SDL_Quit();
+    exit(0);
 }
 
 // Implement this in the future

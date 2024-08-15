@@ -16,25 +16,29 @@ extern "C" {
 #include "CollisionDetector.h"
 }
 
+extern "C++" {
+#include <memory>
+}
+
 // Does something when objects collide
 
 class CollisionResolver {
 public:
-	GameObjectContainer* gameObjectContainer;
-	ScreenManager* screenManager;
+    std::unique_ptr<GameObjectContainer> gameObjectContainer;
+    std::unique_ptr<ScreenManager> screenManager;
 
-	CollisionResolver();
-	CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager);
+    CollisionResolver();
+    CollisionResolver(std::unique_ptr<GameObjectContainer> gameObjectContainer, std::unique_ptr<ScreenManager> screenManager);
 
-	void handlePlayerCollisionWithKong();
-	void handlePlayerCollisionWithPrincess();
-	void handlePlayerCollisionWithBarrel(MovableGameObject* barrel, bool* quit, int* startAnotherRound);
-	void handlePlayerCollisionWithLadder();
-	void handleCollisionWithPlatform(MovableGameObject* gameObject);
-	void handleCollisionWithJumping();
+    void handlePlayerCollisionWithKong();
+    void handlePlayerCollisionWithPrincess();
+    void handlePlayerCollisionWithBarrel(std::unique_ptr<MovableGameObject> barrel, bool* quit, int* startAnotherRound);
+    void handlePlayerCollisionWithLadder();
+    void handleCollisionWithPlatform(std::unique_ptr<MovableGameObject> gameObject);
+    void handleCollisionWithJumping();
 
-	void handlePlayerCollision();
-	void handleBarrelsCollision(bool* quit, int* startAnotherRound);
+    void handlePlayerCollision();
+    void handleBarrelsCollision(bool* quit, int* startAnotherRound);
 
-	void closeGame();
+    void closeGame();
 };

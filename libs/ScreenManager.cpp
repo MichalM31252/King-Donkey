@@ -134,7 +134,7 @@ void ScreenManager::createSDL() {
 
 // draw a surface sprite on a surface screen in point (x, y)
 // (x, y) is the center of sprite on screen
-void ScreenManager::drawSurface(SDL_Surface* screen, GameObject* gameObject, int xpos, int ypos) {
+void ScreenManager::drawSurface(SDL_Surface* screen, std::unique_ptr<GameObject> gameObject, int xpos, int ypos) {
 	SDL_Rect dest;
 	dest.x = xpos;
 	dest.y = ypos;
@@ -143,7 +143,7 @@ void ScreenManager::drawSurface(SDL_Surface* screen, GameObject* gameObject, int
 	SDL_BlitSurface(gameObject->sprite, NULL, screen, &dest);
 };
 
-void ScreenManager::drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, int xpos, int ypos, SDL_Rect dest) { // not the best solution but works
+void ScreenManager::drawSurfaceLadder(SDL_Surface* screen, std::unique_ptr<GameObject> ladder, int xpos, int ypos, SDL_Rect dest) { // not the best solution but works
 	ladder->sprite->w = dest.w;
 	ladder->sprite->h = dest.h;
 	SDL_BlitSurface(ladder->sprite, NULL, screen, &dest);
@@ -223,30 +223,37 @@ template void ScreenManager::initGameObject<Player>(std::unique_ptr<Player>& gam
 
 template void ScreenManager::loadTexture<GameObject>(std::unique_ptr<GameObject>& gameObject, const char* fileName);
 template void ScreenManager::loadTexture<MovableGameObject>(std::unique_ptr<MovableGameObject>& gameObject, const char* fileName);
+template void ScreenManager::loadTexture<Barrel>(std::unique_ptr<Barrel>& gameObject, const char* fileName);
+template void ScreenManager::loadTexture<Player>(std::unique_ptr<Player>& gameObject, const char* fileName);
 
-void ScreenManager::renderGameObject(GameObject* gameObject, SDL_Surface* screen) {
-	drawSurface(screen, gameObject, gameObject->xpos, gameObject->ypos);
+template void ScreenManager::renderGameObject<GameObject>(std::unique_ptr<GameObject> gameObject, SDL_Surface* screen);
+template void ScreenManager::renderGameObject<MovableGameObject>(std::unique_ptr<MovableGameObject> gameObject, SDL_Surface* screen);
+
+
+template<typename T>
+void ScreenManager::renderGameObject(std::unique_ptr<T> gameObject, SDL_Surface* screen) {
+	drawSurface(screen, std::move(gameObject), gameObject->xpos, gameObject->ypos);
 }
 
-void ScreenManager::renderLadder(GameObject* gameObject, SDL_Surface* screen) {
-	drawSurfaceLadder(screen, gameObject, gameObject->xpos, gameObject->ypos, gameObject->destRect);
+void ScreenManager::renderLadder(std::unique_ptr<GameObject> gameObject, SDL_Surface* screen) {
+	drawSurfaceLadder(screen, std::move(gameObject), gameObject->xpos, gameObject->ypos, gameObject->destRect);
 }
 
 void ScreenManager::drawPlatforms() {
-	for (int i = 0; i < gameObjectContainer->platformHolder->numberOfElements; i++) {
-		gameObjectContainer->platformHolder->platforms[i].render(screen);
+	for (int i = 0; i < gameObjectContainer->platformHolder->getNumberOfElements(); i++) {
+		gameObjectContainer->platformHolder->platforms[i]->render(screen);
 	}
 }
 
 void ScreenManager::drawLadders() {
-	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
-		renderLadder(&gameObjectContainer->ladderHolder->ladders[i], screen);
+	for (int i = 0; i < gameObjectContainer->ladderHolder->getNumberOfElements(); i++) {
+		renderLadder(std::move(gameObjectContainer->ladderHolder->ladders[i]), screen);
 	}
 }
 
 void ScreenManager::drawBarrels() {
-	for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->numberOfElements; i++) {
-		renderGameObject(&gameObjectContainer->barrelFactory->barrelHolder->barrels[i], screen);
+	for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->getNumberOfElements(); i++) {
+		renderGameObject(std::move(gameObjectContainer->barrelFactory->barrelHolder->barrels[i]), screen); // ERROR
 	}
 }
 
@@ -280,9 +287,9 @@ void ScreenManager::handlePlayerSprite(Player* player){ // rename to handlePlaye
 //}
 
 void ScreenManager::drawElements() { // don't repeat yourself
-	renderGameObject(gameObjectContainer->donkeyKong, screen);
-	renderGameObject(gameObjectContainer->princess, screen);
-	renderGameObject(gameObjectContainer->player, screen);
+	renderGameObject(std::move(gameObjectContainer->donkeyKong), screen);
+	renderGameObject(std::move(gameObjectContainer->princess), screen);
+	renderGameObject(std::move(gameObjectContainer->player), screen);
 
 	drawPlatforms();
 	drawLadders();

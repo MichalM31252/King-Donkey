@@ -109,11 +109,10 @@ void GameObjectFactory::createBarrels() { // work on this
 	barrel1->objectSpeed = DEFAULT_BARREL_SPEED;
 
 	std::unique_ptr<BarrelHolder> barrelH = std::make_unique<BarrelHolder>();
-	initBarrelHolder(barrelH);
-	addBarrel(barrelH, barrel1);
+	barrelH->addBarrel(std::move(barrel1)); // ERROR
 
-	gameObjectContainer->barrelFactory = new BarrelFactory();
-	gameObjectContainer->barrelFactory->barrelHolder = barrelH;
+	gameObjectContainer->barrelFactory = std::make_unique<BarrelFactory>();
+	gameObjectContainer->barrelFactory->barrelHolder = std::move(barrelH);
 	gameObjectContainer->barrelFactory->setPosition(gameObjectContainer->donkeyKong->xpos + gameObjectContainer->donkeyKong->destRect.w + +SMALL_MARGIN, gameObjectContainer->donkeyKong->ypos);
 }
 

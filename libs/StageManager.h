@@ -7,14 +7,18 @@
 #include "ScreenManager.h"
 #include "GameObjectContainer.h"
 
+extern "C++" {
+#include <memory>
+}
+
 class StageManager {
 private:
-	CollisionResolver* collisionResolver;
-	PhysicsManager* physicsManager;
-	GameObjectFactory* gameObjectFactory;
-	KeyboardManager* keyboardManager;
-	ScreenManager* screenManager;
+    std::unique_ptr<CollisionResolver> collisionResolver;
+    std::unique_ptr<PhysicsManager> physicsManager;
+    std::unique_ptr<GameObjectFactory> gameObjectFactory;
+    std::unique_ptr<KeyboardManager> keyboardManager;
+    std::unique_ptr<ScreenManager> screenManager;
 
 	StageManager();
-	StageManager(GameObjectContainer* gameObjectContainer);
+	StageManager(std::unique_ptr<GameObjectContainer> gameObjectContainer);
 };

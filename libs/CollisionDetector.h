@@ -6,6 +6,10 @@ extern "C" {
 #include "Platform.h"
 #include "PlatformHolder.h"
 }
+
+extern "C++" {
+#include <memory>
+}
 // tracks every game object in the game and checks if they collide
 
 
@@ -25,13 +29,13 @@ extern "C" {
 class CollisionDetector
 {
 public:
-	static bool isCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
-	static bool isPointAPartOfLine(const int x, const int y, Platform* platform);
-	static bool isRectInsideLadder(SDL_Rect a, SDL_Rect b);
+    static bool isCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
+    static bool isPointAPartOfLine(const int x, const int y, const std::unique_ptr<Platform> platform);
+    static bool isRectInsideLadder(SDL_Rect a, SDL_Rect b);
 
-	static bool isGameObjectOnTopOfPlatform(GameObject* gameObject, Platform* platform);
-	static bool isGameObjectInsidePlatform(GameObject* gameObject, Platform* platform);
-	static bool isGameObjectOnTopOfAnyPlatform(GameObject* gameObject, PlatformHolder* platformHolder);
+    static bool isGameObjectOnTopOfPlatform(std::unique_ptr<GameObject> gameObject, std::unique_ptr<Platform> platform);
+    static bool isGameObjectInsidePlatform(std::unique_ptr<GameObject> gameObject, std::unique_ptr<Platform> platform);
+    static bool isGameObjectOnTopOfAnyPlatform(std::unique_ptr<GameObject> gameObject, std::unique_ptr<PlatformHolder> platformHolder);
 	// isGameObjectInsideBarrel
 
 	// isPlayerClimbingTheLadder (check if player is inside ladder, then check if if player is not touching the platform (ok but what about falling))

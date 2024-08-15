@@ -6,15 +6,17 @@ extern "C" {
 
 extern "C++" {
 #include <memory>
+#include <vector>
 }
 
-struct BarrelHolder {
-    std::unique_ptr<MovableGameObject[]> barrels;
-    int numberOfElements;
-    int sizeOfArray;
-};
+class BarrelHolder {
+public:
+    std::vector<std::unique_ptr<MovableGameObject>> barrels;
+    
+    BarrelHolder() = default;
 
-void initBarrelHolder(std::unique_ptr<BarrelHolder>& barrelHolder);
-void addBarrel(std::unique_ptr<BarrelHolder>& barrelHolder, std::unique_ptr<MovableGameObject>& barrel);
-void emptyBarrelHolder(std::unique_ptr<BarrelHolder>& barrelHolder);
-void updateBarrels(std::unique_ptr<BarrelHolder>& barrelHolder, float deltaTime);
+    void addBarrel(std::unique_ptr<MovableGameObject> barrel);
+    void emptyBarrelHolder();
+    void updateBarrels(float deltaTime);
+    int getNumberOfElements();
+};

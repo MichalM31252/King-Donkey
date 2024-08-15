@@ -15,32 +15,30 @@ class KeyboardManager {
 private:
 	SDL_Event event; // this can be used here
 public:
+    std::unique_ptr<GameObjectContainer> gameObjectContainer;
 
+    KeyboardManager();
+    explicit KeyboardManager(std::unique_ptr<GameObjectContainer> gameObjectContainer);
 
-	GameObjectContainer* gameObjectContainer;
+    void handleEvents(bool& quit, double deltaTime, std::unique_ptr<Player>& player, int& startAnotherRound);
 
-	KeyboardManager();
-	KeyboardManager(GameObjectContainer* gameObjectContainer);
+    static void initializeQuit(bool& quit, int& startAnotherRound);
 
-	void handleEvents(bool* quit, double deltaTime, Player* player, int* startAnotherRound);
+    void onKeyPressed(bool& quit, double deltaTime, std::unique_ptr<Player>& player, int& startAnotherRound);
+    static void onKeyPressArrowUp(double deltaTime, std::unique_ptr<Player>& player);
+    static void onKeyPressArrowRight(double deltaTime, std::unique_ptr<Player>& player);
+    static void onKeyPressArrowDown(double deltaTime, std::unique_ptr<Player>& player);
+    static void onKeyPressArrowLeft(double deltaTime, std::unique_ptr<Player>& player);
+    static void onKeyPressSpace(std::unique_ptr<Player>& player);
+    static void onKeyPressN(bool& quit, int& startAnotherRound);
+    static void onKeyPress1(bool& quit, int& startAnotherRound);
+    static void onKeyPress2(bool& quit, int& startAnotherRound);
+    static void onKeyPress3(bool& quit, int& startAnotherRound);
 
-	void initializeQuit(bool* quit, int* startAnotherRound);
+    void onKeyReleased(std::unique_ptr<Player>& player);
 
-	void onKeyPressed(bool* quit, double deltaTime, Player* player, int* startAnotherRound);
-	void onKeyPressArrowUp(double deltaTime, Player* player);
-	void onKeyPressArrowRight(double deltaTime, Player* player);
-	void onKeyPressArrowDown(double deltaTime, Player* player);
-	void onKeyPressArrowLeft(double deltaTime, Player* player);
-	void onKeyPressSpace(Player* player);
-	void onKeyPressN(bool* quit, int* startAnotherRound);
-	void onKeyPress1(bool* quit, int* startAnotherRound);
-	void onKeyPress2(bool* quit, int* startAnotherRound);
-	void onKeyPress3(bool* quit, int* startAnotherRound);
-
-	void onKeyReleased(Player* player);
-
-	void onKeyReleasedArrowUp(Player* player);
-	void onKeyReleasedArrowRight(Player* player);
-	void onKeyReleasedArrowDown(Player* player);
-	void onKeyReleasedArrowLeft(Player* player);
+    static void onKeyReleasedArrowUp(std::unique_ptr<Player>& player);
+    static void onKeyReleasedArrowRight(std::unique_ptr<Player>& player);
+    static void onKeyReleasedArrowDown(std::unique_ptr<Player>& player);
+    static void onKeyReleasedArrowLeft(std::unique_ptr<Player>& player);
 };
