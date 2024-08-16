@@ -1,5 +1,8 @@
 extern "C" {
 #include "BarrelFactory.h"
+}
+
+extern "C++" {
 #include "ScreenManager.h" // temporary fix
 }
 

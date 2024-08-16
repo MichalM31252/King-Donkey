@@ -63,8 +63,6 @@ public:
 
 	void serveNextFrame();
 
-	
-
 	void drawSurface(SDL_Surface* screen, std::unique_ptr<GameObject> gameObject, int xpos, int ypos);
 	void drawSurfaceLadder(SDL_Surface* screen, std::unique_ptr<GameObject> ladder, int xpos, int ypos, SDL_Rect dest);
 	void DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset);
