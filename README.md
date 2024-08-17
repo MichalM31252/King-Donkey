@@ -2,7 +2,7 @@
 
 ![IMG_0299](https://github.com/MichalM31252/King-Donkey/assets/65298857/073ce791-3dcf-4bea-9e38-13bc993598b7)
 
-# Todo:
+# Plans:
 
 - [ ] Fix animations
 - [x] Fix the delay between keys and player
@@ -22,6 +22,11 @@
 - [ ] Lower the number of code smells detected by sonarcloud to 0
 - [ ] Add pause mechanism
 - [ ] Add home screen
+
+# Future plans:
+
+- [ ] Dynamic level generation
+- [ ] Infinite game mode
 
 # STATISTICS
 
