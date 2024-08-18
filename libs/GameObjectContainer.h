@@ -6,10 +6,10 @@
 #include "Player.h" // no screen manager
 
 struct GameObjectContainer {
-	std::unique_ptr<GameObject> donkeyKong;
-	std::unique_ptr<GameObject> princess;
-	std::unique_ptr<Player> player;
-	std::unique_ptr<PlatformHolder> platformHolder;
-	std::unique_ptr<LadderHolder> ladderHolder;
-	std::unique_ptr<BarrelFactory> barrelFactory;
+    GameObject* donkeyKong;
+    GameObject* princess;
+    Player* player;
+    PlatformHolder* platformHolder;
+    LadderHolder* ladderHolder;
+    BarrelFactory* barrelFactory;
 };

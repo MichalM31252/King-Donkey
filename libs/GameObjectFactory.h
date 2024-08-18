@@ -1,15 +1,17 @@
 #pragma once
+extern "C" {
 #include "PhysicsManager.h"
 #include "CollisionResolver.h"
 #include "GameObjectContainer.h"
+}
 
 class GameObjectFactory {
 public:
-	std::unique_ptr<GameObjectContainer> gameObjectContainer;
-	std::unique_ptr<CollisionResolver> collisionResolver;
+	GameObjectContainer* gameObjectContainer;
+	CollisionResolver* collisionResolver;
 
 	GameObjectFactory();
-	GameObjectFactory(std::unique_ptr<GameObjectContainer>& gameObjectContainer);
+	GameObjectFactory(GameObjectContainer* gameObjectContainer);
 
 	void createPlayer();
 	void createDonkeyKong();

@@ -4,8 +4,8 @@ extern "C" {
 
 PlatformHolder::PlatformHolder() = default;
 
-void PlatformHolder::addPlatform(std::unique_ptr<Platform> platform) {
-    platforms.push_back(std::move(platform));
+void PlatformHolder::addPlatform(Platform* platform) {
+    platforms.push_back(platform);
 }
 
 size_t PlatformHolder::getNumberOfElements() const {

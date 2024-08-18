@@ -4,10 +4,10 @@ extern "C" {
 
 LadderHolder::LadderHolder() = default;
 
-void LadderHolder::addLadder(std::unique_ptr<GameObject>& ladder) {
-	ladders.push_back(std::move(ladder));
+void LadderHolder::addLadder(GameObject* ladder) {
+    ladders.push_back(ladder);
 }
 
 size_t LadderHolder::getNumberOfElements() const {
-	return ladders.size();
+    return ladders.size();
 }

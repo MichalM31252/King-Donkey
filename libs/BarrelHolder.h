@@ -5,17 +5,16 @@ extern "C" {
 }
 
 extern "C++" {
-#include <memory>
 #include <vector>
 }
 
 class BarrelHolder {
 public:
-    std::vector<std::unique_ptr<MovableGameObject>> barrels;
-    
+    std::vector<MovableGameObject*> barrels;
+
     BarrelHolder() = default;
 
-    void addBarrel(std::unique_ptr<MovableGameObject> barrel);
+    void addBarrel(MovableGameObject* barrel);
     void emptyBarrelHolder();
     void updateBarrels(float deltaTime);
     int getNumberOfElements();

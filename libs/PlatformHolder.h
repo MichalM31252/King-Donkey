@@ -6,15 +6,14 @@ extern "C" {
 }
 
 extern "C++" {
-#include <memory>
 #include <vector>
 }
 
 class PlatformHolder {
 public:
-    std::vector<std::unique_ptr<Platform>> platforms;
+    std::vector<Platform*> platforms;
     PlatformHolder();
-    void addPlatform(std::unique_ptr<Platform> platform);
+    void addPlatform(Platform* platform);
     size_t getNumberOfElements() const;
 };
 

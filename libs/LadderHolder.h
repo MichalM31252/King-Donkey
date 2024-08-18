@@ -6,14 +6,13 @@ extern "C" {
 }
 
 extern "C++" {
-#include <memory>
 #include <vector>
 }
 
 class LadderHolder {
 public:
-    std::vector<std::unique_ptr<GameObject>> ladders;
+    std::vector<GameObject*> ladders;
     LadderHolder();
-    void addLadder(std::unique_ptr<GameObject>& ladder);
+    void addLadder(GameObject* ladder);
     size_t getNumberOfElements() const;
 };

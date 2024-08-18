@@ -1,7 +1,7 @@
 #define _USE_MATH_DEFINES
 
 extern "C" {
-	#include "./libs/Game.h"
+#include "./libs/Game.h"
 }
 
 // main
@@ -13,6 +13,5 @@ int main(int argc, char** argv) {
 
 	game.initGame();
 
-	// freeing all surfaces
 	return 0;
 };

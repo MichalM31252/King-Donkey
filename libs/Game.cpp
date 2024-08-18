@@ -9,15 +9,15 @@ Game::Game() {
     // the only thing that should be here is the stage manager
     // first move every method from this class to its respective manager then implement the stage manager
 
-    gameObjectContainer = std::make_unique<GameObjectContainer>();
+    gameObjectContainer = new GameObjectContainer();
 
-    screenManager = std::make_unique<ScreenManager>(gameObjectContainer.get());
+    screenManager = new ScreenManager(gameObjectContainer);
 
-    gameObjectFactory = std::make_unique<GameObjectFactory>(gameObjectContainer.get());
+    gameObjectFactory = new GameObjectFactory(gameObjectContainer);
 
-    collisionResolver = std::make_unique<CollisionResolver>(gameObjectContainer.get(), screenManager.get());
+    collisionResolver = new CollisionResolver(gameObjectContainer, screenManager);
 
-    roundManager = std::make_unique<RoundManager>(screenManager.get(), gameObjectFactory.get(), gameObjectContainer.get(), collisionResolver.get());
+    roundManager = new RoundManager(screenManager, gameObjectFactory, gameObjectContainer, collisionResolver);
 }
 
 void Game::initGame() {

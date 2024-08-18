@@ -1,21 +1,19 @@
+extern "C" {
 #include "RoundManager.h"
-
-RoundManager::RoundManager() {
-    screenManager = std::make_unique<ScreenManager>();
-    gameObjectFactory = std::make_unique<GameObjectFactory>();
-    gameObjectContainer = std::make_unique<GameObjectContainer>();
-    collisionResolver = std::make_unique<CollisionResolver>(gameObjectContainer.get(), screenManager.get());
 }
 
-RoundManager::RoundManager(std::unique_ptr<ScreenManager> screenManager,
-    std::unique_ptr<GameObjectFactory> gameObjectFactory,
-    std::unique_ptr<GameObjectContainer> gameObjectContainer,
-    std::unique_ptr<CollisionResolver> collisionResolver)
-    : screenManager(std::move(screenManager)),
-    gameObjectFactory(std::move(gameObjectFactory)),
-    gameObjectContainer(std::move(gameObjectContainer)),
-    collisionResolver(std::move(collisionResolver))
-{
+RoundManager::RoundManager() {
+    screenManager = new ScreenManager();
+    gameObjectFactory = new GameObjectFactory();
+    gameObjectContainer = new GameObjectContainer();
+    collisionResolver = new CollisionResolver(gameObjectContainer, screenManager);
+}
+
+RoundManager::RoundManager(ScreenManager* screenManager, GameObjectFactory* gameObjectFactory, GameObjectContainer* gameObjectContainer, CollisionResolver* collisionResolver){
+	this->screenManager = screenManager;
+	this->gameObjectFactory = gameObjectFactory;
+	this->gameObjectContainer = gameObjectContainer;
+	this->collisionResolver = collisionResolver;
 }
 
 void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound) {

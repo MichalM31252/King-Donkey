@@ -5,18 +5,14 @@ extern "C" {
 #include "BarrelHolder.h"
 }
 
-extern "C++" {
-#include <memory>
-}
-
 class BarrelFactory {
 private:
     int xpos, ypos;
     double accumulatedTime;
 public:
-    std::unique_ptr<BarrelHolder> barrelHolder;
+    BarrelHolder* barrelHolder;
 
-    void initBarrelFactory(std::unique_ptr<BarrelFactory> barrelFactory);
+    void initBarrelFactory(BarrelFactory* barrelFactory);
     void setPosition(int x, int y);
     void update(double deltaTime);
     void throwBarrel();

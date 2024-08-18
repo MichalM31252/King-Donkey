@@ -4,7 +4,7 @@ bool CollisionDetector::isCollisionBetweenRects(SDL_Rect a, SDL_Rect b) {
     return SDL_HasIntersection(&a, &b);
 }
 
-bool CollisionDetector::isPointAPartOfLine(const int x, const int y, std::unique_ptr<Platform> platform) {
+bool CollisionDetector::isPointAPartOfLine(const int x, const int y, Platform* platform) {
     double a = platform->y2pos - platform->y1pos;
     double b = platform->x1pos - platform->x2pos;
     double c = a * platform->x1pos + b * platform->y1pos;
@@ -27,41 +27,41 @@ bool CollisionDetector::isRectInsideLadder(SDL_Rect playerDestRect, SDL_Rect lad
     return false;
 }
 
-bool CollisionDetector::isGameObjectOnTopOfPlatform(std::unique_ptr<GameObject> gameObject, std::unique_ptr<Platform> platform) {
+bool CollisionDetector::isGameObjectOnTopOfPlatform(GameObject* gameObject, Platform* platform) {
     int yPosition = gameObject->ypos + gameObject->destRect.h;
     int xPositionBottomLeftCorner = gameObject->xpos;
     int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
 
-    if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, std::move(platform))) { // ERROR
+    if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, platform)) {
         return true;
     }
 
-	if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, std::move(platform))) { // ERROR
+    if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, platform)) {
         return true;
     }
 
     return false;
 }
 
-bool CollisionDetector::isGameObjectInsidePlatform(std::unique_ptr<GameObject> gameObject, std::unique_ptr<Platform> platform) {
+bool CollisionDetector::isGameObjectInsidePlatform(GameObject* gameObject, Platform* platform) {
     int yPosition = gameObject->ypos + gameObject->destRect.h;
     int xPositionBottomLeftCorner = gameObject->xpos;
     int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
 
-    if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, std::move(platform))) { // ERROR
+    if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, platform)) {
         return true;
     }
 
-    if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition, std::move(platform))) { // ERROR
+    if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition, platform)) {
         return true;
     }
 
     return false;
 }
 
-bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(std::unique_ptr<GameObject> gameObject, std::unique_ptr<PlatformHolder> platformHolder) {
+bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(GameObject* gameObject, PlatformHolder* platformHolder) {
     for (int i = 0; i < platformHolder->getNumberOfElements(); i++) {
-        if (CollisionDetector::isGameObjectOnTopOfPlatform(std::move(gameObject), std::move(platformHolder->platforms[i]))) { // ERROR, ERROR
+        if (CollisionDetector::isGameObjectOnTopOfPlatform(gameObject, platformHolder->platforms[i])) {
             return true;
         }
     }

@@ -16,25 +16,21 @@ extern "C" {
 #include "CollisionDetector.h"
 }
 
-extern "C++" {
-#include <memory>
-}
-
 // Does something when objects collide
 
 class CollisionResolver {
 public:
-    std::unique_ptr<GameObjectContainer> gameObjectContainer;
-    std::unique_ptr<ScreenManager> screenManager;
+    GameObjectContainer* gameObjectContainer;
+    ScreenManager* screenManager;
 
     CollisionResolver();
-    CollisionResolver(std::unique_ptr<GameObjectContainer> gameObjectContainer, std::unique_ptr<ScreenManager> screenManager);
+    CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager);
 
     void handlePlayerCollisionWithKong();
     void handlePlayerCollisionWithPrincess();
-    void handlePlayerCollisionWithBarrel(std::unique_ptr<MovableGameObject> barrel, bool* quit, int* startAnotherRound);
+    void handlePlayerCollisionWithBarrel(MovableGameObject* barrel, bool* quit, int* startAnotherRound);
     void handlePlayerCollisionWithLadder();
-    void handleCollisionWithPlatform(std::unique_ptr<MovableGameObject> gameObject);
+    void handleCollisionWithPlatform(MovableGameObject* gameObject);
     void handleCollisionWithJumping();
 
     void handlePlayerCollision();

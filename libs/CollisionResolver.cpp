@@ -3,13 +3,13 @@ extern "C" {
 }
 
 CollisionResolver::CollisionResolver() {
-    this->gameObjectContainer = std::make_unique<GameObjectContainer>();
-    this->screenManager = std::make_unique<ScreenManager>();
+    this->gameObjectContainer = new GameObjectContainer();
+    this->screenManager = new ScreenManager();
 }
 
-CollisionResolver::CollisionResolver(std::unique_ptr<GameObjectContainer> gameObjectContainer, std::unique_ptr<ScreenManager> screenManager) {
-    this->gameObjectContainer = std::move(gameObjectContainer);
-    this->screenManager = std::move(screenManager);
+CollisionResolver::CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager) {
+    this->gameObjectContainer = gameObjectContainer;
+    this->screenManager = screenManager;
 }
 
 void CollisionResolver::handlePlayerCollisionWithKong() {
@@ -24,7 +24,7 @@ void CollisionResolver::handlePlayerCollisionWithPrincess() {
     }
 }
 
-void CollisionResolver::handlePlayerCollisionWithBarrel(std::unique_ptr<MovableGameObject> barrel, bool* quit, int* startAnotherRound) {
+void CollisionResolver::handlePlayerCollisionWithBarrel(MovableGameObject* barrel, bool* quit, int* startAnotherRound) {
     if (CollisionDetector::isCollisionBetweenRects(gameObjectContainer->player->destRect, barrel->destRect)) {
         *quit = true;
         *startAnotherRound = 1;
@@ -53,10 +53,10 @@ void CollisionResolver::handleCollisionWithJumping() {
     }
 }
 
-void CollisionResolver::handleCollisionWithPlatform(std::unique_ptr<MovableGameObject> gameObject) {
+void CollisionResolver::handleCollisionWithPlatform(MovableGameObject* gameObject) {
     int yPosition = gameObject->ypos + gameObject->destRect.h;
     for (int i = 0; i < gameObjectContainer->platformHolder->getNumberOfElements(); i++) {
-		if (CollisionDetector::isGameObjectInsidePlatform(std::move(gameObject), std::move(gameObjectContainer->platformHolder->platforms[i]))) { // ERROR, ERROR
+        if (CollisionDetector::isGameObjectInsidePlatform(gameObject, gameObjectContainer->platformHolder->platforms[i])) {
             gameObject->ypos--;
             yPosition--;
         }
@@ -64,20 +64,20 @@ void CollisionResolver::handleCollisionWithPlatform(std::unique_ptr<MovableGameO
 }
 
 void CollisionResolver::handlePlayerCollision() {
-	std::unique_ptr<Player> player = std::move(gameObjectContainer->player);
+    Player* player = gameObjectContainer->player;
 
-	handleCollisionWithPlatform(std::move(player)); // ERROR
+    handleCollisionWithPlatform(player);
     handlePlayerCollisionWithKong();
     handlePlayerCollisionWithPrincess();
     handlePlayerCollisionWithLadder();
 
     if (!player->isClimbing) {
-		if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(std::move(player), std::move(gameObjectContainer->platformHolder))) { // ERROR, ERROR
+        if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(player, gameObjectContainer->platformHolder)) {
             screenManager->loadTexture(player, PLAYER_1_FILENAME);
             handleCollisionWithJumping();
         }
         else {
-			PhysicsManager::handleFallingForPlayer(std::move(player), screenManager->deltaTime); // ERROR
+            PhysicsManager::handleFallingForPlayer(player, screenManager->deltaTime);
         }
         if (player->isJumping) {
             player->jump(screenManager->deltaTime);
@@ -91,13 +91,12 @@ void CollisionResolver::handlePlayerCollision() {
 
 void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRound) {
     for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->getNumberOfElements(); i++) {
-        gameObjectContainer->barrelFactory->barrelHolder->getNumberOfElements();
-		std::unique_ptr<MovableGameObject> barrel = std::move(gameObjectContainer->barrelFactory->barrelHolder->barrels[i]); // ERROR
+        MovableGameObject* barrel = gameObjectContainer->barrelFactory->barrelHolder->barrels[i];
 
-		handlePlayerCollisionWithBarrel(std::move(barrel), quit, startAnotherRound); // ERROR
-		handleCollisionWithPlatform(std::move(barrel)); // ERROR
+        handlePlayerCollisionWithBarrel(barrel, quit, startAnotherRound);
+        handleCollisionWithPlatform(barrel);
 
-		if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(std::move(barrel), std::move(gameObjectContainer->platformHolder))) { // ERROR, ERROR
+        if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(barrel, gameObjectContainer->platformHolder)) {
             if (barrel->isFalling) {
                 barrel->stopFalling();
                 barrel->stopMove();
@@ -106,7 +105,7 @@ void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRoun
             barrel->startMovingRight(screenManager->deltaTime);
         }
         else {
-            PhysicsManager::handleFalling(std::move(barrel), screenManager->deltaTime);
+            PhysicsManager::handleFalling(barrel, screenManager->deltaTime);
         }
         barrel->update(screenManager->deltaTime);
     }
