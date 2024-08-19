@@ -1,9 +1,7 @@
 #pragma once
-extern "C" {
 #include "KeyboardManager.h"
 #include "ScreenManager.h"
 #include "GameObjectFactory.h"
-}
 
 class RoundManager {
 public:

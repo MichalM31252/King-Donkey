@@ -1,13 +1,11 @@
 #pragma once
 
-extern "C" {
 #include "CollisionResolver.h"
 #include "PhysicsManager.h"
 #include "GameObjectFactory.h"
 #include "KeyboardManager.h"
 #include "ScreenManager.h"
 #include "GameObjectContainer.h"
-}
 
 class StageManager {
 private:

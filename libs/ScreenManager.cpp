@@ -1,7 +1,5 @@
 #define _USE_MATH_DEFINES
-extern "C" {
 #include "ScreenManager.h"
-}
 
 ScreenManager::ScreenManager() {
 
@@ -282,9 +280,9 @@ void ScreenManager::handlePlayerSprite(Player* player){ // rename to handlePlaye
 //}
 
 void ScreenManager::drawElements() { // don't repeat yourself
-	renderGameObject(std::move(gameObjectContainer->donkeyKong), screen);
-	renderGameObject(std::move(gameObjectContainer->princess), screen);
-	renderGameObject(std::move(gameObjectContainer->player), screen);
+	renderGameObject(gameObjectContainer->donkeyKong, screen);
+	renderGameObject(gameObjectContainer->princess, screen);
+	renderGameObject(gameObjectContainer->player, screen);
 
 	drawPlatforms();
 	drawLadders();

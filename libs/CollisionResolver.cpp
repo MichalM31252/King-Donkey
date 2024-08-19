@@ -1,6 +1,5 @@
-extern "C" {
 #include "CollisionResolver.h"
-}
+
 
 CollisionResolver::CollisionResolver() {
     this->gameObjectContainer = new GameObjectContainer();

@@ -1,6 +1,4 @@
-extern "C" {
 #include "PlatformHolder.h"
-}
 
 PlatformHolder::PlatformHolder() = default;
 

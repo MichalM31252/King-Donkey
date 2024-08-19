@@ -1,7 +1,5 @@
-extern "C" {
 #include "Player.h"
 #include "ScreenManager.h" // temporary solution
-}
 
 Player::Player() {
 	*tag = "Player";

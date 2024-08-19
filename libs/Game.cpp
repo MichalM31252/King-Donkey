@@ -1,9 +1,7 @@
 #define _USE_MATH_DEFINES
 
-extern "C" {
 #include "Game.h"
 #include "CollisionResolver.h" // temporary fix
-}
 
 Game::Game() {
     // the only thing that should be here is the stage manager

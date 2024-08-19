@@ -1,12 +1,8 @@
 #pragma once
-extern "C" {
+
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
-
-#include "../SDL2-2.0.10/include/SDL.h"
-#include "../SDL2-2.0.10/include/SDL_main.h"
-
 #include "Platform.h"
 #include "GameObject.h"
 #include "MovableGameObject.h"
@@ -14,6 +10,10 @@ extern "C" {
 #include "PhysicsManager.h"
 #include "ScreenManager.h"
 #include "CollisionDetector.h"
+
+extern "C" {
+#include "../SDL2-2.0.10/include/SDL.h"
+#include "../SDL2-2.0.10/include/SDL_main.h"
 }
 
 // Does something when objects collide

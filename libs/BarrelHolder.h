@@ -1,8 +1,5 @@
 #pragma once
-
-extern "C" {
 #include "MovableGameObject.h"
-}
 
 extern "C++" {
 #include <vector>

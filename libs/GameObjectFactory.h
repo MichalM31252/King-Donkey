@@ -1,9 +1,8 @@
 #pragma once
-extern "C" {
+
 #include "PhysicsManager.h"
 #include "CollisionResolver.h"
 #include "GameObjectContainer.h"
-}
 
 class GameObjectFactory {
 public:

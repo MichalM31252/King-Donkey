@@ -1,9 +1,7 @@
  #pragma once
 
-extern "C" {
 #include "Platform.h"
 #include "Constants.h"
-}
 
 extern "C++" {
 #include <vector>

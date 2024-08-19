@@ -1,6 +1,4 @@
-extern "C" {
 #include "BarrelHolder.h"
-}
 
 void BarrelHolder::addBarrel(MovableGameObject* barrel) {
     barrels.push_back(barrel);

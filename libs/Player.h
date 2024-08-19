@@ -1,8 +1,6 @@
 #pragma once
 
-extern "C" {
 #include "MovableGameObject.h"
-}
 
 class Player : public MovableGameObject {
 public:

@@ -1,9 +1,6 @@
 #pragma once
-
-extern "C" {
 #include "Player.h"
 #include "Barrel.h"
-}
 
 class PhysicsManager {
 public:

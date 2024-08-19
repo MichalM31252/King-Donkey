@@ -1,6 +1,4 @@
-extern "C" {
 #include "RoundManager.h"
-}
 
 RoundManager::RoundManager() {
     screenManager = new ScreenManager();

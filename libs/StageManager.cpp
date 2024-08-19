@@ -1,7 +1,5 @@
 #pragma once
-extern "C" {
 #include "StageManager.h"
-}
 
 StageManager::StageManager() = default;
 
@@ -14,4 +12,3 @@ StageManager::StageManager(GameObjectContainer* gameObjectContainer) { // assign
 	// physics manager is entirely static
 	// round manager doesnt exist yet
 }
-

@@ -1,6 +1,4 @@
-extern "C" {
 #include "LadderHolder.h"
-}
 
 LadderHolder::LadderHolder() = default;
 

@@ -1,7 +1,5 @@
-extern "C" {
 #include "BarrelFactory.h"
 #include "ScreenManager.h"
-}
 
 void BarrelFactory::initBarrelFactory(BarrelFactory* barrelFactory) {
 	barrelFactory->barrelHolder = new BarrelHolder();

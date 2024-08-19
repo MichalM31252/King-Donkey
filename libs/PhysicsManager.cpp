@@ -1,6 +1,4 @@
-extern "C" {
 #include "PhysicsManager.h"
-}
 
 void PhysicsManager::handleFallingForPlayer(Player* player, double deltaTime) {
     if (!player->isJumping) {
