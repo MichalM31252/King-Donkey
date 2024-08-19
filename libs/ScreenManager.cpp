@@ -197,34 +197,35 @@ void ScreenManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int 
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void ScreenManager::loadTexture(GameObject* gameObject, const char* fileName) {
+template <typename T>
+void ScreenManager::loadTexture(T* gameObject, const char* fileName) {
 	gameObject->sprite = SDL_LoadBMP(fileName);
 	if (gameObject->sprite == NULL) {
 		printf("SDL_LoadBMP error: %s\n", SDL_GetError());
 	}
 }
 
-void ScreenManager::initGameObject(GameObject* gameObject, const char* fileName) {
+template void ScreenManager::loadTexture<GameObject>(GameObject* gameObject, const char* fileName);
+template void ScreenManager::loadTexture<MovableGameObject>(MovableGameObject* gameObject, const char* fileName);
+template void ScreenManager::loadTexture<Barrel>(Barrel* gameObject, const char* fileName);
+template void ScreenManager::loadTexture<Player>(Player* gameObject, const char* fileName);
+
+template <typename T>
+void ScreenManager::initGameObject(T* gameObject, const char* fileName) {
 	loadTexture(gameObject, fileName);
 }
 
-void ScreenManager::renderGameObject(GameObject* gameObject, SDL_Surface* screen) {
+template void ScreenManager::initGameObject<GameObject>(GameObject* gameObject, const char* fileName);
+template void ScreenManager::initGameObject<MovableGameObject>(MovableGameObject* gameObject, const char* fileName);
+template void ScreenManager::initGameObject<Player>(Player* gameObject, const char* fileName);
+
+template <typename T>
+void ScreenManager::renderGameObject(T* gameObject, SDL_Surface* screen) {
 	drawSurface(screen, gameObject, gameObject->xpos, gameObject->ypos);
 }
 
-// Explicit instantiations
-//template void ScreenManager::initGameObject<GameObject>(std::unique_ptr<GameObject>& gameObject, const char* fileName);
-//template void ScreenManager::initGameObject<MovableGameObject>(std::unique_ptr<MovableGameObject>& gameObject, const char* fileName);
-//template void ScreenManager::initGameObject<Player>(std::unique_ptr<Player>& gameObject, const char* fileName);
-//
-//template void ScreenManager::loadTexture<GameObject>(std::unique_ptr<GameObject>& gameObject, const char* fileName);
-//template void ScreenManager::loadTexture<MovableGameObject>(std::unique_ptr<MovableGameObject>& gameObject, const char* fileName);
-//template void ScreenManager::loadTexture<Barrel>(std::unique_ptr<Barrel>& gameObject, const char* fileName);
-//template void ScreenManager::loadTexture<Player>(std::unique_ptr<Player>& gameObject, const char* fileName);
-//
-//template void ScreenManager::renderGameObject<GameObject>(std::unique_ptr<GameObject> gameObject, SDL_Surface* screen);
-//template void ScreenManager::renderGameObject<MovableGameObject>(std::unique_ptr<MovableGameObject> gameObject, SDL_Surface* screen);
+template void ScreenManager::renderGameObject<GameObject>(GameObject* gameObject, SDL_Surface* screen);
+template void ScreenManager::renderGameObject<MovableGameObject>(MovableGameObject* gameObject, SDL_Surface* screen);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

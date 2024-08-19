@@ -64,13 +64,14 @@ public:
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	static void initGameObject(GameObject* gameObject, const char* fileName);
+	template <typename T>
+	static void initGameObject(T* gameObject, const char* fileName);
 
-	//template<typename T>
-	static void loadTexture(GameObject* gameObject, const char* fileName);
+	template <typename T>
+	static void loadTexture(T* gameObject, const char* fileName);
 
-	//template<typename T>
-	void renderGameObject(GameObject* gameObject, SDL_Surface* screen);
+	template<typename T>
+	void renderGameObject(T* gameObject, SDL_Surface* screen);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
