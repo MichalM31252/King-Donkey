@@ -11,11 +11,8 @@
 #include "BarrelHolder.h"
 #include "GameObjectFactory.h"
 #include "RoundManager.h"
-
-extern "C" {
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
-}
 
 class Game {
 public:
