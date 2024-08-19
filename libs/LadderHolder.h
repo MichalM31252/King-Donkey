@@ -2,10 +2,7 @@
 
 #include "GameObject.h"
 #include "Constants.h"
-
-extern "C++" {
 #include <vector>
-}
 
 class LadderHolder {
 public:

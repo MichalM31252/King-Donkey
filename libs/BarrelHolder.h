@@ -1,9 +1,6 @@
 #pragma once
 #include "MovableGameObject.h"
-
-extern "C++" {
 #include <vector>
-}
 
 class BarrelHolder {
 public:

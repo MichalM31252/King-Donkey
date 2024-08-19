@@ -2,10 +2,7 @@
 
 #include "Platform.h"
 #include "Constants.h"
-
-extern "C++" {
 #include <vector>
-}
 
 class PlatformHolder {
 public:
