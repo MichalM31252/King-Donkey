@@ -27,5 +27,5 @@ void BarrelFactory::throwBarrel() {
 	barrel->createDestRect();
 	barrel->objectSpeed = DEFAULT_BARREL_SPEED;
 
-	barrelHolder->addBarrel(barrel);  // No need to move the pointer
+	barrelHolder->addBarrel(barrel);
 }

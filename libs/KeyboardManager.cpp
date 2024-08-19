@@ -28,53 +28,53 @@ void KeyboardManager::handleEvents(bool& quit, double deltaTime, Player* player,
 void KeyboardManager::onKeyPressed(bool& quit, double deltaTime, Player* player, int& startAnotherRound) {
     player->startMovingAtSpeed(DEFAULT_PLAYER_SPEED);
     switch (event.key.keysym.sym) {
-    case SDLK_ESCAPE:
-        initializeQuit(quit, startAnotherRound);
-        break;
-    case SDLK_UP:
-        onKeyPressArrowUp(deltaTime, player);
-        break;
-    case SDLK_LEFT:
-        onKeyPressArrowLeft(deltaTime, player);
-        break;
-    case SDLK_RIGHT:
-        onKeyPressArrowRight(deltaTime, player);
-        break;
-    case SDLK_DOWN:
-        onKeyPressArrowDown(deltaTime, player);
-        break;
-    case SDLK_SPACE:
-        onKeyPressSpace(player);
-        break;
-    case SDLK_n:
-        onKeyPressN(quit, startAnotherRound);
-        break;
-    case SDLK_1:
-        onKeyPress1(quit, startAnotherRound);
-        break;
-    case SDLK_2:
-        onKeyPress2(quit, startAnotherRound);
-        break;
-    case SDLK_3:
-        onKeyPress3(quit, startAnotherRound);
-        break;
+        case SDLK_ESCAPE:
+            initializeQuit(quit, startAnotherRound);
+            break;
+        case SDLK_UP:
+            onKeyPressArrowUp(deltaTime, player);
+            break;
+        case SDLK_LEFT:
+            onKeyPressArrowLeft(deltaTime, player);
+            break;
+        case SDLK_RIGHT:
+            onKeyPressArrowRight(deltaTime, player);
+            break;
+        case SDLK_DOWN:
+            onKeyPressArrowDown(deltaTime, player);
+            break;
+        case SDLK_SPACE:
+            onKeyPressSpace(player);
+            break;
+        case SDLK_n:
+            onKeyPressN(quit, startAnotherRound);
+            break;
+        case SDLK_1:
+            onKeyPress1(quit, startAnotherRound);
+            break;
+        case SDLK_2:
+            onKeyPress2(quit, startAnotherRound);
+            break;
+        case SDLK_3:
+            onKeyPress3(quit, startAnotherRound);
+            break;
     }
 }
 
 void KeyboardManager::onKeyReleased(Player* player) {
     switch (event.key.keysym.sym) {
-    case SDLK_UP:
-        onKeyReleasedArrowUp(player);
-        break;
-    case SDLK_LEFT:
-        onKeyReleasedArrowLeft(player);
-        break;
-    case SDLK_RIGHT:
-        onKeyReleasedArrowRight(player);
-        break;
-    case SDLK_DOWN:
-        onKeyReleasedArrowDown(player);
-        break;
+        case SDLK_UP:
+            onKeyReleasedArrowUp(player);
+            break;
+        case SDLK_LEFT:
+            onKeyReleasedArrowLeft(player);
+            break;
+        case SDLK_RIGHT:
+            onKeyReleasedArrowRight(player);
+            break;
+        case SDLK_DOWN:
+            onKeyReleasedArrowDown(player);
+            break;
     }
 }
 

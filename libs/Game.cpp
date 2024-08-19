@@ -20,7 +20,8 @@ Game::Game() {
 
 void Game::initGame() {
     screenManager->createSDL();
-    int startAnotherRound = 0;
+    screenManager->createFramerate();
+	int startAnotherRound = 0;
     roundManager->handleRound(startAnotherRound);
     closeGame();
 }

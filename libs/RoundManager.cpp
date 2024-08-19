@@ -42,10 +42,8 @@ void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startA
     };
 }
 
-void RoundManager::handleRound(int startAnotherRound) {
+void RoundManager::handleRound(int& startAnotherRound) {
     KeyboardManager eventHandler;
-    screenManager->createFramerate();
-
     decideWhichBoardToCreate(startAnotherRound);
     handleCurrentRound(eventHandler, &startAnotherRound);
 

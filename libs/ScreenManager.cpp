@@ -196,7 +196,6 @@ void ScreenManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int 
 	}
 };
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template <typename T>
 void ScreenManager::loadTexture(T* gameObject, const char* fileName) {
 	gameObject->sprite = SDL_LoadBMP(fileName);

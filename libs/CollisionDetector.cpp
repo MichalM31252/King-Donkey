@@ -4,7 +4,7 @@ bool CollisionDetector::isCollisionBetweenRects(SDL_Rect a, SDL_Rect b) {
     return SDL_HasIntersection(&a, &b);
 }
 
-bool CollisionDetector::isPointAPartOfLine(const int x, const int y, Platform* platform) {
+bool CollisionDetector::isPointAPartOfLine(const int x, const int y, Platform* platform) { // create class Point ?
     double a = platform->y2pos - platform->y1pos;
     double b = platform->x1pos - platform->x2pos;
     double c = a * platform->x1pos + b * platform->y1pos;

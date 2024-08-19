@@ -62,8 +62,6 @@ public:
 	void DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color);
 	void DrawRectangle(SDL_Surface* screen, int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor);
 
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 	template <typename T>
 	static void initGameObject(T* gameObject, const char* fileName);
 
@@ -72,8 +70,6 @@ public:
 
 	template<typename T>
 	void renderGameObject(T* gameObject, SDL_Surface* screen);
-
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	void renderLadder(GameObject* gameObject, SDL_Surface* screen);
 
