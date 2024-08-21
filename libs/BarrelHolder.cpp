@@ -11,7 +11,7 @@ void BarrelHolder::emptyBarrelHolder() {
     barrels.clear();
 }
 
-void BarrelHolder::updateBarrels(float deltaTime) {
+void BarrelHolder::updateBarrels(float deltaTime) {  
     for (auto barrel : barrels) {
         barrel->update(deltaTime);
     }

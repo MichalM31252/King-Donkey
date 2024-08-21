@@ -106,7 +106,6 @@ void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRoun
         else {
             PhysicsManager::handleFalling(barrel, screenManager->deltaTime);
         }
-        barrel->update(screenManager->deltaTime);
     }
 }
 

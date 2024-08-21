@@ -11,5 +11,9 @@ struct GameObjectContainer {
     Player* player;
     PlatformHolder* platformHolder;
     LadderHolder* ladderHolder;
+	BarrelHolder* barrelHolder;
+
+
+
     BarrelFactory* barrelFactory;
 };

@@ -63,18 +63,18 @@ void KeyboardManager::onKeyPressed(bool& quit, double deltaTime, Player* player,
 
 void KeyboardManager::onKeyReleased(Player* player) {
     switch (event.key.keysym.sym) {
-        case SDLK_UP:
-            onKeyReleasedArrowUp(player);
-            break;
-        case SDLK_LEFT:
-            onKeyReleasedArrowLeft(player);
-            break;
-        case SDLK_RIGHT:
-            onKeyReleasedArrowRight(player);
-            break;
-        case SDLK_DOWN:
-            onKeyReleasedArrowDown(player);
-            break;
+    case SDLK_UP:
+        onKeyReleasedArrowUp(player);
+        break;
+    case SDLK_LEFT:
+        onKeyReleasedArrowLeft(player);
+        break;
+    case SDLK_RIGHT:
+        onKeyReleasedArrowRight(player);
+        break;
+    case SDLK_DOWN:
+        onKeyReleasedArrowDown(player);
+        break;
     }
 }
 
