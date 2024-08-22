@@ -1,120 +1,115 @@
-extern "C" {
 #include "GameObjectFactory.h"
-#include "ScreenManager.h" // temporary fix
-}
+#include "ScreenManager.h"
 
 GameObjectFactory::GameObjectFactory() {
 
 }
 
 GameObjectFactory::GameObjectFactory(GameObjectContainer* gameObjectContainer) {
-	this->gameObjectContainer = gameObjectContainer;
+    this->gameObjectContainer = gameObjectContainer;
 }
 
 void GameObjectFactory::createPlayer() {
-	Player* pla = new Player();
+    Player* pla = new Player();
 
-	ScreenManager::initGameObject(pla, PLAYER_1_FILENAME);
+    ScreenManager::initGameObject(pla, PLAYER_1_FILENAME);
 
-	pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
-	pla->createSrcRect();
-	pla->createDestRect();
+    pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
+    pla->createSrcRect();
+    pla->createDestRect();
 
-	gameObjectContainer->player = pla;
+    gameObjectContainer->player = pla;
 }
 
 void GameObjectFactory::createDonkeyKong() {
-	GameObject* donkeyK = new GameObject();
+    GameObject* donkeyK = new GameObject();
 
-	ScreenManager::initGameObject(donkeyK, "./assets/DonkeyKong.bmp");
+    ScreenManager::initGameObject(donkeyK, "./assets/DonkeyKong.bmp");
 
-	donkeyK->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
-	donkeyK->createSrcRect();
-	donkeyK->createDestRect();
+    donkeyK->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
+    donkeyK->createSrcRect();
+    donkeyK->createDestRect();
 
-	gameObjectContainer->donkeyKong = donkeyK;
+    gameObjectContainer->donkeyKong = donkeyK;
 }
 
 void GameObjectFactory::createPrincess() {
-	GameObject* prin = new GameObject();
+    GameObject* prin = new GameObject();
 
-	ScreenManager::initGameObject(prin, "./assets/Princess.bmp");
+    ScreenManager::initGameObject(prin, "./assets/Princess.bmp");
 
-	prin->setPosition(STARTING_X_PRINCESS, STARTING_Y_PRINCESS);
-	prin->createSrcRect();
-	prin->createDestRect();
+    prin->setPosition(STARTING_X_PRINCESS, STARTING_Y_PRINCESS);
+    prin->createSrcRect();
+    prin->createDestRect();
 
-	gameObjectContainer->princess = prin;
+    gameObjectContainer->princess = prin;
 }
 
 void GameObjectFactory::createPlatforms1() {
-	Platform* plat1 = new Platform();
-	plat1->setPosition(1, 400, 400, 400);
+    Platform* plat1 = new Platform();
+    plat1->setPosition(1, 400, 400, 400);
 
-	Platform* plat2 = new Platform();
-	plat2->setPosition(400, 400, 500, 300);
+    Platform* plat2 = new Platform();
+    plat2->setPosition(400, 400, 500, 300);
 
-	Platform* plat3 = new Platform();
-	plat3->setPosition(500, 300, SCREEN_WIDTH - 1, 300);
+    Platform* plat3 = new Platform();
+    plat3->setPosition(500, 300, SCREEN_WIDTH - 1, 300);
 
-	Platform* plat4 = new Platform();
-	plat4->setPosition(1, 130, 570, 130);
+    Platform* plat4 = new Platform();
+    plat4->setPosition(1, 130, 570, 130);
 
-	Platform* plat5 = new Platform();
-	plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80);
+    Platform* plat5 = new Platform();
+    plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80);
 
-	PlatformHolder* pH = new PlatformHolder();
-	initPlatformHolder(pH);
-	addPlatform(pH, plat1);
-	addPlatform(pH, plat2);
-	addPlatform(pH, plat3);
-	addPlatform(pH, plat4);
-	addPlatform(pH, plat5);
+    PlatformHolder* platH = new PlatformHolder();
+    platH->addPlatform(plat1);
+    platH->addPlatform(plat2);
+    platH->addPlatform(plat3);
+    platH->addPlatform(plat4);
+    platH->addPlatform(plat5);
 
-	gameObjectContainer->platformHolder = pH;
+    gameObjectContainer->platformHolder = platH;
 }
 
 void GameObjectFactory::createLadders1() {
-	GameObject* ladd1 = new GameObject();
+    GameObject* ladd1 = new GameObject();
 
-	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
+    ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
 
-	ladd1->setPosition(525, 129);
-	ladd1->setSrcRect(LADDER_WIDTH, 170);
-	ladd1->setDestRect(LADDER_WIDTH, 170);
+    ladd1->setPosition(525, 129);
+    ladd1->setSrcRect(LADDER_WIDTH, 170);
+    ladd1->setDestRect(LADDER_WIDTH, 170);
 
-	GameObject* ladd2 = new GameObject();
+    GameObject* ladd2 = new GameObject();
 
-	ScreenManager::initGameObject(ladd2, "./assets/Ladder.bmp");
+    ScreenManager::initGameObject(ladd2, "./assets/Ladder.bmp");
 
-	ladd2->setPosition(250, 79);
-	ladd2->setSrcRect(LADDER_WIDTH, 50);
-	ladd2->setDestRect(LADDER_WIDTH, 50);
+    ladd2->setPosition(250, 79);
+    ladd2->setSrcRect(LADDER_WIDTH, 50);
+    ladd2->setDestRect(LADDER_WIDTH, 50);
 
-	LadderHolder* laddH = new LadderHolder();
-	initLadderHolder(laddH);
-	addLadder(laddH, ladd1);
-	addLadder(laddH, ladd2);
-	gameObjectContainer->ladderHolder = laddH;
+    LadderHolder* laddH = new LadderHolder();
+    laddH->addLadder(ladd1);
+    laddH->addLadder(ladd2);
+    gameObjectContainer->ladderHolder = laddH;
 }
 
 void GameObjectFactory::createBarrels() {
-	MovableGameObject* barrel1 = new MovableGameObject();
+    MovableGameObject* barrel1 = new MovableGameObject();
 
-	ScreenManager::initGameObject(barrel1, BARREL_1_FILENAME);
+    ScreenManager::initGameObject(barrel1, BARREL_1_FILENAME);
 
-	barrel1->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
-	barrel1->createSrcRect();
-	barrel1->createDestRect();
-	barrel1->objectSpeed = DEFAULT_BARREL_SPEED;
+    barrel1->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
+    barrel1->createSrcRect();
+    barrel1->createDestRect();
+    barrel1->objectSpeed = DEFAULT_BARREL_SPEED;
 
-	BarrelHolder* barrelH = new BarrelHolder();
-	initBarrelHolder(barrelH);
-	addBarrel(barrelH, barrel1);
+    BarrelHolder* barrelH = new BarrelHolder();
+    barrelH->addBarrel(barrel1);
 
-	gameObjectContainer->barrelFactory = new BarrelFactory();
-	gameObjectContainer->barrelFactory->barrelHolder = barrelH;
-	gameObjectContainer->barrelFactory->setPosition(gameObjectContainer->donkeyKong->xpos + gameObjectContainer->donkeyKong->destRect.w + +SMALL_MARGIN, gameObjectContainer->donkeyKong->ypos);
+    gameObjectContainer->barrelFactory = new BarrelFactory();
+    gameObjectContainer->barrelFactory->barrelHolder = barrelH;
+    gameObjectContainer->barrelFactory->setPosition(gameObjectContainer->donkeyKong->xpos + gameObjectContainer->donkeyKong->destRect.w + SMALL_MARGIN, gameObjectContainer->donkeyKong->ypos);
 }
 
 void GameObjectFactory::createPlatforms2() {
@@ -137,13 +132,12 @@ void GameObjectFactory::createPlatforms2() {
 	plat6->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH - LADDER_WIDTH, 230, SCREEN_WIDTH - LARGE_MARGIN, 230);
 
 	PlatformHolder* platH = new PlatformHolder();
-	initPlatformHolder(platH);
-	addPlatform(platH, plat1);
-	addPlatform(platH, plat2);
-	addPlatform(platH, plat3);
-	addPlatform(platH, plat4);
-	addPlatform(platH, plat5);
-	addPlatform(platH, plat6);
+	platH->addPlatform(plat1);
+	platH->addPlatform(plat2);
+	platH->addPlatform(plat3);
+	platH->addPlatform(plat4);
+	platH->addPlatform(plat5);
+	platH->addPlatform(plat6);
 
 	gameObjectContainer->platformHolder = platH;
 }
@@ -166,9 +160,8 @@ void GameObjectFactory::createLadders2() {
 	ladd2->setDestRect(LADDER_WIDTH, 150);
 
 	LadderHolder* laddH = new LadderHolder();
-	initLadderHolder(laddH);
-	addLadder(laddH, ladd1);
-	addLadder(laddH, ladd2);
+	laddH->addLadder(ladd1);
+	laddH->addLadder(ladd2);
 
 	gameObjectContainer->ladderHolder = laddH;
 }
@@ -190,12 +183,11 @@ void GameObjectFactory::createPlatforms3() {
 	plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80);
 
 	PlatformHolder* platH = new PlatformHolder();
-	initPlatformHolder(platH);
-	addPlatform(platH, plat1);
-	addPlatform(platH, plat2);
-	addPlatform(platH, plat3);
-	addPlatform(platH, plat4);
-	addPlatform(platH, plat5);
+	platH->addPlatform(plat1);
+	platH->addPlatform(plat2);
+	platH->addPlatform(plat3);
+	platH->addPlatform(plat4);
+	platH->addPlatform(plat5);
 
 	gameObjectContainer->platformHolder = platH;
 }
@@ -234,33 +226,28 @@ void GameObjectFactory::createLadders3() {
 	ladd4->setDestRect(LADDER_WIDTH, 50);
 
 	LadderHolder* laddH = new LadderHolder();
-	initLadderHolder(laddH);
-	addLadder(laddH, ladd1);
-	addLadder(laddH, ladd2);
-	addLadder(laddH, ladd3);
-	addLadder(laddH, ladd4);
+    laddH->addLadder(ladd1);
+    laddH->addLadder(ladd2);
+	laddH->addLadder(ladd3);
+	laddH->addLadder(ladd4);
 	gameObjectContainer->ladderHolder = laddH;
 }
 
 void GameObjectFactory::createBoard(int boardId) {
-	createPlayer();
-	createDonkeyKong();
-	createPrincess();
-	if (boardId == 1) {
-		createPlatforms1();
-		createLadders1();
-	}
-	if (boardId == 2) {
-		createPlatforms2();
-		createLadders2();
-	}
-	if (boardId == 3) {
-		createPlatforms3();
-		createLadders3();
-	}
-	createBarrels();
-}
-
-GameObjectFactory::~GameObjectFactory() {
-
+    createPlayer();
+    createDonkeyKong();
+    createPrincess();
+    if (boardId == 1) {
+        createPlatforms1();
+        createLadders1();
+    }
+    if (boardId == 2) {
+        createPlatforms2();
+        createLadders2();
+    }
+    if (boardId == 3) {
+        createPlatforms3();
+        createLadders3();
+    }
+    createBarrels();
 }

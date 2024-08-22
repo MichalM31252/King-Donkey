@@ -1,16 +1,15 @@
 #pragma once
-
-extern "C" {
 #include "MovableGameObject.h"
-}
+#include <vector>
 
-struct BarrelHolder {
-	MovableGameObject* barrels;
-	int numberOfElements;
-	int sizeOfArray;
+class BarrelHolder {
+public:
+    std::vector<MovableGameObject*> barrels;
+
+    BarrelHolder() = default;
+
+    void addBarrel(MovableGameObject* barrel);
+    void emptyBarrelHolder();
+    void updateBarrels(float deltaTime);
+    int getNumberOfElements();
 };
-
-void initBarrelHolder(BarrelHolder* barrelHolder);
-void addBarrel(BarrelHolder* barrelHolder, MovableGameObject* barrel);
-void emptyBarrelHolder(BarrelHolder* barrelHolder);
-void updateBarrels(BarrelHolder* barrelHolder, float deltaTime);

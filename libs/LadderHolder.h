@@ -1,16 +1,13 @@
 #pragma once
 
-extern "C" {
 #include "GameObject.h"
 #include "Constants.h"
-}
+#include <vector>
 
-struct LadderHolder {
-	GameObject* ladders;
-	int numberOfElements;
-	int sizeOfArray;
+class LadderHolder {
+public:
+    std::vector<GameObject*> ladders;
+    LadderHolder();
+    void addLadder(GameObject* ladder);
+    size_t getNumberOfElements() const;
 };
-
-void initLadderHolder(LadderHolder* ladderHolder);
-void addLadder(LadderHolder* ladderHolder, GameObject* ladder);
-void emptyLadderHolder(LadderHolder* ladderHolder);

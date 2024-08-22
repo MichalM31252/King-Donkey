@@ -1,6 +1,4 @@
-extern "C" {
 #include "Platform.h"
-}
 
 void Platform::setPosition(int x1, int y1, int x2, int y2) {
 	x1pos = x1;

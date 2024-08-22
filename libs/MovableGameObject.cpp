@@ -1,9 +1,5 @@
-extern "C" {
+#include "ScreenManager.h" 
 #include "MovableGameObject.h"
-#include "ScreenManager.h" // Temporary solution
-}
-
-// CURRENT TASK - remove: isPlayer, isClimbing, from this class
 
 MovableGameObject::MovableGameObject() {
 	currentDirectionOfMovement = -1; // 0 - up , 1 - right, 2 - down, 3 - left

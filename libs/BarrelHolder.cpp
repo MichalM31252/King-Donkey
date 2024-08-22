@@ -1,36 +1,22 @@
-extern "C" {
 #include "BarrelHolder.h"
+
+void BarrelHolder::addBarrel(MovableGameObject* barrel) {
+    barrels.push_back(barrel);
 }
 
-void initBarrelHolder(BarrelHolder* barrelHolder) {
-	barrelHolder->barrels = new MovableGameObject[MAXIMUM_AMOUNT_OF_BARRELS];
-	barrelHolder->numberOfElements = 0;
-	barrelHolder->sizeOfArray = MAXIMUM_AMOUNT_OF_BARRELS;
+void BarrelHolder::emptyBarrelHolder() {
+    for (auto barrel : barrels) {
+        delete barrel;
+    }
+    barrels.clear();
 }
 
-void addBarrel(BarrelHolder* barrelHolder, MovableGameObject* barrel) {
-	if (barrelHolder->numberOfElements == barrelHolder->sizeOfArray) {
-		MovableGameObject* temp = new MovableGameObject[barrelHolder->sizeOfArray];
-
-		for (int i = 0; i < barrelHolder->numberOfElements; i++) {
-			temp[i] = barrelHolder->barrels[i];
-		}
-
-		delete[] barrelHolder->barrels;
-
-		barrelHolder->barrels = temp;
-		barrelHolder->sizeOfArray *= 2;
-	}
-	barrelHolder->barrels[barrelHolder->numberOfElements] = *barrel;
-	barrelHolder->numberOfElements++;
+void BarrelHolder::updateBarrels(float deltaTime) {  
+    for (auto barrel : barrels) {
+        barrel->update(deltaTime);
+    }
 }
 
-void emptyBarrelHolder(BarrelHolder* barrelHolder) {
-	delete[] barrelHolder->barrels;
-}
-
-void updateBarrels(BarrelHolder* barrelHolder, float deltaTime) {
-	for (int i = 0; i < barrelHolder->numberOfElements; i++) {
-		barrelHolder->barrels[i].update(deltaTime);
-	}
+int BarrelHolder::getNumberOfElements() {
+    return static_cast<int>(barrels.size());
 }

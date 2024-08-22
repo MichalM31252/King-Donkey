@@ -1,7 +1,5 @@
 #define _USE_MATH_DEFINES
-extern "C" {
 #include "ScreenManager.h"
-}
 
 ScreenManager::ScreenManager() {
 
@@ -141,13 +139,13 @@ void ScreenManager::drawSurface(SDL_Surface* screen, GameObject* gameObject, int
 	dest.w = gameObject->sprite->w;
 	dest.h = gameObject->sprite->h;
 	SDL_BlitSurface(gameObject->sprite, NULL, screen, &dest);
-};
+}
 
-void ScreenManager::drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, int xpos, int ypos, SDL_Rect dest) { // not the best solution but works
+void ScreenManager::drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, int xpos, int ypos, SDL_Rect dest) {
 	ladder->sprite->w = dest.w;
 	ladder->sprite->h = dest.h;
 	SDL_BlitSurface(ladder->sprite, NULL, screen, &dest);
-};
+}
 
 // draw a text txt on surface screen, starting from the point (x, y)
 // charset is a 128x128 bitmap containing character images
@@ -198,45 +196,57 @@ void ScreenManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int 
 	}
 };
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// MOVE TO TEXTURE MANAGER
-
-void ScreenManager::loadTexture(GameObject* gameObject, const char* fileName) {
+template <typename T>
+void ScreenManager::loadTexture(T* gameObject, const char* fileName) {
 	gameObject->sprite = SDL_LoadBMP(fileName);
 	if (gameObject->sprite == NULL) {
 		printf("SDL_LoadBMP error: %s\n", SDL_GetError());
 	}
 }
 
-void ScreenManager::initGameObject(GameObject* gameObject, const char* fileName) {
+template void ScreenManager::loadTexture<GameObject>(GameObject* gameObject, const char* fileName);
+template void ScreenManager::loadTexture<MovableGameObject>(MovableGameObject* gameObject, const char* fileName);
+template void ScreenManager::loadTexture<Barrel>(Barrel* gameObject, const char* fileName);
+template void ScreenManager::loadTexture<Player>(Player* gameObject, const char* fileName);
+
+template <typename T>
+void ScreenManager::initGameObject(T* gameObject, const char* fileName) {
 	loadTexture(gameObject, fileName);
 }
 
-void ScreenManager::renderGameObject(GameObject* gameObject, SDL_Surface* screen) {
+template void ScreenManager::initGameObject<GameObject>(GameObject* gameObject, const char* fileName);
+template void ScreenManager::initGameObject<MovableGameObject>(MovableGameObject* gameObject, const char* fileName);
+template void ScreenManager::initGameObject<Player>(Player* gameObject, const char* fileName);
+
+template <typename T>
+void ScreenManager::renderGameObject(T* gameObject, SDL_Surface* screen) {
 	drawSurface(screen, gameObject, gameObject->xpos, gameObject->ypos);
 }
+
+template void ScreenManager::renderGameObject<GameObject>(GameObject* gameObject, SDL_Surface* screen);
+template void ScreenManager::renderGameObject<MovableGameObject>(MovableGameObject* gameObject, SDL_Surface* screen);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void ScreenManager::renderLadder(GameObject* gameObject, SDL_Surface* screen) {
 	drawSurfaceLadder(screen, gameObject, gameObject->xpos, gameObject->ypos, gameObject->destRect);
 }
 
 void ScreenManager::drawPlatforms() {
-	for (int i = 0; i < gameObjectContainer->platformHolder->numberOfElements; i++) {
-		gameObjectContainer->platformHolder->platforms[i].render(screen);
+	for (int i = 0; i < gameObjectContainer->platformHolder->getNumberOfElements(); i++) {
+		gameObjectContainer->platformHolder->platforms[i]->render(screen);
 	}
 }
 
 void ScreenManager::drawLadders() {
-	for (int i = 0; i < gameObjectContainer->ladderHolder->numberOfElements; i++) {
-		renderLadder(&gameObjectContainer->ladderHolder->ladders[i], screen);
+	for (int i = 0; i < gameObjectContainer->ladderHolder->getNumberOfElements(); i++) {
+		renderLadder(std::move(gameObjectContainer->ladderHolder->ladders[i]), screen);
 	}
 }
 
 void ScreenManager::drawBarrels() {
-	for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->numberOfElements; i++) {
-		renderGameObject(&gameObjectContainer->barrelFactory->barrelHolder->barrels[i], screen);
+	for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->getNumberOfElements(); i++) {
+		renderGameObject(std::move(gameObjectContainer->barrelFactory->barrelHolder->barrels[i]), screen); // ERROR
 	}
 }
 

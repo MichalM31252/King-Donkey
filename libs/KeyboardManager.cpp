@@ -1,86 +1,81 @@
 #define _USE_MATH_DEFINES
 
-extern "C" {
 #include "KeyboardManager.h"
 #include "ScreenManager.h" // temporary fix
-}
 
-KeyboardManager::KeyboardManager() {
-
-}
+KeyboardManager::KeyboardManager() = default;
 
 KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer) {
 	this->gameObjectContainer = gameObjectContainer;
 }
 
-void KeyboardManager::handleEvents(bool* quit, double deltaTime, Player* player, int* startAnotherRound) {
-	while (SDL_PollEvent(&event)) {
-		switch (event.type) {
-			case SDL_KEYDOWN:
-				onKeyPressed(quit, deltaTime, player, startAnotherRound);
-				break;
-			case SDL_KEYUP:
-				onKeyReleased(player);
-				break;
-			case SDL_QUIT:
-				initializeQuit(quit, startAnotherRound);
-				break;
-		}
-	}
+void KeyboardManager::handleEvents(bool& quit, double deltaTime, Player* player, int& startAnotherRound) {
+    while (SDL_PollEvent(&event)) {
+        switch (event.type) {
+        case SDL_KEYDOWN:
+            onKeyPressed(quit, deltaTime, player, startAnotherRound);
+            break;
+        case SDL_KEYUP:
+            onKeyReleased(player);
+            break;
+        case SDL_QUIT:
+            initializeQuit(quit, startAnotherRound);
+            break;
+        }
+    }
 }
 
-void KeyboardManager::onKeyPressed(bool* quit, double deltaTime, Player* player, int* startAnotherRound) {
-	player->startMovingAtSpeed(DEFAULT_PLAYER_SPEED);
-	switch (event.key.keysym.sym) {
-		case SDLK_ESCAPE:
-			initializeQuit(quit, startAnotherRound);
-			break;
-		case SDLK_UP:
-			onKeyPressArrowUp(deltaTime, player);
-			break;
-		case SDLK_LEFT:
-			onKeyPressArrowLeft(deltaTime, player);
-			break;
-		case SDLK_RIGHT:
-			onKeyPressArrowRight(deltaTime, player);
-			break;
-		case SDLK_DOWN:
-			onKeyPressArrowDown(deltaTime, player);
-			break;
-		case SDLK_SPACE:
-			onKeyPressSpace(player);
-			break;
-		case SDLK_n:
-			onKeyPressN(quit, startAnotherRound);
-			break;
-		case SDLK_1: // load level 1
-			onKeyPress1(quit, startAnotherRound);
-			break;
-		case SDLK_2: // load level 2
-			onKeyPress2(quit, startAnotherRound);
-			break;
-		case SDLK_3: // load level 3
-			onKeyPress3(quit, startAnotherRound);
-			break;
-	}
+void KeyboardManager::onKeyPressed(bool& quit, double deltaTime, Player* player, int& startAnotherRound) {
+    player->startMovingAtSpeed(DEFAULT_PLAYER_SPEED);
+    switch (event.key.keysym.sym) {
+        case SDLK_ESCAPE:
+            initializeQuit(quit, startAnotherRound);
+            break;
+        case SDLK_UP:
+            onKeyPressArrowUp(deltaTime, player);
+            break;
+        case SDLK_LEFT:
+            onKeyPressArrowLeft(deltaTime, player);
+            break;
+        case SDLK_RIGHT:
+            onKeyPressArrowRight(deltaTime, player);
+            break;
+        case SDLK_DOWN:
+            onKeyPressArrowDown(deltaTime, player);
+            break;
+        case SDLK_SPACE:
+            onKeyPressSpace(player);
+            break;
+        case SDLK_n:
+            onKeyPressN(quit, startAnotherRound);
+            break;
+        case SDLK_1:
+            onKeyPress1(quit, startAnotherRound);
+            break;
+        case SDLK_2:
+            onKeyPress2(quit, startAnotherRound);
+            break;
+        case SDLK_3:
+            onKeyPress3(quit, startAnotherRound);
+            break;
+    }
 }
 
-void KeyboardManager::onKeyReleased(Player* player) { // yeah this needs to be fixed you need to check if space was let go or arrow was let go
-	switch (event.key.keysym.sym) {
-		case SDLK_UP:
-			onKeyReleasedArrowUp(player);
-			break;
-		case SDLK_LEFT:
-			onKeyReleasedArrowLeft(player);
-			break;
-		case SDLK_RIGHT:
-			onKeyReleasedArrowRight(player);
-			break;
-		case SDLK_DOWN:
-			onKeyReleasedArrowDown(player);
-			break;
-		}
-	// player->stopMove(); USE THIS ONLY AFTER ALL KEYS ARE RELEASED AND IT WILL FIX THE ISSUE
+void KeyboardManager::onKeyReleased(Player* player) {
+    switch (event.key.keysym.sym) {
+    case SDLK_UP:
+        onKeyReleasedArrowUp(player);
+        break;
+    case SDLK_LEFT:
+        onKeyReleasedArrowLeft(player);
+        break;
+    case SDLK_RIGHT:
+        onKeyReleasedArrowRight(player);
+        break;
+    case SDLK_DOWN:
+        onKeyReleasedArrowDown(player);
+        break;
+    }
 }
 
 void KeyboardManager::onKeyReleasedArrowUp(Player* player) {
@@ -111,10 +106,9 @@ void KeyboardManager::onKeyReleasedArrowDown(Player* player) {
 	}
 }
 
-
-void KeyboardManager::initializeQuit(bool* quit, int* startAnotherRound) {
-	*quit = true;
-	*startAnotherRound = 0;
+void KeyboardManager::initializeQuit(bool& quit, int& startAnotherRound) {
+	quit = true;
+	startAnotherRound = 0;
 }
 
 void KeyboardManager::onKeyPressArrowUp(double deltaTime, Player* player) {
@@ -151,23 +145,23 @@ void KeyboardManager::onKeyPressSpace(Player* player) {
 	player->initJump();
 }
 
-void KeyboardManager::onKeyPressN(bool* quit, int* startAnotherRound) {
-	*startAnotherRound = 1;
-	*quit = true;
+void KeyboardManager::onKeyPressN(bool& quit, int& startAnotherRound) {
+	startAnotherRound = 1;
+	quit = true;
 }
 
-void KeyboardManager::onKeyPress1(bool* quit, int* startAnotherRound) {
-	*startAnotherRound = 1;
-	*quit = true;
+void KeyboardManager::onKeyPress1(bool& quit, int& startAnotherRound) {
+	startAnotherRound = 1;
+	quit = true;
 }
 
-void KeyboardManager::onKeyPress2(bool* quit, int* startAnotherRound) {
-	*startAnotherRound = 2;
-	*quit = true;
+void KeyboardManager::onKeyPress2(bool& quit, int& startAnotherRound) {
+	startAnotherRound = 2;
+	quit = true;
 }
 
-void KeyboardManager::onKeyPress3(bool* quit, int* startAnotherRound) {
-	*startAnotherRound = 3;
-	*quit = true;
+void KeyboardManager::onKeyPress3(bool& quit, int& startAnotherRound) {
+	startAnotherRound = 3;
+	quit = true;
 }
 

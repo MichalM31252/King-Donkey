@@ -1,6 +1,4 @@
-extern "C" {
 #include "GameObject.h"
-}
 
 void GameObject::createSrcRect() {
 	srcRect.w = sprite->w;

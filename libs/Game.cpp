@@ -1,40 +1,34 @@
 #define _USE_MATH_DEFINES
 
-extern "C" {
 #include "Game.h"
 #include "CollisionResolver.h" // temporary fix
-}
 
 Game::Game() {
-	// the only thing that should be here is the stage manager
-	// first move every method from this class to its respective manager then implement the stage manager
+    // the only thing that should be here is the stage manager
+    // first move every method from this class to its respective manager then implement the stage manager
 
-	GameObjectContainer* gameObjectC = new GameObjectContainer();
-	gameObjectContainer = gameObjectC;
+    gameObjectContainer = new GameObjectContainer();
 
-	ScreenManager* screenMan = new ScreenManager(gameObjectContainer);
-	screenManager = screenMan;
+    screenManager = new ScreenManager(gameObjectContainer);
 
-	GameObjectFactory* gameObjectMan = new GameObjectFactory(gameObjectContainer);
-	gameObjectFactory = gameObjectMan;
+    gameObjectFactory = new GameObjectFactory(gameObjectContainer);
 
-	CollisionResolver* collisionMan = new CollisionResolver(gameObjectContainer, screenManager);
-	collisionResolver = collisionMan;
+    collisionResolver = new CollisionResolver(gameObjectContainer, screenManager);
 
-	RoundManager* roundMan = new RoundManager(screenManager, gameObjectFactory, gameObjectContainer, collisionResolver);
-	roundManager = roundMan;
+    roundManager = new RoundManager(screenManager, gameObjectFactory, gameObjectContainer, collisionResolver);
 }
 
 void Game::initGame() {
-	screenManager->createSDL();
+    screenManager->createSDL();
+    screenManager->createFramerate();
 	int startAnotherRound = 0;
-	roundManager->handleRound(startAnotherRound);
-	closeGame();
+    roundManager->handleRound(startAnotherRound);
+    closeGame();
 }
 
 void Game::closeGame() {
-	SDL_Quit();
-	exit(0);
+    SDL_Quit();
+    exit(0);
 }
 
 // Implement this in the future

@@ -1,11 +1,8 @@
-extern "C" {
 #include "BarrelFactory.h"
-#include "ScreenManager.h" // temporary fix
-}
+#include "ScreenManager.h"
 
 void BarrelFactory::initBarrelFactory(BarrelFactory* barrelFactory) {
-	barrelFactory->barrelHolder = new BarrelHolder;
-	initBarrelHolder(barrelFactory->barrelHolder);
+	barrelFactory->barrelHolder = new BarrelHolder();
 }
 
 void BarrelFactory::setPosition(int x, int y) {
@@ -23,12 +20,12 @@ void BarrelFactory::update(double deltaTime) {
 
 void BarrelFactory::throwBarrel() {
 	MovableGameObject* barrel = new MovableGameObject();
-	ScreenManager::initGameObject(barrel, BARREL_1_FILENAME); // this needs refactoring 
+	ScreenManager::initGameObject(barrel, BARREL_1_FILENAME);
 
 	barrel->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
 	barrel->createSrcRect();
 	barrel->createDestRect();
 	barrel->objectSpeed = DEFAULT_BARREL_SPEED;
 
-	addBarrel(barrelHolder, barrel);
+	barrelHolder->addBarrel(barrel);
 }

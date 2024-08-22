@@ -1,13 +1,11 @@
 #pragma once
-extern "C" {
-#include "../SDL2-2.0.10/include/SDL.h"
-#include "../SDL2-2.0.10/include/SDL_main.h"
 #include "MovableGameObject.h"
 #include "Platform.h"
 #include "PlatformHolder.h"
-}
-// tracks every game object in the game and checks if they collide
+#include "../SDL2-2.0.10/include/SDL.h"
+#include "../SDL2-2.0.10/include/SDL_main.h"
 
+// tracks every game object in the game and checks if they collide
 
 // in the future merge most of these methods into one method that will check if two game objects collide
 // once every game object has a hitbox
@@ -25,13 +23,13 @@ extern "C" {
 class CollisionDetector
 {
 public:
-	static bool isCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
-	static bool isPointAPartOfLine(const int x, const int y, Platform* platform);
-	static bool isRectInsideLadder(SDL_Rect a, SDL_Rect b);
+    static bool isCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
+    static bool isPointAPartOfLine(const int x, const int y, Platform* platform);
+    static bool isRectInsideLadder(SDL_Rect a, SDL_Rect b);
 
-	static bool isGameObjectOnTopOfPlatform(GameObject* gameObject, Platform* platform);
-	static bool isGameObjectInsidePlatform(GameObject* gameObject, Platform* platform);
-	static bool isGameObjectOnTopOfAnyPlatform(GameObject* gameObject, PlatformHolder* platformHolder);
+    static bool isGameObjectOnTopOfPlatform(GameObject* gameObject, Platform* platform);
+    static bool isGameObjectInsidePlatform(GameObject* gameObject, Platform* platform);
+    static bool isGameObjectOnTopOfAnyPlatform(GameObject* gameObject, PlatformHolder* platformHolder);
 	// isGameObjectInsideBarrel
 
 	// isPlayerClimbingTheLadder (check if player is inside ladder, then check if if player is not touching the platform (ok but what about falling))

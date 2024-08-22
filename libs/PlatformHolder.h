@@ -1,18 +1,15 @@
  #pragma once
 
-extern "C" {
 #include "Platform.h"
 #include "Constants.h"
-}
+#include <vector>
 
-struct PlatformHolder {
-	Platform* platforms;
-	int numberOfElements;
-	int sizeOfArray;
+class PlatformHolder {
+public:
+    std::vector<Platform*> platforms;
+    PlatformHolder();
+    void addPlatform(Platform* platform);
+    size_t getNumberOfElements() const;
 };
-
-void initPlatformHolder(PlatformHolder* platformHolder);
-void addPlatform(PlatformHolder* platformHolder, Platform* platform);
-void emptyPlatformHolder(PlatformHolder* platformHolder);
 
 

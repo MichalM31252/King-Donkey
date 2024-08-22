@@ -6,10 +6,14 @@
 #include "Player.h" // no screen manager
 
 struct GameObjectContainer {
-	GameObject* donkeyKong;
-	GameObject* princess;
-	Player* player;
-	PlatformHolder* platformHolder;
-	LadderHolder* ladderHolder;
-	BarrelFactory* barrelFactory;
+    GameObject* donkeyKong;
+    GameObject* princess;
+    Player* player;
+    PlatformHolder* platformHolder;
+    LadderHolder* ladderHolder;
+	BarrelHolder* barrelHolder;
+
+
+
+    BarrelFactory* barrelFactory;
 };
