@@ -1,7 +1,7 @@
 #include "BarrelFactory.h"
 #include "ScreenManager.h"
 
-void BarrelFactory::initBarrelFactory(BarrelFactory* barrelFactory) {
+void BarrelFactory::initBarrelFactory(BarrelFactory* barrelFactory) const {
 	barrelFactory->barrelHolder = new BarrelHolder();
 }
 
