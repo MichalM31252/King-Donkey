@@ -65,7 +65,7 @@ void ScreenManager::setSDLWindowTitle() {
 
 void ScreenManager::setSDLCharset() {
 	charset = SDL_LoadBMP("./assets/cs8x8.bmp");
-	if (charset == NULL) {
+	if (charset == nullptr) {
 		printf("SDL_LoadBMP(cs8x8.bmp) error: %s\n", SDL_GetError());
 	};
 }
@@ -87,8 +87,8 @@ void ScreenManager::setSDLColorKey() {
 }
 
 void ScreenManager::serveNextFrame() {
-	SDL_UpdateTexture(scrtex, NULL, screen->pixels, screen->pitch);
-	SDL_RenderCopy(renderer, scrtex, NULL, NULL);
+	SDL_UpdateTexture(scrtex, nullptr, screen->pixels, screen->pitch);
+	SDL_RenderCopy(renderer, scrtex, nullptr, nullptr);
 	SDL_RenderPresent(renderer);
 }
 
@@ -136,13 +136,13 @@ void ScreenManager::drawSurface(SDL_Surface* screen, GameObject* gameObject, int
 	dest.y = ypos;
 	dest.w = gameObject->sprite->w;
 	dest.h = gameObject->sprite->h;
-	SDL_BlitSurface(gameObject->sprite, NULL, screen, &dest);
+	SDL_BlitSurface(gameObject->sprite, nullptr, screen, &dest);
 }
 
 void ScreenManager::drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, int xpos, int ypos, SDL_Rect dest) {
 	ladder->sprite->w = dest.w;
 	ladder->sprite->h = dest.h;
-	SDL_BlitSurface(ladder->sprite, NULL, screen, &dest);
+	SDL_BlitSurface(ladder->sprite, nullptr, screen, &dest);
 }
 
 // draw a text txt on surface screen, starting from the point (x, y)
@@ -200,7 +200,7 @@ void ScreenManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int 
 template <typename T>
 void ScreenManager::loadTexture(T* gameObject, const char* fileName) {
 	gameObject->sprite = SDL_LoadBMP(fileName);
-	if (gameObject->sprite == NULL) {
+	if (gameObject->sprite == nullptr) {
 		printf("SDL_LoadBMP error: %s\n", SDL_GetError());
 	}
 }
