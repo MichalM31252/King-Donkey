@@ -150,8 +150,11 @@ void ScreenManager::drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, i
 // draw a text txt on surface screen, starting from the point (x, y)
 // charset is a 128x128 bitmap containing character images
 void ScreenManager::DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset) {
-	int px, py, c;
-	SDL_Rect s, d;
+	int px;
+	int py;
+	int c;
+	SDL_Rect s;
+	SDL_Rect d;
 	s.w = 8;
 	s.h = 8;
 	d.w = 8;

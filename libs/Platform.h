@@ -4,11 +4,16 @@
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
 
-class Platform
-{
+class Platform {
 public:
-	int x1pos, y1pos, x2pos, y2pos; // first platform line
-	double a, b, c;
+	int x1pos; 
+	int y1pos;
+	int x2pos;
+	int y2pos;
+
+	double a;
+	double b;
+	double c;
 
 	char* tag[30];
 	void setPosition(int x1, int y1, int x2, int y2);

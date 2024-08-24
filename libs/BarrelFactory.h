@@ -5,7 +5,8 @@
 
 class BarrelFactory {
 private:
-    int xpos, ypos;
+    int xpos;
+    int ypos;
     double accumulatedTime;
 public:
     BarrelHolder* barrelHolder;
