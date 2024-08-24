@@ -9,7 +9,7 @@ public:
 	GameObjectContainer* gameObjectContainer;
 	CollisionResolver* collisionResolver;
 
-	GameObjectFactory();
+	GameObjectFactory() = default;
 	GameObjectFactory(GameObjectContainer* gameObjectContainer);
 
 	void createPlayer();

@@ -40,7 +40,7 @@ public:
 	SDL_Window* window; // widnows window
 	SDL_Renderer* renderer; // we send here to render the screen
 
-	ScreenManager();
+	ScreenManager() = default;
 	ScreenManager(GameObjectContainer* gameObjectContainer);
 
 	void SDLCheck();

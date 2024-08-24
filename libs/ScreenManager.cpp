@@ -1,9 +1,7 @@
 #define _USE_MATH_DEFINES
 #include "ScreenManager.h"
 
-ScreenManager::ScreenManager() {
-
-}
+ScreenManager::ScreenManager() = default;
 
 ScreenManager::ScreenManager(GameObjectContainer* gameObjectContainer) {
 	this->gameObjectContainer = gameObjectContainer;
