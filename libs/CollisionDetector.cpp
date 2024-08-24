@@ -1,10 +1,10 @@
 #include "CollisionDetector.h"
 
-bool CollisionDetector::isCollisionBetweenRects(SDL_Rect a, SDL_Rect b) {
+bool CollisionDetector::isCollisionBetweenRects(const SDL_Rect a, const SDL_Rect b) {
     return SDL_HasIntersection(&a, &b);
 }
 
-bool CollisionDetector::isPointAPartOfLine(const int x, const int y, Platform* platform) { // create class Point ?
+bool CollisionDetector::isPointAPartOfLine(const int x, const int y, const Platform* platform) { // create class Point ?
     double a = platform->y2pos - platform->y1pos;
     double b = platform->x1pos - platform->x2pos;
     double c = a * platform->x1pos + b * platform->y1pos;
@@ -18,7 +18,7 @@ bool CollisionDetector::isPointAPartOfLine(const int x, const int y, Platform* p
     return false;
 }
 
-bool CollisionDetector::isRectInsideLadder(SDL_Rect playerDestRect, SDL_Rect ladderDestRect) {
+bool CollisionDetector::isRectInsideLadder(const SDL_Rect playerDestRect, const SDL_Rect ladderDestRect) {
     if (playerDestRect.x >= ladderDestRect.x && playerDestRect.x + playerDestRect.w <= ladderDestRect.x + ladderDestRect.w) {
         if (playerDestRect.y + playerDestRect.h <= ladderDestRect.y + ladderDestRect.h && playerDestRect.y + playerDestRect.h >= ladderDestRect.y) {
             return true;
@@ -27,7 +27,7 @@ bool CollisionDetector::isRectInsideLadder(SDL_Rect playerDestRect, SDL_Rect lad
     return false;
 }
 
-bool CollisionDetector::isGameObjectOnTopOfPlatform(GameObject* gameObject, Platform* platform) {
+bool CollisionDetector::isGameObjectOnTopOfPlatform(const GameObject* gameObject, const Platform* platform) {
     int yPosition = gameObject->ypos + gameObject->destRect.h;
     int xPositionBottomLeftCorner = gameObject->xpos;
     int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
@@ -43,7 +43,7 @@ bool CollisionDetector::isGameObjectOnTopOfPlatform(GameObject* gameObject, Plat
     return false;
 }
 
-bool CollisionDetector::isGameObjectInsidePlatform(GameObject* gameObject, Platform* platform) {
+bool CollisionDetector::isGameObjectInsidePlatform(const GameObject* gameObject, const Platform* platform) {
     int yPosition = gameObject->ypos + gameObject->destRect.h;
     int xPositionBottomLeftCorner = gameObject->xpos;
     int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
@@ -59,7 +59,7 @@ bool CollisionDetector::isGameObjectInsidePlatform(GameObject* gameObject, Platf
     return false;
 }
 
-bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(GameObject* gameObject, PlatformHolder* platformHolder) {
+bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(const GameObject* gameObject, const PlatformHolder* platformHolder) {
     for (int i = 0; i < platformHolder->getNumberOfElements(); i++) {
         if (CollisionDetector::isGameObjectOnTopOfPlatform(gameObject, platformHolder->platforms[i])) {
             return true;

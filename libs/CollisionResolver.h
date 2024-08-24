@@ -23,7 +23,7 @@ public:
 
     void handlePlayerCollisionWithKong();
     void handlePlayerCollisionWithPrincess();
-    void handlePlayerCollisionWithBarrel(MovableGameObject* barrel, bool* quit, int* startAnotherRound);
+    void handlePlayerCollisionWithBarrel(const MovableGameObject* barrel, bool* quit, int* startAnotherRound);
     void handlePlayerCollisionWithLadder();
     void handleCollisionWithPlatform(MovableGameObject* gameObject);
     void handleCollisionWithJumping();
