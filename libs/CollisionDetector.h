@@ -23,13 +23,13 @@
 class CollisionDetector
 {
 public:
-    static bool isCollisionBetweenRects(SDL_Rect a, SDL_Rect b);
-    static bool isPointAPartOfLine(const int x, const int y, Platform* platform);
-    static bool isRectInsideLadder(SDL_Rect a, SDL_Rect b);
+    static bool isCollisionBetweenRects(const SDL_Rect a, const SDL_Rect b);
+    static bool isPointAPartOfLine(const int x, const int y, const Platform* platform);
+    static bool isRectInsideLadder(const SDL_Rect a, const SDL_Rect b);
 
-    static bool isGameObjectOnTopOfPlatform(GameObject* gameObject, Platform* platform);
-    static bool isGameObjectInsidePlatform(GameObject* gameObject, Platform* platform);
-    static bool isGameObjectOnTopOfAnyPlatform(GameObject* gameObject, PlatformHolder* platformHolder);
+    static bool isGameObjectOnTopOfPlatform(const GameObject* gameObject, const Platform* platform);
+    static bool isGameObjectInsidePlatform(const GameObject* gameObject, const Platform* platform);
+    static bool isGameObjectOnTopOfAnyPlatform(const GameObject* gameObject, const PlatformHolder* platformHolder);
 	// isGameObjectInsideBarrel
 
 	// isPlayerClimbingTheLadder (check if player is inside ladder, then check if if player is not touching the platform (ok but what about falling))

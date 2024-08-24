@@ -5,12 +5,13 @@
 
 class BarrelFactory {
 private:
-    int xpos, ypos;
+    int xpos;
+    int ypos;
     double accumulatedTime;
 public:
     BarrelHolder* barrelHolder;
 
-    void initBarrelFactory(BarrelFactory* barrelFactory);
+    void initBarrelFactory(BarrelFactory* barrelFactory) const;
     void setPosition(int x, int y);
     void update(double deltaTime);
     void throwBarrel();

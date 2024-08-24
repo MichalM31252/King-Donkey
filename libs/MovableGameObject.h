@@ -5,7 +5,11 @@
 
 class MovableGameObject : public GameObject {
 public:
-	double accumulatedMoveLeft, accumulatedMoveUp, accumulatedMoveRight, accumulatedMoveDown;
+	double accumulatedMoveLeft;
+	double accumulatedMoveUp;
+	double accumulatedMoveRight;
+	double accumulatedMoveDown;
+
 	bool canLeaveScreen;
 	double objectSpeed;
 	bool isFalling;

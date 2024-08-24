@@ -15,19 +15,32 @@ class ScreenManager {
 public:
 	GameObjectContainer* gameObjectContainer;
 
-	int tick1, tick2, frames;
-	double deltaTime, worldTime, fpsTimer, fps;
+	int tick1;
+	int tick2;
+	int frames;
 
-	Uint32 black, green, red, blue, white;
-	Uint32 ladderColor, platformColor;
+	double deltaTime;
+	double worldTime;
+	double fpsTimer;
+	double fps;
+
+	Uint32 black;
+	Uint32 green;
+	Uint32 red;
+	Uint32 blue;
+	Uint32 white;
+
+	Uint32 ladderColor;
+	Uint32 platformColor;
 
 	int rc;
-	SDL_Surface* screen, * charset; // screen on which we will be drawing, charset is the bitmap with characters
+	SDL_Surface* screen; // screen on which we will be drawing, charset is the bitmap with characters
+	SDL_Surface* charset; // screen on which we will be drawing, charset is the bitmap with characters
 	SDL_Texture* scrtex; // 
 	SDL_Window* window; // widnows window
 	SDL_Renderer* renderer; // we send here to render the screen
 
-	ScreenManager();
+	ScreenManager() = default;
 	ScreenManager(GameObjectContainer* gameObjectContainer);
 
 	void SDLCheck();
