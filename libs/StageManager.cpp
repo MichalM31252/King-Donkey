@@ -1,8 +1,6 @@
 #pragma once
 #include "StageManager.h"
 
-StageManager::StageManager() = default;
-
 StageManager::StageManager(GameObjectContainer* gameObjectContainer) { // assign gameObjectContainer to each one of these managers
     screenManager = new ScreenManager();
     collisionResolver = new CollisionResolver(gameObjectContainer, screenManager);

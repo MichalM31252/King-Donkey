@@ -10,11 +10,10 @@
 class StageManager {
 private:
     CollisionResolver* collisionResolver;
-    PhysicsManager* physicsManager;
     GameObjectFactory* gameObjectFactory;
     KeyboardManager* keyboardManager;
     ScreenManager* screenManager;
 
-    StageManager();
+    StageManager() = default;
     StageManager(GameObjectContainer* gameObjectContainer);
 };

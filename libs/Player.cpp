@@ -2,7 +2,6 @@
 #include "ScreenManager.h" // temporary solution
 
 Player::Player() {
-	*tag = "Player";
 	isClimbing = false; // player
 	isJumping = false; // player
 	isInsideLadder = false; // player

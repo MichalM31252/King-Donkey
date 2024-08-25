@@ -1,8 +1,6 @@
 #include "GameObjectFactory.h"
 #include "ScreenManager.h"
 
-GameObjectFactory::GameObjectFactory() = default;
-
 GameObjectFactory::GameObjectFactory(GameObjectContainer* gameObjectContainer) {
     this->gameObjectContainer = gameObjectContainer;
 }
