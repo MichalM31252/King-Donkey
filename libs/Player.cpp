@@ -72,7 +72,7 @@ void Player::loadNextClimbingSprite() {
 
 }
 
-bool Player::isPlayerJumping() {
+bool Player::isPlayerJumping() const {
 	return this->isJumping;
 }
 

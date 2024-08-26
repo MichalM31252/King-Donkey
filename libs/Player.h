@@ -22,7 +22,7 @@ public:
 	void loadJumpingSprite();
 	void loadClimbingSprite();
 	void loadNextClimbingSprite();
-	bool isPlayerJumping();
+	bool isPlayerJumping() const;
 
 	void startAccumulatingDistance(double deltaTime) override;
 };

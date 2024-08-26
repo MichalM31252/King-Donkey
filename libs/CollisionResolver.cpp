@@ -23,7 +23,7 @@ void CollisionResolver::handlePlayerCollisionWithPrincess() {
     }
 }
 
-void CollisionResolver::handlePlayerCollisionWithBarrel(const MovableGameObject* barrel, bool* quit, int* startAnotherRound) {
+void CollisionResolver::handlePlayerCollisionWithBarrel(const MovableGameObject* barrel, bool* quit, int* startAnotherRound) const{
     if (CollisionDetector::isCollisionBetweenRects(gameObjectContainer->player->destRect, barrel->destRect)) {
         *quit = true;
         *startAnotherRound = 1;
@@ -109,7 +109,7 @@ void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRoun
     }
 }
 
-void CollisionResolver::closeGame() {
+void CollisionResolver::closeGame() const {
     SDL_Quit();
     exit(0);
 }

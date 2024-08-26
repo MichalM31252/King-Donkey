@@ -35,7 +35,10 @@ void Platform::render(SDL_Surface* screen) {
 	}
 }
 
-void Platform::DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) {
+// i dont think these should be here
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Platform::DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color)  const {
 	int bpp = surface->format->BytesPerPixel;
 	Uint8* p = (Uint8*)surface->pixels + y * surface->pitch + x * bpp;
 	*(Uint32*)p = color;
@@ -48,4 +51,6 @@ void Platform::DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy
 		y += dy;
 	};
 };
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

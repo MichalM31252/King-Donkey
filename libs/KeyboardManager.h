@@ -22,7 +22,7 @@ public:
 
     static void initializeQuit(bool& quit, int& startAnotherRound);
 
-    void onKeyPressed(bool& quit, double deltaTime, Player* player, int& startAnotherRound);
+    void onKeyPressed(bool& quit, double deltaTime, Player* player, int& startAnotherRound) const;
     static void onKeyPressArrowUp(double deltaTime, Player* player);
     static void onKeyPressArrowRight(double deltaTime, Player* player);
     static void onKeyPressArrowDown(double deltaTime, Player* player);
@@ -33,7 +33,7 @@ public:
     static void onKeyPress2(bool& quit, int& startAnotherRound);
     static void onKeyPress3(bool& quit, int& startAnotherRound);
 
-    void onKeyReleased(Player* player);
+    void onKeyReleased(Player* player) const;
 
     static void onKeyReleasedArrowUp(Player* player);
     static void onKeyReleasedArrowRight(Player* player);

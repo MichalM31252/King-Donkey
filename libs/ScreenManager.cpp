@@ -32,7 +32,7 @@ void ScreenManager::handleFPSTimer() {
 	};
 }
 
-void ScreenManager::SDLCheck() {
+void ScreenManager::SDLCheck() const {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		printf("SDL_Init error: %s\n", SDL_GetError());
 	}
@@ -45,7 +45,7 @@ void ScreenManager::SDLCreateWindowAndRenderer() {
 	};
 }
 
-void ScreenManager::setSDLHint() {
+void ScreenManager::setSDLHint() const {
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 }
 
@@ -76,7 +76,7 @@ void ScreenManager::setSDLTexture() {
 	scrtex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void ScreenManager::hideSDLCursor() {
+void ScreenManager::hideSDLCursor() const {
 	SDL_ShowCursor(SDL_DISABLE);
 }
 
@@ -128,7 +128,7 @@ void ScreenManager::createSDL() {
 
 // draw a surface sprite on a surface screen in point (x, y)
 // (x, y) is the center of sprite on screen
-void ScreenManager::drawSurface(SDL_Surface* screen, GameObject* gameObject, int xpos, int ypos) {
+void ScreenManager::drawSurface(SDL_Surface* screen, GameObject* gameObject, int xpos, int ypos) const {
 	SDL_Rect dest;
 	dest.x = xpos;
 	dest.y = ypos;
@@ -137,7 +137,7 @@ void ScreenManager::drawSurface(SDL_Surface* screen, GameObject* gameObject, int
 	SDL_BlitSurface(gameObject->sprite, nullptr, screen, &dest);
 }
 
-void ScreenManager::drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, int xpos, int ypos, SDL_Rect dest) {
+void ScreenManager::drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, int xpos, int ypos, SDL_Rect dest) const {
 	ladder->sprite->w = dest.w;
 	ladder->sprite->h = dest.h;
 	SDL_BlitSurface(ladder->sprite, nullptr, screen, &dest);
@@ -145,7 +145,7 @@ void ScreenManager::drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, i
 
 // draw a text txt on surface screen, starting from the point (x, y)
 // charset is a 128x128 bitmap containing character images
-void ScreenManager::DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset) {
+void ScreenManager::DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset) const{
 	int px;
 	int py;
 	int c;
@@ -170,7 +170,7 @@ void ScreenManager::DrawString(SDL_Surface* screen, int x, int y, const char* te
 };
 
 
-void ScreenManager::DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) { // draw a single pixel
+void ScreenManager::DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const { // draw a single pixel
 	int bpp = surface->format->BytesPerPixel;
 	Uint8* p = (Uint8*)surface->pixels + y * surface->pitch + x * bpp;
 	*(Uint32*)p = color;
@@ -249,7 +249,7 @@ void ScreenManager::drawBarrels() {
 	}
 }
 
-void ScreenManager::handlePlayerSprite(Player* player){ // rename to handlePlayerSprite
+void ScreenManager::handlePlayerSprite(Player* player) const { // maybe const shouldn't be here ?
 	if (player->isPlayerJumping()) {
 		player->loadJumpingSprite();
 	}

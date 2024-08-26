@@ -25,7 +25,7 @@ void KeyboardManager::handleEvents(bool& quit, double deltaTime, Player* player,
     }
 }
 
-void KeyboardManager::onKeyPressed(bool& quit, double deltaTime, Player* player, int& startAnotherRound) {
+void KeyboardManager::onKeyPressed(bool& quit, double deltaTime, Player* player, int& startAnotherRound) const {
     player->startMovingAtSpeed(DEFAULT_PLAYER_SPEED);
     switch (event.key.keysym.sym) {
         case SDLK_ESCAPE:
@@ -61,7 +61,7 @@ void KeyboardManager::onKeyPressed(bool& quit, double deltaTime, Player* player,
     }
 }
 
-void KeyboardManager::onKeyReleased(Player* player) {
+void KeyboardManager::onKeyReleased(Player* player) const {
     switch (event.key.keysym.sym) {
     case SDLK_UP:
         onKeyReleasedArrowUp(player);
