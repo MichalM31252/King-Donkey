@@ -6,7 +6,7 @@ GameObjectFactory::GameObjectFactory(GameObjectContainer* gameObjectContainer) {
 }
 
 void GameObjectFactory::createPlayer() {
-    Player* pla = new Player();
+    auto* pla = new Player();
 
     ScreenManager::initGameObject(pla, PLAYER_1_FILENAME);
 
@@ -18,7 +18,7 @@ void GameObjectFactory::createPlayer() {
 }
 
 void GameObjectFactory::createDonkeyKong() {
-    GameObject* donkeyK = new GameObject();
+    auto* donkeyK = new GameObject();
 
     ScreenManager::initGameObject(donkeyK, "./assets/DonkeyKong.bmp");
 
@@ -30,7 +30,7 @@ void GameObjectFactory::createDonkeyKong() {
 }
 
 void GameObjectFactory::createPrincess() {
-    GameObject* prin = new GameObject();
+    auto* prin = new GameObject();
 
     ScreenManager::initGameObject(prin, "./assets/Princess.bmp");
 
@@ -42,22 +42,22 @@ void GameObjectFactory::createPrincess() {
 }
 
 void GameObjectFactory::createPlatforms1() {
-    Platform* plat1 = new Platform();
+    auto* plat1 = new Platform();
     plat1->setPosition(1, 400, 400, 400);
 
-    Platform* plat2 = new Platform();
+    auto* plat2 = new Platform();
     plat2->setPosition(400, 400, 500, 300);
 
-    Platform* plat3 = new Platform();
+    auto* plat3 = new Platform();
     plat3->setPosition(500, 300, SCREEN_WIDTH - 1, 300);
 
-    Platform* plat4 = new Platform();
+    auto* plat4 = new Platform();
     plat4->setPosition(1, 130, 570, 130);
 
-    Platform* plat5 = new Platform();
+    auto* plat5 = new Platform();
     plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80);
 
-    PlatformHolder* platH = new PlatformHolder();
+    auto* platH = new PlatformHolder();
     platH->addPlatform(plat1);
     platH->addPlatform(plat2);
     platH->addPlatform(plat3);
@@ -68,7 +68,7 @@ void GameObjectFactory::createPlatforms1() {
 }
 
 void GameObjectFactory::createLadders1() {
-    GameObject* ladd1 = new GameObject();
+    auto* ladd1 = new GameObject();
 
     ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
 
@@ -76,7 +76,7 @@ void GameObjectFactory::createLadders1() {
     ladd1->setSrcRect(LADDER_WIDTH, 170);
     ladd1->setDestRect(LADDER_WIDTH, 170);
 
-    GameObject* ladd2 = new GameObject();
+    auto* ladd2 = new GameObject();
 
     ScreenManager::initGameObject(ladd2, "./assets/Ladder.bmp");
 
@@ -84,14 +84,14 @@ void GameObjectFactory::createLadders1() {
     ladd2->setSrcRect(LADDER_WIDTH, 50);
     ladd2->setDestRect(LADDER_WIDTH, 50);
 
-    LadderHolder* laddH = new LadderHolder();
+    auto* laddH = new LadderHolder();
     laddH->addLadder(ladd1);
     laddH->addLadder(ladd2);
     gameObjectContainer->ladderHolder = laddH;
 }
 
 void GameObjectFactory::createBarrels() {
-    MovableGameObject* barrel1 = new MovableGameObject();
+    auto* barrel1 = new MovableGameObject();
 
     ScreenManager::initGameObject(barrel1, BARREL_1_FILENAME);
 
@@ -100,7 +100,7 @@ void GameObjectFactory::createBarrels() {
     barrel1->createDestRect();
     barrel1->objectSpeed = DEFAULT_BARREL_SPEED;
 
-    BarrelHolder* barrelH = new BarrelHolder();
+    auto* barrelH = new BarrelHolder();
     barrelH->addBarrel(barrel1);
 
     gameObjectContainer->barrelFactory = new BarrelFactory();
@@ -109,25 +109,25 @@ void GameObjectFactory::createBarrels() {
 }
 
 void GameObjectFactory::createPlatforms2() {
-	Platform* plat1 = new Platform();
+    auto* plat1 = new Platform();
 	plat1->setPosition(TINY_MARGIN, 400, SCREEN_WIDTH - 1, 400);
 
-	Platform* plat2 = new Platform();
+    auto* plat2 = new Platform();
 	plat2->setPosition(130, 130, 300, 300);
 
-	Platform* plat3 = new Platform();
+    auto* plat3 = new Platform();
 	plat3->setPosition(TINY_MARGIN, 130, 130, 130);
 
-	Platform* plat4 = new Platform();
+    auto* plat4 = new Platform();
 	plat4->setPosition(TINY_MARGIN, 130, 130, 130);
 
-	Platform* plat5 = new Platform();
+    auto* plat5 = new Platform();
 	plat5->setPosition(200, 80, SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 80);
 
-	Platform* plat6 = new Platform();
+    auto* plat6 = new Platform();
 	plat6->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH - LADDER_WIDTH, 230, SCREEN_WIDTH - LARGE_MARGIN, 230);
 
-	PlatformHolder* platH = new PlatformHolder();
+    auto* platH = new PlatformHolder();
 	platH->addPlatform(plat1);
 	platH->addPlatform(plat2);
 	platH->addPlatform(plat3);
@@ -139,7 +139,7 @@ void GameObjectFactory::createPlatforms2() {
 }
 
 void GameObjectFactory::createLadders2() {
-	GameObject* ladd1 = new GameObject();
+    auto* ladd1 = new GameObject();
 
 	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
 
@@ -147,7 +147,7 @@ void GameObjectFactory::createLadders2() {
 	ladd1->setSrcRect(LADDER_WIDTH, 170);
 	ladd1->setDestRect(LADDER_WIDTH, 170);
 
-	GameObject* ladd2 = new GameObject();
+    auto* ladd2 = new GameObject();
 
 	ScreenManager::initGameObject(ladd2, "./assets/Ladder.bmp");
 
@@ -155,7 +155,7 @@ void GameObjectFactory::createLadders2() {
 	ladd2->setSrcRect(LADDER_WIDTH, 150);
 	ladd2->setDestRect(LADDER_WIDTH, 150);
 
-	LadderHolder* laddH = new LadderHolder();
+    auto* laddH = new LadderHolder();
 	laddH->addLadder(ladd1);
 	laddH->addLadder(ladd2);
 
@@ -163,22 +163,22 @@ void GameObjectFactory::createLadders2() {
 }
 
 void GameObjectFactory::createPlatforms3() {
-	Platform* plat1 = new Platform();
+    auto* plat1 = new Platform();
 	plat1->setPosition(STARTING_X, 400, SCREEN_WIDTH - TINY_MARGIN, 400);
 
-	Platform* plat2 = new Platform();
+    auto* plat2 = new Platform();
 	plat2->setPosition(LARGE_MARGIN, 300, SCREEN_WIDTH - LARGE_MARGIN, 300);
 
-	Platform* plat3 = new Platform();
+    auto* plat3 = new Platform();
 	plat3->setPosition(LARGE_MARGIN, 200, SCREEN_WIDTH - LARGE_MARGIN, 200);
 
-	Platform* plat4 = new Platform();
+    auto* plat4 = new Platform();
 	plat4->setPosition(TINY_MARGIN, 130, SCREEN_WIDTH - LARGE_MARGIN, 130);
 
-	Platform* plat5 = new Platform();
+    auto* plat5 = new Platform();
 	plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80);
 
-	PlatformHolder* platH = new PlatformHolder();
+    auto* platH = new PlatformHolder();
 	platH->addPlatform(plat1);
 	platH->addPlatform(plat2);
 	platH->addPlatform(plat3);
@@ -189,7 +189,7 @@ void GameObjectFactory::createPlatforms3() {
 }
 
 void GameObjectFactory::createLadders3() {
-	GameObject* ladd1 = new GameObject();
+    auto* ladd1 = new GameObject();
 
 	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
 
@@ -197,7 +197,7 @@ void GameObjectFactory::createLadders3() {
 	ladd1->setSrcRect(LADDER_WIDTH, LARGE_MARGIN);
 	ladd1->setDestRect(LADDER_WIDTH, LARGE_MARGIN);
 
-	GameObject* ladd2 = new GameObject();
+    auto* ladd2 = new GameObject();
 
 	ScreenManager::initGameObject(ladd2, "./assets/Ladder.bmp");
 
@@ -205,7 +205,7 @@ void GameObjectFactory::createLadders3() {
 	ladd2->setSrcRect(LADDER_WIDTH, LARGE_MARGIN);
 	ladd2->setDestRect(LADDER_WIDTH, LARGE_MARGIN);
 
-	GameObject* ladd3 = new GameObject();
+    auto* ladd3 = new GameObject();
 
 	ScreenManager::initGameObject(ladd3, "./assets/Ladder.bmp");
 
@@ -213,7 +213,7 @@ void GameObjectFactory::createLadders3() {
 	ladd3->setSrcRect(LADDER_WIDTH, 70);
 	ladd3->setDestRect(LADDER_WIDTH, 70);
 
-	GameObject* ladd4 = new GameObject();
+    auto* ladd4 = new GameObject();
 
 	ScreenManager::initGameObject(ladd4, "./assets/Ladder.bmp");
 
@@ -221,7 +221,7 @@ void GameObjectFactory::createLadders3() {
 	ladd4->setSrcRect(LADDER_WIDTH, 50);
 	ladd4->setDestRect(LADDER_WIDTH, 50);
 
-	LadderHolder* laddH = new LadderHolder();
+    auto* laddH = new LadderHolder();
     laddH->addLadder(ladd1);
     laddH->addLadder(ladd2);
 	laddH->addLadder(ladd3);

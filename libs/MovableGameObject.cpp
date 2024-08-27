@@ -33,22 +33,22 @@ void MovableGameObject::startAccumulatingDistance(double deltaTime) {
 
 void MovableGameObject::updatePosition() {
 	if (accumulatedMoveRight > 1.0f) {
-		int pixelsToMove = (int)accumulatedMoveRight;
+		auto pixelsToMove = (int)accumulatedMoveRight;
 		xpos += pixelsToMove;
 		accumulatedMoveRight -= pixelsToMove;
 	}
 	if (accumulatedMoveDown > 1.0f) {
-		int pixelsToMove = (int)accumulatedMoveDown;
+		auto pixelsToMove = (int)accumulatedMoveDown;
 		ypos += pixelsToMove;
 		accumulatedMoveDown -= pixelsToMove;
 	}
 	if (accumulatedMoveLeft > 1.0f) {
-		int pixelsToMove = (int)accumulatedMoveLeft;
+		auto pixelsToMove = (int)accumulatedMoveLeft;
 		xpos -= pixelsToMove;
 		accumulatedMoveLeft -= pixelsToMove;
 	}
 	if (accumulatedMoveUp > 1.0f) {
-		int pixelsToMove = (int)accumulatedMoveUp;
+		auto pixelsToMove = (int)accumulatedMoveUp;
 		ypos -= pixelsToMove;
 		accumulatedMoveUp -= pixelsToMove;
 	}
