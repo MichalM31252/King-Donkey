@@ -32,7 +32,7 @@ void CollisionResolver::handlePlayerCollisionWithBarrel(const MovableGameObject*
 
 void CollisionResolver::handlePlayerCollisionWithLadder() {
     for (int i = 0; i < gameObjectContainer->ladderHolder->getNumberOfElements(); i++) {
-        if (CollisionDetector::isRectInsideLadder(gameObjectContainer->player->destRect, gameObjectContainer->ladderHolder->ladders[i]->destRect)) {
+        if (CollisionDetector::isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->ladderHolder->ladders[i]->destRect)) {
             gameObjectContainer->player->isInsideLadder = true;
             return;
         }

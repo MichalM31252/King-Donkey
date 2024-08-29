@@ -26,7 +26,6 @@ public:
     static bool isCollisionBetweenRects(const SDL_Rect a, const SDL_Rect b);
 	static bool isPointWithinWidthOfPlatform(const int x, const int y, const Platform* platform);
     static bool isPointAPartOfLine(const int x, const int y, const Platform* platform);
-    static bool isRectInsideLadder(const SDL_Rect a, const SDL_Rect b);
 
     static bool isGameObjectOnTopOfPlatform(const GameObject* gameObject, const Platform* platform);
     static bool isGameObjectInsidePlatform(const GameObject* gameObject, const Platform* platform);

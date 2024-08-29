@@ -23,15 +23,6 @@ bool CollisionDetector::isPointAPartOfLine(const int x, const int y, const Platf
     return false;
 }
 
-bool CollisionDetector::isRectInsideLadder(const SDL_Rect playerDestRect, const SDL_Rect ladderDestRect) {
-    if (playerDestRect.x >= ladderDestRect.x && playerDestRect.x + playerDestRect.w <= ladderDestRect.x + ladderDestRect.w) {
-        if (playerDestRect.y + playerDestRect.h <= ladderDestRect.y + ladderDestRect.h && playerDestRect.y + playerDestRect.h >= ladderDestRect.y) {
-            return true;
-        }
-    }
-    return false;
-}
-
 bool CollisionDetector::isGameObjectOnTopOfPlatform(const GameObject* gameObject, const Platform* platform) {
     int yPosition = gameObject->ypos + gameObject->destRect.h;
     int xPositionBottomLeftCorner = gameObject->xpos;
