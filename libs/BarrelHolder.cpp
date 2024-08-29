@@ -11,12 +11,12 @@ void BarrelHolder::emptyBarrelHolder() {
     barrels.clear();
 }
 
-void BarrelHolder::updateBarrels(float deltaTime) {  
+void BarrelHolder::updateBarrels(float deltaTime)  const{  
     for (auto barrel : barrels) {
         barrel->update(deltaTime);
     }
 }
 
-int BarrelHolder::getNumberOfElements() {
+int BarrelHolder::getNumberOfElements() const {
     return static_cast<int>(barrels.size());
 }

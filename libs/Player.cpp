@@ -2,7 +2,6 @@
 #include "ScreenManager.h" // temporary solution
 
 Player::Player() {
-	*tag = "Player";
 	isClimbing = false; // player
 	isJumping = false; // player
 	isInsideLadder = false; // player
@@ -73,7 +72,7 @@ void Player::loadNextClimbingSprite() {
 
 }
 
-bool Player::isPlayerJumping() {
+bool Player::isPlayerJumping() const {
 	return this->isJumping;
 }
 

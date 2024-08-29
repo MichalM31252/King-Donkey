@@ -19,7 +19,7 @@ void BarrelFactory::update(double deltaTime) {
 }
 
 void BarrelFactory::throwBarrel() {
-	MovableGameObject* barrel = new MovableGameObject();
+	auto* barrel = new MovableGameObject();
 	ScreenManager::initGameObject(barrel, BARREL_1_FILENAME);
 
 	barrel->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);

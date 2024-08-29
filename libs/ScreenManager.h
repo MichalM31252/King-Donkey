@@ -43,9 +43,9 @@ public:
 	ScreenManager() = default;
 	ScreenManager(GameObjectContainer* gameObjectContainer);
 
-	void SDLCheck();
+	void SDLCheck() const;
 	void SDLCreateWindowAndRenderer();
-	void setSDLHint();
+	void setSDLHint() const;
 	void setSDLRenderLogicalSize();
 	void setSDLDefaultDrawColor();
 	void setSDLWindowTitle();
@@ -53,7 +53,7 @@ public:
 	void setSDLScreen();
 	void setSDLTexture();
 
-	void hideSDLCursor();
+	void hideSDLCursor() const;
 	void setSDLColorKey();
 
 	void setColors();
@@ -68,10 +68,10 @@ public:
 
 	void serveNextFrame();
 
-	void drawSurface(SDL_Surface* screen, GameObject* gameObject, int xpos, int ypos);
-	void drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, int xpos, int ypos, SDL_Rect dest);
-	void DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset);
-	void DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color);
+	void drawSurface(SDL_Surface* screen, GameObject* gameObject, int xpos, int ypos) const;
+	void drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, int xpos, int ypos, SDL_Rect dest) const;
+	void DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset) const;
+	void DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const;
 	void DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color);
 	void DrawRectangle(SDL_Surface* screen, int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor);
 
@@ -91,6 +91,6 @@ public:
 	void drawLadders();
 	void drawBarrels();
 
-	void handlePlayerSprite(Player* player);
+	void handlePlayerSprite(Player* player) const;
 	// void handleBarrelSprite(Barrel* barrel);
 };

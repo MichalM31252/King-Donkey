@@ -9,7 +9,7 @@ void PhysicsManager::handleFallingForPlayer(Player* player, double deltaTime) {
 void PhysicsManager::handleFalling(MovableGameObject* gameObject, double deltaTime) {
     gameObject->startFalling();
     gameObject->accumulatedMoveDown += deltaTime * gameObject->gravity;
-    int pixelsToMove = static_cast<int>(gameObject->accumulatedMoveDown);
+    auto pixelsToMove = static_cast<int>(gameObject->accumulatedMoveDown);
     if (pixelsToMove >= 1) {
         gameObject->ypos += pixelsToMove;
         gameObject->accumulatedMoveDown -= pixelsToMove;

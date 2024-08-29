@@ -23,7 +23,7 @@ public:
 
     void handlePlayerCollisionWithKong();
     void handlePlayerCollisionWithPrincess();
-    void handlePlayerCollisionWithBarrel(const MovableGameObject* barrel, bool* quit, int* startAnotherRound);
+    void handlePlayerCollisionWithBarrel(const MovableGameObject* barrel, bool* quit, int* startAnotherRound) const;
     void handlePlayerCollisionWithLadder();
     void handleCollisionWithPlatform(MovableGameObject* gameObject);
     void handleCollisionWithJumping();
@@ -31,5 +31,5 @@ public:
     void handlePlayerCollision();
     void handleBarrelsCollision(bool* quit, int* startAnotherRound);
 
-    void closeGame();
+    void closeGame() const;
 };

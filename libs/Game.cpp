@@ -32,7 +32,7 @@ void Game::closeGame() {
 }
 
 // Implement this in the future
-//void Game::closeGame(ScreenManager& screenManager) { // change this into a vector to be more efficient (so it can destroy every gameobject)
+//void Game::closeGame(ScreenManager& screenManager) const { // change this into a vector to be more efficient (so it can destroy every gameobject)
 //	SDL_FreeSurface(screenManager.charset);
 //	SDL_FreeSurface(screenManager.screen);
 //	SDL_DestroyTexture(screenManager.scrtex);

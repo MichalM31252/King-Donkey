@@ -10,6 +10,6 @@ public:
 
     void addBarrel(MovableGameObject* barrel);
     void emptyBarrelHolder();
-    void updateBarrels(float deltaTime);
-    int getNumberOfElements();
+    void updateBarrels(float deltaTime) const;
+    int getNumberOfElements() const;
 };

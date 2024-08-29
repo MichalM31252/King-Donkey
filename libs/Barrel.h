@@ -5,6 +5,5 @@
 
 class Barrel : public MovableGameObject {
 public:
-	Barrel();
 	void loadNextSprite();
 };
