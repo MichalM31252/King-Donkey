@@ -11,13 +11,13 @@ CollisionResolver::CollisionResolver(GameObjectContainer* gameObjectContainer, S
     this->screenManager = screenManager;
 }
 
-void CollisionResolver::handlePlayerCollisionWithKong() {
+void CollisionResolver::handlePlayerCollisionWithKong() const {
     if (CollisionDetector::isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->donkeyKong->destRect)) {
         closeGame();
     }
 }
 
-void CollisionResolver::handlePlayerCollisionWithPrincess() {
+void CollisionResolver::handlePlayerCollisionWithPrincess() const {
     if (CollisionDetector::isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->princess->destRect)) {
         closeGame();
     }

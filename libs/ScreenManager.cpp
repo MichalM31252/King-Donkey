@@ -176,7 +176,7 @@ void ScreenManager::DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) 
 	*(Uint32*)p = color;
 };
 
-void ScreenManager::DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color) { // draw a vertical (when dx = 0, dy = 1) or horizontal (when dx = 1, dy = 0) line
+void ScreenManager::DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color) const { // draw a vertical (when dx = 0, dy = 1) or horizontal (when dx = 1, dy = 0) line
 	for (int i = 0; i < l; i++) {
 		DrawPixel(screen, x, y, color);
 		x += dx;
@@ -184,7 +184,7 @@ void ScreenManager::DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, i
 	};
 };
 
-void ScreenManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) { // x, y - top left corner // draw a rectangle of size l by k
+void ScreenManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) const { // x, y - top left corner // draw a rectangle of size l by k
 	int i;
 	DrawLine(screen, x, y, k, 0, 1, outlineColor);
 	DrawLine(screen, x + l - 1, y, k, 0, 1, outlineColor);

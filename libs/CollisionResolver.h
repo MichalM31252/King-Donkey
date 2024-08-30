@@ -21,8 +21,8 @@ public:
     CollisionResolver();
     CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager);
 
-    void handlePlayerCollisionWithKong();
-    void handlePlayerCollisionWithPrincess();
+    void handlePlayerCollisionWithKong() const;
+    void handlePlayerCollisionWithPrincess() const;
     void handlePlayerCollisionWithBarrel(const MovableGameObject* barrel, bool* quit, int* startAnotherRound) const;
     void handlePlayerCollisionWithLadder();
     void handleCollisionWithPlatform(MovableGameObject* gameObject);
