@@ -72,7 +72,7 @@ void CollisionResolver::handlePlayerCollision() {
 
     if (!player->isClimbing) {
         if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(player, gameObjectContainer->platformHolder)) {
-            screenManager->loadTexture(player, PLAYER_1_FILENAME);
+            ScreenManager::loadTexture(player, PLAYER_1_FILENAME);
             handleCollisionWithJumping();
         }
         else {
