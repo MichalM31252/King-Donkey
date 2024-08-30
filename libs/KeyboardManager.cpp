@@ -12,15 +12,15 @@ KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer) {
 void KeyboardManager::handleEvents(bool& quit, double deltaTime, Player* player, int& startAnotherRound) {
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
-        case SDL_KEYDOWN:
-            onKeyPressed(quit, deltaTime, player, startAnotherRound);
-            break;
-        case SDL_KEYUP:
-            onKeyReleased(player);
-            break;
-        case SDL_QUIT:
-            initializeQuit(quit, startAnotherRound);
-            break;
+            case SDL_KEYDOWN:
+                onKeyPressed(quit, deltaTime, player, startAnotherRound);
+                break;
+            case SDL_KEYUP:
+                onKeyReleased(player);
+                break;
+            case SDL_QUIT:
+                initializeQuit(quit, startAnotherRound);
+                break;
         }
     }
 }
@@ -63,18 +63,18 @@ void KeyboardManager::onKeyPressed(bool& quit, double deltaTime, Player* player,
 
 void KeyboardManager::onKeyReleased(Player* player) const {
     switch (event.key.keysym.sym) {
-    case SDLK_UP:
-        onKeyReleasedArrowUp(player);
-        break;
-    case SDLK_LEFT:
-        onKeyReleasedArrowLeft(player);
-        break;
-    case SDLK_RIGHT:
-        onKeyReleasedArrowRight(player);
-        break;
-    case SDLK_DOWN:
-        onKeyReleasedArrowDown(player);
-        break;
+        case SDLK_UP:
+            onKeyReleasedArrowUp(player);
+            break;
+        case SDLK_LEFT:
+            onKeyReleasedArrowLeft(player);
+            break;
+        case SDLK_RIGHT:
+            onKeyReleasedArrowRight(player);
+            break;
+        case SDLK_DOWN:
+            onKeyReleasedArrowDown(player);
+            break;
     }
 }
 
