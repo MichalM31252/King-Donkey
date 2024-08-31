@@ -101,14 +101,14 @@ void ScreenManager::setColors() {
 }     
 
 void ScreenManager::drawOutlineOfTheBoard() {
-	DrawRectangle(screen, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black);
+	DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black);
 }
 
 void ScreenManager::drawAdditionalInfo() {
-	DrawRectangle(screen, 1, 1, SCREEN_WIDTH - 2, TOP_BAR_HEIGHT, blue, blue);
+	DrawRectangle(1, 1, SCREEN_WIDTH - 2, TOP_BAR_HEIGHT, blue, blue);
 	char text[128];
 	sprintf(text, "Time: %.1lf s  Score: 00000  Lives: 1", worldTime);
-	DrawString(screen, screen->w / 2 - strlen(text) * 8 / 2, 7, text, charset);
+	DrawString(screen->w / 2 - strlen(text) * 8 / 2, 7, text, charset);
 }
 
 void ScreenManager::createSDL() {
@@ -128,7 +128,7 @@ void ScreenManager::createSDL() {
 
 // draw a surface sprite on a surface screen in point (x, y)
 // (x, y) is the center of sprite on screen
-void ScreenManager::drawSurface(SDL_Surface* screen, GameObject* gameObject, int xpos, int ypos) const {
+void ScreenManager::drawSurface(GameObject* gameObject, int xpos, int ypos) const {
 	SDL_Rect dest;
 	dest.x = xpos;
 	dest.y = ypos;
@@ -137,7 +137,7 @@ void ScreenManager::drawSurface(SDL_Surface* screen, GameObject* gameObject, int
 	SDL_BlitSurface(gameObject->sprite, nullptr, screen, &dest);
 }
 
-void ScreenManager::drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, int xpos, int ypos, SDL_Rect dest) const {
+void ScreenManager::drawSurfaceLadder(GameObject* ladder, int xpos, int ypos, SDL_Rect dest) const {
 	ladder->sprite->w = dest.w;
 	ladder->sprite->h = dest.h;
 	SDL_BlitSurface(ladder->sprite, nullptr, screen, &dest);
@@ -145,7 +145,7 @@ void ScreenManager::drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, i
 
 // draw a text txt on surface screen, starting from the point (x, y)
 // charset is a 128x128 bitmap containing character images
-void ScreenManager::DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset) const{
+void ScreenManager::DrawString(int x, int y, const char* text, SDL_Surface* charset) const{
 	int px;
 	int py;
 	int c;
@@ -176,7 +176,7 @@ void ScreenManager::DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) 
 	*(Uint32*)p = color;
 };
 
-void ScreenManager::DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color) const { // draw a vertical (when dx = 0, dy = 1) or horizontal (when dx = 1, dy = 0) line
+void ScreenManager::DrawLine(int x, int y, int l, int dx, int dy, Uint32 color) const { // draw a vertical (when dx = 0, dy = 1) or horizontal (when dx = 1, dy = 0) line
 	for (int i = 0; i < l; i++) {
 		DrawPixel(screen, x, y, color);
 		x += dx;
@@ -184,14 +184,14 @@ void ScreenManager::DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, i
 	};
 };
 
-void ScreenManager::DrawRectangle(SDL_Surface* screen, int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) const { // x, y - top left corner // draw a rectangle of size l by k
+void ScreenManager::DrawRectangle(int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) const { // x, y - top left corner // draw a rectangle of size l by k
 	int i;
-	DrawLine(screen, x, y, k, 0, 1, outlineColor);
-	DrawLine(screen, x + l - 1, y, k, 0, 1, outlineColor);
-	DrawLine(screen, x, y, l, 1, 0, outlineColor);
-	DrawLine(screen, x, y + k - 1, l, 1, 0, outlineColor);
+	DrawLine(x, y, k, 0, 1, outlineColor);
+	DrawLine(x + l - 1, y, k, 0, 1, outlineColor);
+	DrawLine(x, y, l, 1, 0, outlineColor);
+	DrawLine(x, y + k - 1, l, 1, 0, outlineColor);
 	for (i = y + 1; i < y + k - 1; i++) {
-		DrawLine(screen, x + 1, i, l - 2, 1, 0, fillColor);
+		DrawLine(x + 1, i, l - 2, 1, 0, fillColor);
 	}
 };
 
@@ -219,7 +219,7 @@ template void ScreenManager::initGameObject<Player>(Player* gameObject, const ch
 
 template <typename T>
 void ScreenManager::renderGameObject(T* gameObject, SDL_Surface* screen) {
-	drawSurface(screen, gameObject, gameObject->xpos, gameObject->ypos);
+	drawSurface(gameObject, gameObject->xpos, gameObject->ypos);
 }
 
 template void ScreenManager::renderGameObject<GameObject>(GameObject* gameObject, SDL_Surface* screen);
@@ -228,7 +228,7 @@ template void ScreenManager::renderGameObject<MovableGameObject>(MovableGameObje
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void ScreenManager::renderLadder(GameObject* gameObject, SDL_Surface* screen) {
-	drawSurfaceLadder(screen, gameObject, gameObject->xpos, gameObject->ypos, gameObject->destRect);
+	drawSurfaceLadder(gameObject, gameObject->xpos, gameObject->ypos, gameObject->destRect);
 }
 
 void ScreenManager::drawPlatforms() {
