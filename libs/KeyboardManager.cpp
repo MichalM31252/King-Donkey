@@ -9,11 +9,11 @@ KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer) {
 	this->gameObjectContainer = gameObjectContainer;
 }
 
-void KeyboardManager::handleEvents(bool& quit, double deltaTime, Player* player, int& startAnotherRound) {
+void KeyboardManager::handleEvents(bool& quit, Player* player, int& startAnotherRound) {
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_KEYDOWN:
-                onKeyPressed(quit, deltaTime, player, startAnotherRound);
+                onKeyPressed(quit, player, startAnotherRound);
                 break;
             case SDL_KEYUP:
                 onKeyReleased(player);
@@ -25,23 +25,23 @@ void KeyboardManager::handleEvents(bool& quit, double deltaTime, Player* player,
     }
 }
 
-void KeyboardManager::onKeyPressed(bool& quit, double deltaTime, Player* player, int& startAnotherRound) const {
+void KeyboardManager::onKeyPressed(bool& quit, Player* player, int& startAnotherRound) const {
     player->startMovingAtSpeed(DEFAULT_PLAYER_SPEED);
     switch (event.key.keysym.sym) {
         case SDLK_ESCAPE:
             initializeQuit(quit, startAnotherRound);
             break;
         case SDLK_UP:
-            onKeyPressArrowUp(deltaTime, player);
+            onKeyPressArrowUp(player);
             break;
         case SDLK_LEFT:
-            onKeyPressArrowLeft(deltaTime, player);
+            onKeyPressArrowLeft(player);
             break;
         case SDLK_RIGHT:
-            onKeyPressArrowRight(deltaTime, player);
+            onKeyPressArrowRight(player);
             break;
         case SDLK_DOWN:
-            onKeyPressArrowDown(deltaTime, player);
+            onKeyPressArrowDown(player);
             break;
         case SDLK_SPACE:
             onKeyPressSpace(player);
@@ -111,33 +111,33 @@ void KeyboardManager::initializeQuit(bool& quit, int& startAnotherRound) {
 	startAnotherRound = 0;
 }
 
-void KeyboardManager::onKeyPressArrowUp(double deltaTime, Player* player) {
+void KeyboardManager::onKeyPressArrowUp(Player* player) {
 	if (player->isInsideLadder) {
 		player->isClimbing = true;
 
 		ScreenManager::loadTexture(player, PLAYER_CLIMB_1);
 
-		player->startMovingUp(deltaTime);
+		player->startMovingUp();
 	}
 }
 
-void KeyboardManager::onKeyPressArrowLeft(double deltaTime, Player* player) {
+void KeyboardManager::onKeyPressArrowLeft(Player* player) {
 	if (!player->isClimbing) {
-		player->startMovingLeft(deltaTime);
+		player->startMovingLeft();
 	}
 }
 
-void KeyboardManager::onKeyPressArrowRight(double deltaTime, Player* player) {
+void KeyboardManager::onKeyPressArrowRight(Player* player) {
 	if (!player->isClimbing) {
-		player->startMovingRight(deltaTime);
+		player->startMovingRight();
 	}
 }
 
-void KeyboardManager::onKeyPressArrowDown(double deltaTime, Player* player) {
+void KeyboardManager::onKeyPressArrowDown(Player* player) {
 	if (player->isInsideLadder) {
 		player->isClimbing = true;
 		ScreenManager::loadTexture(player, PLAYER_CLIMB_1);
-		player->startMovingDown(deltaTime);
+		player->startMovingDown();
 	}
 }
 

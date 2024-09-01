@@ -101,7 +101,7 @@ void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRoun
                 barrel->stopMove();
             }
             barrel->startMovingAtSpeed(DEFAULT_BARREL_SPEED);
-            barrel->startMovingRight(screenManager->deltaTime);
+            barrel->startMovingRight();
         }
         else {
             PhysicsManager::handleFalling(barrel, screenManager->deltaTime);

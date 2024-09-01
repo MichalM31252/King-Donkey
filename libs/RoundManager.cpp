@@ -26,7 +26,7 @@ void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startA
         screenManager->serveNextFrame();
         screenManager->frames++;
 
-        eventHandler.handleEvents(quit, screenManager->deltaTime, gameObjectContainer->player, *startAnotherRound);
+        eventHandler.handleEvents(quit, gameObjectContainer->player, *startAnotherRound);
 
         gameObjectContainer->player->update(screenManager->deltaTime);
 
