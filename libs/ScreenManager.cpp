@@ -1,8 +1,9 @@
 #define _USE_MATH_DEFINES
 #include "ScreenManager.h"
 
-ScreenManager::ScreenManager(GameObjectContainer* gameObjectContainer) {
-	this->gameObjectContainer = gameObjectContainer;
+ScreenManager::ScreenManager(GameObjectContainer* gameObjectContainer) 
+	: gameObjectContainer(gameObjectContainer)
+{
 }
 
 void ScreenManager::createFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)

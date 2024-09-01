@@ -1,12 +1,10 @@
 #pragma once
 #include "StageManager.h"
 
-StageManager::StageManager(GameObjectContainer* gameObjectContainer) { // assign gameObjectContainer to each one of these managers
-    screenManager = new ScreenManager();
-    collisionResolver = new CollisionResolver(gameObjectContainer, screenManager);
-    gameObjectFactory = new GameObjectFactory(gameObjectContainer);
-    keyboardManager = new KeyboardManager(gameObjectContainer);
-
-	// physics manager is entirely static
-	// round manager doesnt exist yet
+StageManager::StageManager(GameObjectContainer* gameObjectContainer)
+    : screenManager(new ScreenManager())
+    , collisionResolver(new CollisionResolver(gameObjectContainer, screenManager))
+    , gameObjectFactory(new GameObjectFactory(gameObjectContainer))
+    , keyboardManager(new KeyboardManager(gameObjectContainer))
+{
 }

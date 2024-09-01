@@ -1,16 +1,18 @@
 #include "ScreenManager.h" 
 #include "MovableGameObject.h"
 
-MovableGameObject::MovableGameObject() {
-	currentDirectionOfMovement = -1; // 0 - up , 1 - right, 2 - down, 3 - left
-	accumulatedMoveDown = 0;
-	accumulatedMoveLeft = 0;
-	accumulatedMoveRight = 0;
-	accumulatedMoveUp = 0;
-	canLeaveScreen = false;
-	objectSpeed = 0;
-	currentSpriteId = 1;
-	gravity = DEFAULT_GRAVITY; // physics manager ??
+MovableGameObject::MovableGameObject()
+	: currentDirectionOfMovement(-1)
+	, accumulatedMoveDown(0)
+	, accumulatedMoveLeft(0)
+	, accumulatedMoveRight(0)
+	, accumulatedMoveUp(0)
+	, canLeaveScreen(false)
+	, objectSpeed(0)
+	, currentSpriteId(1)
+	, gravity(DEFAULT_GRAVITY)
+	, isFalling(false)
+{
 }
 
 void MovableGameObject::startAccumulatingDistance(double deltaTime) {

@@ -1,12 +1,13 @@
 #include "Player.h"
 #include "ScreenManager.h" // temporary solution
 
-Player::Player() {
-	isClimbing = false;
-	isJumping = false;
-	isInsideLadder = false;
-	checkIfJumpPossible = false;
-	jumpHeightStop = SCREEN_HEIGHT;
+Player::Player()
+	: isClimbing(false)
+	, isJumping(false)
+	, isInsideLadder(false)
+	, checkIfJumpPossible(false)
+	, jumpHeightStop(SCREEN_HEIGHT)
+{
 }
 
 void Player::startClimbing() {

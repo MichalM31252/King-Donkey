@@ -5,8 +5,9 @@
 
 KeyboardManager::KeyboardManager() = default;
 
-KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer) {
-	this->gameObjectContainer = gameObjectContainer;
+KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer)
+    : gameObjectContainer(gameObjectContainer) 
+{
 }
 
 void KeyboardManager::handleEvents(bool& quit, Player* player, int& startAnotherRound) {

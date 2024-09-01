@@ -1,14 +1,15 @@
 #include "CollisionResolver.h"
 
-
-CollisionResolver::CollisionResolver() {
-    this->gameObjectContainer = new GameObjectContainer();
-    this->screenManager = new ScreenManager();
+CollisionResolver::CollisionResolver()
+    : gameObjectContainer(new GameObjectContainer())
+    , screenManager(new ScreenManager())
+{
 }
 
-CollisionResolver::CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager) {
-    this->gameObjectContainer = gameObjectContainer;
-    this->screenManager = screenManager;
+CollisionResolver::CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager)
+    : gameObjectContainer(gameObjectContainer)
+    , screenManager(screenManager)
+{
 }
 
 void CollisionResolver::handlePlayerCollisionWithKong() const {

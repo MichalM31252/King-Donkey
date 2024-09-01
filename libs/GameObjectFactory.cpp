@@ -1,8 +1,9 @@
 #include "GameObjectFactory.h"
 #include "ScreenManager.h"
 
-GameObjectFactory::GameObjectFactory(GameObjectContainer* gameObjectContainer) {
-    this->gameObjectContainer = gameObjectContainer;
+GameObjectFactory::GameObjectFactory(GameObjectContainer* gameObjectContainer)
+    : gameObjectContainer(gameObjectContainer)
+{
 }
 
 void GameObjectFactory::createPlayer() {
