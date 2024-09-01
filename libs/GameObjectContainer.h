@@ -1,9 +1,9 @@
 #pragma once
-#include "BarrelFactory.h" // no screen manager
-#include "LadderHolder.h" // no screen manager
-#include "PlatformHolder.h" // no screen manager
-#include "MovableGameObject.h" // has screen manager
-#include "Player.h" // no screen manager
+#include "BarrelFactory.h"
+#include "LadderHolder.h"
+#include "PlatformHolder.h"
+#include "MovableGameObject.h"
+#include "Player.h"
 
 struct GameObjectContainer {
     GameObject* donkeyKong;

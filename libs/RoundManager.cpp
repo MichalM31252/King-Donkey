@@ -1,17 +1,19 @@
 #include "RoundManager.h"
 
-RoundManager::RoundManager() {
-    screenManager = new ScreenManager();
-    gameObjectFactory = new GameObjectFactory();
-    gameObjectContainer = new GameObjectContainer();
-    collisionResolver = new CollisionResolver(gameObjectContainer, screenManager);
+RoundManager::RoundManager()
+    : screenManager(new ScreenManager())
+    , gameObjectFactory(new GameObjectFactory())
+    , gameObjectContainer(new GameObjectContainer())
+    , collisionResolver(new CollisionResolver(gameObjectContainer, screenManager))
+{
 }
 
-RoundManager::RoundManager(ScreenManager* screenManager, GameObjectFactory* gameObjectFactory, GameObjectContainer* gameObjectContainer, CollisionResolver* collisionResolver){
-	this->screenManager = screenManager;
-	this->gameObjectFactory = gameObjectFactory;
-	this->gameObjectContainer = gameObjectContainer;
-	this->collisionResolver = collisionResolver;
+RoundManager::RoundManager(ScreenManager* screenManager, GameObjectFactory* gameObjectFactory, GameObjectContainer* gameObjectContainer, CollisionResolver* collisionResolver)
+    : screenManager(screenManager)
+    , gameObjectFactory(gameObjectFactory)
+    , gameObjectContainer(gameObjectContainer)
+    , collisionResolver(collisionResolver)
+{
 }
 
 void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startAnotherRound) {
@@ -26,7 +28,7 @@ void RoundManager::handleCurrentRound(KeyboardManager& eventHandler, int* startA
         screenManager->serveNextFrame();
         screenManager->frames++;
 
-        eventHandler.handleEvents(quit, screenManager->deltaTime, gameObjectContainer->player, *startAnotherRound);
+        eventHandler.handleEvents(quit, gameObjectContainer->player, *startAnotherRound);
 
         gameObjectContainer->player->update(screenManager->deltaTime);
 

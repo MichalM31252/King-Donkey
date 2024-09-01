@@ -3,19 +3,13 @@
 #include "Game.h"
 #include "CollisionResolver.h" // temporary fix
 
-Game::Game() {
-    // the only thing that should be here is the stage manager
-    // first move every method from this class to its respective manager then implement the stage manager
-
-    gameObjectContainer = new GameObjectContainer();
-
-    screenManager = new ScreenManager(gameObjectContainer);
-
-    gameObjectFactory = new GameObjectFactory(gameObjectContainer);
-
-    collisionResolver = new CollisionResolver(gameObjectContainer, screenManager);
-
-    roundManager = new RoundManager(screenManager, gameObjectFactory, gameObjectContainer, collisionResolver);
+Game::Game()
+    : gameObjectContainer(new GameObjectContainer())
+    , screenManager(new ScreenManager(gameObjectContainer))
+    , gameObjectFactory(new GameObjectFactory(gameObjectContainer))
+    , collisionResolver(new CollisionResolver(gameObjectContainer, screenManager))
+    , roundManager(new RoundManager(screenManager, gameObjectFactory, gameObjectContainer, collisionResolver))
+{
 }
 
 void Game::initGame() {
@@ -26,7 +20,7 @@ void Game::initGame() {
     closeGame();
 }
 
-void Game::closeGame() {
+void Game::closeGame() const {
     SDL_Quit();
     exit(0);
 }

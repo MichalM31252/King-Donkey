@@ -68,12 +68,12 @@ public:
 
 	void serveNextFrame();
 
-	void drawSurface(SDL_Surface* screen, GameObject* gameObject, int xpos, int ypos) const;
-	void drawSurfaceLadder(SDL_Surface* screen, GameObject* ladder, int xpos, int ypos, SDL_Rect dest) const;
-	void DrawString(SDL_Surface* screen, int x, int y, const char* text, SDL_Surface* charset) const;
+	void drawSurface(GameObject* gameObject, int xpos, int ypos) const;
+	void drawSurfaceLadder(GameObject* ladder, int xpos, int ypos, SDL_Rect dest) const;
+	void DrawString(int x, int y, const char* text, SDL_Surface* charset) const;
 	void DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const;
-	void DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color);
-	void DrawRectangle(SDL_Surface* screen, int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor);
+	void DrawLine(int x, int y, int l, int dx, int dy, Uint32 color) const;
+	void DrawRectangle(int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) const;
 
 	template <typename T>
 	static void initGameObject(T* gameObject, const char* fileName);

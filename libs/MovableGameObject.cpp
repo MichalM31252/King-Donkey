@@ -1,16 +1,18 @@
 #include "ScreenManager.h" 
 #include "MovableGameObject.h"
 
-MovableGameObject::MovableGameObject() {
-	currentDirectionOfMovement = -1; // 0 - up , 1 - right, 2 - down, 3 - left
-	accumulatedMoveDown = 0;
-	accumulatedMoveLeft = 0;
-	accumulatedMoveRight = 0;
-	accumulatedMoveUp = 0;
-	canLeaveScreen = false;
-	objectSpeed = 0;
-	currentSpriteId = 1;
-	gravity = DEFAULT_GRAVITY; // physics manager ??
+MovableGameObject::MovableGameObject()
+	: currentDirectionOfMovement(-1)
+	, accumulatedMoveDown(0)
+	, accumulatedMoveLeft(0)
+	, accumulatedMoveRight(0)
+	, accumulatedMoveUp(0)
+	, canLeaveScreen(false)
+	, objectSpeed(0)
+	, currentSpriteId(1)
+	, gravity(DEFAULT_GRAVITY)
+	, isFalling(false)
+{
 }
 
 void MovableGameObject::startAccumulatingDistance(double deltaTime) {
@@ -88,19 +90,19 @@ void MovableGameObject::startMovingAtSpeed(double speed) {
 	objectSpeed = speed;
 }
 
-void MovableGameObject::startMovingUp(double deltaTime) {
+void MovableGameObject::startMovingUp() {
 	currentDirectionOfMovement = 0;
 }
 
-void MovableGameObject::startMovingRight(double deltaTime) {
+void MovableGameObject::startMovingRight() {
 	currentDirectionOfMovement = 1;
 }
 
-void MovableGameObject::startMovingDown(double deltaTime) {
+void MovableGameObject::startMovingDown() {
 	currentDirectionOfMovement = 2;
 }
 
-void MovableGameObject::startMovingLeft(double deltaTime) {
+void MovableGameObject::startMovingLeft() {
 	currentDirectionOfMovement = 3;
 }
 

@@ -17,7 +17,7 @@ bool CollisionDetector::isPointAPartOfLine(const int x, const int y, const Platf
     double b = platform->x1pos - platform->x2pos;
     double c = a * platform->x1pos + b * platform->y1pos;
 
-    if (a * x + b * y == c) { // is point part of the line
+    if (a * x + b * y == c) {
         return true;
     }
     return false;

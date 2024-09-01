@@ -1,12 +1,13 @@
 #include "Player.h"
 #include "ScreenManager.h" // temporary solution
 
-Player::Player() {
-	isClimbing = false; // player
-	isJumping = false; // player
-	isInsideLadder = false; // player
-	checkIfJumpPossible = false; // player
-	jumpHeightStop = SCREEN_HEIGHT; // player
+Player::Player()
+	: isClimbing(false)
+	, isJumping(false)
+	, isInsideLadder(false)
+	, checkIfJumpPossible(false)
+	, jumpHeightStop(SCREEN_HEIGHT)
+{
 }
 
 void Player::startClimbing() {
@@ -76,8 +77,15 @@ bool Player::isPlayerJumping() const {
 	return this->isJumping;
 }
 
+bool Player::isPlayerMovingVertically() const {
+	if (currentDirectionOfMovement == 0 || currentDirectionOfMovement == 2) {
+		return true;
+	}
+	return false;
+}
+
 void Player::startAccumulatingDistance(double deltaTime) {
-	if (currentDirectionOfMovement == 0 || currentDirectionOfMovement == 2) { // up or down
+	if (isPlayerMovingVertically()) { // up or down
 		if (isClimbing) {
 			if (currentDirectionOfMovement == 0) {
 				accumulatedMoveUp += deltaTime * objectSpeed;

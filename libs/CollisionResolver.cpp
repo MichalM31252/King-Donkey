@@ -1,23 +1,24 @@
 #include "CollisionResolver.h"
 
-
-CollisionResolver::CollisionResolver() {
-    this->gameObjectContainer = new GameObjectContainer();
-    this->screenManager = new ScreenManager();
+CollisionResolver::CollisionResolver()
+    : gameObjectContainer(new GameObjectContainer())
+    , screenManager(new ScreenManager())
+{
 }
 
-CollisionResolver::CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager) {
-    this->gameObjectContainer = gameObjectContainer;
-    this->screenManager = screenManager;
+CollisionResolver::CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager)
+    : gameObjectContainer(gameObjectContainer)
+    , screenManager(screenManager)
+{
 }
 
-void CollisionResolver::handlePlayerCollisionWithKong() {
+void CollisionResolver::handlePlayerCollisionWithKong() const {
     if (CollisionDetector::isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->donkeyKong->destRect)) {
         closeGame();
     }
 }
 
-void CollisionResolver::handlePlayerCollisionWithPrincess() {
+void CollisionResolver::handlePlayerCollisionWithPrincess() const {
     if (CollisionDetector::isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->princess->destRect)) {
         closeGame();
     }
@@ -72,7 +73,7 @@ void CollisionResolver::handlePlayerCollision() {
 
     if (!player->isClimbing) {
         if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(player, gameObjectContainer->platformHolder)) {
-            screenManager->loadTexture(player, PLAYER_1_FILENAME);
+            ScreenManager::loadTexture(player, PLAYER_1_FILENAME);
             handleCollisionWithJumping();
         }
         else {
@@ -101,7 +102,7 @@ void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRoun
                 barrel->stopMove();
             }
             barrel->startMovingAtSpeed(DEFAULT_BARREL_SPEED);
-            barrel->startMovingRight(screenManager->deltaTime);
+            barrel->startMovingRight();
         }
         else {
             PhysicsManager::handleFalling(barrel, screenManager->deltaTime);

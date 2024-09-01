@@ -25,5 +25,5 @@ public:
 	Game();
 
 	void initGame();
-	void closeGame();
+	void closeGame() const;
 };

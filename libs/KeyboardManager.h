@@ -18,15 +18,15 @@ public:
     KeyboardManager();
     explicit KeyboardManager(GameObjectContainer* gameObjectContainer);
 
-    void handleEvents(bool& quit, double deltaTime, Player* player, int& startAnotherRound);
+    void handleEvents(bool& quit, Player* player, int& startAnotherRound);
 
     static void initializeQuit(bool& quit, int& startAnotherRound);
 
-    void onKeyPressed(bool& quit, double deltaTime, Player* player, int& startAnotherRound) const;
-    static void onKeyPressArrowUp(double deltaTime, Player* player);
-    static void onKeyPressArrowRight(double deltaTime, Player* player);
-    static void onKeyPressArrowDown(double deltaTime, Player* player);
-    static void onKeyPressArrowLeft(double deltaTime, Player* player);
+    void onKeyPressed(bool& quit, Player* player, int& startAnotherRound) const;
+    static void onKeyPressArrowUp(Player* player);
+    static void onKeyPressArrowRight(Player* player);
+    static void onKeyPressArrowDown(Player* player);
+    static void onKeyPressArrowLeft(Player* player);
     static void onKeyPressSpace(Player* player);
     static void onKeyPressN(bool& quit, int& startAnotherRound);
     static void onKeyPress1(bool& quit, int& startAnotherRound);
