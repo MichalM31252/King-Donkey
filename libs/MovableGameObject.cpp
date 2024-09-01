@@ -88,19 +88,19 @@ void MovableGameObject::startMovingAtSpeed(double speed) {
 	objectSpeed = speed;
 }
 
-void MovableGameObject::startMovingUp(double deltaTime) {
+void MovableGameObject::startMovingUp() {
 	currentDirectionOfMovement = 0;
 }
 
-void MovableGameObject::startMovingRight(double deltaTime) {
+void MovableGameObject::startMovingRight() {
 	currentDirectionOfMovement = 1;
 }
 
-void MovableGameObject::startMovingDown(double deltaTime) {
+void MovableGameObject::startMovingDown() {
 	currentDirectionOfMovement = 2;
 }
 
-void MovableGameObject::startMovingLeft(double deltaTime) {
+void MovableGameObject::startMovingLeft() {
 	currentDirectionOfMovement = 3;
 }
 

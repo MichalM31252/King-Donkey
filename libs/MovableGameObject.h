@@ -25,10 +25,10 @@ public:
 	void stayInBounds();
 	void updatePosition();
 	void startMovingAtSpeed(double speed);
-	void startMovingLeft(double delta);
-	void startMovingRight(double delta);
-	void startMovingUp(double delta);
-	void startMovingDown(double delta);
+	void startMovingLeft();
+	void startMovingRight();
+	void startMovingUp();
+	void startMovingDown();
 	void stopMove();
 
 	void startFalling();
