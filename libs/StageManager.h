@@ -15,5 +15,5 @@ private:
     ScreenManager* screenManager;
 
     StageManager() = default;
-    StageManager(GameObjectContainer* gameObjectContainer);
+    // StageManager(GameObjectContainer* gameObjectContainer);
 };
