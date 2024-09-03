@@ -1,5 +1,6 @@
 #define _USE_MATH_DEFINES
 #include "ScreenManager.h"
+#include <string>
 
 ScreenManager::ScreenManager(GameObjectContainer* gameObjectContainer) 
 	: gameObjectContainer(gameObjectContainer)
@@ -107,9 +108,12 @@ void ScreenManager::drawOutlineOfTheBoard() {
 
 void ScreenManager::drawAdditionalInfo() {
 	DrawRectangle(1, 1, SCREEN_WIDTH - 2, TOP_BAR_HEIGHT, blue, blue);
-	char text[128];
-	sprintf(text, "Time: %.1lf s  Score: 00000  Lives: 1", worldTime);
-	DrawString(screen->w / 2 - strlen(text) * 8 / 2, 7, text, charset);
+
+	// Convert worldTime to string and concatenate the rest of the text
+	std::string text = "Time: " + std::to_string(worldTime) + " s  Score: 0  Lives: 1";
+
+	// Call the DrawString method with the string
+	DrawString(screen->w / 2 - text.length() * 8 / 2, 7, text, charset);
 }
 
 void ScreenManager::createSDL() {
@@ -146,7 +150,7 @@ void ScreenManager::drawSurfaceLadder(GameObject* ladder, int xpos, int ypos, SD
 
 // draw a text txt on surface screen, starting from the point (x, y)
 // charset is a 128x128 bitmap containing character images
-void ScreenManager::DrawString(int x, int y, const char* text, SDL_Surface* charset) const{
+void ScreenManager::DrawString(int x, int y, const std::string& text, SDL_Surface* charset) const {
 	int px;
 	int py;
 	int c;
@@ -156,8 +160,10 @@ void ScreenManager::DrawString(int x, int y, const char* text, SDL_Surface* char
 	s.h = 8;
 	d.w = 8;
 	d.h = 8;
-	while (*text) {
-		c = *text & 255;
+
+	// Iterate over the string instead of char array
+	for (char ch : text) {
+		c = ch & 255;
 		px = (c % 16) * 8;
 		py = (c / 16) * 8;
 		s.x = px;
@@ -166,9 +172,8 @@ void ScreenManager::DrawString(int x, int y, const char* text, SDL_Surface* char
 		d.y = y;
 		SDL_BlitSurface(charset, &s, screen, &d);
 		x += 8;
-		text++;
-	};
-};
+	}
+}
 
 
 void ScreenManager::DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const { // draw a single pixel
