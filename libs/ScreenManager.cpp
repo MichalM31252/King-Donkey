@@ -142,7 +142,7 @@ void ScreenManager::drawSurface(GameObject* gameObject, int xpos, int ypos) cons
 	SDL_BlitSurface(gameObject->sprite, nullptr, screen, &dest);
 }
 
-void ScreenManager::drawSurfaceLadder(GameObject* ladder, int xpos, int ypos, SDL_Rect dest) const {
+void ScreenManager::drawSurfaceLadder(GameObject* ladder, SDL_Rect dest) const {
 	ladder->sprite->w = dest.w;
 	ladder->sprite->h = dest.h;
 	SDL_BlitSurface(ladder->sprite, nullptr, screen, &dest);
@@ -233,8 +233,8 @@ template void ScreenManager::renderGameObject<MovableGameObject>(MovableGameObje
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ScreenManager::renderLadder(GameObject* gameObject, SDL_Surface* screen) {
-	drawSurfaceLadder(gameObject, gameObject->xpos, gameObject->ypos, gameObject->destRect);
+void ScreenManager::renderLadder(GameObject* gameObject) {
+	drawSurfaceLadder(gameObject, gameObject->destRect);
 }
 
 void ScreenManager::drawPlatforms() {
@@ -245,7 +245,7 @@ void ScreenManager::drawPlatforms() {
 
 void ScreenManager::drawLadders() {
 	for (int i = 0; i < gameObjectContainer->ladderHolder->getNumberOfElements(); i++) {
-		renderLadder(std::move(gameObjectContainer->ladderHolder->ladders[i]), screen);
+		renderLadder(std::move(gameObjectContainer->ladderHolder->ladders[i]));
 	}
 }
 

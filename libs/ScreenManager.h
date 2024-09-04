@@ -70,7 +70,7 @@ public:
 	void serveNextFrame();
 
 	void drawSurface(GameObject* gameObject, int xpos, int ypos) const;
-	void drawSurfaceLadder(GameObject* ladder, int xpos, int ypos, SDL_Rect dest) const;
+	void drawSurfaceLadder(GameObject* ladder, SDL_Rect dest) const;
 	void DrawString(int x, int y, const std::string& text, SDL_Surface* charset) const;
 	void DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const;
 	void DrawLine(int x, int y, int l, int dx, int dy, Uint32 color) const;
@@ -85,7 +85,7 @@ public:
 	template<typename T>
 	void renderGameObject(T* gameObject, SDL_Surface* screen);
 
-	void renderLadder(GameObject* gameObject, SDL_Surface* screen);
+	void renderLadder(GameObject* gameObject);
 
 	void drawElements();
 	void drawPlatforms();

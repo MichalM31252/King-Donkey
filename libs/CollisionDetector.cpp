@@ -4,7 +4,7 @@ bool CollisionDetector::isCollisionBetweenRects(const SDL_Rect a, const SDL_Rect
     return SDL_HasIntersection(&a, &b);
 }
 
-bool CollisionDetector::isPointWithinWidthOfPlatform(const int x, const int y, const Platform* platform) {
+bool CollisionDetector::isXWithinWidthOfPlatform(const int x, const Platform* platform) {
 	if ((x >= platform->x1pos && x <= platform->x2pos) || (x <= platform->x1pos && x >= platform->x2pos)) {
 		return true;
 	}
@@ -28,11 +28,11 @@ bool CollisionDetector::isGameObjectOnTopOfPlatform(const GameObject* gameObject
     int xPositionBottomLeftCorner = gameObject->xpos;
     int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
 
-    if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, platform) && CollisionDetector::isPointWithinWidthOfPlatform(xPositionBottomRightCorner, yPosition + 1, platform)) {
+    if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, platform) && CollisionDetector::isXWithinWidthOfPlatform(xPositionBottomRightCorner, platform)) {
         return true;
     }
 
-    if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, platform) && CollisionDetector::isPointWithinWidthOfPlatform(xPositionBottomLeftCorner, yPosition + 1, platform)) {
+    if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, platform) && CollisionDetector::isXWithinWidthOfPlatform(xPositionBottomLeftCorner, platform)) {
         return true;
     }
 
@@ -44,11 +44,11 @@ bool CollisionDetector::isGameObjectInsidePlatform(const GameObject* gameObject,
     int xPositionBottomLeftCorner = gameObject->xpos;
     int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
 
-    if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, platform) && CollisionDetector::isPointWithinWidthOfPlatform(xPositionBottomLeftCorner, yPosition, platform)) {
+    if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, platform) && CollisionDetector::isXWithinWidthOfPlatform(xPositionBottomLeftCorner, platform)) {
         return true;
     }
 
-    if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition, platform) && CollisionDetector::isPointWithinWidthOfPlatform(xPositionBottomRightCorner, yPosition, platform) ) {
+    if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition, platform) && CollisionDetector::isXWithinWidthOfPlatform(xPositionBottomRightCorner, platform) ) {
         return true;
     }
 

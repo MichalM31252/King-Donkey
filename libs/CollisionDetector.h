@@ -24,7 +24,7 @@ class CollisionDetector
 {
 public:
     static bool isCollisionBetweenRects(const SDL_Rect a, const SDL_Rect b);
-	static bool isPointWithinWidthOfPlatform(const int x, const int y, const Platform* platform);
+	static bool isXWithinWidthOfPlatform(const int x, const Platform* platform);
     static bool isPointAPartOfLine(const int x, const int y, const Platform* platform);
 
     static bool isGameObjectOnTopOfPlatform(const GameObject* gameObject, const Platform* platform);
