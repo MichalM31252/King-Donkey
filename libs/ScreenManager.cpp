@@ -133,7 +133,7 @@ void ScreenManager::createSDL() {
 
 // draw a surface sprite on a surface screen in point (x, y)
 // (x, y) is the center of sprite on screen
-void ScreenManager::drawSurface(GameObject* gameObject, int xpos, int ypos) const {
+void ScreenManager::drawSurface(const GameObject* gameObject, int xpos, int ypos) const {
 	SDL_Rect dest;
 	dest.x = xpos;
 	dest.y = ypos;
@@ -142,7 +142,7 @@ void ScreenManager::drawSurface(GameObject* gameObject, int xpos, int ypos) cons
 	SDL_BlitSurface(gameObject->sprite, nullptr, screen, &dest);
 }
 
-void ScreenManager::drawSurfaceLadder(GameObject* ladder, SDL_Rect dest) const {
+void ScreenManager::drawSurfaceLadder(const GameObject* ladder, SDL_Rect dest) const {
 	ladder->sprite->w = dest.w;
 	ladder->sprite->h = dest.h;
 	SDL_BlitSurface(ladder->sprite, nullptr, screen, &dest);
@@ -224,16 +224,16 @@ template void ScreenManager::initGameObject<MovableGameObject>(MovableGameObject
 template void ScreenManager::initGameObject<Player>(Player* gameObject, const char* fileName);
 
 template <typename T>
-void ScreenManager::renderGameObject(T* gameObject, SDL_Surface* screen) {
+void ScreenManager::renderGameObject(T* gameObject, const SDL_Surface* screen) {
 	drawSurface(gameObject, gameObject->xpos, gameObject->ypos);
 }
 
-template void ScreenManager::renderGameObject<GameObject>(GameObject* gameObject, SDL_Surface* screen);
-template void ScreenManager::renderGameObject<MovableGameObject>(MovableGameObject* gameObject, SDL_Surface* screen);
+template void ScreenManager::renderGameObject<GameObject>(GameObject* gameObject, const SDL_Surface* screen);
+template void ScreenManager::renderGameObject<MovableGameObject>(MovableGameObject* gameObject, const SDL_Surface* screen);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ScreenManager::renderLadder(GameObject* gameObject) {
+void ScreenManager::renderLadder(const GameObject* gameObject) {
 	drawSurfaceLadder(gameObject, gameObject->destRect);
 }
 
