@@ -10,9 +10,8 @@
 #include "../SDL2-2.0.10/include/SDL_main.h"
 
 class KeyboardManager {
-private:
-	SDL_Event event; // this can be used here
 public:
+    SDL_Event event; // this can be used here
     GameObjectContainer* gameObjectContainer;
 
     KeyboardManager();
