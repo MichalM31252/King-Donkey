@@ -1,4 +1,4 @@
-# STATISTICS
+# Statistics
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=bugs)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
