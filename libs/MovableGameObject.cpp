@@ -2,16 +2,16 @@
 #include "MovableGameObject.h"
 
 MovableGameObject::MovableGameObject()
-	: currentDirectionOfMovement(-1)
-	, accumulatedMoveDown(0)
+	: accumulatedMoveUp(0)
+	, accumulatedMoveRight(0) 
+	, accumulatedMoveDown(0) 
 	, accumulatedMoveLeft(0)
-	, accumulatedMoveRight(0)
-	, accumulatedMoveUp(0)
 	, canLeaveScreen(false)
 	, objectSpeed(0)
-	, currentSpriteId(1)
-	, gravity(DEFAULT_GRAVITY)
 	, isFalling(false)
+	, gravity(DEFAULT_GRAVITY)
+	, currentDirectionOfMovement(-1)
+	, currentSpriteId(1)
 {
 }
 

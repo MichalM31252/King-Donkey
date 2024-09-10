@@ -4,11 +4,10 @@
 #include "BarrelHolder.h"
 
 class BarrelFactory {
-private:
+public:
     int xpos;
     int ypos;
     double accumulatedTime;
-public:
     BarrelHolder* barrelHolder;
 
     void initBarrelFactory(BarrelFactory* barrelFactory) const;

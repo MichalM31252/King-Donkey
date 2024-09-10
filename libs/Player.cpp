@@ -2,9 +2,9 @@
 #include "ScreenManager.h" // temporary solution
 
 Player::Player()
-	: isClimbing(false)
+	: isInsideLadder(false)
 	, isJumping(false)
-	, isInsideLadder(false)
+	, isClimbing(false)
 	, checkIfJumpPossible(false)
 	, jumpHeightStop(SCREEN_HEIGHT)
 {

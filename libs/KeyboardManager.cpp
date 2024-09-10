@@ -22,6 +22,8 @@ void KeyboardManager::handleEvents(bool& quit, Player* player, int& startAnother
             case SDL_QUIT:
                 initializeQuit(quit, startAnotherRound);
                 break;
+			default:
+				break;
         }
     }
 }
@@ -59,6 +61,8 @@ void KeyboardManager::onKeyPressed(bool& quit, Player* player, int& startAnother
         case SDLK_3:
             onKeyPress3(quit, startAnotherRound);
             break;
+        default:
+            break;
     }
 }
 
@@ -75,6 +79,8 @@ void KeyboardManager::onKeyReleased(Player* player) const {
             break;
         case SDLK_DOWN:
             onKeyReleasedArrowDown(player);
+            break;
+        default:
             break;
     }
 }
