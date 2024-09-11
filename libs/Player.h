@@ -19,9 +19,9 @@ public:
 	void stopClimbing();
 
 	void loadNextRunningSprite();
-	void loadJumpingSprite();
-	void loadClimbingSprite();
-	void loadNextClimbingSprite();
+	void loadJumpingSprite() const;
+	void loadClimbingSprite() const;
+	void loadNextClimbingSprite() const;
 	bool isPlayerMovingVertically() const;
 	bool isPlayerJumping() const;
 

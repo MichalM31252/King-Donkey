@@ -61,15 +61,15 @@ void Player::loadNextRunningSprite() {
 	}
 }
 
-void Player::loadJumpingSprite() {
+void Player::loadJumpingSprite() const {
 	// ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
 }
 
-void Player::loadClimbingSprite() {
+void Player::loadClimbingSprite() const {
 	// ScreenManager::loadTexture(this, PLAYER_CLIMB_1);
 }
 
-void Player::loadNextClimbingSprite() {
+void Player::loadNextClimbingSprite() const {
 
 }
 
