@@ -58,7 +58,7 @@ public:
 	void setSDLColorKey();
 
 	void setColors();
-	void drawOutlineOfTheBoard();
+	void drawOutlineOfTheBoard() const ;
 	void drawAdditionalInfo();
 	void createSDL();
 
@@ -85,7 +85,7 @@ public:
 	template<typename T>
 	void renderGameObject(T* gameObject, const SDL_Surface* screen);
 
-	void renderLadder(const GameObject* gameObject);
+	void renderLadder(const GameObject* gameObject) const;
 
 	void drawElements();
 	void drawPlatforms();

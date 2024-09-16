@@ -4,11 +4,11 @@
 #include "CollisionResolver.h" // temporary fix
 
 Game::Game()
-    : gameObjectContainer(new GameObjectContainer())
-    , screenManager(new ScreenManager(gameObjectContainer))
-    , gameObjectFactory(new GameObjectFactory(gameObjectContainer))
-    , collisionResolver(new CollisionResolver(gameObjectContainer, screenManager))
-    , roundManager(new RoundManager(screenManager, gameObjectFactory, gameObjectContainer, collisionResolver))
+    : gameObjectContainer(std::make_unique<GameObjectContainer>())
+    , screenManager(std::make_unique<ScreenManager>(gameObjectContainer.get()))
+    , gameObjectFactory(std::make_unique<GameObjectFactory>(gameObjectContainer.get()))
+    , collisionResolver(std::make_unique<CollisionResolver>(gameObjectContainer.get(), screenManager.get()))
+    , roundManager(std::make_unique<RoundManager>(screenManager.get(), gameObjectFactory.get(), gameObjectContainer.get(), collisionResolver.get()))
 {
 }
 

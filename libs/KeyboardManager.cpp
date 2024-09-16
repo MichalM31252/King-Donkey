@@ -153,8 +153,7 @@ void KeyboardManager::onKeyPressSpace(Player* player) {
 }
 
 void KeyboardManager::onKeyPressN(bool& quit, int& startAnotherRound) {
-	startAnotherRound = 1;
-	quit = true;
+	onKeyPress1(quit, startAnotherRound);
 }
 
 void KeyboardManager::onKeyPress1(bool& quit, int& startAnotherRound) {

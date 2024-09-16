@@ -102,7 +102,7 @@ void ScreenManager::setColors() {
 	platformColor = SDL_MapRGB(screen->format, 0xef, 0x1e, 0x4f);
 }     
 
-void ScreenManager::drawOutlineOfTheBoard() {
+void ScreenManager::drawOutlineOfTheBoard() const {
 	DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black);
 }
 
@@ -191,12 +191,11 @@ void ScreenManager::DrawLine(int x, int y, int l, int dx, int dy, Uint32 color) 
 };
 
 void ScreenManager::DrawRectangle(int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) const { // x, y - top left corner // draw a rectangle of size l by k
-	int i;
 	DrawLine(x, y, k, 0, 1, outlineColor);
 	DrawLine(x + l - 1, y, k, 0, 1, outlineColor);
 	DrawLine(x, y, l, 1, 0, outlineColor);
 	DrawLine(x, y + k - 1, l, 1, 0, outlineColor);
-	for (i = y + 1; i < y + k - 1; i++) {
+	for (int i = y + 1; i < y + k - 1; i++) {
 		DrawLine(x + 1, i, l - 2, 1, 0, fillColor);
 	}
 };
@@ -233,7 +232,7 @@ template void ScreenManager::renderGameObject<MovableGameObject>(MovableGameObje
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void ScreenManager::renderLadder(const GameObject* gameObject) {
+void ScreenManager::renderLadder(const GameObject* gameObject) const {
 	drawSurfaceLadder(gameObject, gameObject->destRect);
 }
 

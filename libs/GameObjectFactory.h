@@ -25,6 +25,4 @@ public:
 	void createBarrels();
 
 	void createBoard(int boardId);
-
-	~GameObjectFactory();
 };

@@ -16,14 +16,14 @@ void Platform::render(SDL_Surface* screen) {
 		int y = y1pos;
 		if (y1pos > y2pos) {
 			for (int i = 0; i < differenceBetweenX; i++) {
-				DrawPixel(screen, x, y, 0xffffffff);
+				drawPixel(screen, x, y, 0xffffffff);
 				x++;
 				y--;
 			}
 		}
 		if (y1pos < y2pos) {
 			for (int i = 0; i < differenceBetweenX; i++) {
-				DrawPixel(screen, x, y, 0xffffffff);
+				drawPixel(screen, x, y, 0xffffffff);
 				x++;
 				y++;
 			}
@@ -31,22 +31,22 @@ void Platform::render(SDL_Surface* screen) {
 
 	}
 	else {
-		DrawLine(screen, x1pos, y1pos, length, 1, 0, 0xffffffff);
+		drawLine(screen, x1pos, y1pos, length, 1, 0, 0xffffffff);
 	}
 }
 
 // i dont think these should be here
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Platform::DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color)  const {
+void Platform::drawPixel(SDL_Surface* surface, int x, int y, Uint32 color)  const {
 	int bpp = surface->format->BytesPerPixel;
 	Uint8* p = (Uint8*)surface->pixels + y * surface->pitch + x * bpp;
 	*(Uint32*)p = color;
 };
 
-void Platform::DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color) {
+void Platform::drawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color) const {
 	for (int i = 0; i < l; i++) {
-		DrawPixel(screen, x, y, color);
+		drawPixel(screen, x, y, color);
 		x += dx;
 		y += dy;
 	};

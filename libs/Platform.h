@@ -16,7 +16,7 @@ public:
 	double c;
 
 	void setPosition(int x1, int y1, int x2, int y2);
-	void DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const;
-	void DrawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color);
+	void drawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const;
+	void drawLine(SDL_Surface* screen, int x, int y, int l, int dx, int dy, Uint32 color) const;
 	void render(SDL_Surface* screen);
 };

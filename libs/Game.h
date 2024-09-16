@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
@@ -16,11 +17,11 @@
 
 class Game {
 public:
-    GameObjectContainer* gameObjectContainer;
-    GameObjectFactory* gameObjectFactory;
-    ScreenManager* screenManager;
-    CollisionResolver* collisionResolver;
-    RoundManager* roundManager;
+    std::unique_ptr<GameObjectContainer> gameObjectContainer;
+    std::unique_ptr<GameObjectFactory> gameObjectFactory;
+    std::unique_ptr<ScreenManager> screenManager;
+    std::unique_ptr<CollisionResolver> collisionResolver;
+    std::unique_ptr<RoundManager> roundManager;
 
 	Game();
 
