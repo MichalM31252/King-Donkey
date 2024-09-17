@@ -24,7 +24,7 @@
 - [ ] Remove unnescessary pointers to make code more readable
 - [ ] Refactor platform mechanism
 - [ ] Change player sprite based on the direction of movement
-- [ ] Fix memory leaks
+- [x] Fix memory leaks
 - [x] Implement a C++ template vector for BarrelHolder, LadderHolder, PlatformHolder instead of your own implementation
 - [ ] Change classes which don't need an instance to static ones
 - [x] Fix inconsistent indentations
