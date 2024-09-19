@@ -6,17 +6,47 @@
 Game::Game()
     : gameObjectContainer(std::make_unique<GameObjectContainer>())
     , screenManager(std::make_unique<ScreenManager>(gameObjectContainer.get()))
-    , gameObjectFactory(std::make_unique<GameObjectFactory>(gameObjectContainer.get()))
-    , collisionResolver(std::make_unique<CollisionResolver>(gameObjectContainer.get(), screenManager.get()))
-    , roundManager(std::make_unique<RoundManager>(screenManager.get(), gameObjectFactory.get(), gameObjectContainer.get(), collisionResolver.get()))
+	, levelLoader(std::make_unique<LevelLoader>(gameObjectContainer.get()))
+	, keyboardManager(std::make_unique<KeyboardManager>())
+	, collisionResolver(std::make_unique<CollisionResolver>(gameObjectContainer.get(), screenManager.get()))
+	, collisionDetector(std::make_unique<CollisionDetector>())
+	, physicsManager(std::make_unique<PhysicsManager>())
 {
 }
 
-void Game::initGame() {
+void Game::initGame() const {
     screenManager->createSDL();
     screenManager->createFramerate();
 	int startAnotherRound = 0;
-    roundManager->handleRound(startAnotherRound);
+     
+    levelLoader->decideWhichBoardToCreate(startAnotherRound);
+
+    bool quit = false;
+    while (!quit) {
+        screenManager->handleDifferentComputers();
+        screenManager->updateWorldTime();
+        screenManager->handleFPSTimer();
+        screenManager->drawOutlineOfTheBoard();
+        screenManager->drawAdditionalInfo();
+        screenManager->drawElements();
+        screenManager->serveNextFrame();
+        screenManager->frames++;
+
+        keyboardManager->handleEvents(quit, gameObjectContainer->player, startAnotherRound);
+
+        gameObjectContainer->player->update(screenManager->deltaTime);
+
+        collisionResolver->handlePlayerCollision();
+
+        // screenManager->handlePlayerSprite(gameObjectContainer->player);
+
+        gameObjectContainer->barrelFactory->update(screenManager->deltaTime);
+
+        gameObjectContainer->barrelFactory->barrelHolder->updateBarrels(screenManager->deltaTime);
+
+        collisionResolver->handleBarrelsCollision(&quit, &startAnotherRound);
+    };
+
     closeGame();
 }
 
@@ -24,14 +54,3 @@ void Game::closeGame() const {
     SDL_Quit();
     exit(0);
 }
-
-// Implement this in the future
-//void Game::closeGame(ScreenManager& screenManager) const { // change this into a vector to be more efficient (so it can destroy every gameobject)
-//	SDL_FreeSurface(screenManager.charset);
-//	SDL_FreeSurface(screenManager.screen);
-//	SDL_DestroyTexture(screenManager.scrtex);
-//	SDL_DestroyWindow(screenManager.window);
-//	SDL_DestroyRenderer(screenManager.renderer);
-//	SDL_Quit();
-//	exit(0);
-//}

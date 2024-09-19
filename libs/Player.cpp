@@ -19,7 +19,6 @@ void Player::stopClimbing() {
 }
 
 void Player::jump(double deltaTime) {
-	// ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
 	accumulatedMoveUp -= deltaTime * gravity;
 	int pixelsToMove = accumulatedMoveUp / 1;
 	if (pixelsToMove <= -1) {
