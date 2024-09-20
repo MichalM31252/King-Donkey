@@ -19,7 +19,7 @@ void Game::initGame() const {
     screenManager->createFramerate();
 	int startAnotherRound = 0;
      
-    levelLoader->decideWhichBoardToCreate(startAnotherRound);
+    levelLoader->decideWhichBoardToCreate(startAnotherRound); // fix this
 
     bool quit = false;
     while (!quit) {
@@ -32,19 +32,24 @@ void Game::initGame() const {
         screenManager->serveNextFrame();
         screenManager->frames++;
 
-        keyboardManager->handleEvents(quit, gameObjectContainer->player, startAnotherRound);
+		keyboardManager->handleEvents(quit, gameObjectContainer->player, startAnotherRound); // just pass gameObjectContainer
 
+		// GameObjectManager
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+        
+		// update every object
         gameObjectContainer->player->update(screenManager->deltaTime);
-
-        collisionResolver->handlePlayerCollision();
-
-        // screenManager->handlePlayerSprite(gameObjectContainer->player);
-
         gameObjectContainer->barrelFactory->update(screenManager->deltaTime);
-
         gameObjectContainer->barrelFactory->barrelHolder->updateBarrels(screenManager->deltaTime);
 
+		// handle collisions
+        collisionResolver->handlePlayerCollision();
         collisionResolver->handleBarrelsCollision(&quit, &startAnotherRound);
+
+        // update sprites for everyhting
+        // screenManager->handlePlayerSprite(gameObjectContainer->player);
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////        
     };
 
     closeGame();

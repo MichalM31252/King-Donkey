@@ -45,6 +45,7 @@
     <Image Include="eti.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="libs\LadderFactory.h" />
     <ClInclude Include="libs\BarrelFactory.h" />
     <ClInclude Include="libs\BarrelHolder.h" />

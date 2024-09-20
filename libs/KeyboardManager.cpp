@@ -7,6 +7,7 @@ KeyboardManager::KeyboardManager() = default;
 
 KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer)
     : gameObjectContainer(gameObjectContainer) 
+	, event()
 {
 }
 
@@ -32,6 +33,7 @@ void KeyboardManager::onKeyPressed(bool& quit, Player* player, int& startAnother
     player->startMovingAtSpeed(DEFAULT_PLAYER_SPEED);
     switch (event.key.keysym.sym) {
         case SDLK_ESCAPE:
+            // close the game static method
             initializeQuit(quit, startAnotherRound);
             break;
         case SDLK_UP:
