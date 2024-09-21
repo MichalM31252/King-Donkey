@@ -8,9 +8,7 @@ Game::Game()
     , screenManager(std::make_unique<ScreenManager>(gameObjectContainer.get()))
 	, levelLoader(std::make_unique<LevelLoader>(gameObjectContainer.get()))
 	, keyboardManager(std::make_unique<KeyboardManager>())
-	, collisionResolver(std::make_unique<CollisionResolver>(gameObjectContainer.get(), screenManager.get()))
-	, collisionDetector(std::make_unique<CollisionDetector>())
-	, physicsManager(std::make_unique<PhysicsManager>())
+	, gameObjectManager(std::make_unique<GameObjectManager>(gameObjectContainer.get()))
 {
 }
 
@@ -34,22 +32,9 @@ void Game::initGame() const {
 
 		keyboardManager->handleEvents(quit, gameObjectContainer->player, startAnotherRound); // just pass gameObjectContainer
 
-		// GameObjectManager
-        ////////////////////////////////////////////////////////////////////////////////////////////////
-        
-		// update every object
-        gameObjectContainer->player->update(screenManager->deltaTime);
-        gameObjectContainer->barrelFactory->update(screenManager->deltaTime);
-        gameObjectContainer->barrelFactory->barrelHolder->updateBarrels(screenManager->deltaTime);
-
-		// handle collisions
-        collisionResolver->handlePlayerCollision();
-        collisionResolver->handleBarrelsCollision(&quit, &startAnotherRound);
-
-        // update sprites for everyhting
-        // screenManager->handlePlayerSprite(gameObjectContainer->player);
-
-        ////////////////////////////////////////////////////////////////////////////////////////////////        
+        gameObjectManager->updateGameObjects(screenManager->deltaTime);
+		gameObjectManager->handleCollisions(quit, startAnotherRound);
+		gameObjectManager->updateSprites();    
     };
 
     closeGame();

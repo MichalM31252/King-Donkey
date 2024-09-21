@@ -24,6 +24,7 @@
     <ClCompile Include="libs\CollisionDetector.cpp" />
     <ClCompile Include="libs\CollisionResolver.cpp" />
     <ClCompile Include="libs\Game.cpp" />
+    <ClCompile Include="libs\GameObjectManager.cpp" />
     <ClCompile Include="libs\LevelLoader.cpp" />
     <ClCompile Include="libs\KeyboardManager.cpp" />
     <ClCompile Include="libs\FileManager.cpp" />
@@ -45,7 +46,7 @@
     <Image Include="eti.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="libs\GameObjectManager.h" />
     <ClInclude Include="libs\LadderFactory.h" />
     <ClInclude Include="libs\BarrelFactory.h" />
     <ClInclude Include="libs\BarrelHolder.h" />

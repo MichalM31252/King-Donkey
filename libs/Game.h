@@ -11,6 +11,7 @@
 #include "Platform.h"
 #include "BarrelHolder.h"
 #include "LevelLoader.h"
+#include "GameObjectManager.h"
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
 
@@ -20,12 +21,7 @@ public:
 	std::unique_ptr<ScreenManager> screenManager;
 	std::unique_ptr<LevelLoader> levelLoader;
 	std::unique_ptr<KeyboardManager> keyboardManager;
-
-	// GameObjectManager
-	std::unique_ptr<CollisionResolver> collisionResolver;
-	std::unique_ptr<CollisionDetector> collisionDetector;
-	std::unique_ptr<PhysicsManager> physicsManager;
-	//
+	std::unique_ptr<GameObjectManager> gameObjectManager;
 
 	Game();
 
