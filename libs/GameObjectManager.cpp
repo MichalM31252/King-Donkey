@@ -4,7 +4,11 @@ GameObjectManager::GameObjectManager() {
 }
 
 GameObjectManager::GameObjectManager(GameObjectContainer* gameObjectContainer)
-	: gameObjectContainer(gameObjectContainer) {
+	: gameObjectContainer(gameObjectContainer) 
+	, collisionResolver(std::make_unique<CollisionResolver>(gameObjectContainer))
+	// collision detector is completely static
+	// physics manager is completely static
+{
 }
 
 void GameObjectManager::updateGameObjects(double deltaTime) {
