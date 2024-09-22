@@ -7,7 +7,7 @@ Game::Game()
     : gameObjectContainer(std::make_unique<GameObjectContainer>())
     , screenManager(std::make_unique<ScreenManager>(gameObjectContainer.get()))
 	, levelLoader(std::make_unique<LevelLoader>(gameObjectContainer.get()))
-	, keyboardManager(std::make_unique<KeyboardManager>())
+	, keyboardManager(std::make_unique<KeyboardManager>(gameObjectContainer.get()))
 	, gameObjectManager(std::make_unique<GameObjectManager>(gameObjectContainer.get()))
 {
 }
@@ -35,6 +35,15 @@ void Game::initGame() const {
         gameObjectManager->updateGameObjects(screenManager->deltaTime);
 		gameObjectManager->handleCollisions(quit, startAnotherRound);
 		gameObjectManager->updateSprites();    
+		gameObjectManager->updatePhysics(screenManager->deltaTime);
+
+        // no idea where to put this
+        if (!gameObjectContainer->player->isClimbing) {
+            if (gameObjectContainer->player->isJumping) {
+                gameObjectContainer->player->jump(screenManager->deltaTime);
+            }
+        }
+
     };
 
     closeGame();

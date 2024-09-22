@@ -74,20 +74,6 @@ void CollisionResolver::handlePlayerCollision() {
             ScreenManager::loadTexture(player, PLAYER_1_FILENAME);
             handleCollisionWithJumping();
         }
-
-        // CREATE A METHOD SOMEWHERE ELSE TO START FALLING WHEN PLAYER IS NOT STANDING ON ANYTHING OR CLIMBING
-
-        //else {
-        //    PhysicsManager::handleFallingForPlayer(player, screenManager->deltaTime);
-        //}
-
-        // ALSO REWRITE THIS
-
-        //if (player->isJumping) {
-        //    player->jump(screenManager->deltaTime);
-        //}
-
-
         if (player->isJumping && player->ypos <= player->jumpHeightStop) {
             player->stopJumping();
             player->startFalling();
@@ -110,12 +96,6 @@ void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRoun
             barrel->startMovingAtSpeed(DEFAULT_BARREL_SPEED);
             barrel->startMovingRight();
         }
-
-        // CREATE A METHOD SOMEWHERE ELSE TO START FALLING WHEN BARREL IS NOT STANDING ON ANYTHING OR CLIMBING
-
-        //else {
-        //    PhysicsManager::handleFalling(barrel, screenManager->deltaTime);
-        //}
     }
 }
 

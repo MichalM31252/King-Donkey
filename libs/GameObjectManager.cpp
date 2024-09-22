@@ -6,8 +6,8 @@ GameObjectManager::GameObjectManager() {
 GameObjectManager::GameObjectManager(GameObjectContainer* gameObjectContainer)
 	: gameObjectContainer(gameObjectContainer) 
 	, collisionResolver(std::make_unique<CollisionResolver>(gameObjectContainer))
-	// collision detector is completely static
-	// physics manager is completely static
+	, physicsManager(std::make_unique<PhysicsManager>(gameObjectContainer))
+	// collision detector is completely stati2c
 {
 }
 
@@ -18,13 +18,16 @@ void GameObjectManager::updateGameObjects(double deltaTime) {
 }
 
 void GameObjectManager::handleCollisions(bool& quit, int& startAnotherRound) {
-	// handle collisions
 	collisionResolver->handlePlayerCollision();
 	collisionResolver->handleBarrelsCollision(&quit, &startAnotherRound);
 }
 
 void GameObjectManager::updateSprites() {
-	// update sprites for everyhting
-	// gameObjectContainer->screenManager->handlePlayerSprite(gameObjectContainer->player);
+	
+}
+
+void GameObjectManager::updatePhysics(double deltaTime) {
+	physicsManager->handleFallingForPlayer(gameObjectContainer->player, deltaTime);
+	physicsManager->handleFallingForBarrels(gameObjectContainer->barrelFactory->barrelHolder, deltaTime);
 }
 

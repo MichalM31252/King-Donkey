@@ -29,7 +29,7 @@ void KeyboardManager::handleEvents(bool& quit, Player* player, int& startAnother
     }
 }
 
-void KeyboardManager::onKeyPressed(bool& quit, Player* player, int& startAnotherRound) const {
+void KeyboardManager::onKeyPressed(bool& quit, Player* player, int& startAnotherRound){
     player->startMovingAtSpeed(DEFAULT_PLAYER_SPEED);
     switch (event.key.keysym.sym) {
         case SDLK_ESCAPE:
@@ -151,7 +151,7 @@ void KeyboardManager::onKeyPressArrowDown(Player* player) {
 }
 
 void KeyboardManager::onKeyPressSpace(Player* player) {
-	player->initJump();
+    player->initJump();
 }
 
 void KeyboardManager::onKeyPressN(bool& quit, int& startAnotherRound) {

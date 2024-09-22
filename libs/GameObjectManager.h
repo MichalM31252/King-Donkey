@@ -19,4 +19,5 @@ public:
 	void updateGameObjects(double deltaTime);
 	void handleCollisions(bool& quit, int& startAnotherRound);
 	void updateSprites();
+	void updatePhysics(double deltaTime);
 };
