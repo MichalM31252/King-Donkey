@@ -17,6 +17,7 @@
 
 # Plans:
 
+- [ ] Implement component based design
 - [ ] Fix animations
 - [x] Fix the delay between keys and player
 - [ ] Fix the ladders
