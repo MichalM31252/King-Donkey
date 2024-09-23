@@ -16,7 +16,6 @@
 class CollisionResolver {
 public:
     GameObjectContainer* gameObjectContainer;
-    ScreenManager* screenManager;
 
     CollisionResolver();
     CollisionResolver(GameObjectContainer* gameObjectContainer);

@@ -30,7 +30,7 @@ void Game::initGame() const {
         screenManager->serveNextFrame();
         screenManager->frames++;
 
-		keyboardManager->handleEvents(quit, gameObjectContainer->player, startAnotherRound); // just pass gameObjectContainer
+		keyboardManager->handleEvents(quit, startAnotherRound);
 
         gameObjectManager->updateGameObjects(screenManager->deltaTime);
 		gameObjectManager->handleCollisions(quit, startAnotherRound);

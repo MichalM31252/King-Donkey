@@ -12,13 +12,11 @@ bool CollisionDetector::isXWithinWidthOfPlatform(const int x, const Platform* pl
 
 }
 
-bool CollisionDetector::isPointAPartOfLine(const int x, const int y, const Platform* platform) { // create class Point ?
-    double a = platform->y2pos - platform->y1pos;
-    double b = platform->x1pos - platform->x2pos;
-    double c = a * platform->x1pos + b * platform->y1pos;
-
-    if (a * x + b * y == c) {
-        return true;
+bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(const GameObject* gameObject, const PlatformHolder* platformHolder) {
+    for (int i = 0; i < platformHolder->getNumberOfElements(); i++) {
+        if (CollisionDetector::isGameObjectOnTopOfPlatform(gameObject, platformHolder->platforms[i])) {
+            return true;
+        }
     }
     return false;
 }
@@ -39,6 +37,17 @@ bool CollisionDetector::isGameObjectOnTopOfPlatform(const GameObject* gameObject
     return false;
 }
 
+bool CollisionDetector::isPointAPartOfLine(const int x, const int y, const Platform* platform) { // create class Point ?
+    double a = platform->y2pos - platform->y1pos;
+    double b = platform->x1pos - platform->x2pos;
+    double c = a * platform->x1pos + b * platform->y1pos;
+
+    if (a * x + b * y == c) {
+        return true;
+    }
+    return false;
+}
+
 bool CollisionDetector::isGameObjectInsidePlatform(const GameObject* gameObject, const Platform* platform) {
     int yPosition = gameObject->ypos + gameObject->destRect.h;
     int xPositionBottomLeftCorner = gameObject->xpos;
@@ -52,14 +61,5 @@ bool CollisionDetector::isGameObjectInsidePlatform(const GameObject* gameObject,
         return true;
     }
 
-    return false;
-}
-
-bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(const GameObject* gameObject, const PlatformHolder* platformHolder) {
-    for (int i = 0; i < platformHolder->getNumberOfElements(); i++) {
-        if (CollisionDetector::isGameObjectOnTopOfPlatform(gameObject, platformHolder->platforms[i])) {
-            return true;
-        }
-    }
     return false;
 }
