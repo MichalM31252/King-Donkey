@@ -32,16 +32,16 @@ void Game::initGame() const {
 
 		keyboardManager->handleEvents(quit, startAnotherRound);
 
-        gameObjectManager->updateGameObjects(screenManager->deltaTime);
-		gameObjectManager->handleCollisions(quit, startAnotherRound);
-		gameObjectManager->updateSprites();    
-		gameObjectManager->updatePhysics(screenManager->deltaTime);
+        gameObjectManager->updatePositionOfGameObjects(screenManager->deltaTime);
+		gameObjectManager->handleCollisionsOfGameObjects(quit, startAnotherRound);
+		gameObjectManager->updateSpritesOfGameObjects();
+		gameObjectManager->updatePhysicsOfGameObjects(screenManager->deltaTime);
 
         // no idea where to put this
         if (!gameObjectContainer->player->isClimbing && gameObjectContainer->player->isJumping) {
             gameObjectContainer->player->jump(screenManager->deltaTime);
         }
-    };
+    }
 
     closeGame();
 }

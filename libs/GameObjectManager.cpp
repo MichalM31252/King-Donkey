@@ -1,8 +1,5 @@
 #include "GameObjectManager.h"
 
-GameObjectManager::GameObjectManager() {
-}
-
 GameObjectManager::GameObjectManager(GameObjectContainer* gameObjectContainer)
 	: gameObjectContainer(gameObjectContainer) 
 	, collisionResolver(std::make_unique<CollisionResolver>(gameObjectContainer))
@@ -11,22 +8,22 @@ GameObjectManager::GameObjectManager(GameObjectContainer* gameObjectContainer)
 {
 }
 
-void GameObjectManager::updateGameObjects(double deltaTime) {
+void GameObjectManager::updatePositionOfGameObjects(double deltaTime) {
 	gameObjectContainer->player->update(deltaTime);
 	gameObjectContainer->barrelFactory->update(deltaTime);
 	gameObjectContainer->barrelFactory->barrelHolder->updateBarrels(deltaTime);
 }
 
-void GameObjectManager::handleCollisions(bool& quit, int& startAnotherRound) {
+void GameObjectManager::handleCollisionsOfGameObjects(bool& quit, int& startAnotherRound) {
 	collisionResolver->handlePlayerCollision();
 	collisionResolver->handleBarrelsCollision(&quit, &startAnotherRound);
 }
 
-void GameObjectManager::updateSprites() {
+void GameObjectManager::updateSpritesOfGameObjects() {
 	
 }
 
-void GameObjectManager::updatePhysics(double deltaTime) {
+void GameObjectManager::updatePhysicsOfGameObjects(double deltaTime) {
 	physicsManager->handleFallingForPlayer(gameObjectContainer->player, deltaTime);
 	physicsManager->handleFallingForBarrels(gameObjectContainer->barrelFactory->barrelHolder, deltaTime);
 }
