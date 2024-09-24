@@ -149,7 +149,7 @@ void ScreenManager::drawSurfaceLadder(const GameObject* ladder, SDL_Rect dest) c
 
 // draw a text txt on surface screen, starting from the point (x, y)
 // charset is a 128x128 bitmap containing character images
-void ScreenManager::DrawString(int x, int y, const std::string& text, SDL_Surface* charset) const {
+void ScreenManager::DrawString(int x, int y, const std::string& text) const {
 	int px;
 	int py;
 	int c;

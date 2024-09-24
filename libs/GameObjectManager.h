@@ -12,12 +12,13 @@ public:
 	std::unique_ptr<CollisionResolver> collisionResolver;
 	std::unique_ptr<CollisionDetector> collisionDetector;
 	std::unique_ptr<PhysicsManager> physicsManager;
+	// texture manager
 
-	GameObjectManager();
+	GameObjectManager() = default;
 	explicit GameObjectManager(GameObjectContainer* gameObjectContainer);
 
-	void updateGameObjects(double deltaTime);
-	void handleCollisions(bool& quit, int& startAnotherRound);
-	void updateSprites();
-	void updatePhysics(double deltaTime);
+	void updatePositionOfGameObjects(double deltaTime);
+	void handleCollisionsOfGameObjects(bool& quit, int& startAnotherRound);
+	void updateSpritesOfGameObjects();
+	void updatePhysicsOfGameObjects(double deltaTime);
 };

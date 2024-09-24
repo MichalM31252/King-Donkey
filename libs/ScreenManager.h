@@ -71,7 +71,7 @@ public:
 
 	void drawSurface(const GameObject* gameObject, int xpos, int ypos) const;
 	void drawSurfaceLadder(const GameObject* ladder, SDL_Rect dest) const;
-	void DrawString(int x, int y, const std::string& text, SDL_Surface* charset) const;
+	void DrawString(int x, int y, const std::string& text) const;
 	void DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const;
 	void DrawLine(int x, int y, int l, int dx, int dy, Uint32 color) const;
 	void DrawRectangle(int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) const;
