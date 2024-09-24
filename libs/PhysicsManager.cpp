@@ -6,12 +6,8 @@ PhysicsManager::PhysicsManager(GameObjectContainer* gameObjectContainer)
 }
 
 void PhysicsManager::handleFallingForPlayer(Player* player, double deltaTime) {
-    if (!CollisionDetector::isGameObjectOnTopOfAnyPlatform(player, gameObjectContainer->platformHolder)) {
-        if (!player->isJumping) {
-            if (!player->isClimbing) {
-                startFalling(player, deltaTime);
-            }
-        }
+    if (!CollisionDetector::isGameObjectOnTopOfAnyPlatform(player, gameObjectContainer->platformHolder) && !player->isJumping && !player->isClimbing) {
+        startFalling(player, deltaTime);
     }
 }
 
@@ -24,7 +20,7 @@ void PhysicsManager::handleFallingForBarrels(BarrelHolder* barrelHolder, double 
 	}
 }
 
-void PhysicsManager::startFalling(MovableGameObject* gameObject, double deltaTime) {
+void PhysicsManager::startFalling(MovableGameObject* gameObject, double deltaTime) const {
     gameObject->startFalling();
     gameObject->accumulatedMoveDown += deltaTime * gameObject->gravity;
     auto pixelsToMove = static_cast<int>(gameObject->accumulatedMoveDown);

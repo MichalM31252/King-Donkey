@@ -14,7 +14,7 @@ public:
 	std::unique_ptr<PhysicsManager> physicsManager;
 
 	GameObjectManager();
-	GameObjectManager(GameObjectContainer* gameObjectContainer);
+	explicit GameObjectManager(GameObjectContainer* gameObjectContainer);
 
 	void updateGameObjects(double deltaTime);
 	void handleCollisions(bool& quit, int& startAnotherRound);

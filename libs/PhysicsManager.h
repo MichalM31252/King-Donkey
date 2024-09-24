@@ -8,9 +8,9 @@ class PhysicsManager {
 public:
 	GameObjectContainer* gameObjectContainer;
 
-	PhysicsManager(GameObjectContainer* gameObjectContainer);
+	explicit PhysicsManager(GameObjectContainer* gameObjectContainer);
 
     void handleFallingForPlayer(Player* player, double deltaTime);
     void handleFallingForBarrels(BarrelHolder* barrelHolder, double deltaTime);
-	void startFalling(MovableGameObject* gameObject, double deltaTime);
+	void startFalling(MovableGameObject* gameObject, double deltaTime) const;
 };

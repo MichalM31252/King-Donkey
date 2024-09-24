@@ -38,12 +38,9 @@ void Game::initGame() const {
 		gameObjectManager->updatePhysics(screenManager->deltaTime);
 
         // no idea where to put this
-        if (!gameObjectContainer->player->isClimbing) {
-            if (gameObjectContainer->player->isJumping) {
-                gameObjectContainer->player->jump(screenManager->deltaTime);
-            }
+        if (!gameObjectContainer->player->isClimbing && gameObjectContainer->player->isJumping) {
+            gameObjectContainer->player->jump(screenManager->deltaTime);
         }
-
     };
 
     closeGame();

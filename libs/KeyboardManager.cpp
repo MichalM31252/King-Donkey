@@ -6,8 +6,8 @@
 KeyboardManager::KeyboardManager() = default;
 
 KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer)
-    : gameObjectContainer(gameObjectContainer) 
-	, event()
+    : event()
+	, gameObjectContainer(gameObjectContainer)
 {
 }
 
