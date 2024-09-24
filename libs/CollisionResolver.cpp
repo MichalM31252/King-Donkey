@@ -2,13 +2,11 @@
 
 CollisionResolver::CollisionResolver()
     : gameObjectContainer(new GameObjectContainer())
-    , screenManager(new ScreenManager())
 {
 }
 
-CollisionResolver::CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager)
+CollisionResolver::CollisionResolver(GameObjectContainer* gameObjectContainer)
     : gameObjectContainer(gameObjectContainer)
-    , screenManager(screenManager)
 {
 }
 
@@ -73,14 +71,14 @@ void CollisionResolver::handlePlayerCollision() {
 
     if (!player->isClimbing) {
         if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(player, gameObjectContainer->platformHolder)) {
+            
+            // MOVE THIS TO UPDATE TEXTURES
+            
             ScreenManager::loadTexture(player, PLAYER_1_FILENAME);
+            
+            //
+            
             handleCollisionWithJumping();
-        }
-        else {
-            PhysicsManager::handleFallingForPlayer(player, screenManager->deltaTime);
-        }
-        if (player->isJumping) {
-            player->jump(screenManager->deltaTime);
         }
         if (player->isJumping && player->ypos <= player->jumpHeightStop) {
             player->stopJumping();
@@ -103,9 +101,6 @@ void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRoun
             }
             barrel->startMovingAtSpeed(DEFAULT_BARREL_SPEED);
             barrel->startMovingRight();
-        }
-        else {
-            PhysicsManager::handleFalling(barrel, screenManager->deltaTime);
         }
     }
 }

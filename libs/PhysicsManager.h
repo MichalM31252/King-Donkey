@@ -1,9 +1,16 @@
 #pragma once
 #include "Player.h"
 #include "Barrel.h"
+#include "BarrelHolder.h"
+#include "CollisionDetector.h"
 
 class PhysicsManager {
 public:
-    static void handleFallingForPlayer(Player* player, double deltaTime);
-    static void handleFalling(MovableGameObject* gameObject, double deltaTime);
+	GameObjectContainer* gameObjectContainer;
+
+	PhysicsManager(GameObjectContainer* gameObjectContainer);
+
+    void handleFallingForPlayer(Player* player, double deltaTime);
+    void handleFallingForBarrels(BarrelHolder* barrelHolder, double deltaTime);
+	void startFalling(MovableGameObject* gameObject, double deltaTime);
 };

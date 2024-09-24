@@ -1,12 +1,12 @@
-#include "GameObjectFactory.h"
+#include "LevelLoader.h"
 #include "ScreenManager.h"
 
-GameObjectFactory::GameObjectFactory(GameObjectContainer* gameObjectContainer)
+LevelLoader::LevelLoader(GameObjectContainer* gameObjectContainer)
     : gameObjectContainer(gameObjectContainer)
 {
 }
 
-void GameObjectFactory::createPlayer() {
+void LevelLoader::createPlayer() {
     auto* pla = new Player();
 
     ScreenManager::initGameObject(pla, PLAYER_1_FILENAME);
@@ -18,7 +18,7 @@ void GameObjectFactory::createPlayer() {
     gameObjectContainer->player = pla;
 }
 
-void GameObjectFactory::createDonkeyKong() {
+void LevelLoader::createDonkeyKong() {
     auto* donkeyK = new GameObject();
 
     ScreenManager::initGameObject(donkeyK, "./assets/DonkeyKong.bmp");
@@ -30,7 +30,7 @@ void GameObjectFactory::createDonkeyKong() {
     gameObjectContainer->donkeyKong = donkeyK;
 }
 
-void GameObjectFactory::createPrincess() {
+void LevelLoader::createPrincess() {
     auto* prin = new GameObject();
 
     ScreenManager::initGameObject(prin, "./assets/Princess.bmp");
@@ -42,7 +42,7 @@ void GameObjectFactory::createPrincess() {
     gameObjectContainer->princess = prin;
 }
 
-void GameObjectFactory::createPlatforms1() {
+void LevelLoader::createPlatforms1() {
     auto* plat1 = new Platform();
     plat1->setPosition(1, 400, 400, 400);
 
@@ -68,7 +68,7 @@ void GameObjectFactory::createPlatforms1() {
     gameObjectContainer->platformHolder = platH;
 }
 
-void GameObjectFactory::createLadders1() {
+void LevelLoader::createLadders1() {
     auto* ladd1 = new GameObject();
 
     ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
@@ -91,7 +91,7 @@ void GameObjectFactory::createLadders1() {
     gameObjectContainer->ladderHolder = laddH;
 }
 
-void GameObjectFactory::createBarrels() {
+void LevelLoader::createBarrels() {
     auto* barrel1 = new MovableGameObject();
 
     ScreenManager::initGameObject(barrel1, BARREL_1_FILENAME);
@@ -109,7 +109,7 @@ void GameObjectFactory::createBarrels() {
     gameObjectContainer->barrelFactory->setPosition(gameObjectContainer->donkeyKong->xpos + gameObjectContainer->donkeyKong->destRect.w + SMALL_MARGIN, gameObjectContainer->donkeyKong->ypos);
 }
 
-void GameObjectFactory::createPlatforms2() {
+void LevelLoader::createPlatforms2() {
     auto* plat1 = new Platform();
 	plat1->setPosition(TINY_MARGIN, 400, SCREEN_WIDTH - 1, 400);
 
@@ -139,7 +139,7 @@ void GameObjectFactory::createPlatforms2() {
 	gameObjectContainer->platformHolder = platH;
 }
 
-void GameObjectFactory::createLadders2() {
+void LevelLoader::createLadders2() {
     auto* ladd1 = new GameObject();
 
 	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
@@ -163,7 +163,7 @@ void GameObjectFactory::createLadders2() {
 	gameObjectContainer->ladderHolder = laddH;
 }
 
-void GameObjectFactory::createPlatforms3() {
+void LevelLoader::createPlatforms3() {
     auto* plat1 = new Platform();
 	plat1->setPosition(STARTING_X, 400, SCREEN_WIDTH - TINY_MARGIN, 400);
 
@@ -189,7 +189,7 @@ void GameObjectFactory::createPlatforms3() {
 	gameObjectContainer->platformHolder = platH;
 }
 
-void GameObjectFactory::createLadders3() {
+void LevelLoader::createLadders3() {
     auto* ladd1 = new GameObject();
 
 	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
@@ -230,7 +230,7 @@ void GameObjectFactory::createLadders3() {
 	gameObjectContainer->ladderHolder = laddH;
 }
 
-void GameObjectFactory::createBoard(int boardId) {
+void LevelLoader::createBoard(int boardId) {
     createPlayer();
     createDonkeyKong();
     createPrincess();
@@ -247,4 +247,21 @@ void GameObjectFactory::createBoard(int boardId) {
         createLadders3();
     }
     createBarrels();
+}
+
+void LevelLoader::decideWhichBoardToCreate(int startAnotherRound) {
+    if (startAnotherRound) {
+        if (startAnotherRound == BOARD_ID_A) {
+            createBoard(BOARD_ID_A);
+        }
+        if (startAnotherRound == BOARD_ID_B) {
+            createBoard(BOARD_ID_B);
+        }
+        if (startAnotherRound == BOARD_ID_C) {
+            createBoard(BOARD_ID_C);
+        }
+    }
+    else {
+        createBoard(BOARD_ID_A);
+    }
 }

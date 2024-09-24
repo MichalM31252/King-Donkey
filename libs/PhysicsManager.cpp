@@ -1,12 +1,30 @@
 #include "PhysicsManager.h"
 
+PhysicsManager::PhysicsManager(GameObjectContainer* gameObjectContainer)
+	: gameObjectContainer(gameObjectContainer)
+{
+}
+
 void PhysicsManager::handleFallingForPlayer(Player* player, double deltaTime) {
-    if (!player->isJumping) {
-        handleFalling(player, deltaTime);
+    if (!CollisionDetector::isGameObjectOnTopOfAnyPlatform(player, gameObjectContainer->platformHolder)) {
+        if (!player->isJumping) {
+            if (!player->isClimbing) {
+                startFalling(player, deltaTime);
+            }
+        }
     }
 }
 
-void PhysicsManager::handleFalling(MovableGameObject* gameObject, double deltaTime) {
+void PhysicsManager::handleFallingForBarrels(BarrelHolder* barrelHolder, double deltaTime) {
+	for (int i = 0; i < barrelHolder->getNumberOfElements(); i++) {
+		MovableGameObject* barrel = barrelHolder->barrels[i]; // FIX THIS // REPLACE MOVABLEGAMEOBJECT WITH BARREL
+        if (!CollisionDetector::isGameObjectOnTopOfAnyPlatform(barrel, gameObjectContainer->platformHolder)) {
+            startFalling(barrel, deltaTime);
+        }
+	}
+}
+
+void PhysicsManager::startFalling(MovableGameObject* gameObject, double deltaTime) {
     gameObject->startFalling();
     gameObject->accumulatedMoveDown += deltaTime * gameObject->gravity;
     auto pixelsToMove = static_cast<int>(gameObject->accumulatedMoveDown);

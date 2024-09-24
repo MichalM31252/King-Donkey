@@ -7,17 +7,18 @@ KeyboardManager::KeyboardManager() = default;
 
 KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer)
     : gameObjectContainer(gameObjectContainer) 
+	, event()
 {
 }
 
-void KeyboardManager::handleEvents(bool& quit, Player* player, int& startAnotherRound) {
+void KeyboardManager::handleEvents(bool& quit, int& startAnotherRound) {
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_KEYDOWN:
-                onKeyPressed(quit, player, startAnotherRound);
+                onKeyPressed(quit, startAnotherRound);
                 break;
             case SDL_KEYUP:
-                onKeyReleased(player);
+                onKeyReleased();
                 break;
             case SDL_QUIT:
                 initializeQuit(quit, startAnotherRound);
@@ -28,26 +29,27 @@ void KeyboardManager::handleEvents(bool& quit, Player* player, int& startAnother
     }
 }
 
-void KeyboardManager::onKeyPressed(bool& quit, Player* player, int& startAnotherRound) const {
-    player->startMovingAtSpeed(DEFAULT_PLAYER_SPEED);
+void KeyboardManager::onKeyPressed(bool& quit, int& startAnotherRound){
+    gameObjectContainer->player->startMovingAtSpeed(DEFAULT_PLAYER_SPEED);
     switch (event.key.keysym.sym) {
         case SDLK_ESCAPE:
+            // close the game static method
             initializeQuit(quit, startAnotherRound);
             break;
         case SDLK_UP:
-            onKeyPressArrowUp(player);
+            onKeyPressArrowUp();
             break;
         case SDLK_LEFT:
-            onKeyPressArrowLeft(player);
+            onKeyPressArrowLeft();
             break;
         case SDLK_RIGHT:
-            onKeyPressArrowRight(player);
+            onKeyPressArrowRight();
             break;
         case SDLK_DOWN:
-            onKeyPressArrowDown(player);
+            onKeyPressArrowDown();
             break;
         case SDLK_SPACE:
-            onKeyPressSpace(player);
+            onKeyPressSpace();
             break;
         case SDLK_n:
             onKeyPressN(quit, startAnotherRound);
@@ -66,50 +68,50 @@ void KeyboardManager::onKeyPressed(bool& quit, Player* player, int& startAnother
     }
 }
 
-void KeyboardManager::onKeyReleased(Player* player) const {
+void KeyboardManager::onKeyReleased() {
     switch (event.key.keysym.sym) {
         case SDLK_UP:
-            onKeyReleasedArrowUp(player);
+            onKeyReleasedArrowUp();
             break;
         case SDLK_LEFT:
-            onKeyReleasedArrowLeft(player);
+            onKeyReleasedArrowLeft();
             break;
         case SDLK_RIGHT:
-            onKeyReleasedArrowRight(player);
+            onKeyReleasedArrowRight();
             break;
         case SDLK_DOWN:
-            onKeyReleasedArrowDown(player);
+            onKeyReleasedArrowDown();
             break;
         default:
             break;
     }
 }
 
-void KeyboardManager::onKeyReleasedArrowUp(Player* player) {
-	player->accumulatedMoveUp = 0;
-	if (player->currentDirectionOfMovement == 0) {
-		player->currentDirectionOfMovement = -1;
+void KeyboardManager::onKeyReleasedArrowUp() {
+	gameObjectContainer->player->accumulatedMoveUp = 0;
+	if (gameObjectContainer->player->currentDirectionOfMovement == 0) {
+        gameObjectContainer->player->currentDirectionOfMovement = -1;
 	}
 }
 
-void KeyboardManager::onKeyReleasedArrowLeft(Player* player) {
-	player->accumulatedMoveLeft = 0;
-	if (player->currentDirectionOfMovement == 3) {
-		player->currentDirectionOfMovement = -1;
+void KeyboardManager::onKeyReleasedArrowLeft() {
+    gameObjectContainer->player->accumulatedMoveLeft = 0;
+	if (gameObjectContainer->player->currentDirectionOfMovement == 3) {
+        gameObjectContainer->player->currentDirectionOfMovement = -1;
 	}
 }
 
-void KeyboardManager::onKeyReleasedArrowRight(Player* player) {
-	player->accumulatedMoveRight = 0;
-	if (player->currentDirectionOfMovement == 1) {
-		player->currentDirectionOfMovement = -1;
+void KeyboardManager::onKeyReleasedArrowRight() {
+    gameObjectContainer->player->accumulatedMoveRight = 0;
+	if (gameObjectContainer->player->currentDirectionOfMovement == 1) {
+        gameObjectContainer->player->currentDirectionOfMovement = -1;
 	}
 }
 
-void KeyboardManager::onKeyReleasedArrowDown(Player* player) {
-	player->accumulatedMoveDown = 0;
-	if (player->currentDirectionOfMovement == 2) {
-		player->currentDirectionOfMovement = -1;
+void KeyboardManager::onKeyReleasedArrowDown() {
+    gameObjectContainer->player->accumulatedMoveDown = 0;
+	if (gameObjectContainer->player->currentDirectionOfMovement == 2) {
+        gameObjectContainer->player->currentDirectionOfMovement = -1;
 	}
 }
 
@@ -118,38 +120,38 @@ void KeyboardManager::initializeQuit(bool& quit, int& startAnotherRound) {
 	startAnotherRound = 0;
 }
 
-void KeyboardManager::onKeyPressArrowUp(Player* player) {
-	if (player->isInsideLadder) {
-		player->isClimbing = true;
+void KeyboardManager::onKeyPressArrowUp() {
+	if (gameObjectContainer->player->isInsideLadder) {
+        gameObjectContainer->player->isClimbing = true;
 
-		ScreenManager::loadTexture(player, PLAYER_CLIMB_1);
+		ScreenManager::loadTexture(gameObjectContainer->player, PLAYER_CLIMB_1);
 
-		player->startMovingUp();
+        gameObjectContainer->player->startMovingUp();
 	}
 }
 
-void KeyboardManager::onKeyPressArrowLeft(Player* player) {
-	if (!player->isClimbing) {
-		player->startMovingLeft();
+void KeyboardManager::onKeyPressArrowLeft() {
+	if (!gameObjectContainer->player->isClimbing) {
+        gameObjectContainer->player->startMovingLeft();
 	}
 }
 
-void KeyboardManager::onKeyPressArrowRight(Player* player) {
-	if (!player->isClimbing) {
-		player->startMovingRight();
+void KeyboardManager::onKeyPressArrowRight() {
+	if (!gameObjectContainer->player->isClimbing) {
+        gameObjectContainer->player->startMovingRight();
 	}
 }
 
-void KeyboardManager::onKeyPressArrowDown(Player* player) {
-	if (player->isInsideLadder) {
-		player->isClimbing = true;
-		ScreenManager::loadTexture(player, PLAYER_CLIMB_1);
-		player->startMovingDown();
+void KeyboardManager::onKeyPressArrowDown() {
+	if (gameObjectContainer->player->isInsideLadder) {
+        gameObjectContainer->player->isClimbing = true;
+		ScreenManager::loadTexture(gameObjectContainer->player, PLAYER_CLIMB_1);
+        gameObjectContainer->player->startMovingDown();
 	}
 }
 
-void KeyboardManager::onKeyPressSpace(Player* player) {
-	player->initJump();
+void KeyboardManager::onKeyPressSpace() {
+    gameObjectContainer->player->initJump();
 }
 
 void KeyboardManager::onKeyPressN(bool& quit, int& startAnotherRound) {

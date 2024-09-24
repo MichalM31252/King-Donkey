@@ -4,13 +4,12 @@
 #include "CollisionResolver.h"
 #include "GameObjectContainer.h"
 
-class GameObjectFactory {
+class LevelLoader {
 public:
 	GameObjectContainer* gameObjectContainer;
-	CollisionResolver* collisionResolver;
 
-	GameObjectFactory() = default;
-	GameObjectFactory(GameObjectContainer* gameObjectContainer);
+	LevelLoader() = default;
+	LevelLoader(GameObjectContainer* gameObjectContainer);
 
 	void createPlayer();
 	void createDonkeyKong();
@@ -25,4 +24,6 @@ public:
 	void createBarrels();
 
 	void createBoard(int boardId);
+
+	void decideWhichBoardToCreate(int startAnotherRound);
 };

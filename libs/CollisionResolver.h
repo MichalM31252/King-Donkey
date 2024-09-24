@@ -16,10 +16,9 @@
 class CollisionResolver {
 public:
     GameObjectContainer* gameObjectContainer;
-    ScreenManager* screenManager;
 
     CollisionResolver();
-    CollisionResolver(GameObjectContainer* gameObjectContainer, ScreenManager* screenManager);
+    CollisionResolver(GameObjectContainer* gameObjectContainer);
 
     void handlePlayerCollisionWithKong() const;
     void handlePlayerCollisionWithPrincess() const;

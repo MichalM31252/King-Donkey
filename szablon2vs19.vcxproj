@@ -24,7 +24,8 @@
     <ClCompile Include="libs\CollisionDetector.cpp" />
     <ClCompile Include="libs\CollisionResolver.cpp" />
     <ClCompile Include="libs\Game.cpp" />
-    <ClCompile Include="libs\GameObjectFactory.cpp" />
+    <ClCompile Include="libs\GameObjectManager.cpp" />
+    <ClCompile Include="libs\LevelLoader.cpp" />
     <ClCompile Include="libs\KeyboardManager.cpp" />
     <ClCompile Include="libs\FileManager.cpp" />
     <ClCompile Include="libs\LadderFactory.cpp" />
@@ -38,15 +39,14 @@
     <ClCompile Include="libs\LadderHolder.cpp" />
     <ClCompile Include="libs\Platform.cpp" />
     <ClCompile Include="libs\PlatformHolder.cpp" />
-    <ClCompile Include="libs\StageManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="libs\RoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="cs8x8.bmp" />
     <Image Include="eti.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="libs\GameObjectManager.h" />
     <ClInclude Include="libs\LadderFactory.h" />
     <ClInclude Include="libs\BarrelFactory.h" />
     <ClInclude Include="libs\BarrelHolder.h" />
@@ -55,7 +55,7 @@
     <ClInclude Include="libs\Constants.h" />
     <ClInclude Include="libs\Game.h" />
     <ClInclude Include="libs\GameObjectContainer.h" />
-    <ClInclude Include="libs\GameObjectFactory.h" />
+    <ClInclude Include="libs\LevelLoader.h" />
     <ClInclude Include="libs\KeyboardManager.h" />
     <ClInclude Include="libs\FileManager.h" />
     <ClInclude Include="libs\MovableGameObject.h" />
@@ -68,8 +68,6 @@
     <ClInclude Include="libs\LadderHolder.h" />
     <ClInclude Include="libs\Platform.h" />
     <ClInclude Include="libs\PlatformHolder.h" />
-    <ClInclude Include="libs\StageManager.h" />
-    <ClInclude Include="libs\RoundManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

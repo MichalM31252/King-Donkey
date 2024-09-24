@@ -6,17 +6,46 @@
 Game::Game()
     : gameObjectContainer(std::make_unique<GameObjectContainer>())
     , screenManager(std::make_unique<ScreenManager>(gameObjectContainer.get()))
-    , gameObjectFactory(std::make_unique<GameObjectFactory>(gameObjectContainer.get()))
-    , collisionResolver(std::make_unique<CollisionResolver>(gameObjectContainer.get(), screenManager.get()))
-    , roundManager(std::make_unique<RoundManager>(screenManager.get(), gameObjectFactory.get(), gameObjectContainer.get(), collisionResolver.get()))
+	, levelLoader(std::make_unique<LevelLoader>(gameObjectContainer.get()))
+	, keyboardManager(std::make_unique<KeyboardManager>(gameObjectContainer.get()))
+	, gameObjectManager(std::make_unique<GameObjectManager>(gameObjectContainer.get()))
 {
 }
 
-void Game::initGame() {
+void Game::initGame() const {
     screenManager->createSDL();
     screenManager->createFramerate();
 	int startAnotherRound = 0;
-    roundManager->handleRound(startAnotherRound);
+     
+    levelLoader->decideWhichBoardToCreate(startAnotherRound); // fix this
+
+    bool quit = false;
+    while (!quit) {
+        screenManager->handleDifferentComputers();
+        screenManager->updateWorldTime();
+        screenManager->handleFPSTimer();
+        screenManager->drawOutlineOfTheBoard();
+        screenManager->drawAdditionalInfo();
+        screenManager->drawElements();
+        screenManager->serveNextFrame();
+        screenManager->frames++;
+
+		keyboardManager->handleEvents(quit, startAnotherRound);
+
+        gameObjectManager->updateGameObjects(screenManager->deltaTime);
+		gameObjectManager->handleCollisions(quit, startAnotherRound);
+		gameObjectManager->updateSprites();    
+		gameObjectManager->updatePhysics(screenManager->deltaTime);
+
+        // no idea where to put this
+        if (!gameObjectContainer->player->isClimbing) {
+            if (gameObjectContainer->player->isJumping) {
+                gameObjectContainer->player->jump(screenManager->deltaTime);
+            }
+        }
+
+    };
+
     closeGame();
 }
 
@@ -24,14 +53,3 @@ void Game::closeGame() const {
     SDL_Quit();
     exit(0);
 }
-
-// Implement this in the future
-//void Game::closeGame(ScreenManager& screenManager) const { // change this into a vector to be more efficient (so it can destroy every gameobject)
-//	SDL_FreeSurface(screenManager.charset);
-//	SDL_FreeSurface(screenManager.screen);
-//	SDL_DestroyTexture(screenManager.scrtex);
-//	SDL_DestroyWindow(screenManager.window);
-//	SDL_DestroyRenderer(screenManager.renderer);
-//	SDL_Quit();
-//	exit(0);
-//}

@@ -112,7 +112,6 @@ void ScreenManager::drawAdditionalInfo() {
 	// Convert worldTime to string and concatenate the rest of the text
 	std::string text = "Time: " + std::to_string(worldTime) + " s  Score: 0  Lives: 1";
 
-	// Call the DrawString method with the string
 	DrawString(screen->w / 2 - text.length() * 8 / 2, 7, text, charset);
 }
 
