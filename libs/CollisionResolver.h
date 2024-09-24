@@ -18,7 +18,7 @@ public:
     GameObjectContainer* gameObjectContainer;
 
     CollisionResolver();
-    CollisionResolver(GameObjectContainer* gameObjectContainer);
+    explicit CollisionResolver(GameObjectContainer* gameObjectContainer);
 
     void handlePlayerCollisionWithKong() const;
     void handlePlayerCollisionWithPrincess() const;

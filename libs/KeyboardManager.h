@@ -16,7 +16,7 @@ public:
     GameObjectContainer* gameObjectContainer;
 
     KeyboardManager();
-    KeyboardManager(GameObjectContainer* gameObjectContainer);
+    explicit KeyboardManager(GameObjectContainer* gameObjectContainer);
 
     void handleEvents(bool& quit, int& startAnotherRound);
 

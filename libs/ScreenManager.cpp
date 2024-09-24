@@ -222,12 +222,12 @@ template void ScreenManager::initGameObject<MovableGameObject>(MovableGameObject
 template void ScreenManager::initGameObject<Player>(Player* gameObject, const char* fileName);
 
 template <typename T>
-void ScreenManager::renderGameObject(T* gameObject, const SDL_Surface* screen) {
+void ScreenManager::renderGameObject(T* gameObject) const {
 	drawSurface(gameObject, gameObject->xpos, gameObject->ypos);
 }
 
-template void ScreenManager::renderGameObject<GameObject>(GameObject* gameObject, const SDL_Surface* screen);
-template void ScreenManager::renderGameObject<MovableGameObject>(MovableGameObject* gameObject, const SDL_Surface* screen);
+template void ScreenManager::renderGameObject<GameObject>(GameObject* gameObject) const;
+template void ScreenManager::renderGameObject<MovableGameObject>(MovableGameObject* gameObject) const;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -249,7 +249,7 @@ void ScreenManager::drawLadders() {
 
 void ScreenManager::drawBarrels() {
 	for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->getNumberOfElements(); i++) {
-		renderGameObject(std::move(gameObjectContainer->barrelFactory->barrelHolder->barrels[i]), screen); // ERROR
+		renderGameObject(std::move(gameObjectContainer->barrelFactory->barrelHolder->barrels[i])); // ERROR
 	}
 }
 
@@ -283,9 +283,9 @@ void ScreenManager::handlePlayerSprite(Player* player) const { // maybe const sh
 //}
 
 void ScreenManager::drawElements() { // don't repeat yourself
-	renderGameObject(gameObjectContainer->donkeyKong, screen);
-	renderGameObject(gameObjectContainer->princess, screen);
-	renderGameObject(gameObjectContainer->player, screen);
+	renderGameObject(gameObjectContainer->donkeyKong);
+	renderGameObject(gameObjectContainer->princess);
+	renderGameObject(gameObjectContainer->player);
 
 	drawPlatforms();
 	drawLadders();

@@ -42,7 +42,7 @@ public:
 	SDL_Renderer* renderer; // we send here to render the screen
 
 	ScreenManager() = default;
-	ScreenManager(GameObjectContainer* gameObjectContainer);
+	explicit ScreenManager(GameObjectContainer* gameObjectContainer);
 
 	void SDLCheck() const;
 	void SDLCreateWindowAndRenderer();
@@ -83,7 +83,7 @@ public:
 	static void loadTexture(T* gameObject, const char* fileName);
 
 	template<typename T>
-	void renderGameObject(T* gameObject, const SDL_Surface* screen);
+	void renderGameObject(T* gameObject) const;
 
 	void renderLadder(const GameObject* gameObject) const;
 

@@ -9,7 +9,7 @@ public:
 	GameObjectContainer* gameObjectContainer;
 
 	LevelLoader() = default;
-	LevelLoader(GameObjectContainer* gameObjectContainer);
+	explicit LevelLoader(GameObjectContainer* gameObjectContainer);
 
 	void createPlayer();
 	void createDonkeyKong();
