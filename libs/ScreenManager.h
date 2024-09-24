@@ -71,10 +71,10 @@ public:
 
 	void drawSurface(const GameObject* gameObject, int xpos, int ypos) const;
 	void drawSurfaceLadder(const GameObject* ladder, SDL_Rect dest) const;
-	void DrawString(int x, int y, const std::string& text) const;
-	void DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const;
-	void DrawLine(int x, int y, int l, int dx, int dy, Uint32 color) const;
-	void DrawRectangle(int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) const;
+	void drawString(int x, int y, const std::string& text) const;
+	void drawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const;
+	void drawLine(int x, int y, int l, int dx, int dy, Uint32 color) const;
+	void drawRectangle(int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) const;
 
 	template <typename T>
 	static void initGameObject(T* gameObject, const char* fileName);

@@ -103,16 +103,16 @@ void ScreenManager::setColors() {
 }     
 
 void ScreenManager::drawOutlineOfTheBoard() const {
-	DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black);
+	drawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black);
 }
 
 void ScreenManager::drawAdditionalInfo() {
-	DrawRectangle(1, 1, SCREEN_WIDTH - 2, TOP_BAR_HEIGHT, blue, blue);
+	drawRectangle(1, 1, SCREEN_WIDTH - 2, TOP_BAR_HEIGHT, blue, blue);
 
 	// Convert worldTime to string and concatenate the rest of the text
 	std::string text = "Time: " + std::to_string(worldTime) + " s  Score: 0  Lives: 1";
 
-	DrawString(screen->w / 2 - text.length() * 8 / 2, 7, text, charset);
+	drawString(screen->w / 2 - text.length() * 8 / 2, 7, text);
 }
 
 void ScreenManager::createSDL() {
@@ -149,7 +149,7 @@ void ScreenManager::drawSurfaceLadder(const GameObject* ladder, SDL_Rect dest) c
 
 // draw a text txt on surface screen, starting from the point (x, y)
 // charset is a 128x128 bitmap containing character images
-void ScreenManager::DrawString(int x, int y, const std::string& text) const {
+void ScreenManager::drawString(int x, int y, const std::string& text) const {
 	int px;
 	int py;
 	int c;
@@ -175,27 +175,27 @@ void ScreenManager::DrawString(int x, int y, const std::string& text) const {
 }
 
 
-void ScreenManager::DrawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const { // draw a single pixel
+void ScreenManager::drawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const { // draw a single pixel
 	int bpp = surface->format->BytesPerPixel;
 	Uint8* p = (Uint8*)surface->pixels + y * surface->pitch + x * bpp;
 	*(Uint32*)p = color;
 };
 
-void ScreenManager::DrawLine(int x, int y, int l, int dx, int dy, Uint32 color) const { // draw a vertical (when dx = 0, dy = 1) or horizontal (when dx = 1, dy = 0) line
+void ScreenManager::drawLine(int x, int y, int l, int dx, int dy, Uint32 color) const { // draw a vertical (when dx = 0, dy = 1) or horizontal (when dx = 1, dy = 0) line
 	for (int i = 0; i < l; i++) {
-		DrawPixel(screen, x, y, color);
+		drawPixel(screen, x, y, color);
 		x += dx;
 		y += dy;
 	};
 };
 
-void ScreenManager::DrawRectangle(int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) const { // x, y - top left corner // draw a rectangle of size l by k
-	DrawLine(x, y, k, 0, 1, outlineColor);
-	DrawLine(x + l - 1, y, k, 0, 1, outlineColor);
-	DrawLine(x, y, l, 1, 0, outlineColor);
-	DrawLine(x, y + k - 1, l, 1, 0, outlineColor);
+void ScreenManager::drawRectangle(int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) const { // x, y - top left corner // draw a rectangle of size l by k
+	drawLine(x, y, k, 0, 1, outlineColor);
+	drawLine(x + l - 1, y, k, 0, 1, outlineColor);
+	drawLine(x, y, l, 1, 0, outlineColor);
+	drawLine(x, y + k - 1, l, 1, 0, outlineColor);
 	for (int i = y + 1; i < y + k - 1; i++) {
-		DrawLine(x + 1, i, l - 2, 1, 0, fillColor);
+		drawLine(x + 1, i, l - 2, 1, 0, fillColor);
 	}
 };
 
