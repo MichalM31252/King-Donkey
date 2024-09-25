@@ -18,5 +18,5 @@ void BarrelHolder::updateBarrels(float deltaTime)  const{
 }
 
 int BarrelHolder::getNumberOfElements() const {
-    return static_cast<int>(barrels.size());
+    return barrels.size();
 }

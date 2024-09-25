@@ -24,7 +24,7 @@ void GameObjectManager::updateSpritesOfGameObjects() {
 }
 
 void GameObjectManager::updatePhysicsOfGameObjects(double deltaTime) {
-	physicsManager->handleFallingForPlayer(gameObjectContainer->player, deltaTime);
-	physicsManager->handleFallingForBarrels(gameObjectContainer->barrelFactory->barrelHolder, deltaTime);
+	physicsManager->handleFallingForPlayer(deltaTime);
+	physicsManager->handleFallingForBarrels(deltaTime);
 }
 

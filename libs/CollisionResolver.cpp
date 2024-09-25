@@ -105,7 +105,7 @@ void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRoun
     }
 }
 
-void CollisionResolver::closeGame() const {
+[[noreturn]] void CollisionResolver::closeGame() const {
     SDL_Quit();
     exit(0);
 }

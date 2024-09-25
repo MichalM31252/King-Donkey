@@ -12,7 +12,7 @@ Game::Game()
 {
 }
 
-void Game::initGame() const {
+[[noreturn]] void Game::initGame() const {
     screenManager->createSDL();
     screenManager->createFramerate();
 	int startAnotherRound = 0;
@@ -46,7 +46,7 @@ void Game::initGame() const {
     closeGame();
 }
 
-void Game::closeGame() const {
+[[noreturn]] void Game::closeGame() const {
     SDL_Quit();
     exit(0);
 }
