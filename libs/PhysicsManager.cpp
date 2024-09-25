@@ -12,8 +12,9 @@ void PhysicsManager::handleFallingForPlayer(double deltaTime) {
 }
 
 void PhysicsManager::handleFallingForBarrels(double deltaTime) {
-	for (int i = 0; i < gameObjectContainer->barrelHolder->getNumberOfElements(); i++) {
-		MovableGameObject* barrel = gameObjectContainer->barrelHolder->barrels[i]; // FIX THIS // REPLACE MOVABLEGAMEOBJECT WITH BARREL
+    // BARREL HOLDER IS NULL HERE
+	for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->getNumberOfElements(); i++) {
+		MovableGameObject* barrel = gameObjectContainer->barrelFactory->barrelHolder->barrels[i]; // FIX THIS // REPLACE MOVABLEGAMEOBJECT WITH BARREL
         if (!CollisionDetector::isGameObjectOnTopOfAnyPlatform(barrel, gameObjectContainer->platformHolder)) {
             startFalling(barrel, deltaTime);
         }
