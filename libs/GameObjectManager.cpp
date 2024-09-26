@@ -8,10 +8,10 @@ GameObjectManager::GameObjectManager(GameObjectContainer* gameObjectContainer)
 {
 }
 
-void GameObjectManager::updatePositionOfGameObjects(double deltaTime) {
+void GameObjectManager::updateGameObjects(double deltaTime) {
 	gameObjectContainer->player->update(deltaTime);
-	gameObjectContainer->barrelFactory->update(deltaTime);
-	gameObjectContainer->barrelFactory->barrelHolder->updateBarrels(deltaTime);
+	gameObjectContainer->donkeyKong->update(deltaTime);
+	gameObjectContainer->barrelHolder->updateBarrels(deltaTime);
 }
 
 void GameObjectManager::handleCollisionsOfGameObjects(bool& quit, int& startAnotherRound) {

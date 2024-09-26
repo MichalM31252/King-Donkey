@@ -32,7 +32,7 @@ Game::Game()
 
 		keyboardManager->handleEvents(quit, startAnotherRound);
 
-        gameObjectManager->updatePositionOfGameObjects(screenManager->deltaTime);
+        gameObjectManager->updateGameObjects(screenManager->deltaTime);
 		gameObjectManager->handleCollisionsOfGameObjects(quit, startAnotherRound);
 		gameObjectManager->updateSpritesOfGameObjects();
 		gameObjectManager->updatePhysicsOfGameObjects(screenManager->deltaTime);

@@ -19,7 +19,9 @@ void LevelLoader::createPlayer() {
 }
 
 void LevelLoader::createDonkeyKong() {
-    auto* donkeyK = new GameObject();
+    gameObjectContainer->barrelHolder = new BarrelHolder();
+
+    auto* donkeyK = new Gorilla(gameObjectContainer->barrelHolder);
 
     ScreenManager::initGameObject(donkeyK, "./assets/DonkeyKong.bmp");
 
@@ -28,6 +30,8 @@ void LevelLoader::createDonkeyKong() {
     donkeyK->createDestRect();
 
     gameObjectContainer->donkeyKong = donkeyK;
+
+    donkeyK->barrelFactory->setPosition(gameObjectContainer->donkeyKong->xpos + gameObjectContainer->donkeyKong->destRect.w + SMALL_MARGIN, gameObjectContainer->donkeyKong->ypos);
 }
 
 void LevelLoader::createPrincess() {
@@ -92,21 +96,7 @@ void LevelLoader::createLadders1() {
 }
 
 void LevelLoader::createBarrels() {
-    auto* barrel1 = new MovableGameObject();
 
-    ScreenManager::initGameObject(barrel1, BARREL_1_FILENAME);
-
-    barrel1->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
-    barrel1->createSrcRect();
-    barrel1->createDestRect();
-    barrel1->objectSpeed = DEFAULT_BARREL_SPEED;
-
-    auto* barrelH = new BarrelHolder();
-    barrelH->addBarrel(barrel1);
-
-    gameObjectContainer->barrelFactory = new BarrelFactory();
-    gameObjectContainer->barrelFactory->barrelHolder = barrelH;
-    gameObjectContainer->barrelFactory->setPosition(gameObjectContainer->donkeyKong->xpos + gameObjectContainer->donkeyKong->destRect.w + SMALL_MARGIN, gameObjectContainer->donkeyKong->ypos);
 }
 
 void LevelLoader::createPlatforms2() {

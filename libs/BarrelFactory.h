@@ -10,7 +10,9 @@ public:
     double accumulatedTime;
     BarrelHolder* barrelHolder;
 
-    void initBarrelFactory(BarrelFactory* barrelFactory) const;
+	BarrelFactory() = default;
+	explicit BarrelFactory(BarrelHolder* barrelHolder);
+
     void setPosition(int x, int y);
     void update(double deltaTime);
     void throwBarrel();

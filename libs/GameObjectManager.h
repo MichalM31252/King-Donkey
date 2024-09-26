@@ -17,7 +17,7 @@ public:
 	GameObjectManager() = default;
 	explicit GameObjectManager(GameObjectContainer* gameObjectContainer);
 
-	void updatePositionOfGameObjects(double deltaTime);
+	void updateGameObjects(double deltaTime);
 	void handleCollisionsOfGameObjects(bool& quit, int& startAnotherRound);
 	void updateSpritesOfGameObjects();
 	void updatePhysicsOfGameObjects(double deltaTime);

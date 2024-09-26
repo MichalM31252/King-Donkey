@@ -4,16 +4,15 @@
 #include "PlatformHolder.h"
 #include "MovableGameObject.h"
 #include "Player.h"
+#include "Gorilla.h"
+
+// rename holder to container
 
 struct GameObjectContainer {
-    GameObject* donkeyKong;
+    Gorilla* donkeyKong;
     GameObject* princess;
     Player* player;
     PlatformHolder* platformHolder;
     LadderHolder* ladderHolder;
 	BarrelHolder* barrelHolder;
-
-
-
-    BarrelFactory* barrelFactory;
 };

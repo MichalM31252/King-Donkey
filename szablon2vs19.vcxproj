@@ -25,6 +25,7 @@
     <ClCompile Include="libs\CollisionResolver.cpp" />
     <ClCompile Include="libs\Game.cpp" />
     <ClCompile Include="libs\GameObjectManager.cpp" />
+    <ClCompile Include="libs\Gorilla.cpp" />
     <ClCompile Include="libs\LevelLoader.cpp" />
     <ClCompile Include="libs\KeyboardManager.cpp" />
     <ClCompile Include="libs\FileManager.cpp" />
@@ -47,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="libs\GameObjectManager.h" />
+    <ClInclude Include="libs\Gorilla.h" />
     <ClInclude Include="libs\LadderFactory.h" />
     <ClInclude Include="libs\BarrelFactory.h" />
     <ClInclude Include="libs\BarrelHolder.h" />

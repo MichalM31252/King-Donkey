@@ -88,8 +88,8 @@ void CollisionResolver::handlePlayerCollision() {
 }
 
 void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRound) {
-    for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->getNumberOfElements(); i++) {
-        MovableGameObject* barrel = gameObjectContainer->barrelFactory->barrelHolder->barrels[i];
+    for (int i = 0; i < gameObjectContainer->barrelHolder->getNumberOfElements(); i++) {
+        MovableGameObject* barrel = gameObjectContainer->barrelHolder->barrels[i];
 
         handlePlayerCollisionWithBarrel(barrel, quit, startAnotherRound);
         handleCollisionWithPlatform(barrel);

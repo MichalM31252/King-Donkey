@@ -43,7 +43,7 @@ const int STARTING_Y_PRINCESS = 32;
 
 const double DEFAULT_PLAYER_SPEED = 200;
 const double DEFAULT_BARREL_SPEED = 50;
-const double DEFAULT_BARREL_SPAWN_RATE = 5.0;
+const double DEFAULT_BARREL_SPAWN_RATE = 3.0;
 
 const double DEFAULT_GRAVITY = 100;
 
