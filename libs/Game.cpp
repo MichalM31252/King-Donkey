@@ -32,10 +32,13 @@ Game::Game()
 
 		keyboardManager->handleEvents(quit, startAnotherRound);
 
-        gameObjectManager->updateGameObjects(screenManager->deltaTime);
+        gameObjectManager->updatePositionOfGameObjects(screenManager->deltaTime);
 		gameObjectManager->handleCollisionsOfGameObjects(quit, startAnotherRound);
 		gameObjectManager->updateSpritesOfGameObjects();
 		gameObjectManager->updatePhysicsOfGameObjects(screenManager->deltaTime);
+
+        // no idea where to put this, this updates the class that creates barrels
+        gameObjectContainer->donkeyKong->update(screenManager->deltaTime);
 
         // no idea where to put this
         if (!gameObjectContainer->player->isClimbing && gameObjectContainer->player->isJumping) {

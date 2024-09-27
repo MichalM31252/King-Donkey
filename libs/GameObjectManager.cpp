@@ -8,9 +8,8 @@ GameObjectManager::GameObjectManager(GameObjectContainer* gameObjectContainer)
 {
 }
 
-void GameObjectManager::updateGameObjects(double deltaTime) {
+void GameObjectManager::updatePositionOfGameObjects(double deltaTime) {
 	gameObjectContainer->player->update(deltaTime);
-	gameObjectContainer->donkeyKong->update(deltaTime);
 	gameObjectContainer->barrelContainer->updateBarrels(deltaTime);
 }
 
