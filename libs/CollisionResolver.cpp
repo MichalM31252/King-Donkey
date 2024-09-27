@@ -30,8 +30,8 @@ void CollisionResolver::handlePlayerCollisionWithBarrel(const MovableGameObject*
 }
 
 void CollisionResolver::handlePlayerCollisionWithLadder() {
-    for (int i = 0; i < gameObjectContainer->ladderHolder->getNumberOfElements(); i++) {
-        if (CollisionDetector::isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->ladderHolder->ladders[i]->destRect)) {
+    for (int i = 0; i < gameObjectContainer->ladderContainer->getNumberOfElements(); i++) {
+        if (CollisionDetector::isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->ladderContainer->ladders[i]->destRect)) {
             gameObjectContainer->player->isInsideLadder = true;
             return;
         }
@@ -53,8 +53,8 @@ void CollisionResolver::handleCollisionWithJumping() {
 
 void CollisionResolver::handleCollisionWithPlatform(MovableGameObject* gameObject) {
     int yPosition = gameObject->ypos + gameObject->destRect.h;
-    for (int i = 0; i < gameObjectContainer->platformHolder->getNumberOfElements(); i++) {
-        if (CollisionDetector::isGameObjectInsidePlatform(gameObject, gameObjectContainer->platformHolder->platforms[i])) {
+    for (int i = 0; i < gameObjectContainer->platformContainer->getNumberOfElements(); i++) {
+        if (CollisionDetector::isGameObjectInsidePlatform(gameObject, gameObjectContainer->platformContainer->platforms[i])) {
             gameObject->ypos--;
             yPosition--;
         }
@@ -70,7 +70,7 @@ void CollisionResolver::handlePlayerCollision() {
     handlePlayerCollisionWithLadder();
 
     if (!player->isClimbing) {
-        if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(player, gameObjectContainer->platformHolder)) {
+        if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(player, gameObjectContainer->platformContainer)) {
             
             // MOVE THIS TO UPDATE TEXTURES
             
@@ -88,13 +88,13 @@ void CollisionResolver::handlePlayerCollision() {
 }
 
 void CollisionResolver::handleBarrelsCollision(bool* quit, int* startAnotherRound) {
-    for (int i = 0; i < gameObjectContainer->barrelHolder->getNumberOfElements(); i++) {
-        MovableGameObject* barrel = gameObjectContainer->barrelHolder->barrels[i];
+    for (int i = 0; i < gameObjectContainer->barrelContainer->getNumberOfElements(); i++) {
+        MovableGameObject* barrel = gameObjectContainer->barrelContainer->barrels[i];
 
         handlePlayerCollisionWithBarrel(barrel, quit, startAnotherRound);
         handleCollisionWithPlatform(barrel);
 
-        if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(barrel, gameObjectContainer->platformHolder)) {
+        if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(barrel, gameObjectContainer->platformContainer)) {
             if (barrel->isFalling) {
                 barrel->stopFalling();
                 barrel->stopMove();

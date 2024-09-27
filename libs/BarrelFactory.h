@@ -8,10 +8,10 @@ public:
     int xpos;
     int ypos;
     double accumulatedTime;
-    BarrelHolder* barrelHolder;
+    BarrelContainer* barrelHolder;
 
 	BarrelFactory() = default;
-	explicit BarrelFactory(BarrelHolder* barrelHolder);
+	explicit BarrelFactory(BarrelContainer* barrelHolder);
 
     void setPosition(int x, int y);
     void update(double deltaTime);

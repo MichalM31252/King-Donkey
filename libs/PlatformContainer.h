@@ -4,10 +4,10 @@
 #include "Constants.h"
 #include <vector>
 
-class PlatformHolder {
+class PlatformContainer {
 public:
     std::vector<Platform*> platforms;
-    PlatformHolder();
+    PlatformContainer();
     void addPlatform(Platform* platform);
     size_t getNumberOfElements() const;
 };

@@ -1,22 +1,22 @@
 #include "BarrelHolder.h"
 
-void BarrelHolder::addBarrel(MovableGameObject* barrel) {
+void BarrelContainer::addBarrel(MovableGameObject* barrel) {
     barrels.push_back(barrel);
 }
 
-void BarrelHolder::emptyBarrelHolder() {
+void BarrelContainer::emptyBarrelHolder() {
     for (auto barrel : barrels) {
         delete barrel;
     }
     barrels.clear();
 }
 
-void BarrelHolder::updateBarrels(float deltaTime)  const{  
+void BarrelContainer::updateBarrels(float deltaTime)  const{  
     for (auto barrel : barrels) {
         barrel->update(deltaTime);
     }
 }
 
-int BarrelHolder::getNumberOfElements() const {
+int BarrelContainer::getNumberOfElements() const {
     return barrels.size();
 }

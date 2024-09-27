@@ -6,16 +6,16 @@ PhysicsManager::PhysicsManager(GameObjectContainer* gameObjectContainer)
 }
 
 void PhysicsManager::handleFallingForPlayer(double deltaTime) {
-    if (!CollisionDetector::isGameObjectOnTopOfAnyPlatform(gameObjectContainer->player, gameObjectContainer->platformHolder) && !gameObjectContainer->player->isJumping && !gameObjectContainer->player->isClimbing) {
+    if (!CollisionDetector::isGameObjectOnTopOfAnyPlatform(gameObjectContainer->player, gameObjectContainer->platformContainer) && !gameObjectContainer->player->isJumping && !gameObjectContainer->player->isClimbing) {
         startFalling(gameObjectContainer->player, deltaTime);
     }
 }
 
 void PhysicsManager::handleFallingForBarrels(double deltaTime) {
     // BARREL HOLDER IS NULL HERE
-	for (int i = 0; i < gameObjectContainer->barrelHolder->getNumberOfElements(); i++) {
-		MovableGameObject* barrel = gameObjectContainer->barrelHolder->barrels[i]; // FIX THIS // REPLACE MOVABLEGAMEOBJECT WITH BARREL
-        if (!CollisionDetector::isGameObjectOnTopOfAnyPlatform(barrel, gameObjectContainer->platformHolder)) {
+	for (int i = 0; i < gameObjectContainer->barrelContainer->getNumberOfElements(); i++) {
+		MovableGameObject* barrel = gameObjectContainer->barrelContainer->barrels[i]; // FIX THIS // REPLACE MOVABLEGAMEOBJECT WITH BARREL
+        if (!CollisionDetector::isGameObjectOnTopOfAnyPlatform(barrel, gameObjectContainer->platformContainer)) {
             startFalling(barrel, deltaTime);
         }
 	}

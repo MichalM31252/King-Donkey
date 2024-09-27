@@ -37,9 +37,9 @@
     <ClCompile Include="libs\Player.cpp" />
     <ClCompile Include="libs\GameObject.cpp" />
     <ClCompile Include="libs\ScreenManager.cpp" />
-    <ClCompile Include="libs\LadderHolder.cpp" />
+    <ClCompile Include="libs\LadderContainer.cpp" />
     <ClCompile Include="libs\Platform.cpp" />
-    <ClCompile Include="libs\PlatformHolder.cpp" />
+    <ClCompile Include="libs\PlatformContainer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -67,9 +67,9 @@
     <ClInclude Include="libs\PhysicsManager.h" />
     <ClInclude Include="libs\GameObject.h" />
     <ClInclude Include="libs\ScreenManager.h" />
-    <ClInclude Include="libs\LadderHolder.h" />
+    <ClInclude Include="libs\LadderContainer.h" />
     <ClInclude Include="libs\Platform.h" />
-    <ClInclude Include="libs\PlatformHolder.h" />
+    <ClInclude Include="libs\PlatformContainer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

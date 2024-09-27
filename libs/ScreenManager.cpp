@@ -238,20 +238,20 @@ void ScreenManager::renderLadder(const GameObject* gameObject) const {
 }
 
 void ScreenManager::drawPlatforms() {
-	for (int i = 0; i < gameObjectContainer->platformHolder->getNumberOfElements(); i++) {
-		gameObjectContainer->platformHolder->platforms[i]->render(screen);
+	for (int i = 0; i < gameObjectContainer->platformContainer->getNumberOfElements(); i++) {
+		gameObjectContainer->platformContainer->platforms[i]->render(screen);
 	}
 }
 
 void ScreenManager::drawLadders() {
-	for (int i = 0; i < gameObjectContainer->ladderHolder->getNumberOfElements(); i++) {
-		renderLadder(std::move(gameObjectContainer->ladderHolder->ladders[i]));
+	for (int i = 0; i < gameObjectContainer->ladderContainer->getNumberOfElements(); i++) {
+		renderLadder(std::move(gameObjectContainer->ladderContainer->ladders[i]));
 	}
 }
 
 void ScreenManager::drawBarrels() {
-	for (int i = 0; i < gameObjectContainer->barrelHolder->getNumberOfElements(); i++) {
-		renderGameObject(std::move(gameObjectContainer->barrelHolder->barrels[i])); // ERROR
+	for (int i = 0; i < gameObjectContainer->barrelContainer->getNumberOfElements(); i++) {
+		renderGameObject(std::move(gameObjectContainer->barrelContainer->barrels[i])); // ERROR
 	}
 }
 

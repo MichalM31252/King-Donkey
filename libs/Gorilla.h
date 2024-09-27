@@ -8,7 +8,7 @@ public:
 	BarrelFactory* barrelFactory;
 
 	Gorilla();
-	Gorilla(BarrelHolder* barrelHolder);
+	Gorilla(BarrelContainer* barrelHolder);
 
 	void update(double deltaTime);
 

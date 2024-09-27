@@ -11,7 +11,7 @@ GameObjectManager::GameObjectManager(GameObjectContainer* gameObjectContainer)
 void GameObjectManager::updateGameObjects(double deltaTime) {
 	gameObjectContainer->player->update(deltaTime);
 	gameObjectContainer->donkeyKong->update(deltaTime);
-	gameObjectContainer->barrelHolder->updateBarrels(deltaTime);
+	gameObjectContainer->barrelContainer->updateBarrels(deltaTime);
 }
 
 void GameObjectManager::handleCollisionsOfGameObjects(bool& quit, int& startAnotherRound) {

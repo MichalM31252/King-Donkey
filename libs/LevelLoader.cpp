@@ -19,9 +19,9 @@ void LevelLoader::createPlayer() {
 }
 
 void LevelLoader::createDonkeyKong() {
-    gameObjectContainer->barrelHolder = new BarrelHolder();
+    gameObjectContainer->barrelContainer = new BarrelContainer();
 
-    auto* donkeyK = new Gorilla(gameObjectContainer->barrelHolder);
+    auto* donkeyK = new Gorilla(gameObjectContainer->barrelContainer);
 
     ScreenManager::initGameObject(donkeyK, "./assets/DonkeyKong.bmp");
 
@@ -62,14 +62,14 @@ void LevelLoader::createPlatforms1() {
     auto* plat5 = new Platform();
     plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80);
 
-    auto* platH = new PlatformHolder();
+    auto* platH = new PlatformContainer();
     platH->addPlatform(plat1);
     platH->addPlatform(plat2);
     platH->addPlatform(plat3);
     platH->addPlatform(plat4);
     platH->addPlatform(plat5);
 
-    gameObjectContainer->platformHolder = platH;
+    gameObjectContainer->platformContainer = platH;
 }
 
 void LevelLoader::createLadders1() {
@@ -89,10 +89,10 @@ void LevelLoader::createLadders1() {
     ladd2->setSrcRect(LADDER_WIDTH, 50);
     ladd2->setDestRect(LADDER_WIDTH, 50);
 
-    auto* laddH = new LadderHolder();
+    auto* laddH = new LadderContainer();
     laddH->addLadder(ladd1);
     laddH->addLadder(ladd2);
-    gameObjectContainer->ladderHolder = laddH;
+    gameObjectContainer->ladderContainer = laddH;
 }
 
 void LevelLoader::createBarrels() {
@@ -118,7 +118,7 @@ void LevelLoader::createPlatforms2() {
     auto* plat6 = new Platform();
 	plat6->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH - LADDER_WIDTH, 230, SCREEN_WIDTH - LARGE_MARGIN, 230);
 
-    auto* platH = new PlatformHolder();
+    auto* platH = new PlatformContainer();
 	platH->addPlatform(plat1);
 	platH->addPlatform(plat2);
 	platH->addPlatform(plat3);
@@ -126,7 +126,7 @@ void LevelLoader::createPlatforms2() {
 	platH->addPlatform(plat5);
 	platH->addPlatform(plat6);
 
-	gameObjectContainer->platformHolder = platH;
+	gameObjectContainer->platformContainer = platH;
 }
 
 void LevelLoader::createLadders2() {
@@ -146,11 +146,11 @@ void LevelLoader::createLadders2() {
 	ladd2->setSrcRect(LADDER_WIDTH, 150);
 	ladd2->setDestRect(LADDER_WIDTH, 150);
 
-    auto* laddH = new LadderHolder();
+    auto* laddH = new LadderContainer();
 	laddH->addLadder(ladd1);
 	laddH->addLadder(ladd2);
 
-	gameObjectContainer->ladderHolder = laddH;
+	gameObjectContainer->ladderContainer = laddH;
 }
 
 void LevelLoader::createPlatforms3() {
@@ -169,14 +169,14 @@ void LevelLoader::createPlatforms3() {
     auto* plat5 = new Platform();
 	plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80);
 
-    auto* platH = new PlatformHolder();
+    auto* platH = new PlatformContainer();
 	platH->addPlatform(plat1);
 	platH->addPlatform(plat2);
 	platH->addPlatform(plat3);
 	platH->addPlatform(plat4);
 	platH->addPlatform(plat5);
 
-	gameObjectContainer->platformHolder = platH;
+	gameObjectContainer->platformContainer = platH;
 }
 
 void LevelLoader::createLadders3() {
@@ -212,12 +212,12 @@ void LevelLoader::createLadders3() {
 	ladd4->setSrcRect(LADDER_WIDTH, 50);
 	ladd4->setDestRect(LADDER_WIDTH, 50);
 
-    auto* laddH = new LadderHolder();
+    auto* laddH = new LadderContainer();
     laddH->addLadder(ladd1);
     laddH->addLadder(ladd2);
 	laddH->addLadder(ladd3);
 	laddH->addLadder(ladd4);
-	gameObjectContainer->ladderHolder = laddH;
+	gameObjectContainer->ladderContainer = laddH;
 }
 
 void LevelLoader::createBoard(int boardId) {

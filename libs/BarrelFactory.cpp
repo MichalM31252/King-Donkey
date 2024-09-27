@@ -2,7 +2,7 @@
 #include "ScreenManager.h"
 
 
-BarrelFactory::BarrelFactory(BarrelHolder* barrelHolder) {
+BarrelFactory::BarrelFactory(BarrelContainer* barrelHolder) {
 	this->barrelHolder = barrelHolder;
 	accumulatedTime = DEFAULT_BARREL_SPAWN_RATE;
 }

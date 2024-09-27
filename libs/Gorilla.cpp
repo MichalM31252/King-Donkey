@@ -4,7 +4,7 @@ Gorilla::Gorilla() {
 	barrelFactory = new BarrelFactory();
 }
 
-Gorilla::Gorilla(BarrelHolder* barrelHolder) {
+Gorilla::Gorilla(BarrelContainer* barrelHolder) {
 	barrelFactory = new BarrelFactory(barrelHolder);
 }
 
