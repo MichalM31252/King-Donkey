@@ -7,8 +7,8 @@ class Gorilla : public GameObject {
 public:
 	BarrelFactory* barrelFactory;
 
-	Gorilla();
-	Gorilla(BarrelContainer* barrelHolder);
+	Gorilla() = default;
+	Gorilla(BarrelContainer* barrelContainer);
 
 	void update(double deltaTime);
 

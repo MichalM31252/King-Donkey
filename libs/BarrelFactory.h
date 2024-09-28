@@ -2,16 +2,16 @@
 
 #include "MovableGameObject.h"
 #include "BarrelHolder.h"
+#include <memory>
 
 class BarrelFactory {
 public:
     int xpos;
     int ypos;
     double accumulatedTime;
-    BarrelContainer* barrelHolder;
+    BarrelContainer* barrelContainer;
 
-	BarrelFactory() = default;
-	explicit BarrelFactory(BarrelContainer* barrelHolder);
+	explicit BarrelFactory(BarrelContainer* barrelContainer);
 
     void setPosition(int x, int y);
     void update(double deltaTime);
