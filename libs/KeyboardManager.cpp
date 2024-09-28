@@ -172,4 +172,3 @@ void KeyboardManager::onKeyPress3(bool& quit, int& startAnotherRound) {
 	startAnotherRound = 3;
 	quit = true;
 }
-

@@ -12,7 +12,7 @@ Game::Game()
 {
 }
 
-void Game::initGame() const {
+[[noreturn]] void Game::initGame() const {
     screenManager->createSDL();
     screenManager->createFramerate();
 	int startAnotherRound = 0;
@@ -37,6 +37,9 @@ void Game::initGame() const {
 		gameObjectManager->updateSpritesOfGameObjects();
 		gameObjectManager->updatePhysicsOfGameObjects(screenManager->deltaTime);
 
+        // no idea where to put this, this updates the class that creates barrels
+        gameObjectContainer->donkeyKong->update(screenManager->deltaTime);
+
         // no idea where to put this
         if (!gameObjectContainer->player->isClimbing && gameObjectContainer->player->isJumping) {
             gameObjectContainer->player->jump(screenManager->deltaTime);
@@ -46,7 +49,7 @@ void Game::initGame() const {
     closeGame();
 }
 
-void Game::closeGame() const {
+[[noreturn]] void Game::closeGame() const {
     SDL_Quit();
     exit(0);
 }

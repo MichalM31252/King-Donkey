@@ -10,7 +10,7 @@ public:
 
 	explicit PhysicsManager(GameObjectContainer* gameObjectContainer);
 
-    void handleFallingForPlayer(Player* player, double deltaTime);
-    void handleFallingForBarrels(BarrelHolder* barrelHolder, double deltaTime);
+    void handleFallingForPlayer(double deltaTime);
+    void handleFallingForBarrels(double deltaTime);
 	void startFalling(MovableGameObject* gameObject, double deltaTime) const;
 };

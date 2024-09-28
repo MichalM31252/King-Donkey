@@ -1,19 +1,15 @@
 #pragma once
-#include "BarrelFactory.h"
-#include "LadderHolder.h"
-#include "PlatformHolder.h"
+#include "LadderContainer.h"
+#include "PlatformContainer.h"
 #include "MovableGameObject.h"
 #include "Player.h"
+#include "Gorilla.h"
 
 struct GameObjectContainer {
-    GameObject* donkeyKong;
+    Gorilla* donkeyKong;
     GameObject* princess;
     Player* player;
-    PlatformHolder* platformHolder;
-    LadderHolder* ladderHolder;
-	BarrelHolder* barrelHolder;
-
-
-
-    BarrelFactory* barrelFactory;
+    PlatformContainer* platformContainer;
+    LadderContainer* ladderContainer;
+	BarrelContainer* barrelContainer;
 };

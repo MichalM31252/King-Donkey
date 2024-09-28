@@ -1,8 +1,10 @@
 #include "BarrelFactory.h"
 #include "ScreenManager.h"
 
-void BarrelFactory::initBarrelFactory(BarrelFactory* barrelFactory) const {
-	barrelFactory->barrelHolder = new BarrelHolder();
+BarrelFactory::BarrelFactory(BarrelContainer* barrelHolder)
+	: barrelContainer(barrelHolder)
+	, accumulatedTime(DEFAULT_BARREL_SPAWN_RATE) 
+{
 }
 
 void BarrelFactory::setPosition(int x, int y) {
@@ -14,7 +16,7 @@ void BarrelFactory::update(double deltaTime) {
 	accumulatedTime += deltaTime;
 	if (accumulatedTime >= DEFAULT_BARREL_SPAWN_RATE) {
 		throwBarrel();
-		accumulatedTime = 0.00;
+		accumulatedTime -= DEFAULT_BARREL_SPAWN_RATE;
 	}
 }
 
@@ -27,5 +29,5 @@ void BarrelFactory::throwBarrel() {
 	barrel->createDestRect();
 	barrel->objectSpeed = DEFAULT_BARREL_SPEED;
 
-	barrelHolder->addBarrel(barrel);
+	barrelContainer->addBarrel(barrel);
 }

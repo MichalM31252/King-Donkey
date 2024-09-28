@@ -211,6 +211,7 @@ template void ScreenManager::loadTexture<GameObject>(GameObject* gameObject, con
 template void ScreenManager::loadTexture<MovableGameObject>(MovableGameObject* gameObject, const char* fileName);
 template void ScreenManager::loadTexture<Barrel>(Barrel* gameObject, const char* fileName);
 template void ScreenManager::loadTexture<Player>(Player* gameObject, const char* fileName);
+template void ScreenManager::loadTexture<Gorilla>(Gorilla* gameObject, const char* fileName);
 
 template <typename T>
 void ScreenManager::initGameObject(T* gameObject, const char* fileName) {
@@ -220,6 +221,7 @@ void ScreenManager::initGameObject(T* gameObject, const char* fileName) {
 template void ScreenManager::initGameObject<GameObject>(GameObject* gameObject, const char* fileName);
 template void ScreenManager::initGameObject<MovableGameObject>(MovableGameObject* gameObject, const char* fileName);
 template void ScreenManager::initGameObject<Player>(Player* gameObject, const char* fileName);
+template void ScreenManager::initGameObject<Gorilla>(Gorilla* gorilla, const char* fileName);
 
 template <typename T>
 void ScreenManager::renderGameObject(T* gameObject) const {
@@ -236,20 +238,20 @@ void ScreenManager::renderLadder(const GameObject* gameObject) const {
 }
 
 void ScreenManager::drawPlatforms() {
-	for (int i = 0; i < gameObjectContainer->platformHolder->getNumberOfElements(); i++) {
-		gameObjectContainer->platformHolder->platforms[i]->render(screen);
+	for (int i = 0; i < gameObjectContainer->platformContainer->getNumberOfElements(); i++) {
+		gameObjectContainer->platformContainer->platforms[i]->render(screen);
 	}
 }
 
 void ScreenManager::drawLadders() {
-	for (int i = 0; i < gameObjectContainer->ladderHolder->getNumberOfElements(); i++) {
-		renderLadder(std::move(gameObjectContainer->ladderHolder->ladders[i]));
+	for (int i = 0; i < gameObjectContainer->ladderContainer->getNumberOfElements(); i++) {
+		renderLadder(std::move(gameObjectContainer->ladderContainer->ladders[i]));
 	}
 }
 
 void ScreenManager::drawBarrels() {
-	for (int i = 0; i < gameObjectContainer->barrelFactory->barrelHolder->getNumberOfElements(); i++) {
-		renderGameObject(std::move(gameObjectContainer->barrelFactory->barrelHolder->barrels[i])); // ERROR
+	for (int i = 0; i < gameObjectContainer->barrelContainer->getNumberOfElements(); i++) {
+		renderGameObject(std::move(gameObjectContainer->barrelContainer->barrels[i])); // ERROR
 	}
 }
 

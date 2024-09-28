@@ -4,10 +4,10 @@
 #include "Constants.h"
 #include <vector>
 
-class LadderHolder {
+class LadderContainer {
 public:
     std::vector<GameObject*> ladders;
-    LadderHolder();
+    LadderContainer();
     void addLadder(GameObject* ladder);
     size_t getNumberOfElements() const;
 };

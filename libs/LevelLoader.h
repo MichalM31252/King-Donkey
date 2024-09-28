@@ -3,6 +3,7 @@
 #include "PhysicsManager.h"
 #include "CollisionResolver.h"
 #include "GameObjectContainer.h"
+#include "Gorilla.h"
 
 class LevelLoader {
 public:

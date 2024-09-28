@@ -26,6 +26,6 @@ public:
 
 	Game();
 
-	void initGame() const;
+	[[noreturn]] void initGame() const;
 	[[noreturn]] void closeGame() const;
 };

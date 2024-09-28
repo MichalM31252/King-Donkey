@@ -30,5 +30,5 @@ public:
     void handlePlayerCollision();
     void handleBarrelsCollision(bool* quit, int* startAnotherRound);
 
-    void closeGame() const;
+    [[noreturn]] void closeGame() const;
 };

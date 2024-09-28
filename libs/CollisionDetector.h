@@ -1,7 +1,7 @@
 #pragma once
 #include "MovableGameObject.h"
 #include "Platform.h"
-#include "PlatformHolder.h"
+#include "PlatformContainer.h"
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
 
@@ -29,7 +29,7 @@ public:
 
     static bool isGameObjectOnTopOfPlatform(const GameObject* gameObject, const Platform* platform);
     static bool isGameObjectInsidePlatform(const GameObject* gameObject, const Platform* platform);
-    static bool isGameObjectOnTopOfAnyPlatform(const GameObject* gameObject, const PlatformHolder* platformHolder);
+    static bool isGameObjectOnTopOfAnyPlatform(const GameObject* gameObject, const PlatformContainer* platformHolder);
 	// isGameObjectInsideBarrel
 
 	// isPlayerClimbingTheLadder (check if player is inside ladder, then check if if player is not touching the platform (ok but what about falling))

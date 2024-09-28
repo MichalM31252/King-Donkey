@@ -2,11 +2,11 @@
 #include "MovableGameObject.h"
 #include <vector>
 
-class BarrelHolder {
+class BarrelContainer {
 public:
     std::vector<MovableGameObject*> barrels;
 
-    BarrelHolder() = default;
+    BarrelContainer() = default;
 
     void addBarrel(MovableGameObject* barrel);
     void emptyBarrelHolder();

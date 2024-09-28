@@ -10,8 +10,7 @@ GameObjectManager::GameObjectManager(GameObjectContainer* gameObjectContainer)
 
 void GameObjectManager::updatePositionOfGameObjects(double deltaTime) {
 	gameObjectContainer->player->update(deltaTime);
-	gameObjectContainer->barrelFactory->update(deltaTime);
-	gameObjectContainer->barrelFactory->barrelHolder->updateBarrels(deltaTime);
+	gameObjectContainer->barrelContainer->updateBarrels(deltaTime);
 }
 
 void GameObjectManager::handleCollisionsOfGameObjects(bool& quit, int& startAnotherRound) {
@@ -24,7 +23,7 @@ void GameObjectManager::updateSpritesOfGameObjects() {
 }
 
 void GameObjectManager::updatePhysicsOfGameObjects(double deltaTime) {
-	physicsManager->handleFallingForPlayer(gameObjectContainer->player, deltaTime);
-	physicsManager->handleFallingForBarrels(gameObjectContainer->barrelFactory->barrelHolder, deltaTime);
+	physicsManager->handleFallingForPlayer(deltaTime);
+	physicsManager->handleFallingForBarrels(deltaTime);
 }
 
