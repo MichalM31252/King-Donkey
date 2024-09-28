@@ -1,4 +1,4 @@
-# STATISTICS
+# Statistics
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=bugs)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
@@ -17,6 +17,7 @@
 
 # Plans:
 
+- [ ] Implement component based design
 - [ ] Fix animations
 - [x] Fix the delay between keys and player
 - [ ] Fix the ladders
@@ -24,7 +25,7 @@
 - [ ] Remove unnescessary pointers to make code more readable
 - [ ] Refactor platform mechanism
 - [ ] Change player sprite based on the direction of movement
-- [ ] Fix memory leaks
+- [x] Fix memory leaks
 - [x] Implement a C++ template vector for BarrelHolder, LadderHolder, PlatformHolder instead of your own implementation
 - [ ] Change classes which don't need an instance to static ones
 - [x] Fix inconsistent indentations
