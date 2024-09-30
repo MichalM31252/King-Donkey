@@ -4,7 +4,7 @@ GameObjectManager::GameObjectManager(GameObjectContainer* gameObjectContainer)
 	: gameObjectContainer(gameObjectContainer) 
 	, collisionResolver(std::make_unique<CollisionResolver>(gameObjectContainer))
 	, physicsManager(std::make_unique<PhysicsManager>(gameObjectContainer))
-	// collision detector is completely stati2c
+	, animationManager(std::make_unique<AnimationManager>(gameObjectContainer))
 {
 }
 
@@ -18,8 +18,8 @@ void GameObjectManager::handleCollisionsOfGameObjects(bool& quit, int& startAnot
 	collisionResolver->handleBarrelsCollision(&quit, &startAnotherRound);
 }
 
-void GameObjectManager::updateSpritesOfGameObjects() {
-	
+void GameObjectManager::updateSpritesOfGameObjects(double deltaTime) {
+	animationManager->handleAnimations(deltaTime);
 }
 
 void GameObjectManager::updatePhysicsOfGameObjects(double deltaTime) {
