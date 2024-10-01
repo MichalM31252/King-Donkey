@@ -23,12 +23,9 @@ void AnimationManager::handlePlayerAnimation() {
 			// here check the last reference point and based on that decide if the program should change the sprite
 			player->loadClimbingSprite();
 		}
-		else if (player->distanceTravelledFromLastRunningSprite >= 1) { // after a specific amount of time change sprite
+		else if (player->distanceTravelledFromLastRunningSprite >= 20) { // after a specific amount of time change sprite
 			player->loadNextRunningSprite();
-			player->distanceTravelledFromLastRunningSprite -= 1;
-		}
-		else { // use idle sprite
-			player->loadIdleSprite();
+			player->distanceTravelledFromLastRunningSprite -= 20;
 		}
 	}
 	if (player->currentDirectionOfMovement == 3) {

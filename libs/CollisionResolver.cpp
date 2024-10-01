@@ -71,13 +71,6 @@ void CollisionResolver::handlePlayerCollision() {
 
     if (!player->isClimbing) {
         if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(player, gameObjectContainer->platformContainer)) {
-            
-            // MOVE THIS TO UPDATE TEXTURES
-            
-            ScreenManager::loadTexture(player, PLAYER_1_FILENAME);
-            
-            //
-            
             handleCollisionWithJumping();
         }
         if (player->isJumping && player->ypos <= player->jumpHeightStop) {
