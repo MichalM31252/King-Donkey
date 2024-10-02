@@ -28,6 +28,7 @@ public:
     void onKeyPressArrowDown();
     void onKeyPressArrowLeft();
     void onKeyPressSpace();
+
     static void onKeyPressN(bool& quit, int& startAnotherRound);
     static void onKeyPress1(bool& quit, int& startAnotherRound);
     static void onKeyPress2(bool& quit, int& startAnotherRound);
