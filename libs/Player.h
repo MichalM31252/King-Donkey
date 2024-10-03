@@ -4,7 +4,6 @@
 
 class Player : public MovableGameObject {
 public:
-	bool isInsideLadder;
 	bool isJumping;
 	int distanceTravelledFromLastRunningSprite;
 	bool isClimbing;

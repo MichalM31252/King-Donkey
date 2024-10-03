@@ -63,3 +63,22 @@ bool CollisionDetector::isGameObjectInsidePlatform(const GameObject* gameObject,
 
     return false;
 }
+
+bool CollisionDetector::isGameObjectInsideAnyLadder(const GameObject* gameObject, const LadderContainer* ladderContainer)
+{
+    for (int i = 0; i < ladderContainer->getNumberOfElements(); i++) {
+        if (isGameObjectInsideLadder(gameObject, ladderContainer->ladders[i])) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool CollisionDetector::isGameObjectInsideLadder(const GameObject* gameObject, const GameObject* ladder)
+{
+    if (CollisionDetector::isCollisionBetweenRects(gameObject->destRect, ladder->destRect)) {
+        return true;
+    }
+    return false;
+}
+

@@ -2,8 +2,7 @@
 #include "ScreenManager.h" // temporary solution
 
 Player::Player()
-	: isInsideLadder(false)
-	, isJumping(false)
+	: isJumping(false)
 	, distanceTravelledFromLastRunningSprite(0) // move to movableGameObject or not idk
 	, isClimbing(false)
 	, checkIfJumpPossible(false)

@@ -123,13 +123,16 @@ void KeyboardManager::initializeQuit(bool& quit, int& startAnotherRound) {
 }
 
 void KeyboardManager::onKeyPressArrowUp() {
-	if (gameObjectContainer->player->isInsideLadder) {
+    if (CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
         gameObjectContainer->player->isClimbing = true;
 
 		ScreenManager::loadTexture(gameObjectContainer->player, PLAYER_CLIMB_1); // THIS SHOOUDNT BE HERE
 
         gameObjectContainer->player->startMovingUp();
 	}
+    else {
+        gameObjectContainer->player->isClimbing = false;
+    }
 }
 
 void KeyboardManager::onKeyPressArrowLeft() {
@@ -145,11 +148,16 @@ void KeyboardManager::onKeyPressArrowRight() {
 }
 
 void KeyboardManager::onKeyPressArrowDown() {
-	if (gameObjectContainer->player->isInsideLadder) {
+	if (CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
         gameObjectContainer->player->isClimbing = true;
-		ScreenManager::loadTexture(gameObjectContainer->player, PLAYER_CLIMB_1);
+
+		ScreenManager::loadTexture(gameObjectContainer->player, PLAYER_CLIMB_1); // THIS SHOOUDNT BE HERE
+
         gameObjectContainer->player->startMovingDown();
 	}
+    else {
+        gameObjectContainer->player->isClimbing = false;
+    }
 }
 
 void KeyboardManager::onKeyPressSpace() {
