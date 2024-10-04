@@ -95,10 +95,6 @@ void LevelLoader::createLadders1() {
     gameObjectContainer->ladderContainer = laddH;
 }
 
-void LevelLoader::createBarrels() {
-
-}
-
 void LevelLoader::createPlatforms2() {
     auto* plat1 = new Platform();
 	plat1->setPosition(TINY_MARGIN, 400, SCREEN_WIDTH - 1, 400);
@@ -236,7 +232,6 @@ void LevelLoader::createBoard(int boardId) {
         createPlatforms3();
         createLadders3();
     }
-    createBarrels();
 }
 
 void LevelLoader::decideWhichBoardToCreate(int startAnotherRound) {

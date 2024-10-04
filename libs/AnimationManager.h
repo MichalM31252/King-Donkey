@@ -7,7 +7,7 @@ public:
 	GameObjectContainer* gameObjectContainer;
 
 	AnimationManager() = default;
-	AnimationManager(GameObjectContainer* gameObjectContainer);
+	explicit AnimationManager(GameObjectContainer* gameObjectContainer);
 
 	void handleAnimations(double deltaTime);
 

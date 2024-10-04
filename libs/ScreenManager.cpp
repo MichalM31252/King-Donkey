@@ -255,35 +255,6 @@ void ScreenManager::drawBarrels() {
 	}
 }
 
-void ScreenManager::handlePlayerSprite(Player* player) const { // maybe const shouldn't be here ?
-	if (player->isPlayerJumping()) {
-		player->loadJumpingSprite();
-	}
-	else if (player->isClimbing) {
-		player->loadNextClimbingSprite();
-	}
-	else if (player->isFalling) {
-		player->loadJumpingSprite();
-	}
-	else {
-		player->loadNextRunningSprite();
-	}
-
-	// is player running 
-	//   after a specific amount of distance travelled change the sprite
-	// is player climbing
-	//   after a specific amount of distance travelled change the sprite
-	// is player touching the barrel
-	//  play death animation
-	// is player idle
-	//   play idle animation
-
-}
-//void ScreenManager::handleBarrelSprite(Barrel* barrel)
-//{
-//	// after a specific amount of distance travelled change the sprite
-//}
-
 void ScreenManager::drawElements() { // don't repeat yourself
 	renderGameObject(gameObjectContainer->donkeyKong);
 	renderGameObject(gameObjectContainer->princess);

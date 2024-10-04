@@ -22,7 +22,6 @@ public:
 	void createLadders2();
 	void createPlatforms3();
 	void createLadders3();
-	void createBarrels();
 
 	void createBoard(int boardId);
 

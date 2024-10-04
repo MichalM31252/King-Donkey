@@ -91,7 +91,4 @@ public:
 	void drawPlatforms();
 	void drawLadders();
 	void drawBarrels();
-
-	void handlePlayerSprite(Player* player) const;
-	// void handleBarrelSprite(Barrel* barrel);
 };
