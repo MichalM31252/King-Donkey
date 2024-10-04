@@ -34,7 +34,7 @@ Game::Game()
 
         gameObjectManager->updatePositionOfGameObjects(screenManager->deltaTime);
 		gameObjectManager->handleCollisionsOfGameObjects(quit, startAnotherRound);
-		gameObjectManager->updateSpritesOfGameObjects();
+		gameObjectManager->updateSpritesOfGameObjects(screenManager->deltaTime);
 		gameObjectManager->updatePhysicsOfGameObjects(screenManager->deltaTime);
 
         // no idea where to put this, this updates the class that creates barrels

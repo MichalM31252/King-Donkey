@@ -29,17 +29,6 @@ void CollisionResolver::handlePlayerCollisionWithBarrel(const MovableGameObject*
     }
 }
 
-void CollisionResolver::handlePlayerCollisionWithLadder() {
-    for (int i = 0; i < gameObjectContainer->ladderContainer->getNumberOfElements(); i++) {
-        if (CollisionDetector::isCollisionBetweenRects(gameObjectContainer->player->destRect, gameObjectContainer->ladderContainer->ladders[i]->destRect)) {
-            gameObjectContainer->player->isInsideLadder = true;
-            return;
-        }
-    }
-    gameObjectContainer->player->isInsideLadder = false;
-    gameObjectContainer->player->isClimbing = false;
-}
-
 void CollisionResolver::handleCollisionWithJumping() {
     if (gameObjectContainer->player->isFalling) {
         gameObjectContainer->player->stopFalling();
@@ -67,17 +56,9 @@ void CollisionResolver::handlePlayerCollision() {
     handleCollisionWithPlatform(player);
     handlePlayerCollisionWithKong();
     handlePlayerCollisionWithPrincess();
-    handlePlayerCollisionWithLadder();
 
     if (!player->isClimbing) {
         if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(player, gameObjectContainer->platformContainer)) {
-            
-            // MOVE THIS TO UPDATE TEXTURES
-            
-            ScreenManager::loadTexture(player, PLAYER_1_FILENAME);
-            
-            //
-            
             handleCollisionWithJumping();
         }
         if (player->isJumping && player->ypos <= player->jumpHeightStop) {

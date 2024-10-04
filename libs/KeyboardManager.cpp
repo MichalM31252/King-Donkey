@@ -90,28 +90,30 @@ void KeyboardManager::onKeyReleased() {
 void KeyboardManager::onKeyReleasedArrowUp() {
 	gameObjectContainer->player->accumulatedMoveUp = 0;
 	if (gameObjectContainer->player->currentDirectionOfMovement == 0) {
-        gameObjectContainer->player->currentDirectionOfMovement = -1;
+        gameObjectContainer->player->objectSpeed = 0;
 	}
 }
 
 void KeyboardManager::onKeyReleasedArrowLeft() {
     gameObjectContainer->player->accumulatedMoveLeft = 0;
 	if (gameObjectContainer->player->currentDirectionOfMovement == 3) {
-        gameObjectContainer->player->currentDirectionOfMovement = -1;
+        gameObjectContainer->player->objectSpeed = 0;
+		// gameObjectContainer->player->currentDirectionOfMovement = 0; // z tym animacja idle nie dziala
 	}
 }
 
 void KeyboardManager::onKeyReleasedArrowRight() {
     gameObjectContainer->player->accumulatedMoveRight = 0;
 	if (gameObjectContainer->player->currentDirectionOfMovement == 1) {
-        gameObjectContainer->player->currentDirectionOfMovement = -1;
+        gameObjectContainer->player->objectSpeed = 0;
+        // gameObjectContainer->player->currentDirectionOfMovement = 0; // z tym animacja idle nie dziala
 	}
 }
 
 void KeyboardManager::onKeyReleasedArrowDown() {
     gameObjectContainer->player->accumulatedMoveDown = 0;
 	if (gameObjectContainer->player->currentDirectionOfMovement == 2) {
-        gameObjectContainer->player->currentDirectionOfMovement = -1;
+        gameObjectContainer->player->objectSpeed = 0;
 	}
 }
 
@@ -121,13 +123,16 @@ void KeyboardManager::initializeQuit(bool& quit, int& startAnotherRound) {
 }
 
 void KeyboardManager::onKeyPressArrowUp() {
-	if (gameObjectContainer->player->isInsideLadder) {
+    if (CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
         gameObjectContainer->player->isClimbing = true;
 
-		ScreenManager::loadTexture(gameObjectContainer->player, PLAYER_CLIMB_1);
+		ScreenManager::loadTexture(gameObjectContainer->player, PLAYER_CLIMB_1); // THIS SHOOUDNT BE HERE
 
         gameObjectContainer->player->startMovingUp();
 	}
+    else {
+        gameObjectContainer->player->isClimbing = false;
+    }
 }
 
 void KeyboardManager::onKeyPressArrowLeft() {
@@ -143,11 +148,16 @@ void KeyboardManager::onKeyPressArrowRight() {
 }
 
 void KeyboardManager::onKeyPressArrowDown() {
-	if (gameObjectContainer->player->isInsideLadder) {
+	if (CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
         gameObjectContainer->player->isClimbing = true;
-		ScreenManager::loadTexture(gameObjectContainer->player, PLAYER_CLIMB_1);
+
+		ScreenManager::loadTexture(gameObjectContainer->player, PLAYER_CLIMB_1); // THIS SHOOUDNT BE HERE
+
         gameObjectContainer->player->startMovingDown();
 	}
+    else {
+        gameObjectContainer->player->isClimbing = false;
+    }
 }
 
 void KeyboardManager::onKeyPressSpace() {

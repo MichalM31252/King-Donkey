@@ -10,22 +10,23 @@ MovableGameObject::MovableGameObject()
 	, objectSpeed(0)
 	, isFalling(false)
 	, gravity(DEFAULT_GRAVITY)
-	, currentDirectionOfMovement(-1)
+	, currentDirectionOfMovement(0)
 	, currentSpriteId(1)
 {
 }
 
+// remove objectSpeed > 0 after testing
 void MovableGameObject::startAccumulatingDistance(double deltaTime) {
-	if (currentDirectionOfMovement == 0) { // up
+	if (currentDirectionOfMovement == 0 && objectSpeed > 0) { // up
 		accumulatedMoveUp += deltaTime * objectSpeed;
 	}
-	else if (currentDirectionOfMovement == 1) { // right
+	else if (currentDirectionOfMovement == 1 && objectSpeed > 0) { // right
 		accumulatedMoveRight += deltaTime * objectSpeed;
 	}
-	else if (currentDirectionOfMovement == 2) { // down
+	else if (currentDirectionOfMovement == 2 && objectSpeed > 0) { // down
 		accumulatedMoveDown += deltaTime * objectSpeed;
 	}
-	else if (currentDirectionOfMovement == 3) { // left
+	else if (currentDirectionOfMovement == 3 && objectSpeed > 0) { // left
 		accumulatedMoveLeft += deltaTime * objectSpeed;
 	}
 	else {
@@ -34,23 +35,24 @@ void MovableGameObject::startAccumulatingDistance(double deltaTime) {
 }
 
 void MovableGameObject::updatePosition() {
+	int pixelsToMove = 0;
 	if (accumulatedMoveRight > 1.0f) {
-		auto pixelsToMove = (int)accumulatedMoveRight;
+		pixelsToMove = (int)accumulatedMoveRight;
 		xpos += pixelsToMove;
 		accumulatedMoveRight -= pixelsToMove;
 	}
 	if (accumulatedMoveDown > 1.0f) {
-		auto pixelsToMove = (int)accumulatedMoveDown;
+		pixelsToMove = (int)accumulatedMoveDown;
 		ypos += pixelsToMove;
 		accumulatedMoveDown -= pixelsToMove;
 	}
 	if (accumulatedMoveLeft > 1.0f) {
-		auto pixelsToMove = (int)accumulatedMoveLeft;
+		pixelsToMove = (int)accumulatedMoveLeft;
 		xpos -= pixelsToMove;
 		accumulatedMoveLeft -= pixelsToMove;
 	}
 	if (accumulatedMoveUp > 1.0f) {
-		auto pixelsToMove = (int)accumulatedMoveUp;
+		pixelsToMove = (int)accumulatedMoveUp;
 		ypos -= pixelsToMove;
 		accumulatedMoveUp -= pixelsToMove;
 	}
@@ -107,7 +109,7 @@ void MovableGameObject::startMovingLeft() {
 }
 
 void MovableGameObject::stopMove() {
-	currentDirectionOfMovement = -1;
+	objectSpeed = 0;
 }
 
 void MovableGameObject::startFalling() {
