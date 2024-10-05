@@ -216,37 +216,26 @@ void LevelLoader::createLadders3() {
 	gameObjectContainer->ladderContainer = laddH;
 }
 
-void LevelLoader::createBoard(int boardId) {
+void LevelLoader::loadLevel1() {
     createPlayer();
     createDonkeyKong();
     createPrincess();
-    if (boardId == 1) {
-        createPlatforms1();
-        createLadders1();
-    }
-    if (boardId == 2) {
-        createPlatforms2();
-        createLadders2();
-    }
-    if (boardId == 3) {
-        createPlatforms3();
-        createLadders3();
-    }
+    createPlatforms1();
+    createLadders1();
 }
 
-void LevelLoader::decideWhichBoardToCreate(int startAnotherRound) {
-    if (startAnotherRound) {
-        if (startAnotherRound == BOARD_ID_A) {
-            createBoard(BOARD_ID_A);
-        }
-        if (startAnotherRound == BOARD_ID_B) {
-            createBoard(BOARD_ID_B);
-        }
-        if (startAnotherRound == BOARD_ID_C) {
-            createBoard(BOARD_ID_C);
-        }
-    }
-    else {
-        createBoard(BOARD_ID_A);
-    }
+void LevelLoader::loadLevel2() {
+    createPlayer();
+    createDonkeyKong();
+    createPrincess();
+    createPlatforms2();
+    createLadders2();
+}
+
+void LevelLoader::loadLevel3() {
+    createPlayer();
+    createDonkeyKong();
+    createPrincess();
+    createPlatforms3();
+    createLadders3();
 }

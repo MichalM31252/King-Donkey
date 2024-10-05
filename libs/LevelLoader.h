@@ -23,7 +23,7 @@ public:
 	void createPlatforms3();
 	void createLadders3();
 
-	void createBoard(int boardId);
-
-	void decideWhichBoardToCreate(int startAnotherRound);
+	void loadLevel1();
+	void loadLevel2();
+	void loadLevel3();
 };

@@ -15,24 +15,24 @@ public:
     SDL_Event event;
     GameObjectContainer* gameObjectContainer;
 
-    KeyboardManager();
+    KeyboardManager() = default;
     explicit KeyboardManager(GameObjectContainer* gameObjectContainer);
 
-    void handleEvents(bool& quit, int& startAnotherRound);
+    void handleEvents(bool& quit);
 
-    static void initializeQuit(bool& quit, int& startAnotherRound);
+    static void initializeQuit(bool& quit);
 
-    void onKeyPressed(bool& quit, int& startAnotherRound);
+    void onKeyPressed(bool& quit);
     void onKeyPressArrowUp();
     void onKeyPressArrowRight();
     void onKeyPressArrowDown();
     void onKeyPressArrowLeft();
     void onKeyPressSpace();
 
-    static void onKeyPressN(bool& quit, int& startAnotherRound);
-    static void onKeyPress1(bool& quit, int& startAnotherRound);
-    static void onKeyPress2(bool& quit, int& startAnotherRound);
-    static void onKeyPress3(bool& quit, int& startAnotherRound);
+    static void onKeyPressN(bool& quit);
+    static void onKeyPress1(bool& quit);
+    static void onKeyPress2(bool& quit);
+    static void onKeyPress3(bool& quit);
 
     void onKeyReleased();
 

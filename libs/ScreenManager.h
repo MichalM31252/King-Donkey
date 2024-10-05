@@ -25,6 +25,7 @@ public:
 	double fpsTimer;
 	double fps;
 
+	// create a structure for colors
 	Uint32 black;
 	Uint32 green;
 	Uint32 red;

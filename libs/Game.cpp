@@ -15,9 +15,8 @@ Game::Game()
 [[noreturn]] void Game::initGame() const {
     screenManager->createSDL();
     screenManager->createFramerate();
-	int startAnotherRound = 0;
      
-    levelLoader->decideWhichBoardToCreate(startAnotherRound); // fix this
+	levelLoader->loadLevel1();
 
     bool quit = false;
     while (!quit) {
@@ -30,10 +29,10 @@ Game::Game()
         screenManager->serveNextFrame();
         screenManager->frames++;
 
-		keyboardManager->handleEvents(quit, startAnotherRound);
+		keyboardManager->handleEvents(quit);
 
         gameObjectManager->updatePositionOfGameObjects(screenManager->deltaTime);
-		gameObjectManager->handleCollisionsOfGameObjects(quit, startAnotherRound);
+		gameObjectManager->handleCollisionsOfGameObjects(quit);
 		gameObjectManager->updateSpritesOfGameObjects(screenManager->deltaTime);
 		gameObjectManager->updatePhysicsOfGameObjects(screenManager->deltaTime);
 

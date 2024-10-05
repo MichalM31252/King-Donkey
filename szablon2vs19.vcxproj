@@ -30,7 +30,6 @@
     <ClCompile Include="libs\LevelLoader.cpp" />
     <ClCompile Include="libs\KeyboardManager.cpp" />
     <ClCompile Include="libs\FileManager.cpp" />
-    <ClCompile Include="libs\LadderFactory.cpp" />
     <ClCompile Include="libs\MovableGameObject.cpp" />
     <ClCompile Include="libs\Barrel.cpp" />
     <ClCompile Include="libs\PhysicsManager.cpp" />
@@ -51,7 +50,6 @@
     <ClInclude Include="libs\AnimationManager.h" />
     <ClInclude Include="libs\GameObjectManager.h" />
     <ClInclude Include="libs\Gorilla.h" />
-    <ClInclude Include="libs\LadderFactory.h" />
     <ClInclude Include="libs\BarrelFactory.h" />
     <ClInclude Include="libs\BarrelHolder.h" />
     <ClInclude Include="libs\CollisionDetector.h" />

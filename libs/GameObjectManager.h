@@ -20,7 +20,7 @@ public:
 	explicit GameObjectManager(GameObjectContainer* gameObjectContainer);
 
 	void updatePositionOfGameObjects(double deltaTime);
-	void handleCollisionsOfGameObjects(bool& quit, int& startAnotherRound);
+	void handleCollisionsOfGameObjects(bool& quit);
 	void updateSpritesOfGameObjects(double deltaTime);
 	void updatePhysicsOfGameObjects(double deltaTime);
 };
