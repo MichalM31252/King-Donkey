@@ -15,32 +15,17 @@ void AnimationManager::handleAnimations(double deltaTime) {
 void AnimationManager::handlePlayerAnimation() {
 	Player* player = gameObjectContainer->player;
 
-	if (player->currentDirectionOfMovement == 1) {
-		if (player->isJumping || player->isFalling) {
-			player->loadJumpingSprite();
-		}
-		if (player->isClimbing) {
-			// here check the last reference point and based on that decide if the program should change the sprite
-			player->loadClimbingSprite();
-		}
-		if (player->distanceTravelledFromLastRunningSprite >= 20 && player->objectSpeed > 0) { // after a specific amount of time change sprite
-			player->loadNextRunningSprite();
-			player->distanceTravelledFromLastRunningSprite -= 20;
-		}
-		if (player->objectSpeed == 0) {
-			player->loadIdleSprite();
-		}
+	if (player->isJumping || player->isFalling) {
+		player->loadJumpingSprite();
 	}
-	if (player->currentDirectionOfMovement == 3) {
-		// works
+	if (player->isClimbing) {
+		// here check the last reference point and based on that decide if the program should change the sprite
+		player->loadClimbingSprite();
 	}
-
-	// teraz jak sie zatrzymuje (puszczasz guzik do ruszania sie) to zawsze ma direction of movement 0
-	// i nie wiadomo jaka animacje dac
-
-
-
-	// somewhere in the code add, after few seconds play idle animation
+	// if (player->distanceTravelledFromLastRunningSprite >= 20 && player->objectSpeed > 0) { // after a specific amount of time change sprite
+		player->loadNextRunningSprite();
+		player->distanceTravelledFromLastRunningSprite -= 20;
+	//}
 }
 
 // based on distance traveled // is it possible to use a map to assign to every game object its last reference point??

@@ -7,27 +7,24 @@ MovableGameObject::MovableGameObject()
 	, accumulatedMoveDown(0) 
 	, accumulatedMoveLeft(0)
 	, canLeaveScreen(false)
-	, objectSpeed(0)
 	, isFalling(false)
 	, gravity(DEFAULT_GRAVITY)
-	, currentDirectionOfMovement(0)
 	, currentSpriteId(1)
 {
 }
 
-// remove objectSpeed > 0 after testing
-void MovableGameObject::startAccumulatingDistance(double deltaTime) {
-	if (currentDirectionOfMovement == 0 && objectSpeed > 0) { // up
-		accumulatedMoveUp += deltaTime * objectSpeed;
+void MovableGameObject::startAccumulatingDistance(double deltaTime) { // rename to accumulate distance
+	if (velocityY > 0 && directionOfMovementY == UP) {
+		accumulatedMoveUp += deltaTime * velocityY;
 	}
-	else if (currentDirectionOfMovement == 1 && objectSpeed > 0) { // right
-		accumulatedMoveRight += deltaTime * objectSpeed;
+	else if (velocityX > 0 && directionOfMovementX == RIGHT) {
+		accumulatedMoveRight += deltaTime * velocityX;
 	}
-	else if (currentDirectionOfMovement == 2 && objectSpeed > 0) { // down
-		accumulatedMoveDown += deltaTime * objectSpeed;
+	else if (velocityY > 0 && directionOfMovementY == DOWN) {
+		accumulatedMoveDown += deltaTime * velocityY;
 	}
-	else if (currentDirectionOfMovement == 3 && objectSpeed > 0) { // left
-		accumulatedMoveLeft += deltaTime * objectSpeed;
+	else if (velocityX > 0 && directionOfMovementX == LEFT) {
+		accumulatedMoveLeft += deltaTime * velocityX;
 	}
 	else {
 		return;
@@ -89,27 +86,27 @@ void MovableGameObject::update(double deltaTime) { // break this up into smaller
 }
 
 void MovableGameObject::startMovingAtSpeed(double speed) {
-	objectSpeed = speed;
+
 }
 
 void MovableGameObject::startMovingUp() {
-	currentDirectionOfMovement = 0;
+	
 }
 
 void MovableGameObject::startMovingRight() {
-	currentDirectionOfMovement = 1;
+	
 }
 
 void MovableGameObject::startMovingDown() {
-	currentDirectionOfMovement = 2;
+	
 }
 
 void MovableGameObject::startMovingLeft() {
-	currentDirectionOfMovement = 3;
+	
 }
 
 void MovableGameObject::stopMove() {
-	objectSpeed = 0;
+	directionOfMovementX = NONE;
 }
 
 void MovableGameObject::startFalling() {

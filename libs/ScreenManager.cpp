@@ -106,7 +106,7 @@ void ScreenManager::drawOutlineOfTheBoard() const {
 	drawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black);
 }
 
-void ScreenManager::drawAdditionalInfo() {
+void ScreenManager::drawAdditionalInfo() const {
 	drawRectangle(1, 1, SCREEN_WIDTH - 2, TOP_BAR_HEIGHT, blue, blue);
 
 	// Convert worldTime to string and concatenate the rest of the text

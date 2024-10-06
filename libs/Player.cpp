@@ -128,21 +128,17 @@ bool Player::isPlayerJumping() const {
 }
 
 bool Player::isPlayerMovingVertically() const {
-	if (currentDirectionOfMovement == 0 || currentDirectionOfMovement == 2) {
-		return true;
-	}
+	// if game object has speed and its going either up or down
 	return false;
 }
 
 void Player::startAccumulatingDistance(double deltaTime) {
 	if (isPlayerMovingVertically()) { // up or down
 		if (isClimbing) {
-			if (currentDirectionOfMovement == 0) {
-				accumulatedMoveUp += deltaTime * objectSpeed;
-			}
-			else {
-				accumulatedMoveDown += deltaTime * objectSpeed;
-			}
+			// if player is going up
+			// accumulatedMoveUp += deltaTime * objectSpeed;
+			// if player is going down
+			// accumulatedMoveDown += deltaTime * objectSpeed;
 		}
 	}
 	else {

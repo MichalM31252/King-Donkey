@@ -9,7 +9,7 @@ KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer)
 {
 }
 
-void KeyboardManager::handleEvents(bool& quit) {
+void KeyboardManager::handleEvents(bool& quit) { // rename this to handleInput and Keyboard manager to KeyboardController or something
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_KEYDOWN:
@@ -87,32 +87,22 @@ void KeyboardManager::onKeyReleased() {
 
 void KeyboardManager::onKeyReleasedArrowUp() {
 	gameObjectContainer->player->accumulatedMoveUp = 0;
-	if (gameObjectContainer->player->currentDirectionOfMovement == 0) {
-        gameObjectContainer->player->objectSpeed = 0;
-	}
+    // if player is currently going up then stop
 }
 
 void KeyboardManager::onKeyReleasedArrowLeft() {
     gameObjectContainer->player->accumulatedMoveLeft = 0;
-	if (gameObjectContainer->player->currentDirectionOfMovement == 3) {
-        gameObjectContainer->player->objectSpeed = 0;
-		// gameObjectContainer->player->currentDirectionOfMovement = 0; // z tym animacja idle nie dziala
-	}
+    // if player is currently going left then stop
 }
 
 void KeyboardManager::onKeyReleasedArrowRight() {
     gameObjectContainer->player->accumulatedMoveRight = 0;
-	if (gameObjectContainer->player->currentDirectionOfMovement == 1) {
-        gameObjectContainer->player->objectSpeed = 0;
-        // gameObjectContainer->player->currentDirectionOfMovement = 0; // z tym animacja idle nie dziala
-	}
+	// if player is currently going right then stop
 }
 
 void KeyboardManager::onKeyReleasedArrowDown() {
     gameObjectContainer->player->accumulatedMoveDown = 0;
-	if (gameObjectContainer->player->currentDirectionOfMovement == 2) {
-        gameObjectContainer->player->objectSpeed = 0;
-	}
+    // if player is currently going down then stop
 }
 
 void KeyboardManager::initializeQuit(bool& quit) {

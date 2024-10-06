@@ -20,20 +20,15 @@ Game::Game()
 
     bool quit = false;
     while (!quit) {
+		// UPDATE TIME
         screenManager->handleDifferentComputers();
-        screenManager->updateWorldTime();
-        screenManager->handleFPSTimer();
-        screenManager->drawOutlineOfTheBoard();
-        screenManager->drawAdditionalInfo();
-        screenManager->drawElements();
-        screenManager->serveNextFrame();
-        screenManager->frames++;
 
+		// PROCESS EVENTS
 		keyboardManager->handleEvents(quit);
 
+        // UPDATE
         gameObjectManager->updatePositionOfGameObjects(screenManager->deltaTime);
 		gameObjectManager->handleCollisionsOfGameObjects(quit);
-		gameObjectManager->updateSpritesOfGameObjects(screenManager->deltaTime);
 		gameObjectManager->updatePhysicsOfGameObjects(screenManager->deltaTime);
 
         // no idea where to put this, this updates the class that creates barrels
@@ -43,6 +38,16 @@ Game::Game()
         if (!gameObjectContainer->player->isClimbing && gameObjectContainer->player->isJumping) {
             gameObjectContainer->player->jump(screenManager->deltaTime);
         }
+
+        // RENDER
+        screenManager->updateWorldTime();
+        screenManager->handleFPSTimer();
+        screenManager->drawOutlineOfTheBoard();
+        screenManager->drawAdditionalInfo();
+        screenManager->drawElements();
+        screenManager->serveNextFrame();
+        screenManager->frames++;
+        gameObjectManager->updateSpritesOfGameObjects(screenManager->deltaTime); // handle animations?
     }
 
     closeGame();

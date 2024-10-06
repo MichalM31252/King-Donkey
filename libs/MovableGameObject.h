@@ -3,6 +3,18 @@
 #include "GameObject.h"
 #include "Constants.h"
 
+enum DirectionOfMovementX {
+	LEFT,
+	RIGHT,
+	NONE
+};
+
+enum DirectionOfMovementY {
+	UP,
+	DOWN,
+	NONE
+};
+
 class MovableGameObject : public GameObject {
 public:
 	double accumulatedMoveUp;
@@ -11,10 +23,14 @@ public:
 	double accumulatedMoveLeft;
 
 	bool canLeaveScreen;
-	double objectSpeed;
+
+	unsigned int velocityX;
+	unsigned int velocityY;
+	DirectionOfMovementX directionOfMovementX;
+	DirectionOfMovementY directionOfMovementY;
+
 	bool isFalling;
 	double gravity;
-	int currentDirectionOfMovement;
 	int currentSpriteId;
 
 	MovableGameObject();

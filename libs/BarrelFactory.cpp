@@ -27,7 +27,7 @@ void BarrelFactory::throwBarrel() {
 	barrel->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
 	barrel->createSrcRect();
 	barrel->createDestRect();
-	barrel->objectSpeed = DEFAULT_BARREL_SPEED;
+	// barrel->objectSpeed = DEFAULT_BARREL_SPEED;
 
 	barrelContainer->addBarrel(barrel);
 }

@@ -59,8 +59,8 @@ public:
 	void setSDLColorKey();
 
 	void setColors();
-	void drawOutlineOfTheBoard() const ;
-	void drawAdditionalInfo();
+	void drawOutlineOfTheBoard() const;
+	void drawAdditionalInfo() const;
 	void createSDL();
 
 	void createFramerate();
