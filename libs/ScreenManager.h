@@ -25,6 +25,7 @@ public:
 	double fpsTimer;
 	double fps;
 
+	// create a structure for colors
 	Uint32 black;
 	Uint32 green;
 	Uint32 red;
@@ -91,7 +92,4 @@ public:
 	void drawPlatforms();
 	void drawLadders();
 	void drawBarrels();
-
-	void handlePlayerSprite(Player* player) const;
-	// void handleBarrelSprite(Barrel* barrel);
 };

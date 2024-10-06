@@ -22,12 +22,12 @@ public:
 
     void handlePlayerCollisionWithKong() const;
     void handlePlayerCollisionWithPrincess() const;
-    void handlePlayerCollisionWithBarrel(const MovableGameObject* barrel, bool* quit, int* startAnotherRound) const;
+    void handlePlayerCollisionWithBarrel(const MovableGameObject* barrel, bool* quit) const;
     void handleCollisionWithPlatform(MovableGameObject* gameObject);
     void handleCollisionWithJumping();
 
     void handlePlayerCollision();
-    void handleBarrelsCollision(bool* quit, int* startAnotherRound);
+    void handleBarrelsCollision(bool* quit);
 
     [[noreturn]] void closeGame() const;
 };

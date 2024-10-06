@@ -13,9 +13,9 @@ void GameObjectManager::updatePositionOfGameObjects(double deltaTime) {
 	gameObjectContainer->barrelContainer->updateBarrels(deltaTime);
 }
 
-void GameObjectManager::handleCollisionsOfGameObjects(bool& quit, int& startAnotherRound) {
+void GameObjectManager::handleCollisionsOfGameObjects(bool& quit) {
 	collisionResolver->handlePlayerCollision();
-	collisionResolver->handleBarrelsCollision(&quit, &startAnotherRound);
+	collisionResolver->handleBarrelsCollision(&quit);
 }
 
 void GameObjectManager::updateSpritesOfGameObjects(double deltaTime) {

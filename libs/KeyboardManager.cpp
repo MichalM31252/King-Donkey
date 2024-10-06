@@ -3,25 +3,23 @@
 #include "KeyboardManager.h"
 #include "ScreenManager.h" // temporary fix
 
-KeyboardManager::KeyboardManager() = default;
-
 KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer)
     : event()
 	, gameObjectContainer(gameObjectContainer)
 {
 }
 
-void KeyboardManager::handleEvents(bool& quit, int& startAnotherRound) {
+void KeyboardManager::handleEvents(bool& quit) {
     while (SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_KEYDOWN:
-                onKeyPressed(quit, startAnotherRound);
+                onKeyPressed(quit);
                 break;
             case SDL_KEYUP:
                 onKeyReleased();
                 break;
             case SDL_QUIT:
-                initializeQuit(quit, startAnotherRound);
+                initializeQuit(quit);
                 break;
 			default:
 				break;
@@ -29,12 +27,12 @@ void KeyboardManager::handleEvents(bool& quit, int& startAnotherRound) {
     }
 }
 
-void KeyboardManager::onKeyPressed(bool& quit, int& startAnotherRound){
+void KeyboardManager::onKeyPressed(bool& quit){
     gameObjectContainer->player->startMovingAtSpeed(DEFAULT_PLAYER_SPEED);
     switch (event.key.keysym.sym) {
         case SDLK_ESCAPE:
             // close the game static method
-            initializeQuit(quit, startAnotherRound);
+            initializeQuit(quit);
             break;
         case SDLK_UP:
             onKeyPressArrowUp();
@@ -52,16 +50,16 @@ void KeyboardManager::onKeyPressed(bool& quit, int& startAnotherRound){
             onKeyPressSpace();
             break;
         case SDLK_n:
-            onKeyPressN(quit, startAnotherRound);
+            onKeyPressN(quit);
             break;
         case SDLK_1:
-            onKeyPress1(quit, startAnotherRound);
+            onKeyPress1(quit);
             break;
         case SDLK_2:
-            onKeyPress2(quit, startAnotherRound);
+            onKeyPress2(quit);
             break;
         case SDLK_3:
-            onKeyPress3(quit, startAnotherRound);
+            onKeyPress3(quit);
             break;
         default:
             break;
@@ -117,9 +115,8 @@ void KeyboardManager::onKeyReleasedArrowDown() {
 	}
 }
 
-void KeyboardManager::initializeQuit(bool& quit, int& startAnotherRound) {
+void KeyboardManager::initializeQuit(bool& quit) {
 	quit = true;
-	startAnotherRound = 0;
 }
 
 void KeyboardManager::onKeyPressArrowUp() {
@@ -164,21 +161,18 @@ void KeyboardManager::onKeyPressSpace() {
     gameObjectContainer->player->initJump();
 }
 
-void KeyboardManager::onKeyPressN(bool& quit, int& startAnotherRound) {
-	onKeyPress1(quit, startAnotherRound);
+void KeyboardManager::onKeyPressN(bool& quit) {
+	onKeyPress1(quit);
 }
 
-void KeyboardManager::onKeyPress1(bool& quit, int& startAnotherRound) {
-	startAnotherRound = 1;
+void KeyboardManager::onKeyPress1(bool& quit) {
 	quit = true;
 }
 
-void KeyboardManager::onKeyPress2(bool& quit, int& startAnotherRound) {
-	startAnotherRound = 2;
-	quit = true;
+void KeyboardManager::onKeyPress2(bool& quit) {
+    onKeyPress1(quit);
 }
 
-void KeyboardManager::onKeyPress3(bool& quit, int& startAnotherRound) {
-	startAnotherRound = 3;
-	quit = true;
+void KeyboardManager::onKeyPress3(bool& quit) {
+    onKeyPress1(quit);
 }

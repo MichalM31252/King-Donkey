@@ -130,6 +130,11 @@ void ScreenManager::createSDL() {
 	setColors();
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Different class
+
 // draw a surface sprite on a surface screen in point (x, y)
 // (x, y) is the center of sprite on screen
 void ScreenManager::drawSurface(const GameObject* gameObject, int xpos, int ypos) const {
@@ -254,35 +259,6 @@ void ScreenManager::drawBarrels() {
 		renderGameObject(std::move(gameObjectContainer->barrelContainer->barrels[i])); // ERROR
 	}
 }
-
-void ScreenManager::handlePlayerSprite(Player* player) const { // maybe const shouldn't be here ?
-	if (player->isPlayerJumping()) {
-		player->loadJumpingSprite();
-	}
-	else if (player->isClimbing) {
-		player->loadNextClimbingSprite();
-	}
-	else if (player->isFalling) {
-		player->loadJumpingSprite();
-	}
-	else {
-		player->loadNextRunningSprite();
-	}
-
-	// is player running 
-	//   after a specific amount of distance travelled change the sprite
-	// is player climbing
-	//   after a specific amount of distance travelled change the sprite
-	// is player touching the barrel
-	//  play death animation
-	// is player idle
-	//   play idle animation
-
-}
-//void ScreenManager::handleBarrelSprite(Barrel* barrel)
-//{
-//	// after a specific amount of distance travelled change the sprite
-//}
 
 void ScreenManager::drawElements() { // don't repeat yourself
 	renderGameObject(gameObjectContainer->donkeyKong);

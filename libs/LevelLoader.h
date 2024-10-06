@@ -22,9 +22,8 @@ public:
 	void createLadders2();
 	void createPlatforms3();
 	void createLadders3();
-	void createBarrels();
 
-	void createBoard(int boardId);
-
-	void decideWhichBoardToCreate(int startAnotherRound);
+	void loadLevel1();
+	void loadLevel2();
+	void loadLevel3();
 };
