@@ -3,7 +3,7 @@
 
 Player::Player()
 	: isJumping(false)
-	, distanceTravelledFromLastRunningSprite(0) // move to movableGameObject or not idk
+	, distanceTravelledFromLastRunningSprite(20) // remove magic number
 	, isClimbing(false)
 	, checkIfJumpPossible(false)
 	, jumpHeightStop(SCREEN_HEIGHT)

@@ -7,6 +7,10 @@ MovableGameObject::MovableGameObject()
 	, accumulatedMoveDown(0) 
 	, accumulatedMoveLeft(0)
 	, canLeaveScreen(false)
+	, velocityX(0)
+	, velocityY(0)
+	, directionOfMovementX(NONE_X)
+	, directionOfMovementY(NONE_Y)
 	, isFalling(false)
 	, gravity(DEFAULT_GRAVITY)
 	, currentSpriteId(1)
@@ -101,12 +105,11 @@ void MovableGameObject::startMovingDown() {
 	
 }
 
-void MovableGameObject::startMovingLeft() {
-	
-}
-
 void MovableGameObject::stopMove() {
-	directionOfMovementX = NONE;
+	directionOfMovementX = NONE_X;
+	directionOfMovementY = NONE_Y;
+	velocityX = 0;
+	velocityY = 0;
 }
 
 void MovableGameObject::startFalling() {

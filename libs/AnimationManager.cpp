@@ -15,17 +15,22 @@ void AnimationManager::handleAnimations(double deltaTime) {
 void AnimationManager::handlePlayerAnimation() {
 	Player* player = gameObjectContainer->player;
 
-	if (player->isJumping || player->isFalling) {
-		player->loadJumpingSprite();
+	if (player->directionOfMovementX == RIGHT) {
+		if (player->isJumping || player->isFalling) {
+			player->loadJumpingSprite();
+		}
+		else if (player->isClimbing) {
+			// here check the last reference point and based on that decide if the program should change the sprite
+			player->loadClimbingSprite();
+		}
+		else if (player->distanceTravelledFromLastRunningSprite >= 20 && player->velocityX > 0) { // after a specific amount of time change sprite
+			player->loadNextRunningSprite();
+			player->distanceTravelledFromLastRunningSprite -= 20;
+		}
+		else if (player->velocityX == 0) {
+			player->loadIdleSprite();
+		}
 	}
-	if (player->isClimbing) {
-		// here check the last reference point and based on that decide if the program should change the sprite
-		player->loadClimbingSprite();
-	}
-	// if (player->distanceTravelledFromLastRunningSprite >= 20 && player->objectSpeed > 0) { // after a specific amount of time change sprite
-		player->loadNextRunningSprite();
-		player->distanceTravelledFromLastRunningSprite -= 20;
-	//}
 }
 
 // based on distance traveled // is it possible to use a map to assign to every game object its last reference point??
