@@ -19,16 +19,20 @@ void AnimationManager::handlePlayerAnimation() {
 		if (player->isJumping || player->isFalling) {
 			player->loadJumpingSprite();
 		}
-		else if (player->isClimbing) {
-			// here check the last reference point and based on that decide if the program should change the sprite
-			player->loadClimbingSprite();
-		}
 		else if (player->distanceTravelledFromLastRunningSprite >= 20 && player->velocityX > 0) { // after a specific amount of time change sprite
 			player->loadNextRunningSprite();
 			player->distanceTravelledFromLastRunningSprite -= 20;
 		}
 		else if (player->velocityX == 0) {
 			player->loadIdleSprite();
+		}
+	}
+	if (player->directionOfMovementY == UP || player->directionOfMovementY == DOWN) {
+		if (player->isClimbing) {
+			if (player->distanceTravelledFromLastClimbingSprite >= 20 && player->velocityY > 0) {
+				player->loadNextClimbingSprite();
+				player->distanceTravelledFromLastClimbingSprite -= 20;
+			}
 		}
 	}
 }

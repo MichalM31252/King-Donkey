@@ -4,6 +4,7 @@
 Player::Player()
 	: isJumping(false)
 	, distanceTravelledFromLastRunningSprite(20) // remove magic number
+	, distanceTravelledFromLastClimbingSprite(20)
 	, isClimbing(false)
 	, checkIfJumpPossible(false)
 	, jumpHeightStop(SCREEN_HEIGHT)
@@ -44,6 +45,10 @@ void Player::updatePosition() {
 
 	if (!isJumping && !isFalling) {
 		distanceTravelledFromLastRunningSprite += pixelsToMove; // move to movableGameObject or not idk
+	}
+
+	if (isClimbing) {
+		distanceTravelledFromLastClimbingSprite += pixelsToMove;
 	}
 }
 
@@ -128,17 +133,21 @@ bool Player::isPlayerJumping() const {
 }
 
 bool Player::isPlayerMovingVertically() const {
-	// if game object has speed and its going either up or down
+	if ((directionOfMovementY == UP || directionOfMovementY == DOWN) && velocityY > 0) {
+		return true;
+	}
 	return false;
 }
 
 void Player::startAccumulatingDistance(double deltaTime) {
 	if (isPlayerMovingVertically()) { // up or down
 		if (isClimbing) {
-			// if player is going up
-			// accumulatedMoveUp += deltaTime * objectSpeed;
-			// if player is going down
-			// accumulatedMoveDown += deltaTime * objectSpeed;
+			if (directionOfMovementY == UP && velocityY > 0) {
+				accumulatedMoveUp += deltaTime * velocityY;
+			}
+			if (directionOfMovementY == DOWN && velocityY > 0) {
+				accumulatedMoveDown += deltaTime * velocityY;
+			}
 		}
 	}
 	else {

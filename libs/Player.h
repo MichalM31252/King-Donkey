@@ -6,6 +6,7 @@ class Player : public MovableGameObject {
 public:
 	bool isJumping;
 	int distanceTravelledFromLastRunningSprite;
+	int distanceTravelledFromLastClimbingSprite;
 	bool isClimbing;
 	bool checkIfJumpPossible;
 	int jumpHeightStop;
