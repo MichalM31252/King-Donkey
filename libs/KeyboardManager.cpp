@@ -122,7 +122,7 @@ void KeyboardManager::onKeyPressArrowUp() {
     if (CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
         player->isClimbing = true;
 
-		ScreenManager::loadTexture(player, PLAYER_CLIMB_1); // THIS SHOOUDNT BE HERE
+		ScreenManager::loadTexture(player, PLAYER_CLIMB_1, false); // THIS SHOOUDNT BE HERE
 
 		player->directionOfMovementY = UP;
         player->velocityY = DEFAULT_PLAYER_SPEED;
@@ -138,7 +138,7 @@ void KeyboardManager::onKeyPressArrowDown() {
     if (CollisionDetector::isGameObjectInsideAnyLadder(player, gameObjectContainer->ladderContainer)) {
         player->isClimbing = true;
 
-        ScreenManager::loadTexture(player, PLAYER_CLIMB_1); // THIS SHOOUDNT BE HERE
+        ScreenManager::loadTexture(player, PLAYER_CLIMB_1, false); // THIS SHOOUDNT BE HERE
 
         player->directionOfMovementY = DOWN;
         player->velocityY = DEFAULT_PLAYER_SPEED;

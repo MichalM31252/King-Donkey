@@ -35,6 +35,18 @@ void AnimationManager::handlePlayerAnimation() {
 			}
 		}
 	}
+	if (player->directionOfMovementX == LEFT) {
+		if (player->isJumping || player->isFalling) {
+			player->loadJumpingSprite(); // but reversed
+		}
+		else if (player->distanceTravelledFromLastRunningSprite >= 20 && player->velocityX < 0) {
+			player->loadNextRunningSprite(); // but reversed
+			player->distanceTravelledFromLastRunningSprite -= 20;
+		}
+		else if (player->velocityX == 0) {
+			player->loadIdleSprite(); // but reversed
+		}
+	}
 }
 
 // based on distance traveled // is it possible to use a map to assign to every game object its last reference point??

@@ -205,22 +205,48 @@ void ScreenManager::drawRectangle(int x, int y, int l, int k, Uint32 outlineColo
 };
 
 template <typename T>
-void ScreenManager::loadTexture(T* gameObject, const char* fileName) {
+void ScreenManager::loadTexture(T* gameObject, const char* fileName, bool flipHorizontal) {
 	gameObject->sprite = SDL_LoadBMP(fileName);
 	if (gameObject->sprite == nullptr) {
 		printf("SDL_LoadBMP error: %s\n", SDL_GetError());
+		return;
 	}
+
+	if (!flipHorizontal) {
+		return;
+	}
+
+	// Get the surface info
+	int width = gameObject->sprite->w;
+	int height = gameObject->sprite->h;
+	int pitch = gameObject->sprite->pitch;
+	int bpp = gameObject->sprite->format->BytesPerPixel;
+
+	// Get pixel data
+	unsigned char* pixels = static_cast<unsigned char*>(gameObject->sprite->pixels);
+
+	// Perform horizontal flip
+	for (int y = 0; y < height; y++) {
+		unsigned char* row = pixels + y * pitch;
+		for (int x = 0; x < width / 2; x++) {
+			for (int b = 0; b < bpp; b++) {
+				std::swap(row[x * bpp + b], row[(width - 1 - x) * bpp + b]);
+			}
+		}
+	}
+
+	// SDL_UpdateWindowSurface(SDL_GetWindowFromSurface(gameObject->sprite));
 }
 
-template void ScreenManager::loadTexture<GameObject>(GameObject* gameObject, const char* fileName);
-template void ScreenManager::loadTexture<MovableGameObject>(MovableGameObject* gameObject, const char* fileName);
-template void ScreenManager::loadTexture<Barrel>(Barrel* gameObject, const char* fileName);
-template void ScreenManager::loadTexture<Player>(Player* gameObject, const char* fileName);
-template void ScreenManager::loadTexture<Gorilla>(Gorilla* gameObject, const char* fileName);
+template void ScreenManager::loadTexture<GameObject>(GameObject* gameObject, const char* fileName, bool flipHorizontal);
+template void ScreenManager::loadTexture<MovableGameObject>(MovableGameObject* gameObject, const char* fileName, bool flipHorizontal);
+template void ScreenManager::loadTexture<Barrel>(Barrel* gameObject, const char* fileName, bool flipHorizontal);
+template void ScreenManager::loadTexture<Player>(Player* gameObject, const char* fileName, bool flipHorizontal);
+template void ScreenManager::loadTexture<Gorilla>(Gorilla* gameObject, const char* fileName, bool flipHorizontal);
 
 template <typename T>
 void ScreenManager::initGameObject(T* gameObject, const char* fileName) {
-	loadTexture(gameObject, fileName);
+	loadTexture(gameObject, fileName, false);
 }
 
 template void ScreenManager::initGameObject<GameObject>(GameObject* gameObject, const char* fileName);

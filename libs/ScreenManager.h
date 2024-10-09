@@ -81,7 +81,7 @@ public:
 	static void initGameObject(T* gameObject, const char* fileName);
 
 	template <typename T>
-	static void loadTexture(T* gameObject, const char* fileName);
+	static void loadTexture(T* gameObject, const char* fileName, bool flipHorizontal);
 
 	template<typename T>
 	void renderGameObject(T* gameObject) const;

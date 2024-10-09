@@ -90,41 +90,41 @@ void Player::initJump() {
 
 void Player::loadNextRunningSprite() {
 	if (this->currentSpriteId == 1) {
-		ScreenManager::loadTexture(this, PLAYER_1_FILENAME);
+		ScreenManager::loadTexture(this, PLAYER_1_FILENAME, false);
 		this->currentSpriteId++;
 	}
 	else if (this->currentSpriteId == 2) {
-		ScreenManager::loadTexture(this, PLAYER_2_FILENAME);
+		ScreenManager::loadTexture(this, PLAYER_2_FILENAME, false);
 		this->currentSpriteId++;
 	}
 	else {
-		ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
+		ScreenManager::loadTexture(this, PLAYER_3_FILENAME, false);
 		this->currentSpriteId = 1;
 	}
 }
 
 void Player::loadJumpingSprite() {
-	ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
+	ScreenManager::loadTexture(this, PLAYER_3_FILENAME, false);
 }
 
 void Player::loadClimbingSprite() {
-	ScreenManager::loadTexture(this, PLAYER_CLIMB_1);
+	ScreenManager::loadTexture(this, PLAYER_CLIMB_1, false);
 	currentClimbingSpriteId = 1;
 }
 
 void Player::loadNextClimbingSprite(){
 	if (currentClimbingSpriteId == 1) {
-		ScreenManager::loadTexture(this, PLAYER_CLIMB_2);
+		ScreenManager::loadTexture(this, PLAYER_CLIMB_2, false);
 		currentClimbingSpriteId++;
 	}
 	else {
-		ScreenManager::loadTexture(this, PLAYER_CLIMB_1);
+		ScreenManager::loadTexture(this, PLAYER_CLIMB_1, false);
 		currentClimbingSpriteId = 1;
 	}
 }
 
 void Player::loadIdleSprite() {
-	ScreenManager::loadTexture(this, PLAYER_1_FILENAME);
+	ScreenManager::loadTexture(this, PLAYER_1_FILENAME, false);
 	currentRunningSpriteId = 1;
 }
 
