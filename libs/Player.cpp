@@ -80,6 +80,7 @@ void Player::stopJumping() {
 	accumulatedMoveDown = 0;
 	accumulatedMoveUp = 0;
 	distanceTravelledFromLastRunningSprite = 0; // move to movableGameObject or not idk
+	distanceTravelledFromLastClimbingSprite = 0;
 }
 
 void Player::initJump() {
