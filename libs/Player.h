@@ -24,9 +24,6 @@ public:
 
 	void loadNextRunningSprite();
 
-	void loadNextRightRunningSprite();
-	void loadNextLeftRunningSprite();
-
 	void loadJumpingSprite();
 	void loadClimbingSprite();
 	void loadNextClimbingSprite();
@@ -38,4 +35,6 @@ public:
 	void updatePosition();
 
 	void startAccumulatingDistance(double deltaTime) override;
+
+	// handle animations based on direction method 
 };

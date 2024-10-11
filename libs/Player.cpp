@@ -130,11 +130,11 @@ void Player::loadClimbingSprite() {
 
 void Player::loadNextClimbingSprite(){
 	if (currentClimbingSpriteId == 1) {
-		ScreenManager::loadTexture(this, PLAYER_CLIMB_2, false);
+		ScreenManager::loadTexture(this, PLAYER_CLIMB_1, false);
 		currentClimbingSpriteId++;
 	}
 	else {
-		ScreenManager::loadTexture(this, PLAYER_CLIMB_1, false);
+		ScreenManager::loadTexture(this, PLAYER_CLIMB_1, true);
 		currentClimbingSpriteId = 1;
 	}
 }
