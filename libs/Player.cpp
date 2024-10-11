@@ -80,7 +80,6 @@ void Player::stopJumping() {
 	accumulatedMoveDown = 0;
 	accumulatedMoveUp = 0;
 	distanceTravelledFromLastRunningSprite = 0; // move to movableGameObject or not idk
-	distanceTravelledFromLastClimbingSprite = 0;
 }
 
 void Player::initJump() {
@@ -90,22 +89,38 @@ void Player::initJump() {
 }
 
 void Player::loadNextRunningSprite() {
+	bool shouldSpriteBeReversed;
+	if (directionOfMovementX == RIGHT) {
+		shouldSpriteBeReversed = false;
+	}
+	else {
+		shouldSpriteBeReversed = true;
+	}
+
 	if (this->currentSpriteId == 1) {
-		ScreenManager::loadTexture(this, PLAYER_1_FILENAME, false);
+		ScreenManager::loadTexture(this, PLAYER_1_FILENAME, shouldSpriteBeReversed);
 		this->currentSpriteId++;
 	}
 	else if (this->currentSpriteId == 2) {
-		ScreenManager::loadTexture(this, PLAYER_2_FILENAME, false);
+		ScreenManager::loadTexture(this, PLAYER_2_FILENAME, shouldSpriteBeReversed);
 		this->currentSpriteId++;
 	}
 	else {
-		ScreenManager::loadTexture(this, PLAYER_3_FILENAME, false);
+		ScreenManager::loadTexture(this, PLAYER_3_FILENAME, shouldSpriteBeReversed);
 		this->currentSpriteId = 1;
 	}
 }
 
 void Player::loadJumpingSprite() {
-	ScreenManager::loadTexture(this, PLAYER_3_FILENAME, false);
+	bool shouldSpriteBeReversed;
+	if (directionOfMovementX == RIGHT) {
+		shouldSpriteBeReversed = false;
+	}
+	else {
+		shouldSpriteBeReversed = true;
+	}
+
+	ScreenManager::loadTexture(this, PLAYER_3_FILENAME, shouldSpriteBeReversed);
 }
 
 void Player::loadClimbingSprite() {
@@ -125,7 +140,15 @@ void Player::loadNextClimbingSprite(){
 }
 
 void Player::loadIdleSprite() {
-	ScreenManager::loadTexture(this, PLAYER_1_FILENAME, false);
+	bool shouldSpriteBeReversed;
+	if (directionOfMovementX == RIGHT) {
+		shouldSpriteBeReversed = false;
+	}
+	else {
+		shouldSpriteBeReversed = true;
+	}
+	
+	ScreenManager::loadTexture(this, PLAYER_1_FILENAME, shouldSpriteBeReversed);
 	currentRunningSpriteId = 1;
 }
 

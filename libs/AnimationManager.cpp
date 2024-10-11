@@ -15,11 +15,11 @@ void AnimationManager::handleAnimations(double deltaTime) {
 void AnimationManager::handlePlayerAnimation() {
 	Player* player = gameObjectContainer->player;
 
-	if (player->directionOfMovementX == RIGHT) {
+	if (player->directionOfMovementX == LEFT || player->directionOfMovementX == RIGHT) {
 		if (player->isJumping || player->isFalling) {
 			player->loadJumpingSprite();
 		}
-		else if (player->distanceTravelledFromLastRunningSprite >= 20 && player->velocityX > 0) { // after a specific amount of time change sprite
+		else if (player->distanceTravelledFromLastRunningSprite >= 20) { // after a specific amount of time change sprite
 			player->loadNextRunningSprite();
 			player->distanceTravelledFromLastRunningSprite -= 20;
 		}
@@ -27,24 +27,13 @@ void AnimationManager::handlePlayerAnimation() {
 			player->loadIdleSprite();
 		}
 	}
+
 	if (player->directionOfMovementY == UP || player->directionOfMovementY == DOWN) {
 		if (player->isClimbing) {
 			if (player->distanceTravelledFromLastClimbingSprite >= 20 && player->velocityY > 0) {
 				player->loadNextClimbingSprite();
 				player->distanceTravelledFromLastClimbingSprite -= 20;
 			}
-		}
-	}
-	if (player->directionOfMovementX == LEFT) {
-		if (player->isJumping || player->isFalling) {
-			player->loadJumpingSprite(); // but reversed
-		}
-		else if (player->distanceTravelledFromLastRunningSprite >= 20 && player->velocityX < 0) {
-			player->loadNextRunningSprite(); // but reversed
-			player->distanceTravelledFromLastRunningSprite -= 20;
-		}
-		else if (player->velocityX == 0) {
-			player->loadIdleSprite(); // but reversed
 		}
 	}
 }

@@ -23,6 +23,10 @@ public:
 	void stopClimbing();
 
 	void loadNextRunningSprite();
+
+	void loadNextRightRunningSprite();
+	void loadNextLeftRunningSprite();
+
 	void loadJumpingSprite();
 	void loadClimbingSprite();
 	void loadNextClimbingSprite();
