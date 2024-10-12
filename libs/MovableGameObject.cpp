@@ -89,16 +89,22 @@ void MovableGameObject::update(double deltaTime) { // break this up into smaller
 	updatePositionCoordinates();
 }
 
-void MovableGameObject::startMovingAtSpeed(double speed) {
+// maybe refactor this code
 
+void MovableGameObject::startMovingHorizontallyAtSpeed(double speed) {
+	velocityX = speed;
+}
+
+void MovableGameObject::startMovingVerticallyAtSpeed(double speed) {
+	velocityY = speed;
 }
 
 void MovableGameObject::startMovingUp() {
-	
+	directionOfMovementY = UP;
 }
 
 void MovableGameObject::startMovingRight() {
-	
+	directionOfMovementX = RIGHT;
 }
 
 void MovableGameObject::startMovingDown() {

@@ -27,13 +27,7 @@ public:
 
 	// create a structure for colors
 	Uint32 black;
-	Uint32 green;
-	Uint32 red;
 	Uint32 blue;
-	Uint32 white;
-
-	Uint32 ladderColor;
-	Uint32 platformColor;
 
 	int rc;
 	SDL_Surface* screen; // screen on which we will be drawing, charset is the bitmap with characters

@@ -40,7 +40,8 @@ public:
 
 	void stayInBounds();
 	void updatePosition();
-	void startMovingAtSpeed(double speed);
+	void startMovingHorizontallyAtSpeed(double speed);
+	void startMovingVerticallyAtSpeed(double speed);
 	void startMovingRight();
 	void startMovingUp();
 	void startMovingDown();

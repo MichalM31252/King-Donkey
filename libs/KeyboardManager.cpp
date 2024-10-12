@@ -28,7 +28,6 @@ void KeyboardManager::handleEvents(bool& quit) { // rename this to handleInput a
 }
 
 void KeyboardManager::onKeyPressed(bool& quit){
-    gameObjectContainer->player->startMovingAtSpeed(DEFAULT_PLAYER_SPEED);
     switch (event.key.keysym.sym) {
         case SDLK_ESCAPE:
             // close the game static method

@@ -79,8 +79,12 @@ void CollisionResolver::handleBarrelsCollision(bool* quit) {
                 barrel->stopFalling();
                 barrel->stopMove();
             }
-            barrel->startMovingAtSpeed(DEFAULT_BARREL_SPEED);
-            barrel->startMovingRight();
+
+            //barrel->startMovingAtSpeed(DEFAULT_BARREL_SPEED);
+            //barrel->startMovingRight();
+
+			barrel->startMovingHorizontallyAtSpeed(DEFAULT_BARREL_SPEED);
+			barrel->startMovingRight();
         }
     }
 }

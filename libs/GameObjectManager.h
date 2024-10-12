@@ -15,7 +15,6 @@ public:
 	std::unique_ptr<PhysicsManager> physicsManager;
 	std::unique_ptr<AnimationManager> animationManager;
 	
-
 	GameObjectManager() = default;
 	explicit GameObjectManager(GameObjectContainer* gameObjectContainer);
 

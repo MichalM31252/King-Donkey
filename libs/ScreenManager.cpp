@@ -47,7 +47,7 @@ void ScreenManager::SDLCreateWindowAndRenderer() {
 	};
 }
 
-void ScreenManager::setSDLHint() const {
+void ScreenManager::setSDLHint() const { // use this to recieve input from window
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 }
 
@@ -94,12 +94,7 @@ void ScreenManager::serveNextFrame() {
 
 void ScreenManager::setColors() {
 	black = SDL_MapRGB(screen->format, 0x00, 0x00, 0x00);
-	green = SDL_MapRGB(screen->format, 0x00, 0xFF, 0x00);
-	red = SDL_MapRGB(screen->format, 0xFF, 0x00, 0x00);
 	blue = SDL_MapRGB(screen->format, 0x00, 0x00, 0xFF);
-	white = SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF);
-	ladderColor = SDL_MapRGB(screen->format, 0x00, 0xcf, 0xcf);
-	platformColor = SDL_MapRGB(screen->format, 0xef, 0x1e, 0x4f);
 }     
 
 void ScreenManager::drawOutlineOfTheBoard() const {
@@ -179,7 +174,6 @@ void ScreenManager::drawString(int x, int y, const std::string& text) const {
 	}
 }
 
-
 void ScreenManager::drawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const { // draw a single pixel
 	int bpp = surface->format->BytesPerPixel;
 	Uint8* p = (Uint8*)surface->pixels + y * surface->pitch + x * bpp;
@@ -204,6 +198,7 @@ void ScreenManager::drawRectangle(int x, int y, int l, int k, Uint32 outlineColo
 	}
 };
 
+// refactor so maybe you have two functions flip, and loadTexture, and flip is called inside loadTexture
 template <typename T>
 void ScreenManager::loadTexture(T* gameObject, const char* fileName, bool flipHorizontal) {
 	gameObject->sprite = SDL_LoadBMP(fileName);
@@ -234,8 +229,6 @@ void ScreenManager::loadTexture(T* gameObject, const char* fileName, bool flipHo
 			}
 		}
 	}
-
-	// SDL_UpdateWindowSurface(SDL_GetWindowFromSurface(gameObject->sprite));
 }
 
 template void ScreenManager::loadTexture<GameObject>(GameObject* gameObject, const char* fileName, bool flipHorizontal);
@@ -262,8 +255,6 @@ void ScreenManager::renderGameObject(T* gameObject) const {
 template void ScreenManager::renderGameObject<GameObject>(GameObject* gameObject) const;
 template void ScreenManager::renderGameObject<MovableGameObject>(MovableGameObject* gameObject) const;
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 void ScreenManager::renderLadder(const GameObject* gameObject) const {
 	drawSurfaceLadder(gameObject, gameObject->destRect);
 }
@@ -282,11 +273,11 @@ void ScreenManager::drawLadders() {
 
 void ScreenManager::drawBarrels() {
 	for (int i = 0; i < gameObjectContainer->barrelContainer->getNumberOfElements(); i++) {
-		renderGameObject(std::move(gameObjectContainer->barrelContainer->barrels[i])); // ERROR
+		renderGameObject(std::move(gameObjectContainer->barrelContainer->barrels[i]));
 	}
 }
 
-void ScreenManager::drawElements() { // don't repeat yourself
+void ScreenManager::drawElements() { // rename these, so they are more descriptive on what they do
 	renderGameObject(gameObjectContainer->donkeyKong);
 	renderGameObject(gameObjectContainer->princess);
 	renderGameObject(gameObjectContainer->player);
