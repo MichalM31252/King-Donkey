@@ -11,6 +11,7 @@ bool CollisionDetector::isXWithinWidthOfPlatform(const int x, const Platform* pl
 	return false;
 }
 
+// use template here for 
 bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(const GameObject* gameObject, const PlatformContainer* platformHolder) {
     for (int i = 0; i < platformHolder->getNumberOfElements(); i++) {
         if (CollisionDetector::isGameObjectOnTopOfPlatform(gameObject, platformHolder->platforms[i])) {

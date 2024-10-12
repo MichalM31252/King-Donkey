@@ -51,11 +51,18 @@ void AnimationManager::handlePlayerAnimation() {
 	// horizontally it saves the last direction inside directionof movement x but it does not save the last direction of movement y
 }
 
-// based on distance traveled // is it possible to use a map to assign to every game object its last reference point??
-void AnimationManager::handleBarrelAnimation() {
-	// if dynamic game object is moving
-		// after a specific amount of distance is travelled from last referance point
-			// change sprite to next
+void AnimationManager::handleBarrelAnimation() { // barrels, because its all barrels
+	if (gameObjectContainer->barrelContainer->getNumberOfElements() == 0) {
+		return;
+	}
+
+	for (auto barrel : gameObjectContainer->barrelContainer->barrels) {
+		if (barrel->distanceTravelledFromLastSpriteChange >= 3) {
+			barrel->loadNextSprite();
+			barrel->distanceTravelledFromLastSpriteChange -= 3;
+		}
+	}
+
 }
 
 // based on time from last sprite change

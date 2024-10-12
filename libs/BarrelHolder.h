@@ -1,14 +1,14 @@
 #pragma once
-#include "MovableGameObject.h"
+#include "Barrel.h"
 #include <vector>
 
 class BarrelContainer {
 public:
-    std::vector<MovableGameObject*> barrels;
+    std::vector<Barrel*> barrels; // this should be barrel class
 
     BarrelContainer() = default;
 
-    void addBarrel(MovableGameObject* barrel);
+    void addBarrel(Barrel* barrel);
     void emptyBarrelHolder();
     void updateBarrels(float deltaTime) const;
     int getNumberOfElements() const;

@@ -6,7 +6,6 @@
 #include "MovableGameObject.h"
 #include "Constants.h"
 #include "GameObjectContainer.h"
-#include "Barrel.h"
 #include "Player.h"
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"

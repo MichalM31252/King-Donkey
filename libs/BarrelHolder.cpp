@@ -1,6 +1,6 @@
 #include "BarrelHolder.h"
 
-void BarrelContainer::addBarrel(MovableGameObject* barrel) {
+void BarrelContainer::addBarrel(Barrel* barrel) {
     barrels.push_back(barrel);
 }
 

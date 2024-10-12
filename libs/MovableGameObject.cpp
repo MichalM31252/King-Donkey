@@ -90,6 +90,7 @@ void MovableGameObject::update(double deltaTime) { // break this up into smaller
 }
 
 // maybe refactor this code
+////////////////////////////////
 
 void MovableGameObject::startMovingHorizontallyAtSpeed(double speed) {
 	velocityX = speed;
@@ -110,6 +111,8 @@ void MovableGameObject::startMovingRight() {
 void MovableGameObject::startMovingDown() {
 	
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void MovableGameObject::stopMove() {
 	directionOfMovementX = NONE_X;

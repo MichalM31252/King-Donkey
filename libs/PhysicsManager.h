@@ -1,8 +1,7 @@
 #pragma once
-#include "Player.h"
-#include "Barrel.h"
-#include "BarrelHolder.h"
+
 #include "CollisionDetector.h"
+#include "GameObjectContainer.h"
 
 class PhysicsManager {
 public:

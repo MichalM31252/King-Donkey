@@ -1,6 +1,7 @@
 #define _USE_MATH_DEFINES
 #include "ScreenManager.h"
 #include <string>
+#include "Barrel.h"
 
 ScreenManager::ScreenManager(GameObjectContainer* gameObjectContainer) 
 	: gameObjectContainer(gameObjectContainer)
@@ -246,6 +247,7 @@ template void ScreenManager::initGameObject<GameObject>(GameObject* gameObject, 
 template void ScreenManager::initGameObject<MovableGameObject>(MovableGameObject* gameObject, const char* fileName);
 template void ScreenManager::initGameObject<Player>(Player* gameObject, const char* fileName);
 template void ScreenManager::initGameObject<Gorilla>(Gorilla* gorilla, const char* fileName);
+template void ScreenManager::initGameObject<Barrel>(Barrel* barrel, const char* fileName);
 
 template <typename T>
 void ScreenManager::renderGameObject(T* gameObject) const {
