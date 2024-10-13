@@ -44,7 +44,7 @@ Game::Game()
         screenManager->handleFPSTimer();
         screenManager->drawOutlineOfTheBoard();
         screenManager->drawAdditionalInfo();
-        screenManager->drawElements();
+		screenManager->drawElements(); // current quick fix is that ladder is drawn first then player to make player appear on top of ladder
         screenManager->serveNextFrame();
         screenManager->frames++;
         gameObjectManager->updateSpritesOfGameObjects(screenManager->deltaTime); // handle animations?

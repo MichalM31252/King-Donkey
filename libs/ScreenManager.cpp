@@ -280,11 +280,11 @@ void ScreenManager::drawBarrels() {
 }
 
 void ScreenManager::drawElements() { // rename these, so they are more descriptive on what they do
-	renderGameObject(gameObjectContainer->donkeyKong);
-	renderGameObject(gameObjectContainer->princess);
-	renderGameObject(gameObjectContainer->player);
-
 	drawPlatforms();
 	drawLadders();
 	drawBarrels();
+	
+	renderGameObject(gameObjectContainer->donkeyKong);
+	renderGameObject(gameObjectContainer->princess);
+	renderGameObject(gameObjectContainer->player);
 }

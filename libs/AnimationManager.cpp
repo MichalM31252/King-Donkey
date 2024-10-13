@@ -57,9 +57,9 @@ void AnimationManager::handleBarrelAnimation() { // barrels, because its all bar
 	}
 
 	for (auto barrel : gameObjectContainer->barrelContainer->barrels) {
-		if (barrel->distanceTravelledFromLastSpriteChange >= 3) {
+		if (barrel->distanceTravelledFromLastSpriteChange >= 5) {
 			barrel->loadNextSprite();
-			barrel->distanceTravelledFromLastSpriteChange -= 3;
+			barrel->distanceTravelledFromLastSpriteChange -= 5;
 		}
 	}
 

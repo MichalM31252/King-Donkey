@@ -3,7 +3,7 @@
 
 Barrel::Barrel() {
 	this->currentSpriteId = 1;
-	this->distanceTravelledFromLastSpriteChange = 3;
+	this->distanceTravelledFromLastSpriteChange = 5;
 }
 
 void Barrel::update(double deltaTime) {
