@@ -119,13 +119,14 @@ void KeyboardManager::initializeQuit(bool& quit) {
 void KeyboardManager::onKeyPressArrowUp() {
     Player* player = gameObjectContainer->player;
     if (CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
+        
         player->isClimbing = true;
-
-		ScreenManager::loadTexture(player, PLAYER_CLIMB_1, false); // THIS SHOOUDNT BE HERE
-
-		player->directionOfMovementY = UP;
+        player->isFalling = false;
+        player->isJumping = false;
+        player->directionOfMovementY = UP;
         player->velocityY = DEFAULT_PLAYER_SPEED;
 
+		ScreenManager::loadTexture(player, PLAYER_CLIMB_1, false); // THIS SHOOUDNT BE HERE
 	}
     else {
         player->isClimbing = false;
@@ -135,12 +136,14 @@ void KeyboardManager::onKeyPressArrowUp() {
 void KeyboardManager::onKeyPressArrowDown() {
     Player* player = gameObjectContainer->player;
     if (CollisionDetector::isGameObjectInsideAnyLadder(player, gameObjectContainer->ladderContainer)) {
+        
         player->isClimbing = true;
-
-        ScreenManager::loadTexture(player, PLAYER_CLIMB_1, false); // THIS SHOOUDNT BE HERE
-
+        player->isFalling = false;
+        player->isJumping = false;
         player->directionOfMovementY = DOWN;
         player->velocityY = DEFAULT_PLAYER_SPEED;
+
+        ScreenManager::loadTexture(player, PLAYER_CLIMB_1, false); // THIS SHOOUDNT BE HERE
     }
     else {
         player->isClimbing = false;
