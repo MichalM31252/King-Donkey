@@ -18,23 +18,24 @@
 # Plans:
 
 - [ ] Implement component based design
-- [ ] Fix animations
+- [x] Fix animations
 - [x] Fix the delay between keys and player
 - [ ] Fix the ladders
 - [ ] Update file structure
 - [ ] Remove unnescessary pointers to make code more readable
 - [ ] Refactor platform mechanism
-- [ ] Change player sprite based on the direction of movement
+- [x] Change player sprite based on the direction of movement
 - [x] Fix memory leaks
 - [x] Implement a C++ template vector for BarrelHolder, LadderHolder, PlatformHolder instead of your own implementation
 - [ ] Change classes which don't need an instance to static ones
 - [x] Fix inconsistent indentations
 - [ ] Add menu
-- [ ] Add a pickup items (hammer, prizes)
+- [ ] Add pickup items (hammer, prizes)
 - [ ] Refactor collision detection methods from single pixels to SDL_Rectangles
 - [ ] Lower the number of code smells detected by sonarcloud to 0
 - [ ] Add pause mechanism
 - [ ] Add home screen
+- [ ] Divide into smaller classes
 
 # Future plans:
 
