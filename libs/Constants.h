@@ -37,6 +37,7 @@ const int DEFAULT_JUMP_HEIGHT = 60; // check 60 for jumping onto platforms
 
 const int STARTING_X_DONKEY_KONG = 64;
 const int STARTING_Y_DONKEY_KONG = 64;
+const int DONKEY_KONG_WIDTH = 80;
 
 const int STARTING_X_PRINCESS = 200;
 const int STARTING_Y_PRINCESS = 32;

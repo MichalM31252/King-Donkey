@@ -24,7 +24,7 @@ void BarrelFactory::throwBarrel() {
 	auto* barrel = new Barrel();
 	ScreenManager::initGameObject(barrel, BARREL_1_FILENAME);
 
-	barrel->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
+	barrel->setPosition(STARTING_X_DONKEY_KONG + DONKEY_KONG_WIDTH, STARTING_Y_DONKEY_KONG);
 	barrel->createSrcRect();
 	barrel->createDestRect();
 
