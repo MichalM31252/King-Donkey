@@ -64,9 +64,3 @@ void AnimationManager::handleBarrelAnimation() { // barrels, because its all bar
 	}
 
 }
-
-// based on time from last sprite change
-void AnimationManager::handleGorillaAnimation(double deltaTime) {
-	// after a specific amount of time has passed then  
-		// change sprite to next
-}

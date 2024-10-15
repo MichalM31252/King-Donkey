@@ -29,11 +29,9 @@
     <ClCompile Include="libs\Gorilla.cpp" />
     <ClCompile Include="libs\LevelLoader.cpp" />
     <ClCompile Include="libs\KeyboardManager.cpp" />
-    <ClCompile Include="libs\FileManager.cpp" />
     <ClCompile Include="libs\MovableGameObject.cpp" />
     <ClCompile Include="libs\Barrel.cpp" />
     <ClCompile Include="libs\PhysicsManager.cpp" />
-    <ClCompile Include="libs\PlatformFactory.cpp" />
     <ClCompile Include="libs\Player.cpp" />
     <ClCompile Include="libs\GameObject.cpp" />
     <ClCompile Include="libs\ScreenManager.cpp" />
@@ -59,10 +57,8 @@
     <ClInclude Include="libs\GameObjectContainer.h" />
     <ClInclude Include="libs\LevelLoader.h" />
     <ClInclude Include="libs\KeyboardManager.h" />
-    <ClInclude Include="libs\FileManager.h" />
     <ClInclude Include="libs\MovableGameObject.h" />
     <ClInclude Include="libs\Barrel.h" />
-    <ClInclude Include="libs\PlatformFactory.h" />
     <ClInclude Include="libs\Player.h" />
     <ClInclude Include="libs\PhysicsManager.h" />
     <ClInclude Include="libs\GameObject.h" />

@@ -13,5 +13,4 @@ public:
 
 	void handlePlayerAnimation();
 	void handleBarrelAnimation();
-	void handleGorillaAnimation(double deltaTime);
 };
