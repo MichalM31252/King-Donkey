@@ -38,18 +38,17 @@ public:
 	ScreenManager() = default;
 	explicit ScreenManager(GameObjectContainer* gameObjectContainer);
 
-	void SDLCheck() const;
-	void SDLCreateWindowAndRenderer();
-	void setSDLHint() const;
-	void setSDLRenderLogicalSize();
-	void setSDLDefaultDrawColor();
-	void setSDLWindowTitle();
-	void setSDLCharset();
-	void setSDLScreen();
-	void setSDLTexture();
-
-	void hideSDLCursor() const;
-	void setSDLColorKey();
+	void CheckSDL() const;
+	void CreateWindowAndRenderer();
+	void setHint() const;
+	void setRenderLogicalSize();
+	void setDefaultDrawColor();
+	void setWindowTitle();
+	void setCharset();
+	void setScreen();
+	void setTexture();
+	void hideCursor() const;
+	void setColorKey();
 
 	void setColors();
 	void drawOutlineOfTheBoard() const;
@@ -64,7 +63,7 @@ public:
 	void serveNextFrame();
 
 	void drawSurface(const GameObject* gameObject, int xpos, int ypos) const;
-	void drawSurfaceLadder(const GameObject* ladder, SDL_Rect dest) const;
+	void drawSurfaceLadder(const GameObject* ladder, int xpos, int ypos) const;
 	void drawString(int x, int y, const std::string& text) const;
 	void drawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const;
 	void drawLine(int x, int y, int l, int dx, int dy, Uint32 color) const;
@@ -75,9 +74,7 @@ public:
 
 	template <typename T>
 	static void loadTexture(T* gameObject, const char* fileName, bool flipHorizontal);
-
-	template<typename T>
-	void renderGameObject(T* gameObject) const;
+	static void flipTextureHorizontally(SDL_Surface* sprite);
 
 	void renderLadder(const GameObject* gameObject) const;
 

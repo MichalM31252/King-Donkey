@@ -8,7 +8,6 @@ AnimationManager::AnimationManager(GameObjectContainer* gameObjectContainer)
 void AnimationManager::handleAnimations(double deltaTime) {
 	handlePlayerAnimation();
 	handleBarrelAnimation();
-	handleGorillaAnimation(deltaTime);
 }
 
 // 

@@ -35,55 +35,55 @@ void ScreenManager::handleFPSTimer() {
 	};
 }
 
-void ScreenManager::SDLCheck() const {
+void ScreenManager::CheckSDL() const {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		printf("SDL_Init error: %s\n", SDL_GetError());
 	}
 }
 
-void ScreenManager::SDLCreateWindowAndRenderer() {
+void ScreenManager::CreateWindowAndRenderer() {
 	rc = SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
 	if (rc != 0) {
 		printf("SDL_CreateWindowAndRenderer error: %s\n", SDL_GetError());
 	};
 }
 
-void ScreenManager::setSDLHint() const { // use this to recieve input from window
+void ScreenManager::setHint() const { // use this to recieve input from window
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 }
 
-void ScreenManager::setSDLRenderLogicalSize() {
+void ScreenManager::setRenderLogicalSize() {
 	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void ScreenManager::setSDLDefaultDrawColor() {
+void ScreenManager::setDefaultDrawColor() {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }
 
-void ScreenManager::setSDLWindowTitle() {
+void ScreenManager::setWindowTitle() {
 	SDL_SetWindowTitle(window, "192928 Michal Malinowski");
 }
 
-void ScreenManager::setSDLCharset() {
+void ScreenManager::setCharset() {
 	charset = SDL_LoadBMP("./assets/cs8x8.bmp");
 	if (charset == nullptr) {
 		printf("SDL_LoadBMP(cs8x8.bmp) error: %s\n", SDL_GetError());
 	};
 }
 
-void ScreenManager::setSDLScreen() {
+void ScreenManager::setScreen() {
 	screen = SDL_CreateRGBSurface(0, SCREEN_WIDTH, SCREEN_HEIGHT, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
 }
 
-void ScreenManager::setSDLTexture() {
+void ScreenManager::setTexture() {
 	scrtex = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
-void ScreenManager::hideSDLCursor() const {
+void ScreenManager::hideCursor() const {
 	SDL_ShowCursor(SDL_DISABLE);
 }
 
-void ScreenManager::setSDLColorKey() {
+void ScreenManager::setColorKey() {
 	SDL_SetColorKey(charset, true, 0x000000);
 }
 
@@ -112,17 +112,17 @@ void ScreenManager::drawAdditionalInfo() const {
 }
 
 void ScreenManager::createSDL() {
-	SDLCheck();
-	SDLCreateWindowAndRenderer();
-	setSDLHint();
-	setSDLRenderLogicalSize();
-	setSDLDefaultDrawColor();
-	setSDLWindowTitle();
-	setSDLCharset();
-	setSDLScreen();
-	setSDLTexture();
-	hideSDLCursor();
-	setSDLColorKey();
+	CheckSDL();
+	CreateWindowAndRenderer();
+	setHint();
+	setRenderLogicalSize();
+	setDefaultDrawColor();
+	setWindowTitle();
+	setCharset();
+	setScreen();
+	setTexture();
+	hideCursor();
+	setColorKey();
 	setColors();
 }
 
@@ -134,7 +134,7 @@ void ScreenManager::createSDL() {
 // draw a surface sprite on a surface screen in point (x, y)
 // (x, y) is the center of sprite on screen
 void ScreenManager::drawSurface(const GameObject* gameObject, int xpos, int ypos) const {
-	SDL_Rect dest;
+	SDL_Rect dest = gameObject->destRect;
 	dest.x = xpos;
 	dest.y = ypos;
 	dest.w = gameObject->sprite->w;
@@ -142,7 +142,10 @@ void ScreenManager::drawSurface(const GameObject* gameObject, int xpos, int ypos
 	SDL_BlitSurface(gameObject->sprite, nullptr, screen, &dest);
 }
 
-void ScreenManager::drawSurfaceLadder(const GameObject* ladder, SDL_Rect dest) const {
+void ScreenManager::drawSurfaceLadder(const GameObject* ladder, int xpos, int ypos) const {
+	SDL_Rect dest = ladder->destRect;
+	dest.x = xpos;
+	dest.y = ypos;
 	ladder->sprite->w = dest.w;
 	ladder->sprite->h = dest.h;
 	SDL_BlitSurface(ladder->sprite, nullptr, screen, &dest);
@@ -208,20 +211,20 @@ void ScreenManager::loadTexture(T* gameObject, const char* fileName, bool flipHo
 		return;
 	}
 
-	if (!flipHorizontal) {
-		return;
+	// If flipHorizontal is true, flip the texture
+	if (flipHorizontal) {
+		flipTextureHorizontally(gameObject->sprite);
 	}
+}
 
-	// Get the surface info
-	int width = gameObject->sprite->w;
-	int height = gameObject->sprite->h;
-	int pitch = gameObject->sprite->pitch;
-	int bpp = gameObject->sprite->format->BytesPerPixel;
+void ScreenManager::flipTextureHorizontally(SDL_Surface* sprite) {
+	int width = sprite->w;
+	int height = sprite->h;
+	int pitch = sprite->pitch;
+	int bpp = sprite->format->BytesPerPixel;
 
-	// Get pixel data
-	unsigned char* pixels = static_cast<unsigned char*>(gameObject->sprite->pixels);
+	unsigned char* pixels = static_cast<unsigned char*>(sprite->pixels);
 
-	// Perform horizontal flip
 	for (int y = 0; y < height; y++) {
 		unsigned char* row = pixels + y * pitch;
 		for (int x = 0; x < width / 2; x++) {
@@ -231,6 +234,7 @@ void ScreenManager::loadTexture(T* gameObject, const char* fileName, bool flipHo
 		}
 	}
 }
+
 
 template void ScreenManager::loadTexture<GameObject>(GameObject* gameObject, const char* fileName, bool flipHorizontal);
 template void ScreenManager::loadTexture<MovableGameObject>(MovableGameObject* gameObject, const char* fileName, bool flipHorizontal);
@@ -249,16 +253,9 @@ template void ScreenManager::initGameObject<Player>(Player* gameObject, const ch
 template void ScreenManager::initGameObject<Gorilla>(Gorilla* gorilla, const char* fileName);
 template void ScreenManager::initGameObject<Barrel>(Barrel* barrel, const char* fileName);
 
-template <typename T>
-void ScreenManager::renderGameObject(T* gameObject) const {
-	drawSurface(gameObject, gameObject->xpos, gameObject->ypos);
-}
-
-template void ScreenManager::renderGameObject<GameObject>(GameObject* gameObject) const;
-template void ScreenManager::renderGameObject<MovableGameObject>(MovableGameObject* gameObject) const;
-
 void ScreenManager::renderLadder(const GameObject* gameObject) const {
-	drawSurfaceLadder(gameObject, gameObject->destRect);
+	// drawSurface(gameObject, gameObject->xpos, gameObject->ypos);
+	drawSurfaceLadder(gameObject, gameObject->xpos, gameObject->ypos);
 }
 
 void ScreenManager::drawPlatforms() {
@@ -275,16 +272,16 @@ void ScreenManager::drawLadders() {
 
 void ScreenManager::drawBarrels() {
 	for (int i = 0; i < gameObjectContainer->barrelContainer->getNumberOfElements(); i++) {
-		renderGameObject(std::move(gameObjectContainer->barrelContainer->barrels[i]));
+		drawSurface(gameObjectContainer->barrelContainer->barrels[i], gameObjectContainer->barrelContainer->barrels[i]->xpos, gameObjectContainer->barrelContainer->barrels[i]->ypos);
 	}
 }
 
-void ScreenManager::drawElements() { // rename these, so they are more descriptive on what they do
+void ScreenManager::drawElements() {
 	drawPlatforms();
 	drawLadders();
 	drawBarrels();
 	
-	renderGameObject(gameObjectContainer->donkeyKong);
-	renderGameObject(gameObjectContainer->princess);
-	renderGameObject(gameObjectContainer->player);
+	drawSurface(gameObjectContainer->donkeyKong, gameObjectContainer->donkeyKong->xpos, gameObjectContainer->donkeyKong->ypos);
+	drawSurface(gameObjectContainer->princess, gameObjectContainer->princess->xpos, gameObjectContainer->princess->ypos);
+	drawSurface(gameObjectContainer->player, gameObjectContainer->player->xpos, gameObjectContainer->player->ypos);
 }
