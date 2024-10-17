@@ -126,7 +126,7 @@ void KeyboardManager::onKeyPressArrowUp() {
         player->directionOfMovementY = UP;
         player->velocityY = DEFAULT_PLAYER_SPEED;
 
-		ScreenManager::loadTexture(player, PLAYER_CLIMB_1, false); // THIS SHOOUDNT BE HERE
+		ScreenManager::loadTexture(player, PLAYER_CLIMB_1); // THIS SHOOUDNT BE HERE
 	}
     else {
         player->isClimbing = false;
@@ -143,7 +143,7 @@ void KeyboardManager::onKeyPressArrowDown() {
         player->directionOfMovementY = DOWN;
         player->velocityY = DEFAULT_PLAYER_SPEED;
 
-        ScreenManager::loadTexture(player, PLAYER_CLIMB_1, false); // THIS SHOOUDNT BE HERE
+        ScreenManager::loadTexture(player, PLAYER_CLIMB_1); // THIS SHOOUDNT BE HERE
     }
     else {
         player->isClimbing = false;

@@ -9,7 +9,7 @@ LevelLoader::LevelLoader(GameObjectContainer* gameObjectContainer)
 void LevelLoader::createPlayer() {
     auto* pla = new Player();
 
-    ScreenManager::initGameObject(pla, PLAYER_1_FILENAME);
+	ScreenManager::loadTexture(pla, PLAYER_1_FILENAME);
 
     pla->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
     pla->createSrcRect();
@@ -23,7 +23,7 @@ void LevelLoader::createDonkeyKong() {
 
     auto* donkeyK = new Gorilla(gameObjectContainer->barrelContainer);
 
-    ScreenManager::initGameObject(donkeyK, "./assets/DonkeyKong.bmp");
+	ScreenManager::loadTexture(donkeyK, DONKEY_KONG_FILENAME);
 
     donkeyK->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
     donkeyK->createSrcRect();
@@ -39,7 +39,7 @@ void LevelLoader::createDonkeyKong() {
 void LevelLoader::createPrincess() {
     auto* prin = new GameObject();
 
-    ScreenManager::initGameObject(prin, "./assets/Princess.bmp");
+	ScreenManager::loadTexture(prin, PRINCESS_FILENAME);
 
     prin->setPosition(STARTING_X_PRINCESS, STARTING_Y_PRINCESS);
     prin->createSrcRect();
@@ -77,7 +77,7 @@ void LevelLoader::createPlatforms1() {
 void LevelLoader::createLadders1() {
     auto* ladd1 = new GameObject();
 
-    ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
+	ScreenManager::loadTexture(ladd1, LADDER_FILENAME);
 
     ladd1->setPosition(525, 129);
     ladd1->setSrcRect(LADDER_WIDTH, 170);
@@ -85,7 +85,7 @@ void LevelLoader::createLadders1() {
 
     auto* ladd2 = new GameObject();
 
-    ScreenManager::initGameObject(ladd2, "./assets/Ladder.bmp");
+	ScreenManager::loadTexture(ladd2, LADDER_FILENAME);
 
     ladd2->setPosition(250, 79);
     ladd2->setSrcRect(LADDER_WIDTH, 50);
@@ -130,7 +130,7 @@ void LevelLoader::createPlatforms2() {
 void LevelLoader::createLadders2() {
     auto* ladd1 = new GameObject();
 
-	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
+	ScreenManager::loadTexture(ladd1, LADDER_FILENAME);
 
 	ladd1->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 229);
 	ladd1->setSrcRect(LADDER_WIDTH, 170);
@@ -138,7 +138,7 @@ void LevelLoader::createLadders2() {
 
     auto* ladd2 = new GameObject();
 
-	ScreenManager::initGameObject(ladd2, "./assets/Ladder.bmp");
+	ScreenManager::loadTexture(ladd2, LADDER_FILENAME);
 
 	ladd2->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH - LADDER_WIDTH, 79);
 	ladd2->setSrcRect(LADDER_WIDTH, 150);
@@ -180,7 +180,7 @@ void LevelLoader::createPlatforms3() {
 void LevelLoader::createLadders3() {
     auto* ladd1 = new GameObject();
 
-	ScreenManager::initGameObject(ladd1, "./assets/Ladder.bmp");
+	ScreenManager::loadTexture(ladd1, LADDER_FILENAME);
 
 	ladd1->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 299);
 	ladd1->setSrcRect(LADDER_WIDTH, LARGE_MARGIN);
@@ -188,7 +188,7 @@ void LevelLoader::createLadders3() {
 
     auto* ladd2 = new GameObject();
 
-	ScreenManager::initGameObject(ladd2, "./assets/Ladder.bmp");
+	ScreenManager::loadTexture(ladd2, LADDER_FILENAME);
 
 	ladd2->setPosition(LARGE_MARGIN, 199);
 	ladd2->setSrcRect(LADDER_WIDTH, LARGE_MARGIN);
@@ -196,7 +196,7 @@ void LevelLoader::createLadders3() {
 
     auto* ladd3 = new GameObject();
 
-	ScreenManager::initGameObject(ladd3, "./assets/Ladder.bmp");
+	ScreenManager::loadTexture(ladd3, LADDER_FILENAME);
 
 	ladd3->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 129);
 	ladd3->setSrcRect(LADDER_WIDTH, 70);
@@ -204,7 +204,7 @@ void LevelLoader::createLadders3() {
 
     auto* ladd4 = new GameObject();
 
-	ScreenManager::initGameObject(ladd4, "./assets/Ladder.bmp");
+	ScreenManager::loadTexture(ladd4, LADDER_FILENAME);
 
 	ladd4->setPosition(250, 79);
 	ladd4->setSrcRect(LADDER_WIDTH, 50);

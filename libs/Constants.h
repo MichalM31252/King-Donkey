@@ -56,6 +56,15 @@ const char PLAYER_3_FILENAME[] = "./assets/Mario_Run3.bmp";
 const char PLAYER_CLIMB_1[] = "./assets/Mario_Climb1.bmp";
 const char PLAYER_CLIMB_2[] = "./assets/Mario_Climb2.bmp";
 
+// Donkey Kong
+const char DONKEY_KONG_FILENAME[] = "./assets/DonkeyKong.bmp";
+
+// Princess
+const char PRINCESS_FILENAME[] = "./assets/Princess.bmp";
+
+// Ladder
+const char LADDER_FILENAME[] = "./assets/Ladder.bmp";
+
 // Barrel 
 const char BARREL_1_FILENAME[] = "./assets/Barrel_1.bmp";
 const char BARREL_2_FILENAME[] = "./assets/Barrel_2.bmp";
