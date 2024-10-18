@@ -186,6 +186,33 @@ void ScreenManager::drawLine(int x, int y, int l, int dx, int dy, Uint32 color) 
 	};
 };
 
+void ScreenManager::drawPlatorm(Platform* platform) {
+	int length = sqrt(pow(platform->x2pos - platform->x1pos, 2) + pow(platform->y2pos - platform->y1pos, 2));
+	if (platform->y1pos != platform->y2pos) { // xdddddddddddddddddd
+		int differenceBetweenX = sqrt(pow(platform->x2pos - platform->x1pos, 2));
+		int x = platform->x1pos;
+		int y = platform->y1pos;
+		if (platform->y1pos > platform->y2pos) {
+			for (int i = 0; i < differenceBetweenX; i++) {
+				drawPixel(screen, x, y, 0xffffffff);
+				x++;
+				y--;
+			}
+		}
+		if (platform->y1pos < platform->y2pos) {
+			for (int i = 0; i < differenceBetweenX; i++) {
+				drawPixel(screen, x, y, 0xffffffff);
+				x++;
+				y++;
+			}
+		}
+
+	}
+	else {
+		drawLine(platform->x1pos, platform->y1pos, length, 1, 0, 0xffffffff);
+	}
+}
+
 void ScreenManager::drawRectangle(int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) const { // x, y - top left corner // draw a rectangle of size l by k
 	drawLine(x, y, k, 0, 1, outlineColor);
 	drawLine(x + l - 1, y, k, 0, 1, outlineColor);
@@ -229,20 +256,16 @@ void ScreenManager::flipTextureHorizontally(SDL_Surface* sprite) {
 	}
 }
 
-void ScreenManager::renderLadder(const GameObject* gameObject) const {
-	// drawSurface(gameObject, gameObject->xpos, gameObject->ypos);
-	drawSurfaceLadder(gameObject, gameObject->xpos, gameObject->ypos);
-}
-
 void ScreenManager::drawPlatforms() {
 	for (int i = 0; i < gameObjectContainer->platformContainer->getNumberOfElements(); i++) {
-		gameObjectContainer->platformContainer->platforms[i]->render(screen);
+		drawPlatorm(gameObjectContainer->platformContainer->platforms[i]);
 	}
 }
 
 void ScreenManager::drawLadders() {
 	for (int i = 0; i < gameObjectContainer->ladderContainer->getNumberOfElements(); i++) {
-		renderLadder(std::move(gameObjectContainer->ladderContainer->ladders[i]));
+		auto gameObject = gameObjectContainer->ladderContainer->ladders[i];
+		drawSurfaceLadder(gameObject, gameObject->xpos, gameObject->ypos);
 	}
 }
 
