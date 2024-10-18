@@ -9,8 +9,8 @@ public:
 	AnimationManager() = default;
 	explicit AnimationManager(GameObjectContainer* gameObjectContainer);
 
-	void handleAnimations(double deltaTime);
+	void handleAnimations();
 
 	void handlePlayerAnimation();
-	void handleBarrelAnimation();
+	void handleAllBarrelsAnimation() const;
 };

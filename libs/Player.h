@@ -34,7 +34,7 @@ public:
 	void update(double deltaTime);
 	void updatePosition();
 
-	void startAccumulatingDistance(double deltaTime) override;
+	void accumulateDistance(double deltaTime) override;
 
 	// handle animations based on direction method 
 };

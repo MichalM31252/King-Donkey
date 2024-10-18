@@ -35,7 +35,7 @@ public:
 
 	MovableGameObject();
 	void update(double deltaTime);
-	virtual void startAccumulatingDistance(double deltaTime);
+	virtual void accumulateDistance(double deltaTime);
 	void updatePositionCoordinates();
 
 	void stayInBounds();

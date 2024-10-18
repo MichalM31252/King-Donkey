@@ -5,9 +5,9 @@ AnimationManager::AnimationManager(GameObjectContainer* gameObjectContainer)
 {
 }
 
-void AnimationManager::handleAnimations(double deltaTime) {
+void AnimationManager::handleAnimations() {
 	handlePlayerAnimation();
-	handleBarrelAnimation();
+	handleAllBarrelsAnimation();
 }
 
 // 
@@ -15,12 +15,10 @@ void AnimationManager::handlePlayerAnimation() {
 	Player* player = gameObjectContainer->player;
 
 	// RUNNING
-	if ((player->directionOfMovementX == LEFT || player->directionOfMovementX == RIGHT) && player->velocityX > 0) {
-		if (player->distanceTravelledFromLastRunningSprite >= 20) {
-			player->loadNextRunningSprite();
-			player->distanceTravelledFromLastRunningSprite -= 20;
-			return;
-		}
+	if ((player->directionOfMovementX == LEFT || player->directionOfMovementX == RIGHT) && player->velocityX > 0 && player->distanceTravelledFromLastRunningSprite >= 20) {
+		player->loadNextRunningSprite();
+		player->distanceTravelledFromLastRunningSprite -= 20;
+		return;
 	}
 
 	// JUMPING
@@ -46,20 +44,14 @@ void AnimationManager::handlePlayerAnimation() {
 
 	// 4 functions, isPlayerRunning, isPlayerJumping, isPlayerClimbing, isPlayerIdle
 
-
 	// horizontally it saves the last direction inside directionof movement x but it does not save the last direction of movement y
 }
 
-void AnimationManager::handleBarrelAnimation() { // barrels, because its all barrels
-	if (gameObjectContainer->barrelContainer->getNumberOfElements() == 0) {
-		return;
-	}
-
+void AnimationManager::handleAllBarrelsAnimation() const {
 	for (auto barrel : gameObjectContainer->barrelContainer->barrels) {
 		if (barrel->distanceTravelledFromLastSpriteChange >= 5) {
 			barrel->loadNextSprite();
 			barrel->distanceTravelledFromLastSpriteChange -= 5;
 		}
 	}
-
 }

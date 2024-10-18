@@ -15,7 +15,7 @@ Player::Player()
 
 void Player::update(double deltaTime) {
 	this->updatePosition();
-	startAccumulatingDistance(deltaTime);
+	accumulateDistance(deltaTime);
 	stayInBounds();
 	updatePositionCoordinates();
 }
@@ -176,7 +176,7 @@ bool Player::isPlayerMovingVertically() const {
 	return false;
 }
 
-void Player::startAccumulatingDistance(double deltaTime) {
+void Player::accumulateDistance(double deltaTime) {
 	if (isPlayerMovingVertically()) { // up or down
 		if (isClimbing) {
 			if (directionOfMovementY == UP && velocityY > 0) {
@@ -188,7 +188,7 @@ void Player::startAccumulatingDistance(double deltaTime) {
 		}
 	}
 	else {
-		MovableGameObject::startAccumulatingDistance(deltaTime);
+		MovableGameObject::accumulateDistance(deltaTime);
 	}
 }
 

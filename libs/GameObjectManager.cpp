@@ -19,7 +19,7 @@ void GameObjectManager::handleCollisionsOfGameObjects(bool& quit) {
 }
 
 void GameObjectManager::updateSpritesOfGameObjects(double deltaTime) {
-	animationManager->handleAnimations(deltaTime);
+	animationManager->handleAnimations();
 }
 
 void GameObjectManager::updatePhysicsOfGameObjects(double deltaTime) {

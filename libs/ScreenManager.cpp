@@ -32,7 +32,7 @@ void ScreenManager::handleFPSTimer() {
 		fps = frames * REFRESH_RATE;
 		frames = 0;
 		fpsTimer -= SECONDS_BETWEEN_REFRESH;
-	};
+	}
 }
 
 void ScreenManager::CheckSDL() const {
@@ -45,7 +45,7 @@ void ScreenManager::CreateWindowAndRenderer() {
 	rc = SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
 	if (rc != 0) {
 		printf("SDL_CreateWindowAndRenderer error: %s\n", SDL_GetError());
-	};
+	}
 }
 
 void ScreenManager::setHint() const { // use this to recieve input from window
@@ -68,7 +68,7 @@ void ScreenManager::setCharset() {
 	charset = SDL_LoadBMP("./assets/cs8x8.bmp");
 	if (charset == nullptr) {
 		printf("SDL_LoadBMP(cs8x8.bmp) error: %s\n", SDL_GetError());
-	};
+	}
 }
 
 void ScreenManager::setScreen() {
@@ -109,21 +109,6 @@ void ScreenManager::drawAdditionalInfo() const {
 	std::string text = "Time: " + std::to_string(worldTime) + " s  Score: 0  Lives: 1";
 
 	drawString(screen->w / 2 - text.length() * 8 / 2, 7, text);
-}
-
-void ScreenManager::createSDL() {
-	CheckSDL();
-	CreateWindowAndRenderer();
-	setHint();
-	setRenderLogicalSize();
-	setDefaultDrawColor();
-	setWindowTitle();
-	setCharset();
-	setScreen();
-	setTexture();
-	hideCursor();
-	setColorKey();
-	setColors();
 }
 
 // draw a surface sprite on a surface screen in point (x, y)
@@ -183,10 +168,10 @@ void ScreenManager::drawLine(int x, int y, int l, int dx, int dy, Uint32 color) 
 		drawPixel(screen, x, y, color);
 		x += dx;
 		y += dy;
-	};
-};
+	}
+}
 
-void ScreenManager::drawPlatorm(Platform* platform) {
+void ScreenManager::drawPlatorm(const Platform* platform) {
 	int length = sqrt(pow(platform->x2pos - platform->x1pos, 2) + pow(platform->y2pos - platform->y1pos, 2));
 	if (platform->y1pos != platform->y2pos) { // xdddddddddddddddddd
 		int differenceBetweenX = sqrt(pow(platform->x2pos - platform->x1pos, 2));
@@ -213,15 +198,15 @@ void ScreenManager::drawPlatorm(Platform* platform) {
 	}
 }
 
-void ScreenManager::drawRectangle(int x, int y, int l, int k, Uint32 outlineColor, Uint32 fillColor) const { // x, y - top left corner // draw a rectangle of size l by k
-	drawLine(x, y, k, 0, 1, outlineColor);
-	drawLine(x + l - 1, y, k, 0, 1, outlineColor);
-	drawLine(x, y, l, 1, 0, outlineColor);
-	drawLine(x, y + k - 1, l, 1, 0, outlineColor);
-	for (int i = y + 1; i < y + k - 1; i++) {
-		drawLine(x + 1, i, l - 2, 1, 0, fillColor);
+void ScreenManager::drawRectangle(int x, int y, int widthOfRectangle, int heightOfRectangle, Uint32 outlineColor, Uint32 fillColor) const { // x, y - top left corner // draw a rectangle of size l by k
+	drawLine(x, y, heightOfRectangle, 0, 1, outlineColor);
+	drawLine(x + widthOfRectangle - 1, y, heightOfRectangle, 0, 1, outlineColor);
+	drawLine(x, y, widthOfRectangle, 1, 0, outlineColor);
+	drawLine(x, y + heightOfRectangle - 1, widthOfRectangle, 1, 0, outlineColor);
+	for (int i = y + 1; i < y + heightOfRectangle - 1; i++) {
+		drawLine(x + 1, i, widthOfRectangle - 2, 1, 0, fillColor);
 	}
-};
+}
 
 template <typename T>
 void ScreenManager::loadTexture(T* gameObject, const char* fileName) {
@@ -244,7 +229,7 @@ void ScreenManager::flipTextureHorizontally(SDL_Surface* sprite) {
 	int pitch = sprite->pitch;
 	int bpp = sprite->format->BytesPerPixel;
 
-	unsigned char* pixels = static_cast<unsigned char*>(sprite->pixels);
+	auto* pixels = static_cast<unsigned char*>(sprite->pixels);
 
 	for (int y = 0; y < height; y++) {
 		unsigned char* row = pixels + y * pitch;

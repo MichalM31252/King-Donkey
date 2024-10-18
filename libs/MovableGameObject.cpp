@@ -17,7 +17,7 @@ MovableGameObject::MovableGameObject()
 {
 }
 
-void MovableGameObject::startAccumulatingDistance(double deltaTime) { // rename to accumulate distance
+void MovableGameObject::accumulateDistance(double deltaTime) { // rename to accumulate distance
 	if (velocityY > 0 && directionOfMovementY == UP) {
 		accumulatedMoveUp += deltaTime * velocityY;
 	}
@@ -84,7 +84,7 @@ void MovableGameObject::updatePositionCoordinates() {
 
 void MovableGameObject::update(double deltaTime) { // break this up into smaller functions
 	updatePosition();
-	startAccumulatingDistance(deltaTime);
+	accumulateDistance(deltaTime);
 	stayInBounds();
 	updatePositionCoordinates();
 }
@@ -109,7 +109,7 @@ void MovableGameObject::startMovingRight() {
 }
 
 void MovableGameObject::startMovingDown() {
-	
+	directionOfMovementY = DOWN;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

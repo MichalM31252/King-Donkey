@@ -22,7 +22,6 @@ public:
 	std::unique_ptr<LevelLoader> levelLoader;
 	std::unique_ptr<KeyboardManager> keyboardManager;
 	std::unique_ptr<GameObjectManager> gameObjectManager;
-	// gameObjectTextureManager 
 
 	Game();
 

@@ -8,19 +8,6 @@
 
 // tracks every game object in the game and checks if they collide
 
-// in the future merge most of these methods into one method that will check if two game objects collide
-// once every game object has a hitbox
-
-// is movable game object colliding with ladder
-// is movable game object colliding with barrel
-// is movable game object colliding with platform
-// is movable game object colliding with kong
-// is movable game object colliding with princess
-// is movable game object colliding with the edge of the screen
-
-
-// !!! is movable game object colliding with another movable game object !!!
-
 class CollisionDetector
 {
 public:

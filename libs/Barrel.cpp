@@ -8,7 +8,7 @@ Barrel::Barrel() {
 
 void Barrel::update(double deltaTime) {
 	this->updatePosition();
-	startAccumulatingDistance(deltaTime);
+	accumulateDistance(deltaTime);
 	stayInBounds();
 	updatePositionCoordinates();
 }

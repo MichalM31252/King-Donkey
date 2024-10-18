@@ -73,12 +73,9 @@ bool CollisionDetector::isGameObjectInsideAnyLadder(const GameObject* gameObject
     return false;
 }
 
-// it needs to be completely inside the rect and not just collision
 bool CollisionDetector::isGameObjectInsideLadder(const GameObject* gameObject, const GameObject* ladder) { 
-    if (((gameObject->xpos >= ladder->xpos && gameObject->xpos < ladder->xpos + ladder->destRect.w) && (gameObject->xpos + gameObject->destRect.w > ladder->xpos && gameObject->xpos + gameObject->destRect.w < ladder->xpos + ladder->destRect.w))) {
-        if (isCollisionBetweenRects(gameObject->destRect, ladder->destRect)) {
-            return true;
-        }
+    if ((gameObject->xpos >= ladder->xpos && gameObject->xpos < ladder->xpos + ladder->destRect.w) && (gameObject->xpos + gameObject->destRect.w > ladder->xpos && gameObject->xpos + gameObject->destRect.w < ladder->xpos + ladder->destRect.w) && isCollisionBetweenRects(gameObject->destRect, ladder->destRect)) {
+        return true;
     }
     return false;
 }

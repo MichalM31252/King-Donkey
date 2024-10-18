@@ -13,7 +13,18 @@ Game::Game()
 }
 
 [[noreturn]] void Game::initGame() const {
-    screenManager->createSDL();
+    screenManager->CheckSDL();
+    screenManager->CreateWindowAndRenderer();
+    screenManager->setHint();
+    screenManager->setRenderLogicalSize();
+    screenManager->setDefaultDrawColor();
+    screenManager->setWindowTitle();
+    screenManager->setCharset();
+    screenManager->setScreen();
+    screenManager->setTexture();
+    screenManager->hideCursor();
+    screenManager->setColorKey();
+    screenManager->setColors();
     screenManager->createFramerate();
      
 	levelLoader->loadLevel1();
@@ -49,7 +60,6 @@ Game::Game()
         screenManager->frames++;
         gameObjectManager->updateSpritesOfGameObjects(screenManager->deltaTime); // handle animations?
     }
-
     closeGame();
 }
 
