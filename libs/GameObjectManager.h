@@ -10,10 +10,10 @@
 class GameObjectManager {
 public:
 	std::unique_ptr<GameObjectContainer> gameObjectContainer;
-	std::unique_ptr<CollisionResolver> collisionResolver;
-	std::unique_ptr<CollisionDetector> collisionDetector;
-	std::unique_ptr<PhysicsManager> physicsManager;
-	std::unique_ptr<AnimationManager> animationManager;
+	CollisionResolver collisionResolver;
+	CollisionDetector collisionDetector;
+	PhysicsManager physicsManager;
+	AnimationManager animationManager;
 	
 	GameObjectManager() = default;
 	explicit GameObjectManager(GameObjectContainer* gameObjectContainer);

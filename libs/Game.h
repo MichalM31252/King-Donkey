@@ -18,13 +18,13 @@
 class Game {
 public:
 	std::unique_ptr<GameObjectContainer> gameObjectContainer;
-	std::unique_ptr<ScreenManager> screenManager;
-	std::unique_ptr<LevelLoader> levelLoader;
-	std::unique_ptr<KeyboardManager> keyboardManager;
-	std::unique_ptr<GameObjectManager> gameObjectManager;
+	ScreenManager screenManager;
+	LevelLoader levelLoader;
+	KeyboardManager keyboardManager;
+	GameObjectManager gameObjectManager;
 
 	Game();
 
-	[[noreturn]] void initGame() const;
-	[[noreturn]] void closeGame() const;
+	[[noreturn]] void initGame();
+	[[noreturn]] void closeGame();
 };

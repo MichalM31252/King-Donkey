@@ -10,7 +10,6 @@ void AnimationManager::handleAnimations() {
 	handleAllBarrelsAnimation();
 }
 
-// 
 void AnimationManager::handlePlayerAnimation() {
 	Player* player = gameObjectContainer->player;
 

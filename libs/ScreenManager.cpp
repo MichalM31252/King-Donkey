@@ -35,13 +35,13 @@ void ScreenManager::handleFPSTimer() {
 	}
 }
 
-void ScreenManager::CheckSDL() const {
+void ScreenManager::checkSDL() const {
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
 		printf("SDL_Init error: %s\n", SDL_GetError());
 	}
 }
 
-void ScreenManager::CreateWindowAndRenderer() {
+void ScreenManager::createWindowAndRenderer() {
 	rc = SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
 	if (rc != 0) {
 		printf("SDL_CreateWindowAndRenderer error: %s\n", SDL_GetError());

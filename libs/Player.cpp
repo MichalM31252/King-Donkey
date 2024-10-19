@@ -3,13 +3,13 @@
 
 Player::Player()
 	: isJumping(false)
-	, distanceTravelledFromLastRunningSprite(20) // remove magic number
-	, distanceTravelledFromLastClimbingSprite(20)
-	, isClimbing(false)
+	, isClimbing(false) 
+	, currentRunningSpriteId(0) 
+	, currentClimbingSpriteId(0) 
+	, distanceTravelledFromLastRunningSprite(20) // remove magic number 
+	, distanceTravelledFromLastClimbingSprite(20) 
+	, jumpHeightStop(SCREEN_HEIGHT) 
 	, checkIfJumpPossible(false)
-	, jumpHeightStop(SCREEN_HEIGHT)
-	, currentClimbingSpriteId(0)
-	, currentRunningSpriteId(0)
 {
 }
 
@@ -165,11 +165,7 @@ void Player::loadIdleSprite() {
 	currentRunningSpriteId = 1;
 }
 
-bool Player::isPlayerJumping() const {
-	return this->isJumping;
-}
-
-bool Player::isPlayerMovingVertically() const {
+bool Player::isMovingVertically() const {
 	if ((directionOfMovementY == UP || directionOfMovementY == DOWN) && velocityY > 0) {
 		return true;
 	}
@@ -177,14 +173,12 @@ bool Player::isPlayerMovingVertically() const {
 }
 
 void Player::accumulateDistance(double deltaTime) {
-	if (isPlayerMovingVertically()) { // up or down
-		if (isClimbing) {
-			if (directionOfMovementY == UP && velocityY > 0) {
-				accumulatedMoveUp += deltaTime * velocityY;
-			}
-			if (directionOfMovementY == DOWN && velocityY > 0) {
-				accumulatedMoveDown += deltaTime * velocityY;
-			}
+	if (isMovingVertically() && isClimbing) { // up or down
+		if (directionOfMovementY == UP && velocityY > 0) {
+			accumulatedMoveUp += deltaTime * velocityY;
+		}
+		if (directionOfMovementY == DOWN && velocityY > 0) {
+			accumulatedMoveDown += deltaTime * velocityY;
 		}
 	}
 	else {

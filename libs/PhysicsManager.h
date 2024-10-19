@@ -11,5 +11,5 @@ public:
 
     void handleFallingForPlayer(double deltaTime);
     void handleFallingForBarrels(double deltaTime);
-	void startFalling(MovableGameObject* gameObject, double deltaTime) const;
+	void forceFalling(MovableGameObject* gameObject, double deltaTime) const;
 };

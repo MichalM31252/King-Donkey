@@ -38,8 +38,8 @@ public:
 	ScreenManager() = default;
 	explicit ScreenManager(GameObjectContainer* gameObjectContainer);
 
-	void CheckSDL() const;
-	void CreateWindowAndRenderer();
+	void checkSDL() const;
+	void createWindowAndRenderer();
 	void setHint() const;
 	void setRenderLogicalSize();
 	void setDefaultDrawColor();

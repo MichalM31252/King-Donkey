@@ -2,9 +2,9 @@
 
 GameObjectManager::GameObjectManager(GameObjectContainer* gameObjectContainer)
 	: gameObjectContainer(gameObjectContainer) 
-	, collisionResolver(std::make_unique<CollisionResolver>(gameObjectContainer))
-	, physicsManager(std::make_unique<PhysicsManager>(gameObjectContainer))
-	, animationManager(std::make_unique<AnimationManager>(gameObjectContainer))
+	, collisionResolver(CollisionResolver(gameObjectContainer))
+	, physicsManager(PhysicsManager(gameObjectContainer))
+	, animationManager(AnimationManager(gameObjectContainer))
 {
 }
 
@@ -14,16 +14,16 @@ void GameObjectManager::updatePositionOfGameObjects(double deltaTime) {
 }
 
 void GameObjectManager::handleCollisionsOfGameObjects(bool& quit) {
-	collisionResolver->handlePlayerCollision();
-	collisionResolver->handleBarrelsCollision(&quit);
+	collisionResolver.handlePlayerCollision();
+	collisionResolver.handleBarrelsCollision(&quit);
 }
 
 void GameObjectManager::updateSpritesOfGameObjects(double deltaTime) {
-	animationManager->handleAnimations();
+	animationManager.handleAnimations();
 }
 
 void GameObjectManager::updatePhysicsOfGameObjects(double deltaTime) {
-	physicsManager->handleFallingForPlayer(deltaTime);
-	physicsManager->handleFallingForBarrels(deltaTime);
+	physicsManager.handleFallingForPlayer(deltaTime);
+	physicsManager.handleFallingForBarrels(deltaTime);
 }
 
