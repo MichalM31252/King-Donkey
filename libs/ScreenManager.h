@@ -15,12 +15,7 @@ class ScreenManager {
 public:
 	GameObjectContainer* gameObjectContainer;
 
-	int tick1;
-	int tick2;
 	int frames;
-
-	double deltaTime;
-	double worldTime;
 	double fpsTimer;
 	double fps;
 
@@ -52,12 +47,10 @@ public:
 
 	void setColors();
 	void drawOutlineOfTheBoard() const;
-	void drawAdditionalInfo() const;
+	void drawAdditionalInfo(double deltaTime) const;
 
 	void createFramerate();
-	void handleFPSTimer();
-	void handleDifferentComputers();
-	void updateWorldTime();
+	void handleFPSTimer(double deltaTime);
 
 	void serveNextFrame();
 

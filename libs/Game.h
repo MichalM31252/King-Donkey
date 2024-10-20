@@ -12,6 +12,7 @@
 #include "BarrelHolder.h"
 #include "LevelLoader.h"
 #include "GameObjectManager.h"
+#include "GameTime.h"
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
 
@@ -22,6 +23,7 @@ public:
 	LevelLoader levelLoader;
 	KeyboardManager keyboardManager;
 	GameObjectManager gameObjectManager;
+	GameTime gameTime;
 
 	Game();
 

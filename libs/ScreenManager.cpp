@@ -9,24 +9,12 @@ ScreenManager::ScreenManager(GameObjectContainer* gameObjectContainer)
 }
 
 void ScreenManager::createFramerate() { // (logic) (use constructor instead) (ok what do I do with tick1 then?)
-	tick1 = SDL_GetTicks();
 	frames = 0; // frames that happend
 	fpsTimer = 0; // 
 	fps = 0; // frames per second
-	worldTime = 0; // how long the game is running
 }
 
-void ScreenManager::handleDifferentComputers() {
-	tick2 = SDL_GetTicks();
-	deltaTime = (tick2 - tick1) * 0.001;
-	tick1 = tick2;
-}
-
-void ScreenManager::updateWorldTime() {
-	worldTime += deltaTime;
-}
-
-void ScreenManager::handleFPSTimer() {
+void ScreenManager::handleFPSTimer(double deltaTime) {
 	fpsTimer += deltaTime;
 	if (fpsTimer > SECONDS_BETWEEN_REFRESH) {
 		fps = frames * REFRESH_RATE;
@@ -102,11 +90,11 @@ void ScreenManager::drawOutlineOfTheBoard() const {
 	drawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, blue, black);
 }
 
-void ScreenManager::drawAdditionalInfo() const {
+void ScreenManager::drawAdditionalInfo(double deltaTime) const {
 	drawRectangle(1, 1, SCREEN_WIDTH - 2, TOP_BAR_HEIGHT, blue, blue);
 
 	// Convert worldTime to string and concatenate the rest of the text
-	std::string text = "Time: " + std::to_string(worldTime) + " s  Score: 0  Lives: 1";
+	std::string text = "Time: " + std::to_string(deltaTime) + " s  Score: 0  Lives: 1";
 
 	drawString(screen->w / 2 - text.length() * 8 / 2, 7, text);
 }

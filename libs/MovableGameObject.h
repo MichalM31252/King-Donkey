@@ -3,13 +3,13 @@
 #include "GameObject.h"
 #include "Constants.h"
 
-enum class CurrentDirectionOfMovementX {
+enum class DirectionX {
 	NONE = 0,
 	LEFT,
 	RIGHT
 };
 
-enum class CurrentDirectionOfMovementY {
+enum class DirectionY {
 	NONE = 0,
 	UP,
 	DOWN
@@ -26,8 +26,8 @@ public:
 
 	unsigned int velocityX;
 	unsigned int velocityY;
-	CurrentDirectionOfMovementX currentDirectionOfMovementX;
-	CurrentDirectionOfMovementY currentDirectionOfMovementY;
+	DirectionX currentDirectionOfMovementX;
+	DirectionY currentDirectionOfMovementY;
 
 	bool isFalling;
 	double gravity;

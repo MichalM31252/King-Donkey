@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="libs\GameTime.cpp" />
     <ClCompile Include="libs\AnimationManager.cpp" />
     <ClCompile Include="libs\BarrelFactory.cpp" />
     <ClCompile Include="libs\BarrelHolder.cpp" />
@@ -45,6 +46,7 @@
     <Image Include="eti.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="libs\GameTime.h" />
     <ClInclude Include="libs\AnimationManager.h" />
     <ClInclude Include="libs\GameObjectManager.h" />
     <ClInclude Include="libs\Gorilla.h" />

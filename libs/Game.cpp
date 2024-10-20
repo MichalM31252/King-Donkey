@@ -9,6 +9,7 @@ Game::Game()
 	, levelLoader(LevelLoader(gameObjectContainer.get()))
 	, keyboardManager(KeyboardManager(gameObjectContainer.get()))
 	, gameObjectManager(GameObjectManager(gameObjectContainer.get()))
+	, gameTime(GameTime())
 {
 	startGame();
 }
@@ -28,6 +29,7 @@ Game::Game()
     screenManager.setColors();
     screenManager.createFramerate();
     levelLoader.loadLevel1();
+	gameTime.start();
     runGame();
 }
 
@@ -35,33 +37,32 @@ Game::Game()
     bool quit = false;
     while (!quit) {
 		// UPDATE TIME
-        screenManager.handleDifferentComputers();
+		gameTime.update();
 
 		// PROCESS EVENTS
 		keyboardManager.handleEvents(quit);
 
         // UPDATE
-        gameObjectManager.updatePositionOfGameObjects(screenManager.deltaTime);
+        gameObjectManager.updatePositionOfGameObjects(gameTime.deltaTime);
 		gameObjectManager.handleCollisionsOfGameObjects(quit);
-		gameObjectManager.updatePhysicsOfGameObjects(screenManager.deltaTime);
+		gameObjectManager.updatePhysicsOfGameObjects(gameTime.deltaTime);
 
         // no idea where to put this, this updates the class that creates barrels
-        gameObjectContainer->donkeyKong->update(screenManager.deltaTime);
+        gameObjectContainer->donkeyKong->update(gameTime.deltaTime);
 
         // no idea where to put this
         if (!gameObjectContainer->player->isClimbing && gameObjectContainer->player->isJumping) {
-            gameObjectContainer->player->jump(screenManager.deltaTime);
+            gameObjectContainer->player->jump(gameTime.deltaTime);
         }
 
         // RENDER
-        screenManager.updateWorldTime();
-        screenManager.handleFPSTimer();
+        screenManager.handleFPSTimer(gameTime.deltaTime);
         screenManager.drawOutlineOfTheBoard();
-        screenManager.drawAdditionalInfo();
+        screenManager.drawAdditionalInfo(gameTime.worldTime);
 		screenManager.drawElements(); // current quick fix is that ladder is drawn first then player to make player appear on top of ladder
         screenManager.serveNextFrame();
         screenManager.frames++;
-        gameObjectManager.updateSpritesOfGameObjects(screenManager.deltaTime); // handle animations?
+        gameObjectManager.updateSpritesOfGameObjects(gameTime.deltaTime); // handle animations?
     }
     closeGame();
 }
