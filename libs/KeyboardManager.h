@@ -7,6 +7,7 @@
 #include "Constants.h"
 #include "GameObjectContainer.h"
 #include "CollisionDetector.h"
+#include "GameTime.h"
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
 
@@ -14,9 +15,10 @@ class KeyboardManager {
 public:
     SDL_Event event;
     GameObjectContainer* gameObjectContainer;
+    GameTime* gameTime;
 
     KeyboardManager() = default;
-    explicit KeyboardManager(GameObjectContainer* gameObjectContainer);
+    KeyboardManager(GameObjectContainer* gameObjectContainer, GameTime* gameTime);
 
     void handleEvents(bool& quit);
 
@@ -28,6 +30,7 @@ public:
     void onKeyPressArrowDown();
     void onKeyPressArrowLeft();
     void onKeyPressSpace();
+    void onKeyPressP();
 
     static void onKeyPressN(bool& quit);
     static void onKeyPress1(bool& quit);

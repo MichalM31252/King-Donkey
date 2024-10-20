@@ -18,12 +18,12 @@
 
 class Game {
 public:
+	GameTime gameTime;
 	std::unique_ptr<GameObjectContainer> gameObjectContainer;
 	ScreenManager screenManager;
 	LevelLoader levelLoader;
 	KeyboardManager keyboardManager;
 	GameObjectManager gameObjectManager;
-	GameTime gameTime;
 
 	Game();
 

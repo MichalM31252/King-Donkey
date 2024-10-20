@@ -4,12 +4,13 @@
 #include "CollisionResolver.h" // temporary fix
 
 Game::Game()
-    : gameObjectContainer(std::make_unique<GameObjectContainer>())
+    : gameTime(GameTime())
+    , gameObjectContainer(std::make_unique<GameObjectContainer>())
     , screenManager(ScreenManager(gameObjectContainer.get()))
 	, levelLoader(LevelLoader(gameObjectContainer.get()))
-	, keyboardManager(KeyboardManager(gameObjectContainer.get()))
+	, keyboardManager(KeyboardManager(gameObjectContainer.get(), &gameTime))
 	, gameObjectManager(GameObjectManager(gameObjectContainer.get()))
-	, gameTime(GameTime())
+	
 {
 	startGame();
 }

@@ -3,9 +3,10 @@
 #include "KeyboardManager.h"
 #include "ScreenManager.h" // temporary fix
 
-KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer)
+KeyboardManager::KeyboardManager(GameObjectContainer* gameObjectContainer, GameTime* gameTime)
     : event()
 	, gameObjectContainer(gameObjectContainer)
+    , gameTime(gameTime)
 {
 }
 
@@ -51,6 +52,9 @@ void KeyboardManager::onKeyPressed(bool& quit){
         case SDLK_n:
             onKeyPressN(quit);
             break;
+		case SDLK_p:
+            onKeyPressP();
+			break;
         case SDLK_1:
             onKeyPress1(quit);
             break;
@@ -162,6 +166,15 @@ void KeyboardManager::onKeyPressArrowRight() {
 
 void KeyboardManager::onKeyPressSpace() {
     gameObjectContainer->player->initJump();
+}
+
+void KeyboardManager::onKeyPressP() {
+    if (gameTime->isPaused) {
+        gameTime->resume();
+    }
+    else {
+        gameTime->pause();
+    }
 }
 
 void KeyboardManager::onKeyPressN(bool& quit) {

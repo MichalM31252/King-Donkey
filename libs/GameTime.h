@@ -10,9 +10,13 @@ public:
 	int tick2;
 	double deltaTime;
 	double worldTime;
+	bool isPaused;
 
 	GameTime();
 	void start();
 	void update();
+	void reset();
+	void pause();
+	void resume();
 };
 
