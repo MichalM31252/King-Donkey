@@ -165,7 +165,9 @@ void KeyboardManager::onKeyPressArrowRight() {
 }
 
 void KeyboardManager::onKeyPressSpace() {
-    gameObjectContainer->player->initJump();
+    if (!gameTime->isPaused) {
+        gameObjectContainer->player->initJump();
+    }
 }
 
 void KeyboardManager::onKeyPressP() {

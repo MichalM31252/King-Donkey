@@ -34,7 +34,6 @@ void GameTime::pause() {
     if (!isPaused) {
         isPaused = true;
         tick2 = SDL_GetTicks();
-        deltaTime = 0;
     }
 }
 

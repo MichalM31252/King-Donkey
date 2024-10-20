@@ -37,33 +37,35 @@ Game::Game()
 [[noreturn]] void Game::runGame() {
     bool quit = false;
     while (!quit) {
-		// UPDATE TIME
-		gameTime.update();
 
 		// PROCESS EVENTS
 		keyboardManager.handleEvents(quit);
 
-        // UPDATE
-        gameObjectManager.updatePositionOfGameObjects(gameTime.deltaTime);
-		gameObjectManager.handleCollisionsOfGameObjects(quit);
-		gameObjectManager.updatePhysicsOfGameObjects(gameTime.deltaTime);
+        if (!gameTime.isPaused) {
+            // UPDATE TIME
+            gameTime.update();
 
-        // no idea where to put this, this updates the class that creates barrels
-        gameObjectContainer->donkeyKong->update(gameTime.deltaTime);
+            // UPDATE GAMEOBJECTS
+            gameObjectManager.updatePositionOfGameObjects(gameTime.deltaTime);
+            gameObjectManager.handleCollisionsOfGameObjects(quit);
+            gameObjectManager.updatePhysicsOfGameObjects(gameTime.deltaTime);
+            // no idea where to put this, this updates the class that creates barrels
+            gameObjectContainer->donkeyKong->update(gameTime.deltaTime);
 
-        // no idea where to put this
-        if (!gameObjectContainer->player->isClimbing && gameObjectContainer->player->isJumping) {
-            gameObjectContainer->player->jump(gameTime.deltaTime);
+            // no idea where to put this
+            if (!gameObjectContainer->player->isClimbing && gameObjectContainer->player->isJumping) {
+                gameObjectContainer->player->jump(gameTime.deltaTime);
+            }
+
+            // RENDER
+            gameObjectManager.updateSpritesOfGameObjects(gameTime.deltaTime); // handle animations?
+            screenManager.handleFPSTimer(gameTime.deltaTime);
+            screenManager.drawOutlineOfTheBoard();
+            screenManager.drawAdditionalInfo(gameTime.worldTime);
+            screenManager.drawElements(); // current quick fix is that ladder is drawn first then player to make player appear on top of ladder
+            screenManager.serveNextFrame();
+            screenManager.frames++;
         }
-
-        // RENDER
-        screenManager.handleFPSTimer(gameTime.deltaTime);
-        screenManager.drawOutlineOfTheBoard();
-        screenManager.drawAdditionalInfo(gameTime.worldTime);
-		screenManager.drawElements(); // current quick fix is that ladder is drawn first then player to make player appear on top of ladder
-        screenManager.serveNextFrame();
-        screenManager.frames++;
-        gameObjectManager.updateSpritesOfGameObjects(gameTime.deltaTime); // handle animations?
     }
     closeGame();
 }
