@@ -33,7 +33,7 @@
 - [ ] Add pickup items (hammer, prizes)
 - [ ] Refactor collision detection methods from single pixels to SDL_Rectangles
 - [ ] Lower the number of code smells detected by sonarcloud to 0
-- [ ] Add pause mechanism
+- [x] Add pause mechanism
 - [ ] Add home screen
 - [ ] Divide into smaller classes
 
