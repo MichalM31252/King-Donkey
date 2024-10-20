@@ -11,10 +11,9 @@ Game::Game()
 	, gameObjectManager(GameObjectManager(gameObjectContainer.get()))
 {
 	startGame();
-	runGame();
 }
 
-void Game::startGame() {
+[[noreturn]] void Game::startGame() {
     screenManager.checkSDL();
     screenManager.createWindowAndRenderer();
     screenManager.setHint();
@@ -29,6 +28,7 @@ void Game::startGame() {
     screenManager.setColors();
     screenManager.createFramerate();
     levelLoader.loadLevel1();
+    runGame();
 }
 
 [[noreturn]] void Game::runGame() {
