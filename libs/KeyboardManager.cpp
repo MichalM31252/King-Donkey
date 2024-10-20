@@ -86,28 +86,28 @@ void KeyboardManager::onKeyReleased() {
 
 void KeyboardManager::onKeyReleasedArrowUp() {
 	gameObjectContainer->player->accumulatedMoveUp = 0;
-	if (gameObjectContainer->player->directionOfMovementY == UP) {
+	if (gameObjectContainer->player->currentDirectionOfMovementY == CurrentDirectionOfMovementY::UP) {
 		gameObjectContainer->player->velocityY = 0;
 	}
 }
 
 void KeyboardManager::onKeyReleasedArrowLeft() {
     gameObjectContainer->player->accumulatedMoveLeft = 0;
-	if (gameObjectContainer->player->directionOfMovementX == LEFT) {
+	if (gameObjectContainer->player->currentDirectionOfMovementX == CurrentDirectionOfMovementX::LEFT) {
 		gameObjectContainer->player->velocityX = 0;
 	}
 }
 
 void KeyboardManager::onKeyReleasedArrowRight() {
     gameObjectContainer->player->accumulatedMoveRight = 0;
-	if (gameObjectContainer->player->directionOfMovementX == RIGHT) {
+	if (gameObjectContainer->player->currentDirectionOfMovementX == CurrentDirectionOfMovementX::RIGHT) {
 		gameObjectContainer->player->velocityX = 0;
 	}
 }
 
 void KeyboardManager::onKeyReleasedArrowDown() {
     gameObjectContainer->player->accumulatedMoveDown = 0;
-	if (gameObjectContainer->player->directionOfMovementY == DOWN) {
+	if (gameObjectContainer->player->currentDirectionOfMovementY == CurrentDirectionOfMovementY::DOWN) {
 		gameObjectContainer->player->velocityY = 0;
 	}
 }
@@ -122,7 +122,7 @@ void KeyboardManager::onKeyPressArrowUp() {
         player->isClimbing = true;
         player->isFalling = false;
         player->isJumping = false;
-        player->directionOfMovementY = UP;
+        player->currentDirectionOfMovementY = CurrentDirectionOfMovementY::UP;
         player->velocityY = DEFAULT_PLAYER_SPEED;
 	}
     else {
@@ -136,7 +136,7 @@ void KeyboardManager::onKeyPressArrowDown() {
         player->isClimbing = true;
         player->isFalling = false;
         player->isJumping = false;
-        player->directionOfMovementY = DOWN;
+		player->currentDirectionOfMovementY = CurrentDirectionOfMovementY::DOWN;
         player->velocityY = DEFAULT_PLAYER_SPEED;
     }
     else {
@@ -147,7 +147,7 @@ void KeyboardManager::onKeyPressArrowDown() {
 void KeyboardManager::onKeyPressArrowLeft() {
 	Player* player = gameObjectContainer->player;
 	if (!player->isClimbing) {
-        player->directionOfMovementX = LEFT;
+		player->currentDirectionOfMovementX = CurrentDirectionOfMovementX::LEFT;
         player->velocityX = DEFAULT_PLAYER_SPEED;
 	}
 }
@@ -155,7 +155,7 @@ void KeyboardManager::onKeyPressArrowLeft() {
 void KeyboardManager::onKeyPressArrowRight() {
     Player* player = gameObjectContainer->player;
 	if (!player->isClimbing) {
-		player->directionOfMovementX = RIGHT;
+		player->currentDirectionOfMovementX = CurrentDirectionOfMovementX::RIGHT;
 		player->velocityX = DEFAULT_PLAYER_SPEED;
 	}
 }

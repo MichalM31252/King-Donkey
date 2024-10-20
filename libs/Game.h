@@ -25,6 +25,7 @@ public:
 
 	Game();
 
-	[[noreturn]] void initGame();
+	[[noreturn]] void startGame();
+	[[noreturn]] void runGame();
 	[[noreturn]] void closeGame();
 };

@@ -90,7 +90,7 @@ void Player::initJump() {
 
 void Player::loadNextRunningSprite() {
 	bool shouldSpriteBeReversed;
-	if (directionOfMovementX == RIGHT) {
+	if (currentDirectionOfMovementX == CurrentDirectionOfMovementX::RIGHT) {
 		shouldSpriteBeReversed = false;
 	}
 	else {
@@ -117,7 +117,7 @@ void Player::loadNextRunningSprite() {
 
 void Player::loadJumpingSprite() {
 	bool shouldSpriteBeReversed;
-	if (directionOfMovementX == RIGHT) {
+	if (currentDirectionOfMovementX == CurrentDirectionOfMovementX::RIGHT) {
 		shouldSpriteBeReversed = false;
 	}
 	else {
@@ -150,7 +150,7 @@ void Player::loadNextClimbingSprite(){
 
 void Player::loadIdleSprite() {
 	bool shouldSpriteBeReversed;
-	if (directionOfMovementX == RIGHT) {
+	if (currentDirectionOfMovementX == CurrentDirectionOfMovementX::RIGHT) {
 		shouldSpriteBeReversed = false;
 	}
 	else {
@@ -166,20 +166,18 @@ void Player::loadIdleSprite() {
 }
 
 bool Player::isMovingVertically() const {
-	if ((directionOfMovementY == UP || directionOfMovementY == DOWN) && velocityY > 0) {
+	if ((currentDirectionOfMovementY == CurrentDirectionOfMovementY::UP || currentDirectionOfMovementY == CurrentDirectionOfMovementY::DOWN) && velocityY > 0) {
 		return true;
 	}
 	return false;
 }
 
 void Player::accumulateDistance(double deltaTime) {
-	if (isMovingVertically() && isClimbing) { // up or down
-		if (directionOfMovementY == UP && velocityY > 0) {
-			accumulatedMoveUp += deltaTime * velocityY;
-		}
-		if (directionOfMovementY == DOWN && velocityY > 0) {
-			accumulatedMoveDown += deltaTime * velocityY;
-		}
+	if (currentDirectionOfMovementY == CurrentDirectionOfMovementY::UP && velocityY > 0) {
+		accumulatedMoveUp += deltaTime * velocityY;
+	}
+	else if (currentDirectionOfMovementY == CurrentDirectionOfMovementY::DOWN && velocityY > 0) {
+		accumulatedMoveDown += deltaTime * velocityY;
 	}
 	else {
 		MovableGameObject::accumulateDistance(deltaTime);

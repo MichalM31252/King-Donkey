@@ -10,9 +10,11 @@ Game::Game()
 	, keyboardManager(KeyboardManager(gameObjectContainer.get()))
 	, gameObjectManager(GameObjectManager(gameObjectContainer.get()))
 {
+	startGame();
+	runGame();
 }
 
-[[noreturn]] void Game::initGame() {
+void Game::startGame() {
     screenManager.checkSDL();
     screenManager.createWindowAndRenderer();
     screenManager.setHint();
@@ -26,9 +28,10 @@ Game::Game()
     screenManager.setColorKey();
     screenManager.setColors();
     screenManager.createFramerate();
-     
-	levelLoader.loadLevel1();
+    levelLoader.loadLevel1();
+}
 
+[[noreturn]] void Game::runGame() {
     bool quit = false;
     while (!quit) {
 		// UPDATE TIME

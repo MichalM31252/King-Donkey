@@ -14,7 +14,7 @@ void AnimationManager::handlePlayerAnimation() {
 	Player* player = gameObjectContainer->player;
 
 	// RUNNING
-	if ((player->directionOfMovementX == LEFT || player->directionOfMovementX == RIGHT) && player->velocityX > 0 && player->distanceTravelledFromLastRunningSprite >= 20) {
+	if ((player->currentDirectionOfMovementX == CurrentDirectionOfMovementX::LEFT|| player->currentDirectionOfMovementX == CurrentDirectionOfMovementX::RIGHT) && player->velocityX > 0 && player->distanceTravelledFromLastRunningSprite >= 20) {
 		player->loadNextRunningSprite();
 		player->distanceTravelledFromLastRunningSprite -= 20;
 		return;

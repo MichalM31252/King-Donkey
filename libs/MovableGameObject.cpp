@@ -9,8 +9,8 @@ MovableGameObject::MovableGameObject()
 	, canLeaveScreen(false)
 	, velocityX(0)
 	, velocityY(0)
-	, directionOfMovementX(NONE_X)
-	, directionOfMovementY(NONE_Y)
+	, currentDirectionOfMovementX(CurrentDirectionOfMovementX::NONE)
+	, currentDirectionOfMovementY(CurrentDirectionOfMovementY::NONE)
 	, isFalling(false)
 	, gravity(DEFAULT_GRAVITY)
 	, currentSpriteId(1)
@@ -18,16 +18,16 @@ MovableGameObject::MovableGameObject()
 }
 
 void MovableGameObject::accumulateDistance(double deltaTime) { // rename to accumulate distance
-	if (velocityY > 0 && directionOfMovementY == UP) {
+	if (velocityY > 0 && currentDirectionOfMovementY == CurrentDirectionOfMovementY::UP) {
 		accumulatedMoveUp += deltaTime * velocityY;
 	}
-	else if (velocityX > 0 && directionOfMovementX == RIGHT) {
+	else if (velocityX > 0 && currentDirectionOfMovementX == CurrentDirectionOfMovementX::RIGHT) {
 		accumulatedMoveRight += deltaTime * velocityX;
 	}
-	else if (velocityY > 0 && directionOfMovementY == DOWN) {
+	else if (velocityY > 0 && currentDirectionOfMovementY == CurrentDirectionOfMovementY::DOWN) {
 		accumulatedMoveDown += deltaTime * velocityY;
 	}
-	else if (velocityX > 0 && directionOfMovementX == LEFT) {
+	else if (velocityX > 0 && currentDirectionOfMovementX == CurrentDirectionOfMovementX::LEFT) {
 		accumulatedMoveLeft += deltaTime * velocityX;
 	}
 	else {
@@ -101,22 +101,22 @@ void MovableGameObject::startMovingVerticallyAtSpeed(double speed) {
 }
 
 void MovableGameObject::startMovingUp() {
-	directionOfMovementY = UP;
+	currentDirectionOfMovementY = CurrentDirectionOfMovementY::UP;
 }
 
 void MovableGameObject::startMovingRight() {
-	directionOfMovementX = RIGHT;
+	currentDirectionOfMovementX = CurrentDirectionOfMovementX::RIGHT;
 }
 
 void MovableGameObject::startMovingDown() {
-	directionOfMovementY = DOWN;
+	currentDirectionOfMovementY = CurrentDirectionOfMovementY::DOWN;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void MovableGameObject::stopMove() {
-	directionOfMovementX = NONE_X;
-	directionOfMovementY = NONE_Y;
+	currentDirectionOfMovementX = CurrentDirectionOfMovementX::NONE;
+	currentDirectionOfMovementY = CurrentDirectionOfMovementY::NONE;
 	velocityX = 0;
 	velocityY = 0;
 }
