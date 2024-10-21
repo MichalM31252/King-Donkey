@@ -13,7 +13,6 @@ MovableGameObject::MovableGameObject()
 	, currentDirectionOfMovementY(DirectionY::NONE)
 	, isFalling(false)
 	, gravity(DEFAULT_GRAVITY)
-	, currentSpriteId(1)
 {
 }
 

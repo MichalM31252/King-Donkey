@@ -31,7 +31,6 @@ public:
 
 	bool isFalling;
 	double gravity;
-	int currentSpriteId;
 
 	MovableGameObject();
 	void update(double deltaTime);

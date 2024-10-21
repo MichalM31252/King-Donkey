@@ -89,44 +89,28 @@ void Player::initJump() {
 }
 
 void Player::loadNextRunningSprite() {
-	bool shouldSpriteBeReversed;
-	if (currentDirectionOfMovementX == DirectionX::RIGHT) {
-		shouldSpriteBeReversed = false;
-	}
-	else {
-		shouldSpriteBeReversed = true;
-	}
 
-	if (this->currentSpriteId == 1) {
+	if (this->currentRunningSpriteId == 1) {
 		ScreenManager::loadTexture(this, PLAYER_1_FILENAME);
-		this->currentSpriteId++;
+		this->currentRunningSpriteId++;
 	}
-	else if (this->currentSpriteId == 2) {
+	else if (this->currentRunningSpriteId == 2) {
 		ScreenManager::loadTexture(this, PLAYER_2_FILENAME);
-		this->currentSpriteId++;
+		this->currentRunningSpriteId++;
 	}
 	else {
 		ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
-		this->currentSpriteId = 1;
+		this->currentRunningSpriteId = 1;
 	}
 
-	if (shouldSpriteBeReversed) {
+	if (currentDirectionOfMovementX == DirectionX::LEFT) {
 		ScreenManager::flipTextureHorizontally(this->sprite);
 	}
 }
 
 void Player::loadJumpingSprite() {
-	bool shouldSpriteBeReversed;
-	if (currentDirectionOfMovementX == DirectionX::RIGHT) {
-		shouldSpriteBeReversed = false;
-	}
-	else {
-		shouldSpriteBeReversed = true;
-	}
-
 	ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
-
-	if (shouldSpriteBeReversed) {
+	if (currentDirectionOfMovementX == DirectionX::LEFT) {
 		ScreenManager::flipTextureHorizontally(this->sprite);
 	}
 }
@@ -137,33 +121,24 @@ void Player::loadClimbingSprite() {
 }
 
 void Player::loadNextClimbingSprite(){
-	if (currentClimbingSpriteId == 1) {
-		ScreenManager::loadTexture(this, PLAYER_CLIMB_1);
-		currentClimbingSpriteId++;
-	}
-	else {
-		ScreenManager::loadTexture(this, PLAYER_CLIMB_1);
+	ScreenManager::loadTexture(this, PLAYER_CLIMB_1);
+	if (currentClimbingSpriteId == 2) {
 		ScreenManager::flipTextureHorizontally(this->sprite);
 		currentClimbingSpriteId = 1;
+	}
+	else {
+		currentClimbingSpriteId++;
 	}
 }
 
 void Player::loadIdleSprite() {
-	bool shouldSpriteBeReversed;
-	if (currentDirectionOfMovementX == DirectionX::RIGHT) {
-		shouldSpriteBeReversed = false;
-	}
-	else {
-		shouldSpriteBeReversed = true;
-	}
-	
 	ScreenManager::loadTexture(this, PLAYER_1_FILENAME);
-	if (shouldSpriteBeReversed) {
+	if (currentDirectionOfMovementX == DirectionX::LEFT) {
 		ScreenManager::flipTextureHorizontally(this->sprite);
 	}
-
 	currentRunningSpriteId = 1;
 }
+
 
 bool Player::isMovingVertically() const {
 	if ((currentDirectionOfMovementY == DirectionY::UP || currentDirectionOfMovementY == DirectionY::DOWN) && velocityY > 0) {
