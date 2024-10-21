@@ -20,6 +20,7 @@
 - [ ] Implement component based design
 - [x] Fix animations
 - [x] Fix the delay between keys and player
+- [ ] Refactor jumping mechanism
 - [ ] Fix the ladders
 - [ ] Update file structure
 - [ ] Remove unnescessary pointers to make code more readable
