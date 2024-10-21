@@ -20,6 +20,7 @@
 - [ ] Implement component based design
 - [x] Fix animations
 - [x] Fix the delay between keys and player
+- [ ] Refactor jumping mechanism
 - [ ] Fix the ladders
 - [ ] Update file structure
 - [ ] Remove unnescessary pointers to make code more readable
@@ -33,7 +34,7 @@
 - [ ] Add pickup items (hammer, prizes)
 - [ ] Refactor collision detection methods from single pixels to SDL_Rectangles
 - [ ] Lower the number of code smells detected by sonarcloud to 0
-- [ ] Add pause mechanism
+- [x] Add pause mechanism
 - [ ] Add home screen
 - [ ] Divide into smaller classes
 
