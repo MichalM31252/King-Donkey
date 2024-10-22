@@ -10,7 +10,6 @@ Game::Game()
 	, levelLoader(LevelLoader(gameObjectContainer.get()))
 	, keyboardManager(KeyboardManager(gameObjectContainer.get(), &gameTime))
 	, gameObjectManager(GameObjectManager(gameObjectContainer.get()))
-	
 {
 	startGame();
 }

@@ -131,6 +131,8 @@ void KeyboardManager::onKeyPressArrowUp() {
 	}
     else {
         player->isClimbing = false;
+        player->currentDirectionOfMovementY = DirectionY::NONE;
+        player->velocityY = 0;
     }
 }
 
@@ -145,6 +147,8 @@ void KeyboardManager::onKeyPressArrowDown() {
     }
     else {
         player->isClimbing = false;
+        player->currentDirectionOfMovementY = DirectionY::NONE;
+        player->velocityY = 0;
     }
 }
 

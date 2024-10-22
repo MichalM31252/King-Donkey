@@ -74,9 +74,17 @@ bool CollisionDetector::isGameObjectInsideAnyLadder(const GameObject* gameObject
 }
 
 bool CollisionDetector::isGameObjectInsideLadder(const GameObject* gameObject, const GameObject* ladder) { 
-    if ((gameObject->xpos >= ladder->xpos && gameObject->xpos < ladder->xpos + ladder->destRect.w) && (gameObject->xpos + gameObject->destRect.w > ladder->xpos && gameObject->xpos + gameObject->destRect.w < ladder->xpos + ladder->destRect.w) && isCollisionBetweenRects(gameObject->destRect, ladder->destRect)) {
+    //if (isGameObjectWithinWidthOfLadder(gameObject, ladder) && isGameObjectWithinHeightOfLadder(gameObject, ladder)) {
+    if (isGameObjectWithinWidthOfLadder(gameObject, ladder) && isCollisionBetweenRects(gameObject->destRect, ladder->destRect)){
         return true;
     }
     return false;
 }
 
+bool CollisionDetector::isGameObjectWithinWidthOfLadder(const GameObject* gameObject, const GameObject* ladder) {
+    return gameObject->xpos >= ladder->xpos && gameObject->xpos + gameObject->destRect.w < ladder->xpos + ladder->destRect.w;
+}
+
+bool CollisionDetector::isGameObjectWithinHeightOfLadder(const GameObject* gameObject, const GameObject* ladder) {
+	return gameObject->ypos >= ladder->ypos && gameObject->ypos <= ladder->ypos + ladder->destRect.h;
+}

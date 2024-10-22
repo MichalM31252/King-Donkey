@@ -22,5 +22,7 @@ public:
     static bool isGameObjectInsideAnyLadder(const GameObject* gameObject, const LadderContainer* ladderContainer);
     static bool isGameObjectInsideLadder(const GameObject* gameObject, const GameObject* ladder);
 
+    static bool isGameObjectWithinWidthOfLadder(const GameObject* gameObject, const GameObject* ladder);
+    static bool isGameObjectWithinHeightOfLadder(const GameObject* gameObject, const GameObject* ladder);
 	// isPlayerClimbingTheLadder (check if player is inside ladder, then check if if player is not touching the platform (ok but what about falling))
 };
