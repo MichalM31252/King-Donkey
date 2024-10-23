@@ -1,10 +1,11 @@
 #include "Gorilla.h"
 
-Gorilla::Gorilla(BarrelContainer* barrelContainer) {
-	barrelFactory = new BarrelFactory(barrelContainer);
+Gorilla::Gorilla(BarrelContainer* barrelContainer) 
+	: barrelFactory(barrelContainer) 
+{
 }
 
 void Gorilla::update(double deltaTime) {
-	barrelFactory->update(deltaTime);
+	barrelFactory.update(deltaTime);
 }
 

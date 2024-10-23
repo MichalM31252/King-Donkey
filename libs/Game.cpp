@@ -57,7 +57,7 @@ Game::Game()
             }
 
             // RENDER
-            gameObjectManager.updateSpritesOfGameObjects(gameTime.deltaTime); // handle animations?
+            gameObjectManager.updateSpritesOfGameObjects(); // handle animations?
             screenManager.handleFPSTimer(gameTime.deltaTime);
             screenManager.drawOutlineOfTheBoard();
             screenManager.drawAdditionalInfo(gameTime.worldTime);
@@ -69,7 +69,7 @@ Game::Game()
     closeGame();
 }
 
-[[noreturn]] void Game::closeGame() {
+[[noreturn]] void Game::closeGame() const {
     SDL_Quit();
     exit(0);
 }

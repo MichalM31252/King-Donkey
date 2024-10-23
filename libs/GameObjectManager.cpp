@@ -18,7 +18,7 @@ void GameObjectManager::handleCollisionsOfGameObjects(bool& quit) {
 	collisionResolver.handleBarrelsCollision(&quit);
 }
 
-void GameObjectManager::updateSpritesOfGameObjects(double deltaTime) {
+void GameObjectManager::updateSpritesOfGameObjects() {
 	animationManager.handleAnimations();
 }
 

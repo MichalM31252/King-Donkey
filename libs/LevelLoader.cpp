@@ -30,10 +30,6 @@ void LevelLoader::createDonkeyKong() {
     donkeyK->createDestRect();
 
     gameObjectContainer->donkeyKong = donkeyK;
-
-	// this is not the place where you decide where the barrels are thrown
-	// this doesnt really do anything
-    donkeyK->barrelFactory->setPosition(0, 0); 
 }
 
 void LevelLoader::createPrincess() {

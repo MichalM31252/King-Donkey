@@ -179,7 +179,6 @@ void ScreenManager::drawPlatorm(const Platform* platform) {
 				y++;
 			}
 		}
-
 	}
 	else {
 		drawLine(platform->x1pos, platform->y1pos, length, 1, 0, 0xffffffff);

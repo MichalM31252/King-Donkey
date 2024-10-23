@@ -20,6 +20,6 @@ public:
 
 	void updatePositionOfGameObjects(double deltaTime);
 	void handleCollisionsOfGameObjects(bool& quit);
-	void updateSpritesOfGameObjects(double deltaTime);
+	void updateSpritesOfGameObjects();
 	void updatePhysicsOfGameObjects(double deltaTime);
 };

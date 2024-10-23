@@ -29,5 +29,5 @@ public:
 
 	[[noreturn]] void startGame();
 	[[noreturn]] void runGame();
-	[[noreturn]] void closeGame();
+	[[noreturn]] void closeGame() const;
 };
