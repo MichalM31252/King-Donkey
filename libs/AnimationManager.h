@@ -1,16 +1,18 @@
 #pragma once
 
 #include "GameObjectContainer.h"
+#include <memory>
 
 class AnimationManager {
 public:
-	GameObjectContainer* gameObjectContainer;
+    std::shared_ptr<GameObjectContainer> gameObjectContainer;
 
-	AnimationManager() = default;
-	explicit AnimationManager(GameObjectContainer* gameObjectContainer);
+    AnimationManager() = default;
+    explicit AnimationManager(std::shared_ptr<GameObjectContainer> gameObjectContainer);
 
-	void handleAnimations();
+    void handleAnimations();
 
-	void handlePlayerAnimation();
-	void handleAllBarrelsAnimation() const;
+private:
+    void handlePlayerAnimation();
+    void handleAllBarrelsAnimation() const;
 };

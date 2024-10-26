@@ -15,10 +15,10 @@
 
 class CollisionResolver {
 public:
-    GameObjectContainer* gameObjectContainer;
+    std::shared_ptr<GameObjectContainer> gameObjectContainer;
 
     CollisionResolver();
-    explicit CollisionResolver(GameObjectContainer* gameObjectContainer);
+    explicit CollisionResolver(std::shared_ptr<GameObjectContainer> gameObjectContainer);
 
     void handlePlayerCollisionWithKong() const;
     void handlePlayerCollisionWithPrincess() const;

@@ -5,9 +5,9 @@
 
 class PhysicsManager {
 public:
-	GameObjectContainer* gameObjectContainer;
+	std::shared_ptr<GameObjectContainer> gameObjectContainer;
 
-	explicit PhysicsManager(GameObjectContainer* gameObjectContainer);
+	explicit PhysicsManager(std::shared_ptr<GameObjectContainer> gameObjectContainer);
 
     void handleFallingForPlayer(double deltaTime);
     void handleFallingForBarrels(double deltaTime);

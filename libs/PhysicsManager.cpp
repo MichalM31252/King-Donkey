@@ -1,6 +1,6 @@
 #include "PhysicsManager.h"
 
-PhysicsManager::PhysicsManager(GameObjectContainer* gameObjectContainer)
+PhysicsManager::PhysicsManager(std::shared_ptr<GameObjectContainer> gameObjectContainer)
 	: gameObjectContainer(gameObjectContainer)
 {
 }

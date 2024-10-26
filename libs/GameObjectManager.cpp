@@ -1,6 +1,6 @@
 #include "GameObjectManager.h"
 
-GameObjectManager::GameObjectManager(GameObjectContainer* gameObjectContainer)
+GameObjectManager::GameObjectManager(std::shared_ptr<GameObjectContainer> gameObjectContainer)
 	: gameObjectContainer(gameObjectContainer) 
 	, collisionResolver(CollisionResolver(gameObjectContainer))
 	, physicsManager(PhysicsManager(gameObjectContainer))

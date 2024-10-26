@@ -5,7 +5,7 @@ CollisionResolver::CollisionResolver()
 {
 }
 
-CollisionResolver::CollisionResolver(GameObjectContainer* gameObjectContainer)
+CollisionResolver::CollisionResolver(std::shared_ptr<GameObjectContainer> gameObjectContainer)
     : gameObjectContainer(gameObjectContainer)
 {
 }

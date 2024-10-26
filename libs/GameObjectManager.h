@@ -9,14 +9,14 @@
 
 class GameObjectManager {
 public:
-	std::unique_ptr<GameObjectContainer> gameObjectContainer;
+	std::shared_ptr<GameObjectContainer> gameObjectContainer;
 	CollisionResolver collisionResolver;
 	CollisionDetector collisionDetector;
 	PhysicsManager physicsManager;
 	AnimationManager animationManager;
 	
 	GameObjectManager() = default;
-	explicit GameObjectManager(GameObjectContainer* gameObjectContainer);
+	explicit GameObjectManager(std::shared_ptr<GameObjectContainer> gameObjectContainer);
 
 	void updatePositionOfGameObjects(double deltaTime);
 	void handleCollisionsOfGameObjects(bool& quit);

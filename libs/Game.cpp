@@ -9,7 +9,7 @@ Game::Game()
     , screenManager(ScreenManager(gameObjectContainer.get()))
 	, levelLoader(LevelLoader(gameObjectContainer.get()))
 	, keyboardInputManager(KeyboardInputManager(gameObjectContainer.get(), &gameTime))
-	, gameObjectManager(GameObjectManager(gameObjectContainer.get()))
+	, gameObjectManager(GameObjectManager(gameObjectContainer))
 {
 	startGame();
 }
