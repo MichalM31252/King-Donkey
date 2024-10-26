@@ -11,14 +11,14 @@
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
 
-class KeyboardManager {
+class KeyboardInputManager {
 public:
     SDL_Event event;
     GameObjectContainer* gameObjectContainer;
     GameTime* gameTime;
 
-    KeyboardManager() = default;
-    KeyboardManager(GameObjectContainer* gameObjectContainer, GameTime* gameTime);
+    KeyboardInputManager() = default;
+    KeyboardInputManager(GameObjectContainer* gameObjectContainer, GameTime* gameTime);
 
     void handleEvents(bool& quit);
 

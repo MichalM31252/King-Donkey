@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "ScreenManager.h"
-#include "KeyboardManager.h"
+#include "KeyboardInputManager.h"
 #include "Constants.h"
 #include "Player.h"
 #include "Platform.h"
@@ -22,7 +22,7 @@ public:
 	std::unique_ptr<GameObjectContainer> gameObjectContainer;
 	ScreenManager screenManager;
 	LevelLoader levelLoader;
-	KeyboardManager keyboardManager;
+	KeyboardInputManager keyboardInputManager;
 	GameObjectManager gameObjectManager;
 
 	Game();
