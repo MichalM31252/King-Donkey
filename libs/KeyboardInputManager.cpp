@@ -3,7 +3,7 @@
 #include "KeyboardInputManager.h"
 #include "ScreenManager.h" // temporary fix
 
-KeyboardInputManager::KeyboardInputManager(GameObjectContainer* gameObjectContainer, GameTime* gameTime)
+KeyboardInputManager::KeyboardInputManager(std::shared_ptr<GameObjectContainer> gameObjectContainer, GameTime* gameTime)
     : event()
 	, gameObjectContainer(gameObjectContainer)
     , gameTime(gameTime)
@@ -121,7 +121,7 @@ void KeyboardInputManager::initializeQuit(bool& quit) {
 }
 
 void KeyboardInputManager::onKeyPressArrowUp() {
-    Player* player = gameObjectContainer->player;
+	auto player = gameObjectContainer->player;
     if (CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
         player->isClimbing = true;
         player->isFalling = false;
@@ -137,7 +137,7 @@ void KeyboardInputManager::onKeyPressArrowUp() {
 }
 
 void KeyboardInputManager::onKeyPressArrowDown() {
-    Player* player = gameObjectContainer->player;
+    auto player = gameObjectContainer->player;
     if (CollisionDetector::isGameObjectInsideAnyLadder(player, gameObjectContainer->ladderContainer)) {
         player->isClimbing = true;
         player->isFalling = false;
@@ -153,7 +153,7 @@ void KeyboardInputManager::onKeyPressArrowDown() {
 }
 
 void KeyboardInputManager::onKeyPressArrowLeft() {
-	Player* player = gameObjectContainer->player;
+	auto player = gameObjectContainer->player;
 	if (!player->isClimbing) {
 		player->currentDirectionOfMovementX = DirectionX::LEFT;
         player->velocityX = DEFAULT_PLAYER_SPEED;
@@ -161,7 +161,7 @@ void KeyboardInputManager::onKeyPressArrowLeft() {
 }
 
 void KeyboardInputManager::onKeyPressArrowRight() {
-    Player* player = gameObjectContainer->player;
+    auto player = gameObjectContainer->player;
 	if (!player->isClimbing) {
 		player->currentDirectionOfMovementX = DirectionX::RIGHT;
 		player->velocityX = DEFAULT_PLAYER_SPEED;

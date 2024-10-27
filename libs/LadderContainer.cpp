@@ -2,7 +2,7 @@
 
 LadderContainer::LadderContainer() = default;
 
-void LadderContainer::addLadder(GameObject* ladder) {
+void LadderContainer::addLadder(std::shared_ptr<GameObject> ladder) {
     ladders.push_back(ladder);
 }
 

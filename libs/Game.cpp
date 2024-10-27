@@ -6,9 +6,9 @@
 Game::Game()
     : gameTime(GameTime())
     , gameObjectContainer(std::make_unique<GameObjectContainer>())
-    , screenManager(ScreenManager(gameObjectContainer.get()))
-	, levelLoader(LevelLoader(gameObjectContainer.get()))
-	, keyboardInputManager(KeyboardInputManager(gameObjectContainer.get(), &gameTime))
+    , screenManager(ScreenManager(gameObjectContainer))
+	, levelLoader(LevelLoader(gameObjectContainer))
+	, keyboardInputManager(KeyboardInputManager(gameObjectContainer, &gameTime))
 	, gameObjectManager(GameObjectManager(gameObjectContainer))
 {
 	startGame();

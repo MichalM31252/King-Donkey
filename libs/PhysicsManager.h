@@ -11,5 +11,5 @@ public:
 
     void handleFallingForPlayer(double deltaTime);
     void handleFallingForBarrels(double deltaTime);
-	void forceFalling(MovableGameObject* gameObject, double deltaTime) const;
+	void forceFalling(std::shared_ptr<MovableGameObject> movableGameObject, double deltaTime) const;
 };

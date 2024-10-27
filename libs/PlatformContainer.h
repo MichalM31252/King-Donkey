@@ -3,12 +3,13 @@
 #include "Platform.h"
 #include "Constants.h"
 #include <vector>
+#include <memory>
 
 class PlatformContainer {
 public:
-    std::vector<Platform*> platforms;
+    std::vector<std::shared_ptr<Platform>> platforms;
     PlatformContainer();
-    void addPlatform(Platform* platform);
+    void addPlatform(std::shared_ptr<Platform> platform);
     size_t getNumberOfElements() const;
 };
 

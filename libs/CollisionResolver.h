@@ -22,8 +22,8 @@ public:
 
     void handlePlayerCollisionWithKong() const;
     void handlePlayerCollisionWithPrincess() const;
-    void handlePlayerCollisionWithBarrel(const MovableGameObject* barrel, bool* quit) const;
-    void handleCollisionWithPlatform(MovableGameObject* gameObject);
+    void handlePlayerCollisionWithBarrel(std::shared_ptr<Barrel> barrel, bool* quit) const;
+    void handleCollisionWithPlatform(const std::shared_ptr<MovableGameObject>& gameObject);
     void handleCollisionWithJumping();
 
     void handlePlayerCollision();

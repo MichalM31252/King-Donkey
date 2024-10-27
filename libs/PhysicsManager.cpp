@@ -13,19 +13,19 @@ void PhysicsManager::handleFallingForPlayer(double deltaTime) {
 
 void PhysicsManager::handleFallingForBarrels(double deltaTime) {
 	for (int i = 0; i < gameObjectContainer->barrelContainer->getNumberOfElements(); i++) {
-		auto* barrel = gameObjectContainer->barrelContainer->barrels[i];
+		auto barrel = gameObjectContainer->barrelContainer->barrels[i];
         if (!CollisionDetector::isGameObjectOnTopOfAnyPlatform(barrel, gameObjectContainer->platformContainer)) {
             forceFalling(barrel, deltaTime);
         }
 	}
 }
 
-void PhysicsManager::forceFalling(MovableGameObject* gameObject, double deltaTime) const {
-    gameObject->startFalling();
-    gameObject->accumulatedMoveDown += deltaTime * gameObject->gravity;
-    auto pixelsToMove = static_cast<int>(gameObject->accumulatedMoveDown);
+void PhysicsManager::forceFalling(std::shared_ptr<MovableGameObject> movableGameObject, double deltaTime) const {
+    movableGameObject->startFalling();
+    movableGameObject->accumulatedMoveDown += deltaTime * movableGameObject->gravity;
+    auto pixelsToMove = static_cast<int>(movableGameObject->accumulatedMoveDown);
     if (pixelsToMove >= 1) {
-        gameObject->ypos += pixelsToMove;
-        gameObject->accumulatedMoveDown -= pixelsToMove;
+        movableGameObject->ypos += pixelsToMove;
+        movableGameObject->accumulatedMoveDown -= pixelsToMove;
     }
 }

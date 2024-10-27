@@ -1,7 +1,7 @@
 #include "Gorilla.h"
 
-Gorilla::Gorilla(BarrelContainer* barrelContainer) 
-	: barrelFactory(barrelContainer) 
+Gorilla::Gorilla(std::shared_ptr<BarrelContainer> barrelContainer)
+	: barrelFactory(barrelContainer)
 {
 }
 

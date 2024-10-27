@@ -22,7 +22,7 @@
     <ClCompile Include="libs\GameTime.cpp" />
     <ClCompile Include="libs\AnimationManager.cpp" />
     <ClCompile Include="libs\BarrelFactory.cpp" />
-    <ClCompile Include="libs\BarrelHolder.cpp" />
+    <ClCompile Include="libs\BarrelContainer.cpp" />
     <ClCompile Include="libs\CollisionDetector.cpp" />
     <ClCompile Include="libs\CollisionResolver.cpp" />
     <ClCompile Include="libs\Game.cpp" />
@@ -51,7 +51,7 @@
     <ClInclude Include="libs\GameObjectManager.h" />
     <ClInclude Include="libs\Gorilla.h" />
     <ClInclude Include="libs\BarrelFactory.h" />
-    <ClInclude Include="libs\BarrelHolder.h" />
+    <ClInclude Include="libs\BarrelContainer.h" />
     <ClInclude Include="libs\CollisionDetector.h" />
     <ClInclude Include="libs\CollisionResolver.h" />
     <ClInclude Include="libs\Constants.h" />

@@ -9,7 +9,7 @@
 #include "Constants.h"
 #include "Player.h"
 #include "Platform.h"
-#include "BarrelHolder.h"
+#include "BarrelContainer.h"
 #include "LevelLoader.h"
 #include "GameObjectManager.h"
 #include "GameTime.h"
@@ -20,6 +20,7 @@
 
 class Game {
 public:
+	// GameTime gameTime;
 	GameTime gameTime;
 	std::shared_ptr<GameObjectContainer> gameObjectContainer;
 	ScreenManager screenManager;

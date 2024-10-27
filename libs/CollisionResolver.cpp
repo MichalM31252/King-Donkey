@@ -1,7 +1,7 @@
 #include "CollisionResolver.h"
 
 CollisionResolver::CollisionResolver()
-    : gameObjectContainer(new GameObjectContainer())
+    : gameObjectContainer(std::make_shared<GameObjectContainer>())
 {
 }
 
@@ -22,7 +22,7 @@ void CollisionResolver::handlePlayerCollisionWithPrincess() const {
     }
 }
 
-void CollisionResolver::handlePlayerCollisionWithBarrel(const MovableGameObject* barrel, bool* quit) const{
+void CollisionResolver::handlePlayerCollisionWithBarrel(std::shared_ptr<Barrel> barrel, bool* quit) const{
     if (CollisionDetector::isCollisionBetweenRects(gameObjectContainer->player->destRect, barrel->destRect)) {
         *quit = true;
     }
@@ -39,7 +39,7 @@ void CollisionResolver::handleCollisionWithJumping() {
     }
 }
 
-void CollisionResolver::handleCollisionWithPlatform(MovableGameObject* gameObject) {
+void CollisionResolver::handleCollisionWithPlatform(const std::shared_ptr<MovableGameObject>& gameObject) {
     int yPosition = gameObject->ypos + gameObject->destRect.h;
     for (int i = 0; i < gameObjectContainer->platformContainer->getNumberOfElements(); i++) {
         if (CollisionDetector::isGameObjectInsidePlatform(gameObject, gameObjectContainer->platformContainer->platforms[i])) {
@@ -50,7 +50,7 @@ void CollisionResolver::handleCollisionWithPlatform(MovableGameObject* gameObjec
 }
 
 void CollisionResolver::handlePlayerCollision() {
-    Player* player = gameObjectContainer->player;
+    auto player = gameObjectContainer->player;
 
     handleCollisionWithPlatform(player);
     handlePlayerCollisionWithKong();
@@ -69,7 +69,7 @@ void CollisionResolver::handlePlayerCollision() {
 
 void CollisionResolver::handleBarrelsCollision(bool* quit) {
     for (int i = 0; i < gameObjectContainer->barrelContainer->getNumberOfElements(); i++) {
-        MovableGameObject* barrel = gameObjectContainer->barrelContainer->barrels[i];
+        auto barrel = gameObjectContainer->barrelContainer->barrels[i];
 
         handlePlayerCollisionWithBarrel(barrel, quit);
         handleCollisionWithPlatform(barrel);
@@ -79,11 +79,12 @@ void CollisionResolver::handleBarrelsCollision(bool* quit) {
                 barrel->stopFalling();
                 barrel->stopMove();
             }
-			barrel->startMovingHorizontallyAtSpeed(DEFAULT_BARREL_SPEED);
-			barrel->startMovingRight();
+            barrel->startMovingHorizontallyAtSpeed(DEFAULT_BARREL_SPEED);
+            barrel->startMovingRight();
         }
     }
 }
+
 
 [[noreturn]] void CollisionResolver::closeGame() const {
     SDL_Quit();

@@ -6,10 +6,10 @@
 #include "Gorilla.h"
 
 struct GameObjectContainer {
-    Gorilla* donkeyKong;
-    GameObject* princess;
-    Player* player;
-    PlatformContainer* platformContainer;
-    LadderContainer* ladderContainer;
-	BarrelContainer* barrelContainer;
+    std::shared_ptr<Gorilla> donkeyKong;
+    std::shared_ptr<GameObject> princess;
+    std::shared_ptr<Player> player;
+    std::shared_ptr<PlatformContainer> platformContainer;
+    std::shared_ptr<LadderContainer> ladderContainer;
+    std::shared_ptr<BarrelContainer> barrelContainer;
 };

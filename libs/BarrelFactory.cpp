@@ -1,9 +1,9 @@
 #include "BarrelFactory.h"
 #include "ScreenManager.h"
 
-BarrelFactory::BarrelFactory(BarrelContainer* barrelHolder)
+BarrelFactory::BarrelFactory(std::shared_ptr<BarrelContainer> barrelContainer)
 	: accumulatedTime(DEFAULT_BARREL_SPAWN_RATE)
-	, barrelContainer(barrelHolder) 
+	, barrelContainer(barrelContainer)
 {
 }
 
@@ -21,8 +21,8 @@ void BarrelFactory::update(double deltaTime) {
 }
 
 void BarrelFactory::throwBarrel() {
-	auto* barrel = new Barrel();
-	ScreenManager::loadTexture(barrel, BARREL_1_FILENAME);
+	auto barrel = std::make_shared<Barrel>();
+	ScreenManager::loadTexture(barrel.get(), BARREL_1_FILENAME);
 
 	barrel->setPosition(STARTING_X_DONKEY_KONG + DONKEY_KONG_WIDTH, STARTING_Y_DONKEY_KONG);
 	barrel->createSrcRect();

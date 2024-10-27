@@ -13,7 +13,7 @@
 
 class ScreenManager {
 public:
-	GameObjectContainer* gameObjectContainer;
+	std::shared_ptr<GameObjectContainer> gameObjectContainer;
 
 	int frames;
 	double fpsTimer;
@@ -31,7 +31,7 @@ public:
 	SDL_Renderer* renderer; // we send here to render the screen
 
 	ScreenManager() = default;
-	explicit ScreenManager(GameObjectContainer* gameObjectContainer);
+	explicit ScreenManager(std::shared_ptr<GameObjectContainer> gameObjectContainer);
 
 	void checkSDL() const;
 	void createWindowAndRenderer();
@@ -54,13 +54,13 @@ public:
 
 	void serveNextFrame();
 
-	void drawSurface(const GameObject* gameObject, int xpos, int ypos) const;
-	void drawSurfaceLadder(const GameObject* ladder, int xpos, int ypos) const;
+	void drawSurface(std::shared_ptr<GameObject> gameObject, int xpos, int ypos) const;
+	void drawSurfaceLadder(std::shared_ptr<GameObject> ladder, int xpos, int ypos) const;
 	void drawString(int x, int y, const std::string& text) const;
 	void drawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const;
 	void drawLine(int x, int y, int l, int dx, int dy, Uint32 color) const;
 	void drawRectangle(int x, int y, int widthOfRectangle, int heightOfRectangle, Uint32 outlineColor, Uint32 fillColor) const;
-	void drawPlatorm(const Platform* platform);
+	void drawPlatorm(std::shared_ptr<Platform> platform);
 
 	template <typename T>
 	static void loadTexture(T* gameObject, const char* fileName);

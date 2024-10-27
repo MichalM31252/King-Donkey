@@ -1,13 +1,10 @@
-#include "BarrelHolder.h"
+#include "BarrelContainer.h"
 
-void BarrelContainer::addBarrel(Barrel* barrel) {
+void BarrelContainer::addBarrel(std::shared_ptr<Barrel> barrel) {
     barrels.push_back(barrel);
 }
 
 void BarrelContainer::emptyBarrelHolder() {
-    for (auto barrel : barrels) {
-        delete barrel;
-    }
     barrels.clear();
 }
 

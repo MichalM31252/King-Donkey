@@ -14,11 +14,11 @@
 class KeyboardInputManager {
 public:
     SDL_Event event;
-    GameObjectContainer* gameObjectContainer;
-    GameTime* gameTime;
+	std::shared_ptr<GameObjectContainer> gameObjectContainer;
+	GameTime* gameTime;
 
     KeyboardInputManager() = default;
-    KeyboardInputManager(GameObjectContainer* gameObjectContainer, GameTime* gameTime);
+    KeyboardInputManager(std::shared_ptr<GameObjectContainer> gameObjectContainer, GameTime* gameTime);
 
     void handleEvents(bool& quit);
 

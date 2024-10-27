@@ -3,11 +3,12 @@
 #include "GameObject.h"
 #include "Constants.h"
 #include <vector>
+#include <memory>
 
 class LadderContainer {
 public:
-    std::vector<GameObject*> ladders;
+    std::vector<std::shared_ptr<GameObject>> ladders;
     LadderContainer();
-    void addLadder(GameObject* ladder);
+    void addLadder(std::shared_ptr<GameObject> ladder);
     size_t getNumberOfElements() const;
 };

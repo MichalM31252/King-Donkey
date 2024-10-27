@@ -3,7 +3,7 @@
 #include <string>
 #include "Barrel.h"
 
-ScreenManager::ScreenManager(GameObjectContainer* gameObjectContainer) 
+ScreenManager::ScreenManager(std::shared_ptr<GameObjectContainer> gameObjectContainer) 
 	: gameObjectContainer(gameObjectContainer)
 {
 }
@@ -101,7 +101,7 @@ void ScreenManager::drawAdditionalInfo(double deltaTime) const {
 
 // draw a surface sprite on a surface screen in point (x, y)
 // (x, y) is the center of sprite on screen
-void ScreenManager::drawSurface(const GameObject* gameObject, int xpos, int ypos) const {
+void ScreenManager::drawSurface(std::shared_ptr<GameObject> gameObject, int xpos, int ypos) const {
 	SDL_Rect dest = gameObject->destRect;
 	dest.x = xpos;
 	dest.y = ypos;
@@ -110,7 +110,7 @@ void ScreenManager::drawSurface(const GameObject* gameObject, int xpos, int ypos
 	SDL_BlitSurface(gameObject->sprite, nullptr, screen, &dest);
 }
 
-void ScreenManager::drawSurfaceLadder(const GameObject* ladder, int xpos, int ypos) const {
+void ScreenManager::drawSurfaceLadder(std::shared_ptr<GameObject> ladder, int xpos, int ypos) const {
 	SDL_Rect dest = ladder->destRect;
 	dest.x = xpos;
 	dest.y = ypos;
@@ -159,7 +159,7 @@ void ScreenManager::drawLine(int x, int y, int l, int dx, int dy, Uint32 color) 
 	}
 }
 
-void ScreenManager::drawPlatorm(const Platform* platform) {
+void ScreenManager::drawPlatorm(std::shared_ptr<Platform> platform) {
 	int length = sqrt(pow(platform->x2pos - platform->x1pos, 2) + pow(platform->y2pos - platform->y1pos, 2));
 	if (platform->y1pos != platform->y2pos) { // xdddddddddddddddddd
 		int differenceBetweenX = sqrt(pow(platform->x2pos - platform->x1pos, 2));

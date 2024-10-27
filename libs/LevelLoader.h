@@ -7,10 +7,10 @@
 
 class LevelLoader {
 public:
-	GameObjectContainer* gameObjectContainer;
+	std::shared_ptr<GameObjectContainer> gameObjectContainer;
 
 	LevelLoader() = default;
-	explicit LevelLoader(GameObjectContainer* gameObjectContainer);
+	explicit LevelLoader(std::shared_ptr<GameObjectContainer> container);
 
 	void createPlayer();
 	void createDonkeyKong();

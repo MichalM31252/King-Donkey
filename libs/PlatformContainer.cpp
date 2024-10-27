@@ -2,7 +2,7 @@
 
 PlatformContainer::PlatformContainer() = default;
 
-void PlatformContainer::addPlatform(Platform* platform) {
+void PlatformContainer::addPlatform(std::shared_ptr<Platform> platform) {
     platforms.push_back(platform);
 }
 

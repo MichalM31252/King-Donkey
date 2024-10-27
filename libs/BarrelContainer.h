@@ -1,14 +1,15 @@
 #pragma once
 #include "Barrel.h"
 #include <vector>
+#include <memory>
 
 class BarrelContainer {
 public:
-    std::vector<Barrel*> barrels; // this should be barrel class
+    std::vector<std::shared_ptr<Barrel>> barrels;
 
     BarrelContainer() = default;
 
-    void addBarrel(Barrel* barrel);
+    void addBarrel(std::shared_ptr<Barrel> barrel);
     void emptyBarrelHolder();
     void updateBarrels(float deltaTime) const;
     int getNumberOfElements() const;
