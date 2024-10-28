@@ -29,7 +29,7 @@
     <ClCompile Include="libs\GameObjectManager.cpp" />
     <ClCompile Include="libs\Gorilla.cpp" />
     <ClCompile Include="libs\LevelLoader.cpp" />
-    <ClCompile Include="libs\KeyboardInputManager.cpp" />
+    <ClCompile Include="libs\KeyCollector.cpp" />
     <ClCompile Include="libs\MovableGameObject.cpp" />
     <ClCompile Include="libs\Barrel.cpp" />
     <ClCompile Include="libs\PhysicsManager.cpp" />
@@ -40,6 +40,7 @@
     <ClCompile Include="libs\Platform.cpp" />
     <ClCompile Include="libs\PlatformContainer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="libs\KeyActionHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="cs8x8.bmp" />
@@ -58,7 +59,7 @@
     <ClInclude Include="libs\Game.h" />
     <ClInclude Include="libs\GameObjectContainer.h" />
     <ClInclude Include="libs\LevelLoader.h" />
-    <ClInclude Include="libs\KeyboardInputManager.h" />
+    <ClInclude Include="libs\KeyCollector.h" />
     <ClInclude Include="libs\MovableGameObject.h" />
     <ClInclude Include="libs\Barrel.h" />
     <ClInclude Include="libs\Player.h" />
@@ -68,6 +69,7 @@
     <ClInclude Include="libs\LadderContainer.h" />
     <ClInclude Include="libs\Platform.h" />
     <ClInclude Include="libs\PlatformContainer.h" />
+    <ClInclude Include="libs\KeyActionHandler.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

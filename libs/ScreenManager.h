@@ -70,4 +70,6 @@ public:
 	void drawPlatforms();
 	void drawLadders();
 	void drawBarrels();
+
+	static void drawMenu();
 };

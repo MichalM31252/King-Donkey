@@ -5,7 +5,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "ScreenManager.h"
-#include "KeyboardInputManager.h"
+#include "KeyCollector.h"
+#include "KeyActionHandler.h"
 #include "Constants.h"
 #include "Player.h"
 #include "Platform.h"
@@ -20,12 +21,12 @@
 
 class Game {
 public:
-	// GameTime gameTime;
 	GameTime gameTime;
 	std::shared_ptr<GameObjectContainer> gameObjectContainer;
 	ScreenManager screenManager;
 	LevelLoader levelLoader;
-	KeyboardInputManager keyboardInputManager;
+	KeyCollector keyCollector;
+	KeyActionHandler keyActionHandler;
 	GameObjectManager gameObjectManager;
 
 	Game();

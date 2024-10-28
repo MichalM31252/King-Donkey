@@ -256,3 +256,7 @@ void ScreenManager::drawElements() {
 	drawSurface(gameObjectContainer->princess, gameObjectContainer->princess->xpos, gameObjectContainer->princess->ypos);
 	drawSurface(gameObjectContainer->player, gameObjectContainer->player->xpos, gameObjectContainer->player->ypos);
 }
+
+void ScreenManager::drawMenu() {
+	// Current problem - You press a key, you pause, you release a key durning pause and then the release event is not handled
+}

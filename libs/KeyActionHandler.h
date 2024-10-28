@@ -1,0 +1,39 @@
+#pragma once
+
+#include <set>
+#include <memory>
+#include "GameTime.h"
+#include "GameObjectContainer.h"
+#include "CollisionDetector.h"
+#include "../SDL2-2.0.10/include/SDL.h"
+
+class KeyActionHandler { // rename to KeyActionHandler
+public:
+	std::set<SDL_Keycode> pressedKeys;
+	std::set<SDL_Keycode> releasedKeys;
+	std::shared_ptr<GameTime> gameTime;
+	std::shared_ptr<GameObjectContainer> gameObjectContainer;
+
+	KeyActionHandler(std::set<SDL_Keycode> pressedKeys, std::set<SDL_Keycode> releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer);
+
+	void handleInput();
+	//void handleKeyDownCollection(SDL_Keycode key);
+	//void handleKeyUpCollection(SDL_Keycode key);
+
+	//void onKeyPressArrowUp();
+	//void onKeyPressArrowRight();
+	//void onKeyPressArrowDown();
+	//void onKeyPressArrowLeft();
+	//void onKeyPressSpace();
+	//void onKeyPressEsc();
+	//void onKeyPressN(bool& quit);
+	//void onKeyPress1(bool& quit);
+	//void onKeyPress2(bool& quit);
+	//void onKeyPress3(bool& quit);
+
+	//void onKeyReleasedArrowUp();
+	//void onKeyReleasedArrowRight();
+	//void onKeyReleasedArrowDown();
+	//void onKeyReleasedArrowLeft();
+
+};

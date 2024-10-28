@@ -8,7 +8,8 @@ Game::Game()
     , gameObjectContainer(std::make_unique<GameObjectContainer>())
     , screenManager(ScreenManager(gameObjectContainer))
 	, levelLoader(LevelLoader(gameObjectContainer))
-	, keyboardInputManager(KeyboardInputManager(gameObjectContainer, &gameTime))
+	, keyCollector(KeyCollector())
+	, keyActionHandler(KeyActionHandler(keyCollector.pressedKeys, keyCollector.releasedKeys, &gameTime, gameObjectContainer.get()))
 	, gameObjectManager(GameObjectManager(gameObjectContainer))
 {
 	startGame();
@@ -37,8 +38,12 @@ Game::Game()
     bool quit = false;
     while (!quit) {
 
-		// PROCESS EVENTS
-		keyboardInputManager.handleEvents(quit);
+		// collect currently pressed keys
+		keyCollector.collect(quit);
+
+        // HANDLE INPUT HERE
+
+        keyCollector.clearReleasedKeys();
 
         if (!gameTime.isPaused) {
             // UPDATE TIME
