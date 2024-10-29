@@ -40,9 +40,7 @@ Game::Game()
 
 		// collect currently pressed keys
 		keyCollector.collect(quit);
-
-        // HANDLE INPUT HERE
-
+        keyActionHandler.handleInput();
         keyCollector.clearReleasedKeys();
 
         if (!gameTime.isPaused) {

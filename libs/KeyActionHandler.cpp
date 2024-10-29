@@ -8,135 +8,165 @@ KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode> pressedKeys, std::set<S
 {
 }
 
-//void PressedKeyActionHandler::handleInput() {
-//	for (auto key : *pressedKeys) {
-//		switch (key) {
-//			case SDLK_UP:
-//				onKeyPressArrowUp();
-//				break;
-//			case SDLK_DOWN:
-//				onKeyPressArrowDown();
-//				break;
-//			case SDLK_LEFT:
-//				onKeyPressArrowLeft();
-//				break;
-//			case SDLK_RIGHT:
-//				onKeyPressArrowRight();
-//				break;
-//			case SDLK_SPACE:
-//				onKeyPressSpace();
-//				break;
-//			case SDLK_ESCAPE:
-//				onKeyPressEsc();
-//				break;
-//			default:
-//				break;
-//		}
-//	}
-//}
+void KeyActionHandler::handleInput() {
+	for (auto key : pressedKeys) {
+		switch (key) {
+			case SDLK_UP:
+				onKeyPressArrowUp();
+				break;
+			case SDLK_DOWN:
+				onKeyPressArrowDown();
+				break;
+			case SDLK_LEFT:
+				onKeyPressArrowLeft();
+				break;
+			case SDLK_RIGHT:
+				onKeyPressArrowRight();
+				break;
+			case SDLK_SPACE:
+				onKeyPressSpace();
+				break;
+			case SDLK_ESCAPE:
+				onKeyPressEsc();
+				break;
+			default:
+				break;
+		}
+	}
 
-//void PressedKeyActionHandler::onKeyPressArrowUp() {
-//	if (!gameTime->isPaused) {
-//		auto player = gameObjectContainer->player;
-//		if (CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
-//			player->isClimbing = true;
-//			player->isFalling = false;
-//			player->isJumping = false;
-//			player->currentDirectionOfMovementY = DirectionY::UP;
-//			player->velocityY = DEFAULT_PLAYER_SPEED;
-//		}
-//		else {
-//			player->isClimbing = false;
-//			player->currentDirectionOfMovementY = DirectionY::NONE;
-//			player->velocityY = 0;
-//		}
-//	}
-//}
+	for (auto key : releasedKeys) {
+		switch (key) {
+		case SDLK_UP:
+			onKeyReleasedArrowUp();
+			break;
+		case SDLK_DOWN:
+			onKeyReleasedArrowDown();
+			break;
+		case SDLK_LEFT:
+			onKeyReleasedArrowLeft();
+			break;
+		case SDLK_RIGHT:
+			onKeyReleasedArrowRight();
+			break;
+		default:
+			break;
+		}
+	}
+}
 
-//void KeyboardInputManager::onKeyReleasedArrowUp() {
-//    if (!gameTime->isPaused) {
-//        gameObjectContainer->player->accumulatedMoveUp = 0;
-//        if (gameObjectContainer->player->currentDirectionOfMovementY == DirectionY::UP) {
-//            gameObjectContainer->player->velocityY = 0;
-//        }
-//    }
-//}
-//
-//void KeyboardInputManager::onKeyReleasedArrowLeft() {
-//    if (!gameTime->isPaused) {
-//        gameObjectContainer->player->accumulatedMoveLeft = 0;
-//        if (gameObjectContainer->player->currentDirectionOfMovementX == DirectionX::LEFT) {
-//            gameObjectContainer->player->velocityX = 0;
-//        }
-//    }
-//}
-//
-//void KeyboardInputManager::onKeyReleasedArrowRight() {
-//    if (!gameTime->isPaused) {
-//        gameObjectContainer->player->accumulatedMoveRight = 0;
-//        if (gameObjectContainer->player->currentDirectionOfMovementX == DirectionX::RIGHT) {
-//            gameObjectContainer->player->velocityX = 0;
-//        }
-//    }
-//}
-//
-//void KeyboardInputManager::onKeyReleasedArrowDown() {
-//    if (!gameTime->isPaused) {
-//        gameObjectContainer->player->accumulatedMoveDown = 0;
-//	    if (gameObjectContainer->player->currentDirectionOfMovementY == DirectionY::DOWN) {
-//		    gameObjectContainer->player->velocityY = 0;
-//	    }
-//    }
-//}
+void KeyActionHandler::onKeyPressArrowUp() {
+	if (!gameTime->isPaused) {
+		auto player = gameObjectContainer->player;
+		if (CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
+			player->isClimbing = true;
+			player->isFalling = false;
+			player->isJumping = false;
+			player->currentDirectionOfMovementY = DirectionY::UP;
+			player->velocityY = DEFAULT_PLAYER_SPEED;
+		}
+		else {
+			player->isClimbing = false;
+			player->currentDirectionOfMovementY = DirectionY::NONE;
+			player->velocityY = 0;
+		}
+	}
+}
+
+void KeyActionHandler::onKeyPressArrowRight() {
+    if (!gameTime->isPaused) {
+        auto player = gameObjectContainer->player;
+        if (!player->isClimbing) {
+            player->currentDirectionOfMovementX = DirectionX::RIGHT;
+            player->velocityX = DEFAULT_PLAYER_SPEED;
+        }
+    }
+}
+
+void KeyActionHandler::onKeyPressArrowDown() {
+	if (!gameTime->isPaused) {
+		auto player = gameObjectContainer->player;
+		if (CollisionDetector::isGameObjectInsideAnyLadder(player, gameObjectContainer->ladderContainer)) {
+			player->isClimbing = true;
+			player->isFalling = false;
+			player->isJumping = false;
+			player->currentDirectionOfMovementY = DirectionY::DOWN;
+			player->velocityY = DEFAULT_PLAYER_SPEED;
+		}
+		else {
+			player->isClimbing = false;
+			player->currentDirectionOfMovementY = DirectionY::NONE;
+			player->velocityY = 0;
+		}
+	}
+}
+
+void KeyActionHandler::onKeyPressArrowLeft() {
+    if (!gameTime->isPaused) {
+        auto player = gameObjectContainer->player;
+        if (!player->isClimbing) {
+            player->currentDirectionOfMovementX = DirectionX::LEFT;
+            player->velocityX = DEFAULT_PLAYER_SPEED;
+        }
+    }
+}
+
+void KeyActionHandler::onKeyPressSpace() {
+    if (!gameTime->isPaused) {
+        gameObjectContainer->player->initJump();
+    }
+}
+
+void KeyActionHandler::onKeyPressEsc() {
+    if (!gameTime->isPaused) {
+        gameTime->pause();
+        // show menu
+
+    }
+    else {
+        gameTime->resume();
+		// hide menu
+    }
+}
+
+
+void KeyActionHandler::onKeyReleasedArrowUp() {
+    if (!gameTime->isPaused) {
+        gameObjectContainer->player->accumulatedMoveUp = 0;
+        if (gameObjectContainer->player->currentDirectionOfMovementY == DirectionY::UP) {
+			gameObjectContainer->player->velocityY= 0;
+        }
+    }
+}
+
+void KeyActionHandler::onKeyReleasedArrowLeft() {
+    if (!gameTime->isPaused) {
+        gameObjectContainer->player->accumulatedMoveLeft = 0;
+        if (gameObjectContainer->player->currentDirectionOfMovementX == DirectionX::LEFT) {
+            gameObjectContainer->player->velocityX = 0;
+        }
+    }
+}
+
+void KeyActionHandler::onKeyReleasedArrowRight() {
+    if (!gameTime->isPaused) {
+        gameObjectContainer->player->accumulatedMoveRight = 0;
+        if (gameObjectContainer->player->currentDirectionOfMovementX == DirectionX::RIGHT) {
+            gameObjectContainer->player->velocityX = 0;
+        }
+    }
+}
+
+void KeyActionHandler::onKeyReleasedArrowDown() {
+    if (!gameTime->isPaused) {
+        gameObjectContainer->player->accumulatedMoveDown = 0;
+	    if (gameObjectContainer->player->currentDirectionOfMovementY == DirectionY::DOWN) {
+		    gameObjectContainer->player->velocityY = 0;
+	    }
+    }
+}
 //
 //void KeyboardInputManager::initializeQuit(bool& quit) {
 //	quit = true;
-//}
-
-
-//
-//void KeyboardInputManager::onKeyPressArrowDown() {
-//    if (!gameTime->isPaused) {
-//        auto player = gameObjectContainer->player;
-//        if (CollisionDetector::isGameObjectInsideAnyLadder(player, gameObjectContainer->ladderContainer)) {
-//            player->isClimbing = true;
-//            player->isFalling = false;
-//            player->isJumping = false;
-//            player->currentDirectionOfMovementY = DirectionY::DOWN;
-//            player->velocityY = DEFAULT_PLAYER_SPEED;
-//        }
-//        else {
-//            player->isClimbing = false;
-//            player->currentDirectionOfMovementY = DirectionY::NONE;
-//            player->velocityY = 0;
-//        }
-//    }
-//}
-//
-//void KeyboardInputManager::onKeyPressArrowLeft() {
-//    if (!gameTime->isPaused) {
-//        auto player = gameObjectContainer->player;
-//        if (!player->isClimbing) {
-//            player->currentDirectionOfMovementX = DirectionX::LEFT;
-//            player->velocityX = DEFAULT_PLAYER_SPEED;
-//        }
-//    }
-//}
-//
-//void KeyboardInputManager::onKeyPressArrowRight() {
-//    if (!gameTime->isPaused) {
-//        auto player = gameObjectContainer->player;
-//        if (!player->isClimbing) {
-//            player->currentDirectionOfMovementX = DirectionX::RIGHT;
-//            player->velocityX = DEFAULT_PLAYER_SPEED;
-//        }
-//    }
-//}
-//
-//void KeyboardInputManager::onKeyPressSpace() {
-//    if (!gameTime->isPaused) {
-//        gameObjectContainer->player->initJump();
-//    }
 //}
 //
 //void KeyboardInputManager::onKeyPressN(bool& quit) {
@@ -145,17 +175,6 @@ KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode> pressedKeys, std::set<S
 //    }
 //}
 //
-//void KeyboardInputManager::onKeyPressEsc() {
-//    if (!gameTime->isPaused) {
-//        gameTime->pause();
-//        // show menu
-//
-//    }
-//    else {
-//        gameTime->resume();
-//		// hide menu
-//    }
-//}
 //
 //void KeyboardInputManager::onKeyPress1(bool& quit) {
 //    if (!gameTime->isPaused) {
