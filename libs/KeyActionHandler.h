@@ -9,12 +9,12 @@
 
 class KeyActionHandler { // rename to KeyActionHandler
 public:
-	std::set<SDL_Keycode> pressedKeys;
-	std::set<SDL_Keycode> releasedKeys;
+	std::shared_ptr <std::set<SDL_Keycode>> pressedKeys;
+	std::shared_ptr <std::set<SDL_Keycode>> releasedKeys;
 	std::shared_ptr<GameTime> gameTime;
 	std::shared_ptr<GameObjectContainer> gameObjectContainer;
 
-	KeyActionHandler(std::set<SDL_Keycode> pressedKeys, std::set<SDL_Keycode> releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer);
+	KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<SDL_Keycode>* releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer);
 
 	void handleInput();
 
@@ -24,10 +24,6 @@ public:
 	void onKeyPressArrowLeft();
 	void onKeyPressSpace();
 	void onKeyPressEsc();
-	//void onKeyPressN(bool& quit);
-	//void onKeyPress1(bool& quit);
-	//void onKeyPress2(bool& quit);
-	//void onKeyPress3(bool& quit);
 
 	void onKeyReleasedArrowUp();
 	void onKeyReleasedArrowRight();

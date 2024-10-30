@@ -9,7 +9,7 @@ Game::Game()
     , screenManager(ScreenManager(gameObjectContainer))
 	, levelLoader(LevelLoader(gameObjectContainer))
 	, keyCollector(KeyCollector())
-	, keyActionHandler(KeyActionHandler(keyCollector.pressedKeys, keyCollector.releasedKeys, &gameTime, gameObjectContainer.get()))
+	, keyActionHandler(KeyActionHandler(&keyCollector.pressedKeys, &keyCollector.releasedKeys, &gameTime, gameObjectContainer.get()))
 	, gameObjectManager(GameObjectManager(gameObjectContainer))
 {
 	startGame();

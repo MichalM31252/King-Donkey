@@ -1,6 +1,6 @@
 #include "KeyActionHandler.h"
 
-KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode> pressedKeys, std::set<SDL_Keycode> releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer)
+KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<SDL_Keycode>* releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer)
 	: pressedKeys(pressedKeys)
 	, releasedKeys(releasedKeys)
 	, gameTime(gameTime)
@@ -9,7 +9,8 @@ KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode> pressedKeys, std::set<S
 }
 
 void KeyActionHandler::handleInput() {
-	for (auto key : pressedKeys) {
+	for (auto key : *pressedKeys) {
+		// printf("Key pressed: %d\n", key);
 		switch (key) {
 			case SDLK_UP:
 				onKeyPressArrowUp();
@@ -34,22 +35,23 @@ void KeyActionHandler::handleInput() {
 		}
 	}
 
-	for (auto key : releasedKeys) {
+	for (auto key : *releasedKeys) {
+		// printf("Key released: %d\n", key);
 		switch (key) {
-		case SDLK_UP:
-			onKeyReleasedArrowUp();
-			break;
-		case SDLK_DOWN:
-			onKeyReleasedArrowDown();
-			break;
-		case SDLK_LEFT:
-			onKeyReleasedArrowLeft();
-			break;
-		case SDLK_RIGHT:
-			onKeyReleasedArrowRight();
-			break;
-		default:
-			break;
+			case SDLK_UP:
+				onKeyReleasedArrowUp();
+				break;
+			case SDLK_DOWN:
+				onKeyReleasedArrowDown();
+				break;
+			case SDLK_LEFT:
+				onKeyReleasedArrowLeft();
+				break;
+			case SDLK_RIGHT:
+				onKeyReleasedArrowRight();
+				break;
+			default:
+				break;
 		}
 	}
 }
