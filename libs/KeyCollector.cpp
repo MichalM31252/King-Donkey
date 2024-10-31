@@ -7,16 +7,16 @@
 
 void KeyCollector::collect(bool& quit) { // rename this to handleInput and Keyboard manager to KeyboardController or something
     while (SDL_PollEvent(&event) != 0) {
-        switch (event.type) {
-			case SDL_KEYDOWN:
-                handleKeyDownCollection(event.key.keysym.sym);
-                break;
-            case SDL_KEYUP:
-                handleKeyUpCollection(event.key.keysym.sym);
-                break;
-            default:
-                break;
+        if (event.type == SDL_KEYDOWN && !event.key.repeat) {
+            handleKeyDownCollection(event.key.keysym.sym);
         }
+        if (event.type == SDL_KEYUP) {
+            handleKeyUpCollection(event.key.keysym.sym);
+		}
+        if (event.type == SDL_QUIT) {
+            quit = true;
+        }
+        break;
     }
 }
 

@@ -10,7 +10,16 @@ KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<
 
 void KeyActionHandler::handleInput() {
 	for (auto key : *pressedKeys) {
-		// printf("Key pressed: %d\n", key);
+		printf("Key pressed: %d\n", key);
+
+		// Skip if this key has already been handled
+		if (handledKeys.find(key) != handledKeys.end()) {
+			continue;
+		}
+
+		// Mark the key as handled before processing
+		handledKeys.insert(key);
+
 		switch (key) {
 			case SDLK_UP:
 				onKeyPressArrowUp();
@@ -31,12 +40,18 @@ void KeyActionHandler::handleInput() {
 				onKeyPressEsc();
 				break;
 			default:
+				// Remove from handled keys if we don't actually handle it
+				handledKeys.erase(key);
 				break;
 		}
 	}
 
 	for (auto key : *releasedKeys) {
-		// printf("Key released: %d\n", key);
+		printf("Key released: %d\n", key);
+
+		// Clear the handled status for this key
+		clearHandledKey(key);
+
 		switch (key) {
 			case SDLK_UP:
 				onKeyReleasedArrowUp();
@@ -116,6 +131,10 @@ void KeyActionHandler::onKeyPressSpace() {
     if (!gameTime->isPaused) {
         gameObjectContainer->player->initJump();
     }
+}
+
+void KeyActionHandler::clearHandledKey(SDL_Keycode key) {
+	handledKeys.erase(key);
 }
 
 void KeyActionHandler::onKeyPressEsc() {
