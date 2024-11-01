@@ -1,4 +1,4 @@
-#include "KeyActionHandler.h"
+﻿#include "KeyActionHandler.h"
 
 KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<SDL_Keycode>* releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer)
 	: pressedKeys(pressedKeys)
@@ -71,6 +71,8 @@ void KeyActionHandler::handleInput() {
 	}
 }
 
+// PROBLEMEM JEST TO ŻE KAŻDA Z TYCH FUNCKJI JEST WYKONYWANA RAZ TYLKO JAK WCISNIESZ I PRZERYWANA JAK PUSCICSZ
+// CZYLI TYLKO RAZ NA POCZATKU SPRZAWDZI CZY JEST WEWNATRZ DRABINY
 void KeyActionHandler::onKeyPressArrowUp() {
 	if (!gameTime->isPaused) {
 		auto player = gameObjectContainer->player;
@@ -81,22 +83,7 @@ void KeyActionHandler::onKeyPressArrowUp() {
 			player->currentDirectionOfMovementY = DirectionY::UP;
 			player->velocityY = DEFAULT_PLAYER_SPEED;
 		}
-		else {
-			player->isClimbing = false;
-			player->currentDirectionOfMovementY = DirectionY::NONE;
-			player->velocityY = 0;
-		}
 	}
-}
-
-void KeyActionHandler::onKeyPressArrowRight() {
-    if (!gameTime->isPaused) {
-        auto player = gameObjectContainer->player;
-        if (!player->isClimbing) {
-            player->currentDirectionOfMovementX = DirectionX::RIGHT;
-            player->velocityX = DEFAULT_PLAYER_SPEED;
-        }
-    }
 }
 
 void KeyActionHandler::onKeyPressArrowDown() {
@@ -109,12 +96,17 @@ void KeyActionHandler::onKeyPressArrowDown() {
 			player->currentDirectionOfMovementY = DirectionY::DOWN;
 			player->velocityY = DEFAULT_PLAYER_SPEED;
 		}
-		else {
-			player->isClimbing = false;
-			player->currentDirectionOfMovementY = DirectionY::NONE;
-			player->velocityY = 0;
-		}
 	}
+}
+
+void KeyActionHandler::onKeyPressArrowRight() {
+    if (!gameTime->isPaused) {
+        auto player = gameObjectContainer->player;
+        if (!player->isClimbing) {
+            player->currentDirectionOfMovementX = DirectionX::RIGHT;
+            player->velocityX = DEFAULT_PLAYER_SPEED;
+        }
+    }
 }
 
 void KeyActionHandler::onKeyPressArrowLeft() {
@@ -185,32 +177,3 @@ void KeyActionHandler::onKeyReleasedArrowDown() {
 	    }
     }
 }
-//
-//void KeyboardInputManager::initializeQuit(bool& quit) {
-//	quit = true;
-//}
-//
-//void KeyboardInputManager::onKeyPressN(bool& quit) {
-//    if (!gameTime->isPaused) {
-//        onKeyPress1(quit);
-//    }
-//}
-//
-//
-//void KeyboardInputManager::onKeyPress1(bool& quit) {
-//    if (!gameTime->isPaused) {
-//        quit = true;
-//    }
-//}
-//
-//void KeyboardInputManager::onKeyPress2(bool& quit) {
-//    if (!gameTime->isPaused) {
-//        onKeyPress1(quit);
-//    }
-//}
-//
-//void KeyboardInputManager::onKeyPress3(bool& quit) {
-//    if (!gameTime->isPaused) {
-//        onKeyPress1(quit);
-//    }
-//}

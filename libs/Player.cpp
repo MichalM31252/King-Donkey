@@ -18,6 +18,7 @@ void Player::update(double deltaTime) {
 	accumulateDistance(deltaTime);
 	stayInBounds();
 	updatePositionCoordinates();
+
 }
 
 void Player::updatePosition() {
@@ -89,7 +90,6 @@ void Player::initJump() {
 }
 
 void Player::loadNextRunningSprite() {
-
 	if (this->currentRunningSpriteId == 1) {
 		ScreenManager::loadTexture(this, PLAYER_1_FILENAME);
 		this->currentRunningSpriteId++;
@@ -148,14 +148,6 @@ bool Player::isMovingVertically() const {
 }
 
 void Player::accumulateDistance(double deltaTime) {
-	if (currentDirectionOfMovementY == DirectionY::UP && velocityY > 0) {
-		accumulatedMoveUp += deltaTime * velocityY;
-	}
-	else if (currentDirectionOfMovementY == DirectionY::DOWN && velocityY > 0) {
-		accumulatedMoveDown += deltaTime * velocityY;
-	}
-	else {
-		MovableGameObject::accumulateDistance(deltaTime);
-	}
+	MovableGameObject::accumulateDistance(deltaTime);
 }
 

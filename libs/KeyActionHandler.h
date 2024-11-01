@@ -10,8 +10,8 @@
 class KeyActionHandler { // rename to KeyActionHandler
 public:
 	std::shared_ptr<std::set<SDL_Keycode>> pressedKeys;
-	std::set<SDL_Keycode> handledKeys;
 	std::shared_ptr<std::set<SDL_Keycode>> releasedKeys;
+	std::set<SDL_Keycode> handledKeys;
 
 	std::shared_ptr<GameTime> gameTime;
 	std::shared_ptr<GameObjectContainer> gameObjectContainer;
@@ -33,5 +33,4 @@ public:
 	void onKeyReleasedArrowLeft();
 
 	void clearHandledKey(SDL_Keycode key);
-
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MovableGameObject.h"
+#include "CollisionDetector.h"
 
 class Player : public MovableGameObject {
 public:

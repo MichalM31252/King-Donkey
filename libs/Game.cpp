@@ -51,12 +51,23 @@ Game::Game()
             gameObjectManager.updatePositionOfGameObjects(gameTime.deltaTime);
             gameObjectManager.handleCollisionsOfGameObjects(quit);
             gameObjectManager.updatePhysicsOfGameObjects(gameTime.deltaTime);
+
             // no idea where to put this, this updates the class that creates barrels
             gameObjectContainer->donkeyKong->update(gameTime.deltaTime);
 
             // no idea where to put this
             if (!gameObjectContainer->player->isClimbing && gameObjectContainer->player->isJumping) {
                 gameObjectContainer->player->jump(gameTime.deltaTime);
+            }
+
+            if (!CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
+                if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(gameObjectContainer->player, gameObjectContainer->platformContainer)) {
+                    if (gameObjectContainer->player->isClimbing) {
+                        gameObjectContainer->player->isClimbing = false;
+						gameObjectContainer->player->currentDirectionOfMovementY = DirectionY::NONE;
+						gameObjectContainer->player->velocityY = 0;
+                    }
+                }
             }
 
             // RENDER
