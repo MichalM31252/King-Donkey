@@ -37,6 +37,7 @@
 - [x] Add pause mechanism
 - [ ] Add home screen
 - [ ] Divide into smaller classes
+- [ ] Remove hybrid classes that contain both data and methods
 
 # Future plans:
 
