@@ -96,7 +96,7 @@ void ScreenManager::drawAdditionalInfo(double deltaTime) const {
 	// Convert worldTime to string and concatenate the rest of the text
 	std::string text = "Time: " + std::to_string(deltaTime) + " s  Score: 0  Lives: 1";
 
-	drawString(screen->w / 2 - text.length() * 8 / 2, 7, text);
+	drawString(screen->w / 2 - text.length() * 8 / 2, 7, text, 1);
 }
 
 // draw a surface sprite on a surface screen in point (x, y)
@@ -121,7 +121,7 @@ void ScreenManager::drawSurfaceLadder(std::shared_ptr<GameObject> ladder, int xp
 
 // draw a text txt on surface screen, starting from the point (x, y)
 // charset is a 128x128 bitmap containing character images
-void ScreenManager::drawString(int x, int y, const std::string& text) const {
+void ScreenManager::drawString(int x, int y, const std::string& text, int scale = 1) const {
 	int px;
 	int py;
 	int c;
@@ -129,8 +129,8 @@ void ScreenManager::drawString(int x, int y, const std::string& text) const {
 	SDL_Rect d;
 	s.w = 8;
 	s.h = 8;
-	d.w = 8;
-	d.h = 8;
+	d.w = 8 * scale;
+	d.h = 8 * scale;
 
 	for (char ch : text) {
 		c = ch & 255;
@@ -140,10 +140,16 @@ void ScreenManager::drawString(int x, int y, const std::string& text) const {
 		s.y = py;
 		d.x = x;
 		d.y = y;
-		SDL_BlitSurface(charset, &s, screen, &d);
-		x += 8;
+
+		// Render the character at the scaled size
+		SDL_BlitScaled(charset, &s, screen, &d);
+
+		// Move to the next character position, adjusted for scale
+		x += 8 * scale;
 	}
 }
+
+
 
 void ScreenManager::drawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const { // draw a single pixel
 	int bpp = surface->format->BytesPerPixel;
@@ -258,5 +264,38 @@ void ScreenManager::drawElements() {
 }
 
 void ScreenManager::drawMenu() {
-	// Current problem - You press a key, you pause, you release a key durning pause and then the release event is not handled
+	int width = static_cast<int>(640 * 0.7);
+	int height = static_cast<int>(480 * 0.7);
+
+	// Define top-left corner position (e.g., center it or place it at (0, 0))
+	int x = (SCREEN_WIDTH - width) / 2;   // Centered horizontally
+	int y = (SCREEN_HEIGHT - height) / 2; // Centered vertically
+
+	// Draw the rectangle with a blue outline and no fill
+	drawRectangle(x, y, width, height, blue, black); // Assuming 'blue' and 'black' are already set
+
+	// Define menu options
+	const std::string options[] = { "Resume", "Leaderboard", "Quit" };
+	int numOptions = sizeof(options) / sizeof(options[0]);
+
+	// Set scaling factor for the text
+	int scale = 3;
+
+	// Calculate Y spacing for even distribution within the rectangle
+	int spacingY = height / (numOptions + 1); // +1 for equal padding at top and bottom
+
+	// Draw each option centered within the rectangle
+	for (int i = 0; i < numOptions; ++i) {
+		// Calculate the width of the text for centering
+		int textWidth = options[i].size() * 8 * scale;
+
+		// Center text horizontally within the rectangle
+		int optionX = x + (width - textWidth) / 2;
+
+		// Calculate Y-position for each option
+		int optionY = y + spacingY * (i + 1); // Start from spacingY to leave padding at top
+
+		// Draw the option
+		drawString(optionX, optionY, options[i], scale);
+	}
 }

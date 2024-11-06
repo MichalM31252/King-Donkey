@@ -79,6 +79,10 @@ Game::Game()
             screenManager.serveNextFrame();
             screenManager.frames++;
         }
+        else {
+			screenManager.drawMenu();
+			screenManager.serveNextFrame();
+        }
     }
     closeGame();
 }
