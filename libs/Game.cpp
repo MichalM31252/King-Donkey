@@ -41,7 +41,8 @@ Game::Game()
 		// collect currently pressed keys
 		keyCollector.collect(quit);
         keyActionHandler.handleInput();
-        keyCollector.clearReleasedKeys(); // so the game pauses but after your press it once it goes to released keys, after it goes to released keys its cleared, and after thaht the game is no longer paused?
+        // keyCollector.clearReleasedKeys(); // so the game pauses but after your press it once it goes to released keys, after it goes to released keys its cleared, and after thaht the game is no longer paused?
+		keyCollector.releasedKeys.clear();
 
         if (!gameTime.isPaused) {
             // UPDATE TIME
@@ -76,13 +77,12 @@ Game::Game()
             screenManager.drawOutlineOfTheBoard();
             screenManager.drawAdditionalInfo(gameTime.worldTime);
             screenManager.drawElements(); // current quick fix is that ladder is drawn first then player to make player appear on top of ladder
-            screenManager.serveNextFrame();
             screenManager.frames++;
         }
         else {
-			screenManager.drawMenu();
-			screenManager.serveNextFrame();
+			screenManager.drawMenu(0);
         }
+        screenManager.serveNextFrame();
     }
     closeGame();
 }

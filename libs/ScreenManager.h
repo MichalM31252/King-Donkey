@@ -71,5 +71,5 @@ public:
 	void drawLadders();
 	void drawBarrels();
 
-	void drawMenu();
+	void drawMenu(int selectedOption);
 };

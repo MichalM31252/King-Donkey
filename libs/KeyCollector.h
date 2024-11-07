@@ -12,7 +12,9 @@
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
 
-class KeyCollector { // rename to key collector and collect pressed and released keys
+// create one collector for keys pressed and released during the game, and one during the pause 
+
+class KeyCollector {
 public:
     SDL_Event event;
     std::set<SDL_Keycode> pressedKeys;
@@ -21,10 +23,8 @@ public:
     KeyCollector() = default;
 
     void collect(bool& quit);
-    void handleKeyDownCollection(SDL_Keycode key);
-    void handleKeyUpCollection(SDL_Keycode key);
-
-	void clearReleasedKeys();
+    void handlePressedKeysCollection(SDL_Keycode key);
+    void handleReleasedKeysCollection(SDL_Keycode key);
 
     std::set<SDL_Keycode> getPressedKeys();
 

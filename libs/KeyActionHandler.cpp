@@ -9,7 +9,10 @@ KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<
 }
 
 void KeyActionHandler::handleInput() {
-	for (auto key : *pressedKeys) {
+
+	// Create copies of the key sets to safely iterate over
+	std::set<SDL_Keycode> currentPressedKeys = *pressedKeys;
+	for (auto key : currentPressedKeys) {
 		printf("Key pressed: %d\n", key);
 
 		// Skip if this key has already been handled
@@ -46,7 +49,8 @@ void KeyActionHandler::handleInput() {
 		}
 	}
 
-	for (auto key : *releasedKeys) {
+	std::set<SDL_Keycode> currentReleasedKeys = *releasedKeys;
+	for (auto key : currentReleasedKeys) {
 		printf("Key released: %d\n", key);
 
 		// Clear the handled status for this key
@@ -132,12 +136,18 @@ void KeyActionHandler::clearHandledKey(SDL_Keycode key) {
 void KeyActionHandler::onKeyPressEsc() {
     if (!gameTime->isPaused) {
         gameTime->pause();
-        // show menu
+		for (const auto& key : *pressedKeys) {
+			releasedKeys->insert(key);
+		}
+		pressedKeys->clear();
 
     }
     else {
         gameTime->resume();
-		// hide menu
+		for (const auto& key : *pressedKeys) {
+			releasedKeys->insert(key);
+		}
+		releasedKeys->clear();
     }
 }
 
