@@ -9,10 +9,22 @@ KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<
 }
 
 void KeyActionHandler::handleInput() {
+	handlePressedKeys();
+	handleReleasedKeys();
+}
 
+// so the funny thing is that 
+// in a set the first element that gets counted is the element with the smallest value
+// esc key has value 27 
+// everything else has a value around 10000
+// so escape gets executed first always
+// so I decided to iterate from the last element to the first one 
+
+void KeyActionHandler::handlePressedKeys() {
 	// Create copies of the key sets to safely iterate over
 	std::set<SDL_Keycode> currentPressedKeys = *pressedKeys;
-	for (auto key : currentPressedKeys) {
+	for (auto it = currentPressedKeys.rbegin(); it != currentPressedKeys.rend(); ++it) {
+		SDL_Keycode key = *it;
 		printf("Key pressed: %d\n", key);
 
 		// Skip if this key has already been handled
@@ -20,41 +32,41 @@ void KeyActionHandler::handleInput() {
 			continue;
 		}
 
-		// Mark the key as handled before processing
-		handledKeys.insert(key);
-
 		switch (key) {
-			case SDLK_UP:
-				onKeyPressArrowUp();
-				break;
-			case SDLK_DOWN:
-				onKeyPressArrowDown();
-				break;
-			case SDLK_LEFT:
-				onKeyPressArrowLeft();
-				break;
-			case SDLK_RIGHT:
-				onKeyPressArrowRight();
-				break;
-			case SDLK_SPACE:
-				onKeyPressSpace();
-				break;
-			case SDLK_ESCAPE:
-				onKeyPressEsc();
-				break;
-			default:
-				// Remove from handled keys if we don't actually handle it
-				handledKeys.erase(key);
-				break;
+		case SDLK_UP:
+			onKeyPressArrowUp();
+			break;
+		case SDLK_DOWN:
+			onKeyPressArrowDown();
+			break;
+		case SDLK_LEFT:
+			onKeyPressArrowLeft();
+			break;
+		case SDLK_RIGHT:
+			onKeyPressArrowRight();
+			break;
+		case SDLK_SPACE:
+			onKeyPressSpace();
+			break;
+		case SDLK_ESCAPE:
+			onKeyPressEsc();
+			break;
+		default:
+			// Remove from handled keys if we don't actually handle it
+			handledKeys.erase(key);
+			break;
 		}
+
+		// Mark the key as handled
+		handledKeys.insert(key);
 	}
+}
 
+void KeyActionHandler::handleReleasedKeys() {
 	std::set<SDL_Keycode> currentReleasedKeys = *releasedKeys;
-	for (auto key : currentReleasedKeys) {
+	for (auto it = currentReleasedKeys.rbegin(); it != currentReleasedKeys.rend(); ++it) {
+		SDL_Keycode key = *it;
 		printf("Key released: %d\n", key);
-
-		// Clear the handled status for this key
-		clearHandledKey(key);
 
 		switch (key) {
 			case SDLK_UP:
@@ -67,11 +79,16 @@ void KeyActionHandler::handleInput() {
 				onKeyReleasedArrowLeft();
 				break;
 			case SDLK_RIGHT:
+				// HOW THE FUCK IS THE GAME ALREADY PAUSED HERE
 				onKeyReleasedArrowRight();
 				break;
 			default:
 				break;
 		}
+
+		// Clear the handled status for this key
+		deleteHandledKey(key);
+		deleteReleasedKey(key);
 	}
 }
 
@@ -129,25 +146,31 @@ void KeyActionHandler::onKeyPressSpace() {
     }
 }
 
-void KeyActionHandler::clearHandledKey(SDL_Keycode key) {
+void KeyActionHandler::deleteHandledKey(SDL_Keycode key) {
 	handledKeys.erase(key);
 }
+ 
+void KeyActionHandler::deleteReleasedKey(SDL_Keycode key) {
+	releasedKeys->erase(key);
+}
 
+void KeyActionHandler::deletePressedKey(SDL_Keycode key) {
+	pressedKeys->erase(key);
+}
+
+// so this function gets executed only the second time you press esc
 void KeyActionHandler::onKeyPressEsc() {
     if (!gameTime->isPaused) {
+		// moveAllPressedKeysToReleasedKeys();
+		moveAllHandledKeysToReleasedKeys();
+		handleReleasedKeys();
         gameTime->pause();
-		for (const auto& key : *pressedKeys) {
-			releasedKeys->insert(key);
-		}
-		pressedKeys->clear();
-
     }
     else {
+		// moveAllPressedKeysToReleasedKeys();
+		moveAllHandledKeysToReleasedKeys();
+		handleReleasedKeys();
         gameTime->resume();
-		for (const auto& key : *pressedKeys) {
-			releasedKeys->insert(key);
-		}
-		releasedKeys->clear();
     }
 }
 
@@ -186,4 +209,21 @@ void KeyActionHandler::onKeyReleasedArrowDown() {
 		    gameObjectContainer->player->velocityY = 0;
 	    }
     }
+}
+
+void KeyActionHandler::moveAllPressedKeysToReleasedKeys() {
+	for (const auto& key : *pressedKeys) {
+		if (releasedKeys->find(key) == releasedKeys->end()) {
+			releasedKeys->insert(key);
+		}
+	}
+	pressedKeys->clear();
+}
+
+void KeyActionHandler::moveAllHandledKeysToReleasedKeys() {
+	for (const auto& key : handledKeys) {
+		if (releasedKeys->find(key) == releasedKeys->end()) {
+			releasedKeys->insert(key);
+		}
+	}
 }

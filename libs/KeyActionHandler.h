@@ -19,6 +19,8 @@ public:
 	KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<SDL_Keycode>* releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer);
 
 	void handleInput();
+	void handlePressedKeys();
+	void handleReleasedKeys();
 
 	void onKeyPressArrowUp();
 	void onKeyPressArrowRight();
@@ -32,5 +34,10 @@ public:
 	void onKeyReleasedArrowDown();
 	void onKeyReleasedArrowLeft();
 
-	void clearHandledKey(SDL_Keycode key);
+	void deleteHandledKey(SDL_Keycode key);
+	void deleteReleasedKey(SDL_Keycode key);
+	void deletePressedKey(SDL_Keycode key);
+
+	void moveAllPressedKeysToReleasedKeys();
+	void moveAllHandledKeysToReleasedKeys();
 };

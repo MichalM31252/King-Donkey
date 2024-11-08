@@ -3,8 +3,6 @@
 #include "KeyCollector.h"
 #include "ScreenManager.h" // temporary fix
 
-
-
 void KeyCollector::collect(bool& quit) { // rename this to handleInput and Keyboard manager to KeyboardController or something
     while (SDL_PollEvent(&event) != 0) {
         if (event.type == SDL_KEYDOWN && !event.key.repeat) {

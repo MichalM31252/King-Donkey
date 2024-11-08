@@ -41,8 +41,9 @@ Game::Game()
 		// collect currently pressed keys
 		keyCollector.collect(quit);
         keyActionHandler.handleInput();
-        // keyCollector.clearReleasedKeys(); // so the game pauses but after your press it once it goes to released keys, after it goes to released keys its cleared, and after thaht the game is no longer paused?
-		keyCollector.releasedKeys.clear();
+
+        // to be honest there should be a class for just handling the input 
+        // there should be a class for deleting specific keys
 
         if (!gameTime.isPaused) {
             // UPDATE TIME
