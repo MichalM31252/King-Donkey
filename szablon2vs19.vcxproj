@@ -41,6 +41,7 @@
     <ClCompile Include="libs\PlatformContainer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="libs\KeyActionHandler.cpp" />
+    <ClCompile Include="libs\Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="cs8x8.bmp" />
@@ -70,6 +71,7 @@
     <ClInclude Include="libs\Platform.h" />
     <ClInclude Include="libs\PlatformContainer.h" />
     <ClInclude Include="libs\KeyActionHandler.h" />
+    <ClInclude Include="libs\Menu.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

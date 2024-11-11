@@ -27,22 +27,4 @@ public:
     void handleReleasedKeysCollection(SDL_Keycode key);
 
     std::set<SDL_Keycode> getPressedKeys();
-
-    // static void initializeQuit(bool& quit);
-
-    //void onKeyPressArrowUp();
-    //void onKeyPressArrowRight();
-    //void onKeyPressArrowDown();
-    //void onKeyPressArrowLeft();
-    //void onKeyPressSpace();
-    //void onKeyPressEsc();
-    //void onKeyPressN(bool& quit);
-    //void onKeyPress1(bool& quit);
-    //void onKeyPress2(bool& quit);
-    //void onKeyPress3(bool& quit);
-
-    //void onKeyReleasedArrowUp();
-    //void onKeyReleasedArrowRight();
-    //void onKeyReleasedArrowDown();
-    //void onKeyReleasedArrowLeft();
 };

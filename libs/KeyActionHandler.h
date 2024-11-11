@@ -5,6 +5,7 @@
 #include "GameTime.h"
 #include "GameObjectContainer.h"
 #include "CollisionDetector.h"
+#include "Game.h"
 #include "../SDL2-2.0.10/include/SDL.h"
 
 class KeyActionHandler { // rename to KeyActionHandler
@@ -15,8 +16,9 @@ public:
 
 	std::shared_ptr<GameTime> gameTime;
 	std::shared_ptr<GameObjectContainer> gameObjectContainer;
+	std::shared_ptr<Menu> pauseMenu;
 
-	KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<SDL_Keycode>* releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer);
+	KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<SDL_Keycode>* releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer, Menu* pauseMenu);
 
 	void handleInput();
 	void handlePressedKeys();

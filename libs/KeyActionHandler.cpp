@@ -1,10 +1,11 @@
 ﻿#include "KeyActionHandler.h"
 
-KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<SDL_Keycode>* releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer)
+KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<SDL_Keycode>* releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer, Menu* pauseMenu)
 	: pressedKeys(pressedKeys)
 	, releasedKeys(releasedKeys)
 	, gameTime(gameTime)
 	, gameObjectContainer(gameObjectContainer)
+	, pauseMenu(pauseMenu)
 {
 }
 
@@ -104,6 +105,9 @@ void KeyActionHandler::onKeyPressArrowUp() {
 			player->currentDirectionOfMovementY = DirectionY::UP;
 			player->velocityY = DEFAULT_PLAYER_SPEED;
 		}
+	}
+	else {
+
 	}
 }
 

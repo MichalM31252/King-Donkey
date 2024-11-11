@@ -9,8 +9,9 @@ Game::Game()
     , screenManager(ScreenManager(gameObjectContainer))
 	, levelLoader(LevelLoader(gameObjectContainer))
 	, keyCollector(KeyCollector())
-	, keyActionHandler(KeyActionHandler(&keyCollector.pressedKeys, &keyCollector.releasedKeys, &gameTime, gameObjectContainer.get()))
+	, pauseMenu(Menu((SCREEN_WIDTH - static_cast<int>(640 * 0.75)) / 2, (SCREEN_HEIGHT - static_cast<int>(480 * 0.75)) / 2, static_cast<int>(640 * 0.75), static_cast<int>(480 * 0.75), 3))
 	, gameObjectManager(GameObjectManager(gameObjectContainer))
+	, keyActionHandler(KeyActionHandler(&keyCollector.pressedKeys, &keyCollector.releasedKeys, &gameTime, gameObjectContainer.get()), &pauseMenu)
 {
 	startGame();
 }

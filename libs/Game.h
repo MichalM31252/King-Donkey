@@ -14,6 +14,7 @@
 #include "LevelLoader.h"
 #include "GameObjectManager.h"
 #include "GameTime.h"
+#include "Menu.h"
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
 
@@ -28,6 +29,7 @@ public:
 	KeyCollector keyCollector;
 	KeyActionHandler keyActionHandler;
 	GameObjectManager gameObjectManager;
+	Menu pauseMenu; // will probably add startingScreenMenu and gameOverMenu
 
 	Game();
 
