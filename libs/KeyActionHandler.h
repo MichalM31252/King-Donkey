@@ -5,7 +5,7 @@
 #include "GameTime.h"
 #include "GameObjectContainer.h"
 #include "CollisionDetector.h"
-#include "Game.h"
+#include "Menu.h"
 #include "../SDL2-2.0.10/include/SDL.h"
 
 class KeyActionHandler { // rename to KeyActionHandler

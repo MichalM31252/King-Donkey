@@ -7,13 +7,13 @@ Game::Game()
     : gameTime(GameTime())
     , gameObjectContainer(std::make_unique<GameObjectContainer>())
     , screenManager(ScreenManager(gameObjectContainer))
-	, levelLoader(LevelLoader(gameObjectContainer))
-	, keyCollector(KeyCollector())
-	, pauseMenu(Menu((SCREEN_WIDTH - static_cast<int>(640 * 0.75)) / 2, (SCREEN_HEIGHT - static_cast<int>(480 * 0.75)) / 2, static_cast<int>(640 * 0.75), static_cast<int>(480 * 0.75), 3))
-	, gameObjectManager(GameObjectManager(gameObjectContainer))
-	, keyActionHandler(KeyActionHandler(&keyCollector.pressedKeys, &keyCollector.releasedKeys, &gameTime, gameObjectContainer.get()), &pauseMenu)
+    , levelLoader(LevelLoader(gameObjectContainer))
+    , keyCollector(KeyCollector())
+    , pauseMenu(Menu(SCREEN_WIDTH - (640 * 0.75 / 2), (SCREEN_HEIGHT - 480 * 0.75) / 2, 640 * 0.75, 480 * 0.75, 3))
+    , gameObjectManager(GameObjectManager(gameObjectContainer))
+    , keyActionHandler(KeyActionHandler(&keyCollector.pressedKeys, &keyCollector.releasedKeys, &gameTime, gameObjectContainer.get(), &pauseMenu))
 {
-	startGame();
+    startGame();
 }
 
 [[noreturn]] void Game::startGame() {
@@ -82,7 +82,7 @@ Game::Game()
             screenManager.frames++;
         }
         else {
-			screenManager.drawMenu(0);
+			screenManager.drawMenu(pauseMenu.selectedOption);
         }
         screenManager.serveNextFrame();
     }

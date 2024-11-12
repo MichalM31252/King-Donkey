@@ -26,7 +26,6 @@ void KeyActionHandler::handlePressedKeys() {
 	std::set<SDL_Keycode> currentPressedKeys = *pressedKeys;
 	for (auto it = currentPressedKeys.rbegin(); it != currentPressedKeys.rend(); ++it) {
 		SDL_Keycode key = *it;
-		printf("Key pressed: %d\n", key);
 
 		// Skip if this key has already been handled
 		if (handledKeys.find(key) != handledKeys.end()) {
@@ -80,14 +79,12 @@ void KeyActionHandler::handleReleasedKeys() {
 				onKeyReleasedArrowLeft();
 				break;
 			case SDLK_RIGHT:
-				// HOW THE FUCK IS THE GAME ALREADY PAUSED HERE
 				onKeyReleasedArrowRight();
 				break;
 			default:
 				break;
 		}
 
-		// Clear the handled status for this key
 		deleteHandledKey(key);
 		deleteReleasedKey(key);
 	}
@@ -107,7 +104,7 @@ void KeyActionHandler::onKeyPressArrowUp() {
 		}
 	}
 	else {
-
+		pauseMenu->moveUp();
 	}
 }
 
@@ -121,6 +118,9 @@ void KeyActionHandler::onKeyPressArrowDown() {
 			player->currentDirectionOfMovementY = DirectionY::DOWN;
 			player->velocityY = DEFAULT_PLAYER_SPEED;
 		}
+	}
+	else {
+		pauseMenu->moveDown();
 	}
 }
 
@@ -165,13 +165,11 @@ void KeyActionHandler::deletePressedKey(SDL_Keycode key) {
 // so this function gets executed only the second time you press esc
 void KeyActionHandler::onKeyPressEsc() {
     if (!gameTime->isPaused) {
-		// moveAllPressedKeysToReleasedKeys();
 		moveAllHandledKeysToReleasedKeys();
 		handleReleasedKeys();
         gameTime->pause();
     }
     else {
-		// moveAllPressedKeysToReleasedKeys();
 		moveAllHandledKeysToReleasedKeys();
 		handleReleasedKeys();
         gameTime->resume();
