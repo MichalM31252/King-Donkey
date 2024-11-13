@@ -48,6 +48,9 @@ void KeyActionHandler::handlePressedKeys() {
 		case SDLK_SPACE:
 			onKeyPressSpace();
 			break;
+		case SDLK_RETURN:
+			onKeyPressEnter();
+			break;
 		case SDLK_ESCAPE:
 			onKeyPressEsc();
 			break;
@@ -148,6 +151,33 @@ void KeyActionHandler::onKeyPressSpace() {
     if (!gameTime->isPaused) {
         gameObjectContainer->player->initJump();
     }
+}
+
+void KeyActionHandler::onKeyPressEnter() {
+	if (gameTime->isPaused) {
+		handleMenuSelection();
+	}
+}
+
+void KeyActionHandler::handleMenuSelection() {
+	switch (pauseMenu->selectedOptionIndex) {
+		case 0: // Resume
+			moveAllHandledKeysToReleasedKeys();
+			handleReleasedKeys();
+			gameTime->resume();
+			break;
+
+		case 1: // Leaderboard
+			// TODO: Implement leaderboard display logic
+			break;
+
+		case 2: // Quit
+			// Signal game to quit - you'll need to implement how you want to handle this
+			SDL_Event quitEvent;
+			quitEvent.type = SDL_QUIT;
+			SDL_PushEvent(&quitEvent);
+			break;
+	}
 }
 
 void KeyActionHandler::deleteHandledKey(SDL_Keycode key) {

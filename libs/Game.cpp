@@ -1,7 +1,6 @@
 #define _USE_MATH_DEFINES
 
 #include "Game.h"
-#include "CollisionResolver.h" // temporary fix
 
 Game::Game()
     : gameTime(GameTime())
@@ -38,12 +37,9 @@ Game::Game()
 [[noreturn]] void Game::runGame() {
     bool quit = false;
     while (!quit) {
-
-		// collect currently pressed keys
 		keyCollector.collect(quit);
         keyActionHandler.handleInput();
 
-        // to be honest there should be a class for just handling the input 
         // there should be a class for deleting specific keys
 
         if (!gameTime.isPaused) {
@@ -63,6 +59,7 @@ Game::Game()
                 gameObjectContainer->player->jump(gameTime.deltaTime);
             }
 
+			// no idea where to put this
             if (!CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
                 if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(gameObjectContainer->player, gameObjectContainer->platformContainer)) {
                     if (gameObjectContainer->player->isClimbing) {
@@ -82,7 +79,7 @@ Game::Game()
             screenManager.frames++;
         }
         else {
-			screenManager.drawMenu(pauseMenu.selectedOption);
+			screenManager.drawMenu(pauseMenu.selectedOptionIndex);
         }
         screenManager.serveNextFrame();
     }

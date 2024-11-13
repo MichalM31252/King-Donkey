@@ -29,6 +29,7 @@ public:
 	void onKeyPressArrowDown();
 	void onKeyPressArrowLeft();
 	void onKeyPressSpace();
+	void onKeyPressEnter();
 	void onKeyPressEsc();
 
 	void onKeyReleasedArrowUp();
@@ -42,4 +43,6 @@ public:
 
 	void moveAllPressedKeysToReleasedKeys();
 	void moveAllHandledKeysToReleasedKeys();
+
+	void handleMenuSelection();
 };
