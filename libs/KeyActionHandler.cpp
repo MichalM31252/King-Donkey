@@ -69,7 +69,6 @@ void KeyActionHandler::handleReleasedKeys() {
 	std::set<SDL_Keycode> currentReleasedKeys = *releasedKeys;
 	for (auto it = currentReleasedKeys.rbegin(); it != currentReleasedKeys.rend(); ++it) {
 		SDL_Keycode key = *it;
-		printf("Key released: %d\n", key);
 
 		switch (key) {
 			case SDLK_UP:
@@ -166,13 +165,9 @@ void KeyActionHandler::handleMenuSelection() {
 			handleReleasedKeys();
 			gameTime->resume();
 			break;
-
 		case 1: // Leaderboard
-			// TODO: Implement leaderboard display logic
 			break;
-
 		case 2: // Quit
-			// Signal game to quit - you'll need to implement how you want to handle this
 			SDL_Event quitEvent;
 			quitEvent.type = SDL_QUIT;
 			SDL_PushEvent(&quitEvent);

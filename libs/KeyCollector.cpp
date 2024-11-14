@@ -14,7 +14,6 @@ void KeyCollector::collect(bool& quit) { // rename this to handleInput and Keybo
         if (event.type == SDL_QUIT) {
             quit = true;
         }
-        break;
     }
 }
 

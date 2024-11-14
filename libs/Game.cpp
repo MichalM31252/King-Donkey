@@ -61,7 +61,7 @@ Game::Game()
 
 			// no idea where to put this
             if (!CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
-                if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(gameObjectContainer->player, gameObjectContainer->platformContainer)) {
+                if (!CollisionDetector::isGameObjectOnTopOfAnyPlatform(gameObjectContainer->player, gameObjectContainer->platformContainer)) {
                     if (gameObjectContainer->player->isClimbing) {
                         gameObjectContainer->player->isClimbing = false;
 						gameObjectContainer->player->currentDirectionOfMovementY = DirectionY::NONE;
@@ -69,6 +69,8 @@ Game::Game()
                     }
                 }
             }
+
+
 
             // RENDER
             gameObjectManager.updateSpritesOfGameObjects(); // handle animations?
