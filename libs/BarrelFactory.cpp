@@ -22,6 +22,8 @@ void BarrelFactory::update(double deltaTime) {
 
 void BarrelFactory::throwBarrel() {
 	auto barrel = std::make_shared<Barrel>();
+
+	// WHY IS THIS HERE // Fix in the future
 	ScreenManager::loadTexture(barrel.get(), BARREL_1_FILENAME);
 
 	barrel->setPosition(STARTING_X_DONKEY_KONG + DONKEY_KONG_WIDTH, STARTING_Y_DONKEY_KONG);

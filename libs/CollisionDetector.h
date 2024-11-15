@@ -1,10 +1,7 @@
 #pragma once
-#include "MovableGameObject.h"
 #include "Platform.h"
 #include "PlatformContainer.h"
 #include "LadderContainer.h"
-#include "../SDL2-2.0.10/include/SDL.h"
-#include "../SDL2-2.0.10/include/SDL_main.h"
 
 // tracks every game object in the game and checks if they collide
 

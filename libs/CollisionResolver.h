@@ -1,17 +1,7 @@
 #pragma once
-
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
-#include "Platform.h"
-#include "GameObject.h"
 #include "MovableGameObject.h"
 #include "GameObjectContainer.h"
-#include "PhysicsManager.h"
-#include "ScreenManager.h"
-#include "CollisionDetector.h"
-#include "../SDL2-2.0.10/include/SDL.h"
-#include "../SDL2-2.0.10/include/SDL_main.h"
+
 
 class CollisionResolver {
 public:

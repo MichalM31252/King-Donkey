@@ -70,8 +70,6 @@ Game::Game()
                 }
             }
 
-
-
             // RENDER
             gameObjectManager.updateSpritesOfGameObjects(); // handle animations?
             screenManager.handleFPSTimer(gameTime.deltaTime);

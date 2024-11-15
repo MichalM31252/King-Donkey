@@ -5,12 +5,13 @@
 
 class Menu {
 public:
-    int x, y;
-    int width, height;
+    int x;
+    int y;
+    int width;
+	int height;
     int scaleOfText;
     int selectedOptionIndex;
     std::vector<std::string> optionList;
-
 
 	Menu(int x, int y, int width, int height, int scale);
 	void moveUp();
