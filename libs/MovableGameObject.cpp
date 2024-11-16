@@ -16,7 +16,7 @@ MovableGameObject::MovableGameObject()
 {
 }
 
-void MovableGameObject::accumulateDistance(double deltaTime) { // rename to accumulate distance
+void MovableGameObject::accumulateDistance(double deltaTime) {
 	if (velocityY > 0 && currentDirectionOfMovementY == DirectionY::UP) {
 		accumulatedMoveUp += deltaTime * velocityY;
 	}
@@ -58,7 +58,6 @@ void MovableGameObject::updatePosition() {
 	}
 }
 
-// logic, not screen manager
 void MovableGameObject::stayInBounds() {
 	if (!canLeaveScreen) {
 		if (xpos < STARTING_X) { // left
@@ -81,7 +80,7 @@ void MovableGameObject::updatePositionCoordinates() {
 	destRect.y = ypos;
 }
 
-void MovableGameObject::update(double deltaTime) { // break this up into smaller functions
+void MovableGameObject::update(double deltaTime) {
 	updatePosition();
 	accumulateDistance(deltaTime);
 	stayInBounds();
@@ -107,11 +106,15 @@ void MovableGameObject::startMovingRight() {
 	currentDirectionOfMovementX = DirectionX::RIGHT;
 }
 
+void MovableGameObject::startMovingLeft() {
+	currentDirectionOfMovementX = DirectionX::LEFT;
+}
+
 void MovableGameObject::startMovingDown() {
 	currentDirectionOfMovementY = DirectionY::DOWN;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////
 
 void MovableGameObject::stopMove() {
 	currentDirectionOfMovementX = DirectionX::NONE;

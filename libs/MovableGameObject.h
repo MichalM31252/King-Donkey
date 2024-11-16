@@ -42,6 +42,7 @@ public:
 	void startMovingHorizontallyAtSpeed(double speed);
 	void startMovingVerticallyAtSpeed(double speed);
 	void startMovingRight();
+	void startMovingLeft();
 	void startMovingUp();
 	void startMovingDown();
 	void stopMove();

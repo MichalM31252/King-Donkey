@@ -8,7 +8,7 @@
 #include "Menu.h"
 #include "../SDL2-2.0.10/include/SDL.h"
 
-class KeyActionHandler { // rename to KeyActionHandler
+class KeyActionHandler {
 public:
 	std::shared_ptr<std::set<SDL_Keycode>> pressedKeys;
 	std::shared_ptr<std::set<SDL_Keycode>> releasedKeys;

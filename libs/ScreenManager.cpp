@@ -149,8 +149,6 @@ void ScreenManager::drawString(int x, int y, const std::string& text, int scale 
 	}
 }
 
-
-
 void ScreenManager::drawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const { // draw a single pixel
 	int bpp = surface->format->BytesPerPixel;
 	Uint8* p = (Uint8*)surface->pixels + y * surface->pitch + x * bpp;
@@ -264,42 +262,32 @@ void ScreenManager::drawElements() {
 }
 
 void ScreenManager::drawMenu(int selectedOption) {
-	// Define the width and height at 75% of 640x480
 	int width = static_cast<int>(640 * 0.75);
 	int height = static_cast<int>(480 * 0.75);
 
 	// Define top-left corner position for the rectangle
-	int x = (SCREEN_WIDTH - width) / 2;   // Centered horizontally
-	int y = (SCREEN_HEIGHT - height) / 2; // Centered vertically
+	int x = (SCREEN_WIDTH - width) / 2;
+	int y = (SCREEN_HEIGHT - height) / 2;
 
-	// Draw the rectangle with a blue outline and no fill
 	drawRectangle(x, y, width, height, blue, black);
 
-	// Define menu options
 	const std::string options[] = { "Resume", "Leaderboard", "Quit" };
 	int numOptions = sizeof(options) / sizeof(options[0]);
 
-	// Set scaling factor for the text
 	int scale = 3;
 
-	// Calculate Y spacing for even distribution within the rectangle
-	int spacingY = height / (numOptions + 1); // +1 for equal padding at top and bottom
+	int spacingY = height / (numOptions + 1);
 
-	// Draw each option centered within the rectangle
 	for (int i = 0; i < numOptions; ++i) {
-		// Determine if this option is selected
 		std::string optionText = (i == selectedOption) ? "> " + options[i] + " <" : options[i];
-
-		// Calculate the width of the text for centering
 		int textWidth = optionText.size() * 8 * scale;
 
 		// Center text horizontally within the rectangle
 		int optionX = x + (width - textWidth) / 2;
 
 		// Calculate Y-position for each option
-		int optionY = y + spacingY * (i + 1); // Start from spacingY to leave padding at top
+		int optionY = y + spacingY * (i + 1);
 
-		// Draw the option
 		drawString(optionX, optionY, optionText, scale);
 	}
 }

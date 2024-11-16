@@ -15,5 +15,5 @@ public:
 
     void setPosition(int x, int y);
     void update(double deltaTime);
-    void throwBarrel();
+    void addBarrelToContainer();
 };

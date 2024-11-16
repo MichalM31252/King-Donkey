@@ -14,6 +14,6 @@ public:
     std::vector<std::string> optionList;
 
 	Menu(int x, int y, int width, int height, int scale);
-	void moveUp();
-	void moveDown();
+	void selectPreviousOption();
+	void selectNextOption();
 };

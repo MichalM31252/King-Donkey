@@ -15,12 +15,12 @@ void BarrelFactory::setPosition(int x, int y) {
 void BarrelFactory::update(double deltaTime) {
 	accumulatedTime += deltaTime;
 	if (accumulatedTime >= DEFAULT_BARREL_SPAWN_RATE) {
-		throwBarrel();
+		addBarrelToContainer();
 		accumulatedTime -= DEFAULT_BARREL_SPAWN_RATE;
 	}
 }
 
-void BarrelFactory::throwBarrel() {
+void BarrelFactory::addBarrelToContainer() {
 	auto barrel = std::make_shared<Barrel>();
 
 	// WHY IS THIS HERE // Fix in the future

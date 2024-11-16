@@ -106,7 +106,7 @@ void KeyActionHandler::onKeyPressArrowUp() {
 		}
 	}
 	else {
-		pauseMenu->moveUp();
+		pauseMenu->selectPreviousOption();
 	}
 }
 
@@ -122,7 +122,7 @@ void KeyActionHandler::onKeyPressArrowDown() {
 		}
 	}
 	else {
-		pauseMenu->moveDown();
+		pauseMenu->selectNextOption();
 	}
 }
 

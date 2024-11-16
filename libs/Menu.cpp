@@ -5,11 +5,10 @@ Menu::Menu(int x, int y, int width, int height, int scale = 3)
     optionList = { "Resume", "Leaderboard", "Quit" };
 }
 
-void Menu::moveUp() {
+void Menu::selectPreviousOption() {
     if (selectedOptionIndex > 0) selectedOptionIndex--;
 }
 
-// Moves the selection down
-void Menu::moveDown() {
+void Menu::selectNextOption() {
     if (selectedOptionIndex < optionList.size() - 1) selectedOptionIndex++;
 }
