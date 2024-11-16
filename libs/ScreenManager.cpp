@@ -49,7 +49,7 @@ void ScreenManager::setDefaultDrawColor() {
 }
 
 void ScreenManager::setWindowTitle() {
-	SDL_SetWindowTitle(window, "192928 Michal Malinowski");
+	SDL_SetWindowTitle(window, "Michal Malinowski");
 }
 
 void ScreenManager::setCharset() {
@@ -261,33 +261,29 @@ void ScreenManager::drawElements() {
 	drawSurface(gameObjectContainer->player, gameObjectContainer->player->xpos, gameObjectContainer->player->ypos);
 }
 
-void ScreenManager::drawMenu(int selectedOption) {
+void ScreenManager::drawMenu(const Menu& menu) {
+	//int width = menu.width;
+	//int height = menu.height;
+
+	//int x = menu.x;
+	//int y = menu.y;
+
 	int width = static_cast<int>(640 * 0.75);
 	int height = static_cast<int>(480 * 0.75);
 
-	// Define top-left corner position for the rectangle
 	int x = (SCREEN_WIDTH - width) / 2;
 	int y = (SCREEN_HEIGHT - height) / 2;
 
 	drawRectangle(x, y, width, height, blue, black);
 
-	const std::string options[] = { "Resume", "Leaderboard", "Quit" };
-	int numOptions = sizeof(options) / sizeof(options[0]);
-
 	int scale = 3;
+	int spacingY = height / (menu.optionList.size() + 1);
 
-	int spacingY = height / (numOptions + 1);
-
-	for (int i = 0; i < numOptions; ++i) {
-		std::string optionText = (i == selectedOption) ? "> " + options[i] + " <" : options[i];
+	for (int i = 0; i < menu.optionList.size(); ++i) {
+		std::string optionText = (i == menu.selectedOptionIndex) ? "> " + menu.optionList[i] + " <" : menu.optionList[i];
 		int textWidth = optionText.size() * 8 * scale;
-
-		// Center text horizontally within the rectangle
 		int optionX = x + (width - textWidth) / 2;
-
-		// Calculate Y-position for each option
 		int optionY = y + spacingY * (i + 1);
-
 		drawString(optionX, optionY, optionText, scale);
 	}
 }

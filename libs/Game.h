@@ -27,7 +27,8 @@ public:
 	ScreenManager screenManager;
 	LevelLoader levelLoader;
 	KeyCollector keyCollector;
-	Menu pauseMenu; // will probably add startingScreenMenu and gameOverMenu
+	Menu pauseMenu; // will probably add startingScreenMenu in the future
+	Menu gameOverMenu;
 	KeyActionHandler keyActionHandler;
 	GameObjectManager gameObjectManager;
 

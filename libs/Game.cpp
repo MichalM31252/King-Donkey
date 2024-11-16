@@ -8,7 +8,8 @@ Game::Game()
     , screenManager(ScreenManager(gameObjectContainer))
     , levelLoader(LevelLoader(gameObjectContainer))
     , keyCollector(KeyCollector())
-    , pauseMenu(Menu(SCREEN_WIDTH - (640 * 0.75 / 2), (SCREEN_HEIGHT - 480 * 0.75) / 2, 640 * 0.75, 480 * 0.75, 3))
+    , pauseMenu(Menu(SCREEN_WIDTH - ((640 * 0.75) / 2), (SCREEN_HEIGHT - 480 * 0.75) / 2, 640 * 0.75, 480 * 0.75, 3, { "Resume", "Leaderboard", "Quit" }))
+	, gameOverMenu(Menu(SCREEN_WIDTH - ((640 * 0.75) / 2), (SCREEN_HEIGHT - 480 * 0.75) / 2, 640 * 0.75, 480 * 0.75, 3, { "Retry", "Quit" }))
     , gameObjectManager(GameObjectManager(gameObjectContainer))
     , keyActionHandler(KeyActionHandler(&keyCollector.pressedKeys, &keyCollector.releasedKeys, &gameTime, gameObjectContainer.get(), &pauseMenu))
 {
@@ -39,8 +40,6 @@ Game::Game()
     while (!quit) {
 		keyCollector.collect(quit);
         keyActionHandler.handleInput();
-
-        // there should be a class for deleting specific keys
 
         if (!gameTime.isPaused) {
             // UPDATE TIME
@@ -78,8 +77,15 @@ Game::Game()
             screenManager.drawElements(); // current quick fix is that ladder is drawn first then player to make player appear on top of ladder
             screenManager.frames++;
         }
-        else {
-			screenManager.drawMenu(pauseMenu.selectedOptionIndex);
+        if (gameTime.isPaused) {
+			if (quit) {
+				// display game over menu
+				screenManager.drawMenu(gameOverMenu);
+			}
+            else {
+				// display pause menu
+                screenManager.drawMenu(pauseMenu);
+            }
         }
         screenManager.serveNextFrame();
     }

@@ -7,6 +7,7 @@
 #include "Constants.h"
 #include "GameObjectContainer.h"
 #include "Player.h"
+#include "Menu.h"
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
 #include <string>
@@ -71,5 +72,5 @@ public:
 	void drawLadders();
 	void drawBarrels();
 
-	void drawMenu(int selectedOption);
+	void drawMenu(const Menu& menu);
 };
