@@ -18,7 +18,6 @@ void Player::update(double deltaTime) {
 	accumulateDistance(deltaTime);
 	stayInBounds();
 	updatePositionCoordinates();
-
 }
 
 void Player::updatePosition() {
