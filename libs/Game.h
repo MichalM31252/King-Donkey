@@ -17,11 +17,13 @@
 #include "Menu.h"
 #include "../SDL2-2.0.10/include/SDL.h"
 #include "../SDL2-2.0.10/include/SDL_main.h"
+#include "GameState.h"
 
 // EVERY SHARED POINTER SHOULD BE PASSED BY CONST REFERENCE FIX THIS IN THE FUTURE
 
 class Game {
 public:
+	GameState gameState;
 	GameTime gameTime;
 	std::shared_ptr<GameObjectContainer> gameObjectContainer;
 	ScreenManager screenManager;

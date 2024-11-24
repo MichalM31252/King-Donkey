@@ -1,11 +1,12 @@
 ﻿#include "KeyActionHandler.h"
 
-KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<SDL_Keycode>* releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer, Menu* pauseMenu)
+KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<SDL_Keycode>* releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer, Menu* pauseMenu, GameState* gameState)
 	: pressedKeys(pressedKeys)
 	, releasedKeys(releasedKeys)
 	, gameTime(gameTime)
 	, gameObjectContainer(gameObjectContainer)
 	, pauseMenu(pauseMenu)
+	, gameState(gameState)
 {
 }
 
@@ -33,31 +34,31 @@ void KeyActionHandler::handlePressedKeys() {
 		}
 
 		switch (key) {
-		case SDLK_UP:
-			onKeyPressArrowUp();
-			break;
-		case SDLK_DOWN:
-			onKeyPressArrowDown();
-			break;
-		case SDLK_LEFT:
-			onKeyPressArrowLeft();
-			break;
-		case SDLK_RIGHT:
-			onKeyPressArrowRight();
-			break;
-		case SDLK_SPACE:
-			onKeyPressSpace();
-			break;
-		case SDLK_RETURN:
-			onKeyPressEnter();
-			break;
-		case SDLK_ESCAPE:
-			onKeyPressEsc();
-			break;
-		default:
-			// Remove from handled keys if we don't actually handle it
-			handledKeys.erase(key);
-			break;
+			case SDLK_UP:
+				onKeyPressArrowUp();
+				break;
+			case SDLK_DOWN:
+				onKeyPressArrowDown();
+				break;
+			case SDLK_LEFT:
+				onKeyPressArrowLeft();
+				break;
+			case SDLK_RIGHT:
+				onKeyPressArrowRight();
+				break;
+			case SDLK_SPACE:
+				onKeyPressSpace();
+				break;
+			case SDLK_RETURN:
+				onKeyPressEnter();
+				break;
+			case SDLK_ESCAPE:
+				onKeyPressEsc();
+				break;
+			default:
+				// Remove from handled keys if we don't actually handle it
+				handledKeys.erase(key);
+				break;
 		}
 
 		// Mark the key as handled
@@ -95,9 +96,9 @@ void KeyActionHandler::handleReleasedKeys() {
 // PROBLEMEM JEST TO ŻE KAŻDA Z TYCH FUNCKJI JEST WYKONYWANA RAZ TYLKO JAK WCISNIESZ I PRZERYWANA JAK PUSCICSZ
 // CZYLI TYLKO RAZ NA POCZATKU SPRZAWDZI CZY JEST WEWNATRZ DRABINY
 void KeyActionHandler::onKeyPressArrowUp() {
-	if (!gameTime->isPaused) {
+	if (*gameState == GameState::RUNNING) {
 		auto player = gameObjectContainer->player;
-		if (CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
+		if (CollisionDetector::isGameObjectInsideAnyLadder(player, gameObjectContainer->ladderContainer)) {
 			player->isClimbing = true;
 			player->isFalling = false;
 			player->isJumping = false;
@@ -105,13 +106,13 @@ void KeyActionHandler::onKeyPressArrowUp() {
 			player->velocityY = DEFAULT_PLAYER_SPEED;
 		}
 	}
-	else {
+	else if (*gameState == GameState::PAUSE) {
 		pauseMenu->selectPreviousOption();
 	}
 }
 
 void KeyActionHandler::onKeyPressArrowDown() {
-	if (!gameTime->isPaused) {
+	if (*gameState == GameState::RUNNING) {
 		auto player = gameObjectContainer->player;
 		if (CollisionDetector::isGameObjectInsideAnyLadder(player, gameObjectContainer->ladderContainer)) {
 			player->isClimbing = true;
@@ -121,42 +122,66 @@ void KeyActionHandler::onKeyPressArrowDown() {
 			player->velocityY = DEFAULT_PLAYER_SPEED;
 		}
 	}
-	else {
+	else if (*gameState == GameState::PAUSE) {
 		pauseMenu->selectNextOption();
 	}
 }
 
 void KeyActionHandler::onKeyPressArrowRight() {
-    if (!gameTime->isPaused) {
-        auto player = gameObjectContainer->player;
-        if (!player->isClimbing) {
-            player->currentDirectionOfMovementX = DirectionX::RIGHT;
-            player->velocityX = DEFAULT_PLAYER_SPEED;
-        }
-    }
+	if (*gameState == GameState::RUNNING) {
+		auto player = gameObjectContainer->player;
+		if (!player->isClimbing) {
+			player->currentDirectionOfMovementX = DirectionX::RIGHT;
+			player->velocityX = DEFAULT_PLAYER_SPEED;
+		}
+	}
 }
 
 void KeyActionHandler::onKeyPressArrowLeft() {
-    if (!gameTime->isPaused) {
-        auto player = gameObjectContainer->player;
-        if (!player->isClimbing) {
-            player->currentDirectionOfMovementX = DirectionX::LEFT;
-            player->velocityX = DEFAULT_PLAYER_SPEED;
-        }
-    }
+	if (*gameState == GameState::RUNNING) {
+		auto player = gameObjectContainer->player;
+		if (!player->isClimbing) {
+			player->currentDirectionOfMovementX = DirectionX::LEFT;
+			player->velocityX = DEFAULT_PLAYER_SPEED;
+		}
+	}
 }
 
 void KeyActionHandler::onKeyPressSpace() {
-    if (!gameTime->isPaused) {
-        gameObjectContainer->player->initJump();
-    }
+	if (*gameState == GameState::RUNNING) {
+		gameObjectContainer->player->initJump();
+	}
 }
 
 void KeyActionHandler::onKeyPressEnter() {
-	if (gameTime->isPaused) {
+	if (*gameState == GameState::PAUSE) {
 		handleMenuSelection();
 	}
 }
+
+void KeyActionHandler::onKeyPressEsc() {
+	if (*gameState == GameState::RUNNING) {
+		*gameState = GameState::PAUSE;
+	}
+	else if (*gameState == GameState::PAUSE) {
+		*gameState = GameState::RUNNING;
+	}
+}
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// so this function gets executed only the second time you press esc
+//void KeyActionHandler::onKeyPressEsc() {
+//	if (!gameTime->isPaused) {
+//		moveAllHandledKeysToReleasedKeys();
+//		handleReleasedKeys();
+//		gameTime->pause();
+//	}
+//	else {
+//		moveAllHandledKeysToReleasedKeys();
+//		handleReleasedKeys();
+//		gameTime->resume();
+//	}
+//}
 
 void KeyActionHandler::handleMenuSelection() {
 	switch (pauseMenu->selectedOptionIndex) {
@@ -186,21 +211,6 @@ void KeyActionHandler::deleteReleasedKey(SDL_Keycode key) {
 void KeyActionHandler::deletePressedKey(SDL_Keycode key) {
 	pressedKeys->erase(key);
 }
-
-// so this function gets executed only the second time you press esc
-void KeyActionHandler::onKeyPressEsc() {
-    if (!gameTime->isPaused) {
-		moveAllHandledKeysToReleasedKeys();
-		handleReleasedKeys();
-        gameTime->pause();
-    }
-    else {
-		moveAllHandledKeysToReleasedKeys();
-		handleReleasedKeys();
-        gameTime->resume();
-    }
-}
-
 
 void KeyActionHandler::onKeyReleasedArrowUp() {
     if (!gameTime->isPaused) {

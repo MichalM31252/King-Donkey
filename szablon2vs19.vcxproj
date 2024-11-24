@@ -48,6 +48,7 @@
     <Image Include="eti.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="libs\GameState.h" />
     <ClInclude Include="libs\GameTime.h" />
     <ClInclude Include="libs\AnimationManager.h" />
     <ClInclude Include="libs\GameObjectManager.h" />
