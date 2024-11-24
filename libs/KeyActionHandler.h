@@ -18,10 +18,14 @@ public:
 
 	std::shared_ptr<GameTime> gameTime;
 	std::shared_ptr<GameObjectContainer> gameObjectContainer;
-	std::shared_ptr<Menu> pauseMenu;
+
+	Menu* pauseMenu;
+	Menu* gameOverMenu;
+	Menu* startingScreenMenu;
+
 	GameState* gameState;
 
-	KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<SDL_Keycode>* releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer, Menu* pauseMenu, GameState* gameState);
+	KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<SDL_Keycode>* releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer, Menu* pauseMenu, Menu* gameOverMenu, Menu* startingScreenMenu, GameState* gameState);
 
 	void handleInput();
 	void handlePressedKeys();
@@ -47,5 +51,8 @@ public:
 	void moveAllPressedKeysToReleasedKeys();
 	void moveAllHandledKeysToReleasedKeys();
 
-	void handleMenuSelection();
+	Menu* getCurrentActiveMenu();
+	void handlePauseMenuSelection();
+	void handleGameOverMenuSelection();
+	void handleStartingScreenMenuSelection();
 };

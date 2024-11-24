@@ -22,10 +22,9 @@ void CollisionResolver::handlePlayerCollisionWithPrincess() const {
     }
 }
 
-void CollisionResolver::handlePlayerCollisionWithBarrel(std::shared_ptr<Barrel> barrel, bool* quit, GameTime* gameTime) const{
+void CollisionResolver::handlePlayerCollisionWithBarrel(std::shared_ptr<Barrel> barrel, GameState* gameState) const{
     if (CollisionDetector::isCollisionBetweenRects(gameObjectContainer->player->destRect, barrel->destRect)) {
-        *quit = true;
-		gameTime->pause();
+		*gameState = GameState::GAME_OVER;
     }
 }
 
@@ -68,11 +67,11 @@ void CollisionResolver::handlePlayerCollision() {
     }
 }
 
-void CollisionResolver::handleBarrelsCollision(bool* quit, GameTime* gameTime) {
+void CollisionResolver::handleBarrelsCollision(GameState* gameState) {
     for (int i = 0; i < gameObjectContainer->barrelContainer->getNumberOfElements(); i++) {
         auto barrel = gameObjectContainer->barrelContainer->barrels[i];
 
-        handlePlayerCollisionWithBarrel(barrel, quit, gameTime);
+        handlePlayerCollisionWithBarrel(barrel, gameState);
         handleCollisionWithPlatform(barrel);
 
         if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(barrel, gameObjectContainer->platformContainer)) {

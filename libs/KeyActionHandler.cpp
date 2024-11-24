@@ -1,11 +1,13 @@
 ﻿#include "KeyActionHandler.h"
 
-KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<SDL_Keycode>* releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer, Menu* pauseMenu, GameState* gameState)
+KeyActionHandler::KeyActionHandler(std::set<SDL_Keycode>* pressedKeys, std::set<SDL_Keycode>* releasedKeys, GameTime* gameTime, GameObjectContainer* gameObjectContainer, Menu* pauseMenu, Menu* gameOverMenu, Menu* startingScreenMenu, GameState* gameState)
 	: pressedKeys(pressedKeys)
 	, releasedKeys(releasedKeys)
 	, gameTime(gameTime)
 	, gameObjectContainer(gameObjectContainer)
 	, pauseMenu(pauseMenu)
+	, gameOverMenu(gameOverMenu)
+	, startingScreenMenu(startingScreenMenu)
 	, gameState(gameState)
 {
 }
@@ -93,8 +95,19 @@ void KeyActionHandler::handleReleasedKeys() {
 	}
 }
 
-// PROBLEMEM JEST TO ŻE KAŻDA Z TYCH FUNCKJI JEST WYKONYWANA RAZ TYLKO JAK WCISNIESZ I PRZERYWANA JAK PUSCICSZ
-// CZYLI TYLKO RAZ NA POCZATKU SPRZAWDZI CZY JEST WEWNATRZ DRABINY
+Menu* KeyActionHandler::getCurrentActiveMenu() {
+	switch (*gameState) {
+	case GameState::PAUSE:
+		return pauseMenu;
+	case GameState::GAME_OVER:
+		return gameOverMenu;
+	case GameState::START:
+		return startingScreenMenu;
+	default:
+		return nullptr;
+	}
+}
+
 void KeyActionHandler::onKeyPressArrowUp() {
 	if (*gameState == GameState::RUNNING) {
 		auto player = gameObjectContainer->player;
@@ -106,8 +119,9 @@ void KeyActionHandler::onKeyPressArrowUp() {
 			player->velocityY = DEFAULT_PLAYER_SPEED;
 		}
 	}
-	else if (*gameState == GameState::PAUSE) {
-		pauseMenu->selectPreviousOption();
+	else {
+		Menu* currentMenu = getCurrentActiveMenu();
+		currentMenu->selectPreviousOption();
 	}
 }
 
@@ -122,8 +136,9 @@ void KeyActionHandler::onKeyPressArrowDown() {
 			player->velocityY = DEFAULT_PLAYER_SPEED;
 		}
 	}
-	else if (*gameState == GameState::PAUSE) {
-		pauseMenu->selectNextOption();
+	else {
+		Menu* currentMenu = getCurrentActiveMenu();
+		currentMenu->selectNextOption();
 	}
 }
 
@@ -155,7 +170,13 @@ void KeyActionHandler::onKeyPressSpace() {
 
 void KeyActionHandler::onKeyPressEnter() {
 	if (*gameState == GameState::PAUSE) {
-		handleMenuSelection();
+		handlePauseMenuSelection();
+	}
+	else if (*gameState == GameState::GAME_OVER) {
+		handleGameOverMenuSelection();
+	}
+	else if (*gameState == GameState::START) {
+		handleStartingScreenMenuSelection();
 	}
 }
 
@@ -168,34 +189,46 @@ void KeyActionHandler::onKeyPressEsc() {
 	}
 }
 
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// so this function gets executed only the second time you press esc
-//void KeyActionHandler::onKeyPressEsc() {
-//	if (!gameTime->isPaused) {
-//		moveAllHandledKeysToReleasedKeys();
-//		handleReleasedKeys();
-//		gameTime->pause();
-//	}
-//	else {
-//		moveAllHandledKeysToReleasedKeys();
-//		handleReleasedKeys();
-//		gameTime->resume();
-//	}
-//}
-
-void KeyActionHandler::handleMenuSelection() {
+// "Resume", "Leaderboard", "Quit"
+void KeyActionHandler::handlePauseMenuSelection() {
 	switch (pauseMenu->selectedOptionIndex) {
 		case 0: // Resume
-			moveAllHandledKeysToReleasedKeys();
-			handleReleasedKeys();
-			gameTime->resume();
+			*gameState = GameState::RUNNING;
 			break;
 		case 1: // Leaderboard
 			break;
 		case 2: // Quit
-			SDL_Event quitEvent;
-			quitEvent.type = SDL_QUIT;
-			SDL_PushEvent(&quitEvent);
+			*gameState = GameState::QUIT;
+			break;
+	}
+}
+
+// "Retry", "Quit"
+void KeyActionHandler::handleGameOverMenuSelection() {
+	switch (gameOverMenu->selectedOptionIndex) {
+		case 0: // Restart
+			// *gameState = GameState::RESTART;
+			break;
+		case 1: // Quit
+			*gameState = GameState::QUIT;
+			break;
+	}
+}
+
+// "New Game", "Load Game", "Leaderboard", "Options", "Quit"
+void KeyActionHandler::handleStartingScreenMenuSelection() {
+	switch (startingScreenMenu->selectedOptionIndex) {
+		case 0: // Start
+			*gameState = GameState::RUNNING;
+			break;
+		case 1: // Load Game
+			break;
+		case 2: // Leaderboard
+			break;
+		case 3: // Options
+			break;
+		case 4: // Quit
+			*gameState = GameState::QUIT;
 			break;
 	}
 }

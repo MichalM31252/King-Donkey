@@ -2,6 +2,7 @@
 #include "MovableGameObject.h"
 #include "GameObjectContainer.h"
 #include "GameTime.h"
+#include "GameState.h"
 
 
 class CollisionResolver {
@@ -13,12 +14,12 @@ public:
 
     void handlePlayerCollisionWithKong() const;
     void handlePlayerCollisionWithPrincess() const;
-    void handlePlayerCollisionWithBarrel(std::shared_ptr<Barrel> barrel, bool* quit, GameTime* gameTime) const;
+    void handlePlayerCollisionWithBarrel(std::shared_ptr<Barrel> barrel, GameState* gameState) const;
     void handleCollisionWithPlatform(const std::shared_ptr<MovableGameObject>& gameObject);
     void handleCollisionWithJumping();
 
     void handlePlayerCollision();
-    void handleBarrelsCollision(bool* openGameOverMenu, GameTime* gameTime);
+    void handleBarrelsCollision(GameState* gameState);
 
     [[noreturn]] void closeGame() const;
 };

@@ -7,6 +7,7 @@
 #include "PhysicsManager.h"
 #include "AnimationManager.h"
 #include "GameTime.h"
+#include "GameState.h"
 
 class GameObjectManager {
 public:
@@ -20,7 +21,7 @@ public:
 	explicit GameObjectManager(std::shared_ptr<GameObjectContainer> gameObjectContainer);
 
 	void updatePositionOfGameObjects(double deltaTime);
-	void handleCollisionsOfGameObjects(bool& openGameOverMenu, GameTime* gameTime);
+	void handleCollisionsOfGameObjects(GameState* gameState);
 	void updateSpritesOfGameObjects();
 	void updatePhysicsOfGameObjects(double deltaTime);
 };

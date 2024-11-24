@@ -1,7 +1,7 @@
 #include "Game.h"
 
 Game::Game()
-    : gameState(GameState::RUNNING),
+    : gameState(GameState::START),
     gameTime(GameTime()),
     gameObjectContainer(std::make_unique<GameObjectContainer>()),
     screenManager(ScreenManager(gameObjectContainer)),
@@ -11,7 +11,7 @@ Game::Game()
     pauseMenu(Menu(SCREEN_WIDTH - ((640 * 0.75) / 2), (SCREEN_HEIGHT - 480 * 0.75) / 2, 640 * 0.75, 480 * 0.75, 3, { "Resume", "Leaderboard", "Quit" })),
     gameOverMenu(Menu(SCREEN_WIDTH - ((640 * 0.75) / 2), (SCREEN_HEIGHT - 480 * 0.75) / 2, 640 * 0.75, 480 * 0.75, 3, { "Retry", "Quit" })),
     gameObjectManager(GameObjectManager(gameObjectContainer)),
-    keyActionHandler(KeyActionHandler(&keyCollector.pressedKeys, &keyCollector.releasedKeys, &gameTime, gameObjectContainer.get(), &pauseMenu, &gameState)) {
+    keyActionHandler(KeyActionHandler(&keyCollector.pressedKeys, &keyCollector.releasedKeys, &gameTime, gameObjectContainer.get(), &pauseMenu, &gameOverMenu, &startingScreenMenu, &gameState)) {
     startGame();
 }
 
@@ -42,12 +42,13 @@ Game::Game()
         keyActionHandler.handleInput();
 
         switch (gameState) {
-            //case GameState::START:
-            //    gameTime.pause();
-            //    screenManager.drawMenu(startingScreenMenu);
-            //    break;
+            case GameState::START:
+                gameTime.pause();
+                screenManager.drawMenu(startingScreenMenu);
+                break;
 
             case GameState::PAUSE:
+				gameTime.pause();
                 screenManager.drawMenu(pauseMenu);
                 break;
 
@@ -56,16 +57,12 @@ Game::Game()
                 break;
 
             case GameState::RUNNING:
-                if (gameTime.isPaused) {
-                    gameTime.resume();
-                }
 
-                // UPDATE TIME
+                gameTime.resume();
                 gameTime.update();
 
-                // UPDATE GAMEOBJECTS
                 gameObjectManager.updatePositionOfGameObjects(gameTime.deltaTime);
-                gameObjectManager.handleCollisionsOfGameObjects(quit, &gameTime);
+                gameObjectManager.handleCollisionsOfGameObjects(&gameState);
                 gameObjectManager.updatePhysicsOfGameObjects(gameTime.deltaTime);
                 gameObjectContainer->donkeyKong->update(gameTime.deltaTime);
 
