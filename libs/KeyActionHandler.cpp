@@ -207,7 +207,7 @@ void KeyActionHandler::handlePauseMenuSelection() {
 void KeyActionHandler::handleGameOverMenuSelection() {
 	switch (gameOverMenu->selectedOptionIndex) {
 		case 0: // Restart
-			// *gameState = GameState::RESTART;
+			*gameState = GameState::RESTART;
 			break;
 		case 1: // Quit
 			*gameState = GameState::QUIT;

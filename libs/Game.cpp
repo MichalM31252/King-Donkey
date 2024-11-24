@@ -90,6 +90,13 @@ Game::Game()
                 screenManager.frames++;
                 break;
 
+			case GameState::RESTART:
+				levelLoader.loadLevel1();
+				gameTime.reset();
+				gameTime.start();
+				gameState = GameState::RUNNING;
+				break;
+
             case GameState::QUIT:
                 quit = true;
                 break;
