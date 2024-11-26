@@ -1,0 +1,17 @@
+﻿  TextureManager.cpp
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\game_objects\GameObject.h(16,17): error C3646: 'textureManager': unknown override specifier
+  (compiling source file 'libs/game_objects/TextureManager.cpp')
+  
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\game_objects\GameObject.h(16,31): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'libs/game_objects/TextureManager.cpp')
+  
+  ScreenManager.cpp
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\game_objects\GameObject.h(16,17): error C3646: 'textureManager': unknown override specifier
+  (compiling source file 'libs/game_screen/ScreenManager.cpp')
+  
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\game_objects\GameObject.h(16,31): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'libs/game_screen/ScreenManager.cpp')
+  
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\game_screen\ScreenManager.cpp(92,35): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\game_screen\ScreenManager.cpp(91,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  Generating Code...
