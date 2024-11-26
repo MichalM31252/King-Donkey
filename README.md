@@ -1,5 +1,4 @@
 # Statistics
-
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=bugs)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
@@ -11,35 +10,39 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 
-# Current preview of class structure in the project
+# How to Play
+- Use the arrow keys to move the character.
+- Press the spacebar to jump.
+- Avoid barrels and climb ladders to reach the top.
+- Rescue the princess to win the level and progress to the next stage.
 
-![IMG_0299](https://github.com/MichalM31252/King-Donkey/assets/65298857/073ce791-3dcf-4bea-9e38-13bc993598b7)
+# Screenshots
 
-# Plans:
+# License
+This project is licensed under the MIT License. See the LICENSE file for details.
 
+# Current Plans:
 - [ ] Implement component based design
 - [x] Fix animations
 - [x] Fix the delay between keys and player
 - [ ] Refactor jumping mechanism
 - [ ] Fix the ladders
 - [ ] Update file structure
-- [ ] Remove unnescessary pointers to make code more readable
+- [x] Remove unnescessary pointers to make code more readable
 - [ ] Refactor platform mechanism
 - [x] Change player sprite based on the direction of movement
 - [x] Fix memory leaks
 - [x] Implement a C++ template vector for BarrelHolder, LadderHolder, PlatformHolder instead of your own implementation
 - [ ] Change classes which don't need an instance to static ones
 - [x] Fix inconsistent indentations
-- [ ] Add menu
+- [x] Add menu
 - [ ] Add pickup items (hammer, prizes)
 - [ ] Refactor collision detection methods from single pixels to SDL_Rectangles
-- [ ] Lower the number of code smells detected by sonarcloud to 0
 - [x] Add pause mechanism
-- [ ] Add home screen
+- [x] Add home screen
 - [ ] Divide into smaller classes
 - [ ] Remove hybrid classes that contain both data and methods
 
-# Future plans:
-
+# Future Plans:
 - [ ] Dynamic level generation
 - [ ] Infinite game mode
