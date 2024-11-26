@@ -97,14 +97,14 @@ void KeyActionHandler::handleReleasedKeys() {
 
 Menu* KeyActionHandler::getCurrentActiveMenu() {
 	switch (*gameState) {
-	case GameState::PAUSE:
-		return pauseMenu;
-	case GameState::GAME_OVER:
-		return gameOverMenu;
-	case GameState::START:
-		return startingScreenMenu;
-	default:
-		return nullptr;
+		case GameState::PAUSE:
+			return pauseMenu;
+		case GameState::GAME_OVER:
+			return gameOverMenu;
+		case GameState::START:
+			return startingScreenMenu;
+		default:
+			return nullptr;
 	}
 }
 
