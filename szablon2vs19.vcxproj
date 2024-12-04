@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Ladder.cpp" />
     <ClCompile Include="libs\GameTime.cpp" />
     <ClCompile Include="libs\AnimationManager.cpp" />
     <ClCompile Include="libs\BarrelFactory.cpp" />
@@ -48,6 +49,7 @@
     <Image Include="eti.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ladder.h" />
     <ClInclude Include="libs\GameState.h" />
     <ClInclude Include="libs\GameTime.h" />
     <ClInclude Include="libs\AnimationManager.h" />

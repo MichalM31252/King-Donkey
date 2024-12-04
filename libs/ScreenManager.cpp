@@ -110,13 +110,35 @@ void ScreenManager::drawSurface(std::shared_ptr<GameObject> gameObject, int xpos
 	SDL_BlitSurface(gameObject->sprite, nullptr, screen, &dest);
 }
 
+//void ScreenManager::drawSurfaceLadder(std::shared_ptr<GameObject> ladder, int xpos, int ypos) const {
+//	SDL_Rect dest = ladder->destRect;
+//	dest.x = xpos;
+//	dest.y = ypos;
+//	ladder->sprite->w = dest.w;
+//	ladder->sprite->h = dest.h;
+//	SDL_BlitSurface(ladder->sprite, nullptr, screen, &dest);
+//}
+
 void ScreenManager::drawSurfaceLadder(std::shared_ptr<GameObject> ladder, int xpos, int ypos) const {
-	SDL_Rect dest = ladder->destRect;
-	dest.x = xpos;
-	dest.y = ypos;
-	ladder->sprite->w = dest.w;
-	ladder->sprite->h = dest.h;
-	SDL_BlitSurface(ladder->sprite, nullptr, screen, &dest);
+	int tileHeight = 16;  // Original height of each ladder BMP section
+	int tileWidth = 16;   // Original width of the ladder BMP
+	int scaledWidth = 45; // Scaled width of the ladder
+	int totalHeight = ladder->destRect.h;  // Total height from the ladder's destRect
+
+	SDL_Rect srcRect = { 0, 0, tileWidth, tileHeight };  // Source rectangle for the ladder BMP
+	SDL_Rect destRect = { xpos, ypos, scaledWidth, 0 };  // Destination rectangle
+
+	for (int y = 0; y < totalHeight; y += tileHeight) {
+		// Compute the scaled height for the current tile
+		int remainingHeight = totalHeight - y;
+		int currentTileHeight = (remainingHeight < tileHeight) ? remainingHeight : tileHeight;
+
+		destRect.y = ypos + y;          // Update vertical position
+		destRect.h = currentTileHeight; // Set height for current tile
+
+		srcRect.h = currentTileHeight;  // Match source height for partial tiles
+		SDL_BlitScaled(ladder->sprite, &srcRect, screen, &destRect);
+	}
 }
 
 // draw a text txt on surface screen, starting from the point (x, y)

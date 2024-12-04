@@ -57,7 +57,6 @@ Game::Game()
                 break;
 
             case GameState::RUNNING:
-
                 gameTime.resume();
                 gameTime.update();
 
