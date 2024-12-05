@@ -2,7 +2,6 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=bugs)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=coverage)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
@@ -17,6 +16,13 @@
 - Rescue the princess to win the level and progress to the next stage.
 
 # Screenshots
+
+## Menu
+![image](https://github.com/user-attachments/assets/d25285fd-85c9-48f4-80d9-6dd472a3e0bf)
+
+## Playthrough
+![image](https://github.com/user-attachments/assets/f188e793-f23b-4aa6-b090-5f840332b847)
+
 
 # License
 This project is licensed under the MIT License. See the LICENSE file for details.
