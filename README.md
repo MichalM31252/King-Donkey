@@ -17,13 +17,6 @@
 
 # Screenshots
 
-## Menu
-![image](https://github.com/user-attachments/assets/d25285fd-85c9-48f4-80d9-6dd472a3e0bf)
-
-## Playthrough
-![image](https://github.com/user-attachments/assets/f188e793-f23b-4aa6-b090-5f840332b847)
-
-
 # License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
