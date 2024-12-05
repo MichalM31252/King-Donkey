@@ -26,7 +26,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 - [x] Fix animations
 - [x] Fix the delay between keys and player
 - [ ] Refactor jumping mechanism
-- [ ] Fix the ladders
+- [x] Fix the ladders
 - [ ] Update file structure
 - [x] Remove unnescessary pointers to make code more readable
 - [ ] Refactor platform mechanism
@@ -40,7 +40,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 - [ ] Refactor collision detection methods from single pixels to SDL_Rectangles
 - [x] Add pause mechanism
 - [x] Add home screen
-- [ ] Divide into smaller classes
+- [x] Divide into smaller classes
 - [ ] Remove hybrid classes that contain both data and methods
 
 # Future Plans:
