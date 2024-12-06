@@ -61,7 +61,7 @@ public:
 	void drawPixel(SDL_Surface* surface, int x, int y, Uint32 color) const;
 	void drawLine(int x, int y, int l, int dx, int dy, Uint32 color) const;
 	void drawRectangle(int x, int y, int widthOfRectangle, int heightOfRectangle, Uint32 outlineColor, Uint32 fillColor) const;
-	void drawPlatorm(std::shared_ptr<Platform> platform);
+	// void drawPlatorm(std::shared_ptr<Platform> platform);
 
 	template <typename T>
 	static void loadTexture(T* gameObject, const char* fileName);

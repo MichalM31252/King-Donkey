@@ -19,10 +19,10 @@ public:
 	void createPlatforms1();
 	void createLadders1();
 
-	void createPlatforms2();
+	// void createPlatforms2();
 	void createLadders2();
 
-	void createPlatforms3();
+	// void createPlatforms3();
 	void createLadders3();
 
 	void loadLevel1();

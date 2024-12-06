@@ -3,10 +3,7 @@
 #include "PlatformContainer.h"
 #include "LadderContainer.h"
 
-// tracks every game object in the game and checks if they collide
-
-class CollisionDetector
-{
+class CollisionDetector {
 public:
     static bool isCollisionBetweenRects(const SDL_Rect a, const SDL_Rect b);
     static bool isXWithinWidthOfPlatform(int x, const std::shared_ptr<const Platform>& platform);
@@ -21,5 +18,4 @@ public:
 
     static bool isGameObjectWithinWidthOfLadder(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const GameObject>& ladder);
     static bool isGameObjectWithinHeightOfLadder(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const GameObject>& ladder);
-	// isPlayerClimbingTheLadder (check if player is inside ladder, then check if if player is not touching the platform (ok but what about falling))
 };

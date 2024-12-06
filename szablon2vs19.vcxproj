@@ -38,11 +38,11 @@
     <ClCompile Include="libs\GameObject.cpp" />
     <ClCompile Include="libs\ScreenManager.cpp" />
     <ClCompile Include="libs\LadderContainer.cpp" />
-    <ClCompile Include="libs\Platform.cpp" />
     <ClCompile Include="libs\PlatformContainer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="libs\KeyActionHandler.cpp" />
     <ClCompile Include="libs\Menu.cpp" />
+    <ClCompile Include="libs\Platform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="cs8x8.bmp" />
@@ -71,10 +71,10 @@
     <ClInclude Include="libs\GameObject.h" />
     <ClInclude Include="libs\ScreenManager.h" />
     <ClInclude Include="libs\LadderContainer.h" />
-    <ClInclude Include="libs\Platform.h" />
     <ClInclude Include="libs\PlatformContainer.h" />
     <ClInclude Include="libs\KeyActionHandler.h" />
     <ClInclude Include="libs\Menu.h" />
+    <ClInclude Include="libs\Platform.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
