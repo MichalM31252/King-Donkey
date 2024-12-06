@@ -2,7 +2,6 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=bugs)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=coverage)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=MichalM31252_King-Donkey&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=MichalM31252_King-Donkey)
@@ -26,7 +25,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 - [x] Fix animations
 - [x] Fix the delay between keys and player
 - [ ] Refactor jumping mechanism
-- [ ] Fix the ladders
+- [x] Fix the ladders
 - [ ] Update file structure
 - [x] Remove unnescessary pointers to make code more readable
 - [ ] Refactor platform mechanism
@@ -40,7 +39,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 - [ ] Refactor collision detection methods from single pixels to SDL_Rectangles
 - [x] Add pause mechanism
 - [x] Add home screen
-- [ ] Divide into smaller classes
+- [x] Divide into smaller classes
 - [ ] Remove hybrid classes that contain both data and methods
 
 # Future Plans:
