@@ -72,20 +72,11 @@ void LevelLoader::createPlatforms1() {
     auto platformContainer = std::make_shared<PlatformContainer>();
 
     // Platform 1: Horizontal
-    auto plat1 = std::make_shared<Platform>(400, 400, 300, 20, 0.0); // x, y, width, height, angle
+    auto plat1 = std::make_shared<Platform>(1, 400, 100, 8, 0); // x, y, width, height, angle
+	ScreenManager::loadTexture(plat1.get(), PLATFORM_FILENAME);
     platformContainer->addPlatform(plat1);
 
-    // Platform 2: Tilted
-    auto plat2 = std::make_shared<Platform>(400, 400, 200, 20, -15.0); // tilted at -15 degrees
-    platformContainer->addPlatform(plat2);
-
-    // Platform 3: Horizontal
-    auto plat3 = std::make_shared<Platform>(600, 300, 300, 20, 0.0);
-    platformContainer->addPlatform(plat3);
-
-    // Platform 4: Tilted
-    auto plat4 = std::make_shared<Platform>(1, 130, 570, 20, 10.0); // tilted at 10 degrees
-    platformContainer->addPlatform(plat4);
+    // ADD THEM
 
     gameObjectContainer->platformContainer = platformContainer;
 }

@@ -9,7 +9,7 @@ bool CollisionDetector::isCollisionBetweenRects(const SDL_Rect a, const SDL_Rect
 //}
 
 bool CollisionDetector::isXWithinWidthOfPlatform(int x, const std::shared_ptr<const Platform>& platform) {
-    SDL_Rect platformRect = platform->getRect();
+    SDL_Rect platformRect = platform->rect;
     return x >= platformRect.x && x <= platformRect.x + platformRect.w;
 }
 
@@ -50,7 +50,7 @@ bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(const std::shared_ptr<con
 
 bool CollisionDetector::isGameObjectOnTopOfPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const Platform>& platform) {
     SDL_Rect gameObjectRect = gameObject->destRect; // The object's bounding box
-    SDL_Rect platformRect = platform->getRect();
+    SDL_Rect platformRect = platform->rect;
 
     // Calculate the bottom-center point of the GameObject
     int bottomCenterX = gameObjectRect.x + gameObjectRect.w / 2;
@@ -72,9 +72,9 @@ bool CollisionDetector::isGameObjectOnTopOfPlatform(const std::shared_ptr<const 
 
 bool CollisionDetector::isPointAPartOfLine(int x, int y, const std::shared_ptr<const Platform>& platform) {
     // Calculate slope and y-intercept of the platform's line
-    double radians = platform->getAngle() * M_PI / 180.0;
+    double radians = platform->angle * M_PI / 180.0;
     double slope = std::tan(radians);
-    double yIntercept = platform->getRect().y - slope * platform->getRect().x;
+    double yIntercept = platform->rect.y - slope * platform->rect.x;
 
     // Check if the point (x, y) lies on the platform's line
     double expectedY = slope * x + yIntercept;
@@ -99,7 +99,7 @@ bool CollisionDetector::isPointAPartOfLine(int x, int y, const std::shared_ptr<c
 
 bool CollisionDetector::isGameObjectInsidePlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const Platform>& platform) {
     SDL_Rect gameObjectRect = gameObject->destRect;
-    SDL_Rect platformRect = platform->getRect();
+    SDL_Rect platformRect = platform->rect;
 
     // Check if the game object's bounding box intersects the platform's bounding box
     return SDL_HasIntersection(&gameObjectRect, &platformRect);

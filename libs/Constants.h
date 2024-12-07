@@ -65,6 +65,9 @@ const char PRINCESS_FILENAME[] = "./assets/Princess.bmp";
 // Ladder
 const char LADDER_FILENAME[] = "./assets/Ladder.bmp";
 
+// Platform
+const char PLATFORM_FILENAME[] = "./assets/Platform.bmp";
+
 // Barrel 
 const char BARREL_1_FILENAME[] = "./assets/Barrel_1.bmp";
 const char BARREL_2_FILENAME[] = "./assets/Barrel_2.bmp";

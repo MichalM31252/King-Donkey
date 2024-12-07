@@ -141,6 +141,10 @@ void ScreenManager::drawSurfaceLadder(std::shared_ptr<GameObject> ladder, int xp
 	}
 }
 
+//void ScreenManager::drawSurfacePlatform(std::shared_ptr<Platform> platform) const {
+//	SDL_BlitSurface(platform->sprite, nullptr, screen, &platform->rect);
+//}
+
 // draw a text txt on surface screen, starting from the point (x, y)
 // charset is a 128x128 bitmap containing character images
 void ScreenManager::drawString(int x, int y, const std::string& text, int scale = 1) const {
@@ -211,6 +215,22 @@ void ScreenManager::drawLine(int x, int y, int l, int dx, int dy, Uint32 color) 
 //	}
 //}
 
+//// Render the platform
+//void Platform::render() {
+//	// Render the platform with tilt
+//	SDL_RenderCopyEx(renderer, texture, nullptr, &rect, angle, nullptr, SDL_FLIP_NONE);
+//}
+
+void ScreenManager::drawPlatform(std::shared_ptr<Platform> platform) {
+	// Render the platform texture to match the platform->rect dimensions
+	SDL_Texture* scrtex = SDL_CreateTextureFromSurface(renderer, platform->sprite);
+	SDL_RenderCopyEx(renderer, scrtex, nullptr, &platform->rect, platform->angle, nullptr, SDL_FLIP_NONE);
+}
+
+void ScreenManager::clearScreen() {
+	SDL_FillRect(screen, nullptr, 0);
+}
+
 void ScreenManager::drawRectangle(int x, int y, int widthOfRectangle, int heightOfRectangle, Uint32 outlineColor, Uint32 fillColor) const { // x, y - top left corner // draw a rectangle of size l by k
 	drawLine(x, y, heightOfRectangle, 0, 1, outlineColor);
 	drawLine(x + widthOfRectangle - 1, y, heightOfRectangle, 0, 1, outlineColor);
@@ -221,6 +241,7 @@ void ScreenManager::drawRectangle(int x, int y, int widthOfRectangle, int height
 	}
 }
 
+// RENAME THIS. THIS IS NOT A TEXTURE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 template <typename T>
 void ScreenManager::loadTexture(T* gameObject, const char* fileName) {
 	gameObject->sprite = SDL_LoadBMP(fileName);
@@ -235,6 +256,7 @@ template void ScreenManager::loadTexture<MovableGameObject>(MovableGameObject* g
 template void ScreenManager::loadTexture<Barrel>(Barrel* gameObject, const char* fileName);
 template void ScreenManager::loadTexture<Player>(Player* gameObject, const char* fileName);
 template void ScreenManager::loadTexture<Gorilla>(Gorilla* gameObject, const char* fileName);
+template void ScreenManager::loadTexture<Platform>(Platform* gameObject, const char* fileName);
 
 void ScreenManager::flipTextureHorizontally(SDL_Surface* sprite) {
 	int width = sprite->w;
@@ -256,8 +278,8 @@ void ScreenManager::flipTextureHorizontally(SDL_Surface* sprite) {
 
 void ScreenManager::drawPlatforms() {
 	for (int i = 0; i < gameObjectContainer->platformContainer->getNumberOfElements(); i++) {
-		gameObjectContainer->platformContainer->platforms[i]->render();
-		//drawPlatorm(gameObjectContainer->platformContainer->platforms[i]);
+		// gameObjectContainer->platformContainer->platforms[i]->render();
+		drawPlatform(gameObjectContainer->platformContainer->platforms[i]);
 	}
 }
 

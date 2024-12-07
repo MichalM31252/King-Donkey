@@ -6,23 +6,14 @@
 #include <cmath>
 
 class Platform {
-private:
-    SDL_Texture* texture;      // Texture for the platform
+public:
     SDL_Rect rect;             // Position and size of the platform
     double angle;              // Tilt angle in degrees
-    SDL_Renderer* renderer;    // Renderer for drawing the platform
+    SDL_Surface* sprite;       // the image of the game object
 
-public:
     // Constructor
-    Platform(SDL_Renderer* renderer, SDL_Texture* texture, int x, int y, int width, int height, double angle);
-
-    // Render the platform
-    void render();
+    Platform(int x, int y, int width, int height, double angle);
 
     // Collision detection
     bool isColliding(int objX, int objY, int objWidth, int objHeight);
-
-    // Getters
-    SDL_Rect getRect() const { return rect; }
-    double getAngle() const { return angle; }
 };

@@ -1,19 +1,10 @@
 #include "Platform.h"
 
 // Constructor
-Platform::Platform(SDL_Renderer* renderer, SDL_Texture* texture, int x, int y, int width, int height, double angle)
-    : renderer(renderer)
-    , texture(texture)
-    , angle(angle) 
+Platform::Platform(int x, int y, int width, int height, double angle)
+    : angle(angle) 
 {
     rect = { x, y, width, height };
-}
-
-
-// Render the platform
-void Platform::render() {
-    // Render the platform with tilt
-    SDL_RenderCopyEx(renderer, texture, nullptr, &rect, angle, nullptr, SDL_FLIP_NONE);
 }
 
 bool Platform::isColliding(int objX, int objY, int objWidth, int objHeight) {
