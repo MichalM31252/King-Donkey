@@ -9,7 +9,7 @@ class Platform {
 public:
     SDL_Rect rect;             // Position and size of the platform
     double angle;              // Tilt angle in degrees
-    SDL_Surface* sprite;       // the image of the game object
+    SDL_Surface* surface;       // the image of the game object
 
     // Constructor
     Platform(int x, int y, int width, int height, double angle);

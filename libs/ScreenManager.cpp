@@ -29,14 +29,16 @@ void ScreenManager::checkSDL() const {
 	}
 }
 
+// maybe add window and renderer as parameters 
 void ScreenManager::createWindowAndRenderer() {
-	rc = SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
+	int rc = SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
 	if (rc != 0) {
 		printf("SDL_CreateWindowAndRenderer error: %s\n", SDL_GetError());
 	}
 }
 
-void ScreenManager::setHint() const { // use this to recieve input from window
+// use this to recieve input from window
+void ScreenManager::setHint() const {
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
 }
 
@@ -99,25 +101,15 @@ void ScreenManager::drawAdditionalInfo(double deltaTime) const {
 	drawString(screen->w / 2 - text.length() * 8 / 2, 7, text, 1);
 }
 
-// draw a surface sprite on a surface screen in point (x, y)
-// (x, y) is the center of sprite on screen
+// draw a surface from the gameObject on surface screen, starting from the point (xpos, ypos)
 void ScreenManager::drawSurface(std::shared_ptr<GameObject> gameObject, int xpos, int ypos) const {
 	SDL_Rect dest = gameObject->destRect;
 	dest.x = xpos;
 	dest.y = ypos;
-	dest.w = gameObject->sprite->w;
-	dest.h = gameObject->sprite->h;
-	SDL_BlitSurface(gameObject->sprite, nullptr, screen, &dest);
+	dest.w = gameObject->surface->w;
+	dest.h = gameObject->surface->h;
+	SDL_BlitSurface(gameObject->surface, nullptr, screen, &dest);
 }
-
-//void ScreenManager::drawSurfaceLadder(std::shared_ptr<GameObject> ladder, int xpos, int ypos) const {
-//	SDL_Rect dest = ladder->destRect;
-//	dest.x = xpos;
-//	dest.y = ypos;
-//	ladder->sprite->w = dest.w;
-//	ladder->sprite->h = dest.h;
-//	SDL_BlitSurface(ladder->sprite, nullptr, screen, &dest);
-//}
 
 void ScreenManager::drawSurfaceLadder(std::shared_ptr<GameObject> ladder, int xpos, int ypos) const {
 	int tileHeight = 16;  // Original height of each ladder BMP section
@@ -137,13 +129,9 @@ void ScreenManager::drawSurfaceLadder(std::shared_ptr<GameObject> ladder, int xp
 		destRect.h = currentTileHeight; // Set height for current tile
 
 		srcRect.h = currentTileHeight;  // Match source height for partial tiles
-		SDL_BlitScaled(ladder->sprite, &srcRect, screen, &destRect);
+		SDL_BlitScaled(ladder->surface, &srcRect, screen, &destRect);
 	}
 }
-
-//void ScreenManager::drawSurfacePlatform(std::shared_ptr<Platform> platform) const {
-//	SDL_BlitSurface(platform->sprite, nullptr, screen, &platform->rect);
-//}
 
 // draw a text txt on surface screen, starting from the point (x, y)
 // charset is a 128x128 bitmap containing character images
@@ -189,42 +177,8 @@ void ScreenManager::drawLine(int x, int y, int l, int dx, int dy, Uint32 color) 
 	}
 }
 
-//void ScreenManager::drawPlatorm(std::shared_ptr<Platform> platform) {
-//	int length = sqrt(pow(platform->x2pos - platform->x1pos, 2) + pow(platform->y2pos - platform->y1pos, 2));
-//	if (platform->y1pos != platform->y2pos) { // xdddddddddddddddddd
-//		int differenceBetweenX = sqrt(pow(platform->x2pos - platform->x1pos, 2));
-//		int x = platform->x1pos;
-//		int y = platform->y1pos;
-//		if (platform->y1pos > platform->y2pos) {
-//			for (int i = 0; i < differenceBetweenX; i++) {
-//				drawPixel(screen, x, y, 0xffffffff);
-//				x++;
-//				y--;
-//			}
-//		}
-//		if (platform->y1pos < platform->y2pos) {
-//			for (int i = 0; i < differenceBetweenX; i++) {
-//				drawPixel(screen, x, y, 0xffffffff);
-//				x++;
-//				y++;
-//			}
-//		}
-//	}
-//	else {
-//		drawLine(platform->x1pos, platform->y1pos, length, 1, 0, 0xffffffff);
-//	}
-//}
-
-//// Render the platform
-//void Platform::render() {
-//	// Render the platform with tilt
-//	SDL_RenderCopyEx(renderer, texture, nullptr, &rect, angle, nullptr, SDL_FLIP_NONE);
-//}
-
 void ScreenManager::drawPlatform(std::shared_ptr<Platform> platform) {
 	// Render the platform texture to match the platform->rect dimensions
-	SDL_Texture* scrtex = SDL_CreateTextureFromSurface(renderer, platform->sprite);
-	SDL_RenderCopyEx(renderer, scrtex, nullptr, &platform->rect, platform->angle, nullptr, SDL_FLIP_NONE);
 }
 
 void ScreenManager::clearScreen() {
@@ -241,30 +195,29 @@ void ScreenManager::drawRectangle(int x, int y, int widthOfRectangle, int height
 	}
 }
 
-// RENAME THIS. THIS IS NOT A TEXTURE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 template <typename T>
-void ScreenManager::loadTexture(T* gameObject, const char* fileName) {
-	gameObject->sprite = SDL_LoadBMP(fileName);
-	if (gameObject->sprite == nullptr) {
+void ScreenManager::setSurface(T* gameObject, const char* fileName) {
+	gameObject->surface = SDL_LoadBMP(fileName);
+	if (gameObject->surface == nullptr) {
 		printf("SDL_LoadBMP error: %s\n", SDL_GetError());
 		return;
 	}
 }
 
-template void ScreenManager::loadTexture<GameObject>(GameObject* gameObject, const char* fileName);
-template void ScreenManager::loadTexture<MovableGameObject>(MovableGameObject* gameObject, const char* fileName);
-template void ScreenManager::loadTexture<Barrel>(Barrel* gameObject, const char* fileName);
-template void ScreenManager::loadTexture<Player>(Player* gameObject, const char* fileName);
-template void ScreenManager::loadTexture<Gorilla>(Gorilla* gameObject, const char* fileName);
-template void ScreenManager::loadTexture<Platform>(Platform* gameObject, const char* fileName);
+template void ScreenManager::setSurface<GameObject>(GameObject* gameObject, const char* fileName);
+template void ScreenManager::setSurface<MovableGameObject>(MovableGameObject* gameObject, const char* fileName);
+template void ScreenManager::setSurface<Barrel>(Barrel* gameObject, const char* fileName);
+template void ScreenManager::setSurface<Player>(Player* gameObject, const char* fileName);
+template void ScreenManager::setSurface<Gorilla>(Gorilla* gameObject, const char* fileName);
+template void ScreenManager::setSurface<Platform>(Platform* gameObject, const char* fileName);
 
-void ScreenManager::flipTextureHorizontally(SDL_Surface* sprite) {
-	int width = sprite->w;
-	int height = sprite->h;
-	int pitch = sprite->pitch;
-	int bpp = sprite->format->BytesPerPixel;
+void ScreenManager::flipSurfaceHorizontally(SDL_Surface* surface) {
+	int width = surface->w;
+	int height = surface->h;
+	int pitch = surface->pitch;
+	int bpp = surface->format->BytesPerPixel;
 
-	auto* pixels = static_cast<unsigned char*>(sprite->pixels);
+	auto* pixels = static_cast<unsigned char*>(surface->pixels);
 
 	for (int y = 0; y < height; y++) {
 		unsigned char* row = pixels + y * pitch;

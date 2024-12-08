@@ -8,7 +8,7 @@ LevelLoader::LevelLoader(std::shared_ptr<GameObjectContainer> container)
 
 void LevelLoader::createPlayer() {
     auto player = std::make_shared<Player>();
-    ScreenManager::loadTexture(player.get(), PLAYER_1_FILENAME);
+    ScreenManager::setSurface(player.get(), PLAYER_1_FILENAME);
 
     player->setPosition(STARTING_X_PLAYER, STARTING_Y_PLAYER);
     player->createSrcRect();
@@ -21,7 +21,7 @@ void LevelLoader::createDonkeyKong() {
     gameObjectContainer->barrelContainer = std::make_shared<BarrelContainer>();
 
     auto donkeyKong = std::make_shared<Gorilla>(gameObjectContainer->barrelContainer);
-    ScreenManager::loadTexture(donkeyKong.get(), DONKEY_KONG_FILENAME);
+    ScreenManager::setSurface(donkeyKong.get(), DONKEY_KONG_FILENAME);
 
     donkeyKong->setPosition(STARTING_X_DONKEY_KONG, STARTING_Y_DONKEY_KONG);
     donkeyKong->createSrcRect();
@@ -32,7 +32,7 @@ void LevelLoader::createDonkeyKong() {
 
 void LevelLoader::createPrincess() {
     auto princess = std::make_shared<GameObject>();
-    ScreenManager::loadTexture(princess.get(), PRINCESS_FILENAME);
+    ScreenManager::setSurface(princess.get(), PRINCESS_FILENAME);
 
     princess->setPosition(STARTING_X_PRINCESS, STARTING_Y_PRINCESS);
     princess->createSrcRect();
@@ -73,7 +73,7 @@ void LevelLoader::createPlatforms1() {
 
     // Platform 1: Horizontal
     auto plat1 = std::make_shared<Platform>(1, 400, 100, 8, 0); // x, y, width, height, angle
-	ScreenManager::loadTexture(plat1.get(), PLATFORM_FILENAME);
+	ScreenManager::setSurface(plat1.get(), PLATFORM_FILENAME);
     platformContainer->addPlatform(plat1);
 
     // ADD THEM
@@ -83,13 +83,13 @@ void LevelLoader::createPlatforms1() {
 
 void LevelLoader::createLadders1() {
     auto ladd1 = std::make_shared<GameObject>();
-    ScreenManager::loadTexture(ladd1.get(), LADDER_FILENAME);
+    ScreenManager::setSurface(ladd1.get(), LADDER_FILENAME);
     ladd1->setPosition(525, 129);
     ladd1->setSrcRect(LADDER_WIDTH, 170);
     ladd1->setDestRect(LADDER_WIDTH, 170);
 
     auto ladd2 = std::make_shared<GameObject>();
-    ScreenManager::loadTexture(ladd2.get(), LADDER_FILENAME);
+    ScreenManager::setSurface(ladd2.get(), LADDER_FILENAME);
     ladd2->setPosition(250, 79);
     ladd2->setSrcRect(LADDER_WIDTH, 50);
     ladd2->setDestRect(LADDER_WIDTH, 50);
@@ -132,13 +132,13 @@ void LevelLoader::createLadders1() {
 
 void LevelLoader::createLadders2() {
     auto ladd1 = std::make_shared<GameObject>();
-    ScreenManager::loadTexture(ladd1.get(), LADDER_FILENAME);
+    ScreenManager::setSurface(ladd1.get(), LADDER_FILENAME);
     ladd1->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 229);
     ladd1->setSrcRect(LADDER_WIDTH, 170);
     ladd1->setDestRect(LADDER_WIDTH, 170);
 
     auto ladd2 = std::make_shared<GameObject>();
-    ScreenManager::loadTexture(ladd2.get(), LADDER_FILENAME);
+    ScreenManager::setSurface(ladd2.get(), LADDER_FILENAME);
     ladd2->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH - LADDER_WIDTH, 79);
     ladd2->setSrcRect(LADDER_WIDTH, 150);
     ladd2->setDestRect(LADDER_WIDTH, 150);
@@ -178,25 +178,25 @@ void LevelLoader::createLadders2() {
 void LevelLoader::createLadders3() {
     // Creating each ladder with a shared pointer
     auto ladd1 = std::make_shared<GameObject>();
-    ScreenManager::loadTexture(ladd1.get(), LADDER_FILENAME);
+    ScreenManager::setSurface(ladd1.get(), LADDER_FILENAME);
     ladd1->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 299);
     ladd1->setSrcRect(LADDER_WIDTH, LARGE_MARGIN);
     ladd1->setDestRect(LADDER_WIDTH, LARGE_MARGIN);
 
     auto ladd2 = std::make_shared<GameObject>();
-    ScreenManager::loadTexture(ladd2.get(), LADDER_FILENAME);
+    ScreenManager::setSurface(ladd2.get(), LADDER_FILENAME);
     ladd2->setPosition(LARGE_MARGIN, 199);
     ladd2->setSrcRect(LADDER_WIDTH, LARGE_MARGIN);
     ladd2->setDestRect(LADDER_WIDTH, LARGE_MARGIN);
 
     auto ladd3 = std::make_shared<GameObject>();
-    ScreenManager::loadTexture(ladd3.get(), LADDER_FILENAME);
+    ScreenManager::setSurface(ladd3.get(), LADDER_FILENAME);
     ladd3->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 129);
     ladd3->setSrcRect(LADDER_WIDTH, 70);
     ladd3->setDestRect(LADDER_WIDTH, 70);
 
     auto ladd4 = std::make_shared<GameObject>();
-    ScreenManager::loadTexture(ladd4.get(), LADDER_FILENAME);
+    ScreenManager::setSurface(ladd4.get(), LADDER_FILENAME);
     ladd4->setPosition(250, 79);
     ladd4->setSrcRect(LADDER_WIDTH, 50);
     ladd4->setDestRect(LADDER_WIDTH, 50);

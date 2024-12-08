@@ -90,39 +90,39 @@ void Player::initJump() {
 
 void Player::loadNextRunningSprite() {
 	if (this->currentRunningSpriteId == 1) {
-		ScreenManager::loadTexture(this, PLAYER_1_FILENAME);
+		ScreenManager::setSurface(this, PLAYER_1_FILENAME);
 		this->currentRunningSpriteId++;
 	}
 	else if (this->currentRunningSpriteId == 2) {
-		ScreenManager::loadTexture(this, PLAYER_2_FILENAME);
+		ScreenManager::setSurface(this, PLAYER_2_FILENAME);
 		this->currentRunningSpriteId++;
 	}
 	else {
-		ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
+		ScreenManager::setSurface(this, PLAYER_3_FILENAME);
 		this->currentRunningSpriteId = 1;
 	}
 
 	if (currentDirectionOfMovementX == DirectionX::LEFT) {
-		ScreenManager::flipTextureHorizontally(this->sprite);
+		ScreenManager::flipSurfaceHorizontally(this->surface);
 	}
 }
 
 void Player::loadJumpingSprite() {
-	ScreenManager::loadTexture(this, PLAYER_3_FILENAME);
+	ScreenManager::setSurface(this, PLAYER_3_FILENAME);
 	if (currentDirectionOfMovementX == DirectionX::LEFT) {
-		ScreenManager::flipTextureHorizontally(this->sprite);
+		ScreenManager::flipSurfaceHorizontally(this->surface);
 	}
 }
 
 void Player::loadClimbingSprite() {
-	ScreenManager::loadTexture(this, PLAYER_CLIMB_1);
+	ScreenManager::setSurface(this, PLAYER_CLIMB_1);
 	currentClimbingSpriteId = 1;
 }
 
 void Player::loadNextClimbingSprite(){
-	ScreenManager::loadTexture(this, PLAYER_CLIMB_1);
+	ScreenManager::setSurface(this, PLAYER_CLIMB_1);
 	if (currentClimbingSpriteId == 2) {
-		ScreenManager::flipTextureHorizontally(this->sprite);
+		ScreenManager::flipSurfaceHorizontally(this->surface);
 		currentClimbingSpriteId = 1;
 	}
 	else {
@@ -131,9 +131,9 @@ void Player::loadNextClimbingSprite(){
 }
 
 void Player::loadIdleSprite() {
-	ScreenManager::loadTexture(this, PLAYER_1_FILENAME);
+	ScreenManager::setSurface(this, PLAYER_1_FILENAME);
 	if (currentDirectionOfMovementX == DirectionX::LEFT) {
-		ScreenManager::flipTextureHorizontally(this->sprite);
+		ScreenManager::flipSurfaceHorizontally(this->surface);
 	}
 	currentRunningSpriteId = 1;
 }

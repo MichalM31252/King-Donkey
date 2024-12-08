@@ -24,7 +24,6 @@ public:
 	Uint32 black;
 	Uint32 blue;
 
-	int rc;
 	SDL_Surface* screen; // screen on which we will be drawing, charset is the bitmap with characters
 	SDL_Surface* charset; // screen on which we will be drawing, charset is the bitmap with characters
 	SDL_Texture* scrtex; // 
@@ -65,8 +64,8 @@ public:
 	void drawPlatform(std::shared_ptr<Platform> platform);
 
 	template <typename T>
-	static void loadTexture(T* gameObject, const char* fileName);
-	static void flipTextureHorizontally(SDL_Surface* sprite);
+	static void setSurface(T* gameObject, const char* fileName);
+	static void flipSurfaceHorizontally(SDL_Surface* surface);
 
 	void drawElements();
 	void drawPlatforms();

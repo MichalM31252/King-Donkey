@@ -1,8 +1,8 @@
 #include "GameObject.h"
 
 void GameObject::createSrcRect() {
-	srcRect.w = sprite->w;
-	srcRect.h = sprite->h;
+	srcRect.w = surface->w;
+	srcRect.h = surface->h;
 }
 
 void GameObject::setSrcRect(int w, int h) {

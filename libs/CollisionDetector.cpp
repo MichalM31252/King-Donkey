@@ -57,8 +57,7 @@ bool CollisionDetector::isGameObjectOnTopOfPlatform(const std::shared_ptr<const 
     int bottomY = gameObjectRect.y + gameObjectRect.h;
 
     // Check if the bottom-center point is on or near the platform
-    return isPointAPartOfLine(bottomCenterX, bottomY, platform) &&
-        isXWithinWidthOfPlatform(bottomCenterX, platform);
+    return isPointAPartOfLine(bottomCenterX, bottomY, platform) && isXWithinWidthOfPlatform(bottomCenterX, platform);
 }
 
 

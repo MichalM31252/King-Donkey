@@ -1,5 +1,42 @@
-﻿  ScreenManager.cpp
+﻿  AnimationManager.cpp
+  BarrelFactory.cpp
+  CollisionDetector.cpp
+  CollisionResolver.cpp
+  Game.cpp
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\Game.cpp(10,114): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\Game.cpp(10,102): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\Game.cpp(10,93): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\Game.cpp(10,42): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\Game.cpp(11,105): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\Game.cpp(11,93): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\Game.cpp(11,84): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\Game.cpp(11,33): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\Game.cpp(12,108): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\Game.cpp(12,96): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\Game.cpp(12,87): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\Game.cpp(12,36): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  GameObjectManager.cpp
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\GameObjectManager.cpp(13,54): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  LevelLoader.cpp
+  KeyCollector.cpp
+  MovableGameObject.cpp
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\MovableGameObject.cpp(94,14): warning C4244: '=': conversion from 'double' to 'unsigned int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\MovableGameObject.cpp(98,14): warning C4244: '=': conversion from 'double' to 'unsigned int', possible loss of data
+  Barrel.cpp
+  PhysicsManager.cpp
+  Player.cpp
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\Player.cpp(65,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  ScreenManager.cpp
 C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\ScreenManager.cpp(99,27): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\ScreenManager.cpp(327,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\ScreenManager.cpp(331,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\ScreenManager.cpp(322,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\ScreenManager.cpp(326,17): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  PlatformContainer.cpp
+  main.cpp
+  KeyActionHandler.cpp
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\KeyActionHandler.cpp(119,24): warning C4244: '=': conversion from 'double' to 'unsigned int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\KeyActionHandler.cpp(136,24): warning C4244: '=': conversion from 'double' to 'unsigned int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\KeyActionHandler.cpp(150,24): warning C4244: '=': conversion from 'double' to 'unsigned int', possible loss of data
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\KeyActionHandler.cpp(160,24): warning C4244: '=': conversion from 'double' to 'unsigned int', possible loss of data
+  Platform.cpp
+  Generating Code...
   szablon2vs19.vcxproj -> C:\Users\Michal\Documents\test_for_new_project\template-project-2\x64\Debug\szablon2vs19.exe
