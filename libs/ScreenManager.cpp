@@ -79,8 +79,107 @@ void ScreenManager::setColorKey() {
 
 void ScreenManager::serveNextFrame() {
 	SDL_UpdateTexture(scrtex, nullptr, screen->pixels, screen->pitch);
+
+
 	SDL_RenderCopy(renderer, scrtex, nullptr, nullptr);
+
+	// this here forces the platforms to be rendered all the time
+
+	// ONE METHOD TO COPY TEXTYRES TO RENDERER
+	copyPlatformTexturesToRenderer();
+	copyLadderTexturesToRenderer();
+	copyBarrelTexturesToRenderer();
+	copyDonkeyKongTextureToRenderer();
+	copyPlayerTextureToRenderer();
+	copyPrincessTextureToRenderer();
+
+	// ONE METHOD TO UPDATE THE TEXTURES
+
 	SDL_RenderPresent(renderer);
+}
+
+void ScreenManager::copyPlatformTexturesToRenderer() {
+	for (int i = 0; i < gameObjectContainer->platformContainer->getNumberOfElements(); i++) {
+		auto platform = gameObjectContainer->platformContainer->platforms[i];
+		SDL_Surface* surface = platform->surface;
+		SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, platform->surface);
+		SDL_Rect destRect = platform->rect;
+
+		SDL_RenderCopyEx(renderer, texture, nullptr, &destRect, platform->angle, nullptr, SDL_FLIP_NONE);
+	}
+}
+
+void ScreenManager::copyLadderTexturesToRenderer() {
+	for (int i = 0; i < gameObjectContainer->ladderContainer->getNumberOfElements(); i++) {
+		auto ladder = gameObjectContainer->ladderContainer->ladders[i];
+		copyLadderTextureToRenderer(ladder, ladder->xpos, ladder->ypos, renderer);
+	}
+}
+
+void ScreenManager::copyLadderTextureToRenderer(std::shared_ptr<GameObject> ladder, int xpos, int ypos, SDL_Renderer* renderer) const {
+	int tileHeight = 16;  // Original height of each ladder BMP section
+	int tileWidth = 16;   // Original width of the ladder BMP
+	int scaledWidth = 45; // Scaled width of the ladder
+	int totalHeight = ladder->destRect.h;  // Total height from the ladder's destRect
+
+	// Create a texture from the surface if not already created
+	SDL_Texture* ladderTexture = SDL_CreateTextureFromSurface(renderer, ladder->surface);
+	if (!ladderTexture) {
+		SDL_Log("Failed to create texture: %s", SDL_GetError());
+		return;
+	}
+
+	SDL_Rect srcRect = { 0, 0, tileWidth, tileHeight };  // Source rectangle for the ladder BMP
+	SDL_Rect destRect = { xpos, ypos, scaledWidth, 0 };  // Destination rectangle
+
+	for (int y = 0; y < totalHeight; y += tileHeight) {
+		// Compute the scaled height for the current tile
+		int remainingHeight = totalHeight - y;
+		int currentTileHeight = (remainingHeight < tileHeight) ? remainingHeight : tileHeight;
+
+		destRect.y = ypos + y;          // Update vertical position
+		destRect.h = currentTileHeight; // Set height for current tile
+
+		srcRect.h = currentTileHeight;  // Match source height for partial tiles
+
+		// Render the current tile
+		if (SDL_RenderCopyEx(renderer, ladderTexture, &srcRect, &destRect, 0, nullptr, SDL_FLIP_NONE) != 0) {
+			SDL_Log("SDL_RenderCopyEx failed: %s", SDL_GetError());
+		}
+	}
+
+	// Clean up texture
+	SDL_DestroyTexture(ladderTexture);
+}
+
+void ScreenManager::copyBarrelTexturesToRenderer() {
+	for (int i = 0; i < gameObjectContainer->barrelContainer->getNumberOfElements(); i++) {
+		auto barrel = gameObjectContainer->barrelContainer->barrels[i];
+		copyGameObjectTextureToRenderer(barrel, barrel->xpos, barrel->ypos, renderer);
+	}
+}
+
+void ScreenManager::copyGameObjectTextureToRenderer(std::shared_ptr<GameObject> gameObject, int xpos, int ypos, SDL_Renderer* renderer) const {
+	SDL_Rect dest = gameObject->destRect;
+	dest.x = xpos;
+	dest.y = ypos;
+	dest.w = gameObject->surface->w;
+	dest.h = gameObject->surface->h;
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, gameObject->surface);
+	SDL_RenderCopy(renderer, texture, nullptr, &dest);
+	SDL_DestroyTexture(texture);
+}
+
+void ScreenManager::copyDonkeyKongTextureToRenderer() {
+	copyGameObjectTextureToRenderer(gameObjectContainer->donkeyKong, gameObjectContainer->donkeyKong->xpos, gameObjectContainer->donkeyKong->ypos, renderer);
+}
+
+void ScreenManager::copyPlayerTextureToRenderer() {
+	copyGameObjectTextureToRenderer(gameObjectContainer->player, gameObjectContainer->player->xpos, gameObjectContainer->player->ypos, renderer);
+}
+
+void ScreenManager::copyPrincessTextureToRenderer() {
+	copyGameObjectTextureToRenderer(gameObjectContainer->princess, gameObjectContainer->princess->xpos, gameObjectContainer->princess->ypos, renderer);
 }
 
 void ScreenManager::setColors() {
@@ -111,27 +210,6 @@ void ScreenManager::drawSurface(std::shared_ptr<GameObject> gameObject, int xpos
 	SDL_BlitSurface(gameObject->surface, nullptr, screen, &dest);
 }
 
-void ScreenManager::drawSurfaceLadder(std::shared_ptr<GameObject> ladder, int xpos, int ypos) const {
-	int tileHeight = 16;  // Original height of each ladder BMP section
-	int tileWidth = 16;   // Original width of the ladder BMP
-	int scaledWidth = 45; // Scaled width of the ladder
-	int totalHeight = ladder->destRect.h;  // Total height from the ladder's destRect
-
-	SDL_Rect srcRect = { 0, 0, tileWidth, tileHeight };  // Source rectangle for the ladder BMP
-	SDL_Rect destRect = { xpos, ypos, scaledWidth, 0 };  // Destination rectangle
-
-	for (int y = 0; y < totalHeight; y += tileHeight) {
-		// Compute the scaled height for the current tile
-		int remainingHeight = totalHeight - y;
-		int currentTileHeight = (remainingHeight < tileHeight) ? remainingHeight : tileHeight;
-
-		destRect.y = ypos + y;          // Update vertical position
-		destRect.h = currentTileHeight; // Set height for current tile
-
-		srcRect.h = currentTileHeight;  // Match source height for partial tiles
-		SDL_BlitScaled(ladder->surface, &srcRect, screen, &destRect);
-	}
-}
 
 // draw a text txt on surface screen, starting from the point (x, y)
 // charset is a 128x128 bitmap containing character images
@@ -175,10 +253,6 @@ void ScreenManager::drawLine(int x, int y, int l, int dx, int dy, Uint32 color) 
 		x += dx;
 		y += dy;
 	}
-}
-
-void ScreenManager::drawPlatform(std::shared_ptr<Platform> platform) {
-	// Render the platform texture to match the platform->rect dimensions
 }
 
 void ScreenManager::clearScreen() {
@@ -229,34 +303,33 @@ void ScreenManager::flipSurfaceHorizontally(SDL_Surface* surface) {
 	}
 }
 
-void ScreenManager::drawPlatforms() {
-	for (int i = 0; i < gameObjectContainer->platformContainer->getNumberOfElements(); i++) {
-		// gameObjectContainer->platformContainer->platforms[i]->render();
-		drawPlatform(gameObjectContainer->platformContainer->platforms[i]);
-	}
-}
+//void ScreenManager::drawPlatforms() {
+//	for (int i = 0; i < gameObjectContainer->platformContainer->getNumberOfElements(); i++) {
+//		drawPlatform(gameObjectContainer->platformContainer->platforms[i]);
+//	}
+//}
 
-void ScreenManager::drawLadders() {
-	for (int i = 0; i < gameObjectContainer->ladderContainer->getNumberOfElements(); i++) {
-		auto gameObject = gameObjectContainer->ladderContainer->ladders[i];
-		drawSurfaceLadder(gameObject, gameObject->xpos, gameObject->ypos);
-	}
-}
+//void ScreenManager::drawLadders() {
+//	for (int i = 0; i < gameObjectContainer->ladderContainer->getNumberOfElements(); i++) {
+//		auto gameObject = gameObjectContainer->ladderContainer->ladders[i];
+//		drawSurfaceLadder(gameObject, gameObject->xpos, gameObject->ypos);
+//	}
+//}
 
-void ScreenManager::drawBarrels() {
-	for (int i = 0; i < gameObjectContainer->barrelContainer->getNumberOfElements(); i++) {
-		drawSurface(gameObjectContainer->barrelContainer->barrels[i], gameObjectContainer->barrelContainer->barrels[i]->xpos, gameObjectContainer->barrelContainer->barrels[i]->ypos);
-	}
-}
+//void ScreenManager::drawBarrels() {
+//	for (int i = 0; i < gameObjectContainer->barrelContainer->getNumberOfElements(); i++) {
+//		drawSurface(gameObjectContainer->barrelContainer->barrels[i], gameObjectContainer->barrelContainer->barrels[i]->xpos, gameObjectContainer->barrelContainer->barrels[i]->ypos);
+//	}
+//}
 
 void ScreenManager::drawElements() {
-	drawPlatforms();
-	drawLadders();
-	drawBarrels();
+	// drawPlatforms();
+	// drawLadders();
+	// drawBarrels();
 	
-	drawSurface(gameObjectContainer->donkeyKong, gameObjectContainer->donkeyKong->xpos, gameObjectContainer->donkeyKong->ypos);
-	drawSurface(gameObjectContainer->princess, gameObjectContainer->princess->xpos, gameObjectContainer->princess->ypos);
-	drawSurface(gameObjectContainer->player, gameObjectContainer->player->xpos, gameObjectContainer->player->ypos);
+	// drawSurface(gameObjectContainer->donkeyKong, gameObjectContainer->donkeyKong->xpos, gameObjectContainer->donkeyKong->ypos);
+	// drawSurface(gameObjectContainer->princess, gameObjectContainer->princess->xpos, gameObjectContainer->princess->ypos);
+	// drawSurface(gameObjectContainer->player, gameObjectContainer->player->xpos, gameObjectContainer->player->ypos);
 }
 
 void ScreenManager::drawMenu(const Menu& menu) {

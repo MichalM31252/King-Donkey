@@ -41,6 +41,8 @@ void LevelLoader::createPrincess() {
     gameObjectContainer->princess = princess;
 }
 
+// x, y, x, y
+// 
 //void LevelLoader::createPlatforms1() {
 //    auto plat1 = std::make_shared<Platform>();
 //    plat1->setPosition(1, 400, 400, 400);
@@ -72,11 +74,29 @@ void LevelLoader::createPlatforms1() {
     auto platformContainer = std::make_shared<PlatformContainer>();
 
     // Platform 1: Horizontal
-    auto plat1 = std::make_shared<Platform>(1, 400, 100, 8, 0); // x, y, width, height, angle
+    auto plat1 = std::make_shared<Platform>(1, 400, 400, 8, 0); // x, y, width, height, angle
 	ScreenManager::setSurface(plat1.get(), PLATFORM_FILENAME);
     platformContainer->addPlatform(plat1);
 
-    // ADD THEM
+	// Platform 2: Tilted
+	auto plat2 = std::make_shared<Platform>(400, 400, 141, 8, 135); // x, y, width, height, angle
+	ScreenManager::setSurface(plat2.get(), PLATFORM_FILENAME);
+	platformContainer->addPlatform(plat2);
+
+	// Platform 3: Horizontal
+	auto plat3 = std::make_shared<Platform>(500, 300, SCREEN_WIDTH - 1, 8, 0); // x, y, width, height, angle
+	ScreenManager::setSurface(plat3.get(), PLATFORM_FILENAME);
+	platformContainer->addPlatform(plat3);
+
+	// Platform 4: Horizontal
+	auto plat4 = std::make_shared<Platform>(1, 130, 570, 8, 0); // x, y, width, height, angle
+	ScreenManager::setSurface(plat4.get(), PLATFORM_FILENAME);
+	platformContainer->addPlatform(plat4);
+
+	// Platform 5: Horizontal
+	auto plat5 = std::make_shared<Platform>(200, 80, 50 + LADDER_WIDTH, 8, 0); // x, y, width, height, angle
+	ScreenManager::setSurface(plat5.get(), PLATFORM_FILENAME);
+	platformContainer->addPlatform(plat5);
 
     gameObjectContainer->platformContainer = platformContainer;
 }

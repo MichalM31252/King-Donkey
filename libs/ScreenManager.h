@@ -74,4 +74,16 @@ public:
 
 	void drawMenu(const Menu& menu);
 	void clearScreen();
+
+	void copyPlatformTexturesToRenderer();
+
+	void copyLadderTexturesToRenderer();
+	void copyLadderTextureToRenderer(std::shared_ptr<GameObject> ladder, int xpos, int ypos, SDL_Renderer* renderer) const;
+
+	void copyBarrelTexturesToRenderer();
+	void copyGameObjectTextureToRenderer(std::shared_ptr<GameObject> gameObject, int xpos, int ypos, SDL_Renderer* renderer) const;
+
+	void copyDonkeyKongTextureToRenderer();
+	void copyPlayerTextureToRenderer();
+	void copyPrincessTextureToRenderer();
 };
