@@ -23,7 +23,7 @@ bool Platform::isColliding(int objX, int objY, int objWidth, int objHeight) {
             double platformY = slope * cornerX + yIntercept;
 
             // Check if the corner is on or below the platform
-            if (cornerY >= platformY && cornerY <= platformY + 5) {
+            if (cornerY >= platformY && cornerY <= platformY) {
                 return true; // Collision detected
             }
         }

@@ -4,97 +4,42 @@ bool CollisionDetector::isCollisionBetweenRects(const SDL_Rect a, const SDL_Rect
     return SDL_HasIntersection(&a, &b);
 }
 
-//bool CollisionDetector::isXWithinWidthOfPlatform(int x, const std::shared_ptr<const Platform>& platform) {
-//    return (x >= platform->x1pos && x <= platform->x2pos) || (x <= platform->x1pos && x >= platform->x2pos);
-//}
+// Platform
+//////////////////////////////////////////////////////////////////////////
 
 bool CollisionDetector::isXWithinWidthOfPlatform(int x, const std::shared_ptr<const Platform>& platform) {
     SDL_Rect platformRect = platform->rect;
     return x >= platformRect.x && x <= platformRect.x + platformRect.w;
 }
 
-//bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const PlatformContainer>& platformHolder) {
-//    for (int i = 0; i < platformHolder->getNumberOfElements(); i++) {
-//        if (CollisionDetector::isGameObjectOnTopOfPlatform(gameObject, platformHolder->platforms[i])) {
-//            return true;
-//        }
-//    }
-//    return false;
-//}
-
 bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const PlatformContainer>& platformHolder) {
+    SDL_Rect gameObjectRect = gameObject->destRect;
+
+    // Iterate through all platforms and check for collision
     for (int i = 0; i < platformHolder->getNumberOfElements(); i++) {
-        if (isGameObjectOnTopOfPlatform(gameObject, platformHolder->platforms[i])) {
+        if (platformHolder->platforms[i]->isColliding(
+            gameObjectRect.x,
+            gameObjectRect.y,
+            gameObjectRect.w,
+            gameObjectRect.h)) {
             return true;
         }
     }
     return false;
 }
 
+bool CollisionDetector::isGameObjectOnTopOfPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<Platform>& platform) {
+    SDL_Rect gameObjectRect = gameObject->destRect;
 
-//bool CollisionDetector::isGameObjectOnTopOfPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const Platform>& platform) {
-//    int yPosition = gameObject->ypos + gameObject->destRect.h;
-//    int xPositionBottomLeftCorner = gameObject->xpos;
-//    int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
-//
-//    if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition + 1, platform) && CollisionDetector::isXWithinWidthOfPlatform(xPositionBottomRightCorner, platform)) {
-//        return true;
-//    }
-//
-//    if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition + 1, platform) && CollisionDetector::isXWithinWidthOfPlatform(xPositionBottomLeftCorner, platform)) {
-//        return true;
-//    }
-//
-//    return false;
-//}
-
-bool CollisionDetector::isGameObjectOnTopOfPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const Platform>& platform) {
-    SDL_Rect gameObjectRect = gameObject->destRect; // The object's bounding box
-    SDL_Rect platformRect = platform->rect;
-
-    // Calculate the bottom-center point of the GameObject
-    int bottomCenterX = gameObjectRect.x + gameObjectRect.w / 2;
-    int bottomY = gameObjectRect.y + gameObjectRect.h;
-
-    // Check if the bottom-center point is on or near the platform
-    return isPointAPartOfLine(bottomCenterX, bottomY, platform) && isXWithinWidthOfPlatform(bottomCenterX, platform);
+    // Use the platform's isColliding method directly
+    return platform->isColliding(
+        gameObjectRect.x,
+        gameObjectRect.y,
+        gameObjectRect.w,
+        gameObjectRect.h);
 }
 
-
-//bool CollisionDetector::isPointAPartOfLine(int x, int y, const std::shared_ptr<const Platform>& platform) {
-//    double a = platform->y2pos - platform->y1pos;
-//    double b = platform->x1pos - platform->x2pos;
-//    double c = a * platform->x1pos + b * platform->y1pos;
-//
-//    return a * x + b * y == c;
-//}
-
-bool CollisionDetector::isPointAPartOfLine(int x, int y, const std::shared_ptr<const Platform>& platform) {
-    // Calculate slope and y-intercept of the platform's line
-    double radians = platform->angle * M_PI / 180.0;
-    double slope = std::tan(radians);
-    double yIntercept = platform->rect.y - slope * platform->rect.x;
-
-    // Check if the point (x, y) lies on the platform's line
-    double expectedY = slope * x + yIntercept;
-    return std::abs(y - expectedY) <= 1e-5; // Allow for small floating-point errors
-}
-
-//bool CollisionDetector::isGameObjectInsidePlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const Platform>& platform) {
-//    int yPosition = gameObject->ypos + gameObject->destRect.h;
-//    int xPositionBottomLeftCorner = gameObject->xpos;
-//    int xPositionBottomRightCorner = gameObject->xpos + gameObject->destRect.w;
-//
-//    if (CollisionDetector::isPointAPartOfLine(xPositionBottomLeftCorner, yPosition, platform) && CollisionDetector::isXWithinWidthOfPlatform(xPositionBottomLeftCorner, platform)) {
-//        return true;
-//    }
-//
-//    if (CollisionDetector::isPointAPartOfLine(xPositionBottomRightCorner, yPosition, platform) && CollisionDetector::isXWithinWidthOfPlatform(xPositionBottomRightCorner, platform) ) {
-//        return true;
-//    }
-//
-//    return false;
-//}
+///////////////
 
 bool CollisionDetector::isGameObjectInsidePlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const Platform>& platform) {
     SDL_Rect gameObjectRect = gameObject->destRect;
@@ -104,6 +49,15 @@ bool CollisionDetector::isGameObjectInsidePlatform(const std::shared_ptr<const G
     return SDL_HasIntersection(&gameObjectRect, &platformRect);
 }
 
+
+
+
+
+
+
+
+// Ladder
+//////////////////////////////////////////////////////////////////////////
 
 bool CollisionDetector::isGameObjectInsideAnyLadder(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const LadderContainer>& ladderContainer) {
     for (int i = 0; i < ladderContainer->getNumberOfElements(); i++) {
