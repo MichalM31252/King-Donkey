@@ -31,7 +31,7 @@ const double SECONDS_BETWEEN_REFRESH = 0.5;
 const double REFRESH_RATE = 1.0 / SECONDS_BETWEEN_REFRESH;
 
 // GameObject Const
-const int STARTING_X_PLAYER = 50;
+const int STARTING_X_PLAYER = 50; // 400 - for platform checking, 50 for normal
 const int STARTING_Y_PLAYER = 300;
 const int DEFAULT_JUMP_HEIGHT = 60; // check 60 for jumping onto platforms
 

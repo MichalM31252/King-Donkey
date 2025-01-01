@@ -43,6 +43,7 @@ void CollisionResolver::handleCollisionWithPlatform(const std::shared_ptr<Movabl
     int yPosition = gameObject->ypos + gameObject->destRect.h;
     for (int i = 0; i < gameObjectContainer->platformContainer->getNumberOfElements(); i++) {
         if (CollisionDetector::isGameObjectInsidePlatform(gameObject, gameObjectContainer->platformContainer->platforms[i])) {
+			// PLACE HERE A FUNCTION: SNAP IT ON TOP OF THE PLATFORM (THINK IT THROUGH CORRECTLY) INSTEAD OF SLOWLY PLACE IT HIGHER 
             gameObject->ypos--;
             yPosition--;
         }

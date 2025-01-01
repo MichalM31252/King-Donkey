@@ -16,4 +16,5 @@ public:
 
     // Collision detection
     bool isColliding(int objX, int objY, int objWidth, int objHeight);
+	bool isPointInsidePlatform(float px, float py);
 };

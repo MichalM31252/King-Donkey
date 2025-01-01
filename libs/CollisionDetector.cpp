@@ -7,53 +7,25 @@ bool CollisionDetector::isCollisionBetweenRects(const SDL_Rect a, const SDL_Rect
 // Platform
 //////////////////////////////////////////////////////////////////////////
 
-bool CollisionDetector::isXWithinWidthOfPlatform(int x, const std::shared_ptr<const Platform>& platform) {
-    SDL_Rect platformRect = platform->rect;
-    return x >= platformRect.x && x <= platformRect.x + platformRect.w;
-}
-
 bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const PlatformContainer>& platformHolder) {
     SDL_Rect gameObjectRect = gameObject->destRect;
 
     // Iterate through all platforms and check for collision
     for (int i = 0; i < platformHolder->getNumberOfElements(); i++) {
-        if (platformHolder->platforms[i]->isColliding(
-            gameObjectRect.x,
-            gameObjectRect.y,
-            gameObjectRect.w,
-            gameObjectRect.h)) {
+        if (platformHolder->platforms[i]->isColliding(gameObjectRect.x, gameObjectRect.y, gameObjectRect.w, gameObjectRect.h)) {
             return true;
         }
     }
     return false;
 }
 
-bool CollisionDetector::isGameObjectOnTopOfPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<Platform>& platform) {
-    SDL_Rect gameObjectRect = gameObject->destRect;
-
-    // Use the platform's isColliding method directly
-    return platform->isColliding(
-        gameObjectRect.x,
-        gameObjectRect.y,
-        gameObjectRect.w,
-        gameObjectRect.h);
-}
-
-///////////////
-
-bool CollisionDetector::isGameObjectInsidePlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const Platform>& platform) {
+bool CollisionDetector::isGameObjectInsidePlatform(const std::shared_ptr<const GameObject>& gameObject, std::shared_ptr<Platform>& platform) {
     SDL_Rect gameObjectRect = gameObject->destRect;
     SDL_Rect platformRect = platform->rect;
 
     // Check if the game object's bounding box intersects the platform's bounding box
-    return SDL_HasIntersection(&gameObjectRect, &platformRect);
+	return platform->isColliding(gameObjectRect.x, gameObjectRect.y, gameObjectRect.w, gameObjectRect.h);
 }
-
-
-
-
-
-
 
 
 // Ladder
