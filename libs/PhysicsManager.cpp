@@ -20,6 +20,8 @@ void PhysicsManager::handleFallingForBarrels(double deltaTime) {
 	}
 }
 
+// maybe create a function calls forceFalling for every movable game object
+
 void PhysicsManager::forceFalling(std::shared_ptr<MovableGameObject> movableGameObject, double deltaTime) const {
     movableGameObject->startFalling();
     movableGameObject->accumulatedMoveDown += deltaTime * movableGameObject->gravity;

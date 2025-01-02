@@ -20,6 +20,12 @@ void Player::update(double deltaTime) {
 	updatePositionCoordinates();
 }
 
+// maybe create a few functions for this purpose?
+// - calculate how many pixels to move
+// - move that many pixels
+// - subtract that many pixels from accumulatedMove
+// - update distanceTravelledFromLastSpriteChange
+
 void Player::updatePosition() {
 	int pixelsToMove = 0;
 	if (accumulatedMoveRight > 1.0f) {

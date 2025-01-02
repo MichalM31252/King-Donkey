@@ -65,21 +65,14 @@ Game::Game()
                 gameObjectManager.updatePhysicsOfGameObjects(gameTime.deltaTime);
                 gameObjectContainer->donkeyKong->update(gameTime.deltaTime);
 
+                // WHAT THE FUCK IS THIS SUPPOSED TO BE
                 if (!gameObjectContainer->player->isClimbing && gameObjectContainer->player->isJumping) {
                     gameObjectContainer->player->jump(gameTime.deltaTime);
                 }
 
                 gameObjectManager.updateSpritesOfGameObjects();
 
-                if (!CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
-                    if (!CollisionDetector::isGameObjectOnTopOfAnyPlatform(gameObjectContainer->player, gameObjectContainer->platformContainer)) {
-                        if (gameObjectContainer->player->isClimbing) {
-                            gameObjectContainer->player->isClimbing = false;
-                            gameObjectContainer->player->currentDirectionOfMovementY = DirectionY::NONE;
-                            gameObjectContainer->player->velocityY = 0;
-                        }
-                    }
-                }
+				// HERE WAS A PIECE OF CODE THAT DECIDED WHEN A PLAYER SHOULD STOP CLIMBING
 
                 // RENDER
                 screenManager.handleFPSTimer(gameTime.deltaTime);
