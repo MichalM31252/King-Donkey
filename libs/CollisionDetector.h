@@ -7,6 +7,7 @@ class CollisionDetector {
 public:
     static bool isCollisionBetweenRects(const SDL_Rect a, const SDL_Rect b);
 
+    static bool isPointInsidePlatform(int x, int y, std::shared_ptr<Platform>& platform);
     static bool isGameObjectInsidePlatform(const std::shared_ptr<const GameObject>& gameObject, std::shared_ptr<Platform>& platform);
     static bool isGameObjectOnTopOfAnyPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const PlatformContainer>& platformHolder);
 

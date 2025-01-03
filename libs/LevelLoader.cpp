@@ -41,34 +41,6 @@ void LevelLoader::createPrincess() {
     gameObjectContainer->princess = princess;
 }
 
-// x, y, x, y
-// 
-//void LevelLoader::createPlatforms1() {
-//    auto plat1 = std::make_shared<Platform>();
-//    plat1->setPosition(1, 400, 400, 400);
-//
-//    auto plat2 = std::make_shared<Platform>();
-//    plat2->setPosition(400, 400, 500, 300);
-//
-//    auto plat3 = std::make_shared<Platform>();
-//    plat3->setPosition(500, 300, SCREEN_WIDTH - 1, 300);
-//
-//    auto plat4 = std::make_shared<Platform>();
-//    plat4->setPosition(1, 130, 570, 130);
-//
-//    auto plat5 = std::make_shared<Platform>();
-//    plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80);
-//
-//    auto platformContainer = std::make_shared<PlatformContainer>();
-//    platformContainer->addPlatform(plat1);
-//    platformContainer->addPlatform(plat2);
-//    platformContainer->addPlatform(plat3);
-//    platformContainer->addPlatform(plat4);
-//    platformContainer->addPlatform(plat5);
-//
-//    gameObjectContainer->platformContainer = platformContainer;
-//}
-
 // Creates platforms for level 1
 void LevelLoader::createPlatforms1() {
     auto platformContainer = std::make_shared<PlatformContainer>();
@@ -77,7 +49,9 @@ void LevelLoader::createPlatforms1() {
 	ScreenManager::setSurface(plat1.get(), PLATFORM_FILENAME);
     platformContainer->addPlatform(plat1);
 
-	// Platform 2: Tilted // TEMPORARY FIX
+	// Platform 2: Tilted 
+    // THIS IS SUPPOSED TO BE CLOCKWISE ROTATION WTH
+	// auto plat2 = std::make_shared<Platform>(400 - 20, 400 - 50, 141, 8, 135);
 	auto plat2 = std::make_shared<Platform>(400 - 20, 400 - 50, 141, 8, 135);
 	ScreenManager::setSurface(plat2.get(), PLATFORM_FILENAME);
 	platformContainer->addPlatform(plat2);
