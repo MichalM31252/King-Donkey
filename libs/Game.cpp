@@ -79,7 +79,7 @@ Game::Game()
                 // TESTING
                 // TESTING
                 // 
-                CollisionDetector::isGameObjectInsidePlatform(gameObjectContainer->player, gameObjectContainer->platformContainer->platforms[1]);
+                CollisionDetector::isGameObjectInsideAnyPlatform(gameObjectContainer->player, gameObjectContainer->platformContainer);
                 // 
                 // TESTING
                 // TESTING

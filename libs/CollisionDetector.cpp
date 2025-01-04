@@ -8,68 +8,143 @@ bool CollisionDetector::isCollisionBetweenRects(const SDL_Rect a, const SDL_Rect
 // Platform
 //////////////////////////////////////////////////////////////////////////
 
-bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const PlatformContainer>& platformHolder) {
-		// TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING
-	// TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING
-	// TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING
+void printPlatformVerticesBeforeRotation(const std::shared_ptr<const Platform>& platform) {
+    // Extract platform properties
+    int platformX = platform->rect.x;
+    int platformY = platform->rect.y;
+    int platformWidth = platform->rect.w;
+    int platformHeight = platform->rect.h;
 
-	auto normalPlatform = platformHolder->platforms[0];
-	if (isPointInsidePlatform(100, 404, normalPlatform)) { // should be true
-		std::cout << "true" << std::endl;
-	}
-	else {
-		std::cout << "false" << std::endl;
-	}
+    // Compute the coordinates of the four vertices before rotation
+    double left = platformX;
+    double right = platformX + platformWidth;
+    double top = platformY;
+    double bottom = platformY + platformHeight;
 
-	if (isPointInsidePlatform(500, 404, normalPlatform)) { // should be false
-		std::cout << "true" << std::endl;
-	}
-	else {
-		std::cout << "false" << std::endl;
-	}
-
-	if (isPointInsidePlatform(200, 390, normalPlatform)) { // should be false
-		std::cout << "true" << std::endl;
-	}
-	else {
-		std::cout << "false" << std::endl;
-	}
-
-	if (isPointInsidePlatform(201, 404, normalPlatform)) { // should be true
-		std::cout << "true" << std::endl;
-	}
-	else {
-		std::cout << "false" << std::endl;
-	}
-
-
-	auto tiltedPlatform = platformHolder->platforms[1];
-	if (isPointInsidePlatform(440, 360, tiltedPlatform)) { // should be false
-        std::cout << "true" << std::endl;
-	}
-    else {
-        std::cout << "false" << std::endl;
-    }
-
-	if (isPointInsidePlatform(420, 370, tiltedPlatform)) {// should be false
-		std::cout << "true" << std::endl;
-	}
-	else {
-		std::cout << "false" << std::endl;
-	}
-
-	if (isPointInsidePlatform(450, 354, tiltedPlatform)) { // should be true
-		std::cout << "true" << std::endl;
-	}
-    else {
-        std::cout << "false" << std::endl;
-    }
-    
-    
-    return false;
+    std::cout << "Vertices before rotation:" << std::endl;
+    std::cout << "(" << left << ", " << top << ")" << std::endl;       // Top-left
+    std::cout << "(" << right << ", " << top << ")" << std::endl;      // Top-right
+    std::cout << "(" << right << ", " << bottom << ")" << std::endl;   // Bottom-right
+    std::cout << "(" << left << ", " << bottom << ")" << std::endl;    // Bottom-left
 }
 
-bool CollisionDetector::isGameObjectInsidePlatform(const std::shared_ptr<const GameObject>& gameObject, std::shared_ptr<Platform>& platform) {
+void printPlatformVerticesAfterRotation(const std::shared_ptr<const Platform>& platform) {
+    // Extract platform properties
+    int platformX = platform->rect.x;
+    int platformY = platform->rect.y;
+    int platformWidth = platform->rect.w;
+    int platformHeight = platform->rect.h;
+    double platformAngle = platform->angle; // angle is in radians and is clockwise
+
+    // Compute the center of the platform
+    double centerX = platformX + platformWidth / 2.0;
+    double centerY = platformY + platformHeight / 2.0;
+
+    // Compute the coordinates of the four vertices before rotation
+    double left = -platformWidth / 2.0;
+    double right = platformWidth / 2.0;
+    double top = -platformHeight / 2.0;
+    double bottom = platformHeight / 2.0;
+
+    // Rotate each vertex around the center
+    double cosTheta = cos(platformAngle);
+    double sinTheta = sin(platformAngle);
+
+    // Top-left
+    double topLeftX = centerX + (left * cosTheta - top * sinTheta);
+    double topLeftY = centerY + (left * sinTheta + top * cosTheta);
+
+    // Top-right
+    double topRightX = centerX + (right * cosTheta - top * sinTheta);
+    double topRightY = centerY + (right * sinTheta + top * cosTheta);
+
+    // Bottom-right
+    double bottomRightX = centerX + (right * cosTheta - bottom * sinTheta);
+    double bottomRightY = centerY + (right * sinTheta + bottom * cosTheta);
+
+    // Bottom-left
+    double bottomLeftX = centerX + (left * cosTheta - bottom * sinTheta);
+    double bottomLeftY = centerY + (left * sinTheta + bottom * cosTheta);
+
+    // Print the rotated coordinates
+    std::cout << "Vertices after rotation:" << std::endl;
+    std::cout << "(" << topLeftX << ", " << topLeftY << ")" << std::endl;
+    std::cout << "(" << topRightX << ", " << topRightY << ")" << std::endl;
+    std::cout << "(" << bottomRightX << ", " << bottomRightY << ")" << std::endl;
+    std::cout << "(" << bottomLeftX << ", " << bottomLeftY << ")" << std::endl;
+}
+
+//bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const PlatformContainer>& platformHolder) {
+//	// TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING
+//	// TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING
+//	// TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING TESTING
+//
+//	auto normalPlatform = platformHolder->platforms[0]; // 1, 400, 400, 8, 0
+//	if (isPointInsidePlatform(100, 404, normalPlatform)) { // should be true
+//		std::cout << "true" << std::endl;
+//	}
+//	else {
+//		std::cout << "false" << std::endl;
+//	}
+//
+//	if (isPointInsidePlatform(500, 404, normalPlatform)) { // should be false
+//		std::cout << "true" << std::endl;
+//	}
+//	else {
+//		std::cout << "false" << std::endl;
+//	}
+//
+//	if (isPointInsidePlatform(200, 390, normalPlatform)) { // should be false
+//		std::cout << "true" << std::endl;
+//	}
+//	else {
+//		std::cout << "false" << std::endl;
+//	}
+//
+//	if (isPointInsidePlatform(201, 404, normalPlatform)) { // should be true
+//		std::cout << "true" << std::endl;
+//	}
+//	else {
+//		std::cout << "false" << std::endl;
+//	}
+//
+//
+//	auto tiltedPlatform = platformHolder->platforms[1]; // 380, 350, 141, 8, 135
+//	if (isPointInsidePlatform(440, 360, tiltedPlatform)) { // should be false
+//        std::cout << "true" << std::endl;
+//	}
+//    else {
+//        std::cout << "false" << std::endl;
+//    }
+//
+//	if (isPointInsidePlatform(420, 370, tiltedPlatform)) {// should be false
+//		std::cout << "true" << std::endl;
+//	}
+//	else {
+//		std::cout << "false" << std::endl;
+//	}
+//
+//	if (isPointInsidePlatform(450, 354, tiltedPlatform)) { // should be true
+//		std::cout << "true" << std::endl;
+//	}
+//    else {
+//        std::cout << "false" << std::endl;
+//    }
+//    
+//    
+//    return false;
+//}
+
+bool CollisionDetector::isGameObjectInsideAnyPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const PlatformContainer>& platformHolder) {
+	for (int i = 0; i < platformHolder->getNumberOfElements(); i++) {
+		if (isGameObjectInsidePlatform(gameObject, platformHolder->platforms[i])) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool CollisionDetector::isGameObjectInsidePlatform(const std::shared_ptr<const GameObject>& gameObject, std::shared_ptr<Platform> platform) {
 	// First thing I thought about is to check if the rectangle of the gameObject is inside the rectangle of the platform
     // but this is not enough, when I'll implement a tilted platform it will not work
 	// a platform has a starting x position, starting y position, height, width and a slope
@@ -80,6 +155,16 @@ bool CollisionDetector::isGameObjectInsidePlatform(const std::shared_ptr<const G
 	// which means that the player won't be able to pass throught it by accident like before
 	// so I need to implement a mechanism that will check each point of the player's rectangle
 	// THEN take in consideration the platforms height and width and slope and check if the player is inside the platform
+
+	for (int i = 0; i < 4; i++) {
+		int x = gameObject->xpos + (i % 2) * gameObject->destRect.w;
+		int y = gameObject->ypos + (i / 2) * gameObject->destRect.h;
+		if (isPointInsidePlatform(x, y, platform)) {
+            printPlatformVerticesBeforeRotation(platform);
+            printPlatformVerticesAfterRotation(platform);
+            return true;
+		}
+	}
 
 	return false;
 }
