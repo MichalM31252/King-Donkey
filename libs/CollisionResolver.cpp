@@ -54,8 +54,21 @@ void CollisionResolver::handleCollisionWithJumping() {
     }
 }
 
+// TEMPORARY FIX
 void CollisionResolver::handleCollisionWithPlatform(const std::shared_ptr<MovableGameObject>& gameObject) {
+    int yPosition = gameObject->ypos + gameObject->destRect.h;
+    for (int i = 0; i < gameObjectContainer->platformContainer->getNumberOfElements(); i++) {
+        if (CollisionDetector::isGameObjectInsidePlatform(gameObject, gameObjectContainer->platformContainer->platforms[i])) {
 
+            if (gameObject->isFalling) {
+                gameObject->stopFalling();
+            }
+
+			// CALCULATE THE HEIGHT OF THE PLATFORM, AND TELEPORT THE PLAYER 1 PIXEL ABOVE THAT POINT
+            gameObject->ypos--;
+            yPosition--;
+        }
+    }
 }
 
 void CollisionResolver::handlePlayerCollision() {

@@ -74,17 +74,6 @@ Game::Game()
 
 				// HERE WAS A PIECE OF CODE THAT DECIDED WHEN A PLAYER SHOULD STOP CLIMBING
 
-                // TESTING
-                // TESTING
-                // TESTING
-                // TESTING
-                // 
-                CollisionDetector::isGameObjectInsideAnyPlatform(gameObjectContainer->player, gameObjectContainer->platformContainer);
-                // 
-                // TESTING
-                // TESTING
-                // TESTING
-
                 // RENDER
                 screenManager.handleFPSTimer(gameTime.deltaTime);
                 screenManager.drawOutlineOfTheBoard();

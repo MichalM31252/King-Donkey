@@ -50,8 +50,6 @@ void LevelLoader::createPlatforms1() {
     platformContainer->addPlatform(plat1);
 
 	// Platform 2: Tilted 
-    // THIS IS SUPPOSED TO BE CLOCKWISE ROTATION WTH
-	// auto plat2 = std::make_shared<Platform>(400 - 20, 400 - 50, 141, 8, 135);
 	auto plat2 = std::make_shared<Platform>(400 - 20, 400 - 50, 141, 8, 135);
 	ScreenManager::setSurface(plat2.get(), PLATFORM_FILENAME);
 	platformContainer->addPlatform(plat2);

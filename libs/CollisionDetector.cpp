@@ -39,30 +39,9 @@ void rotateRectangle(Point vertices[], double angleDegrees) {
     // Calculate the center before rotation
     Point center = calculateCenter(vertices[0], vertices[1], vertices[2], vertices[3]);
 
-    // Print vertices and center before rotation
-    std::cout << "Center of the rectangle before rotation: ";
-    std::cout << "(" << std::round(center.x) << ", " << std::round(center.y) << ")" << std::endl;
-
-    std::cout << "Vertices before rotation:" << std::endl;
-    for (int i = 0; i < 4; ++i) {
-        std::cout << "(" << std::round(vertices[i].x) << ", " << std::round(vertices[i].y) << ")" << std::endl;
-    }
-
     // Rotate each vertex
     for (int i = 0; i < 4; ++i) {
         vertices[i] = rotatePoint(vertices[i], center, angleDegrees);
-    }
-
-    // Calculate the center after rotation (it should remain the same)
-    Point centerAfterRotation = calculateCenter(vertices[0], vertices[1], vertices[2], vertices[3]);
-
-    // Print vertices and center after rotation
-    std::cout << "\nCenter of the rectangle after rotation: ";
-    std::cout << "(" << std::round(centerAfterRotation.x) << ", " << std::round(centerAfterRotation.y) << ")" << std::endl;
-
-    std::cout << "Vertices after rotation by " << angleDegrees << " degrees:" << std::endl;
-    for (int i = 0; i < 4; ++i) {
-        std::cout << "(" << std::round(vertices[i].x) << ", " << std::round(vertices[i].y) << ")" << std::endl;
     }
 }
 
@@ -93,13 +72,13 @@ bool CollisionDetector::isPointInsidePlatform(double x, double y, std::shared_pt
 		{ platform->rect.x, platform->rect.y + platform->rect.h }
 	};
 
-	// Rotate the rectangle if the platform is tilted
+	// HUGE BOTTLENECK, you are doing this every frame for no reason
 	if (platform->angle != 0) {
 		rotateRectangle(vertices, platform->angle);
 	}
 
 	// Check if the point is inside the rectangle
-	return isPointInsideRectangle(vertices, { x, y });
+    return isPointInsideRectangle(vertices, { x, y });
 }
 
 bool CollisionDetector::isGameObjectInsideAnyPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const PlatformContainer>& platformHolder) {

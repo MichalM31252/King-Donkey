@@ -1,10 +1,2 @@
-﻿  CollisionDetector.cpp
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionDetector.cpp(90,19): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionDetector.cpp(90,37): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionDetector.cpp(91,22): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionDetector.cpp(91,56): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionDetector.cpp(92,22): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionDetector.cpp(92,59): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionDetector.cpp(93,19): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionDetector.cpp(93,40): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
+﻿  CollisionResolver.cpp
   szablon2vs19.vcxproj -> C:\Users\Michal\Documents\test_for_new_project\template-project-2\x64\Debug\szablon2vs19.exe
