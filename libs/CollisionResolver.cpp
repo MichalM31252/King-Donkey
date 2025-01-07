@@ -137,7 +137,7 @@ void CollisionResolver::handleCollisionWithPlatform(const std::shared_ptr<Movabl
                 }
 
                 if (smallestYAtX != INT_MAX) {
-                    gameObject->ypos = smallestYAtX; // Adjust the player's Y position
+                    gameObject->ypos = smallestYAtX - gameObject->destRect.h; // Adjust the player's Y position
                 }
             }
         }
