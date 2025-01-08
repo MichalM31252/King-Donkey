@@ -90,6 +90,24 @@ bool CollisionDetector::isGameObjectInsideAnyPlatform(const std::shared_ptr<cons
     return false;
 }
 
+bool CollisionDetector::isGameObjectOnTopOfAnyPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const PlatformContainer>& platformHolder) {
+	for (int i = 0; i < platformHolder->getNumberOfElements(); i++) {
+		if (isGameObjectOnTopOfPlatform(gameObject, platformHolder->platforms[i])) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool CollisionDetector::isGameObjectOnTopOfPlatform(const std::shared_ptr<const GameObject>& gameObject, std::shared_ptr<Platform> platform) {
+	if (isPointInsidePlatform(gameObject->xpos, gameObject->ypos + gameObject->destRect.h + 1, platform)) {
+		if (isPointInsidePlatform(gameObject->xpos + gameObject->destRect.w, gameObject->ypos + gameObject->destRect.h + 1, platform)) {
+			return true;
+		}
+	}
+    return false;
+}
+
 bool CollisionDetector::isGameObjectInsidePlatform(const std::shared_ptr<const GameObject>&gameObject, std::shared_ptr<Platform> platform) {
     for (int i = 0; i < 4; i++) {
 		int x = gameObject->xpos + (i % 2) * gameObject->destRect.w;
@@ -119,8 +137,4 @@ bool CollisionDetector::isGameObjectInsideLadder(const std::shared_ptr<const Gam
 
 bool CollisionDetector::isGameObjectWithinWidthOfLadder(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const GameObject>& ladder) {
     return gameObject->xpos >= ladder->xpos && gameObject->xpos + gameObject->destRect.w < ladder->xpos + ladder->destRect.w;
-}
-
-bool CollisionDetector::isGameObjectWithinHeightOfLadder(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const GameObject>& ladder) {
-    return gameObject->ypos >= ladder->ypos && gameObject->ypos <= ladder->ypos + ladder->destRect.h;
 }

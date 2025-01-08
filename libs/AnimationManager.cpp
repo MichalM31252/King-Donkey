@@ -14,6 +14,7 @@ void AnimationManager::handlePlayerAnimation() {
     auto player = gameObjectContainer->player;
 
     // RUNNING
+    // possibly player distance from last sprite is not being changed
     if ((player->currentDirectionOfMovementX == DirectionX::LEFT || player->currentDirectionOfMovementX == DirectionX::RIGHT) && player->velocityX > 0 && player->distanceTravelledFromLastRunningSprite >= 20) {
         player->loadNextRunningSprite();
         player->distanceTravelledFromLastRunningSprite -= 20;

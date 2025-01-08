@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "ScreenManager.h" // temporary solution
+#include <iostream>
 
 Player::Player()
 	: isJumping(false)
@@ -49,6 +50,7 @@ void Player::updatePosition() {
 		accumulatedMoveUp -= pixelsToMove;
 	}
 
+	// maybe this isnt changed idk check later 
 	if (!isJumping && !isFalling) {
 		distanceTravelledFromLastRunningSprite += pixelsToMove; // move to movableGameObject or not idk
 	}
@@ -94,18 +96,22 @@ void Player::initJump() {
 	accumulatedMoveUp = 0;
 }
 
+// THIS IS NOT CHANGING FOR SOME REASON
 void Player::loadNextRunningSprite() {
 	if (this->currentRunningSpriteId == 1) {
 		ScreenManager::setSurface(this, PLAYER_1_FILENAME);
 		this->currentRunningSpriteId++;
+		std::cout << "Loading sprite 1" << std::endl;
 	}
 	else if (this->currentRunningSpriteId == 2) {
 		ScreenManager::setSurface(this, PLAYER_2_FILENAME);
 		this->currentRunningSpriteId++;
+		std::cout << "Loading sprite 2" << std::endl;
 	}
 	else {
 		ScreenManager::setSurface(this, PLAYER_3_FILENAME);
 		this->currentRunningSpriteId = 1;
+		std::cout << "Loading sprite 3" << std::endl;
 	}
 
 	if (currentDirectionOfMovementX == DirectionX::LEFT) {
@@ -155,4 +161,3 @@ bool Player::isMovingVertically() const {
 void Player::accumulateDistance(double deltaTime) {
 	MovableGameObject::accumulateDistance(deltaTime);
 }
-

@@ -10,12 +10,6 @@ CollisionResolver::CollisionResolver(std::shared_ptr<GameObjectContainer> gameOb
 {
 }
 
-
-
-// CREATE ONE BIGGER FUNCTION NOT JUST FOR PLAYER
-
-
-
 // REFACTOR THIS TO handleCollisionWIthBarrel and based on the parameters given handle the function
 // don't care which object is the first or the second
 // name the arguments gameObject1 and gameObject2
@@ -92,14 +86,24 @@ void rotateRectangle(PointSecond vertices[], double angleDegrees) {
 }
 
 // TEMPORARY FIX
-void CollisionResolver::handleCollisionWithPlatform(const std::shared_ptr<MovableGameObject>& gameObject) {
-    int yPosition = gameObject->ypos + gameObject->destRect.h;
+void CollisionResolver::handlePlayerCollisionWithPlatforms() {
+	auto player = gameObjectContainer->player;
+
+    if (player->isClimbing) {
+        return;
+    }
+
+    // if player is climbing then ignore the platfrom
+    // if player is falling and then touches the platform then stop falling and collide normally
+    // if player is jumping create a new functionality that will check upper two pixels and will force him to strart falling
+
+    int yPosition = player->ypos + player->destRect.h;
 
     for (int i = 0; i < gameObjectContainer->platformContainer->getNumberOfElements(); i++) {
-        if (CollisionDetector::isGameObjectInsidePlatform(gameObject, gameObjectContainer->platformContainer->platforms[i])) {
+        if (CollisionDetector::isGameObjectInsidePlatform(player, gameObjectContainer->platformContainer->platforms[i])) {
 
-            if (gameObject->isFalling) {
-                gameObject->stopFalling();
+            if (player->isFalling) {
+                player->stopFalling();
             }
 
             auto platform = gameObjectContainer->platformContainer->platforms[i];
@@ -117,13 +121,13 @@ void CollisionResolver::handleCollisionWithPlatform(const std::shared_ptr<Movabl
 
                 // Check only the bottom-left and bottom-right corners of the object
                 int xPositions[2] = {
-                    gameObject->xpos, // Bottom-left corner
-                    gameObject->xpos + gameObject->destRect.w // Bottom-right corner
+                    player->xpos, // Bottom-left corner
+                    player->xpos + player->destRect.w // Bottom-right corner
                 };
 
                 for (int j = 0; j < 2; j++) {
                     int x = xPositions[j];
-                    int y = gameObject->ypos + gameObject->destRect.h; // Bottom corner's Y position
+                    int y = player->ypos + player->destRect.h; // Bottom corner's Y position
 
                     if (CollisionDetector::isPointInsidePlatform(x, y, platform)) {
                         // Move upwards to find the platform surface
@@ -135,27 +139,42 @@ void CollisionResolver::handleCollisionWithPlatform(const std::shared_ptr<Movabl
                         }
                     }
                 }
-
                 if (smallestYAtX != INT_MAX) {
-                    gameObject->ypos = smallestYAtX - gameObject->destRect.h; // Adjust the player's Y position
+                    player->ypos = smallestYAtX - player->destRect.h;
+                    player->isJumping = false;
+                    player->isFalling = false;
+                    player->checkIfJumpPossible = false;
+                    player->isClimbing = false;
                 }
+            }
+            else {
+                player->ypos = platform->rect.y - player->destRect.h;
+				player->isJumping = false;
+				player->isFalling = false;
+                player->checkIfJumpPossible = false;
+				player->isClimbing = false;
             }
         }
     }
 }
 
+// THIS IS TO MAKE SURE THAT AFTER PLAYER LEAVES THE LADDER HE NO LONGER IS CLIMBING
+void CollisionResolver::handlePlayerCollisionWithLadders() {
+    if (!CollisionDetector::isGameObjectInsideAnyLadder(gameObjectContainer->player, gameObjectContainer->ladderContainer)) {
+        gameObjectContainer->player->isClimbing = false;
+    }
+}
 
 void CollisionResolver::handlePlayerCollision() {
     auto player = gameObjectContainer->player;
 
-    handleCollisionWithPlatform(player);
-    // refactor this to handleCollisionWithKong() and based on the type of the given object handle the function
+    handlePlayerCollisionWithLadders();
+	handlePlayerCollisionWithPlatforms();
     handlePlayerCollisionWithKong();
-	// refactor this to handleCollisionWithPrincess() and based on the type of the given object handle the function
     handlePlayerCollisionWithPrincess();
 
     // HANDLE JUMPING MECHANISM WAS HERE FOR SOME REASON
-    // handlePlayerJumping();
+    // handlePlayerJumping();a
 }
 
 void CollisionResolver::handleBarrelsCollision(GameState* gameState) {

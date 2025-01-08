@@ -8,12 +8,13 @@ public:
     static bool isCollisionBetweenRects(const SDL_Rect a, const SDL_Rect b);
 
     static bool isPointInsidePlatform(double x, double y, std::shared_ptr<Platform>& platform);
+	static bool isPointInsideLadder(double x, double y, const std::shared_ptr<const GameObject>& ladder);
     static bool isGameObjectInsidePlatform(const std::shared_ptr<const GameObject>& gameObject, std::shared_ptr<Platform> platform);
 	static bool isGameObjectInsideAnyPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const PlatformContainer>& platformHolder);
     static bool isGameObjectOnTopOfAnyPlatform(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const PlatformContainer>& platformHolder);
+	static bool isGameObjectOnTopOfPlatform(const std::shared_ptr<const GameObject>& gameObject, std::shared_ptr<Platform> platform);
 
     static bool isGameObjectInsideAnyLadder(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const LadderContainer>& ladderContainer);
     static bool isGameObjectInsideLadder(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const GameObject>& ladder);
     static bool isGameObjectWithinWidthOfLadder(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const GameObject>& ladder);
-    static bool isGameObjectWithinHeightOfLadder(const std::shared_ptr<const GameObject>& gameObject, const std::shared_ptr<const GameObject>& ladder);
 };

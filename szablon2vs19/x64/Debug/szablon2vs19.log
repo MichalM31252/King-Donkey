@@ -1,10 +1,5 @@
-﻿  CollisionResolver.cpp
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionResolver.cpp(109,37): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionResolver.cpp(109,55): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionResolver.cpp(110,40): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionResolver.cpp(110,74): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionResolver.cpp(111,40): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionResolver.cpp(111,77): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionResolver.cpp(112,37): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
-C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\CollisionResolver.cpp(112,58): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
+﻿  AnimationManager.cpp
+  Player.cpp
+C:\Users\Michal\Documents\test_for_new_project\template-project-2\libs\Player.cpp(73,19): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
   szablon2vs19.vcxproj -> C:\Users\Michal\Documents\test_for_new_project\template-project-2\x64\Debug\szablon2vs19.exe
