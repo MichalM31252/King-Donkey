@@ -87,37 +87,6 @@ void LevelLoader::createLadders1() {
     ladderContainer->addLadder(ladd2);
     gameObjectContainer->ladderContainer = ladderContainer;
 }
-
-//void LevelLoader::createPlatforms2() {
-//    auto plat1 = std::make_shared<Platform>();
-//    plat1->setPosition(TINY_MARGIN, 400, SCREEN_WIDTH - 1, 400);
-//
-//    auto plat2 = std::make_shared<Platform>();
-//    plat2->setPosition(130, 130, 300, 300);
-//
-//    auto plat3 = std::make_shared<Platform>();
-//    plat3->setPosition(TINY_MARGIN, 130, 130, 130);
-//
-//    auto plat4 = std::make_shared<Platform>();
-//    plat4->setPosition(TINY_MARGIN, 130, 130, 130);
-//
-//    auto plat5 = std::make_shared<Platform>();
-//    plat5->setPosition(200, 80, SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 80);
-//
-//    auto plat6 = std::make_shared<Platform>();
-//    plat6->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH - LADDER_WIDTH, 230, SCREEN_WIDTH - LARGE_MARGIN, 230);
-//
-//    auto platformContainer = std::make_shared<PlatformContainer>();
-//    platformContainer->addPlatform(plat1);
-//    platformContainer->addPlatform(plat2);
-//    platformContainer->addPlatform(plat3);
-//    platformContainer->addPlatform(plat4);
-//    platformContainer->addPlatform(plat5);
-//    platformContainer->addPlatform(plat6);
-//
-//    gameObjectContainer->platformContainer = platformContainer;
-//}
-
 void LevelLoader::createLadders2() {
     auto ladd1 = std::make_shared<GameObject>();
     ScreenManager::setSurface(ladd1.get(), LADDER_FILENAME);
@@ -137,34 +106,8 @@ void LevelLoader::createLadders2() {
     gameObjectContainer->ladderContainer = laddH;
 }
 
-//void LevelLoader::createPlatforms3() {
-//    auto plat1 = std::make_shared<Platform>();
-//    plat1->setPosition(STARTING_X, 400, SCREEN_WIDTH - TINY_MARGIN, 400);
-//
-//    auto plat2 = std::make_shared<Platform>();
-//    plat2->setPosition(LARGE_MARGIN, 300, SCREEN_WIDTH - LARGE_MARGIN, 300);
-//
-//    auto plat3 = std::make_shared<Platform>();
-//    plat3->setPosition(LARGE_MARGIN, 200, SCREEN_WIDTH - LARGE_MARGIN, 200);
-//
-//    auto plat4 = std::make_shared<Platform>();
-//    plat4->setPosition(TINY_MARGIN, 130, SCREEN_WIDTH - LARGE_MARGIN, 130);
-//
-//    auto plat5 = std::make_shared<Platform>();
-//    plat5->setPosition(200, 80, 250 + LADDER_WIDTH, 80);
-//
-//    auto platH = std::make_shared<PlatformContainer>();
-//    platH->addPlatform(plat1);
-//    platH->addPlatform(plat2);
-//    platH->addPlatform(plat3);
-//    platH->addPlatform(plat4);
-//    platH->addPlatform(plat5);
-//
-//    gameObjectContainer->platformContainer = platH;
-//}
 
 void LevelLoader::createLadders3() {
-    // Creating each ladder with a shared pointer
     auto ladd1 = std::make_shared<GameObject>();
     ScreenManager::setSurface(ladd1.get(), LADDER_FILENAME);
     ladd1->setPosition(SCREEN_WIDTH - LARGE_MARGIN - LADDER_WIDTH, 299);
@@ -189,14 +132,12 @@ void LevelLoader::createLadders3() {
     ladd4->setSrcRect(LADDER_WIDTH, 50);
     ladd4->setDestRect(LADDER_WIDTH, 50);
 
-    // Creating the LadderContainer with a shared pointer
     auto laddH = std::make_shared<LadderContainer>();
     laddH->addLadder(ladd1);
     laddH->addLadder(ladd2);
     laddH->addLadder(ladd3);
     laddH->addLadder(ladd4);
 
-    // Assigning the shared ladder container to gameObjectContainer
     gameObjectContainer->ladderContainer = laddH;
 }
 
