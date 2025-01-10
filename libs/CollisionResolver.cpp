@@ -141,18 +141,12 @@ void CollisionResolver::handlePlayerCollisionWithPlatforms() {
                 }
                 if (smallestYAtX != INT_MAX) {
                     player->ypos = smallestYAtX - player->destRect.h;
-                    player->isJumping = false;
                     player->isFalling = false;
-                    player->checkIfJumpPossible = false;
-                    player->isClimbing = false;
                 }
             }
             else {
                 player->ypos = platform->rect.y - player->destRect.h;
-				player->isJumping = false;
 				player->isFalling = false;
-                player->checkIfJumpPossible = false;
-				player->isClimbing = false;
             }
         }
     }

@@ -63,6 +63,7 @@ Game::Game()
                 gameObjectManager.updatePositionOfGameObjects(gameTime.deltaTime);
                 gameObjectManager.handleCollisionsOfGameObjects(&gameState);
                 gameObjectManager.updatePhysicsOfGameObjects(gameTime.deltaTime);
+
                 gameObjectContainer->donkeyKong->update(gameTime.deltaTime);
 
                 // WHAT THE FUCK IS THIS SUPPOSED TO BE

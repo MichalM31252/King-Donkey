@@ -16,8 +16,11 @@ void AnimationManager::handlePlayerAnimation() {
     // RUNNING
     // possibly player distance from last sprite is not being changed
     if ((player->currentDirectionOfMovementX == DirectionX::LEFT || player->currentDirectionOfMovementX == DirectionX::RIGHT) && player->velocityX > 0 && player->distanceTravelledFromLastRunningSprite >= 20) {
-        player->loadNextRunningSprite();
-        player->distanceTravelledFromLastRunningSprite -= 20;
+		// Temporary fix
+        if (CollisionDetector::isGameObjectOnTopOfAnyPlatform(player, gameObjectContainer->platformContainer)) {
+			player->loadNextRunningSprite();
+			player->distanceTravelledFromLastRunningSprite -= 20;
+		}
         return;
     }
 
